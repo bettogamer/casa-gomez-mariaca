@@ -33,7 +33,8 @@ class Lienzo:
 
     def texto(self, x, y, t, tam=11, estilo=""):
         a, b = self.p(x, y)
-        self.add(f'<text x="{a:.1f}" y="{b:.1f}" font-size="{tam}" text-anchor="middle" {estilo}>{escape(str(t))}</text>')
+        ancla = "" if "text-anchor" in estilo else 'text-anchor="middle" '
+        self.add(f'<text x="{a:.1f}" y="{b:.1f}" font-size="{tam}" {ancla}{estilo}>{escape(str(t))}</text>')
 
     def svg(self, titulo):
         cab = (
