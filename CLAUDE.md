@@ -42,6 +42,11 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
 Flujo típico de un cambio: `disenador` → `revisor-estructural` + `revisor-habitabilidad`
 → el usuario decide → se registra en `docs/decisiones.md`.
 
+## Instalaciones
+`tools/instalaciones.py` genera los planos eléctrico y sanitario/gas desde ambientes, aberturas y
+muebles; en `instalaciones` del modelo solo van tablero, calefón, troncales, cámaras y gas. Son
+**esquemas preliminares** (NB 777, normas de agua y YPFB los define el profesional).
+
 ## Comandos
 `make setup` · `make build` · `make check` · `make fotos` · `make pdf` · `make abrir` · `make 3d`
 

@@ -32,6 +32,11 @@ lote:
   origen_x: -15.225     # = fondo(22.025) - 37.25
   origen_y: -2.135      # retiro lateral 2.01 m + media pared
   retiro_fondo: 5.00    # de la pared del fondo al lindero P2-P3
+  # Orientación deducida del usuario: el frente recibe sol pleno a las 17:00 -> frente al OESTE.
+  # Con el plano sin espejar: eje A / retiro lateral (Lote 105) = NORTE (lado soleado),
+  # eje C / vecino (Lote 103) = SUR, patio del fondo = ESTE (sol de mañana).
+  orientacion: {frente: oeste, lado_A: norte, lado_C: sur, fondo: este, norte_en_planta: [0, -1]}
+  estacionamiento: "2 autos en el jardín delantero (dicho por el usuario)"
   colindantes:
     arriba: Lote 105 — Jesús Maldonado
     abajo: Lote 103 — Germán Sánchez
@@ -132,12 +137,12 @@ ambientes:
     - {id: lavado, nombre: Lavado, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], estado: definido, nota: "extractor"}
     - {id: almacen, nombre: Almacén, tipo: servicio, rect: [9.125, 3.73, 11.20, 6.67], estado: definido, nota: "escondido detrás de la cocina, se entra desde la cocina"}
     - id: cocina
-      nombre: Cocina G
+      nombre: Cocina
       tipo: cocina
       poly: [[13.00, 2.68], [16.90, 2.68], [16.90, 6.67], [11.20, 6.67], [11.20, 3.73], [13.00, 3.73]]
-      etiqueta: [15.25, 4.75]
+      etiqueta: [13.95, 5.30]
       estado: definido
-      nota: "amplia: G sobre muro del vecino (largo, con cocina y campana), muro del patio (lavaplatos) + península hacia el comedor; isla o desayunador en el tramo junto al pasillo"
+      nota: "amplia, en L + isla: muro del vecino (cocina, campana, torre de horno), muro del patio (lavaplatos bajo la ventana, refrigerador), isla de trabajo/desayuno mirando al comedor y al pasillo"
   p1: []
   altillo: []
 
@@ -158,7 +163,7 @@ aberturas:
     - {id: puerta_deposito, tipo: puerta, de: [6.87, 0.00], a: [6.07, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso (~1.92 libres)"}
     # Living → terraza: abertura de 2.43 entre las columnas A1 y B1, como en la referencia.
     - {id: living_terraza, tipo: corrediza, de: [0.00, 0.125], a: [0.00, 2.555], nota: "2.43 m, puerta corrediza/ventanal a la terraza"}
-    - {id: ventana_living, tipo: ventana, de: [1.45, 0.00], a: [2.95, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.50 × 1.20 al retiro: ventilación cruzada con la terraza"}
+    - {id: ventana_living, tipo: ventana, de: [0.40, 0.00], a: [1.60, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.20 × 1.20 al norte (retiro): ventilación cruzada con la terraza; deja la pared libre para la TV"}
     # ── Planta baja v4, aprobada 2026-10-03 ──
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
@@ -168,6 +173,8 @@ aberturas:
     - {id: puerta_estudio, tipo: puerta, de: [9.85, 2.68], a: [9.05, 2.68], abre_hacia: estudio, nota: "0.80"}
     - {id: ventana_estudio, tipo: ventana, de: [9.30, 0.00], a: [11.00, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.70 × 1.20 al retiro (sin tocar la columna A4)"}
     - {id: puerta_lavado, tipo: puerta, de: [7.30, 3.73], a: [8.10, 3.73], abre_hacia: lavado, nota: "0.80"}
+    - {id: banderola_lavado, tipo: ventana, de: [8.25, 3.73], a: [9.00, 3.73], antepecho: 2.20, alto: 2.60, nota: "0.75 × 0.40 alta al pasillo, con celosía: entrada de aire para el extractor"}
+    - {id: banderola_almacen, tipo: ventana, de: [9.60, 3.73], a: [10.60, 3.73], antepecho: 2.20, alto: 2.60, nota: "1.00 × 0.40 alta al pasillo, con celosía: ventilación del almacén"}
     - {id: pasillo_cocina_lado, tipo: vano, de: [11.20, 3.73], a: [13.00, 3.73], nota: "la cocina se abre al costado del pasillo"}
     - {id: pasillo_cocina, tipo: vano, de: [13.00, 2.68], a: [13.00, 3.73], nota: "remate del pasillo en la cocina"}
     - {id: comedor_cocina, tipo: vano, de: [13.00, 2.68], a: [16.90, 2.68], nota: "abierto; península-barra entre cocina y comedor"}
@@ -180,26 +187,28 @@ aberturas:
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
 muebles:
   pb:
-    # Living: TV en el muro de la grada, sofá de frente (de espaldas a la corrediza, deja paso de 1.15 m)
-    - {tipo: alfombra, rect: [1.10, 0.60, 3.60, 3.60]}
-    - {tipo: sofa, nombre: Sofá 3, rect: [1.30, 1.00, 2.20, 3.10]}
-    - {tipo: mesa, nombre: Centro, rect: [2.55, 1.55, 3.15, 2.55], alto: 0.40}
-    - {tipo: sillon, rect: [2.45, 0.25, 3.25, 1.05]}
-    - {tipo: sillon, rect: [2.45, 3.05, 3.25, 3.85]}
-    - {tipo: estante, nombre: TV, rect: [3.85, 1.20, 4.30, 2.90], alto: 0.60}
+    # Living: TV en el muro norte (luz de costado, sin reflejo del sol de la tarde por la corrediza oeste)
+    - {tipo: alfombra, rect: [1.20, 1.00, 3.90, 3.60]}
+    - {tipo: estante, nombre: TV, rect: [2.30, 0.13, 3.90, 0.58], alto: 0.60}
+    - {tipo: sofa, nombre: Sofá 3, rect: [1.60, 2.90, 3.70, 3.80]}
+    - {tipo: mesa, nombre: Centro, rect: [2.20, 1.70, 3.20, 2.30], alto: 0.40}
+    - {tipo: sillon, rect: [0.40, 1.40, 1.20, 2.20]}
+    - {tipo: sillon, rect: [3.45, 1.40, 4.25, 2.20]}
     # Ingreso y hall
     - {tipo: estante, nombre: Zapatero, rect: [1.20, 6.10, 2.40, 6.54], alto: 0.90}
     - {tipo: closet, nombre: Abrigos, rect: [5.20, 5.95, 6.95, 6.54]}
+    - {tipo: estante, nombre: Consola + espejo, rect: [3.00, 6.19, 4.30, 6.54], alto: 0.85}
+    - {tipo: estante, nombre: Banca + perchero, rect: [6.60, 4.30, 7.00, 5.50], alto: 0.45}
     # Depósito bajo la grada: estantes del lado bajo
     - {tipo: estante, nombre: Herramientas, rect: [4.48, 0.20, 4.90, 2.55], alto: 0.80}
     # Baño: ducha al fondo, inodoro y lavamanos alternados
     - {tipo: ducha, rect: [7.13, 0.13, 8.77, 1.03]}
     - {tipo: inodoro, rect: [8.08, 1.20, 8.77, 1.60]}
     - {tipo: lavamanos, rect: [7.13, 1.90, 7.58, 2.45]}
-    # Estudio: escritorio bajo la ventana, librero y sofá cama (futuro cuarto de invitados)
-    - {tipo: escritorio, rect: [9.40, 0.13, 10.90, 0.73]}
-    - {tipo: silla, rect: [9.90, 0.85, 10.40, 1.35]}
-    - {tipo: estante, nombre: Librero, rect: [8.93, 0.20, 9.28, 1.70], alto: 2.00}
+    # Estudio: escritorio contra el muro oeste (luz norte de costado, sin sol sobre la pantalla)
+    - {tipo: escritorio, rect: [8.93, 0.35, 9.63, 1.75]}
+    - {tipo: silla, rect: [9.75, 0.80, 10.25, 1.30]}
+    - {tipo: estante, nombre: Librero bajo, rect: [9.75, 0.13, 11.00, 0.48], alto: 0.85}
     - {tipo: sofa, nombre: Sofá cama, rect: [12.05, 0.35, 12.92, 2.35]}
     - {tipo: closet, nombre: Closet, rect: [9.95, 1.95, 11.45, 2.55]}
     # Comedor para 6
@@ -210,17 +219,19 @@ muebles:
     - {tipo: silla, rect: [14.70, 1.87, 15.15, 2.32]}
     - {tipo: silla, rect: [13.20, 1.15, 13.65, 1.60]}
     - {tipo: silla, rect: [15.55, 1.15, 16.00, 1.60]}
-    # Cocina G: península-barra, mesón del patio (lavaplatos), mesón del vecino (cocina), refri, isla
-    - {tipo: meson, nombre: Península, rect: [14.90, 2.75, 16.78, 3.65]}
-    - {tipo: refrigerador, rect: [16.03, 3.65, 16.78, 4.40]}
-    - {tipo: meson, rect: [16.18, 4.40, 16.78, 5.95]}
+    # Cocina en L + isla: muebles contra el muro del vecino (sur: cocina y campana) y del patio
+    # (este: lavaplatos bajo la ventana, refrigerador en la punta); isla de trabajo y desayuno.
+    - {tipo: refrigerador, rect: [16.03, 3.30, 16.78, 4.05]}
+    - {tipo: meson, rect: [16.18, 4.05, 16.78, 5.95]}
     - {tipo: lavaplatos, rect: [16.23, 4.75, 16.73, 5.55]}
-    - {tipo: meson, rect: [12.20, 5.95, 16.78, 6.54]}
+    - {tipo: meson, rect: [12.80, 5.95, 16.78, 6.54]}
     - {tipo: cocina, rect: [14.40, 5.95, 15.15, 6.54]}
-    - {tipo: meson, nombre: Isla / desayunador, rect: [12.50, 4.25, 14.30, 5.05]}
-    - {tipo: taburete, rect: [12.75, 3.82, 13.15, 4.20]}
-    - {tipo: taburete, rect: [13.30, 3.82, 13.70, 4.20]}
-    - {tipo: taburete, rect: [13.85, 3.82, 14.25, 4.20]}
+    - {tipo: closet, nombre: Torre horno, rect: [12.20, 5.95, 12.80, 6.54]}
+    - {tipo: meson, nombre: Isla, rect: [13.10, 3.90, 15.30, 4.90]}
+    - {tipo: taburete, rect: [13.40, 3.45, 13.80, 3.85]}
+    - {tipo: taburete, rect: [14.00, 3.45, 14.40, 3.85]}
+    - {tipo: taburete, rect: [14.60, 3.45, 15.00, 3.85]}
+    - {tipo: closet, nombre: Alacena, rect: [11.28, 3.85, 11.88, 5.35]}
     # Almacén: estantes en U, libre el giro de la puerta
     - {tipo: estante, rect: [9.20, 3.81, 11.12, 4.25], alto: 2.00}
     - {tipo: estante, rect: [9.20, 4.25, 9.65, 6.54], alto: 2.00}
@@ -236,6 +247,34 @@ muebles:
     - {tipo: silla, rect: [-0.80, 2.17, -0.35, 2.62]}
     - {tipo: silla, rect: [-1.62, 1.35, -1.17, 1.80]}
     - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45]}
+
+# Instalaciones (ESQUEMA PRELIMINAR para conversar con el ingeniero/instalador; no es un proyecto
+# aprobable). Lo puntual (luces, enchufes, puntos de agua y desagüe) se genera desde ambientes y
+# muebles en tools/instalaciones.py; aquí solo van los elementos fijos y los recorridos troncales.
+instalaciones:
+  pb:
+    electrico:
+      tablero: {pos: [2.75, 6.45], nota: "TD en el hall, junto al ingreso"}
+      acometida: {pos: [-0.30, 6.10], nota: "desde el medidor en el muro de la calle (frente del lote)"}
+      timbre: [-0.20, 6.45]
+      luces_extra:
+        - {pos: [14.20, 4.40], nota: "colgantes sobre la isla"}
+        - {pos: [16.45, 5.15], nota: "bajo alacena / sobre lavaplatos"}
+    sanitario:
+      # Agua fría: entra por el frente (desde cisterna + bomba / tanque elevado) y corre bajo el piso
+      # del hall y del pasillo; de ahí salen las ramas a cada artefacto.
+      agua_fria: [[-0.40, 5.80], [6.40, 5.80], [6.40, 3.10], [16.60, 3.10]]
+      # Agua caliente: desde el calefón a gas natural (muro del patio, exterior, ventilado).
+      agua_caliente: [[17.25, 3.35], [7.40, 3.35]]
+      calefon: {pos: [17.25, 3.35], nota: "calefón a gas natural, exterior en el muro del patio (este), con nicho de protección"}
+      # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
+      # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
+      colector: [[17.70, 5.15], [17.70, -0.85], [-3.00, -0.85]]
+      camaras: [[17.70, -0.85], [12.70, -0.85], [8.00, -0.85], [2.00, -0.85]]
+      desgrasadora: [17.70, 5.15]
+      # Gas natural (red): desde el medidor en el frente, por el retiro norte (exterior, nunca bajo
+      # la losa), al calefón y a la cocina por detrás del mesón del muro sur.
+      gas: [[-0.40, -0.55], [17.25, -0.55], [17.25, 6.30], [16.90, 6.30], [14.78, 6.30]]
 
 # ─────────────────────────────────────────────────────────────────────────────
 # REFERENCIA: juego impreso fotografiado (IMG_8276, IMG_8277). Solo para consulta;

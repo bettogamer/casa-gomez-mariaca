@@ -116,3 +116,18 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   ventana del living al retiro; puerta corrediza embutida en el baño; closet en el estudio.
 - **Pendiente con arquitecto/instalador:** ductos por cielo falso, calefón, gas, cisterna,
   bajantes del primer piso, tablero; puerta de servicio al patio; estacionamiento.
+
+## 2026-10-03 — Sol, muebles, cocina en L + isla, e instalaciones (esquema)
+- **Orientación** (deducida: sol pleno en el frente a las 17:00): frente al oeste, retiro lateral
+  (Lote 105) al norte, vecino (Lote 103) al sur, patio al este. Pendiente que el usuario confirme.
+- **Muebles por el sol:** TV del living al muro norte (no frente a la corrediza oeste) y ventana del
+  living corrida hacia el frente; escritorio del estudio contra el muro oeste (luz norte de costado).
+- **Cocina:** de G a **L + isla** (muro sur: cocina, campana, torre de horno; muro este: lavaplatos
+  bajo la ventana, refrigerador; isla 2.20 × 1.00 con 3 taburetes; alacena junto al almacén).
+- **Hall:** consola + espejo, banca con perchero, closet de abrigos; tablero eléctrico.
+- **Lavado y almacén:** banderolas altas al pasillo con celosía (entrada de aire; no dan luz).
+- **Estacionamiento:** 2 autos en el jardín delantero.
+- **Instalaciones (esquema preliminar, generado desde el modelo):** plano eléctrico con circuitos y
+  cuadro de cargas; plano de agua fría/caliente, desagüe (colector por el retiro norte, CI,
+  desgrasadora) y gas natural (retiro norte → calefón en el muro del patio → cocina).
+- **Estado:** propuesto.

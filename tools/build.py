@@ -5,12 +5,13 @@ from html import escape
 
 import checks
 import export_dxf
+import instalaciones
 import render_3d
 import render_svg
 from casa import SALIDA, ambientes, area, cargar
 
 
-def tablero(casa, res, resumen):
+def tablero(casa, res, resumen, cargas):
     simb = {"error": ("✗", "#c62828"), "aviso": ("!", "#b26a00"), "info": ("·", "#555")}
     avisos = "".join(
         f'<li style="color:{simb[s][1]}"><b>{simb[s][0]}</b> <span class="niv">{escape(n)}</span> {escape(m)}</li>' for n, s, m in res
@@ -26,6 +27,22 @@ def tablero(casa, res, resumen):
         for n in casa["niveles"]
     )
     empl = (SALIDA / "emplazamiento.svg").read_text(encoding="utf-8")
+    inst = ""
+    for nid, filas in cargas.items():
+        nombre = next(n["nombre"] for n in casa["niveles"] if n["id"] == nid)
+        tabla = "".join(f"<tr><td>{r['id']}</td><td>{escape(r['nombre'])}</td><td class=n>{r['puntos']}</td>"
+                        f"<td class=n>{r['va']:.0f}</td><td class=n>{r['a']:.1f}</td><td>{r['prot']}</td><td>{r['cable']}</td></tr>"
+                        for r in filas)
+        total = sum(r["va"] for r in filas)
+        inst += (f'<section><h2>{escape(nombre)} — eléctrico (esquema preliminar)</h2>'
+                 f'{(SALIDA / f"planta-{nid}-electrico.svg").read_text(encoding="utf-8")}'
+                 f'<h3>Cuadro de cargas (220 V)</h3><table><tr><th>Circuito</th><th>Uso</th><th>Puntos</th><th>VA</th><th>A</th>'
+                 f'<th>Protección</th><th>Cable</th></tr>{tabla}<tr><td></td><td><b>Total instalado</b></td><td></td>'
+                 f'<td class=n><b>{total:.0f}</b></td><td class=n><b>{total / 220:.1f}</b></td><td></td><td></td></tr></table>'
+                 f'<p style="color:#666">Valores de referencia para conversar con el electricista; el proyecto final se dimensiona '
+                 f'según NB 777 (factor de demanda, caída de tensión, puesta a tierra, diferenciales).</p></section>'
+                 f'<section><h2>{escape(nombre)} — agua, desagüe y gas (esquema preliminar)</h2>'
+                 f'{(SALIDA / f"planta-{nid}-sanitario.svg").read_text(encoding="utf-8")}</section>')
     pend = "".join(f"<li>{escape(v)}</li>" for v in casa.get("verificar_en_obra", []))
     return f"""<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,6 +68,7 @@ def tablero(casa, res, resumen):
 </div>
 {plantas}
 <section><h2>Emplazamiento</h2>{empl}</section>
+{inst}
 <section><h2>Ambientes</h2><table><tr><th>Nivel</th><th>Ambiente</th><th>Tipo</th><th>m²</th><th>Estado</th></tr>{filas}</table></section>
 </main></body></html>
 """
@@ -62,8 +80,9 @@ def main():
     render_svg.main()
     render_3d.main()
     export_dxf.main()
+    cargas = instalaciones.main()
     f = SALIDA / "index.html"
-    f.write_text(tablero(casa, res, checks.resumen_areas(casa)), encoding="utf-8")
+    f.write_text(tablero(casa, res, checks.resumen_areas(casa), cargas), encoding="utf-8")
     print("→", f.relative_to(SALIDA.parent))
     errores = [m for _, s, m in res if s == "error"]
     print(f"\n{len(errores)} errores, {sum(1 for _, s, _ in res if s == 'aviso')} avisos")
