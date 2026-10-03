@@ -21,20 +21,16 @@ _Última actualización: 2026-10-03_
   del muro norte** (entre baño y estudio), desagüe por el retiro norte con CI y desgrasadora,
   gas natural por el retiro norte. Horno y secadora eléctricos.
 
-- **Primer piso, fondo (aprobado):** cuartos gemelos de los hijos (A4–C5, 18.3 m², cama queen) con
-  baños privados entre los ejes 3 y 4 (Baño 1 al norte con ventana; Baño 2 al sur con extractor, sobre el
-  almacén de PB), pasillo desde la escalera y vestíbulo.
+- **Primer piso aprobado (completo):** suite principal al frente (dormitorio con TV en el muro oeste, logia
+  sobre el volado de 1 m, lavamanos abierto, inodoro y ducha propios, vestidor en U); hall en la llegada de la
+  escalera; estar (sala de TV, ventana al norte) y blancos entre la escalera y los baños de los hijos; dos
+  cuartos de 17.7 m² con baño privado pegado al eje 4 y ropero empotrado. Ver `docs/revision-p1.md`.
 
 ## Próximo paso
-**Primer piso (P1), resto:** franja libre entre la escalera y los baños de los hijos, y el frente
-(ejes 1–3: dormitorio principal en la referencia). Mismo método, pieza por pieza. Tener en cuenta:
-- Alinear los baños de P1 con el **núcleo técnico** (muro norte, ejes 3–4) y con el baño, lavado
-  y cocina de abajo, para bajantes cortas.
-- La escalera llega a P1 del lado del comedor (eje 3) y sigue al altillo arrancando del lado
-  del living (eje 2), sin quitar el pasaje central.
-- En la referencia, el primer piso sobresale ~1.45 m hacia la terraza (balcón y baño): hay que
-  confirmar si la losa se construyó así (voladizo).
-- Muros de ladrillo sobre losa: pasarlos por `revisor-estructural`.
+**Altillo.** Mismo método, pieza por pieza. Aún sin techo: definir uso (terraza, lavandería, estar grande,
+depósito), el tanque elevado (encima del núcleo técnico, muro norte ejes 3–4) y el techo. La escalera llega
+por el lado del comedor (tramo de 10 sobre el eje 3).
+Antes: pasar el primer piso por `revisor-estructural` y `revisor-habitabilidad`.
 
 ## Pendientes abiertos
 - Confirmar orientación: ¿al mediodía el sol entra por el retiro (Lote 105)?

@@ -178,3 +178,23 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Queda libre:** la franja entre la escalera y los baños (eje 3 a ~2 m del eje 4), a los dos lados del pasillo.
 - **Pendiente:** ducto del extractor del Baño 2; revisión estructural de los muros sobre losa.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-03 — Primer piso completo (aprobado por el usuario y su esposa)
+- **Cuartos de los hijos (revisado):** se probó la opción B (suite cuarto → vestidor → baño, baños junto a la
+  escalera). **Descartada** por la esposa: el piso quedaba sin sala de estar. Idea del usuario: sin vestidores,
+  roperos empotrados de 1.50 junto a cada baño; baños privados pegados al eje 4 (Baño 1 ~1.65 libres con
+  ventana; Baño 2 con extractor, sobre el almacén); cuartos de 17.7 m² con cama queen y escritorio al patio.
+- **Estar:** entre la escalera y el Baño 1, con ventana al norte, abierto al pasillo. 2.35 × 2.68 (6.3 m²): se
+  advirtió que es chico; el usuario lo aprueba como sala de TV (foto de referencia: sofá + mueble bajo con TV).
+  Alternativas descartadas: baño del Cuarto 1 adentro (estar de 11 m²), agrandar el hall, estar en el altillo.
+- **Blancos:** al sur, frente al estar, desde el pasillo (encima del lavado de PB).
+- **Suite principal:** hall en la llegada de la escalera; dormitorio con muro ciego al oeste (TV y cortina;
+  la corrediza se descartó por el sol de la tarde) y puerta lateral a la logia; logia de 1 m sobre el volado
+  (techada por el volado de la losa del altillo); puerta directa a los lavamanos (2.50, doble lavamanos);
+  inodoro y ducha en ambientes propios sobre el volado (como el arquitecto); vestidor de 3.65 × 2.47 en U
+  (el vestidor + blancos unidos se achicó para agrandar los lavamanos).
+- **Detalles:** ventana alta en la caja de escalera; ventana de 2.00 en el Cuarto 2; puerta del dormitorio con
+  bisagra al norte; barandas de la logia; rejillas en vestidores; revestimiento acústico en la cabecera.
+- **Pendiente con ingeniero/instalador:** peso sobre el volado, muro de drywall entre cuartos, desagües y agua
+  caliente de la suite principal, extractor del Baño 2. Ver `docs/revision-p1.md` y `docs/revision-p1-hijos.md`.
+- **Estado:** aprobado.

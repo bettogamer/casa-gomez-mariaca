@@ -153,10 +153,10 @@ ambientes:
     # Baños privados pegados al eje 4 (puerta desde cada cuarto) y roperos empotrados en los cuartos.
     # Entre la escalera y los baños: estar al norte (con ventana) y blancos al sur. Cuartos en todo A4–C5.
     - {id: pasillo_p1, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 11.20, 3.73], estado: definido, nota: "desde la llegada de la escalera; mismo trazo que el pasillo de PB (0.90 libres, 0.85 en la columna B4)"}
-    - {id: estar_p1, nombre: Estar, tipo: social, rect: [7.05, 0.00, 9.40, 2.68], etiqueta: [8.22, 2.30], estado: propuesto, nota: "estar familiar con ventana al norte (sol), abierto al pasillo y al hall"}
-    - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [9.40, 0.00, 11.20, 2.68], etiqueta: [10.30, 2.30], estado: propuesto, nota: "privado del Cuarto 1 (puerta por el eje 4); ~1.65 × 2.50 libres (como el de PB); ventana al retiro; bajante por fuera en el núcleo técnico (desviarla a x ≤ 9.25 para no tapar la ventana del estudio de PB)"}
-    - {id: blancos, nombre: Blancos, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], etiqueta: [8.10, 5.80], estado: propuesto, nota: "cuarto de blancos y limpieza, desde el pasillo; encima del lavado de PB"}
-    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.125, 3.73, 11.20, 6.67], etiqueta: [10.15, 5.80], estado: propuesto, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.90 × 2.80 libres; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB (muros sobre muros); inodoro contra el muro x=9.125 (no en el eje 4: viga)"}
+    - {id: estar_p1, nombre: Estar, tipo: social, rect: [7.05, 0.00, 9.40, 2.68], etiqueta: [8.22, 2.30], estado: definido, nota: "sala de TV familiar (como la foto de referencia): ventana al norte (sol), abierta al pasillo y al hall"}
+    - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [9.40, 0.00, 11.20, 2.68], etiqueta: [10.30, 2.30], estado: definido, nota: "privado del Cuarto 1 (puerta por el eje 4); ~1.65 × 2.50 libres (como el de PB); ventana al retiro; bajante por fuera en el núcleo técnico (desviarla a x ≤ 9.25 para no tapar la ventana del estudio de PB)"}
+    - {id: blancos, nombre: Blancos, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], etiqueta: [8.10, 5.80], estado: definido, nota: "cuarto de blancos y limpieza, desde el pasillo; encima del lavado de PB"}
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.125, 3.73, 11.20, 6.67], etiqueta: [10.15, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.90 × 2.80 libres; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB (muros sobre muros); inodoro contra el muro x=9.125 (no en el eje 4: viga)"}
     - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 13.00, 4.085], etiqueta: [12.10, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
     - id: cuarto_hijo_1
       nombre: Cuarto 1
@@ -172,15 +172,15 @@ ambientes:
       etiqueta: [14.20, 4.90]
       estado: definido
       nota: "~5.45 × 3.15 libres; ventana al este (patio). Muro entre cuartos sobre la mitad del paño de losa B–C, sin muro debajo: drywall con lana mineral (liviano y aísla ruido), con junta arriba; confirmar con el ingeniero"
-    # ── Primer piso, frente: suite principal (propuesta 2026-10-03) ──
+    # ── Primer piso, frente: suite principal (aprobado 2026-10-03) ──
     # Se usa el volado de 1 m: logia frente al dormitorio y baño que avanza hasta el borde.
-    - {id: hall_p1, nombre: Hall, tipo: circulacion, rect: [4.40, 2.68, 7.05, 4.20], etiqueta: [6.30, 3.95], estado: propuesto, nota: "llegada de la escalera; sigue al altillo, al pasillo de los chicos y a la suite principal"}
-    - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: propuesto, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; cabecera contra el muro de la escalera: revestimiento acústico (drywall + lana mineral sobre el ladrillo); puerta a la logia en la esquina sur; ventana al norte"}
-    - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: propuesto, nota: "balcón cubierto sobre el volado de 1 m (la losa del altillo vuela igual y lo techa); cerrado a los costados, baranda al frente; sombrea el dormitorio del sol de la tarde"}
-    - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [3.40, 4.20, 7.05, 6.67], etiqueta: [5.20, 5.45], estado: propuesto, nota: "~3.5 × 2.32 libres, muebles en U con pasillo de 1.20; se entra desde los lavamanos; guarda también blancos y limpieza"}
-    - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: propuesto, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta"}
-    - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: propuesto, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
-    - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: propuesto, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
+    - {id: hall_p1, nombre: Hall, tipo: circulacion, rect: [4.40, 2.68, 7.05, 4.20], etiqueta: [6.30, 3.95], estado: definido, nota: "llegada de la escalera; sigue al altillo, al pasillo de los chicos y a la suite principal"}
+    - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: definido, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; cabecera contra el muro de la escalera: revestimiento acústico (drywall + lana mineral sobre el ladrillo); puerta a la logia en la esquina sur; ventana al norte"}
+    - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: definido, nota: "balcón cubierto sobre el volado de 1 m (la losa del altillo vuela igual y lo techa); cerrado a los costados, baranda al frente; sombrea el dormitorio del sol de la tarde"}
+    - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [3.40, 4.20, 7.05, 6.67], etiqueta: [5.20, 5.45], estado: definido, nota: "~3.5 × 2.32 libres, muebles en U con pasillo de 1.20; se entra desde los lavamanos; guarda también blancos y limpieza"}
+    - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: definido, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta"}
+    - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
+    - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
   altillo: []
 
 # Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
@@ -226,29 +226,29 @@ aberturas:
   p1:
     - {id: escalera_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], estado: definido, nota: "llegada de la escalera al pasillo"}
     - {id: pasillo_vest, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.73], estado: definido}
-    - {id: estar_pasillo, tipo: vano, de: [7.05, 2.68], a: [9.40, 2.68], estado: propuesto, nota: "estar abierto al pasillo"}
-    - {id: ventana_estar, tipo: ventana, de: [7.35, 0.00], a: [9.15, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.80 × 1.20 al norte (retiro)"}
-    - {id: puerta_bano_1, tipo: puerta, de: [11.20, 0.20], a: [11.20, 0.90], abre_hacia: bano_hijo_1, estado: propuesto, nota: "0.70, desde el Cuarto 1"}
-    - {id: ventana_bano_1, tipo: ventana, de: [10.00, 0.00], a: [10.70, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta, sobre la ducha"}
-    - {id: puerta_blancos, tipo: puerta, de: [7.30, 3.73], a: [8.10, 3.73], abre_hacia: blancos, estado: propuesto, nota: "0.80, desde el pasillo"}
-    - {id: puerta_bano_2, tipo: puerta, de: [11.20, 6.47], a: [11.20, 5.77], abre_hacia: bano_hijo_2, estado: propuesto, nota: "0.70, desde el Cuarto 2"}
+    - {id: estar_pasillo, tipo: vano, de: [7.05, 2.68], a: [9.40, 2.68], estado: definido, nota: "estar abierto al pasillo"}
+    - {id: ventana_estar, tipo: ventana, de: [7.35, 0.00], a: [9.15, 0.00], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.80 × 1.20 al norte (retiro)"}
+    - {id: puerta_bano_1, tipo: puerta, de: [11.20, 0.20], a: [11.20, 0.90], abre_hacia: bano_hijo_1, estado: definido, nota: "0.70, desde el Cuarto 1"}
+    - {id: ventana_bano_1, tipo: ventana, de: [10.00, 0.00], a: [10.70, 0.00], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta, sobre la ducha"}
+    - {id: puerta_blancos, tipo: puerta, de: [7.30, 3.73], a: [8.10, 3.73], abre_hacia: blancos, estado: definido, nota: "0.80, desde el pasillo"}
+    - {id: puerta_bano_2, tipo: puerta, de: [11.20, 6.47], a: [11.20, 5.77], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
     - {id: puerta_cuarto_1, tipo: puerta, de: [12.10, 2.585], a: [12.90, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.80"}
     - {id: puerta_cuarto_2, tipo: puerta, de: [12.10, 4.085], a: [12.90, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.80"}
     - {id: ventana_cuarto_1_norte, tipo: ventana, de: [14.10, 0.00], a: [15.60, 0.00], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.50 × 1.20 al norte, sobre el escritorio"}
     - {id: ventana_cuarto_1_este, tipo: ventana, de: [16.90, 0.40], a: [16.90, 1.60], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.20 × 1.20 al patio, sobre el escritorio"}
-    - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.40], a: [16.90, 6.40], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana)"}
+    - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.40], a: [16.90, 6.40], antepecho: 0.90, alto: 2.10, estado: definido, nota: "2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana)"}
     # Suite principal
-    - {id: ventana_escalera, tipo: ventana, de: [4.80, 0.00], a: [6.60, 0.00], antepecho: 2.30, alto: 2.90, estado: propuesto, nota: "1.80 × 0.60 alta en la caja de escalera, al retiro norte, sobre el descanso: luz al hall y a la escalera"}
-    - {id: hall_escalera, tipo: vano, de: [4.40, 2.68], a: [7.05, 2.68], estado: propuesto, nota: "escalera (llegada y subida al altillo)"}
-    - {id: puerta_dorm_principal, tipo: puerta, de: [4.40, 3.30], a: [4.40, 4.10], abre_hacia: dorm_principal, estado: propuesto, nota: "0.80, desde el hall; bisagra del lado norte: la hoja abierta tapa la cama desde la escalera"}
-    - {id: puerta_logia, tipo: puerta, de: [0.00, 3.25], a: [0.00, 4.05], abre_hacia: logia, estado: propuesto, nota: "0.80 a un costado (entre B1 y el baño); el resto del muro queda ciego para la TV y la cortina"}
-    - {id: ventana_dorm_norte, tipo: ventana, de: [1.30, 0.00], a: [2.80, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.50 × 1.20 al retiro (sol)"}
-    - {id: puerta_lavamanos_ppal, tipo: puerta, de: [2.20, 4.20], a: [3.00, 4.20], abre_hacia: lavamanos_ppal, estado: propuesto, nota: "0.80, del dormitorio directo a los lavamanos (de la cama al inodoro ~3 m); al vestidor se sigue por el paso abierto"}
-    - {id: vestidor_lavamanos, tipo: vano, de: [3.40, 4.30], a: [3.40, 5.40], estado: propuesto, nota: "paso abierto del vestidor a los lavamanos"}
-    - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: wc_ppal, estado: propuesto, nota: "0.70"}
-    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 6.15], a: [0.90, 5.55], abre_hacia: ducha_ppal, estado: propuesto, nota: "0.60"}
-    - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada"}
-    - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada"}
+    - {id: ventana_escalera, tipo: ventana, de: [4.80, 0.00], a: [6.60, 0.00], antepecho: 2.30, alto: 2.90, estado: definido, nota: "1.80 × 0.60 alta en la caja de escalera, al retiro norte, sobre el descanso: luz al hall y a la escalera"}
+    - {id: hall_escalera, tipo: vano, de: [4.40, 2.68], a: [7.05, 2.68], estado: definido, nota: "escalera (llegada y subida al altillo)"}
+    - {id: puerta_dorm_principal, tipo: puerta, de: [4.40, 3.30], a: [4.40, 4.10], abre_hacia: dorm_principal, estado: definido, nota: "0.80, desde el hall; bisagra del lado norte: la hoja abierta tapa la cama desde la escalera"}
+    - {id: puerta_logia, tipo: puerta, de: [0.00, 3.25], a: [0.00, 4.05], abre_hacia: logia, estado: definido, nota: "0.80 a un costado (entre B1 y el baño); el resto del muro queda ciego para la TV y la cortina"}
+    - {id: ventana_dorm_norte, tipo: ventana, de: [1.30, 0.00], a: [2.80, 0.00], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.50 × 1.20 al retiro (sol)"}
+    - {id: puerta_lavamanos_ppal, tipo: puerta, de: [2.20, 4.20], a: [3.00, 4.20], abre_hacia: lavamanos_ppal, estado: definido, nota: "0.80, del dormitorio directo a los lavamanos (de la cama al inodoro ~3 m); al vestidor se sigue por el paso abierto"}
+    - {id: vestidor_lavamanos, tipo: vano, de: [3.40, 4.30], a: [3.40, 5.40], estado: definido, nota: "paso abierto del vestidor a los lavamanos"}
+    - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: wc_ppal, estado: definido, nota: "0.70"}
+    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 6.15], a: [0.90, 5.55], abre_hacia: ducha_ppal, estado: definido, nota: "0.60"}
+    - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
+    - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -317,10 +317,11 @@ muebles:
     - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45]}
 
   p1:
-    # Estar: sofá contra el muro de la escalera, TV en el muro del baño
-    - {tipo: sofa, rect: [7.13, 0.45, 8.03, 2.45]}
-    - {tipo: mesa, nombre: Centro, rect: [8.25, 1.10, 8.75, 1.80], alto: 0.40}
-    - {tipo: estante, nombre: TV, rect: [8.95, 0.60, 9.32, 2.10], alto: 0.60}
+    # Estar (como la foto de referencia del usuario): sofá contra el muro de la escalera, TV en un
+    # mueble bajo largo en el muro de enfrente, alfombra, sin mesa de centro; abierto al pasillo
+    - {tipo: alfombra, rect: [8.05, 0.60, 8.90, 2.40]}
+    - {tipo: sofa, rect: [7.13, 0.40, 8.03, 2.50]}
+    - {tipo: estante, nombre: TV, rect: [8.92, 0.25, 9.32, 2.45], alto: 0.50}
     # Baño 1 (privado del Cuarto 1): inodoro contra el muro norte, ducha al fondo
     - {tipo: inodoro, rect: [9.55, 0.13, 9.95, 0.82]}
     - {tipo: lavamanos, rect: [9.48, 1.10, 9.93, 1.65]}
