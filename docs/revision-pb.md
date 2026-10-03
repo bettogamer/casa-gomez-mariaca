@@ -30,15 +30,15 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
 7. **No hay puerta de servicio al patio.** La basura, el lavado (para tender) y la parrilla
    pasan por el comedor y su corrediza. Opción: una puerta en el fondo de la cocina
    (habría que reacomodar el mesón del patio) o aceptar el paso por el comedor.
-8. **Triángulo de la cocina un poco largo.** Lavaplatos–cocina 2.5 m, cocina–refrigerador
+8. ✅ **RESUELTO** (refrigerador junto a la península, cocina corrida: recorrido total 5.9 m). **Triángulo de la cocina un poco largo.** Lavaplatos–cocina 2.5 m, cocina–refrigerador
    1.8 m, refrigerador–lavaplatos 4.1 m: **8.4 m en total** (lo cómodo es hasta ~7.9 m y
    cada lado hasta ~2.7 m). El refrigerador está lejos del lavaplatos. Opción: llevarlo al
    extremo del mesón del patio, junto a la península.
-9. **El living solo tiene luz por la corrediza de la terraza.** Su muro del retiro (lado
+9. ✅ **RESUELTO** (ventana de 1.50 × 1.20 al retiro). **El living solo tiene luz por la corrediza de la terraza.** Su muro del retiro (lado
    Lote 105) no tiene ventana. Una ventana ahí le da ventilación cruzada y luz de tarde.
-10. **Puerta del baño** (pendiente): abre hacia el pasillo de 0.90 m y lo tapa al abrirse.
+10. ✅ **RESUELTO** (corrediza embutida en el muro). **Puerta del baño**: abre hacia el pasillo de 0.90 m y lo tapa al abrirse.
     Una corrediza resuelve las dos cosas.
-11. **El estudio no tiene closet.** Para cuando sea cuarto de invitados, conviene un closet
+11. ✅ **RESUELTO** (closet de 1.50 × 0.60 contra el muro del pasillo; deja abrir el sofá cama). **El estudio no tiene closet.** Para cuando sea cuarto de invitados, conviene un closet
     (puede reemplazar al librero, 0.60 de fondo).
 
 ## C. Detalles menores

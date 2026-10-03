@@ -110,3 +110,9 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Qué:** el baño pasa de ~1.35 a **~1.65 m libres** (1.80 a eje). Estudio igual (se corre 0.30);
   el comedor cede 0.30 (~3.75 × 2.48 libres, sigue la mesa de 6; paso a la corrediza ~0.78 m).
 - **Estado:** aprobado (pedido del usuario).
+
+## 2026-10-03 — Revisión de huecos de la planta baja (docs/revision-pb.md)
+- **Aplicado (aprobado por el usuario):** refrigerador junto a la península (triángulo de 8.4 → 5.9 m);
+  ventana del living al retiro; puerta corrediza embutida en el baño; closet en el estudio.
+- **Pendiente con arquitecto/instalador:** ductos por cielo falso, calefón, gas, cisterna,
+  bajantes del primer piso, tablero; puerta de servicio al patio; estacionamiento.
