@@ -362,7 +362,7 @@ muebles:
     # Vestidor en U (incluye lo que era blancos)
     - {tipo: closet, nombre: Vestidor, rect: [3.48, 6.04, 6.97, 6.59]}
     - {tipo: closet, rect: [6.42, 4.28, 6.97, 6.04]}
-    - {tipo: closet, rect: [3.48, 5.50, 3.90, 6.04]}
+    - {tipo: estante, nombre: Termotanque, rect: [3.48, 5.50, 3.98, 6.04], alto: 1.30}
     - {tipo: closet, rect: [3.95, 4.28, 6.42, 4.83]}
     # Lavamanos abierto, inodoro y ducha en ambientes propios
     - {tipo: meson, nombre: Doble lavamanos, rect: [1.65, 6.04, 3.32, 6.59]}
@@ -432,11 +432,13 @@ instalaciones:
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
       # calefón de PB por el mismo lugar. Troncales por el estar y el pasillo hacia los baños de los hijos y,
-      # por el hall y el vestidor, hacia la suite principal (~15 m: ver agua caliente en revision-p1.md).
+      # por el hall y el vestidor, hacia la suite principal (solo agua fría: la caliente sale del termotanque).
       bajada_tanque: {pos: [9.10, -0.30], etiqueta: "AF ↓ tanque"}
       subida_caliente: {pos: [8.80, -0.30], etiqueta: "AC ↑ calefón (PB)"}
       agua_fria: [[[9.10, -0.30], [9.10, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 5.90], [-0.20, 5.90]]]
-      agua_caliente: [[[8.80, -0.30], [8.80, 0.20], [9.20, 0.20], [9.20, 3.45], [11.35, 3.45]], [[9.20, 3.45], [6.75, 3.45], [6.75, 5.65], [-0.20, 5.65]]]
+      agua_caliente: [[[8.80, -0.30], [8.80, 0.20], [9.20, 0.20], [9.20, 3.45], [11.35, 3.45]], [[3.73, 5.77], [3.73, 5.65], [-0.20, 5.65]]]
+      # La suite principal tiene su propio termotanque eléctrico (decisión del usuario 2026-10-03): agua caliente corta.
+      termotanque: {pos: [3.73, 5.77], nota: "termotanque eléctrico 50–80 L en la esquina del vestidor, junto a los lavamanos; circuito propio C12"}
       # Sin colector en este piso: cada artefacto va a su bajante (BV).
       bajantes:
         - {pos: [9.25, -0.70], ambientes: [bano_hijo_1], etiqueta: "Baño 1, por fuera (x ≤ 9.25)"}
