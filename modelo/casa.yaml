@@ -38,19 +38,25 @@ lote:
     fondo: Lote 95 — Rubén Pérez
     frente: Calle Víctor Rodrigo
 
+# Alturas: el usuario cambió en obra a 3.00 m LIBRES (piso a techo), no 3.00 piso a piso
+# como decía el plano. Piso a piso = 3.00 + espesor de losa (0.20 supuesto) = 3.20.
+# Las cotas cambian si se mide otro espesor de losa.
 niveles:
   - id: pb
     nombre: Planta baja
-    cota: 0.20          # nivel de piso terminado
-    altura: 3.00        # piso a piso
+    cota: 0.20          # nivel de piso terminado (según plano)
+    altura_libre: 3.00  # piso a techo — confirmado por el usuario
+    altura: 3.20        # piso a piso = libre + losa
   - id: p1
     nombre: Primer piso
-    cota: 3.20
-    altura: 3.00
+    cota: 3.40
+    altura_libre: 3.00
+    altura: 3.20
   - id: altillo
     nombre: Altillo
-    cota: 6.20
-    altura: 3.18        # hasta 9.38 m de altura total según PDF
+    cota: 6.60
+    altura_libre: 3.00  # pendiente: ¿el altillo tiene techo construido?
+    altura: 3.20
 
 estructura:
   estado: construido
@@ -76,7 +82,7 @@ estructura:
     ancho_tramo: 1.20
     peldanos_por_piso: 16
     huella: 0.28
-    contrahuella: 0.1875             # 3.00 m / 16
+    contrahuella: 0.1875             # DESACTUALIZADO: en obra se cambió a 10 + descanso + 6. Pendiente de modelar.
     sube_a: [p1, altillo]
 
 # Ambientes por nivel. `rect: [x0, y0, x1, y1]` o `poly: [[x,y], ...]`.

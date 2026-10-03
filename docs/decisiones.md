@@ -19,3 +19,10 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Columna:** 25 × 25 cm, estimado por el usuario (sin medición).
 - **Línea roja B4–B5** en `IMG_8278 copy.png`: solo indica la distancia del tramo, no es un elemento.
 - **Estado:** columnas cerradas.
+
+## 2026-10-03 — Alturas de piso
+- **Qué:** en obra se cambió a 3.00 m libres (piso a techo) en vez de 3.00 m piso a piso del plano.
+  Con losa de 0.20 (supuesto) queda piso a piso 3.20: NPT +0.20 / +3.40 / +6.60.
+- **Consecuencia:** la escalera se rehízo: PB→P1 = 10 escalones + descanso + 6 (sale 3 escalones
+  fuera de la caja); P1→altillo = 6 + descanso + 10, para no quitar el pasaje central del primer piso.
+- **Estado:** alturas aprobadas; geometría de escalera por confirmar.

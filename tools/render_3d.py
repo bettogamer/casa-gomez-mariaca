@@ -212,7 +212,7 @@ def datos(casa):
     est = casa["estructura"]
     lt = casa["lote"]
     esc = est["escalera"]
-    niveles_por_id = {n["id"]: n for n in casa["niveles"]}
+    orden = {n["id"]: k for k, n in enumerate(casa["niveles"])}
     niveles = []
     for n in casa["niveles"]:
         ambs = []
@@ -241,7 +241,7 @@ def datos(casa):
             "escalera": {
                 "rect": esc["rect"], "ancho": esc["ancho_tramo"], "peldanos": esc["peldanos_por_piso"],
                 "huella": esc["huella"], "contrahuella": esc["contrahuella"],
-                "pisos": [niveles_por_id[i]["cota"] - niveles_por_id[i]["altura"] for i in esc["sube_a"]],
+                "pisos": [casa["niveles"][orden[i] - 1]["cota"] for i in esc["sube_a"]],
             },
         },
         "niveles": niveles,
