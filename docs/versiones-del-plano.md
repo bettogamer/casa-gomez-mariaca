@@ -16,7 +16,9 @@ se construyó (o si lo construido es una tercera).
 | Altillo | Dormitorio, baño, garsonier, star | No fotografiado |
 | Elevaciones | "Lateral / Frontal / Posterior" | "Este / …" (renombradas) |
 
-**El modelo (`modelo/casa.yaml`) parte del juego impreso**, por ser la versión posterior.
+**Las columnas se construyeron con `IMG_8278.png`** (plano de fundaciones del juego impreso,
+confirmado por el usuario el 2026-10-03). El modelo parte de esa versión. El PDF queda solo
+como referencia (elevaciones, cortes, carátula).
 
 ## Cómo confirmar en obra (5 minutos con cinta métrica)
 1. Medir entre las dos últimas columnas del fondo: ¿5.70 m o 4.50 m? (es LA diferencia entre versiones)
