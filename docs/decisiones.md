@@ -198,3 +198,8 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Pendiente con ingeniero/instalador:** peso sobre el volado, muro de drywall entre cuartos, desagües y agua
   caliente de la suite principal, extractor del Baño 2. Ver `docs/revision-p1.md` y `docs/revision-p1-hijos.md`.
 - **Estado:** aprobado.
+
+## 2026-10-03 — Baños de los hijos del mismo ancho
+- **Qué:** el Baño 2 pasa de ~1.90 a ~1.65 libres (mismo ancho que el Baño 1; muro en x=9.40). Blancos crece a 2.35 × 2.94.
+- **Por qué no ensanchar el Baño 1:** le quitaría ancho al estar (no entraría bien sofá + mueble de TV).
+- **Estado:** pedido del usuario.
