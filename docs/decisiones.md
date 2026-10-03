@@ -16,6 +16,6 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Qué:** las columnas se construyeron según `planos-arqui/IMG_8278.png` (5 × 3 = 15 columnas,
   tramos 4.40 · 2.65 · 4.15 · 5.70 y 2.68 · 3.99).
 - **Resuelto:** C1–C2 = 4.40 m, no 4.10 (error de dibujo; confirmado con IMG_8277).
-- **Pendiente:** sección de columna; significado de la
-  línea roja B4–B5 en `IMG_8278 copy.png`.
-- **Estado:** aprobado (dicho por el usuario).
+- **Columna:** 25 × 25 cm, estimado por el usuario (sin medición).
+- **Línea roja B4–B5** en `IMG_8278 copy.png`: solo indica la distancia del tramo, no es un elemento.
+- **Estado:** columnas cerradas.

@@ -55,12 +55,13 @@ niveles:
 estructura:
   estado: construido
   nota: Columnas, losas y escalera YA construidas. Son la restricción principal del diseño.
-  seccion_columna: 0.25 # supuesto; medir en obra
+  seccion_columna: 0.25 # 25x25 estimado por el usuario (sin medición)
   espesor_losa: 0.20    # supuesto; medir en obra
   espesor_muro_ext: 0.25
   espesor_muro_int: 0.15
   # Ejes según planos-arqui/IMG_8278.png: plano con el que se construyeron las columnas
-  # (confirmado por el usuario 2026-10-03). IMG_8278 copy.png = misma foto + línea roja B4-B5.
+  # (confirmado por el usuario 2026-10-03). IMG_8278 copy.png = misma foto + línea roja B4-B5
+  # que solo indica la distancia de ese tramo (no es viga ni muro).
   ejes_x: {"1": 0.00, "2": 4.40, "3": 7.05, "4": 11.20, "5": 16.90}
   ejes_y: {A: 0.00, B: 2.68, C: 6.67}
   # Columnas = intersecciones de ejes, salvo las listadas en `desplazadas`.
@@ -128,5 +129,5 @@ areas_declaradas_pdf: {pb: 65.66, p1: 79.27, altillo: 53.49, total: 198.42}
 
 verificar_en_obra:
   - "Comprobar que lo construido siguió IMG_8278: tramo del fondo 5.70 m (el PDF decía 4.50 m)."
-  - "Sección real de columnas y espesor de losas."
+  - "Sección real de columnas (se asume 25x25) y espesor de losas."
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."
