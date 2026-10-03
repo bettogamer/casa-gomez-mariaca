@@ -430,7 +430,7 @@ muebles:
     - {tipo: closet, nombre: Ropero, rect: [13.85, 3.00, 14.80, 3.55]}
     - {tipo: escritorio, rect: [13.85, 4.05, 14.85, 4.52]}
     - {tipo: silla, rect: [14.10, 3.60, 14.55, 4.00]}
-    # Terraza: mesa para 6 y parrilla
+    # Terraza: mesa para 6 (la parrilla irá en la terraza de PB, decisión del usuario)
     - {tipo: mesa, nombre: Mesa 6, rect: [0.60, 2.10, 2.40, 3.00]}
     - {tipo: silla, rect: [0.95, 1.60, 1.40, 2.05]}
     - {tipo: silla, rect: [1.60, 1.60, 2.05, 2.05]}
@@ -438,7 +438,6 @@ muebles:
     - {tipo: silla, rect: [1.60, 3.05, 2.05, 3.50]}
     - {tipo: silla, rect: [0.10, 2.32, 0.55, 2.77]}
     - {tipo: silla, rect: [2.45, 2.32, 2.90, 2.77]}
-    - {tipo: meson, nombre: Parrilla, rect: [2.90, 0.10, 4.30, 0.70]}
     # Franja sur: lavandería (piletas + lavadora manual) con alero, y tendedero
     - {tipo: lavadero, nombre: Piletas, rect: [11.40, 4.75, 12.60, 5.35]}
     - {tipo: lavadora, nombre: Lavadora manual, rect: [12.65, 4.75, 13.25, 5.35]}
