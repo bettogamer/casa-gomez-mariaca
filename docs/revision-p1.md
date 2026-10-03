@@ -88,3 +88,13 @@ Nada es incompatible con lo construido; no se mueve ninguna columna. Para consul
   acortar esa ventana (9.45–11.00), llevar el bajante al otro lado de A4, o correr el inodoro.
 - **Bajante del Baño 2:** bien; ducto en la esquina del almacén (recortar un estante), puede compartirse con el lavadero.
 - **Ducha principal:** la bandeja dibujada pisa ~4 cm la columna C1: ajustar en obra.
+
+**Segundo informe estructural (con el Baño 2 en x=9.40) — puntos nuevos:**
+- **Hall del primer piso sobre el arranque de la escalera de PB** (x 4.40–5.725, y 2.68–4.20): confirmar en obra que
+  ahí hay losa y no hueco. Si es hueco, el hall pierde el paso al pasillo.
+- **Muro x=9.40 entero** (estar/Baño 1 y blancos/Baño 2) queda solo sobre losa (el de PB está en x=9.125): drywall
+  resistente a la humedad o ladrillo hueco. Alternativa estructural: volver el Baño 2 a x=9.125.
+- **Ducha principal sobre la viga del eje 1:** la rejilla de desagüe no puede caer sobre la viga.
+- **Muro hall/vestidor (y=4.20, x 4.40–7.05):** queda a ~7 cm del borde del hueco de la escalera; si hay viga de
+  borde, puede ser ladrillo.
+- **Viga del eje 1 entre A1 y B1** trabaja como dintel de la corrediza del living y recibe encima el muro del dormitorio.
