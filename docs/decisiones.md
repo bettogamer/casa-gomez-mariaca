@@ -217,3 +217,7 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Qué:** sin los roperos del eje 4, el vestíbulo pasa de 1.80 a 1.30 (lo mínimo para puertas de 0.90 con ~10 cm de
   jamba a la columna B4). Cuartos de 18.0 m²; roperos entre cuartos de 3.50 m.
 - **Estado:** pedido del usuario.
+
+## 2026-10-03 — Roperos de los hijos de pared a pared
+- **Qué:** los roperos entre cuartos llegan hasta el muro del patio: ~4.20 m cada uno (antes 3.50, quedaba un hueco sin uso).
+- **Estado:** pedido del usuario.
