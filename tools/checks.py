@@ -5,7 +5,7 @@ municipal de Cochabamba: esa la confirma el arquitecto.
 """
 import sys
 
-from casa import area, caja, cargar, columnas, dentro, dist_borde, escalera, huella_casa, ambientes
+from casa import GARGANTA, area, caja, cargar, columnas, dentro, dist_borde, escalera, huella_casa, ambientes
 
 # (área mínima m², lado mínimo m) — referencial
 MINIMOS = {
@@ -15,7 +15,6 @@ MINIMOS = {
     "social": (9.0, 2.70),
 }
 PASO = 0.05  # resolución para detectar solapes (m)
-GARGANTA = 0.15  # espesor supuesto de la losa de la escalera (m)
 ALTURA_PASO = 2.00
 
 

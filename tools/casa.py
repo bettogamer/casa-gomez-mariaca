@@ -6,6 +6,7 @@ import yaml
 RAIZ = Path(__file__).resolve().parent.parent
 MODELO = RAIZ / "modelo" / "casa.yaml"
 SALIDA = RAIZ / "salida"
+GARGANTA = 0.15  # espesor supuesto de la losa de la escalera y del descanso (m)
 
 COLORES_TIPO = {
     "social": "#f6e7c8",
@@ -228,4 +229,56 @@ def escalera(casa):
             "inicio_y": inicio, "llegada_y": llegada,
             "altura_total": (n1 + n2 + 1) * ch, "contrahuellas": n1 + n2 + 1,
         })
+    return out
+
+
+def alto_bajo_escalera(casa, nivel_id, de, a):
+    """Altura libre (desde el piso del nivel) bajo la escalera que sube desde ese nivel, para un
+    muro de `de` a `a`. None si el muro no pasa por debajo de la escalera."""
+    est = casa["estructura"]
+    t = est["espesor_muro_int"] / 2
+    ch = est["escalera"]["contrahuella"]
+    x0, x1 = sorted([de[0], a[0]])
+    y0, y1 = sorted([de[1], a[1]])
+    if abs(y1 - y0) < 0.01:      # muro horizontal: grosor en y
+        y0, y1 = y0 - t, y1 + t
+    else:                        # muro vertical: grosor en x
+        x0, x1 = x0 - t, x1 + t
+    minimo = None
+    for e in escalera(casa):
+        if e["desde"] != nivel_id:
+            continue
+        for p in e["peldanos"] + [e["descanso"]]:
+            if min(x1, p["x1"]) - max(x0, p["x0"]) > 0.01 and min(y1, p["y1"]) - max(y0, p["y0"]) > 0.01:
+                bajo = p["z"] - (ch if "n" in p else 0) - GARGANTA - e["base"]
+                minimo = bajo if minimo is None else min(minimo, bajo)
+    return minimo
+
+
+def tramos_bajo_escalera(casa, nivel_id, de, a):
+    """Divide un muro en partes según los peldaños que pasan encima.
+    Devuelve [(de, a, alto | None)]; alto None = altura completa."""
+    horizontal = abs(de[1] - a[1]) < 0.01
+    k = 0 if horizontal else 1
+    lo, hi = sorted([de[k], a[k]])
+    cortes = {lo, hi}
+    for e in escalera(casa):
+        if e["desde"] != nivel_id:
+            continue
+        for p in e["peldanos"] + [e["descanso"]]:
+            for v in ((p["x0"], p["x1"]) if horizontal else (p["y0"], p["y1"])):
+                if lo < v < hi:
+                    cortes.add(v)
+    cortes = sorted(cortes)
+    out = []
+    for u, v in zip(cortes, cortes[1:]):
+        if v - u < 0.01:
+            continue
+        p0 = [u, de[1]] if horizontal else [de[0], u]
+        p1 = [v, de[1]] if horizontal else [de[0], v]
+        alto = alto_bajo_escalera(casa, nivel_id, p0, p1)
+        if out and out[-1][2] == alto:          # une partes contiguas de igual altura
+            out[-1] = (out[-1][0], p1, alto)
+        else:
+            out.append((p0, p1, alto))
     return out

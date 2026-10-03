@@ -110,6 +110,16 @@ ambientes:
     - {id: acceso, nombre: Acceso, tipo: exterior, rect: [-2.625, 4.95, -0.125, 6.795], estado: definido, nota: "nivel ±0.00, llega a la puerta de entrada"}
     - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.95], estado: definido}
     - {id: ingreso, nombre: Ingreso, tipo: circulacion, rect: [0.00, 4.95, 2.58, 6.67], estado: definido}
+    - id: deposito_patio
+      nombre: Depósito patio
+      tipo: servicio
+      rect: [4.40, 0.00, 7.05, 2.68]      # entre columnas A2-A3-B2-B3, debajo de la escalera
+      estado: definido
+      nota: "Patio y herramientas. Se entra solo desde el retiro lateral (Lote 105). Bajo el descanso ~1.92 m libres; bajo el tramo de 10 baja hasta ~0.8 m junto al eje B."
+    # Entre columnas A3-A4-B3-B4, mitad y mitad. Orden propuesto: lavado junto a la escalera, baño
+    # junto al eje 4 (más cerca del baño del primer piso de la referencia -> bajantes más cortas).
+    - {id: lavado, nombre: Lavado, tipo: servicio, rect: [7.05, 0.00, 9.125, 2.68], estado: definido}
+    - {id: bano_pb, nombre: Baño completo, tipo: bano, rect: [9.125, 0.00, 11.20, 2.68], estado: definido, nota: "inodoro, lavamanos y ducha (sin tina)"}
   p1: []
   altillo: []
 
@@ -121,6 +131,7 @@ muros:
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
   pb:
+    - {id: puerta_deposito, tipo: puerta, de: [5.35, 0.00], a: [6.15, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso; alto limitado por el descanso (~1.92 libres). Posición y ancho propuestos"}
     - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.45], a: [0.00, 6.37], abre_hacia: ingreso, nota: "0.92 m, como en la referencia"}
     - {id: ingreso_estar, tipo: vano, de: [2.58, 4.95], a: [2.58, 6.67], nota: "ingreso abierto hacia el estar"}
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}

@@ -4,7 +4,7 @@ El HTML lleva los datos embebidos, así que se abre con doble clic (file://).
 """
 import json
 
-from casa import COLORES_TIPO, SALIDA, aberturas, ambientes, area, cargar, columnas, escalera, huella_casa, muros
+from casa import COLORES_TIPO, SALIDA, aberturas, tramos_bajo_escalera, ambientes, area, cargar, columnas, escalera, huella_casa, muros
 
 PLANTILLA = r"""<!doctype html>
 <html lang="es">
@@ -174,15 +174,16 @@ D.niveles.forEach(nv => {
       }
       return;
     }
-    const w = segmento(m.de, m.a, nv.cota, nv.cota + nv.alto_muro, m.grosor, 0xf4f1ea);
-    w.userData.alto = nv.alto_muro; w.userData.base = nv.cota;
+    const alto = m.alto ? Math.min(m.alto, nv.alto_muro) : nv.alto_muro;   // bajo la escalera, hasta su cara inferior
+    const w = segmento(m.de, m.a, nv.cota, nv.cota + alto, m.grosor, 0xf4f1ea);
+    w.userData.alto = alto; w.userData.base = nv.cota;
     muros.push(w); grupo.add(w);
   });
   // dinteles sobre puertas y ventanas; antepecho bajo ventanas (se ocultan con el corte a 1.2 m)
   const dinteles = [];
   nv.aberturas.forEach(ab => {
     if (ab.tipo === "vano") return;
-    const d = segmento(ab.de, ab.a, nv.cota + 2.10, nv.cota + nv.alto_muro, E.muro, 0xe8e4da);
+    const d = segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, E.muro, 0xe8e4da);
     dinteles.push(d); grupo.add(d);
     if (ab.tipo === "ventana") {
       const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + 1.0, E.muro, 0xf4f1ea);
@@ -227,7 +228,10 @@ document.querySelectorAll(".modo button").forEach(b => b.addEventListener("click
   document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o === b));
   actualizar();
 }));
-if (location.hash === "#obra") document.querySelector('[data-modo="obra"]').click();
+// Atajos por URL: #obra (solo lo construido), #retiro (cámara desde el retiro lateral, Lote 105), #pb (solo planta baja)
+if (location.hash.includes("obra")) document.querySelector('[data-modo="obra"]').click();
+if (location.hash.includes("retiro")) { camara.position.set(cx - 4, 7, cz - 13); ctl.target.set(cx - 3, 1.2, cz); ctl.update(); }
+if (location.hash.includes("pb")) cont.querySelectorAll("input").forEach(i => i.checked = i.dataset.nivel === "pb");
 actualizar();
 
 addEventListener("resize", () => {
@@ -266,11 +270,16 @@ def datos(casa):
             (x0, y0), (x1, y1) = m["de"], m["a"]
             perim = (abs(x0 - x1) < 0.01 and any(abs(x0 - v) < 0.01 for v in (min(bx), max(bx)))) or \
                     (abs(y0 - y1) < 0.01 and any(abs(y0 - v) < 0.01 for v in (min(by), max(by))))
-            lista_muros.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"],
-                                "grosor": est["espesor_muro_ext" if perim else "espesor_muro_int"]})
+            grosor = est["espesor_muro_ext" if perim else "espesor_muro_int"]
+            if m["tipo"] != "ladrillo":
+                lista_muros.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "grosor": grosor, "alto": None})
+                continue
+            for d, a, alto in tramos_bajo_escalera(casa, n["id"], m["de"], m["a"]):
+                lista_muros.append({"de": d, "a": a, "tipo": "ladrillo", "grosor": grosor, "alto": alto})
         niveles.append({"id": n["id"], "nombre": n["nombre"], "cota": n["cota"],
                         "muros": lista_muros,
-                        "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"]} for ab in aberturas(casa, n["id"])],
+                        "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"], "alto": ab.get("alto", 2.10)}
+                                      for ab in aberturas(casa, n["id"])],
                         "alto_muro": n["altura"] - est["espesor_losa"], "ambientes": ambs})
     # losas: contrapiso PB + cada nivel superior, con hueco sobre la escalera que llega
     huecos = {}

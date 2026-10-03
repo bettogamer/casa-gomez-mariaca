@@ -164,8 +164,11 @@ def dibujar_aberturas(L, casa, nivel_id):
             destino = ambs.get(ab.get("abre_hacia"))
             if destino:
                 cx, cy = centroide(destino["poly"])
-                if (cx - x0) * nx + (cy - y0) * ny < 0:
-                    nx, ny = -nx, -ny
+            else:  # "afuera": alejarse del centro de la casa
+                hx0, hy0, hx1, hy1 = huella_casa(casa)
+                cx, cy = 2 * x0 - (hx0 + hx1) / 2, 2 * y0 - (hy0 + hy1) / 2
+            if (cx - x0) * nx + (cy - y0) * ny < 0:
+                nx, ny = -nx, -ny
             hx, hy = x0 + nx * largo, y0 + ny * largo
             L.linea(x0, y0, hx, hy, 'stroke="#222" stroke-width="2"')
             pts = []

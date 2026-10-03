@@ -48,3 +48,14 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Cambio respecto a la referencia:** el muro entre living e ingreso es una **celosía de madera**
   (desde la fachada hasta ~2.58 m); después queda un paso abierto de ~1.8 m al estar/escalera.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-03 — Planta baja, parte 2: depósito bajo escalera, lavado y baño
+- **Depósito de patio y herramientas** debajo de la escalera (columnas A2-A3-B2-B3, ~2.40 × 2.50 libres).
+  Se entra solo desde el retiro lateral (lado Lote 105). La puerta queda bajo el descanso: ~1.92 m
+  libres (supuesto: descanso de 15 cm) → puerta de ~0.80 × 1.85 m. Bajo el tramo de 10 escalones la
+  altura baja hasta ~0.6–0.8 m junto al eje B (sirve para guardar cosas bajas).
+- **Lavado + baño completo** (inodoro, lavamanos, ducha; sin tina) entre columnas A3-A4-B3-B4,
+  mitad y mitad (~1.93 × 2.50 libres cada uno).
+  Orden propuesto: lavado junto a la escalera, baño junto al eje 4.
+- **Pendiente:** orden lavado/baño, puertas de lavado y baño, ventanas al retiro.
+- **Estado:** aprobado por el usuario (posiciones de puertas propuestas).
