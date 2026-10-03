@@ -4,7 +4,7 @@ El HTML lleva los datos embebidos, así que se abre con doble clic (file://).
 """
 import json
 
-from casa import COLORES_TIPO, SALIDA, aberturas, tramos_bajo_escalera, ambientes, area, cargar, columnas, escalera, huella_casa, muros
+from casa import COLORES_TIPO, SALIDA, aberturas, tramos_bajo_escalera, ambientes, area, cargar, columnas, escalera, huella_casa, muebles, muros
 
 PLANTILLA = r"""<!doctype html>
 <html lang="es">
@@ -35,6 +35,7 @@ PLANTILLA = r"""<!doctype html>
   <div class="grupo" id="niveles"></div>
   <div class="grupo">
     <label><input type="checkbox" id="corte" checked> Muros cortados a 1.2 m</label>
+    <label><input type="checkbox" id="muebles" checked> Muebles</label>
     <label><input type="checkbox" id="etiquetas" checked> Nombres de ambientes</label>
     <label><input type="checkbox" id="lote" checked> Lote</label>
   </div>
@@ -192,6 +193,13 @@ D.niveles.forEach(nv => {
     }
   });
   grupo.userData.dinteles = dinteles;
+  const gm = new THREE.Group();
+  nv.muebles.forEach(m => {
+    const [x0, z0, x1, z1] = m.rect;
+    gm.add(caja(x0, nv.cota + 0.01, z0, x1, nv.cota + 0.01 + m.alto, z1, m.color));
+  });
+  grupo.add(gm);
+  grupo.userData.muebles = gm;
   grupo.userData.muros = muros;
   G.niveles[nv.id] = grupo;
   escena.add(grupo);
@@ -218,6 +226,7 @@ function actualizar() {
   G.etiquetas.visible = modo === "proyecto" && document.getElementById("etiquetas").checked;
   G.etiquetas.children.forEach(s => s.visible = vis[s.userData.nivel]);
   G.lote.visible = document.getElementById("lote").checked;
+  Object.values(G.niveles).forEach(g => g.userData.muebles.visible = document.getElementById("muebles").checked);
   alturaMuros();
   document.getElementById("info").textContent = modo === "obra"
     ? "Obra actual: columnas, losas y escalera (lo ya construido)"
@@ -279,6 +288,7 @@ def datos(casa):
                 lista_muros.append({"de": d, "a": a, "tipo": "ladrillo", "grosor": grosor, "alto": alto})
         niveles.append({"id": n["id"], "nombre": n["nombre"], "cota": n["cota"],
                         "muros": lista_muros,
+                        "muebles": [{"rect": m["rect"], "alto": m["alto"], "color": m["color"]} for m in muebles(casa, n["id"])],
                         "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"], "alto": ab.get("alto", 2.10),
                                        "antepecho": ab.get("antepecho", 1.0)}
                                       for ab in aberturas(casa, n["id"])],

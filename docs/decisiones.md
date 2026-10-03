@@ -93,3 +93,15 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Living:** el usuario permitió moverlo; se mantiene adelante porque es el único ambiente que
   aprovecha la terraza y la fachada principal.
 - **Estado:** **v4 aprobada** por el usuario y su esposa (2026-10-03). Cocina abierta al pasillo y al comedor.
+
+## 2026-10-03 — Amoblado de la planta baja (propuesta)
+- **Qué:** se agrega `muebles` al modelo (2D con símbolos, 3D con alturas, interruptor "Muebles").
+- **Decisiones de amoblado:** living con TV en el muro de la grada y sofá de frente (paso de
+  ~1.15 m hacia la corrediza); baño mínimo con ducha al fondo, inodoro y lavamanos alternados y
+  **puerta que abre hacia el pasillo** (hacia adentro chocaba con el lavamanos; alternativa:
+  corrediza); estudio con escritorio bajo la ventana, librero y sofá cama para invitados; comedor
+  con mesa de 1.80 × 0.90 para 6; cocina G (península-barra, lavaplatos bajo la ventana, cocina y
+  campana en el muro del vecino, refrigerador junto a la puerta del almacén, isla/desayunador con
+  3 taburetes); almacén con estantes en U; lavado con lavadora, secadora, lavadero y estante de
+  planchado; closet de abrigos en el hall; zapatero en el ingreso; estantes en el depósito.
+- **Estado:** propuesto (el usuario lo pidió; ajustar a gusto).
