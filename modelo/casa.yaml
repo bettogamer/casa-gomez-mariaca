@@ -143,7 +143,28 @@ ambientes:
       etiqueta: [13.95, 5.30]
       estado: definido
       nota: "amplia, en L + isla: muro del vecino (cocina, campana, torre de horno), muro del patio (lavaplatos bajo la ventana, refrigerador), isla de trabajo/desayuno mirando al comedor y al pasillo"
-  p1: []
+  p1:
+    # ── Primer piso, fondo: cuartos gemelos de los hijos y sus baños (aprobado 2026-10-03) ──
+    # Baños privados entre los ejes 3 y 4, a los dos lados del pasillo; se entran desde cada cuarto por el
+    # eje 4. Los cuartos ocupan todo A4–C5. Queda libre (por definir) la franja junto a la escalera.
+    - {id: pasillo_p1, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 11.20, 3.73], estado: definido, nota: "desde la llegada de la escalera; mismo trazo que el pasillo de PB"}
+    - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [9.125, 0.00, 11.20, 2.68], etiqueta: [10.15, 2.30], estado: definido, nota: "privado del Cuarto 1 (puerta por el eje 4); ~1.90 × 2.50 libres; ventana al retiro; inodoro contra el muro norte (bajante al núcleo técnico)"}
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.125, 3.73, 11.20, 6.67], etiqueta: [10.15, 5.30], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.90 × 2.80 libres; sin ventana (vecino): extractor con ducto; encima del almacén de PB (muros sobre muros); inodoro sobre el muro almacén/cocina"}
+    - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 12.20, 4.085], etiqueta: [11.70, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
+    - id: cuarto_hijo_1
+      nombre: Cuarto 1
+      tipo: dormitorio
+      poly: [[11.20, 0.00], [16.90, 0.00], [16.90, 3.335], [12.20, 3.335], [12.20, 2.585], [11.20, 2.585]]
+      etiqueta: [14.20, 1.70]
+      estado: definido
+      nota: "~5.45 × 3.15 libres; ventanas al norte (retiro) y al este (patio)"
+    - id: cuarto_hijo_2
+      nombre: Cuarto 2
+      tipo: dormitorio
+      poly: [[12.20, 3.335], [16.90, 3.335], [16.90, 6.67], [11.20, 6.67], [11.20, 4.085], [12.20, 4.085]]
+      etiqueta: [14.20, 4.90]
+      estado: definido
+      nota: "~5.45 × 3.15 libres; ventana al este (patio). Muro entre cuartos sobre losa sin apoyo abajo: revisar con el ingeniero"
   altillo: []
 
 # Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
@@ -183,6 +204,17 @@ aberturas:
     - {id: ventana_comedor, tipo: ventana, de: [13.30, 0.00], a: [15.30, 0.00], antepecho: 0.90, alto: 2.10, nota: "2.00 × 1.20 al retiro"}
     - {id: corrediza_patio, tipo: corrediza, de: [16.90, 0.35], a: [16.90, 2.35], nota: "2.00 m, comedor al patio (entre columnas A5 y B5)"}
     - {id: ventana_cocina, tipo: ventana, de: [16.90, 4.55], a: [16.90, 5.75], antepecho: 1.05, alto: 2.10, nota: "1.20 × 1.05 sobre el lavaplatos, al patio"}
+  p1:
+    - {id: escalera_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], estado: definido, nota: "llegada de la escalera al pasillo"}
+    - {id: pasillo_vest, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.73], estado: definido}
+    - {id: puerta_bano_1, tipo: puerta, de: [11.20, 0.30], a: [11.20, 1.00], abre_hacia: bano_hijo_1, estado: definido, nota: "0.70, desde el Cuarto 1"}
+    - {id: puerta_bano_2, tipo: puerta, de: [11.20, 6.37], a: [11.20, 5.67], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
+    - {id: ventana_bano_1, tipo: ventana, de: [9.60, 0.00], a: [10.30, 0.00], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta, al retiro"}
+    - {id: puerta_cuarto_1, tipo: puerta, de: [11.30, 2.585], a: [12.10, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.80"}
+    - {id: puerta_cuarto_2, tipo: puerta, de: [11.30, 4.085], a: [12.10, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.80"}
+    - {id: ventana_cuarto_1_norte, tipo: ventana, de: [14.10, 0.00], a: [15.60, 0.00], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.50 × 1.20 al norte, sobre el escritorio"}
+    - {id: ventana_cuarto_1_este, tipo: ventana, de: [16.90, 0.40], a: [16.90, 1.60], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.20 × 1.20 al patio"}
+    - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.60], a: [16.90, 6.10], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.50 × 1.20 al patio"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -249,6 +281,30 @@ muebles:
     - {tipo: silla, rect: [-0.80, 2.17, -0.35, 2.62]}
     - {tipo: silla, rect: [-1.62, 1.35, -1.17, 1.80]}
     - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45]}
+
+  p1:
+    # Baño 1 (norte, privado del Cuarto 1): inodoro contra el muro norte, ducha al fondo
+    - {tipo: inodoro, rect: [9.30, 0.13, 9.70, 0.82]}
+    - {tipo: lavamanos, rect: [9.20, 1.15, 9.65, 1.70]}
+    - {tipo: ducha, rect: [10.00, 1.70, 11.12, 2.60]}
+    # Baño 2 (sur, privado del Cuarto 2): ducha junto al pasillo, inodoro contra el eje 4
+    - {tipo: ducha, rect: [9.20, 3.81, 11.12, 4.71]}
+    - {tipo: inodoro, rect: [10.43, 4.85, 11.12, 5.25]}
+    - {tipo: lavamanos, rect: [9.20, 5.40, 9.65, 5.95]}
+    # Cuarto 1 (norte): cama queen con cabecera en el muro entre cuartos, closet y escritorio al norte
+    - {tipo: closet, rect: [11.95, 0.13, 13.75, 0.73]}
+    - {tipo: cama, nombre: Queen, rect: [12.90, 1.26, 14.50, 3.26]}
+    - {tipo: estante, nombre: Velador, rect: [12.40, 2.81, 12.85, 3.26], alto: 0.55}
+    - {tipo: estante, nombre: Velador, rect: [14.55, 2.81, 15.00, 3.26], alto: 0.55}
+    - {tipo: escritorio, rect: [14.15, 0.13, 15.55, 0.73]}
+    - {tipo: silla, rect: [14.60, 0.85, 15.10, 1.35]}
+    # Cuarto 2 (sur), espejo del 1
+    - {tipo: closet, rect: [11.95, 5.94, 13.75, 6.54]}
+    - {tipo: cama, nombre: Queen, rect: [12.90, 3.41, 14.50, 5.41]}
+    - {tipo: estante, nombre: Velador, rect: [12.40, 3.41, 12.85, 3.86], alto: 0.55}
+    - {tipo: estante, nombre: Velador, rect: [14.55, 3.41, 15.00, 3.86], alto: 0.55}
+    - {tipo: escritorio, rect: [14.15, 5.94, 15.55, 6.54]}
+    - {tipo: silla, rect: [14.60, 5.32, 15.10, 5.82]}
 
 # Instalaciones (ESQUEMA PRELIMINAR para conversar con el ingeniero/instalador; no es un proyecto
 # aprobable). Lo puntual (luces, enchufes, puntos de agua y desagüe) se genera desde ambientes y
