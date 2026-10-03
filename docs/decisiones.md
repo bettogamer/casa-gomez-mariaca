@@ -140,3 +140,14 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   consumos de agua caliente (baño pegado, lavado ~3 m, cocina ~8 m). Los baños de P1 conviene
   ubicarlos cerca.
 - **Estado:** aprobado (el usuario delegó la ubicación del calefón).
+
+## 2026-10-03 — Ductos de aire de la planta baja (propuesta)
+- **Qué:** solo dos ductos. Baño, estudio, comedor y cocina ya ventilan por ventana; el almacén por su banderola.
+  - **Campana de la cocina → patio:** Ø150, 2.1 m recto por el muro sur (vecino), escondido en un cajón
+    sobre las alacenas altas; sale por el muro del patio. No hace falta cielo falso en la cocina.
+  - **Extractor del lavado → retiro norte:** Ø100, ~7 m por cielo falso (h 2.70) en el lavado, una franja
+    de 0.60 en el arranque del pasillo y el baño; sale junto a la columna A3.
+- **Regla:** ductos bajo la losa y bajo las vigas, sin perforarlas; nunca salidas hacia el vecino.
+- **Secadora:** el recorrido es largo para una secadora de evacuación; se recomienda una de condensación
+  o bomba de calor (sin ducto). **El usuario acepta** (todavía no la compró).
+- **Estado:** aprobado por el usuario (techo bajo ~2.70 en lavado y baño incluido).

@@ -159,11 +159,11 @@ def electrico(casa, nivel_id):
                 pos = (x0 + (x1 - x0) * f, c[1]) if x1 - x0 >= y1 - y0 else (c[0], y0 + (y1 - y0) * f)
                 if not any(math.dist(pos, q["pos"]) < 0.5 for q in puntos if q["tipo"] == "especial"):
                     puntos.append({"tipo": "toma", "pos": pos, "circuito": "C4", "va": VA_TOMA})
-    # extractores donde no hay ventana al exterior
-    for amb in ambientes(casa, nivel_id):
-        if amb["id"] in ("lavado",):
-            x0, y0, x1, y1 = caja(amb["poly"])
-            puntos.append({"tipo": "extractor", "pos": ((x0 + x1) / 2, y0 + 0.5), "circuito": "C2", "va": 50})
+    # extractores: al inicio de los ductos de ventilación que lo piden
+    vent = casa.get("instalaciones", {}).get(nivel_id, {}).get("ventilacion", {})
+    for d in vent.get("ductos") or []:
+        if d.get("extractor"):
+            puntos.append({"tipo": "extractor", "pos": tuple(d["linea"][0]), "circuito": "C2", "va": 50})
     for l in (casa.get("instalaciones", {}).get(nivel_id, {}).get("electrico", {}).get("luces_extra") or []):
         puntos.append({"tipo": "luz", "pos": tuple(l["pos"]), "circuito": "C2", "va": VA_LUZ})
     return puntos, cables
@@ -380,7 +380,7 @@ def _dibujar_simbolo(L, p, naranja):
 def plano_sanitario(casa, nivel):
     cfg, puntos, ramas = sanitario(casa, nivel["id"])
     extra = [cfg["pozo"]["pos"]] if cfg.get("pozo") else []
-    L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — AGUA, DESAGÜE Y GAS (esquema)",
+    L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — AGUA, DESAGÜE, GAS Y VENTILACIÓN (esquema)",
                                 "Preliminar: recorridos y diámetros a confirmar con el instalador (agua/desagüe) y con YPFB (gas natural).",
                                 extra)
     AZUL, ROJO, CAFE, GAS = "#1565c0", "#c62828", "#6d4c41", "#f9a825"
@@ -442,6 +442,24 @@ def plano_sanitario(casa, nivel):
         x, y = cfg["calefon"]["pos"]
         L.poly([[x - 0.18, y - 0.30], [x + 0.18, y - 0.30], [x + 0.18, y + 0.30], [x - 0.18, y + 0.30]], f'fill="#fff" stroke="{ROJO}" stroke-width="1.5"')
         L.texto(x - 0.30, y - 0.40, "CALEFÓN (GN)", 7, f'fill="{ROJO}" font-weight="bold" text-anchor="end"')
+    # ventilación: cielos falsos, cajones y ductos
+    vent = casa.get("instalaciones", {}).get(nivel["id"], {}).get("ventilacion", {})
+    VERDE = "#2e7d32"
+    for c in (vent.get("cielos_falsos") or []) + (vent.get("cajones") or []):
+        x0_, y0_, x1_, y1_ = c["rect"]
+        L.poly([[x0_, y0_], [x1_, y0_], [x1_, y1_], [x0_, y1_]], f'fill="{VERDE}" fill-opacity="0.08" stroke="{VERDE}" stroke-width="0.8" stroke-dasharray="2 2"')
+    for d in vent.get("ductos") or []:
+        poli(d["linea"], f'stroke="{VERDE}" stroke-width="3.5" stroke-opacity="0.75"')
+        (ax, ay), (bx, by) = d["linea"][-2], d["linea"][-1]
+        n = math.hypot(bx - ax, by - ay)
+        ux, uy = (bx - ax) / n, (by - ay) / n
+        L.poly([[bx + ux * 0.25, by + uy * 0.25], [bx - uy * 0.15, by + ux * 0.15], [bx + uy * 0.15, by - ux * 0.15]], f'fill="{VERDE}"')
+        sx, sy = d["linea"][0]
+        if d.get("extractor"):
+            _circulo(L, sx, sy, 0.16, f'fill="#e8f5e9" stroke="{VERDE}" stroke-width="1.2"')
+            L.texto(sx, sy + 0.05, "E", 8, f'fill="{VERDE}" font-weight="bold"')
+        L.texto(bx + ux * 0.4 + (0.1 if ux else 0), by + uy * 0.4 + (0.1 if uy else 0), f"Ø{d['diametro']} {d['id']}", 7,
+                f'fill="{VERDE}" font-weight="bold" text-anchor="{"start" if ux >= 0 else "end"}"')
     # puntos de artefactos
     for p in puntos:
         x, y = p["pos"]
@@ -449,7 +467,8 @@ def plano_sanitario(casa, nivel):
     # leyenda
     lx, ly = x0 + 6, y1 + 1.15
     for k, (col, txt, dash) in enumerate([(AZUL, "agua fría", ""), (ROJO, "agua caliente", ""), ("#00838f", "pozo → tanque", 'stroke-dasharray="3 3"'),
-                                          (CAFE, "desagüe", 'stroke-dasharray="7 3"'), (GAS, "gas natural", 'stroke-dasharray="10 4"')]):
+                                          (CAFE, "desagüe", 'stroke-dasharray="7 3"'), (GAS, "gas natural", 'stroke-dasharray="10 4"'),
+                                          ("#2e7d32", "ducto de aire (cielo falso punteado)", 'stroke-opacity="0.75"')]):
         cx = lx + k * 2.4
         L.linea(cx, ly, cx + 0.6, ly, f'stroke="{col}" stroke-width="2.5" {dash}')
         L.texto(cx + 0.75, ly + 0.05, txt, 7, 'fill="#444" text-anchor="start"')

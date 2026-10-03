@@ -238,7 +238,7 @@ muebles:
     - {tipo: estante, rect: [9.65, 6.10, 10.30, 6.54], alto: 2.00}
     # Lavado: lavadora, secadora y lavadero contra el muro del vecino; estante de planchado
     - {tipo: lavadora, nombre: L, rect: [7.20, 5.94, 7.80, 6.54]}
-    - {tipo: lavadora, nombre: S, rect: [7.85, 5.94, 8.45, 6.54]}
+    - {tipo: lavadora, nombre: S, rect: [7.85, 5.94, 8.45, 6.54], nota: "secadora de condensación o bomba de calor: sin ducto (decisión del usuario)"}
     - {tipo: lavadero, rect: [8.45, 5.94, 9.05, 6.54]}
     - {tipo: estante, nombre: Planchado, rect: [8.60, 4.00, 9.05, 5.60], alto: 2.00}
     # Terraza
@@ -279,6 +279,29 @@ instalaciones:
       # Gas natural (red): desde el medidor en el frente, por el retiro norte (exterior, nunca bajo
       # la losa), al calefón y a la cocina por detrás del mesón del muro sur.
       gas: [[-0.40, -0.55], [17.25, -0.55], [17.25, 6.30], [16.90, 6.30], [14.78, 6.30]]
+    # Ventilación mecánica (aprobada 2026-10-03). Solo lo que no tiene ventana propia: campana de la
+    # cocina y extractor del lavado. Baño, estudio, comedor y cocina ya ventilan por ventana; el almacén
+    # por su banderola. La losa ya está hecha: los ductos van BAJO la losa y BAJO las vigas (nunca
+    # perforar vigas ni losa) y salen por muros de ladrillo. Nunca hacia el vecino (muro sur).
+    ventilacion:
+      ductos:
+        - id: campana
+          linea: [[14.78, 6.35], [16.90, 6.35], [17.10, 6.35]]
+          diametro: 150
+          estado: definido
+          nota: "campana → patio, 2.1 m recto, escondido en un cajón sobre las alacenas altas del muro sur"
+        - id: lavado
+          linea: [[8.10, 6.00], [7.32, 6.00], [7.32, -0.20]]
+          diametro: 100
+          extractor: true
+          estado: definido
+          nota: "extractor del lavado → retiro norte, por el cielo falso del lavado, el pasillo y el baño (~7 m)"
+      cielos_falsos:
+        - {rect: [7.05, 3.73, 9.125, 6.67], alto: 2.70, nota: "lavado completo"}
+        - {rect: [7.05, 2.68, 7.65, 3.73], alto: 2.70, nota: "franja de 0.60 en el arranque del pasillo"}
+        - {rect: [7.05, 0.00, 8.85, 2.68], alto: 2.70, nota: "baño completo (oculta el ducto)"}
+      cajones:
+        - {rect: [14.30, 6.10, 16.90, 6.67], nota: "cajón sobre las alacenas altas (campana)"}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # REFERENCIA: juego impreso fotografiado (IMG_8276, IMG_8277). Solo para consulta;
@@ -334,3 +357,4 @@ verificar_en_obra:
   - "Comprobar que lo construido siguió IMG_8278: tramo del fondo 5.70 m (el PDF decía 4.50 m)."
   - "Sección real de columnas (se asume 25x25) y espesor de losas."
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."
+  - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."

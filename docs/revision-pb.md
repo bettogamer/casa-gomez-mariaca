@@ -5,7 +5,7 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
 
 ## A. Antes de levantar muros
 
-1. **Ductos de extracción.** Cocina (campana), lavado (extractor + salida de la secadora), almacén
+1. ✅ **RESUELTO** (secadora de condensación sin ducto; campana → patio por cajón; lavado → retiro por cielo falso de lavado, pasillo y baño). **Ductos de extracción.** Cocina (campana), lavado (extractor + salida de la secadora), almacén
    y estudio no tienen salida directa al exterior: están del lado del vecino o en el medio.
    La losa del primer piso ya está hecha, así que los ductos tienen que correr por un
    **cielo falso** (techo bajo, ~25–30 cm) en pasillo y cocina hasta el retiro o el patio.
