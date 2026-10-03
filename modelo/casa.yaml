@@ -189,7 +189,7 @@ ambientes:
     # Terraza adelante; franja de 2 m libre al sur (normativa); la escalera llega ADENTRO del departamento
     # (que el viento y la lluvia no bajen a los pisos de abajo). Techo de calamina oculto tras antepecho.
     - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: propuesto, nota: "caja de escalera dentro del departamento; puerta a la terraza"}
-    - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: propuesto, nota: "~4.0 × 4.5 libres; cocina en L al norte (junto al núcleo técnico); corrediza a la franja sur"}
+    - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: propuesto, nota: "~4.0 × 4.5 libres; cocina en L pegada al baño (pared húmeda compartida); estar con TV en el muro de la escalera; comedor para 4; corrediza a la franja sur"}
     - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.00], etiqueta: [12.10, 1.65], estado: propuesto, nota: "~1.65 × 1.85 libres (chico); ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
     - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.00, 13.00, 4.67], etiqueta: [12.10, 4.35], estado: propuesto, nota: "reparte a baño, dormitorio y cuarto chico"}
     - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 2.90], etiqueta: [14.95, 1.45], estado: propuesto, nota: "~3.75 × 2.75 libres; rincón para la cuna; ventanas al norte y al patio"}
@@ -267,8 +267,8 @@ aberturas:
     - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.90], a: [4.40, 4.60], abre_hacia: llegada_alt, estado: propuesto, nota: "0.70, de la llegada a la terraza"}
     - {id: llegada_estar, tipo: vano, de: [7.05, 3.85], a: [7.05, 4.67], estado: propuesto, nota: "llegada abierta al estar"}
     - {id: estar_franja, tipo: corrediza, de: [8.20, 4.67], a: [10.60, 4.67], estado: propuesto, nota: "2.40 a la franja sur"}
-    - {id: ventana_cocina_alt, tipo: ventana, de: [7.40, 0.00], a: [9.00, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "1.60 × 1.00 al norte, sobre el mesón"}
-    - {id: ventana_estar_alt, tipo: ventana, de: [9.70, 0.00], a: [10.90, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al norte"}
+    - {id: ventana_cocina_alt, tipo: ventana, de: [9.90, 0.00], a: [10.90, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "1.00 × 1.00 al norte, sobre el lavaplatos"}
+    - {id: ventana_estar_alt, tipo: ventana, de: [7.70, 0.00], a: [9.30, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.60 × 1.10 al norte, sobre el estar"}
     - {id: puerta_hall_alt, tipo: puerta, de: [11.20, 4.45], a: [11.20, 3.65], abre_hacia: hall_alt, estado: propuesto, nota: "0.80, del estar a la zona privada"}
     - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.00], a: [12.15, 2.00], abre_hacia: bano_alt, estado: propuesto, nota: "0.70"}
     - {id: ventana_bano_alt, tipo: ventana, de: [12.00, 0.00], a: [12.60, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.60 × 0.50 alta"}
@@ -398,6 +398,50 @@ muebles:
     - {tipo: lavamanos, rect: [2.65, 6.09, 3.10, 6.54]}
     - {tipo: inodoro, rect: [-1.05, 4.62, -0.36, 5.02]}
     - {tipo: ducha, rect: [-1.05, 5.52, 0.30, 6.59]}
+  altillo:
+    # Estar: TV en el muro de la escalera, sofá mirándola
+    - {tipo: estante, nombre: TV, rect: [7.13, 0.60, 7.53, 2.10], alto: 0.50}
+    - {tipo: sofa, rect: [8.85, 0.50, 9.75, 2.40]}
+    # Comedor para 4 (paso libre de ~0.80 por el sur, de la escalera al hall)
+    - {tipo: mesa, nombre: Mesa 4, rect: [8.00, 2.55, 8.90, 3.35]}
+    - {tipo: silla, rect: [8.22, 2.10, 8.67, 2.50]}
+    - {tipo: silla, rect: [8.22, 3.40, 8.67, 3.80]}
+    - {tipo: silla, rect: [7.50, 2.72, 7.95, 3.17]}
+    - {tipo: silla, rect: [8.95, 2.72, 9.40, 3.17]}
+    # Cocina en L contra el baño: lavaplatos bajo la ventana, cocina en el muro del baño, refrigerador
+    - {tipo: meson, rect: [9.85, 0.13, 11.12, 0.73]}
+    - {tipo: lavaplatos, rect: [10.05, 0.18, 10.75, 0.68]}
+    - {tipo: meson, rect: [10.52, 0.73, 11.12, 2.40]}
+    - {tipo: cocina, rect: [10.52, 1.20, 11.12, 1.80]}
+    - {tipo: refrigerador, rect: [10.42, 2.45, 11.12, 3.15]}
+    # Baño chico: inodoro contra el muro norte (bajante por fuera en x≈11.40), ducha bajo la ventana
+    - {tipo: inodoro, rect: [11.28, 0.13, 11.68, 0.82]}
+    - {tipo: ducha, rect: [12.10, 0.13, 12.92, 0.95]}
+    - {tipo: lavamanos, rect: [12.40, 1.30, 12.92, 1.85]}
+    # Dormitorio: cama queen con cabecera en el muro del cuarto chico, ropero, cuna junto a la cama
+    - {tipo: closet, rect: [13.08, 0.13, 13.68, 1.95]}
+    - {tipo: cama, nombre: Queen, rect: [14.60, 0.83, 16.20, 2.83]}
+    - {tipo: estante, nombre: Velador, rect: [14.10, 2.38, 14.55, 2.83], alto: 0.55}
+    - {tipo: estante, nombre: Velador, rect: [16.25, 2.38, 16.70, 2.83], alto: 0.55}
+    - {tipo: cama, nombre: Cuna, rect: [13.80, 0.20, 14.50, 1.50]}
+    # Cuarto chico (bebé): cuna, cómoda-cambiador, sillón para dar de comer, estante
+    - {tipo: cama, nombre: Cuna, rect: [14.10, 3.05, 15.40, 3.75]}
+    - {tipo: estante, nombre: Cambiador, rect: [15.85, 4.00, 16.70, 4.52], alto: 0.90}
+    - {tipo: sillon, rect: [16.00, 3.05, 16.70, 3.75]}
+    - {tipo: estante, rect: [13.90, 4.15, 15.40, 4.52], alto: 1.80}
+    # Terraza: mesa para 6 y parrilla
+    - {tipo: mesa, nombre: Mesa 6, rect: [0.60, 2.10, 2.40, 3.00]}
+    - {tipo: silla, rect: [0.95, 1.60, 1.40, 2.05]}
+    - {tipo: silla, rect: [1.60, 1.60, 2.05, 2.05]}
+    - {tipo: silla, rect: [0.95, 3.05, 1.40, 3.50]}
+    - {tipo: silla, rect: [1.60, 3.05, 2.05, 3.50]}
+    - {tipo: silla, rect: [0.10, 2.32, 0.55, 2.77]}
+    - {tipo: silla, rect: [2.45, 2.32, 2.90, 2.77]}
+    - {tipo: meson, nombre: Parrilla, rect: [2.90, 0.10, 4.30, 0.70]}
+    # Franja sur: lavandería (piletas + lavadora manual) con alero, y tendedero
+    - {tipo: lavadero, nombre: Piletas, rect: [11.40, 4.75, 12.60, 5.35]}
+    - {tipo: lavadora, nombre: Lavadora manual, rect: [12.65, 4.75, 13.25, 5.35]}
+    - {tipo: alfombra, nombre: Tendedero, rect: [13.80, 5.00, 16.60, 6.45]}
 
 # Instalaciones (ESQUEMA PRELIMINAR para conversar con el ingeniero/instalador; no es un proyecto
 # aprobable). Lo puntual (luces, enchufes, puntos de agua y desagüe) se genera desde ambientes y
