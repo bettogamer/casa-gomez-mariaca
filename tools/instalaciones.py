@@ -18,17 +18,33 @@ from render_svg import ESC, Lienzo, dibujar_aberturas, dibujar_columnas, dibujar
 
 TENSION = 220  # V
 
-# Circuitos: (id, nombre, tipo)
-CIRCUITOS = [
-    ("C1", "Iluminación zona social", "luz"),
-    ("C2", "Iluminación zona de servicio y estudio", "luz"),
-    ("C3", "Tomas living, hall, ingreso y estudio", "toma"),
-    ("C4", "Tomas comedor y cocina (generales)", "toma"),
-    ("C5", "Cocina: refrigerador, horno, campana", "especial"),
-    ("C6", "Lavado: lavadora y secadora", "especial"),
-    ("C7", "Tomas baño, depósito, almacén (con diferencial)", "toma"),
-]
+# Circuitos por nivel: (id, nombre, tipo)
+CIRCUITOS = {
+    "pb": [
+        ("C1", "Iluminación zona social", "luz"),
+        ("C2", "Iluminación zona de servicio y estudio", "luz"),
+        ("C3", "Tomas living, hall, ingreso y estudio", "toma"),
+        ("C4", "Tomas comedor y cocina (generales)", "toma"),
+        ("C5", "Cocina: refrigerador, horno, campana", "especial"),
+        ("C6", "Lavado: lavadora y secadora", "especial"),
+        ("C7", "Tomas baño, depósito, almacén (con diferencial)", "toma"),
+    ],
+    "p1": [
+        ("C8", "Iluminación primer piso", "luz"),
+        ("C9", "Tomas suite principal, hall y estar", "toma"),
+        ("C10", "Tomas baños, blancos y vestidor; extractores (con diferencial)", "toma"),
+        ("C11", "Tomas cuartos de los hijos", "toma"),
+    ],
+}
+# Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
+TOMA_POR_AMBIENTE = {"p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
+# Qué circuito usa cada clase de punto, por nivel
+USO = {
+    "pb": {"luz_social": "C1", "luz": "C2", "toma": "C3", "toma_comedor": "C4", "toma_humeda": "C7", "isla": "C4"},
+    "p1": {"luz_social": "C8", "luz": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10", "isla": "C9"},
+}
 SOCIALES = {"living", "ingreso", "hall", "pasillo_pb", "comedor", "terraza", "acceso"}
+CON_INTERRUPTOR_EXTERIOR = {"terraza", "logia"}
 VA_LUZ, VA_TOMA = 100, 200
 
 # Muebles que piden una toma especial: tipo/nombre -> (letra, VA, circuito, descripción)
@@ -39,8 +55,8 @@ ESPECIALES = {
     "L": ("L", 800, "C6", "lavadora"),
     "S": ("S", 2500, "C6", "secadora"),
 }
-# Muebles que piden una toma común extra junto a ellos
-TOMA_JUNTO = {"escritorio": "C3", "TV": "C3", "Isla": "C4", "lavamanos": "C7"}
+# Muebles que piden una toma común extra junto a ellos (clase de uso)
+TOMA_JUNTO = {"escritorio": "toma", "TV": "toma", "Isla": "isla", "lavamanos": "toma_humeda"}
 
 
 def _borde_de(amb, ab):
@@ -87,11 +103,12 @@ def _hacia_adentro(amb, x, y, d):
 def electrico(casa, nivel_id):
     """Devuelve (puntos, cables). puntos: dict(tipo, pos, circuito, etiqueta, va)."""
     puntos, cables = [], []
+    uso = USO.get(nivel_id, USO["pb"])
     abs_ = aberturas(casa, nivel_id)
     mbs = muebles(casa, nivel_id)
     for amb in ambientes(casa, nivel_id):
         social = amb["id"] in SOCIALES
-        circ_luz = "C1" if social else "C2"
+        circ_luz = uso["luz_social"] if social else uso["luz"]
         x0, y0, x1, y1 = caja(amb["poly"])
         # luces
         if amb["tipo"] == "exterior":
@@ -114,7 +131,7 @@ def electrico(casa, nivel_id):
             puntos.append({"tipo": "luz", "pos": l, "circuito": circ_luz, "va": VA_LUZ, "amb": amb["id"]})
             ids_luz.append(len(puntos) - 1)
         # interruptor junto a la primera puerta (o paso) del ambiente
-        if amb["tipo"] != "exterior" or amb["id"] == "terraza":
+        if amb["tipo"] != "exterior" or amb["id"] in CON_INTERRUPTOR_EXTERIOR:
             propias = [ab for ab in abs_ if _borde_de(amb, ab)]
             propias.sort(key=lambda ab: _prioridad_entrada(casa, nivel_id, amb, ab))
             if propias:
@@ -130,11 +147,11 @@ def electrico(casa, nivel_id):
                 for i in ids_luz:
                     cables.append(((sx, sy), puntos[i]["pos"]))
         # tomas generales repartidas por el perímetro (no en exteriores ni en la cocina: van por mesón)
-        if amb["tipo"] in ("social", "dormitorio") or amb["id"] in ("hall", "deposito_patio", "almacen", "lavado"):
+        if amb["tipo"] in ("social", "dormitorio", "servicio") or amb["id"] == "hall":
             per = sum(math.dist(a, b) for a, b in zip(amb["poly"], amb["poly"][1:] + amb["poly"][:1]))
             n = {"social": max(2, math.ceil(per / 4)), "dormitorio": max(3, math.ceil(per / 4))}.get(amb["tipo"], 1)
-            circ = "C4" if amb["id"] == "comedor" else ("C7" if amb["id"] in ("deposito_patio", "almacen", "lavado") else "C3")
-            for pt in _repartir(amb, abs_, n):
+            circ = uso["toma_comedor"] if amb["id"] == "comedor" else (uso["toma_humeda"] if amb["tipo"] == "servicio" else uso["toma"])
+            for pt in _repartir(amb, abs_, n, [m["rect"] for m in mbs if m["tipo"] == "closet"]):
                 puntos.append({"tipo": "toma", "pos": pt, "circuito": circ, "va": VA_TOMA, "amb": amb["id"]})
     # muebles: tomas especiales y tomas junto a muebles
     for m in mbs:
@@ -147,7 +164,7 @@ def electrico(casa, nivel_id):
         clave = m.get("nombre") if m.get("nombre") in TOMA_JUNTO else m["tipo"]
         if clave in TOMA_JUNTO:
             puntos.append({"tipo": "toma", "pos": (x1 + 0.12, c[1]) if clave != "TV" else (c[0], y1 + 0.10),
-                           "circuito": TOMA_JUNTO[clave], "va": VA_TOMA})
+                           "circuito": uso[TOMA_JUNTO[clave]], "va": VA_TOMA})
             if clave in ("escritorio", "TV"):
                 puntos.append({"tipo": "datos", "pos": (x1 + 0.12, c[1] + 0.25) if clave != "TV" else (c[0] + 0.3, y1 + 0.10),
                                "circuito": "-", "va": 0})
@@ -158,19 +175,25 @@ def electrico(casa, nivel_id):
                 f = (k + 0.5) / max(1, int(largo / 1.2))
                 pos = (x0 + (x1 - x0) * f, c[1]) if x1 - x0 >= y1 - y0 else (c[0], y0 + (y1 - y0) * f)
                 if not any(math.dist(pos, q["pos"]) < 0.5 for q in puntos if q["tipo"] == "especial"):
-                    puntos.append({"tipo": "toma", "pos": pos, "circuito": "C4", "va": VA_TOMA})
+                    puntos.append({"tipo": "toma", "pos": pos, "circuito": uso["toma_comedor"], "va": VA_TOMA})
     # extractores: al inicio de los ductos de ventilación que lo piden
     vent = casa.get("instalaciones", {}).get(nivel_id, {}).get("ventilacion", {})
     for d in vent.get("ductos") or []:
         if d.get("extractor"):
-            puntos.append({"tipo": "extractor", "pos": tuple(d["linea"][0]), "circuito": "C2", "va": 50})
+            puntos.append({"tipo": "extractor", "pos": tuple(d["linea"][0]), "circuito": uso["luz"] if nivel_id == "pb" else uso["toma_humeda"], "va": 50})
     for l in (casa.get("instalaciones", {}).get(nivel_id, {}).get("electrico", {}).get("luces_extra") or []):
-        puntos.append({"tipo": "luz", "pos": tuple(l["pos"]), "circuito": "C2", "va": VA_LUZ})
+        puntos.append({"tipo": "luz", "pos": tuple(l["pos"]), "circuito": uso["luz"], "va": VA_LUZ})
+    for amb in ambientes(casa, nivel_id):
+        nuevo = TOMA_POR_AMBIENTE.get(nivel_id, {}).get(amb["id"])
+        if nuevo:
+            for q in puntos:
+                if q["tipo"] == "toma" and q["circuito"] == uso["toma"] and dentro(amb["poly"], *q["pos"]):
+                    q["circuito"] = nuevo
     return puntos, cables
 
 
-def _repartir(amb, abs_, n):
-    """n puntos sobre el perímetro del ambiente, lejos de puertas y ventanas, 0.12 m hacia adentro."""
+def _repartir(amb, abs_, n, bloqueos=()):
+    """n puntos sobre el perímetro del ambiente, lejos de puertas, ventanas y roperos, 0.12 m hacia adentro."""
     pts = amb["poly"]
     bordes = list(zip(pts, pts[1:] + pts[:1]))
     per = sum(math.dist(a, b) for a, b in bordes)
@@ -192,15 +215,18 @@ def _repartir(amb, abs_, n):
                 iv = _intervalo(a, b, ab["de"], ab["a"])
                 if iv and iv[0] - 0.4 / L <= f <= iv[1] + 0.4 / L:
                     libre = False
+            q = _hacia_adentro(amb, x, y, 0.12)
+            if any(r[0] - 0.15 <= q[0] <= r[2] + 0.15 and r[1] - 0.15 <= q[1] <= r[3] + 0.15 for r in bloqueos):
+                libre = False
             if libre:
-                out.append(_hacia_adentro(amb, x, y, 0.12))
+                out.append(q)
                 break
     return out
 
 
-def cuadro_cargas(puntos):
+def cuadro_cargas(puntos, nivel_id="pb"):
     filas = []
-    for cid, nombre, tipo in CIRCUITOS:
+    for cid, nombre, tipo in CIRCUITOS[nivel_id]:
         ps = [p for p in puntos if p["circuito"] == cid]
         va = sum(p["va"] for p in ps)
         amp = va / TENSION
@@ -270,6 +296,11 @@ def sanitario(casa, nivel_id):
             ramas["agua_caliente"].append(_escuadra(p["pos"], _proyectar(p["pos"], cfg["agua_caliente"])))
         if cfg.get("colector"):
             ramas["desague"].append((_escuadra(p["pos"], _proyectar(p["pos"], cfg["colector"])), p["desague"]))
+        elif cfg.get("bajantes"):
+            amb = next((a["id"] for a in ambientes(casa, nivel_id) if dentro(a["poly"], *p["pos"])), None)
+            cand = [b for b in cfg["bajantes"] if amb in b.get("ambientes", [amb])] or cfg["bajantes"]
+            b = min(cand, key=lambda b: math.dist(p["pos"], b["pos"]))
+            ramas["desague"].append((_escuadra(p["pos"], tuple(b["pos"])), p["desague"]))
     return cfg, puntos, ramas
 
 
@@ -403,6 +434,12 @@ def plano_sanitario(casa, nivel):
                    f'fill="#fff8e1" stroke="{CAFE}" stroke-width="1.5"')
             L.texto(c[0], c[1] + 0.05, "DG", 7, f'fill="{CAFE}" font-weight="bold"')
             L.texto(c[0] + 0.45, c[1] + 0.05, "desgrasadora", 7, f'fill="{CAFE}" text-anchor="start"')
+    for b in cfg.get("bajantes") or []:
+        x, y = b["pos"]
+        _circulo(L, x, y, 0.16, f'fill="#efebe9" stroke="{CAFE}" stroke-width="1.8"')
+        L.texto(x, y + 0.05, "BV", 6, f'fill="{CAFE}" font-weight="bold"')
+        if b.get("etiqueta"):
+            L.texto(x + 0.25, y - 0.22, b["etiqueta"], 7, f'fill="{CAFE}" text-anchor="start"')
     for ruta, d in ramas["desague"]:
         poli(ruta, f'stroke="{CAFE}" stroke-width="2" stroke-dasharray="7 3"')
         p, q = ruta[0], ruta[1]
@@ -413,7 +450,7 @@ def plano_sanitario(casa, nivel):
     if cfg.get("bajada_tanque"):
         x, y = cfg["bajada_tanque"]["pos"]
         _circulo(L, x, y, 0.13, f'fill="{AZUL}"')
-        L.texto(x + 0.25, y - 0.25, "AF ↓ bajada del tanque elevado", 7, f'fill="{AZUL}" text-anchor="start"')
+        L.texto(x + 0.25, y - 0.25, cfg["bajada_tanque"].get("etiqueta", "AF ↓ bajada del tanque elevado"), 7, f'fill="{AZUL}" text-anchor="start"')
     if cfg.get("impulsion"):
         poli(cfg["impulsion"], 'stroke="#00838f" stroke-width="2" stroke-dasharray="3 3"')
         a, b = cfg["impulsion"][0], cfg["impulsion"][-1]
@@ -438,6 +475,10 @@ def plano_sanitario(casa, nivel):
         b = cfg["gas"][-1]
         _circulo(L, b[0], b[1], 0.10, f'fill="{GAS}"')
         L.texto(b[0], b[1] - 0.18, "cocina", 6, 'fill="#9a6700"')
+    if cfg.get("subida_caliente"):
+        x, y = cfg["subida_caliente"]["pos"]
+        _circulo(L, x, y, 0.13, f'fill="{ROJO}"')
+        L.texto(x - 0.25, y - 0.25, cfg["subida_caliente"].get("etiqueta", "AC ↑ desde el calefón"), 7, f'fill="{ROJO}" text-anchor="end"')
     if cfg.get("calefon"):
         x, y = cfg["calefon"]["pos"]
         L.poly([[x - 0.18, y - 0.30], [x + 0.18, y - 0.30], [x + 0.18, y + 0.30], [x - 0.18, y + 0.30]], f'fill="#fff" stroke="{ROJO}" stroke-width="1.5"')
@@ -486,7 +527,7 @@ def main():
         f = SALIDA / f"planta-{nivel['id']}-electrico.svg"
         f.write_text(svg, encoding="utf-8")
         print("→", f.relative_to(SALIDA.parent))
-        salida[nivel["id"]] = cuadro_cargas(puntos)
+        salida[nivel["id"]] = cuadro_cargas(puntos, nivel["id"])
         svg, _ = plano_sanitario(casa, nivel)
         f = SALIDA / f"planta-{nivel['id']}-sanitario.svg"
         f.write_text(svg, encoding="utf-8")
