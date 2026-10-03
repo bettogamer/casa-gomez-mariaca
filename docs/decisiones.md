@@ -79,4 +79,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   A4–B5 con ventana de 2.00 al retiro y corrediza de 2.00 al patio; cocina G (~3.85 × 2.8) en la
   esquina C5 con ventana al patio, abierta al comedor con península; almacén (~1.55 × 2.8) entre
   estudio y cocina, con puerta desde el comedor.
+- **v2 (descartada):** comedor A4–B5 + cocina G chica (~10.7 m²) en C5; la esposa pide cocina más amplia.
+- **v3 (actual, reorganización completa pedida por el usuario):** se mantienen terraza, acceso,
+  ingreso, living, grada y depósito. Bloque medio: estudio/invitados al retiro (ventana real),
+  baño completo (junto al hall) y lavado al lado del vecino con extractor. Fondo: el pasillo
+  remata en el frente abierto de una cocina G amplia (~3.55 × 3.8 libres, ~13.5 m²) con ventana al
+  patio; comedor (~5.55 × 2.48) al retiro con corrediza al patio; almacén escondido junto a la
+  cocina, con puerta desde la cocina.
+- **Living:** el usuario permitió moverlo; se mantiene adelante porque es el único ambiente que
+  aprovecha la terraza y la fachada principal.
 - **Estado:** propuesto, esperando al usuario.
