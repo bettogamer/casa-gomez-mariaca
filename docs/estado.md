@@ -26,6 +26,9 @@ _Última actualización: 2026-10-03_
   escalera; estar (sala de TV, ventana al norte) y blancos entre la escalera y los baños de los hijos; dos
   cuartos de 17.7 m² con baño privado pegado al eje 4 y ropero empotrado. Ver `docs/revision-p1.md`.
 
+- **Instalaciones P1 (esquema preliminar):** eléctrico con subtablero en el hall y 4 circuitos (C8–C11), agua
+  desde el núcleo técnico, 3 bajantes, extractores del Baño 2 y de los lavamanos de la suite. Sin gas.
+
 ## Próximo paso
 **Altillo.** Mismo método, pieza por pieza. Aún sin techo: definir uso (terraza, lavandería, estar grande,
 depósito), el tanque elevado (encima del núcleo técnico, muro norte ejes 3–4) y el techo. La escalera llega

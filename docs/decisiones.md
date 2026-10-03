@@ -221,3 +221,16 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 ## 2026-10-03 — Roperos de los hijos de pared a pared
 - **Qué:** los roperos entre cuartos llegan hasta el muro del patio: ~4.20 m cada uno (antes 3.50, quedaba un hueco sin uso).
 - **Estado:** pedido del usuario.
+
+## 2026-10-03 — Instalaciones del primer piso (esquema preliminar)
+- **Eléctrico:** subtablero en el hall del P1 (alimentado desde el TD de PB); circuitos C8 iluminación, C9 tomas suite
+  principal/hall/estar, C10 tomas húmedas + extractores (diferencial), C11 tomas cuartos de los hijos. Las tomas ya no
+  se ubican detrás de roperos (regla nueva del generador; en PB no cambió nada).
+- **Agua:** AF baja del tanque y AC sube del calefón por el núcleo técnico; troncales por el estar y el pasillo a los
+  baños de los hijos y por el hall y el vestidor a la suite principal.
+- **Desagüe:** tres bajantes: Baño 1 por fuera en el núcleo técnico; Baño 2 en ducto de esquina sobre el almacén;
+  suite principal por la esquina C1, por fuera.
+- **Ventilación:** extractor del Baño 2 → retiro norte; extractor de los lavamanos de la suite → frente.
+- **Gas:** no llega al primer piso.
+- **Pendiente:** agua caliente de la suite principal (~15 m del calefón).
+- **Estado:** propuesto (esquema para conversar con electricista e instalador).
