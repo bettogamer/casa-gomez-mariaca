@@ -151,3 +151,9 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Secadora:** el recorrido es largo para una secadora de evacuación; se recomienda una de condensación
   o bomba de calor (sin ducto). **El usuario acepta** (todavía no la compró).
 - **Estado:** aprobado por el usuario (techo bajo ~2.70 en lavado y baño incluido).
+
+## 2026-10-03 — Puerta de servicio al patio (descartada)
+- **Qué:** no se abre una puerta de servicio en la cocina. Se sale al patio por la corrediza del comedor,
+  pegada a la cocina abierta (lavado → pasillo → cocina → corrediza, ~10 m).
+- **Descartado:** puerta en el muro del patio de la cocina (obligaba a mover el refrigerador y perder mesón).
+- **Estado:** decidido por el usuario.

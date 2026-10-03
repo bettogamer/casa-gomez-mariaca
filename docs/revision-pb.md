@@ -27,7 +27,7 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
 
 ## B. Funcionamiento de la casa
 
-7. **No hay puerta de servicio al patio.** La basura, el lavado (para tender) y la parrilla
+7. ✅ **RESUELTO** (se usa la corrediza del comedor; decisión del usuario). **No hay puerta de servicio al patio.** La basura, el lavado (para tender) y la parrilla
    pasan por el comedor y su corrediza. Opción: una puerta en el fondo de la cocina
    (habría que reacomodar el mesón del patio) o aceptar el paso por el comedor.
 8. ✅ **RESUELTO** (refrigerador junto a la península, cocina corrida: recorrido total 5.9 m). **Triángulo de la cocina un poco largo.** Lavaplatos–cocina 2.5 m, cocina–refrigerador
