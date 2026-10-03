@@ -123,20 +123,20 @@ ambientes:
       poly: [[2.58, 4.95], [4.40, 4.95], [4.40, 4.125], [5.725, 4.125], [5.725, 2.68], [7.05, 2.68], [7.05, 6.67], [2.58, 6.67]]
       estado: propuesto
       nota: "frente a la grada; une ingreso, living, grada y pasillo"
-    # Bloque medio (ejes 3-4): estudio al retiro (ventana real); baño y lavado al lado del vecino (extractor).
-    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [7.05, 0.00, 11.20, 2.68], estado: propuesto, nota: "ventana al retiro lateral"}
-    - id: pasillo_pb
-      nombre: Pasillo
-      tipo: circulacion
-      poly: [[7.05, 2.68], [13.20, 2.68], [13.20, 4.60], [11.20, 4.60], [11.20, 3.73], [7.05, 3.73]]
+    # Lado retiro: baño mínimo junto a la grada, estudio, comedor (más corto).
+    - {id: bano_pb, nombre: Baño, tipo: bano, rect: [7.05, 0.00, 8.55, 2.68], estado: propuesto, nota: "completo, ancho mínimo (~1.35 libres): ducha al fondo bajo ventana alta, inodoro, lavamanos junto a la puerta"}
+    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [8.55, 0.00, 12.70, 2.68], estado: propuesto, nota: "ventana al retiro"}
+    - {id: comedor, nombre: Comedor, tipo: social, rect: [12.70, 0.00, 16.90, 2.68], estado: propuesto, nota: "6 personas; ventana al retiro y corrediza al patio"}
+    - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 12.70, 3.73], estado: propuesto, nota: "eje B; la cocina se abre a su derecha y al final"}
+    # Lado vecino (ciego): lavado, almacén y cocina amplia.
+    - {id: lavado, nombre: Lavado, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], estado: propuesto, nota: "extractor"}
+    - {id: almacen, nombre: Almacén, tipo: servicio, rect: [9.125, 3.73, 11.20, 6.67], estado: propuesto, nota: "escondido detrás de la cocina, se entra desde la cocina"}
+    - id: cocina
+      nombre: Cocina G
+      tipo: cocina
+      poly: [[12.70, 2.68], [16.90, 2.68], [16.90, 6.67], [11.20, 6.67], [11.20, 3.73], [12.70, 3.73]]
       estado: propuesto
-      nota: "eje B; al final se ensancha frente a la cocina"
-    - {id: bano_pb, nombre: Baño completo, tipo: bano, rect: [7.05, 3.73, 9.125, 6.67], estado: propuesto, nota: "inodoro, lavamanos, ducha (sin tina); junto al hall para visitas; extractor"}
-    - {id: lavado, nombre: Lavado, tipo: servicio, rect: [9.125, 3.73, 11.20, 6.67], estado: propuesto, nota: "extractor; junto al almacén y la cocina (zona de servicio)"}
-    # Fondo (ejes 4-5): la cocina remata el pasillo; comedor al retiro y al patio; almacén escondido junto a la cocina.
-    - {id: comedor, nombre: Comedor, tipo: social, rect: [11.20, 0.00, 16.90, 2.68], estado: propuesto, nota: "6-8 personas; ventana al retiro y corrediza al patio"}
-    - {id: cocina, nombre: Cocina G, tipo: cocina, rect: [13.20, 2.68, 16.90, 6.67], estado: propuesto, nota: "U sobre muro del vecino, muro del patio (lavaplatos) y muro del almacén (refrigerador, torres) + península-barra hacia el comedor; frente abierto al pasillo"}
-    - {id: almacen, nombre: Almacén, tipo: servicio, rect: [11.20, 4.60, 13.20, 6.67], estado: propuesto, nota: "escondido detrás de la cocina, se entra desde la cocina"}
+      nota: "amplia: G sobre muro del vecino (largo, con cocina y campana), muro del patio (lavaplatos) + península hacia el comedor; isla o desayunador en el tramo junto al pasillo"
   p1: []
   altillo: []
 
@@ -161,15 +161,16 @@ aberturas:
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
     - {id: hall_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], nota: "hall abierto al pasillo"}
-    - {id: puerta_estudio, tipo: puerta, de: [8.10, 2.68], a: [7.30, 2.68], abre_hacia: estudio, nota: "0.80"}
-    - {id: puerta_bano_pb, tipo: puerta, de: [7.30, 3.73], a: [8.00, 3.73], abre_hacia: bano_pb, nota: "0.70, primera puerta al entrar al pasillo"}
-    - {id: puerta_lavado, tipo: puerta, de: [11.00, 3.73], a: [10.20, 3.73], abre_hacia: lavado, nota: "0.80"}
-    - {id: pasillo_comedor, tipo: vano, de: [11.20, 2.68], a: [13.20, 2.68], nota: "el pasillo se abre al comedor"}
-    - {id: pasillo_cocina, tipo: vano, de: [13.20, 2.68], a: [13.20, 4.60], nota: "frente de la cocina: remate visual del pasillo"}
-    - {id: comedor_cocina, tipo: vano, de: [13.20, 2.68], a: [16.90, 2.68], nota: "abierto; península-barra entre cocina y comedor"}
-    - {id: puerta_almacen, tipo: puerta, de: [13.20, 6.30], a: [13.20, 5.50], abre_hacia: almacen, nota: "0.80, desde la cocina"}
-    - {id: ventana_estudio, tipo: ventana, de: [8.30, 0.00], a: [10.10, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.80 × 1.20 al retiro"}
-    - {id: ventana_comedor, tipo: ventana, de: [12.20, 0.00], a: [14.70, 0.00], antepecho: 0.90, alto: 2.10, nota: "2.50 × 1.20 al retiro"}
+    - {id: puerta_bano_pb, tipo: puerta, de: [7.35, 2.68], a: [8.05, 2.68], abre_hacia: bano_pb, nota: "0.70, primera puerta del pasillo"}
+    - {id: ventana_bano_pb, tipo: ventana, de: [7.45, 0.00], a: [8.15, 0.00], antepecho: 1.60, alto: 2.10, nota: "0.70 × 0.50 alta, al retiro"}
+    - {id: puerta_estudio, tipo: puerta, de: [9.55, 2.68], a: [8.75, 2.68], abre_hacia: estudio, nota: "0.80"}
+    - {id: ventana_estudio, tipo: ventana, de: [9.30, 0.00], a: [11.00, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.70 × 1.20 al retiro (sin tocar la columna A4)"}
+    - {id: puerta_lavado, tipo: puerta, de: [7.30, 3.73], a: [8.10, 3.73], abre_hacia: lavado, nota: "0.80"}
+    - {id: pasillo_cocina_lado, tipo: vano, de: [11.20, 3.73], a: [12.70, 3.73], nota: "la cocina se abre al costado del pasillo"}
+    - {id: pasillo_cocina, tipo: vano, de: [12.70, 2.68], a: [12.70, 3.73], nota: "remate del pasillo en la cocina"}
+    - {id: comedor_cocina, tipo: vano, de: [12.70, 2.68], a: [16.90, 2.68], nota: "abierto; península-barra entre cocina y comedor"}
+    - {id: puerta_almacen, tipo: puerta, de: [11.20, 6.30], a: [11.20, 5.50], abre_hacia: almacen, nota: "0.80, desde la cocina"}
+    - {id: ventana_comedor, tipo: ventana, de: [13.30, 0.00], a: [15.30, 0.00], antepecho: 0.90, alto: 2.10, nota: "2.00 × 1.20 al retiro"}
     - {id: corrediza_patio, tipo: corrediza, de: [16.90, 0.35], a: [16.90, 2.35], nota: "2.00 m, comedor al patio (entre columnas A5 y B5)"}
     - {id: ventana_cocina, tipo: ventana, de: [16.90, 4.00], a: [16.90, 5.80], antepecho: 1.05, alto: 2.10, nota: "1.80 × 1.05 sobre el lavaplatos, al patio"}
 # ─────────────────────────────────────────────────────────────────────────────

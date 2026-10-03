@@ -86,6 +86,10 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   remata en el frente abierto de una cocina G amplia (~3.55 × 3.8 libres, ~13.5 m²) con ventana al
   patio; comedor (~5.55 × 2.48) al retiro con corrediza al patio; almacén escondido junto a la
   cocina, con puerta desde la cocina.
+- **v4 (idea del usuario):** baño de ancho mínimo (~1.35 libres) entre la grada y el estudio, con
+  ventana alta al retiro; el estudio se corre hacia el comedor (comedor ~4.05 × 2.48, para 6).
+  Libera el lado del vecino: lavado junto al hall, almacén (~5.4 m²) detrás de la cocina, y la
+  cocina crece a ~19 m² libres (se abre a lo largo del pasillo y al final).
 - **Living:** el usuario permitió moverlo; se mantiene adelante porque es el único ambiente que
   aprovecha la terraza y la fachada principal.
 - **Estado:** propuesto, esperando al usuario.
