@@ -4,6 +4,8 @@ Rediseño de una vivienda unifamiliar **en construcción** en Cochabamba. Ya est
 las columnas, las losas y la escalera; el resto (muros, distribución, acabados) se puede
 modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo en español.
 
+**Al empezar una sesión, leer `docs/estado.md`** (qué está hecho y qué sigue).
+
 ## Fuente de verdad
 - `modelo/casa.yaml` es el modelo de la casa. Todo cambio de diseño se hace AHÍ.
 - Dentro del modelo: `ambientes` / `muros` / `aberturas` = **diseño nuevo**, que se define
