@@ -481,4 +481,7 @@ verificar_en_obra:
   - "Sección real de columnas (se asume 25x25) y espesor de losas."
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."
   - "Volado de la losa del primer piso al frente: medir cuánto sale (se asume 1.00 m desde la cara del muro) y su espesor en la punta. El baño principal y la logia van encima."
+  - "Cuánto cuelga la viga del eje A entre A2 y A3 bajo la losa del altillo (define el alto de la ventana de la escalera)."
+  - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
+  - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."

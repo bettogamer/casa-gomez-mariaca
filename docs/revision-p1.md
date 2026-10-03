@@ -64,3 +64,23 @@ Cifras de norma sacadas de búsquedas: **el arquitecto las confirma**.
 **A confirmar con el arquitecto:** distancia a linderos para ventanas y balcones; iluminación y ventilación mínimas
 y antepecho en planta alta (OM 4100 / Reglamento General de Edificaciones); ocupación, altura y número de plantas
 con altillo; admisibilidad del volado y la logia.
+
+## E. Revisión estructural del primer piso completo (revisor-estructural, 2026-10-03)
+
+Nada es incompatible con lo construido; no se mueve ninguna columna. Para consultar al ingeniero:
+
+- **Volado:** inodoro y ducha en la punta, muro del frente (x=-1.125, 2.47 m con ventanas), costado sur y tabique
+  inodoro/ducha. ¿Para qué carga se calculó (balcón o muros y baño)? Muro del frente liviano y con junta bajo la losa
+  del altillo. El plano original solo tenía un balcón ahí.
+- **Muro y=4.20 (~8.2 m, dormitorio / suite y hall / vestidor):** el muro nuevo más largo sin nada debajo (paño B–C).
+  Drywall con lana mineral, o ladrillo solo si el ingeniero lo autoriza (el plano original ya tenía muros cerca).
+- **Tabiques x=0.90, x=3.40 y x=9.40:** solo losa → drywall resistente a la humedad o ladrillo hueco.
+- **Logia:** carga de balcón, anclaje de la baranda al borde, pendiente e impermeabilización hacia afuera.
+- **Ventana de la escalera:** entra entre A2 y A3, pero si la viga del eje A cuelga más de ~10 cm hay que bajar el
+  dintel (ventana de ~0.50 de alto).
+- **Bajante de la suite principal:** por fuera en la esquina C1 (quedan ~17 cm entre la puerta de entrada y la
+  columna), tubo enterrado bajo el acceso; relleno de 10–15 cm o cañería colgada con cielo falso en el ingreso.
+- **Bajante del Baño 1 de los hijos:** el inodoro cae sobre la ventana del estudio de PB. Opciones del instalador:
+  acortar esa ventana (9.45–11.00), llevar el bajante al otro lado de A4, o correr el inodoro.
+- **Bajante del Baño 2:** bien; ducto en la esquina del almacén (recortar un estante), puede compartirse con el lavadero.
+- **Ducha principal:** la bandeja dibujada pisa ~4 cm la columna C1: ajustar en obra.
