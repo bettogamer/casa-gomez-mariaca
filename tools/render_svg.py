@@ -155,9 +155,26 @@ def dibujar_aberturas(L, casa, nivel_id):
         largo = (dx * dx + dy * dy) ** 0.5
         if ab["tipo"] == "vano":
             L.linea(x0, y0, x1, y1, 'stroke="#999" stroke-width="1" stroke-dasharray="2 4"')
+        elif ab["tipo"] == "corrediza":
+            # dos hojas de vidrio desplazadas
+            nx, ny = -dy / largo * 0.04, dx / largo * 0.04
+            L.linea(x0, y0, x1, y1, 'stroke="#fff" stroke-width="7"')
+            L.linea(x0 + nx, y0 + ny, x0 + dx * 0.55 + nx, y0 + dy * 0.55 + ny, 'stroke="#222" stroke-width="2"')
+            L.linea(x0 + dx * 0.45 - nx, y0 + dy * 0.45 - ny, x1 - nx, y1 - ny, 'stroke="#222" stroke-width="2"')
+            hx0, hy0, hx1, hy1 = huella_casa(casa)
+            ox, oy = nx / 0.04, ny / 0.04
+            if ((hx0 + hx1) / 2 - x0) * ox + ((hy0 + hy1) / 2 - y0) * oy > 0:
+                ox, oy = -ox, -oy
+            L.texto((x0 + x1) / 2 + ox * 0.55, (y0 + y1) / 2 + oy * 0.55 + 0.05, f"corrediza {largo:.2f}", 8, 'fill="#2a6f97"')
         elif ab["tipo"] == "ventana":
             L.linea(x0, y0, x1, y1, 'stroke="#222" stroke-width="7"')
             L.linea(x0, y0, x1, y1, 'stroke="#bfe3f5" stroke-width="4"')
+            nx, ny = -dy / largo, dx / largo
+            hx0, hy0, hx1, hy1 = huella_casa(casa)
+            cx, cy = (hx0 + hx1) / 2, (hy0 + hy1) / 2
+            if (cx - x0) * nx + (cy - y0) * ny > 0:
+                nx, ny = -nx, -ny
+            L.texto((x0 + x1) / 2 + nx * 0.3, (y0 + y1) / 2 + ny * 0.3 + 0.05, f"V {largo:.2f}", 8, 'fill="#2a6f97"')
         elif ab["tipo"] == "puerta":
             # hoja perpendicular hacia el ambiente al que abre + arco de giro
             nx, ny = -dy / largo, dx / largo

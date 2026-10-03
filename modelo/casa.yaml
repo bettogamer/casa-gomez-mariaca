@@ -126,12 +126,21 @@ ambientes:
 # Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
 muros:
   pb:
-    - {id: celosia_ingreso, tipo: celosia_madera, de: [0.00, 4.95], a: [2.58, 4.95], nota: "separa living e ingreso"}
+    - {id: celosia_ingreso, tipo: celosia_madera, de: [0.00, 4.95], a: [2.58, 4.95], nota: "separa living e ingreso; de piso a techo"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
   pb:
-    - {id: puerta_deposito, tipo: puerta, de: [5.35, 0.00], a: [6.15, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso; alto limitado por el descanso (~1.92 libres). Posición y ancho propuestos"}
+    # Depósito: puerta al costado de la columna A3, donde el techo interior sube (bajo el tramo de 6).
+    - {id: puerta_deposito, tipo: puerta, de: [6.87, 0.00], a: [6.07, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso (~1.92 libres)"}
+    # Living → terraza: abertura de 2.43 entre las columnas A1 y B1, como en la referencia.
+    - {id: living_terraza, tipo: corrediza, de: [0.00, 0.125], a: [0.00, 2.555], nota: "2.43 m, puerta corrediza/ventanal a la terraza"}
+    # Lavado y baño: acceso por el eje B, puertas juntas cerca del muro divisorio (posición propuesta).
+    - {id: puerta_lavado, tipo: puerta, de: [8.97, 2.68], a: [8.17, 2.68], abre_hacia: lavado, nota: "0.80"}
+    - {id: puerta_bano_pb, tipo: puerta, de: [9.20, 2.68], a: [9.90, 2.68], abre_hacia: bano_pb, nota: "0.70"}
+    # Ventanas al retiro lateral (luz y ventilación).
+    - {id: ventana_lavado, tipo: ventana, de: [7.61, 0.00], a: [8.61, 0.00], antepecho: 1.10, alto: 2.10, nota: "1.00 × 1.00"}
+    - {id: ventana_bano_pb, tipo: ventana, de: [9.84, 0.00], a: [10.44, 0.00], antepecho: 1.60, alto: 2.10, nota: "0.60 × 0.50, alta por privacidad"}
     - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.45], a: [0.00, 6.37], abre_hacia: ingreso, nota: "0.92 m, como en la referencia"}
     - {id: ingreso_estar, tipo: vano, de: [2.58, 4.95], a: [2.58, 6.67], nota: "ingreso abierto hacia el estar"}
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}

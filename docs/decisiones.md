@@ -57,5 +57,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Lavado + baño completo** (inodoro, lavamanos, ducha; sin tina) entre columnas A3-A4-B3-B4,
   mitad y mitad (~1.93 × 2.50 libres cada uno).
   Orden propuesto: lavado junto a la escalera, baño junto al eje 4.
-- **Pendiente:** orden lavado/baño, puertas de lavado y baño, ventanas al retiro.
-- **Estado:** aprobado por el usuario (posiciones de puertas propuestas).
+- **Cerrado (mismo día):**
+  - Orden aprobado: lavado junto a la escalera, baño junto al eje 4.
+  - Puerta del depósito corrida junto a la columna A3 (0.80 × 1.85, abre al retiro): por ese lado
+    el techo interior sube de 1.92 a 2.67 m y se entra parado hasta el fondo; el lado de la
+    columna 2 (techo bajo) queda para estantes y herramientas colgadas.
+  - Lavado y baño con puerta por el eje B (0.80 y 0.70, juntas cerca del muro divisorio).
+  - Ventanas al retiro: lavado 1.00 × 1.00 (antepecho 1.10); baño 0.60 × 0.50 alta (antepecho 1.60).
+  - Celosía de piso a techo. Abertura living → terraza de 2.43 entre columnas A1 y B1 (corrediza),
+    como en la referencia.
+- **Estado:** aprobado por el usuario.

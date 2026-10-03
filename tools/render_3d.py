@@ -186,8 +186,9 @@ D.niveles.forEach(nv => {
     const d = segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, E.muro, 0xe8e4da);
     dinteles.push(d); grupo.add(d);
     if (ab.tipo === "ventana") {
-      const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + 1.0, E.muro, 0xf4f1ea);
-      grupo.add(ap);
+      const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + ab.antepecho, E.muro, 0xf4f1ea);
+      ap.userData.alto = ab.antepecho; ap.userData.base = nv.cota;
+      muros.push(ap); grupo.add(ap);
     }
   });
   grupo.userData.dinteles = dinteles;
@@ -278,7 +279,8 @@ def datos(casa):
                 lista_muros.append({"de": d, "a": a, "tipo": "ladrillo", "grosor": grosor, "alto": alto})
         niveles.append({"id": n["id"], "nombre": n["nombre"], "cota": n["cota"],
                         "muros": lista_muros,
-                        "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"], "alto": ab.get("alto", 2.10)}
+                        "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"], "alto": ab.get("alto", 2.10),
+                                       "antepecho": ab.get("antepecho", 1.0)}
                                       for ab in aberturas(casa, n["id"])],
                         "alto_muro": n["altura"] - est["espesor_losa"], "ambientes": ambs})
     # losas: contrapiso PB + cada nivel superior, con hueco sobre la escalera que llega
