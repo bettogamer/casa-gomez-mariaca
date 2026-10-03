@@ -67,3 +67,29 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   - Celosía de piso a techo. Abertura living → terraza de 2.43 entre columnas A1 y B1 (corrediza),
     como en la referencia.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-03 — Planta baja, parte 3: cocina, comedor, estudio, servicios (v4 aprobada)
+- **Pedido:** cocina G, almacén, comedor para mínimo 6, estudio que luego será cuarto de
+  invitados, pasillos. Se usa el fondo (A4–C5).
+- **Primera propuesta (descartada por el usuario):** estudio en la esquina A5 con ventanas al
+  exterior y comedor en el bloque central sin ventana.
+- **Decisión del usuario:** estudio/invitados frente a lavado y baño (B3–C4), con ventana amplia
+  al hall. Se advirtió que no tiene ventana al exterior (lado vecino): se prevé rejilla/extractor.
+- **Propuesta actual:** pasillo por el eje B del hall al comedor; comedor (~5.55 × 3.6 libres) en
+  A4–B5 con ventana de 2.00 al retiro y corrediza de 2.00 al patio; cocina G (~3.85 × 2.8) en la
+  esquina C5 con ventana al patio, abierta al comedor con península; almacén (~1.55 × 2.8) entre
+  estudio y cocina, con puerta desde el comedor.
+- **v2 (descartada):** comedor A4–B5 + cocina G chica (~10.7 m²) en C5; la esposa pide cocina más amplia.
+- **v3 (actual, reorganización completa pedida por el usuario):** se mantienen terraza, acceso,
+  ingreso, living, grada y depósito. Bloque medio: estudio/invitados al retiro (ventana real),
+  baño completo (junto al hall) y lavado al lado del vecino con extractor. Fondo: el pasillo
+  remata en el frente abierto de una cocina G amplia (~3.55 × 3.8 libres, ~13.5 m²) con ventana al
+  patio; comedor (~5.55 × 2.48) al retiro con corrediza al patio; almacén escondido junto a la
+  cocina, con puerta desde la cocina.
+- **v4 (idea del usuario):** baño de ancho mínimo (~1.35 libres) entre la grada y el estudio, con
+  ventana alta al retiro; el estudio se corre hacia el comedor (comedor ~4.05 × 2.48, para 6).
+  Libera el lado del vecino: lavado junto al hall, almacén (~5.4 m²) detrás de la cocina, y la
+  cocina crece a ~19 m² libres (se abre a lo largo del pasillo y al final).
+- **Living:** el usuario permitió moverlo; se mantiene adelante porque es el único ambiente que
+  aprovecha la terraza y la fachada principal.
+- **Estado:** **v4 aprobada** por el usuario y su esposa (2026-10-03). Cocina abierta al pasillo y al comedor.
