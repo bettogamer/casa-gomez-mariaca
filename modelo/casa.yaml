@@ -173,10 +173,13 @@ ambientes:
     # ── Primer piso, frente: suite principal (propuesta 2026-10-03) ──
     # Se usa el volado de 1 m: logia frente al dormitorio y baño que avanza hasta el borde.
     - {id: hall_p1, nombre: Hall, tipo: circulacion, rect: [4.40, 2.68, 7.05, 4.20], etiqueta: [6.30, 3.95], estado: propuesto, nota: "llegada de la escalera; sigue al altillo, al pasillo de los chicos y a la suite principal"}
-    - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: propuesto, nota: "~4.25 × 4.05 libres (17 m²); se abre a la logia (oeste) y al retiro (norte)"}
+    - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: propuesto, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; puerta a la logia en la esquina sur; ventana al norte"}
     - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: propuesto, nota: "balcón cubierto sobre el volado de 1 m; cerrado a los costados, baranda al frente; sombrea el dormitorio del sol de la tarde"}
-    - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [2.60, 4.20, 7.05, 6.67], etiqueta: [4.90, 5.45], estado: propuesto, nota: "walk-in de ~4.4 × 2.3; une dormitorio y baño"}
-    - {id: bano_principal, nombre: Baño principal, tipo: bano, rect: [-1.125, 4.20, 2.60, 6.67], etiqueta: [0.75, 5.40], estado: propuesto, nota: "~3.6 × 2.35 libres, usa el volado; ventana al frente (vidrio esmerilado). Peso sobre el volado y bajante: revisar con el ingeniero"}
+    - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [2.90, 4.20, 5.40, 6.67], etiqueta: [4.10, 5.30], estado: propuesto, nota: "casi cuadrado (~2.35 × 2.32 libres), muebles en U, como el del arquitecto"}
+    - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 2.90, 6.67], etiqueta: [1.90, 5.20], estado: propuesto, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta"}
+    - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: propuesto, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
+    - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: propuesto, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
+    - {id: blancos, nombre: Blancos, tipo: servicio, rect: [5.40, 4.20, 7.05, 6.67], etiqueta: [6.22, 5.80], estado: propuesto, nota: "armario de ropa blanca y limpieza, desde el hall (el arquitecto también tenía 'blancos')"}
   altillo: []
 
 # Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
@@ -232,11 +235,15 @@ aberturas:
     # Suite principal
     - {id: hall_escalera, tipo: vano, de: [4.40, 2.68], a: [7.05, 2.68], estado: propuesto, nota: "escalera (llegada y subida al altillo)"}
     - {id: puerta_dorm_principal, tipo: puerta, de: [4.40, 4.10], a: [4.40, 3.30], abre_hacia: dorm_principal, estado: propuesto, nota: "0.80, desde el hall"}
-    - {id: logia_corrediza, tipo: corrediza, de: [0.00, 0.40], a: [0.00, 2.55], estado: propuesto, nota: "~2.15 m entre las columnas A1 y B1, dormitorio → logia"}
+    - {id: puerta_logia, tipo: puerta, de: [0.00, 3.25], a: [0.00, 4.05], abre_hacia: logia, estado: propuesto, nota: "0.80 a un costado (entre B1 y el baño); el resto del muro queda ciego para la TV y la cortina"}
     - {id: ventana_dorm_norte, tipo: ventana, de: [1.30, 0.00], a: [2.80, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.50 × 1.20 al retiro (sol)"}
-    - {id: puerta_vestidor_ppal, tipo: puerta, de: [2.75, 4.20], a: [3.45, 4.20], abre_hacia: vestidor_principal, estado: propuesto, nota: "0.70, desde el dormitorio"}
-    - {id: puerta_bano_ppal, tipo: puerta, de: [2.60, 5.75], a: [2.60, 5.05], abre_hacia: bano_principal, estado: propuesto, nota: "0.70, desde el vestidor"}
-    - {id: ventana_bano_ppal, tipo: ventana, de: [-1.125, 4.60], a: [-1.125, 5.60], antepecho: 1.20, alto: 2.10, estado: propuesto, nota: "1.00 × 0.90 al frente, vidrio esmerilado"}
+    - {id: puerta_vestidor_ppal, tipo: puerta, de: [2.98, 4.20], a: [3.68, 4.20], abre_hacia: vestidor_principal, estado: propuesto, nota: "0.70, desde el dormitorio"}
+    - {id: vestidor_lavamanos, tipo: vano, de: [2.90, 4.40], a: [2.90, 5.30], estado: propuesto, nota: "paso abierto del vestidor a los lavamanos"}
+    - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: wc_ppal, estado: propuesto, nota: "0.70"}
+    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 6.15], a: [0.90, 5.55], abre_hacia: ducha_ppal, estado: propuesto, nota: "0.60"}
+    - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada"}
+    - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada"}
+    - {id: puerta_blancos, tipo: puerta, de: [5.65, 4.20], a: [6.45, 4.20], abre_hacia: blancos, estado: propuesto, nota: "0.80, desde el hall"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -334,23 +341,28 @@ muebles:
     - {tipo: estante, nombre: Velador, rect: [15.25, 3.41, 15.70, 3.86], alto: 0.55}
     - {tipo: escritorio, rect: [16.17, 4.97, 16.77, 6.37]}
     - {tipo: silla, rect: [15.55, 5.42, 16.05, 5.92]}
-    # Suite principal: cama con cabecera en el muro de la escalera, mirando a la logia
+    # Suite principal: cama con cabecera en el muro de la escalera, TV en el muro ciego de la logia
     - {tipo: cama, nombre: Queen, rect: [2.27, 0.85, 4.27, 2.45]}
     - {tipo: estante, nombre: Velador, rect: [3.80, 0.35, 4.25, 0.80], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [3.80, 2.50, 4.25, 2.95], alto: 0.55}
-    - {tipo: estante, nombre: Cómoda, rect: [0.60, 3.60, 2.20, 4.10], alto: 0.85}
-    - {tipo: sillon, rect: [0.20, 2.75, 0.95, 3.50]}
+    - {tipo: estante, nombre: TV, rect: [0.13, 0.95, 0.55, 2.35], alto: 0.60}
+    - {tipo: sillon, rect: [1.10, 3.20, 1.85, 3.95]}
     - {tipo: silla, rect: [-0.95, 1.00, -0.50, 1.45]}
     - {tipo: mesa, rect: [-0.95, 1.60, -0.55, 2.00], alto: 0.45}
     - {tipo: silla, rect: [-0.95, 2.15, -0.50, 2.60]}
-    - {tipo: closet, nombre: Vestidor, rect: [3.55, 6.00, 6.97, 6.59]}
-    - {tipo: closet, rect: [4.50, 4.28, 6.97, 4.83]}
-    - {tipo: estante, nombre: Tocador, rect: [2.68, 6.05, 3.50, 6.59], alto: 0.75}
-    - {tipo: meson, nombre: Doble lavamanos, rect: [-0.10, 4.28, 1.50, 4.83]}
-    - {tipo: lavamanos, rect: [0.10, 4.33, 0.55, 4.78]}
-    - {tipo: lavamanos, rect: [0.85, 4.33, 1.30, 4.78]}
-    - {tipo: inodoro, rect: [1.00, 5.90, 1.40, 6.59]}
-    - {tipo: ducha, rect: [-1.05, 5.40, 0.35, 6.59]}
+    # Vestidor en U
+    - {tipo: closet, nombre: Vestidor, rect: [2.98, 6.04, 5.32, 6.59]}
+    - {tipo: closet, rect: [4.77, 4.28, 5.32, 6.04]}
+    - {tipo: closet, rect: [3.80, 4.28, 4.77, 4.83]}
+    # Lavamanos abierto, inodoro y ducha en ambientes propios
+    - {tipo: meson, nombre: Doble lavamanos, rect: [1.15, 6.04, 2.82, 6.59]}
+    - {tipo: lavamanos, rect: [1.35, 6.09, 1.80, 6.54]}
+    - {tipo: lavamanos, rect: [2.15, 6.09, 2.60, 6.54]}
+    - {tipo: inodoro, rect: [-1.05, 4.62, -0.36, 5.02]}
+    - {tipo: ducha, rect: [-1.05, 5.52, 0.30, 6.59]}
+    # Blancos: estantes
+    - {tipo: estante, rect: [5.48, 5.95, 6.97, 6.59], alto: 2.00}
+    - {tipo: estante, rect: [6.42, 5.10, 6.97, 5.95], alto: 2.00}
 
 # Instalaciones (ESQUEMA PRELIMINAR para conversar con el ingeniero/instalador; no es un proyecto
 # aprobable). Lo puntual (luces, enchufes, puntos de agua y desagüe) se genera desde ambientes y
