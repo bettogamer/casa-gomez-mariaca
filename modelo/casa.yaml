@@ -1,0 +1,131 @@
+# Modelo de la casa — fuente de verdad del proyecto.
+#
+# Todo lo que se dibuja (plantas SVG, visor 3D, DXF, reporte) se genera desde
+# este archivo con `make build`. Para modificar la casa se edita AQUÍ, nunca
+# los archivos de `salida/`.
+#
+# Sistema de coordenadas (metros):
+#   x = a lo largo de la casa, 0 en el eje 1 (lado terraza / calle), crece hacia el fondo.
+#   y = a lo ancho, 0 en el eje A (lado Lote 105), crece hacia el Lote 103.
+#   Ambos ejes se miden a CENTRO de columna. La pared exterior queda ~0.125 m afuera.
+#
+# Leyenda de `estado` en cada elemento:
+#   construido   -> ya existe en obra. NO se modifica sin verificarlo con cinta métrica.
+#   aproximado   -> digitalizado de foto; medidas a ±10-20 cm. Confirmar.
+#   propuesto    -> modificación nuestra, todavía no aprobada.
+#   pendiente    -> falta información.
+
+proyecto:
+  nombre: Vivienda unifamiliar
+  ubicacion: Cochabamba — Subalcaldía Alejo Calatayud, Distrito 5, Zona Lacma, Mz 101, Lote 4
+  codigo_catastral: 05-17-101-063-0-00-000-000
+  calle: Pasaje innominado / Calle Víctor Rodrigo (9.00 m)
+  fuente_base: >
+    Fotos del juego impreso (planos-arqui/IMG_8276..8278, ago-2026). NO coincide
+    con el PDF "PLANO DE const. 06-03.pdf" (versión anterior, feb-2020). Ver
+    docs/versiones-del-plano.md.
+
+lote:
+  largo: 37.25          # P1-P2 (colinda Lote 105, Jesús Maldonado)
+  ancho: 9.02           # P1-P4 (frente a la calle)
+  # Posición del lote en coordenadas de la casa (esquina P1 = arriba-izquierda).
+  origen_x: -15.225     # = fondo(22.025) - 37.25
+  origen_y: -2.135      # retiro lateral 2.01 m + media pared
+  retiro_fondo: 5.00    # de la pared del fondo al lindero P2-P3
+  colindantes:
+    arriba: Lote 105 — Jesús Maldonado
+    abajo: Lote 103 — Germán Sánchez
+    fondo: Lote 95 — Rubén Pérez
+    frente: Calle Víctor Rodrigo
+
+niveles:
+  - id: pb
+    nombre: Planta baja
+    cota: 0.20          # nivel de piso terminado
+    altura: 3.00        # piso a piso
+  - id: p1
+    nombre: Primer piso
+    cota: 3.20
+    altura: 3.00
+  - id: altillo
+    nombre: Altillo
+    cota: 6.20
+    altura: 3.18        # hasta 9.38 m de altura total según PDF
+
+estructura:
+  estado: construido
+  nota: Columnas, losas y escalera YA construidas. Son la restricción principal del diseño.
+  seccion_columna: 0.25 # supuesto; medir en obra
+  espesor_losa: 0.20    # supuesto; medir en obra
+  espesor_muro_ext: 0.25
+  espesor_muro_int: 0.15
+  # Ejes según foto IMG_8278 (plano de fundaciones impreso).
+  ejes_x: {"1": 0.00, "2": 4.40, "3": 7.05, "4": 11.20, "5": 16.90}
+  ejes_y: {A: 0.00, B: 2.68, C: 6.67}
+  # Columnas = intersecciones de ejes, salvo las listadas en `desplazadas`.
+  columnas_en: [A1, A2, A3, A4, A5, B1, B2, B3, B4, B5, C1, C2, C3, C4, C5]
+  desplazadas:
+    C1: {x: 0.30, nota: "El eje 1' está corrido 0.30 m (cota inferior 4.10 vs superior 4.40). Verificar en obra."}
+  escalera:
+    estado: construido
+    tipo: U (dos tramos con descanso)
+    rect: [4.40, 0.00, 7.05, 3.98]   # x0, y0, x1, y1 (caja de escalera)
+    ancho_tramo: 1.20
+    peldanos_por_piso: 16
+    huella: 0.28
+    contrahuella: 0.1875             # 3.00 m / 16
+    sube_a: [p1, altillo]
+
+# Ambientes por nivel. `rect: [x0, y0, x1, y1]` o `poly: [[x,y], ...]`.
+# tipo: social | dormitorio | bano | cocina | servicio | circulacion | exterior
+ambientes:
+  pb:
+    - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 5.07], estado: aproximado}
+    - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.92], estado: aproximado}
+    - {id: ingreso, nombre: Ingreso, tipo: circulacion, rect: [0.00, 5.07, 2.51, 6.67], estado: aproximado}
+    - id: estar
+      nombre: Estar
+      tipo: social
+      poly: [[2.66, 4.92], [4.40, 4.92], [4.40, 3.98], [7.05, 3.98], [7.05, 6.67], [2.66, 6.67]]
+      estado: aproximado
+    - {id: comedor, nombre: Comedor, tipo: social, rect: [7.05, 0.00, 11.20, 4.17], estado: aproximado}
+    - {id: cocina, nombre: Cocina, tipo: cocina, rect: [7.05, 4.17, 11.20, 6.67], estado: aproximado}
+    - {id: bano_pb, nombre: Baño, tipo: bano, rect: [11.25, 0.00, 13.05, 2.23], estado: aproximado}
+    - {id: visita, nombre: Cuarto de visita, tipo: dormitorio, rect: [13.20, 0.00, 16.90, 2.63], estado: aproximado}
+    - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [11.20, 2.63, 16.90, 4.17], estado: aproximado}
+    - {id: despensa, nombre: Despensa, tipo: servicio, rect: [11.20, 4.17, 13.00, 6.67], estado: aproximado}
+    - {id: deposito, nombre: Depósito, tipo: servicio, rect: [13.10, 4.17, 14.95, 6.67], estado: aproximado}
+    - {id: lavanderia, nombre: Lavandería, tipo: servicio, rect: [15.05, 4.17, 16.90, 6.67], estado: aproximado}
+
+  p1:
+    - {id: balcon, nombre: Balcón, tipo: exterior, rect: [-1.45, 0.00, -0.125, 4.00], estado: aproximado}
+    - {id: dorm_ppal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.15], estado: aproximado}
+    - {id: bano_ppal_wc, nombre: Baño ppal. WC, tipo: bano, rect: [0.00, 4.30, 2.00, 6.67], estado: aproximado}
+    - {id: bano_ppal, nombre: Baño ppal., tipo: bano, rect: [2.00, 4.20, 4.00, 6.67], estado: aproximado}
+    - {id: closet, nombre: Closet, tipo: servicio, rect: [4.00, 4.20, 6.50, 6.67], estado: aproximado}
+    - {id: estudio, nombre: Estudio, tipo: social, rect: [7.05, 0.00, 11.20, 2.63], estado: aproximado}
+    - id: living_p1
+      nombre: Living
+      tipo: social
+      poly: [[7.05, 2.80], [10.00, 2.80], [10.00, 6.67], [6.50, 6.67], [6.50, 3.98], [7.05, 3.98]]
+      estado: aproximado
+    - id: pasillo_p1
+      nombre: Pasillo
+      tipo: circulacion
+      poly: [[10.00, 2.70], [11.20, 2.70], [11.20, 2.30], [13.20, 2.30], [13.20, 3.50], [12.25, 3.50], [12.25, 4.60], [10.00, 4.60]]
+      estado: aproximado
+    - {id: bano_p1, nombre: Baño, tipo: bano, rect: [10.00, 4.70, 12.25, 6.67], estado: aproximado}
+    - {id: bano_p1b, nombre: Baño, tipo: bano, rect: [11.30, 0.00, 13.10, 2.23], estado: aproximado}
+    - {id: dorm_2, nombre: Dormitorio 2, tipo: dormitorio, rect: [13.20, 0.00, 16.90, 3.37], estado: aproximado}
+    - {id: dorm_3, nombre: Dormitorio 3, tipo: dormitorio, rect: [12.35, 3.58, 16.90, 6.67], estado: aproximado}
+
+  altillo: []   # pendiente: falta foto de la planta altillo de la versión impresa
+
+# Áreas declaradas en la carátula del PDF (versión anterior) — solo referencia.
+areas_declaradas_pdf: {pb: 65.66, p1: 79.27, altillo: 53.49, total: 198.42}
+
+verificar_en_obra:
+  - "¿Cuántos ejes de columnas hay a lo largo? Foto: 5 ejes (último tramo 5.70 m). PDF: 7 ejes (último tramo 4.50 m)."
+  - "Distancia entre columnas eje 1 y 2: arriba 4.40 m, abajo 4.10 m (¿columna C1 corrida 0.30 m?)."
+  - "Sección real de columnas y espesor de losas."
+  - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."

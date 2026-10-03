@@ -1,0 +1,4 @@
+pyyaml
+ezdxf
+pymupdf
+pillow
