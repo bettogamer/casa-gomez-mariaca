@@ -34,6 +34,7 @@ CIRCUITOS = {
         ("C9", "Tomas suite principal, hall y estar", "toma"),
         ("C10", "Tomas baños, blancos y vestidor; extractores (con diferencial)", "toma"),
         ("C11", "Tomas cuartos de los hijos", "toma"),
+        ("C12", "Termotanque de la suite principal", "especial"),
     ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
@@ -54,6 +55,7 @@ ESPECIALES = {
     "cocina": ("C", 150, "C5", "campana + encendido"),
     "L": ("L", 800, "C6", "lavadora"),
     "S": ("S", 2500, "C6", "secadora"),
+    "Termotanque": ("T", 2000, "C12", "termotanque eléctrico"),
 }
 # Muebles que piden una toma común extra junto a ellos (clase de uso)
 TOMA_JUNTO = {"escritorio": "toma", "TV": "toma", "Isla": "isla", "lavamanos": "toma_humeda"}
@@ -479,6 +481,11 @@ def plano_sanitario(casa, nivel):
         x, y = cfg["subida_caliente"]["pos"]
         _circulo(L, x, y, 0.13, f'fill="{ROJO}"')
         L.texto(x - 0.25, y - 0.25, cfg["subida_caliente"].get("etiqueta", "AC ↑ desde el calefón"), 7, f'fill="{ROJO}" text-anchor="end"')
+    if cfg.get("termotanque"):
+        x, y = cfg["termotanque"]["pos"]
+        _circulo(L, x, y, 0.22, f'fill="#fff" stroke="{ROJO}" stroke-width="1.8"')
+        L.texto(x, y + 0.05, "TT", 7, f'fill="{ROJO}" font-weight="bold"')
+        L.texto(x + 0.30, y - 0.30, "TERMOTANQUE (eléctrico)", 7, f'fill="{ROJO}" font-weight="bold" text-anchor="start"')
     if cfg.get("calefon"):
         x, y = cfg["calefon"]["pos"]
         L.poly([[x - 0.18, y - 0.30], [x + 0.18, y - 0.30], [x + 0.18, y + 0.30], [x - 0.18, y + 0.30]], f'fill="#fff" stroke="{ROJO}" stroke-width="1.5"')

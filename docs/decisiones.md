@@ -234,3 +234,9 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Gas:** no llega al primer piso.
 - **Pendiente:** agua caliente de la suite principal (~15 m del calefón).
 - **Estado:** propuesto (esquema para conversar con electricista e instalador).
+
+## 2026-10-03 — Termotanque eléctrico para la suite principal
+- **Qué:** termotanque eléctrico de 50–80 L en la esquina del vestidor, junto a los lavamanos, con circuito propio
+  (C12, 2000 VA). El agua caliente de la suite sale de ahí; del calefón de PB solo llegan los baños de los hijos.
+- **Descartado:** segundo calefón a gas (subir gas y chimenea al primer piso) y recirculación de agua caliente.
+- **Estado:** decidido por el usuario.

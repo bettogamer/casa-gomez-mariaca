@@ -12,7 +12,7 @@ Huecos encontrados en el primer piso: cuartos de los hijos (opción B, suite con
    primer piso, o hay que techarla. Si no, es un balcón abierto y le entra la lluvia al dormitorio por la puerta.
 3. **Desagües de la suite principal.** Abajo están el ingreso y el acceso (exterior), sin cielo falso. La bajante va
    por fuera en la fachada (esquina C1) o en un ducto en la esquina del ingreso. Lo define el instalador.
-4. **Agua caliente de la suite principal** a ~10 m del calefón: termotanque o calefón chico propio, o retorno de agua caliente.
+4. ✅ **RESUELTO** (termotanque eléctrico propio en el vestidor, circuito C12). **Agua caliente de la suite principal** a ~10 m del calefón: termotanque o calefón chico propio, o retorno de agua caliente.
 5. **Muro entre los cuartos de los hijos:** drywall con lana mineral (ver revisión estructural).
 6. **Extractor del Baño 2 de los hijos:** ducto de ~6 m por cielo falso del pasillo y del Baño 1 hasta el retiro.
 
