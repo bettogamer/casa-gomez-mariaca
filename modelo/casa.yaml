@@ -175,8 +175,8 @@ ambientes:
     - {id: hall_p1, nombre: Hall, tipo: circulacion, rect: [4.40, 2.68, 7.05, 4.20], etiqueta: [6.30, 3.95], estado: propuesto, nota: "llegada de la escalera; sigue al altillo, al pasillo de los chicos y a la suite principal"}
     - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: propuesto, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; puerta a la logia en la esquina sur; ventana al norte"}
     - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: propuesto, nota: "balcón cubierto sobre el volado de 1 m; cerrado a los costados, baranda al frente; sombrea el dormitorio del sol de la tarde"}
-    - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [2.90, 4.20, 7.05, 6.67], etiqueta: [4.95, 5.45], estado: propuesto, nota: "vestidor + blancos unidos (~4.0 × 2.32 libres), muebles en U con pasillo de 1.20"}
-    - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 2.90, 6.67], etiqueta: [1.90, 5.20], estado: propuesto, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta"}
+    - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [3.40, 4.20, 7.05, 6.67], etiqueta: [5.20, 5.45], estado: propuesto, nota: "vestidor + blancos unidos (~3.5 × 2.32 libres), muebles en U con pasillo de 1.20"}
+    - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: propuesto, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta"}
     - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: propuesto, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
     - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: propuesto, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
   altillo: []
@@ -236,8 +236,8 @@ aberturas:
     - {id: puerta_dorm_principal, tipo: puerta, de: [4.40, 4.10], a: [4.40, 3.30], abre_hacia: dorm_principal, estado: propuesto, nota: "0.80, desde el hall"}
     - {id: puerta_logia, tipo: puerta, de: [0.00, 3.25], a: [0.00, 4.05], abre_hacia: logia, estado: propuesto, nota: "0.80 a un costado (entre B1 y el baño); el resto del muro queda ciego para la TV y la cortina"}
     - {id: ventana_dorm_norte, tipo: ventana, de: [1.30, 0.00], a: [2.80, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.50 × 1.20 al retiro (sol)"}
-    - {id: puerta_vestidor_ppal, tipo: puerta, de: [2.98, 4.20], a: [3.68, 4.20], abre_hacia: vestidor_principal, estado: propuesto, nota: "0.70, desde el dormitorio"}
-    - {id: vestidor_lavamanos, tipo: vano, de: [2.90, 4.40], a: [2.90, 5.30], estado: propuesto, nota: "paso abierto del vestidor a los lavamanos"}
+    - {id: puerta_vestidor_ppal, tipo: puerta, de: [3.50, 4.20], a: [4.20, 4.20], abre_hacia: vestidor_principal, estado: propuesto, nota: "0.70, desde el dormitorio"}
+    - {id: vestidor_lavamanos, tipo: vano, de: [3.40, 4.40], a: [3.40, 5.30], estado: propuesto, nota: "paso abierto del vestidor a los lavamanos"}
     - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: wc_ppal, estado: propuesto, nota: "0.70"}
     - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 6.15], a: [0.90, 5.55], abre_hacia: ducha_ppal, estado: propuesto, nota: "0.60"}
     - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada"}
@@ -349,13 +349,13 @@ muebles:
     - {tipo: mesa, rect: [-0.95, 1.60, -0.55, 2.00], alto: 0.45}
     - {tipo: silla, rect: [-0.95, 2.15, -0.50, 2.60]}
     # Vestidor en U (incluye lo que era blancos)
-    - {tipo: closet, nombre: Vestidor, rect: [2.98, 6.04, 6.97, 6.59]}
+    - {tipo: closet, nombre: Vestidor, rect: [3.48, 6.04, 6.97, 6.59]}
     - {tipo: closet, rect: [6.42, 4.28, 6.97, 6.04]}
-    - {tipo: closet, rect: [3.80, 4.28, 6.42, 4.83]}
+    - {tipo: closet, rect: [4.30, 4.28, 6.42, 4.83]}
     # Lavamanos abierto, inodoro y ducha en ambientes propios
-    - {tipo: meson, nombre: Doble lavamanos, rect: [1.15, 6.04, 2.82, 6.59]}
-    - {tipo: lavamanos, rect: [1.35, 6.09, 1.80, 6.54]}
-    - {tipo: lavamanos, rect: [2.15, 6.09, 2.60, 6.54]}
+    - {tipo: meson, nombre: Doble lavamanos, rect: [1.15, 6.04, 3.32, 6.59]}
+    - {tipo: lavamanos, rect: [1.55, 6.09, 2.00, 6.54]}
+    - {tipo: lavamanos, rect: [2.50, 6.09, 2.95, 6.54]}
     - {tipo: inodoro, rect: [-1.05, 4.62, -0.36, 5.02]}
     - {tipo: ducha, rect: [-1.05, 5.52, 0.30, 6.59]}
 
