@@ -212,3 +212,8 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   principal de 0.70 abriendo hacia los lavamanos (mesón corrido); ventana norte del dormitorio principal de 1.80;
   extractor en los lavamanos de la suite con ducto al frente; antepecho de 1.00 en las ventanas del primer piso.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-03 — Vestíbulo de los hijos más corto
+- **Qué:** sin los roperos del eje 4, el vestíbulo pasa de 1.80 a 1.30 (lo mínimo para puertas de 0.90 con ~10 cm de
+  jamba a la columna B4). Cuartos de 18.0 m²; roperos entre cuartos de 3.50 m.
+- **Estado:** pedido del usuario.
