@@ -193,7 +193,7 @@ ambientes:
     - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.00], etiqueta: [12.10, 1.65], estado: propuesto, nota: "~1.65 × 1.85 libres (chico); ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
     - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.00, 13.00, 4.67], etiqueta: [12.10, 4.35], estado: propuesto, nota: "reparte a baño, dormitorio y cuarto chico"}
     - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 2.90], etiqueta: [14.95, 1.45], estado: propuesto, nota: "~3.75 × 2.75 libres; rincón para la cuna; ventanas al norte y al patio"}
-    - {id: cuarto_chico_alt, nombre: Cuarto chico, tipo: dormitorio, rect: [13.00, 2.90, 16.90, 4.67], etiqueta: [14.95, 3.80], estado: propuesto, nota: "~3.75 × 1.6 libres: bebé o estudio"}
+    - {id: cuarto_chico_alt, nombre: Cuarto chico, tipo: dormitorio, rect: [13.00, 2.90, 16.90, 4.67], etiqueta: [14.95, 3.80], estado: propuesto, nota: "~3.70 × 1.60 libres; uso flexible: niño, invitados (cama nido para 2) o bebé; ~6.9 m², chico: confirmar con el arquitecto si cuenta como dormitorio"}
     - {id: terraza_alt, nombre: Terraza, tipo: exterior, rect: [-1.125, 0.00, 4.40, 6.67], etiqueta: [1.60, 3.30], estado: propuesto, nota: "sobre la suite principal y el volado; antepecho perimetral"}
     - {id: franja_sur_alt, nombre: Franja libre 2 m, tipo: exterior, rect: [4.40, 4.67, 16.90, 6.67], etiqueta: [10.60, 5.70], estado: propuesto, nota: "retiro sur exigido (normativa); patio de servicio descubierto: lavandería con alero, tendedero"}
 
@@ -424,11 +424,12 @@ muebles:
     - {tipo: estante, nombre: Velador, rect: [14.10, 2.38, 14.55, 2.83], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [16.25, 2.38, 16.70, 2.83], alto: 0.55}
     - {tipo: cama, nombre: Cuna, rect: [13.80, 0.20, 14.50, 1.50]}
-    # Cuarto chico (bebé): cuna, cómoda-cambiador, sillón para dar de comer, estante
-    - {tipo: cama, nombre: Cuna, rect: [14.10, 3.05, 15.40, 3.75]}
-    - {tipo: estante, nombre: Cambiador, rect: [15.85, 4.00, 16.70, 4.52], alto: 0.90}
-    - {tipo: sillon, rect: [16.00, 3.05, 16.70, 3.75]}
-    - {tipo: estante, rect: [13.90, 4.15, 15.40, 4.52], alto: 1.80}
+    # Cuarto chico, uso flexible: niño (~6 años) o invitados. Cama de 1 plaza a lo largo (cama nido: con la
+    # cama de abajo duermen 2), ropero chico y escritorio. Para un bebé: cuna en lugar del escritorio.
+    - {tipo: cama, nombre: Cama 1 plaza (nido), rect: [14.85, 3.00, 16.75, 3.90]}
+    - {tipo: closet, nombre: Ropero, rect: [13.85, 3.00, 14.80, 3.55]}
+    - {tipo: escritorio, rect: [13.85, 4.05, 14.85, 4.52]}
+    - {tipo: silla, rect: [14.10, 3.60, 14.55, 4.00]}
     # Terraza: mesa para 6 y parrilla
     - {tipo: mesa, nombre: Mesa 6, rect: [0.60, 2.10, 2.40, 3.00]}
     - {tipo: silla, rect: [0.95, 1.60, 1.40, 2.05]}
