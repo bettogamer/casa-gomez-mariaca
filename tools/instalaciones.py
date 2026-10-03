@@ -222,10 +222,18 @@ ARTEFACTOS = {  # tipo/nombre de mueble -> (agua fría, agua caliente, desagüe 
 }
 
 
+def _lineas(cfg_linea):
+    """Acepta una polilínea o una lista de polilíneas."""
+    if not cfg_linea:
+        return []
+    return cfg_linea if isinstance(cfg_linea[0][0], (list, tuple)) else [cfg_linea]
+
+
 def _proyectar(p, linea):
-    """Punto más cercano de la polilínea `linea` a p."""
+    """Punto más cercano a p sobre una polilínea o lista de polilíneas."""
     mejor, dmin = None, 1e9
-    for a, b in zip(linea, linea[1:]):
+    segs = [(a, b) for l in _lineas(linea) for a, b in zip(l, l[1:])]
+    for a, b in segs:
         dx, dy = b[0] - a[0], b[1] - a[1]
         L2 = dx * dx + dy * dy
         t = max(0, min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2))
@@ -267,9 +275,9 @@ def sanitario(casa, nivel_id):
 
 # ── dibujo ───────────────────────────────────────────────────────────────────
 
-def _base(casa, nivel, titulo, subt):
+def _base(casa, nivel, titulo, subt, extra=()):
     ambs = ambientes(casa, nivel["id"])
-    pts = [p for a in ambs for p in a["poly"]]
+    pts = [p for a in ambs for p in a["poly"]] + [list(e) for e in extra]
     x0, y0 = min(p[0] for p in pts), min(p[1] for p in pts) - 1.0
     x1, y1 = max(p[0] for p in pts) + 1.0, max(p[1] for p in pts)
     L = Lienzo(x0 - 1.0, y0, x1, y1)
@@ -371,8 +379,10 @@ def _dibujar_simbolo(L, p, naranja):
 
 def plano_sanitario(casa, nivel):
     cfg, puntos, ramas = sanitario(casa, nivel["id"])
+    extra = [cfg["pozo"]["pos"]] if cfg.get("pozo") else []
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — AGUA, DESAGÜE Y GAS (esquema)",
-                                "Preliminar: recorridos y diámetros a confirmar con el instalador (agua/desagüe) y con YPFB (gas natural).")
+                                "Preliminar: recorridos y diámetros a confirmar con el instalador (agua/desagüe) y con YPFB (gas natural).",
+                                extra)
     AZUL, ROJO, CAFE, GAS = "#1565c0", "#c62828", "#6d4c41", "#f9a825"
 
     def poli(linea, estilo):
@@ -398,14 +408,26 @@ def plano_sanitario(casa, nivel):
         p, q = ruta[0], ruta[1]
         L.texto((p[0] + q[0]) / 2 + 0.12, (p[1] + q[1]) / 2, f"Ø{d}", 6, f'fill="{CAFE}" text-anchor="start"')
     # agua fría y caliente
-    if cfg.get("agua_fria"):
-        poli(cfg["agua_fria"], f'stroke="{AZUL}" stroke-width="2.5"')
-        a = cfg["agua_fria"][0]
-        L.texto(a[0] - 0.15, a[1] - 0.15, "AF ← cisterna / tanque", 7, f'fill="{AZUL}" text-anchor="end"')
+    for linea in _lineas(cfg.get("agua_fria")):
+        poli(linea, f'stroke="{AZUL}" stroke-width="2.5"')
+    if cfg.get("bajada_tanque"):
+        x, y = cfg["bajada_tanque"]["pos"]
+        _circulo(L, x, y, 0.13, f'fill="{AZUL}"')
+        L.texto(x + 0.25, y - 0.25, "AF ↓ bajada del tanque elevado", 7, f'fill="{AZUL}" text-anchor="start"')
+    if cfg.get("impulsion"):
+        poli(cfg["impulsion"], 'stroke="#00838f" stroke-width="2" stroke-dasharray="3 3"')
+        a, b = cfg["impulsion"][0], cfg["impulsion"][-1]
+        _circulo(L, b[0], b[1], 0.10, 'fill="#00838f"')
+        L.texto(b[0] + 0.2, b[1] - 0.15, "↑ sube al tanque", 7, 'fill="#00838f" text-anchor="start"')
+    if cfg.get("pozo"):
+        x, y = cfg["pozo"]["pos"]
+        _circulo(L, x, y, 0.45, 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"')
+        L.texto(x, y + 0.05, "POZO", 7, 'fill="#00838f" font-weight="bold"')
+        L.texto(x, y + 0.70, "+ bomba", 7, 'fill="#00838f"')
     for ruta in ramas["agua_fria"]:
         poli([(x - 0.05, y) for x, y in ruta], f'stroke="{AZUL}" stroke-width="1.2"')
-    if cfg.get("agua_caliente"):
-        poli(cfg["agua_caliente"], f'stroke="{ROJO}" stroke-width="2.5"')
+    for linea in _lineas(cfg.get("agua_caliente")):
+        poli(linea, f'stroke="{ROJO}" stroke-width="2.5"')
     for ruta in ramas["agua_caliente"]:
         poli([(x + 0.05, y) for x, y in ruta], f'stroke="{ROJO}" stroke-width="1.2"')
     # gas
@@ -419,16 +441,16 @@ def plano_sanitario(casa, nivel):
     if cfg.get("calefon"):
         x, y = cfg["calefon"]["pos"]
         L.poly([[x - 0.18, y - 0.30], [x + 0.18, y - 0.30], [x + 0.18, y + 0.30], [x - 0.18, y + 0.30]], f'fill="#fff" stroke="{ROJO}" stroke-width="1.5"')
-        L.texto(x + 0.30, y + 0.05, "CALEFÓN (GN)", 7, f'fill="{ROJO}" font-weight="bold" text-anchor="start"')
+        L.texto(x - 0.30, y - 0.40, "CALEFÓN (GN)", 7, f'fill="{ROJO}" font-weight="bold" text-anchor="end"')
     # puntos de artefactos
     for p in puntos:
         x, y = p["pos"]
         _circulo(L, x, y, 0.09, f'fill="#fff" stroke="{CAFE}" stroke-width="1.5"')
     # leyenda
     lx, ly = x0 + 6, y1 + 1.15
-    for k, (col, txt, dash) in enumerate([(AZUL, "agua fría", ""), (ROJO, "agua caliente", ""),
+    for k, (col, txt, dash) in enumerate([(AZUL, "agua fría", ""), (ROJO, "agua caliente", ""), ("#00838f", "pozo → tanque", 'stroke-dasharray="3 3"'),
                                           (CAFE, "desagüe", 'stroke-dasharray="7 3"'), (GAS, "gas natural", 'stroke-dasharray="10 4"')]):
-        cx = lx + k * 2.6
+        cx = lx + k * 2.4
         L.linea(cx, ly, cx + 0.6, ly, f'stroke="{col}" stroke-width="2.5" {dash}')
         L.texto(cx + 0.75, ly + 0.05, txt, 7, 'fill="#444" text-anchor="start"')
     return L.svg(f"{nivel['nombre']} — sanitario y gas"), puntos

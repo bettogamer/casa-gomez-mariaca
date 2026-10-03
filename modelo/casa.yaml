@@ -261,12 +261,16 @@ instalaciones:
         - {pos: [14.20, 4.40], nota: "colgantes sobre la isla"}
         - {pos: [16.45, 5.15], nota: "bajo alacena / sobre lavaplatos"}
     sanitario:
-      # Agua fría: entra por el frente (desde cisterna + bomba / tanque elevado) y corre bajo el piso
-      # del hall y del pasillo; de ahí salen las ramas a cada artefacto.
-      agua_fria: [[-0.40, 5.80], [6.40, 5.80], [6.40, 3.10], [16.60, 3.10]]
-      # Agua caliente: desde el calefón a gas natural (muro del patio, exterior, ventilado).
-      agua_caliente: [[17.25, 3.35], [7.40, 3.35]]
-      calefon: {pos: [17.25, 3.35], nota: "calefón a gas natural, exterior en el muro del patio (este), con nicho de protección"}
+      # Agua: pozo en el patio + bomba -> tanque elevado en el último piso -> baja por gravedad a toda
+      # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
+      # estudio (exterior, en el retiro): bajada de agua fría del tanque + calefón a gas natural.
+      pozo: {pos: [21.20, 3.00], nota: "pozo con bomba; distancias a desagües a confirmar con el instalador"}
+      impulsion: [[21.20, 3.00], [17.15, 3.00], [17.15, 0.10]]   # del pozo a la subida al tanque (esquina NE)
+      bajada_tanque: {pos: [9.10, -0.30], nota: "bajada de agua fría desde el tanque elevado (muro norte)"}
+      # Varias troncales: listas de polilíneas.
+      agua_fria: [[[9.10, -0.30], [9.10, 3.10], [16.60, 3.10]], [[9.10, 3.10], [7.20, 3.10]]]
+      agua_caliente: [[[8.80, -0.30], [8.80, 3.35], [16.55, 3.35]], [[8.80, 3.35], [7.40, 3.35]]]
+      calefon: {pos: [8.80, -0.30], nota: "calefón a gas natural, exterior en el muro norte (retiro), en nicho; centro de los consumos de agua caliente"}
       # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
       # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
       colector: [[17.70, 5.15], [17.70, -0.85], [-3.00, -0.85]]

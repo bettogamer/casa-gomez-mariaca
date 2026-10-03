@@ -131,3 +131,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   cuadro de cargas; plano de agua fría/caliente, desagüe (colector por el retiro norte, CI,
   desgrasadora) y gas natural (retiro norte → calefón en el muro del patio → cocina).
 - **Estado:** propuesto.
+
+## 2026-10-03 — Agua y calefón
+- **Agua:** pozo en el patio con bomba → tanque elevado en el último piso → baja por gravedad a toda
+  la casa. **Horno y secadora eléctricos.**
+- **Núcleo técnico** en el muro norte, por fuera (retiro), entre baño y estudio: calefón a gas natural
+  en nicho + bajada de agua fría del tanque; la línea de gas ya pasa por ahí. Es el centro de los
+  consumos de agua caliente (baño pegado, lavado ~3 m, cocina ~8 m). Los baños de P1 conviene
+  ubicarlos cerca.
+- **Estado:** aprobado (el usuario delegó la ubicación del calefón).

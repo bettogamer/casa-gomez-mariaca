@@ -11,12 +11,12 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
    **cielo falso** (techo bajo, ~25–30 cm) en pasillo y cocina hasta el retiro o el patio.
    Con 3.00 m libres hay altura de sobra. La campana conviene sacarla hacia el muro del patio
    (está a ~2 m) y no subirla a través del primer piso.
-2. 🟡 **PROPUESTO** (calefón a gas natural en el muro del patio, exterior). **Agua caliente.** No está ubicado el calefón o termotanque. Si es a gas, necesita aire
+2. ✅ **RESUELTO** (calefón a gas natural en el núcleo técnico del muro norte; pozo + tanque elevado). **Agua caliente.** No está ubicado el calefón o termotanque. Si es a gas, necesita aire
    exterior: no puede ir en el lavado (interior). Opciones: en el patio con protección, o
    en el retiro junto a la cocina.
 3. 🟡 **PROPUESTO** (gas natural por red: retiro norte → calefón → cocina; ver plano sanitario). **Gas.** Falta definir red (medidor) o garrafa, y por dónde llega a la cocina. La garrafa
    va afuera y ventilada (patio).
-4. **Agua de reserva.** En Cochabamba es habitual tener **cisterna** (bajo tierra) + bomba +
+4. ✅ **RESUELTO** (pozo en el patio + bomba + tanque elevado; ubicación exacta del tanque con el altillo). **Agua de reserva.** En Cochabamba es habitual tener **cisterna** (bajo tierra) + bomba +
    tanque elevado. La cisterna se excava, así que conviene ubicarla ya (jardín delantero o
    retiro lateral). El tanque elevado se resuelve con el altillo.
 5. **Bajantes del primer piso.** Los baños y la cocina de arriba van a bajar sus cañerías
