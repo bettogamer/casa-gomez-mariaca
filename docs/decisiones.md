@@ -71,10 +71,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 ## 2026-10-03 — Planta baja, parte 3 (PROPUESTA, rama feat/pb-cocina-comedor)
 - **Pedido:** cocina G, almacén, comedor para mínimo 6, estudio que luego será cuarto de
   invitados, pasillos. Se usa el fondo (A4–C5).
-- **Propuesta:** hall frente a la grada; pasillo por el eje B del hall hasta una puerta al patio;
-  comedor (~5.8 × 2.8 libres) en el bloque central, abierto al hall, al pasillo y a la cocina;
-  cocina G (~3.75 × 2.8) en la esquina C5 con ventana al patio; almacén (~1.35 × 2.5) y estudio
-  (~4.05 × 2.5) del lado del retiro, el estudio en la esquina A5 con ventanas al retiro y al patio.
-- **Contras:** el comedor no tiene ventana propia (lado del vecino); recibe luz del hall, de la
-  cocina y de la puerta con vidrio al patio. El almacén queda al otro lado del pasillo, no dentro de la cocina.
+- **Primera propuesta (descartada por el usuario):** estudio en la esquina A5 con ventanas al
+  exterior y comedor en el bloque central sin ventana.
+- **Decisión del usuario:** estudio/invitados frente a lavado y baño (B3–C4), con ventana amplia
+  al hall. Se advirtió que no tiene ventana al exterior (lado vecino): se prevé rejilla/extractor.
+- **Propuesta actual:** pasillo por el eje B del hall al comedor; comedor (~5.55 × 3.6 libres) en
+  A4–B5 con ventana de 2.00 al retiro y corrediza de 2.00 al patio; cocina G (~3.85 × 2.8) en la
+  esquina C5 con ventana al patio, abierta al comedor con península; almacén (~1.55 × 2.8) entre
+  estudio y cocina, con puerta desde el comedor.
 - **Estado:** propuesto, esperando al usuario.

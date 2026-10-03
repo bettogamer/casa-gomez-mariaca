@@ -196,7 +196,8 @@ def dibujar_aberturas(L, casa, nivel_id):
                                y0 + largo * (ny * math.cos(t) + uy * math.sin(t))))
             L.add('<polyline points="%s" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="3 2"/>'
                   % " ".join("%.1f,%.1f" % p for p in pts))
-            L.texto((x0 + x1) / 2 - nx * 0.35, (y0 + y1) / 2 - ny * 0.35 + 0.05, f"{largo:.2f}", 8, 'fill="#444"')
+            # medida dentro del giro de la hoja, lejos de los rótulos del ambiente vecino
+            L.texto(x0 + (dx * 0.6 + nx * largo * 0.35), y0 + (dy * 0.6 + ny * largo * 0.35) + 0.05, f"{largo:.2f}", 7, 'fill="#444"')
 
 
 def rotular_ambientes(L, ambs):

@@ -127,11 +127,16 @@ ambientes:
       poly: [[2.58, 4.95], [4.40, 4.95], [4.40, 4.125], [5.725, 4.125], [5.725, 2.68], [7.05, 2.68], [7.05, 6.67], [2.58, 6.67]]
       estado: propuesto
       nota: "frente a la grada; une ingreso, living, grada y pasillo"
-    - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 16.90, 3.73], estado: propuesto, nota: "eje B, del hall a la puerta del patio"}
-    - {id: comedor, nombre: Comedor, tipo: social, rect: [7.05, 3.73, 13.00, 6.67], estado: propuesto, nota: "6-8 personas; abierto al pasillo, al hall y a la cocina; sin ventana propia (lado vecino)"}
-    - {id: cocina, nombre: Cocina G, tipo: cocina, rect: [13.00, 3.73, 16.90, 6.67], estado: propuesto, nota: "U sobre muro del patio, muro del vecino y muro del pasillo + península hacia el comedor"}
-    - {id: almacen, nombre: Almacén, tipo: servicio, rect: [11.20, 0.00, 12.70, 2.68], estado: propuesto}
-    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [12.70, 0.00, 16.90, 2.68], estado: propuesto, nota: "ventanas al retiro lateral y al patio"}
+    - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 11.20, 3.73], estado: propuesto, nota: "eje B, del hall al comedor"}
+    - id: estudio
+      nombre: Estudio / invitados
+      tipo: dormitorio
+      rect: [7.05, 3.73, 11.20, 6.67]
+      estado: propuesto
+      nota: "frente a lavado y baño (decisión del usuario). Sin ventana al exterior (lado vecino): ventana amplia al hall + rejilla/extractor para renovar el aire"
+    - {id: comedor, nombre: Comedor, tipo: social, rect: [11.20, 0.00, 16.90, 3.73], estado: propuesto, nota: "6-8 personas; ventanas al retiro y corrediza al patio; el pasillo llega directo"}
+    - {id: almacen, nombre: Almacén, tipo: servicio, rect: [11.20, 3.73, 12.90, 6.67], estado: propuesto, nota: "junto a la cocina, puerta desde el comedor"}
+    - {id: cocina, nombre: Cocina G, tipo: cocina, rect: [12.90, 3.73, 16.90, 6.67], estado: propuesto, nota: "U: muro del patio (lavaplatos bajo la ventana), muro del vecino (cocina + campana) y muro del almacén (refrigerador y torres) + península hacia el comedor"}
   p1: []
   altillo: []
 
@@ -153,15 +158,14 @@ aberturas:
     # ── Propuesta: hall, pasillo, comedor, cocina, almacén, estudio ──
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
-    - {id: hall_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 6.67], nota: "hall abierto al pasillo y al comedor"}
-    - {id: comedor_pasillo, tipo: vano, de: [7.05, 3.73], a: [13.00, 3.73], nota: "comedor abierto al pasillo"}
-    - {id: comedor_cocina, tipo: vano, de: [13.00, 3.73], a: [13.00, 6.67], nota: "abierto; la península de la G marca el límite"}
-    - {id: puerta_almacen, tipo: puerta, de: [11.85, 2.68], a: [12.55, 2.68], abre_hacia: almacen, nota: "0.70"}
-    - {id: puerta_estudio, tipo: puerta, de: [13.65, 2.68], a: [12.85, 2.68], abre_hacia: estudio, nota: "0.80"}
-    - {id: puerta_patio, tipo: puerta, de: [16.90, 2.85], a: [16.90, 3.65], abre_hacia: afuera, nota: "0.80, al patio de atrás; con vidrio para dar luz al pasillo"}
-    - {id: ventana_estudio_lateral, tipo: ventana, de: [14.05, 0.00], a: [15.55, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.50 × 1.20 al retiro"}
-    - {id: ventana_estudio_patio, tipo: ventana, de: [16.90, 0.65], a: [16.90, 1.85], antepecho: 0.90, alto: 2.10, nota: "1.20 × 1.20 al patio"}
-    - {id: ventana_almacen, tipo: ventana, de: [11.65, 0.00], a: [12.25, 0.00], antepecho: 1.70, alto: 2.10, nota: "0.60 × 0.40, ventilación"}
+    - {id: hall_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], nota: "hall abierto al pasillo"}
+    - {id: ventana_estudio_hall, tipo: ventana, de: [7.05, 4.20], a: [7.05, 6.20], antepecho: 0.90, alto: 2.10, nota: "2.00 × 1.20, ventana amplia al hall (con cortina)"}
+    - {id: puerta_estudio, tipo: puerta, de: [8.05, 3.73], a: [7.25, 3.73], abre_hacia: estudio, nota: "0.80, desde el pasillo"}
+    - {id: pasillo_comedor, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.73], nota: "el pasillo entra al comedor"}
+    - {id: comedor_cocina, tipo: vano, de: [12.90, 3.73], a: [16.90, 3.73], nota: "abierto; la península de la G marca el límite"}
+    - {id: puerta_almacen, tipo: puerta, de: [11.35, 3.73], a: [12.05, 3.73], abre_hacia: almacen, nota: "0.70, desde el comedor junto a la cocina"}
+    - {id: corrediza_patio, tipo: corrediza, de: [16.90, 0.35], a: [16.90, 2.35], nota: "2.00 m, comedor al patio de atrás (entre columnas A5 y B5)"}
+    - {id: ventana_comedor, tipo: ventana, de: [13.30, 0.00], a: [15.30, 0.00], antepecho: 0.90, alto: 2.10, nota: "2.00 × 1.20 al retiro lateral"}
     - {id: ventana_cocina, tipo: ventana, de: [16.90, 4.50], a: [16.90, 5.90], antepecho: 1.05, alto: 2.10, nota: "1.40 × 1.05 sobre el lavaplatos, al patio"}
     # Ventanas al retiro lateral (luz y ventilación).
     - {id: ventana_lavado, tipo: ventana, de: [7.61, 0.00], a: [8.61, 0.00], antepecho: 1.10, alto: 2.10, nota: "1.00 × 1.00"}
