@@ -3,7 +3,7 @@ import math
 from html import escape
 
 from casa import (COLORES_TIPO, SALIDA, aberturas, ambientes, area, caja, cargar, centroide, columnas, dentro, escalera,
-                  huella_casa, muros, referencia)
+                  huella_casa, muebles, muros, referencia)
 
 ESC = 50  # px por metro
 MARGEN = 2.2  # m alrededor del dibujo (ejes, cotas)
@@ -200,15 +200,99 @@ def dibujar_aberturas(L, casa, nivel_id):
             L.texto(x0 + (dx * 0.6 + nx * largo * 0.35), y0 + (dy * 0.6 + ny * largo * 0.35) + 0.05, f"{largo:.2f}", 7, 'fill="#444"')
 
 
+def dibujar_muebles(L, casa, nivel_id):
+    def rect(x0, y0, x1, y1, estilo):
+        L.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], estilo)
+
+    def elipse(cx, cy, rx, ry, estilo):
+        a, b = L.p(cx, cy)
+        L.add(f'<ellipse cx="{a:.1f}" cy="{b:.1f}" rx="{rx * ESC:.1f}" ry="{ry * ESC:.1f}" {estilo}/>')
+
+    madera = 'stroke="#6d4c41" stroke-width="0.8"'
+    gris = 'stroke="#616161" stroke-width="0.8"'
+    for m in muebles(casa, nivel_id):
+        x0, y0, x1, y1 = m["rect"]
+        w, h = x1 - x0, y1 - y0
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        t = m["tipo"]
+        if t == "alfombra":
+            rect(x0, y0, x1, y1, 'fill="#efe3cf" stroke="#c8b393" stroke-width="0.6" stroke-dasharray="3 2"')
+        elif t in ("sofa", "sillon"):
+            rect(x0, y0, x1, y1, 'fill="#cfd8dc" stroke="#546e7a" stroke-width="0.8" rx="3"')
+            k = 0.15
+            rect(x0 + k, y0 + k, x1 - k, y1 - k, 'fill="#eceff1" stroke="#90a4ae" stroke-width="0.5"')
+        elif t in ("mesa", "escritorio"):
+            rect(x0, y0, x1, y1, f'fill="#fff" {madera}')
+        elif t in ("silla", "taburete"):
+            rect(x0, y0, x1, y1, f'fill="#d7ccc8" {madera}')
+        elif t in ("estante", "closet"):
+            rect(x0, y0, x1, y1, f'fill="#eeeeee" {gris}')
+            if t == "closet":
+                L.linea(x0, y0, x1, y1, 'stroke="#9e9e9e" stroke-width="0.6"')
+                L.linea(x0, y1, x1, y0, 'stroke="#9e9e9e" stroke-width="0.6"')
+            else:
+                n = max(1, int(max(w, h) / 0.30))
+                for k in range(1, n):
+                    if w >= h:
+                        L.linea(x0 + w * k / n, y0, x0 + w * k / n, y1, 'stroke="#bdbdbd" stroke-width="0.5"')
+                    else:
+                        L.linea(x0, y0 + h * k / n, x1, y0 + h * k / n, 'stroke="#bdbdbd" stroke-width="0.5"')
+        elif t == "meson":
+            rect(x0, y0, x1, y1, f'fill="#e0e0e0" {gris}')
+        elif t == "cocina":
+            rect(x0, y0, x1, y1, 'fill="#9e9e9e" stroke="#424242" stroke-width="0.8"')
+            for fx in (0.28, 0.72):
+                for fy in (0.28, 0.72):
+                    elipse(x0 + w * fx, y0 + h * fy, min(w, h) * 0.15, min(w, h) * 0.15, 'fill="none" stroke="#212121" stroke-width="0.8"')
+        elif t == "lavaplatos":
+            rect(x0, y0, x1, y1, 'fill="#cfd8dc" stroke="#546e7a" stroke-width="0.8" rx="3"')
+        elif t == "refrigerador":
+            rect(x0, y0, x1, y1, 'fill="#fff" stroke="#424242" stroke-width="1"')
+            L.texto(cx, cy + 0.06, "R", 9, 'fill="#424242" font-weight="bold"')
+        elif t == "inodoro":
+            # tanque contra el muro (extremo mayor del eje largo), taza ovalada
+            if w >= h:
+                rect(x1 - 0.18, y0, x1, y1, 'fill="#fff" stroke="#424242" stroke-width="0.8"')
+                elipse(x0 + (w - 0.18) / 2, cy, (w - 0.18) / 2, h / 2 * 0.9, 'fill="#fff" stroke="#424242" stroke-width="0.8"')
+            else:
+                rect(x0, y1 - 0.18, x1, y1, 'fill="#fff" stroke="#424242" stroke-width="0.8"')
+                elipse(cx, y0 + (h - 0.18) / 2, w / 2 * 0.9, (h - 0.18) / 2, 'fill="#fff" stroke="#424242" stroke-width="0.8"')
+        elif t == "lavamanos":
+            rect(x0, y0, x1, y1, 'fill="#fff" stroke="#424242" stroke-width="0.8"')
+            elipse(cx, cy, w * 0.35, h * 0.35, 'fill="none" stroke="#424242" stroke-width="0.8"')
+        elif t == "ducha":
+            rect(x0, y0, x1, y1, 'fill="#e1f5fe" stroke="#0277bd" stroke-width="0.8"')
+            L.linea(x0, y0, x1, y1, 'stroke="#4fc3f7" stroke-width="0.6"')
+            L.linea(x0, y1, x1, y0, 'stroke="#4fc3f7" stroke-width="0.6"')
+        elif t == "lavadora":
+            rect(x0, y0, x1, y1, 'fill="#fff" stroke="#424242" stroke-width="0.8"')
+            elipse(cx, cy, min(w, h) * 0.33, min(w, h) * 0.33, 'fill="none" stroke="#424242" stroke-width="0.8"')
+        elif t == "lavadero":
+            rect(x0, y0, x1, y1, 'fill="#eceff1" stroke="#424242" stroke-width="0.8"')
+            rect(x0 + 0.07, y0 + 0.07, x1 - 0.07, y1 - 0.07, 'fill="#cfd8dc" stroke="#78909c" stroke-width="0.5"')
+        elif t == "cama":
+            rect(x0, y0, x1, y1, 'fill="#fff" stroke="#546e7a" stroke-width="0.8"')
+        else:
+            rect(x0, y0, x1, y1, f'fill="#f5f5f5" {gris}')
+        if m.get("nombre") and t not in ("refrigerador",):
+            L.texto(cx, cy + 0.05, m["nombre"], 6, 'fill="#555"')
+
+
 def rotular_ambientes(L, ambs):
+    def con_halo(x, y, t, tam, estilo):
+        # primero un trazo blanco (halo) y encima el texto: legible sobre los muebles en cualquier visor
+        negrita = 'font-weight="bold" ' if "bold" in estilo else ""
+        L.texto(x, y, t, tam, negrita + 'fill="#fff" stroke="#fff" stroke-width="3" stroke-linejoin="round"')
+        L.texto(x, y, t, tam, estilo)
+
     for a in ambs:
-        cx, cy = centroide(a["poly"])
+        cx, cy = a.get("etiqueta") or centroide(a["poly"])
         x0, y0, x1, y1 = caja(a["poly"])
         aprox = "≈ " if a.get("estado") == "aproximado" else ""
         prop = 'fill="#1565c0"' if a.get("estado") == "propuesto" else 'fill="#222"'
-        L.texto(cx, cy - 0.12, a["nombre"].upper(), 10, f'font-weight="bold" {prop}')
-        L.texto(cx, cy + 0.18, f"{aprox}{x1 - x0:.2f} × {y1 - y0:.2f}", 9, 'fill="#444"')
-        L.texto(cx, cy + 0.44, f"{area(a['poly']):.1f} m²", 9, 'fill="#666"')
+        con_halo(cx, cy - 0.12, a["nombre"].upper(), 10, f'font-weight="bold" {prop}')
+        con_halo(cx, cy + 0.18, f"{aprox}{x1 - x0:.2f} × {y1 - y0:.2f}", 9, 'fill="#444"')
+        con_halo(cx, cy + 0.44, f"{area(a['poly']):.1f} m²", 9, 'fill="#666"')
 
 
 def leyenda(L, x, y, titulo, subt):
@@ -236,6 +320,7 @@ def planta(casa, nivel):
     dibujar_referencia(L, refs, ambs)
     dibujar_ambientes(L, ambs)
     dibujar_escalera(L, casa, nivel["id"])
+    dibujar_muebles(L, casa, nivel["id"])
     dibujar_ejes(L, casa, x0, y0, x1, y1)
     dibujar_muros(L, casa, nivel["id"])
     dibujar_aberturas(L, casa, nivel["id"])

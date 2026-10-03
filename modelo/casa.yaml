@@ -106,9 +106,9 @@ estructura:
 # ─────────────────────────────────────────────────────────────────────────────
 ambientes:
   pb:
-    - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 4.95], estado: definido}
+    - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 4.95], etiqueta: [-1.375, 4.25], estado: definido}
     - {id: acceso, nombre: Acceso, tipo: exterior, rect: [-2.625, 4.95, -0.125, 6.795], estado: definido, nota: "nivel ±0.00, llega a la puerta de entrada"}
-    - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.95], estado: definido}
+    - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.95], etiqueta: [2.20, 4.30], estado: definido}
     - {id: ingreso, nombre: Ingreso, tipo: circulacion, rect: [0.00, 4.95, 2.58, 6.67], estado: definido}
     - id: deposito_patio
       nombre: Depósito patio
@@ -124,9 +124,9 @@ ambientes:
       estado: definido
       nota: "frente a la grada; une ingreso, living, grada y pasillo"
     # Lado retiro: baño mínimo junto a la grada, estudio, comedor (más corto).
-    - {id: bano_pb, nombre: Baño, tipo: bano, rect: [7.05, 0.00, 8.55, 2.68], estado: definido, nota: "completo, ancho mínimo (~1.35 libres): ducha al fondo bajo ventana alta, inodoro, lavamanos junto a la puerta"}
-    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [8.55, 0.00, 12.70, 2.68], estado: definido, nota: "ventana al retiro"}
-    - {id: comedor, nombre: Comedor, tipo: social, rect: [12.70, 0.00, 16.90, 2.68], estado: definido, nota: "6 personas; ventana al retiro y corrediza al patio"}
+    - {id: bano_pb, nombre: Baño, tipo: bano, rect: [7.05, 0.00, 8.55, 2.68], etiqueta: [7.80, 2.15], estado: definido, nota: "completo, ancho mínimo (~1.35 libres): ducha al fondo bajo ventana alta, inodoro, lavamanos junto a la puerta"}
+    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [8.55, 0.00, 12.70, 2.68], etiqueta: [10.60, 1.85], estado: definido, nota: "ventana al retiro"}
+    - {id: comedor, nombre: Comedor, tipo: social, rect: [12.70, 0.00, 16.90, 2.68], etiqueta: [14.50, 2.45], estado: definido, nota: "6 personas; ventana al retiro y corrediza al patio"}
     - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 12.70, 3.73], estado: definido, nota: "eje B; la cocina se abre a su derecha y al final"}
     # Lado vecino (ciego): lavado, almacén y cocina amplia.
     - {id: lavado, nombre: Lavado, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], estado: definido, nota: "extractor"}
@@ -135,6 +135,7 @@ ambientes:
       nombre: Cocina G
       tipo: cocina
       poly: [[12.70, 2.68], [16.90, 2.68], [16.90, 6.67], [11.20, 6.67], [11.20, 3.73], [12.70, 3.73]]
+      etiqueta: [15.25, 4.75]
       estado: definido
       nota: "amplia: G sobre muro del vecino (largo, con cocina y campana), muro del patio (lavaplatos) + península hacia el comedor; isla o desayunador en el tramo junto al pasillo"
   p1: []
@@ -161,7 +162,7 @@ aberturas:
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
     - {id: hall_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], nota: "hall abierto al pasillo"}
-    - {id: puerta_bano_pb, tipo: puerta, de: [7.35, 2.68], a: [8.05, 2.68], abre_hacia: bano_pb, nota: "0.70, primera puerta del pasillo"}
+    - {id: puerta_bano_pb, tipo: puerta, de: [7.35, 2.68], a: [8.05, 2.68], abre_hacia: pasillo_pb, nota: "0.70, abre hacia el pasillo (baño angosto); alternativa: corrediza"}
     - {id: ventana_bano_pb, tipo: ventana, de: [7.45, 0.00], a: [8.15, 0.00], antepecho: 1.60, alto: 2.10, nota: "0.70 × 0.50 alta, al retiro"}
     - {id: puerta_estudio, tipo: puerta, de: [9.55, 2.68], a: [8.75, 2.68], abre_hacia: estudio, nota: "0.80"}
     - {id: ventana_estudio, tipo: ventana, de: [9.30, 0.00], a: [11.00, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.70 × 1.20 al retiro (sin tocar la columna A4)"}
@@ -173,6 +174,67 @@ aberturas:
     - {id: ventana_comedor, tipo: ventana, de: [13.30, 0.00], a: [15.30, 0.00], antepecho: 0.90, alto: 2.10, nota: "2.00 × 1.20 al retiro"}
     - {id: corrediza_patio, tipo: corrediza, de: [16.90, 0.35], a: [16.90, 2.35], nota: "2.00 m, comedor al patio (entre columnas A5 y B5)"}
     - {id: ventana_cocina, tipo: ventana, de: [16.90, 4.00], a: [16.90, 5.80], antepecho: 1.05, alto: 2.10, nota: "1.80 × 1.05 sobre el lavaplatos, al patio"}
+# Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
+# tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
+#       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
+muebles:
+  pb:
+    # Living: TV en el muro de la grada, sofá de frente (de espaldas a la corrediza, deja paso de 1.15 m)
+    - {tipo: alfombra, rect: [1.10, 0.60, 3.60, 3.60]}
+    - {tipo: sofa, nombre: Sofá 3, rect: [1.30, 1.00, 2.20, 3.10]}
+    - {tipo: mesa, nombre: Centro, rect: [2.55, 1.55, 3.15, 2.55], alto: 0.40}
+    - {tipo: sillon, rect: [2.45, 0.25, 3.25, 1.05]}
+    - {tipo: sillon, rect: [2.45, 3.05, 3.25, 3.85]}
+    - {tipo: estante, nombre: TV, rect: [3.85, 1.20, 4.30, 2.90], alto: 0.60}
+    # Ingreso y hall
+    - {tipo: estante, nombre: Zapatero, rect: [1.20, 6.10, 2.40, 6.54], alto: 0.90}
+    - {tipo: closet, nombre: Abrigos, rect: [5.20, 5.95, 6.95, 6.54]}
+    # Depósito bajo la grada: estantes del lado bajo
+    - {tipo: estante, nombre: Herramientas, rect: [4.48, 0.20, 4.90, 2.55], alto: 0.80}
+    # Baño: ducha al fondo, inodoro y lavamanos alternados
+    - {tipo: ducha, rect: [7.13, 0.13, 8.47, 1.03]}
+    - {tipo: inodoro, rect: [7.78, 1.20, 8.47, 1.60]}
+    - {tipo: lavamanos, rect: [7.13, 1.90, 7.58, 2.45]}
+    # Estudio: escritorio bajo la ventana, librero y sofá cama (futuro cuarto de invitados)
+    - {tipo: escritorio, rect: [9.40, 0.13, 10.90, 0.73]}
+    - {tipo: silla, rect: [9.90, 0.85, 10.40, 1.35]}
+    - {tipo: estante, nombre: Librero, rect: [8.63, 0.20, 8.98, 1.70], alto: 2.00}
+    - {tipo: sofa, nombre: Sofá cama, rect: [11.75, 0.35, 12.62, 2.35]}
+    # Comedor para 6
+    - {tipo: mesa, nombre: Mesa 6, rect: [13.60, 0.92, 15.40, 1.82]}
+    - {tipo: silla, rect: [13.95, 0.42, 14.40, 0.87]}
+    - {tipo: silla, rect: [14.60, 0.42, 15.05, 0.87]}
+    - {tipo: silla, rect: [13.95, 1.87, 14.40, 2.32]}
+    - {tipo: silla, rect: [14.60, 1.87, 15.05, 2.32]}
+    - {tipo: silla, rect: [13.10, 1.15, 13.55, 1.60]}
+    - {tipo: silla, rect: [15.45, 1.15, 15.90, 1.60]}
+    # Cocina G: península-barra, mesón del patio (lavaplatos), mesón del vecino (cocina), refri, isla
+    - {tipo: meson, nombre: Península, rect: [14.90, 2.75, 16.78, 3.65]}
+    - {tipo: meson, rect: [16.18, 3.65, 16.78, 5.95]}
+    - {tipo: lavaplatos, rect: [16.23, 4.50, 16.73, 5.30]}
+    - {tipo: meson, rect: [12.95, 5.95, 16.78, 6.54]}
+    - {tipo: cocina, rect: [14.00, 5.95, 14.75, 6.54]}
+    - {tipo: refrigerador, rect: [12.20, 5.80, 12.95, 6.54]}
+    - {tipo: meson, nombre: Isla / desayunador, rect: [12.50, 4.25, 14.30, 5.05]}
+    - {tipo: taburete, rect: [12.75, 3.82, 13.15, 4.20]}
+    - {tipo: taburete, rect: [13.30, 3.82, 13.70, 4.20]}
+    - {tipo: taburete, rect: [13.85, 3.82, 14.25, 4.20]}
+    # Almacén: estantes en U, libre el giro de la puerta
+    - {tipo: estante, rect: [9.20, 3.81, 11.12, 4.25], alto: 2.00}
+    - {tipo: estante, rect: [9.20, 4.25, 9.65, 6.54], alto: 2.00}
+    - {tipo: estante, rect: [9.65, 6.10, 10.30, 6.54], alto: 2.00}
+    # Lavado: lavadora, secadora y lavadero contra el muro del vecino; estante de planchado
+    - {tipo: lavadora, nombre: L, rect: [7.20, 5.94, 7.80, 6.54]}
+    - {tipo: lavadora, nombre: S, rect: [7.85, 5.94, 8.45, 6.54]}
+    - {tipo: lavadero, rect: [8.45, 5.94, 9.05, 6.54]}
+    - {tipo: estante, nombre: Planchado, rect: [8.60, 4.00, 9.05, 5.60], alto: 2.00}
+    # Terraza
+    - {tipo: mesa, rect: [-1.90, 1.90, -0.90, 2.90]}
+    - {tipo: silla, rect: [-2.45, 2.17, -2.00, 2.62]}
+    - {tipo: silla, rect: [-0.80, 2.17, -0.35, 2.62]}
+    - {tipo: silla, rect: [-1.62, 1.35, -1.17, 1.80]}
+    - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45]}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # REFERENCIA: juego impreso fotografiado (IMG_8276, IMG_8277). Solo para consulta;
 # se dibuja en gris debajo del diseño nuevo.

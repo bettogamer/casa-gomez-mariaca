@@ -282,3 +282,21 @@ def tramos_bajo_escalera(casa, nivel_id, de, a):
         else:
             out.append((p0, p1, alto))
     return out
+
+
+# Altura (m) y color 3D por tipo de mueble
+MUEBLES = {
+    "sofa": (0.80, 0x90a4ae), "sillon": (0.80, 0x90a4ae), "mesa": (0.75, 0xbcaaa4), "silla": (0.45, 0x8d6e63),
+    "taburete": (0.70, 0x8d6e63), "cama": (0.55, 0xeceff1), "escritorio": (0.75, 0xbcaaa4), "estante": (2.00, 0xd7ccc8),
+    "closet": (2.10, 0xd7ccc8), "meson": (0.90, 0xe0e0e0), "refrigerador": (1.80, 0xf5f5f5), "cocina": (0.92, 0x424242),
+    "lavaplatos": (0.91, 0xb0bec5), "inodoro": (0.40, 0xffffff), "lavamanos": (0.85, 0xffffff), "ducha": (0.05, 0xb3e5fc),
+    "lavadora": (0.85, 0xffffff), "lavadero": (0.85, 0xcfd8dc), "alfombra": (0.01, 0xd8c3a5),
+}
+
+
+def muebles(casa, nivel_id):
+    out = []
+    for m in (casa.get("muebles") or {}).get(nivel_id) or []:
+        alto, color = MUEBLES.get(m["tipo"], (0.75, 0xcccccc))
+        out.append({**m, "alto": m.get("alto", alto), "color": color})
+    return out
