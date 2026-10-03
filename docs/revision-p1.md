@@ -41,6 +41,10 @@ Huecos encontrados en el primer piso: cuartos de los hijos (opción B, suite con
 
 Cifras de norma sacadas de búsquedas: **el arquitecto las confirma**.
 
+**Aplicado (2026-10-03):** extractor en los lavamanos de la suite, ventana norte del dormitorio de 1.80, puerta de la
+ducha de 0.70 hacia los lavamanos, antepecho 1.00 en planta alta, puertas de los cuartos de 0.90, roperos de los
+hijos en el muro entre cuartos (ruido).
+
 **Antes de levantar muros**
 - **Ventanas al norte a 2.01 m del lindero (Lote 105):** el Código Civil pide ~2 m para ventanas con vista y
   balcones (confirmar artículo). Cumple por 1 cm: medir el retiro real hasta la cara terminada del muro. Si queda
