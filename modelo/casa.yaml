@@ -65,8 +65,9 @@ estructura:
   ejes_y: {A: 0.00, B: 2.68, C: 6.67}
   # Columnas = intersecciones de ejes, salvo las listadas en `desplazadas`.
   columnas_en: [A1, A2, A3, A4, A5, B1, B2, B3, B4, B5, C1, C2, C3, C4, C5]
-  desplazadas:
-    C1: {x: 0.30, nota: "El eje 1' está corrido 0.30 m (cota inferior 4.10 vs superior 4.40). Verificar en obra."}
+  # La cota 4.10 entre 1' y 2' en IMG_8278 es error de dibujo: C1-C2 = 4.40 (comprobado con la
+  # planta 1º piso IMG_8277, dormitorio de 4.35 entre columnas). Ninguna columna desplazada.
+  desplazadas: {}
   escalera:
     estado: construido
     tipo: U (dos tramos con descanso)
@@ -127,6 +128,5 @@ areas_declaradas_pdf: {pb: 65.66, p1: 79.27, altillo: 53.49, total: 198.42}
 
 verificar_en_obra:
   - "Comprobar que lo construido siguió IMG_8278: tramo del fondo 5.70 m (el PDF decía 4.50 m)."
-  - "Distancia entre columnas eje 1 y 2: arriba 4.40 m, abajo 4.10 m (¿columna C1 corrida 0.30 m?)."
   - "Sección real de columnas y espesor de losas."
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."
