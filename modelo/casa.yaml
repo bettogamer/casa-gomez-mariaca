@@ -145,11 +145,13 @@ ambientes:
       nota: "amplia, en L + isla: muro del vecino (cocina, campana, torre de horno), muro del patio (lavaplatos bajo la ventana, refrigerador), isla de trabajo/desayuno mirando al comedor y al pasillo"
   p1:
     # ── Primer piso, fondo: cuartos gemelos de los hijos y sus baños (aprobado 2026-10-03) ──
-    # Baños privados entre los ejes 3 y 4, a los dos lados del pasillo; se entran desde cada cuarto por el
-    # eje 4. Los cuartos ocupan todo A4–C5. Queda libre (por definir) la franja junto a la escalera.
+    # Opción B (suite): cuarto → vestidor → baño. Baños junto a la escalera (encima del baño y del lavado
+    # de PB), vestidores pegados al eje 4. Los cuartos ocupan todo A4–C5.
     - {id: pasillo_p1, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 11.20, 3.73], estado: definido, nota: "desde la llegada de la escalera; mismo trazo que el pasillo de PB"}
-    - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [9.125, 0.00, 11.20, 2.68], etiqueta: [10.15, 2.30], estado: definido, nota: "privado del Cuarto 1 (puerta por el eje 4); ~1.90 × 2.50 libres; ventana al retiro; inodoro contra el muro norte (bajante por fuera, en el núcleo técnico, en x ≤ 9.25 para no tapar la ventana del estudio de PB; pasa el ladrillo sobre la viga del eje A). Muro x=9.125 sin muro debajo: ladrillo hueco o drywall"}
-    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.125, 3.73, 11.20, 6.67], etiqueta: [10.15, 5.30], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.90 × 2.80 libres; sin ventana (vecino): extractor con ducto; encima del almacén de PB (muros sobre muros); inodoro contra el muro x=9.125, bajante en ducto en la esquina del almacén (no en el eje 4: viga); extractor → retiro norte por cielo falso del pasillo y del Baño 1 (~6 m)"}
+    - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [7.05, 0.00, 9.125, 2.68], etiqueta: [8.10, 2.30], estado: propuesto, nota: "suite del Cuarto 1 (se entra por el vestidor); ~1.90 × 2.50 libres; ventana al retiro; ENCIMA del baño de PB: desagües colgados en su cielo falso"}
+    - {id: vestidor_1, nombre: Vestidor 1, tipo: servicio, rect: [9.125, 0.00, 11.20, 2.68], etiqueta: [10.15, 2.30], estado: propuesto, nota: "walk-in en U, ~3.8 m de estantes; paso entre el cuarto y el baño"}
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [7.05, 3.73, 9.125, 6.67], etiqueta: [8.10, 5.30], estado: propuesto, nota: "suite del Cuarto 2 (se entra por el vestidor); ~1.90 × 2.80 libres; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; ENCIMA del lavado de PB (muros sobre muros, desagües en su cielo falso)"}
+    - {id: vestidor_2, nombre: Vestidor 2, tipo: servicio, rect: [9.125, 3.73, 11.20, 6.67], etiqueta: [10.15, 4.30], estado: propuesto, nota: "walk-in en U, ~3.9 m de estantes; encima del almacén de PB (muros sobre muros)"}
     - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 13.00, 4.085], etiqueta: [12.10, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
     - id: cuarto_hijo_1
       nombre: Cuarto 1
@@ -207,9 +209,11 @@ aberturas:
   p1:
     - {id: escalera_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], estado: definido, nota: "llegada de la escalera al pasillo"}
     - {id: pasillo_vest, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.73], estado: definido}
-    - {id: puerta_bano_1, tipo: puerta, de: [11.20, 0.20], a: [11.20, 0.90], abre_hacia: bano_hijo_1, estado: definido, nota: "0.70, desde el Cuarto 1"}
-    - {id: puerta_bano_2, tipo: puerta, de: [11.20, 6.47], a: [11.20, 5.77], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
-    - {id: ventana_bano_1, tipo: ventana, de: [9.60, 0.00], a: [10.30, 0.00], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta, al retiro"}
+    - {id: puerta_vestidor_1, tipo: puerta, de: [11.20, 2.40], a: [11.20, 1.70], abre_hacia: vestidor_1, estado: propuesto, nota: "0.70, desde el Cuarto 1 (deja 15 cm a la columna B4)"}
+    - {id: puerta_bano_1, tipo: puerta, de: [9.125, 1.70], a: [9.125, 2.40], abre_hacia: bano_hijo_1, estado: propuesto, nota: "0.70, desde el vestidor"}
+    - {id: puerta_vestidor_2, tipo: puerta, de: [11.20, 4.27], a: [11.20, 4.97], abre_hacia: vestidor_2, estado: propuesto, nota: "0.70, desde el Cuarto 2"}
+    - {id: puerta_bano_2, tipo: puerta, de: [9.125, 4.97], a: [9.125, 4.27], abre_hacia: bano_hijo_2, estado: propuesto, nota: "0.70, desde el vestidor"}
+    - {id: ventana_bano_1, tipo: ventana, de: [7.45, 0.00], a: [8.15, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta, sobre la ducha (encima de la del baño de PB)"}
     - {id: puerta_cuarto_1, tipo: puerta, de: [12.10, 2.585], a: [12.90, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.80"}
     - {id: puerta_cuarto_2, tipo: puerta, de: [12.10, 4.085], a: [12.90, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.80"}
     - {id: ventana_cuarto_1_norte, tipo: ventana, de: [14.10, 0.00], a: [15.60, 0.00], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.50 × 1.20 al norte, sobre el escritorio"}
@@ -283,25 +287,30 @@ muebles:
     - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45]}
 
   p1:
-    # Baño 1 (norte, privado del Cuarto 1): inodoro contra el muro norte, ducha al fondo
-    - {tipo: inodoro, rect: [9.30, 0.13, 9.70, 0.82]}
-    - {tipo: lavamanos, rect: [9.20, 1.15, 9.65, 1.70]}
-    - {tipo: ducha, rect: [10.00, 1.70, 11.12, 2.60]}
-    # Baño 2 (sur, privado del Cuarto 2): ducha junto al pasillo; inodoro contra el muro x=9.125 (sobre el
-    # muro lavado/almacén de PB): la bajante NO puede ir en el eje 4 porque cortaría la viga.
-    - {tipo: ducha, rect: [9.20, 3.81, 11.12, 4.71]}
-    - {tipo: inodoro, rect: [9.20, 4.95, 9.89, 5.35]}
-    - {tipo: lavamanos, rect: [10.67, 4.85, 11.12, 5.40]}
-    # Cuarto 1 (norte): ropero empotrado junto al baño (muro del eje 4), cama queen con cabecera en el
+    # Baño 1: ducha bajo la ventana, inodoro y lavamanos contra el muro de la escalera (todo encima del baño de PB)
+    - {tipo: ducha, rect: [7.18, 0.13, 8.38, 1.03]}
+    - {tipo: inodoro, rect: [7.18, 1.25, 7.87, 1.65]}
+    - {tipo: lavamanos, rect: [7.18, 1.95, 7.63, 2.50]}
+    # Vestidor 1: estantes en U (paso libre de ~0.80)
+    - {tipo: closet, nombre: Vestidor, rect: [9.20, 0.13, 11.12, 0.68]}
+    - {tipo: closet, rect: [9.20, 0.68, 9.75, 1.60]}
+    - {tipo: closet, rect: [10.57, 0.68, 11.12, 1.60]}
+    # Baño 2: lavamanos e inodoro contra el muro de la escalera, ducha al fondo (todo encima del lavado de PB)
+    - {tipo: lavamanos, rect: [7.18, 3.95, 7.63, 4.50]}
+    - {tipo: inodoro, rect: [7.18, 4.80, 7.87, 5.20]}
+    - {tipo: ducha, rect: [7.18, 5.65, 9.05, 6.54]}
+    # Vestidor 2: estantes en U
+    - {tipo: closet, nombre: Vestidor, rect: [9.20, 5.99, 11.12, 6.54]}
+    - {tipo: closet, rect: [9.20, 5.05, 9.75, 5.99]}
+    - {tipo: closet, rect: [10.57, 5.05, 11.12, 5.99]}
+    # Cuarto 1 (norte): cama queen con cabecera en el
     # muro entre cuartos, escritorio bajo la ventana del patio
-    - {tipo: closet, nombre: Ropero empotrado, rect: [11.28, 1.00, 11.93, 2.51]}
     - {tipo: cama, nombre: Queen, rect: [13.60, 1.26, 15.20, 3.26]}
     - {tipo: estante, nombre: Velador, rect: [13.10, 2.81, 13.55, 3.26], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [15.25, 2.81, 15.70, 3.26], alto: 0.55}
     - {tipo: escritorio, rect: [16.17, 0.30, 16.77, 1.70]}
     - {tipo: silla, rect: [15.55, 0.75, 16.05, 1.25]}
     # Cuarto 2 (sur), espejo del 1
-    - {tipo: closet, nombre: Ropero empotrado, rect: [11.28, 4.16, 11.93, 5.67]}
     - {tipo: cama, nombre: Queen, rect: [13.60, 3.41, 15.20, 5.41]}
     - {tipo: estante, nombre: Velador, rect: [13.10, 3.41, 13.55, 3.86], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [15.25, 3.41, 15.70, 3.86], alto: 0.55}
