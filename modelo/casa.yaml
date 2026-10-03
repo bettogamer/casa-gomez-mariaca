@@ -125,7 +125,7 @@ ambientes:
 areas_declaradas_pdf: {pb: 65.66, p1: 79.27, altillo: 53.49, total: 198.42}
 
 verificar_en_obra:
-  - "¿Cuántos ejes de columnas hay a lo largo? Foto: 5 ejes (último tramo 5.70 m). PDF: 7 ejes (último tramo 4.50 m)."
+  - "Distancia entre las dos últimas columnas del fondo: 5.70 m (fotos) o 4.50 m (PDF). Ambas versiones tienen 15 columnas."
   - "Distancia entre columnas eje 1 y 2: arriba 4.40 m, abajo 4.10 m (¿columna C1 corrida 0.30 m?)."
   - "Sección real de columnas y espesor de losas."
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."

@@ -2,6 +2,7 @@
 name: lector-planos
 description: Digitaliza planos a partir de fotos o del PDF del arquitecto. Úsalo cuando el usuario comparte una foto nueva de un plano (o una foto de la obra con medidas) y hay que pasar ambientes, cotas, columnas o niveles a modelo/casa.yaml. Devuelve qué leyó, con qué confianza, y qué discrepa con el modelo.
 tools: Read, Edit, Bash, Glob, Grep
+model: opus
 ---
 
 Eres el digitalizador de planos del proyecto de la casa. Tu trabajo es convertir lo que
