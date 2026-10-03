@@ -1,7 +1,9 @@
 """Genera las plantas en SVG desde el modelo. Uso: python tools/render_svg.py"""
+import math
 from html import escape
 
-from casa import COLORES_TIPO, SALIDA, ambientes, area, caja, cargar, centroide, columnas, escalera, huella_casa
+from casa import (COLORES_TIPO, SALIDA, aberturas, ambientes, area, caja, cargar, centroide, columnas, dentro, escalera,
+                  huella_casa, muros, referencia)
 
 ESC = 50  # px por metro
 MARGEN = 2.2  # m alrededor del dibujo (ejes, cotas)
@@ -100,13 +102,81 @@ def dibujar_columnas(L, casa):
 
 
 def dibujar_ambientes(L, ambs):
+    """Solo el relleno; los muros se dibujan aparte según su tipo."""
     for a in ambs:
         ext = a["tipo"] == "exterior"
-        estilo = (f'fill="{COLORES_TIPO.get(a["tipo"], "#eee")}" stroke="#222" '
-                  + ('stroke-width="1.5" stroke-dasharray="6 3"' if ext else 'stroke-width="5" stroke-linejoin="miter"'))
+        estilo = f'fill="{COLORES_TIPO.get(a["tipo"], "#eee")}" ' + ('stroke="#555" stroke-width="1.2" stroke-dasharray="6 3"' if ext else 'stroke="none"')
         if a.get("estado") == "propuesto":
             estilo += ' fill-opacity="0.85"'
         L.poly(a["poly"], estilo)
+
+
+def dibujar_referencia(L, refs, nuevos):
+    """Ambientes del plano de referencia en gris punteado (debajo del diseño nuevo)."""
+    for a in refs:
+        L.poly(a["poly"], 'fill="none" stroke="#b5b5b5" stroke-width="1" stroke-dasharray="4 3"')
+    for a in refs:
+        cx, cy = centroide(a["poly"])
+        if any(dentro(n["poly"], cx, cy) for n in nuevos):
+            continue
+        L.texto(cx, cy, a["nombre"].lower(), 9, 'fill="#aaa" font-style="italic"')
+
+
+def dibujar_muros(L, casa, nivel_id):
+    est = casa["estructura"]
+    xs, ys = est["ejes_x"].values(), est["ejes_y"].values()
+    borde_x, borde_y = (min(xs), max(xs)), (min(ys), max(ys))
+    for m in muros(casa, nivel_id):
+        (x0, y0), (x1, y1) = m["de"], m["a"]
+        if m["tipo"] == "ladrillo":
+            perimetral = (abs(x0 - x1) < 0.01 and any(abs(x0 - b) < 0.01 for b in borde_x)) or \
+                         (abs(y0 - y1) < 0.01 and any(abs(y0 - b) < 0.01 for b in borde_y))
+            ancho = est["espesor_muro_ext" if perimetral else "espesor_muro_int"] * ESC
+            L.linea(x0, y0, x1, y1, f'stroke="#222" stroke-width="{ancho:.1f}" stroke-linecap="square"')
+        elif m["tipo"] == "celosia_madera":
+            L.linea(x0, y0, x1, y1, 'stroke="#c49a6c" stroke-width="5"')
+            dx, dy = x1 - x0, y1 - y0
+            largo = (dx * dx + dy * dy) ** 0.5
+            nx, ny = -dy / largo * 0.07, dx / largo * 0.07
+            n = int(largo / 0.12)
+            for k in range(n + 1):
+                px, py = x0 + dx * k / n, y0 + dy * k / n
+                L.linea(px - nx, py - ny, px + nx, py + ny, 'stroke="#7a5230" stroke-width="1.5"')
+            L.texto((x0 + x1) / 2 + nx * 4, (y0 + y1) / 2 + ny * 4 + 0.05, "celosía de madera", 8, 'fill="#7a5230" font-style="italic"')
+        else:
+            L.linea(x0, y0, x1, y1, 'stroke="#555" stroke-width="3"')
+
+
+def dibujar_aberturas(L, casa, nivel_id):
+    ambs = {a["id"]: a for a in ambientes(casa, nivel_id)}
+    for ab in aberturas(casa, nivel_id):
+        (x0, y0), (x1, y1) = ab["de"], ab["a"]
+        dx, dy = x1 - x0, y1 - y0
+        largo = (dx * dx + dy * dy) ** 0.5
+        if ab["tipo"] == "vano":
+            L.linea(x0, y0, x1, y1, 'stroke="#999" stroke-width="1" stroke-dasharray="2 4"')
+        elif ab["tipo"] == "ventana":
+            L.linea(x0, y0, x1, y1, 'stroke="#222" stroke-width="7"')
+            L.linea(x0, y0, x1, y1, 'stroke="#bfe3f5" stroke-width="4"')
+        elif ab["tipo"] == "puerta":
+            # hoja perpendicular hacia el ambiente al que abre + arco de giro
+            nx, ny = -dy / largo, dx / largo
+            destino = ambs.get(ab.get("abre_hacia"))
+            if destino:
+                cx, cy = centroide(destino["poly"])
+                if (cx - x0) * nx + (cy - y0) * ny < 0:
+                    nx, ny = -nx, -ny
+            hx, hy = x0 + nx * largo, y0 + ny * largo
+            L.linea(x0, y0, hx, hy, 'stroke="#222" stroke-width="2"')
+            pts = []
+            for k in range(13):
+                t = k / 12 * 3.14159265 / 2
+                ux, uy = dx / largo, dy / largo
+                pts.append(L.p(x0 + largo * (nx * math.cos(t) + ux * math.sin(t)),
+                               y0 + largo * (ny * math.cos(t) + uy * math.sin(t))))
+            L.add('<polyline points="%s" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="3 2"/>'
+                  % " ".join("%.1f,%.1f" % p for p in pts))
+            L.texto((x0 + x1) / 2 - nx * 0.35, (y0 + y1) / 2 - ny * 0.35 + 0.05, f"{largo:.2f}", 8, 'fill="#444"')
 
 
 def rotular_ambientes(L, ambs):
@@ -134,22 +204,26 @@ def leyenda(L, x, y, titulo, subt):
 
 def planta(casa, nivel):
     ambs = ambientes(casa, nivel["id"])
+    refs = referencia(casa, nivel["id"])
     hx0, hy0, hx1, hy1 = huella_casa(casa)
-    pts = [p for a in ambs for p in a["poly"]] + [[hx0, hy0], [hx1, hy1]]
+    pts = [p for a in ambs + refs for p in a["poly"]] + [[hx0, hy0], [hx1, hy1]]
     x0, y0 = min(p[0] for p in pts), min(p[1] for p in pts)
     x1, y1 = max(p[0] for p in pts), max(p[1] for p in pts)
     L = Lienzo(x0, y0, x1, y1)
     # contorno de la losa
     L.poly([[hx0, hy0], [hx1, hy0], [hx1, hy1], [hx0, hy1]], 'fill="#fafafa" stroke="#bbb" stroke-width="1"')
+    dibujar_referencia(L, refs, ambs)
     dibujar_ambientes(L, ambs)
     dibujar_escalera(L, casa, nivel["id"])
     dibujar_ejes(L, casa, x0, y0, x1, y1)
+    dibujar_muros(L, casa, nivel["id"])
+    dibujar_aberturas(L, casa, nivel["id"])
     dibujar_columnas(L, casa)
     rotular_ambientes(L, ambs)
-    if not ambs:
+    if not ambs and not refs:
         L.texto((hx0 + hx1) / 2, (hy0 + hy1) / 2, "Planta pendiente — falta foto/plano de este nivel", 14, 'fill="#999"')
     leyenda(L, x0 - 1.5, y1 + 1.6, f"{nivel['nombre'].upper()}  (NPT +{nivel['cota']:.2f})",
-            "≈ medida aproximada (digitalizada de foto) · rojo: columnas construidas · azul: propuesto")
+            "color = diseño nuevo · gris punteado = plano de referencia · rojo = columnas construidas · medidas a eje de muro")
     return L.svg(nivel["nombre"])
 
 
@@ -159,8 +233,11 @@ def emplazamiento(casa):
     lx1, ly1 = lx0 + lt["largo"], ly0 + lt["ancho"]
     L = Lienzo(lx0, ly0, lx1, ly1)
     L.poly([[lx0, ly0], [lx1, ly0], [lx1, ly1], [lx0, ly1]], 'fill="#f3f7ee" stroke="#333" stroke-width="2" stroke-dasharray="12 4 2 4"')
+    dibujar_referencia(L, referencia(casa, "pb"), ambientes(casa, "pb"))
     dibujar_ambientes(L, ambientes(casa, "pb"))
     dibujar_escalera(L, casa, "pb")
+    dibujar_muros(L, casa, "pb")
+    dibujar_aberturas(L, casa, "pb")
     dibujar_columnas(L, casa)
     rotular_ambientes(L, ambientes(casa, "pb"))
     col = lt["colindantes"]

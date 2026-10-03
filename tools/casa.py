@@ -21,9 +21,10 @@ COLORES_TIPO = {
 def cargar(ruta=MODELO):
     with open(ruta, encoding="utf-8") as f:
         casa = yaml.safe_load(f)
-    for nivel in casa["niveles"]:
-        for amb in casa["ambientes"].get(nivel["id"]) or []:
-            amb["poly"] = poligono(amb)
+    for seccion in ("ambientes", "referencia"):
+        for nivel in casa["niveles"]:
+            for amb in (casa.get(seccion) or {}).get(nivel["id"]) or []:
+                amb["poly"] = poligono(amb)
     return casa
 
 
@@ -111,6 +112,74 @@ def huella_casa(casa):
 
 def ambientes(casa, nivel_id):
     return casa["ambientes"].get(nivel_id) or []
+
+
+def referencia(casa, nivel_id):
+    return (casa.get("referencia") or {}).get(nivel_id) or []
+
+
+def aberturas(casa, nivel_id):
+    return (casa.get("aberturas") or {}).get(nivel_id) or []
+
+
+def _intervalo(a, b, c, d, tol=0.02):
+    """Si el segmento c-d es colineal con a-b, devuelve su intervalo [t0, t1] sobre a-b (0..1)."""
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    L = (dx * dx + dy * dy) ** 0.5
+    if L < 1e-9:
+        return None
+    for p in (c, d):
+        if abs((p[0] - a[0]) * dy - (p[1] - a[1]) * dx) / L > tol:
+            return None
+    t = sorted(((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (L * L) for p in (c, d))
+    return t if t[1] > 0 and t[0] < 1 else None
+
+
+def _restar(a, b, cortes):
+    """Partes del segmento a-b que no cubren los segmentos de `cortes`."""
+    tramos = [(0.0, 1.0)]
+    for c, d in cortes:
+        iv = _intervalo(a, b, c, d)
+        if not iv:
+            continue
+        nuevos = []
+        for t0, t1 in tramos:
+            if iv[1] <= t0 or iv[0] >= t1:
+                nuevos.append((t0, t1))
+                continue
+            if iv[0] > t0:
+                nuevos.append((t0, iv[0]))
+            if iv[1] < t1:
+                nuevos.append((iv[1], t1))
+        tramos = nuevos
+    L = ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
+    return [([a[0] + (b[0] - a[0]) * t0, a[1] + (b[1] - a[1]) * t0],
+             [a[0] + (b[0] - a[0]) * t1, a[1] + (b[1] - a[1]) * t1])
+            for t0, t1 in tramos if (t1 - t0) * L > 0.01]
+
+
+def muros(casa, nivel_id):
+    """Muros del nivel como segmentos {de, a, tipo}.
+
+    Los bordes de ambientes no exteriores son muro de ladrillo (sin duplicar bordes
+    compartidos), menos las aberturas y los muros especiales; luego se agregan los
+    muros especiales (celosía, etc.) con su tipo.
+    """
+    especiales = (casa.get("muros") or {}).get(nivel_id) or []
+    cortes = [(m["de"], m["a"]) for m in especiales] + [(ab["de"], ab["a"]) for ab in aberturas(casa, nivel_id)]
+    hechos = []
+    out = []
+    for amb in ambientes(casa, nivel_id):
+        if amb["tipo"] == "exterior":
+            continue
+        pts = amb["poly"]
+        for a, b in zip(pts, pts[1:] + pts[:1]):
+            for c, d in _restar(a, b, cortes + hechos):
+                hechos.append((c, d))
+                out.append({"de": c, "a": d, "tipo": "ladrillo"})
+    for m in especiales:
+        out.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "id": m.get("id")})
+    return out
 
 
 def escalera(casa):

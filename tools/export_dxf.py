@@ -5,9 +5,9 @@ invierte (en CAD y crece hacia arriba).
 """
 import ezdxf
 
-from casa import SALIDA, ambientes, area, caja, cargar, centroide, columnas, escalera, huella_casa
+from casa import SALIDA, aberturas, ambientes, area, caja, cargar, centroide, columnas, escalera, huella_casa, muros, referencia
 
-CAPAS = {"EJES": 1, "COLUMNAS": 1, "AMBIENTES": 7, "EXTERIOR": 3, "ESCALERA": 30, "TEXTOS": 8, "LOSA": 9}
+CAPAS = {"EJES": 1, "COLUMNAS": 1, "MUROS": 7, "CELOSIA": 32, "ABERTURAS": 4, "REFERENCIA": 8, "AMBIENTES": 7, "EXTERIOR": 3, "ESCALERA": 30, "TEXTOS": 8, "LOSA": 9}
 
 
 def main():
@@ -44,6 +44,13 @@ def main():
             for b in e["peldanos"] + [e["descanso"]]:
                 msp.add_lwpolyline([P(b["x0"], b["y0"]), P(b["x1"], b["y0"]), P(b["x1"], b["y1"]), P(b["x0"], b["y1"])],
                                    close=True, dxfattribs={"layer": "ESCALERA"})
+        for a in referencia(casa, nivel["id"]):
+            msp.add_lwpolyline([P(x, y) for x, y in a["poly"]], close=True, dxfattribs={"layer": "REFERENCIA", "linetype": "DASHED"})
+        for m in muros(casa, nivel["id"]):
+            capa = "MUROS" if m["tipo"] == "ladrillo" else "CELOSIA"
+            msp.add_line(P(*m["de"]), P(*m["a"]), dxfattribs={"layer": capa, "lineweight": 50 if capa == "MUROS" else 25})
+        for ab in aberturas(casa, nivel["id"]):
+            msp.add_line(P(*ab["de"]), P(*ab["a"]), dxfattribs={"layer": "ABERTURAS", "linetype": "DASHED"})
         for a in ambientes(casa, nivel["id"]):
             capa = "EXTERIOR" if a["tipo"] == "exterior" else "AMBIENTES"
             msp.add_lwpolyline([P(x, y) for x, y in a["poly"]], close=True, dxfattribs={"layer": capa})

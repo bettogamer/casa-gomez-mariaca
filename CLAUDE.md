@@ -6,6 +6,11 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
 
 ## Fuente de verdad
 - `modelo/casa.yaml` es el modelo de la casa. Todo cambio de diseño se hace AHÍ.
+- Dentro del modelo: `ambientes` / `muros` / `aberturas` = **diseño nuevo**, que se define
+  pieza por pieza con el usuario (desde 2026-10-03). `referencia` = el juego impreso, solo
+  para consulta (se dibuja en gris). No copiar de `referencia` a `ambientes` sin que el
+  usuario lo pida.
+- Ritmo: un tema por vez, confirmar con el usuario antes de pasar al siguiente.
 - `salida/` se genera con `make build` (plantas SVG, visor 3D, DXF, tablero). Nunca se
   edita a mano y no se versiona.
 - `planos-arqui/` son los originales del arquitecto. Solo lectura.

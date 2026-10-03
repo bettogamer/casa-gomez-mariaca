@@ -39,3 +39,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Pendiente para la próxima visita a obra:** medir fondo del descanso y distancia de la
   columna B2 al primer escalón. Foto de obra: `planos-arqui/IMG_8371.HEIC`.
 - **Estado:** aprobado como aproximado.
+
+## 2026-10-03 — Planta baja: diseño nuevo, parte 1 (ingreso)
+- **Método:** desde aquí el diseño es nuevo; el juego impreso queda como `referencia` (gris).
+- **Definido:** terraza libre (2.50 × 5.07, se mantiene); acceso exterior a ±0.00 (franja de
+  1.85 m junto a la terraza); puerta de entrada de 0.92 m en la fachada; ingreso
+  (≈2.51 × 1.56 libres) abierto hacia el estar; living (≈4.50 × 4.92 libres) como en la referencia.
+- **Cambio respecto a la referencia:** el muro entre living e ingreso es una **celosía de madera**
+  (desde la fachada hasta ~2.58 m); después queda un paso abierto de ~1.8 m al estar/escalera.
+- **Estado:** aprobado por el usuario.

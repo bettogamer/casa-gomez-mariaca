@@ -4,7 +4,7 @@ El HTML lleva los datos embebidos, así que se abre con doble clic (file://).
 """
 import json
 
-from casa import COLORES_TIPO, SALIDA, ambientes, area, cargar, columnas, escalera, huella_casa
+from casa import COLORES_TIPO, SALIDA, aberturas, ambientes, area, cargar, columnas, escalera, huella_casa, muros
 
 PLANTILLA = r"""<!doctype html>
 <html lang="es">
@@ -78,6 +78,16 @@ function caja(x0, y0, z0, x1, y1, z1, color, opts = {}) {
   return b;
 }
 
+function segmento(p, q, y0, y1, grosor, color) {
+  // muro recto de p a q (planta), entre las alturas y0 e y1
+  const L = Math.hypot(q[0] - p[0], q[1] - p[1]);
+  const b = new THREE.Mesh(new THREE.BoxGeometry(L + grosor, y1 - y0, grosor), new THREE.MeshLambertMaterial({ color }));
+  b.position.set((p[0] + q[0]) / 2, (y0 + y1) / 2, (p[1] + q[1]) / 2);
+  b.rotation.y = -Math.atan2(q[1] - p[1], q[0] - p[0]);
+  b.castShadow = b.receiveShadow = true;
+  return b;
+}
+
 function etiqueta(texto, x, y, z) {
   const c = document.createElement("canvas");
   c.width = 512; c.height = 96;
@@ -141,19 +151,8 @@ D.niveles.forEach(nv => {
     piso.position.y = nv.cota + 0.01;
     piso.receiveShadow = true;
     grupo.add(piso);
-    if (a.tipo !== "exterior") {
-      for (let i = 0; i < a.poly.length; i++) {
-        const [px, pz] = a.poly[i], [qx, qz] = a.poly[(i + 1) % a.poly.length];
-        const t = E.muro / 2;
-        const m = caja(Math.min(px, qx) - t, nv.cota, Math.min(pz, qz) - t, Math.max(px, qx) + t, nv.cota + nv.alto_muro,
-                       Math.max(pz, qz) + t, a.propuesto ? 0x90caf9 : 0xf4f1ea);
-        m.userData.alto = nv.alto_muro;
-        m.userData.base = nv.cota;
-        muros.push(m);
-        grupo.add(m);
-      }
-    } else {
-      // baranda baja
+    if (a.tipo === "exterior" && nv.cota > 1) {
+      // baranda baja en exteriores elevados (balcones)
       const b = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(a.poly.map(p => new THREE.Vector3(p[0], nv.cota + 1.0, p[1]))),
                                    new THREE.LineBasicMaterial({ color: 0x555555 }));
       grupo.add(b);
@@ -162,6 +161,35 @@ D.niveles.forEach(nv => {
     s.userData.nivel = nv.id;
     G.etiquetas.add(s);
   });
+  nv.muros.forEach(m => {
+    if (m.tipo === "celosia_madera") {
+      // listones verticales de 4 x 4 cm cada 10 cm
+      const [x0, z0] = m.de, [x1, z1] = m.a;
+      const L = Math.hypot(x1 - x0, z1 - z0), n = Math.floor(L / 0.10);
+      for (let k = 0; k <= n; k++) {
+        const x = x0 + (x1 - x0) * k / n, z = z0 + (z1 - z0) * k / n;
+        const l = caja(x - 0.02, nv.cota, z - 0.02, x + 0.02, nv.cota + nv.alto_muro, z + 0.02, 0xa0703f);
+        l.userData.alto = nv.alto_muro; l.userData.base = nv.cota;
+        muros.push(l); grupo.add(l);
+      }
+      return;
+    }
+    const w = segmento(m.de, m.a, nv.cota, nv.cota + nv.alto_muro, m.grosor, 0xf4f1ea);
+    w.userData.alto = nv.alto_muro; w.userData.base = nv.cota;
+    muros.push(w); grupo.add(w);
+  });
+  // dinteles sobre puertas y ventanas; antepecho bajo ventanas (se ocultan con el corte a 1.2 m)
+  const dinteles = [];
+  nv.aberturas.forEach(ab => {
+    if (ab.tipo === "vano") return;
+    const d = segmento(ab.de, ab.a, nv.cota + 2.10, nv.cota + nv.alto_muro, E.muro, 0xe8e4da);
+    dinteles.push(d); grupo.add(d);
+    if (ab.tipo === "ventana") {
+      const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + 1.0, E.muro, 0xf4f1ea);
+      grupo.add(ap);
+    }
+  });
+  grupo.userData.dinteles = dinteles;
   grupo.userData.muros = muros;
   G.niveles[nv.id] = grupo;
   escena.add(grupo);
@@ -177,6 +205,7 @@ function alturaMuros() {
     m.scale.y = h / m.userData.alto;
     m.position.y = m.userData.base + h / 2;
   }));
+  Object.values(G.niveles).forEach(g => g.userData.dinteles.forEach(d => d.visible = !corte));
 }
 
 let modo = "proyecto";
@@ -231,7 +260,17 @@ def datos(casa):
                 "area": round(area(a["poly"]), 2),
                 "propuesto": a.get("estado") == "propuesto",
             })
+        bx, by = est["ejes_x"].values(), est["ejes_y"].values()
+        lista_muros = []
+        for m in muros(casa, n["id"]):
+            (x0, y0), (x1, y1) = m["de"], m["a"]
+            perim = (abs(x0 - x1) < 0.01 and any(abs(x0 - v) < 0.01 for v in (min(bx), max(bx)))) or \
+                    (abs(y0 - y1) < 0.01 and any(abs(y0 - v) < 0.01 for v in (min(by), max(by))))
+            lista_muros.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"],
+                                "grosor": est["espesor_muro_ext" if perim else "espesor_muro_int"]})
         niveles.append({"id": n["id"], "nombre": n["nombre"], "cota": n["cota"],
+                        "muros": lista_muros,
+                        "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"]} for ab in aberturas(casa, n["id"])],
                         "alto_muro": n["altura"] - est["espesor_losa"], "ambientes": ambs})
     # losas: contrapiso PB + cada nivel superior, con hueco sobre la escalera que llega
     huecos = {}

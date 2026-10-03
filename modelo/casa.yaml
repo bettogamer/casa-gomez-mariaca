@@ -94,9 +94,43 @@ estructura:
       # Invertida para no quitar el pasaje central del primer piso; el tramo de 10 sobresale en el altillo.
       - {desde: p1, hasta: altillo, tramos: [{lado: "2", escalones: 6}, {lado: "3", escalones: 10}]}
 
-# Ambientes por nivel. `rect: [x0, y0, x1, y1]` o `poly: [[x,y], ...]`.
-# tipo: social | dormitorio | bano | cocina | servicio | circulacion | exterior
+# ─────────────────────────────────────────────────────────────────────────────
+# DISEÑO NUEVO (2026-10-03 en adelante). Se define pieza por pieza con el usuario.
+# Lo que no está aquí todavía se dibuja en gris desde `referencia`.
+#
+# Ambientes: `rect: [x0, y0, x1, y1]` o `poly: [[x,y], ...]`, a eje de muro.
+#   tipo: social | dormitorio | bano | cocina | servicio | circulacion | exterior
+#   estado: definido (acordado con el usuario) | propuesto | aproximado
+# Los bordes de los ambientes son muros de ladrillo, salvo donde `muros` o `aberturas`
+# dicen otra cosa (celosía, puerta, ventana, paso abierto).
+# ─────────────────────────────────────────────────────────────────────────────
 ambientes:
+  pb:
+    - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 4.95], estado: definido}
+    - {id: acceso, nombre: Acceso, tipo: exterior, rect: [-2.625, 4.95, -0.125, 6.795], estado: definido, nota: "nivel ±0.00, llega a la puerta de entrada"}
+    - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.95], estado: definido}
+    - {id: ingreso, nombre: Ingreso, tipo: circulacion, rect: [0.00, 4.95, 2.58, 6.67], estado: definido}
+  p1: []
+  altillo: []
+
+# Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
+muros:
+  pb:
+    - {id: celosia_ingreso, tipo: celosia_madera, de: [0.00, 4.95], a: [2.58, 4.95], nota: "separa living e ingreso"}
+
+# Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
+aberturas:
+  pb:
+    - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.45], a: [0.00, 6.37], abre_hacia: ingreso, nota: "0.92 m, como en la referencia"}
+    - {id: ingreso_estar, tipo: vano, de: [2.58, 4.95], a: [2.58, 6.67], nota: "ingreso abierto hacia el estar"}
+    - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}
+    - {id: living_estar, tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REFERENCIA: juego impreso fotografiado (IMG_8276, IMG_8277). Solo para consulta;
+# se dibuja en gris debajo del diseño nuevo.
+# ─────────────────────────────────────────────────────────────────────────────
+referencia:
   pb:
     - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 5.07], estado: aproximado}
     - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.92], estado: aproximado}
