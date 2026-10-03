@@ -303,6 +303,22 @@ def rotular_ambientes(L, ambs):
         con_halo(cx, cy + 0.44, f"{area(a['poly']):.1f} m²", 9, 'fill="#666"')
 
 
+def flecha_norte(L, casa, x, y):
+    ori = casa["lote"].get("orientacion")
+    if not ori:
+        return
+    nx, ny = ori["norte_en_planta"]
+    cx, cy = L.p(x, y)
+    r = 0.55 * ESC
+    tip = (cx + nx * r, cy + ny * r)
+    izq = (cx - ny * r * 0.35 - nx * r * 0.5, cy + nx * r * 0.35 - ny * r * 0.5)
+    der = (cx + ny * r * 0.35 - nx * r * 0.5, cy - nx * r * 0.35 - ny * r * 0.5)
+    L.add(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="#fff" stroke="#333"/>')
+    L.add('<polygon points="%.1f,%.1f %.1f,%.1f %.1f,%.1f" fill="#333"/>' % (tip + izq + der))
+    L.add(f'<text x="{tip[0] + nx * 12:.1f}" y="{tip[1] + ny * 12 + 4:.1f}" font-size="12" font-weight="bold" text-anchor="middle">N</text>')
+    L.add(f'<text x="{cx:.1f}" y="{cy + r + 14:.1f}" font-size="8" text-anchor="middle" fill="#666">frente: {ori["frente"]}</text>')
+
+
 def leyenda(L, x, y, titulo, subt):
     L.add(f'<text x="{L.p(x, y)[0]:.1f}" y="{L.p(x, y)[1]:.1f}" font-size="18" font-weight="bold">{escape(titulo)}</text>')
     L.add(f'<text x="{L.p(x, y + 0.4)[0]:.1f}" y="{L.p(x, y + 0.4)[1]:.1f}" font-size="10" fill="#666">{escape(subt)}</text>')
@@ -336,6 +352,7 @@ def planta(casa, nivel):
     rotular_ambientes(L, ambs)
     if not ambs and not refs:
         L.texto((hx0 + hx1) / 2, (hy0 + hy1) / 2, "Planta pendiente — falta foto/plano de este nivel", 14, 'fill="#999"')
+    flecha_norte(L, casa, x1 + 1.2, y1 + 1.4)
     leyenda(L, x0 - 1.5, y1 + 1.6, f"{nivel['nombre'].upper()}  (NPT +{nivel['cota']:.2f})",
             "color = diseño nuevo · gris punteado = plano de referencia · rojo = columnas construidas · medidas a eje de muro")
     return L.svg(nivel["nombre"])

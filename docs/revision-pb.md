@@ -11,10 +11,10 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
    **cielo falso** (techo bajo, ~25–30 cm) en pasillo y cocina hasta el retiro o el patio.
    Con 3.00 m libres hay altura de sobra. La campana conviene sacarla hacia el muro del patio
    (está a ~2 m) y no subirla a través del primer piso.
-2. **Agua caliente.** No está ubicado el calefón o termotanque. Si es a gas, necesita aire
+2. 🟡 **PROPUESTO** (calefón a gas natural en el muro del patio, exterior). **Agua caliente.** No está ubicado el calefón o termotanque. Si es a gas, necesita aire
    exterior: no puede ir en el lavado (interior). Opciones: en el patio con protección, o
    en el retiro junto a la cocina.
-3. **Gas.** Falta definir red (medidor) o garrafa, y por dónde llega a la cocina. La garrafa
+3. 🟡 **PROPUESTO** (gas natural por red: retiro norte → calefón → cocina; ver plano sanitario). **Gas.** Falta definir red (medidor) o garrafa, y por dónde llega a la cocina. La garrafa
    va afuera y ventilada (patio).
 4. **Agua de reserva.** En Cochabamba es habitual tener **cisterna** (bajo tierra) + bomba +
    tanque elevado. La cisterna se excava, así que conviene ubicarla ya (jardín delantero o
@@ -22,7 +22,7 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
 5. **Bajantes del primer piso.** Los baños y la cocina de arriba van a bajar sus cañerías
    por la planta baja. Al diseñar el primer piso hay que alinear sus zonas húmedas con las
    de abajo (baño, lavado, cocina) o prever ductos en muros de la planta baja.
-6. **Tablero eléctrico y medidores.** Sin ubicación. El tablero suele ir cerca del ingreso
+6. 🟡 **PROPUESTO** (tablero en el hall junto al ingreso; ver plano eléctrico). **Tablero eléctrico y medidores.** Sin ubicación. El tablero suele ir cerca del ingreso
    (hall o ingreso); los medidores, en el muro de la calle.
 
 ## B. Funcionamiento de la casa
@@ -50,4 +50,4 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
     queda un espacio bajo (<0.6 m). Se puede cerrar o aprovechar como cajonera.
 15. **Hall sin luz natural propia:** llega solo desde la puerta de entrada y la celosía.
     Una puerta de entrada con vidrio o con paño fijo lateral ayuda.
-16. **Estacionamiento:** no está definido dónde va el auto (¿jardín delantero?).
+16. ✅ **RESUELTO** (2 autos en el jardín delantero). **Estacionamiento:** no está definido dónde va el auto (¿jardín delantero?).
