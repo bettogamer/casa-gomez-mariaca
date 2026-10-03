@@ -105,3 +105,8 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   3 taburetes); almacén con estantes en U; lavado con lavadora, secadora, lavadero y estante de
   planchado; closet de abrigos en el hall; zapatero en el ingreso; estantes en el depósito.
 - **Estado:** propuesto (el usuario lo pidió; ajustar a gusto).
+
+## 2026-10-03 — Baño de planta baja más ancho
+- **Qué:** el baño pasa de ~1.35 a **~1.65 m libres** (1.80 a eje). Estudio igual (se corre 0.30);
+  el comedor cede 0.30 (~3.75 × 2.48 libres, sigue la mesa de 6; paso a la corrediza ~0.78 m).
+- **Estado:** aprobado (pedido del usuario).
