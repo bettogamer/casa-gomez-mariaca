@@ -165,3 +165,16 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Pasillo:** se queda en 0.90 libres (0.85 en la columna B4). Aceptado.
 - **Ventana del baño sobre la ducha:** marco de aluminio o PVC y alféizar con pendiente hacia afuera (nota de obra).
 - **Estado:** decidido por el usuario.
+
+## 2026-10-03 — Primer piso, parte 1: cuartos de los hijos con baños privados (aprobado)
+- **Pedido:** dos cuartos gemelos para los hijos en A4–C5, cada uno con baño completo privado; camas queen.
+- **v1 (descartada):** baños dentro de A4–C5, junto al eje 4 (cuartos de ~12 m²).
+- **v2 (descartada):** baños donde la referencia tenía el estudio (A3–A4), pero entrando desde el pasillo (no privados).
+- **v3 (aprobada, idea del usuario):** baños de ~2 m (≈1.90 libres) entre los ejes 3 y 4, pegados al eje 4,
+  a los dos lados del pasillo: Baño 1 entre A y B (ventana al retiro), Baño 2 del pasillo a C (extractor;
+  encima del almacén de PB). Cada uno se entra solo desde su cuarto por una puerta en el eje 4.
+  Cuartos de ~5.45 × 3.15 libres (18.3 m²) con cama queen, dos veladores, closet de 1.80 y escritorio.
+  Pasillo de P1 desde la escalera (mismo trazo que el de PB) y vestíbulo con las dos puertas.
+- **Queda libre:** la franja entre la escalera y los baños (eje 3 a ~2 m del eje 4), a los dos lados del pasillo.
+- **Pendiente:** ducto del extractor del Baño 2; revisión estructural de los muros sobre losa.
+- **Estado:** aprobado por el usuario.

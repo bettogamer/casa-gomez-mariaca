@@ -21,9 +21,13 @@ _Última actualización: 2026-10-03_
   del muro norte** (entre baño y estudio), desagüe por el retiro norte con CI y desgrasadora,
   gas natural por el retiro norte. Horno y secadora eléctricos.
 
+- **Primer piso, fondo (aprobado):** cuartos gemelos de los hijos (A4–C5, 18.3 m², cama queen) con
+  baños privados entre los ejes 3 y 4 (Baño 1 al norte con ventana; Baño 2 al sur con extractor, sobre el
+  almacén de PB), pasillo desde la escalera y vestíbulo.
+
 ## Próximo paso
-**Primer piso (P1).** Mismo método que la planta baja: la referencia queda en gris y se define
-pieza por pieza con el usuario. Tener en cuenta:
+**Primer piso (P1), resto:** franja libre entre la escalera y los baños de los hijos, y el frente
+(ejes 1–3: dormitorio principal en la referencia). Mismo método, pieza por pieza. Tener en cuenta:
 - Alinear los baños de P1 con el **núcleo técnico** (muro norte, ejes 3–4) y con el baño, lavado
   y cocina de abajo, para bajantes cortas.
 - La escalera llega a P1 del lado del comedor (eje 3) y sigue al altillo arrancando del lado
