@@ -155,8 +155,8 @@ ambientes:
     - {id: pasillo_p1, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 11.20, 3.73], estado: definido, nota: "desde la llegada de la escalera; mismo trazo que el pasillo de PB (0.90 libres, 0.85 en la columna B4)"}
     - {id: estar_p1, nombre: Estar, tipo: social, rect: [7.05, 0.00, 9.40, 2.68], etiqueta: [8.22, 2.30], estado: definido, nota: "sala de TV familiar (como la foto de referencia): ventana al norte (sol), abierta al pasillo y al hall"}
     - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [9.40, 0.00, 11.20, 2.68], etiqueta: [10.30, 2.30], estado: definido, nota: "privado del Cuarto 1 (puerta por el eje 4); ~1.65 × 2.50 libres (como el de PB); ventana al retiro; bajante por fuera en el núcleo técnico (desviarla a x ≤ 9.25 para no tapar la ventana del estudio de PB)"}
-    - {id: blancos, nombre: Blancos, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], etiqueta: [8.10, 5.80], estado: definido, nota: "cuarto de blancos y limpieza, desde el pasillo; encima del lavado de PB"}
-    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.125, 3.73, 11.20, 6.67], etiqueta: [10.15, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.90 × 2.80 libres; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB (muros sobre muros); inodoro contra el muro x=9.125 (no en el eje 4: viga)"}
+    - {id: blancos, nombre: Blancos, tipo: servicio, rect: [7.05, 3.73, 9.40, 6.67], etiqueta: [8.22, 5.80], estado: definido, nota: "cuarto de blancos y limpieza, desde el pasillo; encima del lavado de PB"}
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.73, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.80 libres, mismo ancho que el Baño 1; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo hueco o drywall); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga)"}
     - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 13.00, 4.085], etiqueta: [12.10, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
     - id: cuarto_hijo_1
       nombre: Cuarto 1
@@ -327,12 +327,12 @@ muebles:
     - {tipo: lavamanos, rect: [9.48, 1.10, 9.93, 1.65]}
     - {tipo: ducha, rect: [9.48, 1.70, 11.12, 2.60]}
     # Blancos: estantes en U
-    - {tipo: estante, rect: [7.13, 6.04, 9.05, 6.59], alto: 2.10}
+    - {tipo: estante, rect: [7.13, 6.04, 9.32, 6.59], alto: 2.10}
     - {tipo: estante, rect: [7.13, 4.40, 7.58, 6.04], alto: 2.10}
-    - {tipo: estante, rect: [8.60, 4.40, 9.05, 6.04], alto: 2.10}
-    # Baño 2 (privado del Cuarto 2): ducha junto al pasillo, inodoro contra el muro x=9.125
-    - {tipo: ducha, rect: [9.20, 3.81, 11.12, 4.71]}
-    - {tipo: inodoro, rect: [9.20, 4.95, 9.89, 5.35]}
+    - {tipo: estante, rect: [8.87, 4.40, 9.32, 6.04], alto: 2.10}
+    # Baño 2 (privado del Cuarto 2): ducha junto al pasillo, inodoro contra el muro x=9.40
+    - {tipo: ducha, rect: [9.48, 3.81, 11.12, 4.71]}
+    - {tipo: inodoro, rect: [9.48, 4.95, 10.17, 5.35]}
     - {tipo: lavamanos, rect: [10.67, 4.85, 11.12, 5.40]}
     # Cuarto 1 (norte): ropero empotrado junto al baño (muro del eje 4), cama queen con cabecera en el
     # muro entre cuartos, escritorio bajo la ventana del patio
