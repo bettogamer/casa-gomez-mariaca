@@ -37,6 +37,9 @@ lote:
   # eje C / vecino (Lote 103) = SUR, patio del fondo = ESTE (sol de mañana).
   orientacion: {frente: oeste, lado_A: norte, lado_C: sur, fondo: este, norte_en_planta: [0, -1]}
   estacionamiento: "2 autos en el jardín delantero (dicho por el usuario)"
+  # Normativa (dicho por el usuario 2026-10-03): el altillo deja 2 m libres al sur (Lote 103). Se toma desde la cara
+  # del muro medianero (y=6.795): muro del altillo en y=4.67 (cara exterior 4.795). Confirmar con el arquitecto.
+  retiro_altillo_sur: 2.00
   colindantes:
     arriba: Lote 105 — Jesús Maldonado
     abajo: Lote 103 — Germán Sánchez
@@ -181,7 +184,18 @@ ambientes:
     - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: definido, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta; sin ventana: extractor en cielo falso con ducto corto al frente (por encima del inodoro)"}
     - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
     - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
-  altillo: []
+  altillo:
+    # ── Altillo: departamento temporal para un hijo casado (pareja + bebé), propuesta 2026-10-03, paso 1 ──
+    # Terraza adelante; franja de 2 m libre al sur (normativa); la escalera llega ADENTRO del departamento
+    # (que el viento y la lluvia no bajen a los pisos de abajo). Techo de calamina oculto tras antepecho.
+    - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: propuesto, nota: "caja de escalera dentro del departamento; puerta a la terraza"}
+    - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: propuesto, nota: "~4.0 × 4.5 libres; cocina en L al norte (junto al núcleo técnico); corrediza a la franja sur"}
+    - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.00], etiqueta: [12.10, 1.65], estado: propuesto, nota: "~1.65 × 1.85 libres (chico); ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
+    - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.00, 13.00, 4.67], etiqueta: [12.10, 4.35], estado: propuesto, nota: "reparte a baño, dormitorio y cuarto chico"}
+    - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 2.90], etiqueta: [14.95, 1.45], estado: propuesto, nota: "~3.75 × 2.75 libres; rincón para la cuna; ventanas al norte y al patio"}
+    - {id: cuarto_chico_alt, nombre: Cuarto chico, tipo: dormitorio, rect: [13.00, 2.90, 16.90, 4.67], etiqueta: [14.95, 3.80], estado: propuesto, nota: "~3.75 × 1.6 libres: bebé o estudio"}
+    - {id: terraza_alt, nombre: Terraza, tipo: exterior, rect: [-1.125, 0.00, 4.40, 6.67], etiqueta: [1.60, 3.30], estado: propuesto, nota: "sobre la suite principal y el volado; antepecho perimetral"}
+    - {id: franja_sur_alt, nombre: Franja libre 2 m, tipo: exterior, rect: [4.40, 4.67, 16.90, 6.67], etiqueta: [10.60, 5.70], estado: propuesto, nota: "retiro sur exigido (normativa); patio de servicio descubierto: lavandería con alero, tendedero"}
 
 # Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
 muros:
@@ -249,6 +263,20 @@ aberturas:
     - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 5.55], a: [0.90, 6.25], abre_hacia: lavamanos_ppal, estado: definido, nota: "0.70, abre hacia los lavamanos (hacia adentro chocaba con la mampara)"}
     - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
     - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
+  altillo:
+    - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.90], a: [4.40, 4.60], abre_hacia: llegada_alt, estado: propuesto, nota: "0.70, de la llegada a la terraza"}
+    - {id: llegada_estar, tipo: vano, de: [7.05, 3.85], a: [7.05, 4.67], estado: propuesto, nota: "llegada abierta al estar"}
+    - {id: estar_franja, tipo: corrediza, de: [8.20, 4.67], a: [10.60, 4.67], estado: propuesto, nota: "2.40 a la franja sur"}
+    - {id: ventana_cocina_alt, tipo: ventana, de: [7.40, 0.00], a: [9.00, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "1.60 × 1.00 al norte, sobre el mesón"}
+    - {id: ventana_estar_alt, tipo: ventana, de: [9.70, 0.00], a: [10.90, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al norte"}
+    - {id: puerta_hall_alt, tipo: puerta, de: [11.20, 4.45], a: [11.20, 3.65], abre_hacia: hall_alt, estado: propuesto, nota: "0.80, del estar a la zona privada"}
+    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.00], a: [12.15, 2.00], abre_hacia: bano_alt, estado: propuesto, nota: "0.70"}
+    - {id: ventana_bano_alt, tipo: ventana, de: [12.00, 0.00], a: [12.60, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.60 × 0.50 alta"}
+    - {id: puerta_dorm_alt, tipo: puerta, de: [13.00, 2.08], a: [13.00, 2.80], abre_hacia: dorm_alt, estado: propuesto, nota: "0.72"}
+    - {id: puerta_cuarto_chico_alt, tipo: puerta, de: [13.00, 4.30], a: [13.00, 3.55], abre_hacia: cuarto_chico_alt, estado: propuesto, nota: "0.75"}
+    - {id: ventana_dorm_alt_norte, tipo: ventana, de: [14.20, 0.00], a: [15.70, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.50 × 1.10 al norte"}
+    - {id: ventana_dorm_alt_este, tipo: ventana, de: [16.90, 0.50], a: [16.90, 1.70], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
+    - {id: ventana_cuarto_chico_alt, tipo: ventana, de: [16.90, 3.20], a: [16.90, 4.40], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -523,4 +551,6 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay losa o hueco sobre el arranque de la escalera de PB (x 4.40–5.725, y 2.68–4.20)? ¿Dónde está el borde del hueco y si tiene viga de borde? Define el hall del primer piso."
+  - "Altillo: confirmar con el arquitecto el retiro de 2 m al sur (desde dónde se mide), la altura máxima y el número de plantas permitidos."
+  - "Tanque elevado: base propia de hormigón sobre el núcleo técnico (muro norte, ejes 3–4), oculta en un volumen de ladrillo; lo dimensiona el ingeniero."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
