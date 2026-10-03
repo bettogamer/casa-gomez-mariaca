@@ -336,14 +336,14 @@ muebles:
     - {tipo: lavamanos, rect: [10.67, 4.85, 11.12, 5.40]}
     # Cuarto 1 (norte): ropero empotrado contra el muro entre cuartos (espalda con espalda con el del
     # Cuarto 2: aísla el ruido); cama con cabecera en el muro norte; escritorio bajo la ventana norte
-    - {tipo: closet, nombre: Ropero empotrado, rect: [12.55, 2.71, 16.05, 3.26]}
+    - {tipo: closet, nombre: Ropero empotrado, rect: [12.55, 2.71, 16.77, 3.26]}
     - {tipo: cama, nombre: Queen, rect: [14.30, 0.13, 15.90, 2.13]}
     - {tipo: estante, nombre: Velador, rect: [13.80, 0.13, 14.25, 0.58], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [15.95, 0.13, 16.40, 0.58], alto: 0.55}
     - {tipo: escritorio, rect: [12.05, 0.13, 13.45, 0.73]}
     - {tipo: silla, rect: [12.50, 0.85, 13.00, 1.35]}
     # Cuarto 2 (sur): espejo, cabecera en el muro sur; escritorio bajo la ventana del patio
-    - {tipo: closet, nombre: Ropero empotrado, rect: [12.55, 3.41, 16.05, 3.96]}
+    - {tipo: closet, nombre: Ropero empotrado, rect: [12.55, 3.41, 16.77, 3.96]}
     - {tipo: cama, nombre: Queen, rect: [13.70, 4.54, 15.30, 6.54]}
     - {tipo: estante, nombre: Velador, rect: [13.20, 6.09, 13.65, 6.54], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [15.35, 6.09, 15.80, 6.54], alto: 0.55}
