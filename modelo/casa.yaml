@@ -81,11 +81,20 @@ estructura:
   escalera:
     estado: construido
     tipo: U (dos tramos con descanso)
-    rect: [4.40, 0.00, 7.05, 3.98]   # x0, y0, x1, y1 (caja de escalera)
-    ancho_tramo: 1.20
+    foto_obra: planos-arqui/IMG_8371.HEIC   # foto de obra, 2026-10-03
+    rect: [4.40, 0.00, 7.05, 3.98]   # caja según plano; en obra el 1er tramo sobresale (medida pendiente)
+    ancho_tramo: 1.20                # según plano; no medido
+    huella: 0.28                     # confirmado por el usuario
+    # Rehecha en obra por la altura de 3.20 piso a piso (confirmado por el usuario 2026-10-03):
+    # el descanso cuenta como un escalón -> 10 + descanso + 6 = 17 contrahuellas.
+    contrahuellas_por_piso: 17
+    contrahuella: 0.188              # 3.20 / 17
+    inicio: lado eje 2               # "subes por la izquierda" (lado del living) — interpretación a confirmar
+    tramos:
+      pb_a_p1: [10, 6]               # 10 escalones, descanso, 6. El de 10 sale ~3 escalones fuera de la caja.
+      p1_a_altillo: [6, 10]          # invertido para no quitar el pasaje central del primer piso
+    # Lo que sigue lo usan los dibujos mientras no se modelen los tramos reales:
     peldanos_por_piso: 16
-    huella: 0.28
-    contrahuella: 0.1875             # DESACTUALIZADO: en obra se cambió a 10 + descanso + 6. Pendiente de modelar.
     sube_a: [p1, altillo]
 
 # Ambientes por nivel. `rect: [x0, y0, x1, y1]` o `poly: [[x,y], ...]`.
