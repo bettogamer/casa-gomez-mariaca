@@ -157,3 +157,11 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   pegada a la cocina abierta (lavado → pasillo → cocina → corrediza, ~10 m).
 - **Descartado:** puerta en el muro del patio de la cocina (obligaba a mover el refrigerador y perder mesón).
 - **Estado:** decidido por el usuario.
+
+## 2026-10-03 — Detalles menores de la planta baja
+- **Hall:** paño fijo de vidrio de 0.30 junto a la puerta de entrada (la puerta queda maciza). Aprobado.
+- **Hueco bajo el tramo de 10 (lado hall):** cajonera baja que se abre hacia el hall. Tentativo: el usuario
+  todavía decide el uso, pero se deja así mientras tanto.
+- **Pasillo:** se queda en 0.90 libres (0.85 en la columna B4). Aceptado.
+- **Ventana del baño sobre la ducha:** marco de aluminio o PVC y alféizar con pendiente hacia afuera (nota de obra).
+- **Estado:** decidido por el usuario.
