@@ -55,7 +55,7 @@ niveles:
   - id: altillo
     nombre: Altillo
     cota: 6.60
-    altura_libre: 3.00  # pendiente: ¿el altillo tiene techo construido?
+    altura_libre: 3.00  # altillo aún sin techo construido; altura por definir
     altura: 3.20
 
 estructura:
@@ -63,6 +63,9 @@ estructura:
   nota: Columnas, losas y escalera YA construidas. Son la restricción principal del diseño.
   seccion_columna: 0.25 # 25x25 estimado por el usuario (sin medición)
   espesor_losa: 0.20    # supuesto; medir en obra
+  # Losas construidas (2026-10-03): piso del primer piso (+3.40) y piso del altillo (+6.60),
+  # recién terminada. El altillo NO tiene techo todavía; columnas llegan hasta +6.60.
+  losas_construidas: [p1, altillo]
   espesor_muro_ext: 0.25
   espesor_muro_int: 0.15
   # Ejes según planos-arqui/IMG_8278.png: plano con el que se construyeron las columnas
