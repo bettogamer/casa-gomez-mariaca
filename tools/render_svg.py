@@ -155,6 +155,14 @@ def dibujar_aberturas(L, casa, nivel_id):
         largo = (dx * dx + dy * dy) ** 0.5
         if ab["tipo"] == "vano":
             L.linea(x0, y0, x1, y1, 'stroke="#999" stroke-width="1" stroke-dasharray="2 4"')
+        elif ab["tipo"] == "puerta_corrediza":
+            # hoja que se esconde dentro del muro (línea punteada = bolsillo)
+            hx, hy = ab.get("corre_hacia", [x1 + dx, y1 + dy])
+            L.linea(x0, y0, x1, y1, 'stroke="#fff" stroke-width="4"')
+            L.linea(x0, y0, x1, y1, 'stroke="#222" stroke-width="2"')
+            L.linea(x1, y1, hx, hy, 'stroke="#fff" stroke-width="2" stroke-dasharray="3 2"')
+            nx, ny = -dy / largo, dx / largo
+            L.texto((x0 + x1) / 2 + nx * 0.25, (y0 + y1) / 2 + ny * 0.25 + 0.05, f"corr. {largo:.2f}", 7, 'fill="#444"')
         elif ab["tipo"] == "corrediza":
             # dos hojas de vidrio desplazadas
             nx, ny = -dy / largo * 0.04, dx / largo * 0.04
