@@ -43,11 +43,11 @@ resolverlos **antes de levantar muros**, porque después cuesta romper.
 
 ## C. Detalles menores
 
-12. **Pasillo de 0.90 m libres** (0.85 m frente a la columna B4, que sobresale del muro).
+12. ✅ **ACEPTADO** (se deja así). **Pasillo de 0.90 m libres** (0.85 m frente a la columna B4, que sobresale del muro).
     Funciona para una persona; dos se cruzan de costado.
-13. **Ventana del baño sobre la ducha:** perfilería y alféizar resistentes al agua.
-14. **Hueco bajo el tramo de 10 escalones** (entre el eje B y el arranque, desde el hall):
+13. ✅ **NOTA DE OBRA** (aluminio/PVC, alféizar con pendiente). **Ventana del baño sobre la ducha:** perfilería y alféizar resistentes al agua.
+14. 🟡 **CAJONERA** (tentativo). **Hueco bajo el tramo de 10 escalones** (entre el eje B y el arranque, desde el hall):
     queda un espacio bajo (<0.6 m). Se puede cerrar o aprovechar como cajonera.
-15. **Hall sin luz natural propia:** llega solo desde la puerta de entrada y la celosía.
+15. ✅ **RESUELTO** (paño fijo de vidrio 0.30 junto a la puerta). **Hall sin luz natural propia:** llega solo desde la puerta de entrada y la celosía.
     Una puerta de entrada con vidrio o con paño fijo lateral ayuda.
 16. ✅ **RESUELTO** (2 autos en el jardín delantero). **Estacionamiento:** no está definido dónde va el auto (¿jardín delantero?).

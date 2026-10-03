@@ -12,6 +12,10 @@ _Última actualización: 2026-10-03_
   comedor para 6, pasillo, lavado, almacén, cocina amplia en **L + isla**.
 - **Orientación** (deducida, falta confirmar): frente oeste, retiro lateral (Lote 105) norte,
   vecino (Lote 103) sur, patio este. Muebles acomodados por el sol.
+- **Planta baja cerrada (salvo terminaciones):** ductos de aire (campana → patio en cajón; extractor del
+  lavado → retiro, con cielo falso ~2.70 en lavado, baño y arranque del pasillo; secadora de condensación
+  sin ducto); paso al patio por la corrediza del comedor; vidrio fijo junto a la entrada; cajonera bajo la
+  grada; pasillo de 0.90 aceptado. Ver `docs/revision-pb.md`.
 - **Instalaciones PB (esquema preliminar):** eléctrico con 7 circuitos y cuadro de cargas;
   agua (pozo + bomba → tanque elevado → gravedad), calefón a gas natural en el **núcleo técnico
   del muro norte** (entre baño y estudio), desagüe por el retiro norte con CI y desgrasadora,
@@ -32,6 +36,7 @@ pieza por pieza con el usuario. Tener en cuenta:
 - Confirmar orientación: ¿al mediodía el sol entra por el retiro (Lote 105)?
 - Medir en obra: fondo del descanso, distancia de la columna B2 al primer escalón, espesor
   de losa, sección real de columnas.
-- Con arquitecto/instaladores: ductos por cielo falso (campana, extractor, secadora),
-  ubicación del tanque elevado y de la bajada (se define con el altillo), distancias del pozo,
-  puerta de servicio al patio. Ver `docs/revision-pb.md`.
+- Con arquitecto/instaladores: ubicación del tanque elevado y de la bajada (se define con el altillo),
+  distancias del pozo. Medir cuánto cuelgan las vigas (altura del cielo falso).
+- Para el final, toda la casa junta: terminaciones (pisos, azulejos), carpintería y rejas, fachada,
+  exteriores (portón, cerco, parrilla, tendedero) y medidores en el muro de la calle.
