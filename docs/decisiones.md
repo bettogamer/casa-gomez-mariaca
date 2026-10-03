@@ -203,3 +203,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Qué:** el Baño 2 pasa de ~1.90 a ~1.65 libres (mismo ancho que el Baño 1; muro en x=9.40). Blancos crece a 2.35 × 2.94.
 - **Por qué no ensanchar el Baño 1:** le quitaría ancho al estar (no entraría bien sofá + mueble de TV).
 - **Estado:** pedido del usuario.
+
+## 2026-10-03 — Roperos de los hijos en el muro entre cuartos + mejoras de los revisores
+- **Roperos:** pasan del muro del eje 4 (1.50 m) al muro entre los cuartos (3.00 m cada uno, espalda con espalda:
+  aíslan el ruido). Camas con cabecera en el muro exterior (norte / sur); ~0.55 m al pie de la cama → roperos con
+  puertas corredizas. Ventana norte del Cuarto 1 corrida sobre el escritorio.
+- **Mejoras (revisores estructural y de habitabilidad):** puertas de los cuartos de 0.90; puerta de la ducha
+  principal de 0.70 abriendo hacia los lavamanos (mesón corrido); ventana norte del dormitorio principal de 1.80;
+  extractor en los lavamanos de la suite con ducto al frente; antepecho de 1.00 en las ventanas del primer piso.
+- **Estado:** aprobado por el usuario.
