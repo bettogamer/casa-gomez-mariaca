@@ -1,7 +1,7 @@
 """Genera las plantas en SVG desde el modelo. Uso: python tools/render_svg.py"""
 from html import escape
 
-from casa import COLORES_TIPO, SALIDA, ambientes, area, caja, cargar, centroide, columnas, huella_casa
+from casa import COLORES_TIPO, SALIDA, ambientes, area, caja, cargar, centroide, columnas, escalera, huella_casa
 
 ESC = 50  # px por metro
 MARGEN = 2.2  # m alrededor del dibujo (ejes, cotas)
@@ -67,20 +67,29 @@ def dibujar_ejes(L, casa, x0, y0, x1, y1):
     L.texto((xs[0] + xs[-1]) / 2, yc - 0.45, f"{xs[-1] - xs[0]:.2f} entre ejes extremos", 9, 'fill="#999"')
 
 
-def dibujar_escalera(L, casa):
-    esc = casa["estructura"]["escalera"]
-    x0, y0, x1, y1 = esc["rect"]
-    L.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], 'fill="#e8d3b9" stroke="#8a6a45" stroke-width="1"')
-    # dos tramos de ancho_tramo, peldaños a lo largo de y; descanso junto al eje A
-    t = esc["ancho_tramo"]
-    n = esc["peldanos_por_piso"] // 2
-    L.linea(x0, y0 + t, x1, y0 + t, 'stroke="#8a6a45" stroke-width="1"')
-    L.texto((x0 + x1) / 2, y0 + t / 2 + 0.05, "descanso", 8, 'fill="#8a6a45"')
-    for k in range(n + 1):
-        y = y0 + t + k * esc["huella"]
-        L.linea(x0, y, x0 + t, y, 'stroke="#8a6a45" stroke-width="0.7"')
-        L.linea(x1 - t, y, x1, y, 'stroke="#8a6a45" stroke-width="0.7"')
-    L.texto((x0 + x1) / 2, y1 - 0.25, "ESCALERA (construida)", 9, 'fill="#6b4f2f"')
+def dibujar_escalera(L, casa, nivel_id):
+    """Dibuja la escalera que sube desde este nivel (sólida, numerada) y la que llega desde
+    el nivel de abajo (solo contorno punteado: es el hueco en la losa)."""
+    linea = 'stroke="#8a6a45" stroke-width="0.8"'
+    for e in escalera(casa):
+        if e["hasta"] == nivel_id:
+            for p in e["peldanos"][-4:]:
+                L.poly([[p["x0"], p["y0"]], [p["x1"], p["y0"]], [p["x1"], p["y1"]], [p["x0"], p["y1"]]],
+                       'fill="none" stroke="#8a6a45" stroke-width="0.8" stroke-dasharray="3 3"')
+        if e["desde"] != nivel_id:
+            continue
+        d = e["descanso"]
+        L.poly([[d["x0"], d["y0"]], [d["x1"], d["y0"]], [d["x1"], d["y1"]], [d["x0"], d["y1"]]],
+               f'fill="#d9bf9c" {linea}')
+        L.texto((d["x0"] + d["x1"]) / 2, (d["y0"] + d["y1"]) / 2 + 0.05, f"descanso +{d['z']:.2f}", 8, 'fill="#6b4f2f"')
+        for p in e["peldanos"]:
+            L.poly([[p["x0"], p["y0"]], [p["x1"], p["y0"]], [p["x1"], p["y1"]], [p["x0"], p["y1"]]],
+                   f'fill="#e8d3b9" {linea}')
+            L.texto((p["x0"] + p["x1"]) / 2, (p["y0"] + p["y1"]) / 2 + 0.06, p["n"], 7, 'fill="#6b4f2f"')
+        primero = e["peldanos"][0]
+        cx = (primero["x0"] + primero["x1"]) / 2
+        L.texto(cx, e["inicio_y"] + 0.3, "▲ SUBE", 9, 'font-weight="bold" fill="#6b4f2f"')
+        L.texto(cx, e["inicio_y"] + 0.6, f"{e['contrahuellas']} × {casa['estructura']['escalera']['contrahuella'] * 100:.1f} cm", 8, 'fill="#6b4f2f"')
 
 
 def dibujar_columnas(L, casa):
@@ -133,7 +142,7 @@ def planta(casa, nivel):
     # contorno de la losa
     L.poly([[hx0, hy0], [hx1, hy0], [hx1, hy1], [hx0, hy1]], 'fill="#fafafa" stroke="#bbb" stroke-width="1"')
     dibujar_ambientes(L, ambs)
-    dibujar_escalera(L, casa)
+    dibujar_escalera(L, casa, nivel["id"])
     dibujar_ejes(L, casa, x0, y0, x1, y1)
     dibujar_columnas(L, casa)
     rotular_ambientes(L, ambs)
@@ -151,7 +160,7 @@ def emplazamiento(casa):
     L = Lienzo(lx0, ly0, lx1, ly1)
     L.poly([[lx0, ly0], [lx1, ly0], [lx1, ly1], [lx0, ly1]], 'fill="#f3f7ee" stroke="#333" stroke-width="2" stroke-dasharray="12 4 2 4"')
     dibujar_ambientes(L, ambientes(casa, "pb"))
-    dibujar_escalera(L, casa)
+    dibujar_escalera(L, casa, "pb")
     dibujar_columnas(L, casa)
     rotular_ambientes(L, ambientes(casa, "pb"))
     col = lt["colindantes"]

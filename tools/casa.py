@@ -111,3 +111,52 @@ def huella_casa(casa):
 
 def ambientes(casa, nivel_id):
     return casa["ambientes"].get(nivel_id) or []
+
+
+def escalera(casa):
+    """Geometría de la escalera por piso, calculada desde huella/contrahuella/tramos.
+
+    Convención (escalera en U): el primer tramo sube hacia el eje A, el descanso queda contra
+    la pared del eje A y el segundo tramo vuelve hacia el eje C. El descanso cuenta como una
+    contrahuella; el último escalón del segundo tramo es el piso de llegada.
+    Devuelve una lista (una entrada por piso) con peldaños y descanso como cajas
+    {x0, y0, x1, y1, z} (z = altura de la pisada, absoluta).
+    """
+    est = casa["estructura"]
+    esc = est["escalera"]
+    cota = {n["id"]: n["cota"] for n in casa["niveles"]}
+    m = est["seccion_columna"] / 2
+    ancho, hu, ch = esc["ancho_tramo"], esc["huella"], esc["contrahuella"]
+    xl = est["ejes_x"]["2"] + m
+    xr = est["ejes_x"]["3"] - m
+    y_desc0 = est["ejes_y"]["A"] + est["espesor_muro_ext"] / 2
+    y_desc1 = y_desc0 + esc["descanso_fondo"]
+
+    def franja(lado):
+        return (xl, xl + ancho) if lado == "2" else (xr - ancho, xr)
+
+    out = []
+    for piso in esc["pisos"]:
+        base = cota[piso["desde"]]
+        t1, t2 = piso["tramos"]
+        n1, n2 = t1["escalones"], t2["escalones"]
+        peldanos = []
+        x0, x1 = franja(t1["lado"])
+        inicio = y_desc1 + n1 * hu
+        for i in range(n1):
+            peldanos.append({"x0": x0, "x1": x1, "y0": inicio - (i + 1) * hu, "y1": inicio - i * hu,
+                             "z": base + (i + 1) * ch, "n": i + 1})
+        z_desc = base + (n1 + 1) * ch
+        descanso = {"x0": xl, "x1": xr, "y0": y_desc0, "y1": y_desc1, "z": z_desc}
+        x0, x1 = franja(t2["lado"])
+        for j in range(n2 - 1):
+            peldanos.append({"x0": x0, "x1": x1, "y0": y_desc1 + j * hu, "y1": y_desc1 + (j + 1) * hu,
+                             "z": z_desc + (j + 1) * ch, "n": n1 + 2 + j})
+        llegada = y_desc1 + (n2 - 1) * hu
+        out.append({
+            "desde": piso["desde"], "hasta": piso["hasta"], "base": base,
+            "peldanos": peldanos, "descanso": descanso,
+            "inicio_y": inicio, "llegada_y": llegada,
+            "altura_total": (n1 + n2 + 1) * ch, "contrahuellas": n1 + n2 + 1,
+        })
+    return out

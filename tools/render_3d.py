@@ -4,7 +4,7 @@ El HTML lleva los datos embebidos, así que se abre con doble clic (file://).
 """
 import json
 
-from casa import COLORES_TIPO, SALIDA, ambientes, area, cargar, columnas, huella_casa
+from casa import COLORES_TIPO, SALIDA, ambientes, area, cargar, columnas, escalera, huella_casa
 
 PLANTILLA = r"""<!doctype html>
 <html lang="es">
@@ -104,26 +104,30 @@ G.lote.add(suelo);
 // Estructura construida
 const E = D.estructura;
 const h0 = D.huella;
-D.losas.forEach(cota => G.obra.add(caja(h0[0], cota - E.losa, h0[1], h0[2], cota, h0[3], 0xb9b9b4, { op: 0.92 })));
+// Losas con el hueco de la escalera que llega a ese nivel
+D.losas.forEach(l => {
+  const forma = new THREE.Shape([[h0[0], h0[1]], [h0[2], h0[1]], [h0[2], h0[3]], [h0[0], h0[3]]].map(p => new THREE.Vector2(p[0], p[1])));
+  if (l.hueco) {
+    const [a, b, c, d] = l.hueco;
+    forma.holes.push(new THREE.Path([[a, b], [a, d], [c, d], [c, b]].map(p => new THREE.Vector2(p[0], p[1]))));
+  }
+  const g = new THREE.ExtrudeGeometry(forma, { depth: E.losa, bevelEnabled: false });
+  const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0xb9b9b4, transparent: true, opacity: 0.92 }));
+  m.rotation.x = Math.PI / 2;      // (x, y) del plano -> (x, z) del 3D; la extrusión baja desde la cota
+  m.position.y = l.cota;
+  m.castShadow = m.receiveShadow = true;
+  G.obra.add(m);
+});
 D.columnas.forEach(c => {
   const s = E.seccion / 2;
   G.obra.add(caja(c.x - s, 0, c.y - s, c.x + s, E.alto_columnas, c.y + s, 0xc62828));
 });
-// Escalera: tramo 1 por la derecha subiendo hacia el eje A, descanso junto al eje A, tramo 2 de vuelta.
-const esc = E.escalera;
-for (let piso = 0; piso < esc.pisos.length; piso++) {
-  const base = esc.pisos[piso];
-  const n = esc.peldanos / 2, ch = esc.contrahuella, hu = esc.huella;
-  const [x0, y0, x1, y1] = esc.rect, a = esc.ancho;
-  const yl = y0 + a, yi = yl + n * hu;
-  for (let i = 0; i < n; i++) {
-    const zt = yi - (i + 1) * hu;
-    G.obra.add(caja(x1 - a, base, zt, x1, base + (i + 1) * ch, zt + hu, 0xa98b6a));
-    const zt2 = yl + i * hu;
-    G.obra.add(caja(x0, base, zt2, x0 + a, base + (n + i + 1) * ch, zt2 + hu, 0xa98b6a));
-  }
-  G.obra.add(caja(x0, base + n * ch - 0.15, y0, x1, base + n * ch, yl, 0xa98b6a));
-}
+// Escalera (geometría calculada en tools/casa.py: cada peldaño es un bloque macizo hasta su pisada)
+D.escalera.forEach(e => {
+  e.peldanos.forEach(p => G.obra.add(caja(p.x0, Math.max(e.base, p.z - 0.45), p.y0, p.x1, p.z, p.y1, 0xa98b6a)));
+  const d = e.descanso;
+  G.obra.add(caja(d.x0, d.z - 0.15, d.y0, d.x1, d.z, d.y1, 0x8f7556));
+});
 
 // Ambientes por nivel
 const cont = document.getElementById("niveles");
@@ -194,6 +198,7 @@ document.querySelectorAll(".modo button").forEach(b => b.addEventListener("click
   document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o === b));
   actualizar();
 }));
+if (location.hash === "#obra") document.querySelector('[data-modo="obra"]').click();
 actualizar();
 
 addEventListener("resize", () => {
@@ -228,8 +233,13 @@ def datos(casa):
             })
         niveles.append({"id": n["id"], "nombre": n["nombre"], "cota": n["cota"],
                         "alto_muro": n["altura"] - est["espesor_losa"], "ambientes": ambs})
-    # losas construidas: contrapiso PB + cada nivel superior
-    losas = [n["cota"] for n in casa["niveles"]]
+    # losas: contrapiso PB + cada nivel superior, con hueco sobre la escalera que llega
+    huecos = {}
+    for e in escalera(casa):
+        cajas = e["peldanos"] + [e["descanso"]]
+        huecos[e["hasta"]] = [min(b["x0"] for b in cajas), min(b["y0"] for b in cajas),
+                              max(b["x1"] for b in cajas), max(b["y1"] for b in cajas)]
+    losas = [{"cota": n["cota"], "hueco": huecos.get(n["id"])} for n in casa["niveles"]]
     return {
         "huella": list(huella_casa(casa)),
         "lote": [lt["origen_x"], lt["origen_y"], lt["origen_x"] + lt["largo"], lt["origen_y"] + lt["ancho"]],
@@ -237,13 +247,9 @@ def datos(casa):
         "columnas": columnas(casa),
         "estructura": {
             "seccion": est["seccion_columna"], "losa": est["espesor_losa"], "muro": est["espesor_muro_int"],
-            "alto_columnas": max(losas),
-            "escalera": {
-                "rect": esc["rect"], "ancho": esc["ancho_tramo"], "peldanos": esc["peldanos_por_piso"],
-                "huella": esc["huella"], "contrahuella": esc["contrahuella"],
-                "pisos": [casa["niveles"][orden[i] - 1]["cota"] for i in esc["sube_a"]],
-            },
+            "alto_columnas": max(l["cota"] for l in losas),
         },
+        "escalera": escalera(casa),
         "niveles": niveles,
     }
 

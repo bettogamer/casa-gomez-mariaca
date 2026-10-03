@@ -5,7 +5,7 @@ invierte (en CAD y crece hacia arriba).
 """
 import ezdxf
 
-from casa import SALIDA, ambientes, area, caja, cargar, centroide, columnas, huella_casa
+from casa import SALIDA, ambientes, area, caja, cargar, centroide, columnas, escalera, huella_casa
 
 CAPAS = {"EJES": 1, "COLUMNAS": 1, "AMBIENTES": 7, "EXTERIOR": 3, "ESCALERA": 30, "TEXTOS": 8, "LOSA": 9}
 
@@ -38,8 +38,12 @@ def main():
         for c in columnas(casa):
             msp.add_lwpolyline([P(c["x"] - s, c["y"] - s), P(c["x"] + s, c["y"] - s), P(c["x"] + s, c["y"] + s), P(c["x"] - s, c["y"] + s)],
                                close=True, dxfattribs={"layer": "COLUMNAS"})
-        ex0, ey0, ex1, ey1 = est["escalera"]["rect"]
-        msp.add_lwpolyline([P(ex0, ey0), P(ex1, ey0), P(ex1, ey1), P(ex0, ey1)], close=True, dxfattribs={"layer": "ESCALERA"})
+        for e in escalera(casa):
+            if e["desde"] != nivel["id"]:
+                continue
+            for b in e["peldanos"] + [e["descanso"]]:
+                msp.add_lwpolyline([P(b["x0"], b["y0"]), P(b["x1"], b["y0"]), P(b["x1"], b["y1"]), P(b["x0"], b["y1"])],
+                                   close=True, dxfattribs={"layer": "ESCALERA"})
         for a in ambientes(casa, nivel["id"]):
             capa = "EXTERIOR" if a["tipo"] == "exterior" else "AMBIENTES"
             msp.add_lwpolyline([P(x, y) for x, y in a["poly"]], close=True, dxfattribs={"layer": capa})

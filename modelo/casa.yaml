@@ -80,22 +80,19 @@ estructura:
   desplazadas: {}
   escalera:
     estado: construido
-    tipo: U (dos tramos con descanso)
+    tipo: U (dos tramos con descanso junto a la pared del lado Lote 105)
     foto_obra: planos-arqui/IMG_8371.HEIC   # foto de obra, 2026-10-03
-    rect: [4.40, 0.00, 7.05, 3.98]   # caja según plano; en obra el 1er tramo sobresale (medida pendiente)
-    ancho_tramo: 1.20                # según plano; no medido
+    # Caja entre los ejes 2 y 3. Se arranca del lado del eje 2 (living, junto a la columna B2),
+    # se sube hacia el eje A, descanso, y se vuelve por el lado del eje 3 (comedor).
+    # Confirmado por el usuario 2026-10-03.
     huella: 0.28                     # confirmado por el usuario
-    # Rehecha en obra por la altura de 3.20 piso a piso (confirmado por el usuario 2026-10-03):
-    # el descanso cuenta como un escalón -> 10 + descanso + 6 = 17 contrahuellas.
-    contrahuellas_por_piso: 17
-    contrahuella: 0.188              # 3.20 / 17
-    inicio: lado eje 2               # "subes por la izquierda" (lado del living) — interpretación a confirmar
-    tramos:
-      pb_a_p1: [10, 6]               # 10 escalones, descanso, 6. El de 10 sale ~3 escalones fuera de la caja.
-      p1_a_altillo: [6, 10]          # invertido para no quitar el pasaje central del primer piso
-    # Lo que sigue lo usan los dibujos mientras no se modelen los tramos reales:
-    peldanos_por_piso: 16
-    sube_a: [p1, altillo]
+    contrahuella: 0.188              # 3.20 / 17 (el descanso cuenta como un escalón)
+    ancho_tramo: 1.20                # según plano; NO medido
+    descanso_fondo: 1.20             # según plano; NO medido -> define cuánto sobresale el 1er tramo
+    pisos:
+      - {desde: pb, hasta: p1, tramos: [{lado: "2", escalones: 10}, {lado: "3", escalones: 6}]}
+      # Invertida para no quitar el pasaje central del primer piso; el tramo de 10 sobresale en el altillo.
+      - {desde: p1, hasta: altillo, tramos: [{lado: "2", escalones: 6}, {lado: "3", escalones: 10}]}
 
 # Ambientes por nivel. `rect: [x0, y0, x1, y1]` o `poly: [[x,y], ...]`.
 # tipo: social | dormitorio | bano | cocina | servicio | circulacion | exterior

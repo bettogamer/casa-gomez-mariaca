@@ -5,7 +5,7 @@ municipal de Cochabamba: esa la confirma el arquitecto.
 """
 import sys
 
-from casa import area, caja, cargar, columnas, dentro, dist_borde, huella_casa, ambientes
+from casa import area, caja, cargar, columnas, dentro, dist_borde, escalera, huella_casa, ambientes
 
 # (área mínima m², lado mínimo m) — referencial
 MINIMOS = {
@@ -15,6 +15,8 @@ MINIMOS = {
     "social": (9.0, 2.70),
 }
 PASO = 0.05  # resolución para detectar solapes (m)
+GARGANTA = 0.15  # espesor supuesto de la losa de la escalera (m)
+ALTURA_PASO = 2.00
 
 
 def solape(pa, pb):
@@ -46,6 +48,24 @@ def verificar(casa):
     blondel = 2 * esc["contrahuella"] + esc["huella"]
     sev = "info" if 0.60 <= blondel <= 0.65 else "aviso"
     res.append(("estructura", sev, f"Escalera: 2×{esc['contrahuella']:.3f} + {esc['huella']:.2f} = {blondel:.3f} m (cómodo: 0.60–0.65)"))
+    alturas = {n["id"]: n["altura"] for n in casa["niveles"]}
+    for e in escalera(casa):
+        dif = e["altura_total"] - alturas[e["desde"]]
+        sev = "info" if abs(dif) <= 0.02 else "error"
+        res.append(("estructura", sev, f"Escalera {e['desde']}→{e['hasta']}: {e['contrahuellas']} × {esc['contrahuella']:.3f} = {e['altura_total']:.3f} m (piso a piso {alturas[e['desde']]:.2f})"))
+    # Altura de paso: de cada pisada de una escalera a la parte de abajo de la escalera de arriba
+    tramos = escalera(casa)
+    for baja, alta in zip(tramos, tramos[1:]):
+        minimo, donde = None, None
+        for p in baja["peldanos"] + [baja["descanso"]]:
+            for q in alta["peldanos"] + [alta["descanso"]]:
+                if min(p["x1"], q["x1"]) - max(p["x0"], q["x0"]) > 0.01 and min(p["y1"], q["y1"]) - max(p["y0"], q["y0"]) > 0.01:
+                    libre = (q["z"] - esc["contrahuella"] - GARGANTA) - p["z"]
+                    if minimo is None or libre < minimo:
+                        minimo, donde = libre, p.get("n", "descanso")
+        if minimo is not None:
+            sev = "info" if minimo >= ALTURA_PASO else "aviso"
+            res.append(("estructura", sev, f"Altura de paso bajo la escalera {alta['desde']}→{alta['hasta']}: mínimo {minimo:.2f} m (escalón {donde}; recomendable ≥ {ALTURA_PASO:.2f})"))
     if esc["contrahuella"] > 0.18:
         res.append(("estructura", "aviso", f"Contrahuella {esc['contrahuella']*100:.1f} cm > 18 cm: escalera algo empinada (ya construida, solo informativo)"))
 

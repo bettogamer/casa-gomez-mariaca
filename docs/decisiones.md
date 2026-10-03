@@ -26,3 +26,16 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Consecuencia:** la escalera se rehízo: PB→P1 = 10 escalones + descanso + 6 (sale 3 escalones
   fuera de la caja); P1→altillo = 6 + descanso + 10, para no quitar el pasaje central del primer piso.
 - **Estado:** alturas aprobadas; geometría de escalera por confirmar.
+
+## 2026-10-03 — Escalera construida
+- **Qué:** escalera en U entre los ejes 2 y 3, descanso contra la pared del lado Lote 105
+  (detrás queda el retiro de 2 m). Se arranca del lado del living (columna B2).
+  - PB → P1: 10 escalones + descanso + 6 (17 contrahuellas de 18.8 cm, huella 28 cm).
+  - P1 → altillo: 6 + descanso + 10, invertida para no quitar el pasaje central del primer piso.
+- **Calculado:** el 1er tramo de PB arranca a ~4.12 m de la pared del eje A (≈ 1.3 m pasando la
+  columna B2). Altura de paso mínima bajo la escalera superior: 2.11 m.
+- **Supuestos (no medidos):** ancho de tramo 1.20 m y fondo de descanso 1.20 m, del plano.
+  El fondo del descanso define cuánto sobresale el primer tramo.
+- **Pendiente para la próxima visita a obra:** medir fondo del descanso y distancia de la
+  columna B2 al primer escalón. Foto de obra: `planos-arqui/IMG_8371.HEIC`.
+- **Estado:** aprobado como aproximado.
