@@ -116,26 +116,26 @@ ambientes:
       rect: [4.40, 0.00, 7.05, 2.68]      # entre columnas A2-A3-B2-B3, debajo de la escalera
       estado: definido
       nota: "Patio y herramientas. Se entra solo desde el retiro lateral (Lote 105). Bajo el descanso ~1.92 m libres; bajo el tramo de 10 baja hasta ~0.8 m junto al eje B."
-    # ── Propuesta v3 (2026-10-03): reorganización completa de la planta baja ──
+    # ── Planta baja v4, aprobada 2026-10-03 ──
     - id: hall
       nombre: Hall
       tipo: circulacion
       poly: [[2.58, 4.95], [4.40, 4.95], [4.40, 4.125], [5.725, 4.125], [5.725, 2.68], [7.05, 2.68], [7.05, 6.67], [2.58, 6.67]]
-      estado: propuesto
+      estado: definido
       nota: "frente a la grada; une ingreso, living, grada y pasillo"
     # Lado retiro: baño mínimo junto a la grada, estudio, comedor (más corto).
-    - {id: bano_pb, nombre: Baño, tipo: bano, rect: [7.05, 0.00, 8.55, 2.68], estado: propuesto, nota: "completo, ancho mínimo (~1.35 libres): ducha al fondo bajo ventana alta, inodoro, lavamanos junto a la puerta"}
-    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [8.55, 0.00, 12.70, 2.68], estado: propuesto, nota: "ventana al retiro"}
-    - {id: comedor, nombre: Comedor, tipo: social, rect: [12.70, 0.00, 16.90, 2.68], estado: propuesto, nota: "6 personas; ventana al retiro y corrediza al patio"}
-    - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 12.70, 3.73], estado: propuesto, nota: "eje B; la cocina se abre a su derecha y al final"}
+    - {id: bano_pb, nombre: Baño, tipo: bano, rect: [7.05, 0.00, 8.55, 2.68], estado: definido, nota: "completo, ancho mínimo (~1.35 libres): ducha al fondo bajo ventana alta, inodoro, lavamanos junto a la puerta"}
+    - {id: estudio, nombre: Estudio / invitados, tipo: dormitorio, rect: [8.55, 0.00, 12.70, 2.68], estado: definido, nota: "ventana al retiro"}
+    - {id: comedor, nombre: Comedor, tipo: social, rect: [12.70, 0.00, 16.90, 2.68], estado: definido, nota: "6 personas; ventana al retiro y corrediza al patio"}
+    - {id: pasillo_pb, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 12.70, 3.73], estado: definido, nota: "eje B; la cocina se abre a su derecha y al final"}
     # Lado vecino (ciego): lavado, almacén y cocina amplia.
-    - {id: lavado, nombre: Lavado, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], estado: propuesto, nota: "extractor"}
-    - {id: almacen, nombre: Almacén, tipo: servicio, rect: [9.125, 3.73, 11.20, 6.67], estado: propuesto, nota: "escondido detrás de la cocina, se entra desde la cocina"}
+    - {id: lavado, nombre: Lavado, tipo: servicio, rect: [7.05, 3.73, 9.125, 6.67], estado: definido, nota: "extractor"}
+    - {id: almacen, nombre: Almacén, tipo: servicio, rect: [9.125, 3.73, 11.20, 6.67], estado: definido, nota: "escondido detrás de la cocina, se entra desde la cocina"}
     - id: cocina
       nombre: Cocina G
       tipo: cocina
       poly: [[12.70, 2.68], [16.90, 2.68], [16.90, 6.67], [11.20, 6.67], [11.20, 3.73], [12.70, 3.73]]
-      estado: propuesto
+      estado: definido
       nota: "amplia: G sobre muro del vecino (largo, con cocina y campana), muro del patio (lavaplatos) + península hacia el comedor; isla o desayunador en el tramo junto al pasillo"
   p1: []
   altillo: []
@@ -157,7 +157,7 @@ aberturas:
     - {id: puerta_deposito, tipo: puerta, de: [6.87, 0.00], a: [6.07, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso (~1.92 libres)"}
     # Living → terraza: abertura de 2.43 entre las columnas A1 y B1, como en la referencia.
     - {id: living_terraza, tipo: corrediza, de: [0.00, 0.125], a: [0.00, 2.555], nota: "2.43 m, puerta corrediza/ventanal a la terraza"}
-    # ── Propuesta v3 ──
+    # ── Planta baja v4, aprobada 2026-10-03 ──
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
     - {id: hall_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], nota: "hall abierto al pasillo"}

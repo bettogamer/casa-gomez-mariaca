@@ -68,7 +68,7 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
     como en la referencia.
 - **Estado:** aprobado por el usuario.
 
-## 2026-10-03 — Planta baja, parte 3 (PROPUESTA, rama feat/pb-cocina-comedor)
+## 2026-10-03 — Planta baja, parte 3: cocina, comedor, estudio, servicios (v4 aprobada)
 - **Pedido:** cocina G, almacén, comedor para mínimo 6, estudio que luego será cuarto de
   invitados, pasillos. Se usa el fondo (A4–C5).
 - **Primera propuesta (descartada por el usuario):** estudio en la esquina A5 con ventanas al
@@ -92,4 +92,4 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   cocina crece a ~19 m² libres (se abre a lo largo del pasillo y al final).
 - **Living:** el usuario permitió moverlo; se mantiene adelante porque es el único ambiente que
   aprovecha la terraza y la fachada principal.
-- **Estado:** propuesto, esperando al usuario.
+- **Estado:** **v4 aprobada** por el usuario y su esposa (2026-10-03). Cocina abierta al pasillo y al comedor.
