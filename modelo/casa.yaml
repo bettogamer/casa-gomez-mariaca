@@ -190,10 +190,9 @@ ambientes:
     # (que el viento y la lluvia no bajen a los pisos de abajo). Techo de calamina oculto tras antepecho.
     - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: propuesto, nota: "caja de escalera dentro del departamento; puerta a la terraza"}
     - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: propuesto, nota: "~4.0 × 4.5 libres; cocina en L pegada al baño (pared húmeda compartida); estar con TV en el muro de la escalera; comedor para 4; corrediza a la franja sur"}
-    - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.00], etiqueta: [12.10, 1.65], estado: propuesto, nota: "~1.65 × 1.85 libres (chico); ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
-    - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.00, 13.00, 4.67], etiqueta: [12.10, 4.35], estado: propuesto, nota: "reparte a baño, dormitorio y cuarto chico"}
-    - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 2.90], etiqueta: [14.95, 1.45], estado: propuesto, nota: "~3.75 × 2.75 libres; rincón para la cuna; ventanas al norte y al patio"}
-    - {id: cuarto_chico_alt, nombre: Cuarto chico, tipo: dormitorio, rect: [13.00, 2.90, 16.90, 4.67], etiqueta: [14.95, 3.80], estado: propuesto, nota: "~3.70 × 1.60 libres; uso flexible: niño, invitados (cama nido para 2) o bebé; ~6.9 m², chico: confirmar con el arquitecto si cuenta como dormitorio"}
+    - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.40], etiqueta: [11.85, 1.95], estado: propuesto, nota: "~1.65 × 2.25 libres; ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
+    - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.40, 13.00, 4.67], etiqueta: [12.10, 3.20], estado: propuesto, nota: "reparte al baño y al dormitorio"}
+    - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 4.67], etiqueta: [14.20, 1.20], estado: propuesto, nota: "dormitorio y cuarto chico unidos (idea del usuario): ~3.70 × 4.45 libres (~16.5 m²); cama queen + zona flexible (cuna, cama de 1 plaza o escritorio); ventanas al norte y al patio"}
     - {id: terraza_alt, nombre: Terraza, tipo: exterior, rect: [-1.125, 0.00, 4.40, 6.67], etiqueta: [1.60, 3.30], estado: propuesto, nota: "sobre la suite principal y el volado; antepecho perimetral"}
     - {id: franja_sur_alt, nombre: Franja libre 2 m, tipo: exterior, rect: [4.40, 4.67, 16.90, 6.67], etiqueta: [10.60, 5.70], estado: propuesto, nota: "retiro sur exigido (normativa); patio de servicio descubierto: lavandería con alero, tendedero"}
 
@@ -270,13 +269,12 @@ aberturas:
     - {id: ventana_cocina_alt, tipo: ventana, de: [9.90, 0.00], a: [10.90, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "1.00 × 1.00 al norte, sobre el lavaplatos"}
     - {id: ventana_estar_alt, tipo: ventana, de: [7.70, 0.00], a: [9.30, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.60 × 1.10 al norte, sobre el estar"}
     - {id: puerta_hall_alt, tipo: puerta, de: [11.20, 4.45], a: [11.20, 3.65], abre_hacia: hall_alt, estado: propuesto, nota: "0.80, del estar a la zona privada"}
-    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.00], a: [12.15, 2.00], abre_hacia: bano_alt, estado: propuesto, nota: "0.70"}
+    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.40], a: [12.15, 2.40], abre_hacia: bano_alt, estado: propuesto, nota: "0.70"}
     - {id: ventana_bano_alt, tipo: ventana, de: [12.00, 0.00], a: [12.60, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.60 × 0.50 alta"}
-    - {id: puerta_dorm_alt, tipo: puerta, de: [13.00, 2.08], a: [13.00, 2.80], abre_hacia: dorm_alt, estado: propuesto, nota: "0.72"}
-    - {id: puerta_cuarto_chico_alt, tipo: puerta, de: [13.00, 4.30], a: [13.00, 3.55], abre_hacia: cuarto_chico_alt, estado: propuesto, nota: "0.75"}
+    - {id: puerta_dorm_alt, tipo: puerta, de: [13.00, 4.55], a: [13.00, 3.80], abre_hacia: dorm_alt, estado: propuesto, nota: "0.75"}
     - {id: ventana_dorm_alt_norte, tipo: ventana, de: [14.20, 0.00], a: [15.70, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.50 × 1.10 al norte"}
     - {id: ventana_dorm_alt_este, tipo: ventana, de: [16.90, 0.50], a: [16.90, 1.70], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
-    - {id: ventana_cuarto_chico_alt, tipo: ventana, de: [16.90, 3.20], a: [16.90, 4.40], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
+    - {id: ventana_dorm_alt_este_2, tipo: ventana, de: [16.90, 3.20], a: [16.90, 4.40], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -414,22 +412,19 @@ muebles:
     - {tipo: meson, rect: [10.52, 0.73, 11.12, 2.40]}
     - {tipo: cocina, rect: [10.52, 1.20, 11.12, 1.80]}
     - {tipo: refrigerador, rect: [10.42, 2.45, 11.12, 3.15]}
-    # Baño chico: inodoro contra el muro norte (bajante por fuera en x≈11.40), ducha bajo la ventana
+    # Baño: inodoro contra el muro norte (bajante por fuera en x≈11.40), ducha bajo la ventana, lavamanos
     - {tipo: inodoro, rect: [11.28, 0.13, 11.68, 0.82]}
-    - {tipo: ducha, rect: [12.10, 0.13, 12.92, 0.95]}
-    - {tipo: lavamanos, rect: [12.40, 1.30, 12.92, 1.85]}
-    # Dormitorio: cama queen con cabecera en el muro del cuarto chico, ropero, cuna junto a la cama
-    - {tipo: closet, rect: [13.08, 0.13, 13.68, 1.95]}
-    - {tipo: cama, nombre: Queen, rect: [14.60, 0.83, 16.20, 2.83]}
-    - {tipo: estante, nombre: Velador, rect: [14.10, 2.38, 14.55, 2.83], alto: 0.55}
-    - {tipo: estante, nombre: Velador, rect: [16.25, 2.38, 16.70, 2.83], alto: 0.55}
-    - {tipo: cama, nombre: Cuna, rect: [13.80, 0.20, 14.50, 1.50]}
-    # Cuarto chico, uso flexible: niño (~6 años) o invitados. Cama de 1 plaza a lo largo (cama nido: con la
-    # cama de abajo duermen 2), ropero chico y escritorio. Para un bebé: cuna en lugar del escritorio.
-    - {tipo: cama, nombre: Cama 1 plaza (nido), rect: [14.85, 3.00, 16.75, 3.90]}
-    - {tipo: closet, nombre: Ropero, rect: [13.85, 3.00, 14.80, 3.55]}
-    - {tipo: escritorio, rect: [13.85, 4.05, 14.85, 4.52]}
-    - {tipo: silla, rect: [14.10, 3.60, 14.55, 4.00]}
+    - {tipo: ducha, rect: [12.02, 0.13, 12.92, 1.33]}
+    - {tipo: lavamanos, rect: [12.40, 1.55, 12.92, 2.10]}
+    # Dormitorio grande: cama queen con cabecera en el muro del patio (entre las dos ventanas), ropero en el
+    # muro del hall, zona flexible al norte (cama de 1 plaza / cuna) y escritorio junto a la puerta
+    - {tipo: closet, rect: [13.08, 0.13, 13.68, 2.60]}
+    - {tipo: cama, nombre: Queen, rect: [14.78, 1.65, 16.78, 3.25]}
+    - {tipo: estante, nombre: Velador, rect: [16.30, 1.18, 16.75, 1.60], alto: 0.55}
+    - {tipo: estante, nombre: Velador, rect: [16.30, 3.30, 16.75, 3.72], alto: 0.55}
+    - {tipo: cama, nombre: Cuna o cama 1 plaza, rect: [14.30, 0.13, 16.20, 1.03]}
+    - {tipo: escritorio, rect: [13.85, 4.00, 15.25, 4.52]}
+    - {tipo: silla, rect: [14.30, 3.50, 14.75, 3.95]}
     # Terraza: mesa para 6 (la parrilla irá en la terraza de PB, decisión del usuario)
     - {tipo: mesa, nombre: Mesa 6, rect: [0.60, 2.10, 2.40, 3.00]}
     - {tipo: silla, rect: [0.95, 1.60, 1.40, 2.05]}
