@@ -242,7 +242,7 @@ proyecciones:
 # PLANTA DE TECHOS (2026-10-04; ESQUEMA para conversar con el ingeniero y el techador). Todo de calamina.
 # - Departamento: techo OCULTO detrás de un antepecho en los cuatro lados (caja recta), a un agua al sur.
 # - Terraza: techo aparte de calamina sobre estructura de fierro a la vista (postes y vigas), más bajo que el
-#   antepecho del departamento, también al sur.
+#   antepecho del departamento, con caída hacia el FRENTE y canaleta vista en el borde (pedido del usuario).
 # - Nada vuela sobre la franja de 2 m del sur (OM 4100/10: separación lateral SIN VOLADO en el 2do piso). Sobre la
 #   lavandería, semisombra liviana y desmontable.
 # Cotas aproximadas: las define el ingeniero.
@@ -262,12 +262,12 @@ techos:
     - id: techo_terraza
       nombre: Terraza
       poly: [[-1.125, 0.00], [4.40, 0.00], [4.40, 4.67], [-1.125, 4.67]]
-      cae_hacia: sur
+      cae_hacia: oeste
       pendiente: 0.15
-      cota_alta: 9.70
-      cota_baja: 9.00
+      cota_alta: 9.90
+      cota_baja: 9.07
       estado: definido
-      nota: "calamina sobre estructura de fierro a la vista (pedido del usuario), abierta a los costados; ~2.25 libres en el borde bajo. Apoyos: postes metálicos sobre A1 y B1 y vigas hacia el muro del departamento (x=4.40); la esquina sur (y=4.67) en voladizo desde B1 o con un poste extra. Babeta contra el muro del departamento. Lo define el ingeniero"
+      nota: "calamina sobre estructura de fierro a la vista (pedido del usuario), cae hacia el FRENTE: de la calle se ve un borde horizontal con su canaleta. Alto contra el muro del departamento (+9.90, debajo del antepecho +10.20, con babeta), ~2.45 libres en el borde del frente. Apoyos: postes metálicos sobre A1 y B1 y vigas hacia el muro del departamento (x=4.40); la esquina sur (y=4.67) en voladizo desde B1 o con un poste extra. Babeta contra el muro del departamento. Lo define el ingeniero"
   antepechos:
   # cota_base / cota_tope: de dónde a dónde sube cada antepecho (el muro del altillo llega a +9.60).
     - {de: [4.40, 0.00], a: [16.90, 0.00], cota_base: 9.60, cota_tope: 10.20, nota: "antepecho norte del departamento: tapa el borde alto"}
@@ -284,7 +284,7 @@ techos:
   # Canaletas por dentro de la línea y=4.67 (no invaden la separación de 2 m), de chapa galvanizada, 0.5%.
   canaletas:
     - {de: [4.55, 4.58], a: [16.78, 4.58], pendiente: 0.005}
-    - {de: [4.25, 4.58], a: [-1.00, 4.58], pendiente: 0.005}
+    - {de: [-1.18, 0.10], a: [-1.18, 4.58], pendiente: 0.005, nota: "canaleta vista al frente, colgada del borde del techo de la terraza (queda a ~1.05 de la fachada: dentro del voladizo frontal de 1.20)"}
   # Semisombra (malla raschel o toldo) sobre la lavandería: liviana y desmontable, a la altura del antepecho sur.
   semisombras:
     - {rect: [9.40, 4.67, 13.00, 6.67], nombre: "semisombra lavandería", nota: "malla semisombra o toldo retráctil sobre perfiles livianos, entre el muro del departamento y el muro ciego sur; desmontable (no es techo ni volado: confirmar con el arquitecto). El tendedero queda al sol"}
@@ -299,10 +299,10 @@ techos:
     - {pos: [16.55, 6.40]}
   # Cada canaleta baja por un tubo pegado al antepecho hasta la bajante de la esquina (no se vuelca sobre la losa).
   conexiones:
-    - [[-1.00, 4.58], [-1.00, 6.55]]
+    - [[-1.18, 4.58], [-1.18, 6.55], [-1.00, 6.55]]
     - [[16.78, 4.58], [16.78, 6.55]]
   bajantes:
-    - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: techo de la terraza + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
+    - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: canaleta del frente (techo de la terraza) + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
     - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): techo del departamento + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)

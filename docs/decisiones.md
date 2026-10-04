@@ -304,3 +304,11 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Para el ingeniero:** postes y voladizo de la esquina sur del techo de la terraza, peso del muro ciego sur sobre la
   losa del altillo, antepechos del departamento.
 - **Estado:** aprobado por el usuario (cotas del techo aproximadas).
+
+## 2026-10-04 — Techo de la terraza con caída al frente
+- **Qué:** el techo de calamina de la terraza cae hacia el **frente** (oeste) en vez de hacia el sur: alto contra el muro
+  del departamento (≈ +9.90, debajo del antepecho, con babeta), bajo en el frente (≈ +9.07, ~2.45 libres).
+- **Canaleta vista** en el borde del frente (queda a ~1.05 de la fachada, dentro del voladizo frontal de 1.20) que baja
+  hacia la esquina sur y descarga en la bajante BP1.
+- **Por qué:** desde la calle se ve un borde horizontal con su canaleta; se ve mejor para la casa (pedido del usuario).
+- **Estado:** aprobado por el usuario. También se agregaron los techos y el tanque al visor 3D (tanque de ~2500 L supuesto).
