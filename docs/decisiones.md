@@ -268,3 +268,22 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Pendiente para el constructor:** muro sur liviano, techo con aislación (calamina sándwich o lana + cielo raso),
   forro liviano del tanque, impermeabilización y bajante pluvial por el fondo.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-04 — Primer piso: estar al sur, blancos al norte y ajustes
+- **Estar** (sala de TV) movido entre el vestidor y el Baño 2: 9.9 m² (antes 6.3), abierto al pasillo y al hall
+  (se quitó el muro hall–estar: al subir se ve el estar, no una pared). **Sin ventana** (muro sur medianero):
+  ventila por la ventana alta de la escalera, que pasa a tener hojas **proyectantes**. Colores y piso claros, buena luz
+  artificial con atenuador (revisor de habitabilidad). Librero de 1.20 en el muro sur del estar.
+- **Blancos** al norte, donde estaba el estar (6.3 m²), con puerta al pasillo y ventana alta 1.00 × 0.60.
+- **Vestidor principal** achicado a ~2.3 × 2.32 libres (U con pasillo 1.20); muro nuevo en x=5.85.
+- **Pasillo** entre los baños de 0.90 a **1.05 libres**; Baño 2 queda ~1.65 × 2.65.
+- **Suite:** ducha 1.15 × 1.07 con **puerta vaivén**; mueble de doble lavamanos de 2.34 m.
+- **Tableros:** los albañiles dejaron los tubos en la **cara sur de la columna B2**, en las dos losas. Subtablero del P1
+  en el hall junto a B2; el del altillo en la llegada (zona común), embutido. No picar B2 ni vigas.
+- **Cuartos de los hijos:** escritorio de computadora en la punta oeste del ropero empotrado (Cuarto 1: 1.20;
+  Cuarto 2: mueble de ~2 m, dicho por el usuario). Cuarto 1: **tocador** en la esquina noroeste; el banco ventana se
+  queda bajo la ventana norte. Cuarto 2: librero de ~0.95 para útiles en el muro sur, junto al velador.
+- **Construcción:** en Bolivia no se usa drywall: los tabiques sobre losa sin muro debajo van en **ladrillo de 6 huecos**.
+- **Para el ingeniero:** muro x=5.85 en medio del paño B2-B3-C2-C3 (plan B: ropero de piso a techo); muro del Baño 2
+  corrido 15 cm del de PB; viga del eje 3 a la vista en el estar; pase de la bajante del Baño 2 (ver `verificar_en_obra`).
+- **Estado:** aprobado por el usuario (revisores estructural y de habitabilidad: sin cambios incompatibles con lo construido).

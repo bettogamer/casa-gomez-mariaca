@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-03_
+_Última actualización: 2026-10-04_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -23,10 +23,11 @@ _Última actualización: 2026-10-03_
 
 - **Primer piso aprobado (completo):** suite principal al frente (dormitorio con TV en el muro oeste, logia
   sobre el volado de 1 m, lavamanos abierto, inodoro y ducha propios, vestidor en U); hall en la llegada de la
-  escalera; estar (sala de TV, ventana al norte) y blancos entre la escalera y los baños de los hijos; dos
-  cuartos de 17.7 m² con baño privado pegado al eje 4 y ropero empotrado. Ver `docs/revision-p1.md`.
+  escalera; blancos al norte y estar al sur (sala de TV de 9.9 m², sin ventana, abierta al hall y al pasillo de 1.05);
+  dos cuartos de 18 m² con baño privado pegado al eje 4, ropero empotrado y escritorio junto al ropero (Cuarto 1 con
+  tocador y banco ventana). Ver `docs/revision-p1.md` y la entrada del 2026-10-04 en `docs/decisiones.md`.
 
-- **Instalaciones P1 (esquema preliminar):** eléctrico con subtablero en el hall y 4 circuitos (C8–C11), agua
+- **Instalaciones P1 (esquema preliminar):** eléctrico con subtablero en el hall junto a la columna B2 y 4 circuitos (C8–C11), agua
   desde el núcleo técnico, 3 bajantes, extractores del Baño 2 y de los lavamanos de la suite; termotanque eléctrico propio en la suite principal (C12). Sin gas.
 
 - **Altillo aprobado:** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
@@ -38,6 +39,9 @@ Revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`). Después
 exteriores (portón, jardín, parrilla en la terraza de PB, tendedero), fachada, terminaciones, carpintería y rejas.
 
 ## Pendientes abiertos
+- Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el
+  techo del estar, pase de la bajante del Baño 2. Tabiques livianos = ladrillo de 6 huecos (no drywall).
+- ¿Por dónde llegan los tubos del TD de PB (ingreso) a la columna B2?
 - Confirmar orientación: ¿al mediodía el sol entra por el retiro (Lote 105)?
 - Medir en obra: fondo del descanso, distancia de la columna B2 al primer escalón, espesor
   de losa, sección real de columnas.
