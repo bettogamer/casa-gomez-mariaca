@@ -434,6 +434,14 @@ def planta_techos(casa):
             L.texto(cx, ay1 - 0.15, f"borde bajo ≈ +{ag['cota_baja']:.2f}", 7, 'fill="#37474f"')
     for m in t.get("antepechos", []):
         L.linea(*m["de"], *m["a"], 'stroke="#424242" stroke-width="6"')
+    for ss in t.get("semisombras", []):
+        sx0, sy0, sx1, sy1 = ss["rect"]
+        L.poly([[sx0, sy0], [sx1, sy0], [sx1, sy1], [sx0, sy1]], 'fill="#c8e6c9" fill-opacity="0.6" stroke="#2e7d32" stroke-width="1.2" stroke-dasharray="6 3"')
+        x = sx0 + 0.3
+        while x < sx1:
+            L.linea(x, sy0, x - 0.3, sy1, 'stroke="#66bb6a" stroke-width="0.6"')
+            x += 0.3
+        L.texto((sx0 + sx1) / 2, sy0 + 1.15, ss["nombre"], 7, 'fill="#1b5e20" font-style="italic"')
     for m in t.get("cenefas", []):
         L.linea(*m["de"], *m["a"], 'stroke="#6d4c41" stroke-width="4"')
     # losa descubierta: pendientes hacia los sumideros
@@ -465,7 +473,7 @@ def planta_techos(casa):
     dibujar_proyecciones(L, casa, "altillo")
     dibujar_ejes(L, casa, x0, y0, x1, y1)
     dibujar_columnas(L, casa, "altillo")
-    L.texto(10.60, 6.45, "franja 2 m descubierta (retiro)", 8, 'fill="#777" font-style="italic"')
+    L.texto(6.30, 6.45, "franja 2 m descubierta (retiro)", 8, 'fill="#777" font-style="italic"')
     L.texto(1.60, 6.45, "terraza descubierta", 8, 'fill="#777" font-style="italic"')
     # leyenda de símbolos
     lx, ly = x1 - 5.2, y1 + 2.45

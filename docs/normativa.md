@@ -33,27 +33,24 @@ La casa usa la opción de **3 plantas**: PB, primer piso y altillo.
 | PB y P1: apoyo en el otro lateral | sur (Lote 103): muro medianero | ✅ |
 | Altillo: 2.00 al norte | 2.01 | ✅ |
 | Altillo: 2.00 al sur | muro en y=4.67, cara a 2.00 de la cara del medianero | ✅ (justo; desde dónde se mide lo confirma el arquitecto) |
-| Altillo: sin volado en los 2 m | techo y canaleta por dentro del antepecho sur (corregido 2026-10-04) | ✅ |
-| | **alero de la lavandería** sobre la franja | ⚠️ es un volado dentro de los 2 m |
+| Altillo: sin volado en los 2 m | techo y canaleta por dentro del antepecho sur; el alero de la lavandería se cambió por una semisombra desmontable | ✅ (la semisombra la confirma el arquitecto) |
 | Retiro de fondo ≥ 3.00 | 5.00 | ✅ |
 | Voladizo frontal ≤ 1.20 | ~1.00 desde la cara del muro (supuesto) | ✅ (medir en obra) |
 | Estacionamiento en el retiro frontal (art. 48) | 2 autos en el jardín delantero; si hay dos portones, separados 4.00 m | ✅ |
 | Servidumbre de vista (art. 44): ventanas con vista directa a ≥ 2.00 m del vecino, vista oblicua a ≥ 0.60 | ventanas al norte a 2.01; muro sur ciego | ✅ |
-| Servidumbre de vista: sin balcones ni "elementos de acceso permanente" a menos de 2.00 m del vecino | **franja sur del altillo** (lavandería, tendedero) y **parte sur de la terraza**: llegan al lindero del Lote 103 | ⚠️ consultar |
+| Servidumbre de vista: sin balcones ni "elementos de acceso permanente" a menos de 2.00 m del vecino | franja sur (lavandería, tendedero) y parte sur de la terraza llegan al lindero del Lote 103: **muro ciego de ~1.80 hacia el vecino** (decisión del usuario) | ✅ (confirmar con el arquitecto) |
 | Pozos de luz (art. 45) | no hay patios interiores | — |
-| Estar del P1 sin ventana | OM 4100/10 trata la sala de estar como ambiente habitable; la exigencia de ventana está en la OM 1061/91 | ⚠️ consultar |
+| Estar del P1 sin ventana | abierto al pasillo y al hall, ventila por la ventana de la escalera (decisión del usuario) | — (la OM 1061/91 la revisa el arquitecto al aprobar) |
 
-## Consecuencias para el diseño
-- **Techo:** no se puede techar la parte sur de la terraza ni la franja (están en la separación de 2 m del 2do piso).
-  El techo y su canaleta quedan por dentro de y=4.67. Se vuelve a la canaleta **interior detrás del antepecho sur**,
-  con **rebosaderos** hacia la franja por si se tapa.
-- **Franja sur y terraza sur:** el art. 44 podría impedir usarlas como patio (vista directa al vecino a menos de 2 m).
-  Opciones para el arquitecto: antepecho sur ciego y alto (~1.80 m), o dejar esa franja solo para mantenimiento.
-- **Alero de la lavandería:** es un volado dentro de los 2 m. Alternativa: toldo retráctil o lavandería bajo techo.
-- **Calle como pasaje (art. 28 c):** si la vía cuenta como pasaje, se podría sumar un piso dejando 5 m de faja jardín.
-  No hace falta para este proyecto; solo para saberlo.
-- **Trámite:** construir requiere planos aprobados (art. 55), y cada modificación del plano aprobado se vuelve a
-  aprobar (art. 57 b). Sanciones en el art. 58.
+## Decisiones tomadas (2026-10-04)
+- **Techo:** todo de calamina. El departamento con techo oculto tras antepecho; la terraza con techo propio de
+  calamina sobre fierro. Nada vuela sobre los 2 m del sur: canaletas por dentro de y=4.67, con rebosaderos.
+- **Franja sur y terraza sur:** muro ciego de ~1.80 hacia el vecino (sin vista directa, art. 44). La franja sigue
+  siendo patio de servicio.
+- **Lavandería:** semisombra liviana y desmontable (malla o toldo) en vez de alero.
+- **Estar del P1:** queda sin ventana propia (abierto al pasillo y al hall, ventila por la ventana de la escalera).
+- **No es pasaje:** no aplica el piso adicional del art. 28 c.
+- **Trámite:** el plano nuevo de este proyecto se aprobará en la Alcaldía (art. 55 y 57).
 
 ## No aplica a esta casa
 Superficies y frentes mínimos de lote (cap. I–III; solo cuentan al subdividir), habitación en faja jardín (cap. IV),
