@@ -95,11 +95,18 @@ def dibujar_escalera(L, casa, nivel_id):
         L.texto(cx, e["inicio_y"] + 0.6, f"{e['contrahuellas']} × {casa['estructura']['escalera']['contrahuella'] * 100:.1f} cm", 8, 'fill="#6b4f2f"')
 
 
-def dibujar_columnas(L, casa):
-    s = casa["estructura"]["seccion_columna"] / 2
+def dibujar_columnas(L, casa, nivel_id=None):
+    """Columnas construidas en rojo. En un nivel que está por encima de donde terminan las columnas, solo se
+    dibujan las que se propone prolongar (contorno naranja punteado)."""
+    est = casa["estructura"]
+    s = est["seccion_columna"] / 2
+    prolongar = (est.get("prolongar_columnas") or {}).get(nivel_id)
     for c in columnas(casa):
-        L.poly([[c["x"] - s, c["y"] - s], [c["x"] + s, c["y"] - s], [c["x"] + s, c["y"] + s], [c["x"] - s, c["y"] + s]],
-               'fill="#c62828" stroke="#600" stroke-width="1"')
+        cuadro = [[c["x"] - s, c["y"] - s], [c["x"] + s, c["y"] - s], [c["x"] + s, c["y"] + s], [c["x"] - s, c["y"] + s]]
+        if prolongar is None:
+            L.poly(cuadro, 'fill="#c62828" stroke="#600" stroke-width="1"')
+        elif c["id"] in prolongar:
+            L.poly(cuadro, 'fill="#ffe0b2" stroke="#e65100" stroke-width="1.5" stroke-dasharray="3 2"')
 
 
 def dibujar_ambientes(L, ambs):
@@ -358,7 +365,7 @@ def planta(casa, nivel):
     dibujar_ejes(L, casa, x0, y0, x1, y1)
     dibujar_muros(L, casa, nivel["id"])
     dibujar_aberturas(L, casa, nivel["id"])
-    dibujar_columnas(L, casa)
+    dibujar_columnas(L, casa, nivel["id"])
     rotular_ambientes(L, ambs)
     if not ambs and not refs:
         L.texto((hx0 + hx1) / 2, (hy0 + hy1) / 2, "Planta pendiente — falta foto/plano de este nivel", 14, 'fill="#999"')

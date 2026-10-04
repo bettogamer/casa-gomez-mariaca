@@ -256,3 +256,15 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   compartida; por eso se corrió la corrediza del estar). **Presión de agua baja** (tanque ~1.5 m sobre la ducha):
   presurizadora o tanque más alto.
 - **Estado:** aprobado por el usuario (instalaciones: esquema preliminar).
+
+## 2026-10-03 — Ajustes del altillo tras la revisión
+- **Puerta propia del departamento** entre la llegada y el estar; la llegada y la terraza quedan como zona común.
+- **Puerta a la terraza** abriendo hacia afuera, con vidrio. Ambas puertas de 0.70–0.75: la llegada solo mide ~0.82
+  entre la escalera y el muro sur (agrandarla invadiría el retiro de 2 m).
+- **Baranda del hueco de la escalera** (1.10, barrotes ≤ 10 cm) y puerta de seguridad removible para el bebé.
+- **Columnas a prolongar (propuesta del revisor, decide el ingeniero):** A2–A5 y B2–B5, con encadenado; en el plano del
+  altillo se dibujan en naranja punteado. Todas quedan dentro de muros.
+- **Puerta del baño** abre hacia el hall (chocaba con el termotanque).
+- **Pendiente para el constructor:** muro sur liviano, techo con aislación (calamina sándwich o lana + cielo raso),
+  forro liviano del tanque, impermeabilización y bajante pluvial por el fondo.
+- **Estado:** aprobado por el usuario.

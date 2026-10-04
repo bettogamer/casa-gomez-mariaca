@@ -95,6 +95,9 @@ estructura:
   volado_p1: {lado: frente, hasta_x: -1.125, estado: aproximado}
   # La losa del altillo (+6.60) tiene el mismo volado al frente (dicho por el usuario 2026-10-03): techa la logia.
   volado_altillo: {lado: frente, hasta_x: -1.125, estado: aproximado}
+  # Columnas que se propone prolongar en el altillo (revisor-estructural 2026-10-03; lo decide el ingeniero):
+  # ejes A y B, con viga de encadenado arriba. Las del eje B quedan dentro de muros del departamento.
+  prolongar_columnas: {altillo: [A2, A3, A4, A5, B2, B3, B4, B5]}
   escalera:
     estado: construido
     tipo: U (dos tramos con descanso junto a la pared del lado Lote 105)
@@ -192,7 +195,7 @@ ambientes:
     # ── Altillo: departamento temporal para un hijo casado (pareja + bebé), aprobado 2026-10-03 ──
     # Terraza adelante; franja de 2 m libre al sur (normativa); la escalera llega ADENTRO del departamento
     # (que el viento y la lluvia no bajen a los pisos de abajo). Techo de calamina oculto tras antepecho.
-    - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: definido, nota: "caja de escalera dentro del departamento; puerta a la terraza"}
+    - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: definido, nota: "caja de escalera; zona común de la casa: puerta a la terraza y puerta propia del departamento; baranda en el hueco"}
     - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: definido, nota: "~4.0 × 4.5 libres; cocina en L pegada al baño (pared húmeda compartida); estar con TV en el muro de la escalera; comedor para 4; corrediza a la franja sur"}
     - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.40], etiqueta: [11.85, 1.95], estado: definido, nota: "~1.65 × 2.25 libres; ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
     - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.40, 13.00, 4.67], etiqueta: [12.10, 3.20], estado: definido, nota: "reparte al baño y al dormitorio"}
@@ -214,6 +217,7 @@ muros:
     - {id: antepecho_norte_alt, tipo: baranda, de: [-1.125, 0.00], a: [4.40, 0.00], nota: "antepecho norte de la terraza"}
     - {id: antepecho_sur_alt, tipo: baranda, de: [-1.125, 6.67], a: [16.90, 6.67], nota: "antepecho sur (terraza y franja, lindero)"}
     - {id: antepecho_fondo_alt, tipo: baranda, de: [16.90, 4.67], a: [16.90, 6.67], nota: "antepecho del fondo de la franja"}
+    - {id: baranda_hueco_alt, tipo: baranda, de: [4.40, 3.85], a: [5.72, 3.85], nota: "baranda del hueco de la escalera, 1.10 m, barrotes verticales ≤ 10 cm (bebé); puerta de seguridad removible en el último escalón"}
 
 # Lo que queda por encima del plano de corte (se dibuja punteado): aleros, tanque sobre el techo.
 proyecciones:
@@ -280,8 +284,8 @@ aberturas:
     - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
     - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
   altillo:
-    - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.90], a: [4.40, 4.60], abre_hacia: llegada_alt, estado: definido, nota: "0.70, de la llegada a la terraza"}
-    - {id: llegada_estar, tipo: vano, de: [7.05, 3.85], a: [7.05, 4.67], estado: definido, nota: "llegada abierta al estar"}
+    - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.87], a: [4.40, 4.57], abre_hacia: terraza_alt, estado: definido, nota: "0.70–0.75 (máximo que permite la llegada), abre hacia la terraza; con vidrio para dar luz a la llegada"}
+    - {id: llegada_estar, tipo: puerta, de: [7.05, 3.87], a: [7.05, 4.57], abre_hacia: estar_alt, estado: definido, nota: "0.70–0.75, puerta propia del departamento (privacidad, frío y ruido de la escalera); la llegada solo deja ese ancho"}
     - {id: estar_franja, tipo: corrediza, de: [7.25, 4.67], a: [9.35, 4.67], estado: definido, nota: "2.10 a la franja sur (corrida para dejar lugar a la lavandería)"}
     - {id: ventana_cocina_alt, tipo: ventana, de: [9.90, 0.00], a: [10.90, 0.00], antepecho: 1.10, alto: 2.10, estado: definido, nota: "1.00 × 1.00 al norte, sobre el lavaplatos"}
     - {id: ventana_estar_alt, tipo: ventana, de: [7.70, 0.00], a: [9.30, 0.00], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.60 × 1.10 al norte, sobre el estar"}
