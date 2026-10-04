@@ -430,8 +430,13 @@ def planta_techos(casa):
         L.texto(cx + 0.35, ty - 0.08, f"{ag['nombre']}", 9, 'font-weight="bold" text-anchor="start"')
         L.texto(cx + 0.35, ty + 0.20, f"cae {ag['pendiente'] * 100:.0f}% al {ag['cae_hacia']}", 8, 'fill="#b71c1c" text-anchor="start"')
         if "cota_alta" in ag:
-            L.texto(cx, ay0 + 0.35, f"borde alto ≈ +{ag['cota_alta']:.2f}", 7, 'fill="#37474f"')
-            L.texto(cx, ay1 - 0.15, f"borde bajo ≈ +{ag['cota_baja']:.2f}", 7, 'fill="#37474f"')
+            # rótulos junto al borde alto (opuesto a la caída) y al borde bajo
+            mx, my = (ax1 - ax0) / 2 - 0.45, (ay1 - ay0) / 2 - 0.3
+            gira = 'transform="rotate(-90 {:.1f} {:.1f})"'
+            for signo, txt in ((-1, f"borde alto ≈ +{ag['cota_alta']:.2f}"), (1, f"borde bajo ≈ +{ag['cota_baja']:.2f}")):
+                px, py = cx + signo * dx * mx, cy + signo * dy * my + (0.05 if dy else 0)
+                est = 'fill="#37474f"' + (" " + gira.format(*L.p(px, py)) if dx else "")
+                L.texto(px, py, txt, 7, est)
     for m in t.get("antepechos", []):
         L.linea(*m["de"], *m["a"], 'stroke="#424242" stroke-width="6"')
     for ss in t.get("semisombras", []):
@@ -451,9 +456,17 @@ def planta_techos(casa):
     for c in t.get("canaletas", []):
         L.linea(*c["de"], *c["a"], f'stroke="{AZUL}" stroke-width="4"')
         mx, my = (c["de"][0] + c["a"][0]) / 2, (c["de"][1] + c["a"][1]) / 2
-        sx = 1 if c["a"][0] > c["de"][0] else -1
-        _flecha(L, (mx - sx * 0.4, my + 0.28), (mx + sx * 0.4, my + 0.28), f'stroke="{AZUL}" stroke-width="1.2"', 0.15)
-        L.texto(mx, my + 0.55, f"canaleta {c.get('pendiente', 0.005) * 100:.1f}%", 7, f'fill="{AZUL}"')
+        ux, uy = c["a"][0] - c["de"][0], c["a"][1] - c["de"][1]
+        n = math.hypot(ux, uy) or 1
+        ux, uy = ux / n, uy / n
+        ox, oy = (0, 0.28) if abs(ux) > abs(uy) else (-0.28, 0)     # flecha al costado de la canaleta
+        _flecha(L, (mx + ox - ux * 0.4, my + oy - uy * 0.4), (mx + ox + ux * 0.4, my + oy + uy * 0.4),
+                f'stroke="{AZUL}" stroke-width="1.2"', 0.15)
+        if abs(ux) > abs(uy):
+            L.texto(mx, my + 0.55, f"canaleta {c.get('pendiente', 0.005) * 100:.1f}%", 7, f'fill="{AZUL}"')
+        else:
+            L.texto(mx - 0.45, my, f"canaleta {c.get('pendiente', 0.005) * 100:.1f}%", 7,
+                    f'fill="{AZUL}" transform="rotate(-90 {L.p(mx - 0.45, my)[0]:.1f} {L.p(mx - 0.45, my)[1]:.1f})"')
     for linea in t.get("conexiones", []):
         for a, b in zip(linea, linea[1:]):
             L.linea(*a, *b, f'stroke="{AZUL}" stroke-width="2" stroke-dasharray="4 2"')
