@@ -294,7 +294,7 @@ aberturas:
     - {id: puerta_lavamanos_ppal, tipo: puerta, de: [2.20, 4.20], a: [3.00, 4.20], abre_hacia: lavamanos_ppal, estado: definido, nota: "0.80, del dormitorio directo a los lavamanos (de la cama al inodoro ~3 m); al vestidor se sigue por el paso abierto"}
     - {id: vestidor_lavamanos, tipo: vano, de: [3.40, 4.30], a: [3.40, 5.40], estado: definido, nota: "paso abierto del vestidor a los lavamanos"}
     - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: wc_ppal, estado: definido, nota: "0.70"}
-    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 5.55], a: [0.90, 6.25], abre_hacia: lavamanos_ppal, estado: definido, nota: "0.70, abre hacia los lavamanos (hacia adentro chocaba con la mampara)"}
+    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 6.25], a: [0.90, 5.55], abre_hacia: ducha_ppal, estado: propuesto, nota: "0.70, abre hacia adentro (la ducha se acortó a 1.15 para que no choque con la mampara); deja libre la pared para un mueble de lavamanos más largo"}
     - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
     - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
   altillo:
@@ -428,11 +428,11 @@ muebles:
     - {tipo: estante, nombre: Termotanque, rect: [3.48, 5.50, 3.98, 6.04], alto: 1.30}
     - {tipo: closet, rect: [3.95, 4.28, 5.22, 4.83]}
     # Lavamanos abierto, inodoro y ducha en ambientes propios
-    - {tipo: meson, nombre: Doble lavamanos, rect: [1.65, 6.04, 3.32, 6.59]}
-    - {tipo: lavamanos, rect: [1.90, 6.09, 2.35, 6.54]}
-    - {tipo: lavamanos, rect: [2.65, 6.09, 3.10, 6.54]}
+    - {tipo: meson, nombre: Doble lavamanos, rect: [0.98, 6.04, 3.32, 6.59]}
+    - {tipo: lavamanos, rect: [1.35, 6.09, 1.80, 6.54]}
+    - {tipo: lavamanos, rect: [2.50, 6.09, 2.95, 6.54]}
     - {tipo: inodoro, rect: [-1.05, 4.62, -0.36, 5.02]}
-    - {tipo: ducha, rect: [-1.05, 5.52, 0.30, 6.59]}
+    - {tipo: ducha, rect: [-1.05, 5.52, 0.10, 6.59]}
   altillo:
     # Estar: TV en el muro de la escalera, sofá mirándola
     - {tipo: estante, nombre: TV, rect: [7.13, 0.60, 7.53, 2.10], alto: 0.50}
