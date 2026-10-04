@@ -527,7 +527,7 @@ instalaciones:
 
   p1:
     electrico:
-      tablero: {pos: [4.52, 3.00], nota: "subtablero del primer piso pegado a la columna B2, lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): ahí los albañiles dejaron los tubos en la columna (dicho por el usuario 2026-10-04); alimentado desde el TD de PB"}
+      tablero: {pos: [4.52, 3.00], nota: "subtablero del primer piso pegado a la columna B2, lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): los tubos salen por la cara sur de B2, dentro de ese mismo muro (dicho por el usuario 2026-10-04); alimentado desde el TD de PB (tubos por dentro de B2 en las dos losas)"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
       # calefón de PB por el mismo lugar. Troncales por los blancos y el pasillo hacia los baños de los hijos y,
@@ -565,7 +565,7 @@ instalaciones:
 
   altillo:
     electrico:
-      tablero: {pos: [12.85, 4.50], nota: "subtablero del altillo en el hall (puede llevar medidor propio si se alquila)"}
+      tablero: {pos: [4.75, 4.55], nota: "subtablero del altillo en la llegada (zona común), muro sur junto a la puerta de la terraza: los tubos salen por la cara sur de B2 (dicho por el usuario 2026-10-04) dentro del muro x=4.40, que del lado de la llegada da al hueco de la escalera y del otro a la terraza; siguen ~2 m por ese muro y el muro sur hasta el tablero. Puede llevar medidor propio si se alquila"}
     sanitario:
       # El gas no llega: anafe eléctrico y termotanque eléctrico propio. El tanque está encima (~1.5 m sobre la ducha):
       # poca presión → bomba presurizadora chica o tanque más alto (lo define el plomero).
@@ -650,5 +650,5 @@ verificar_en_obra:
   - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
   - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
   - "Altillo: presión de agua (el tanque queda ~1.5 m sobre la ducha): bomba presurizadora o tanque más alto; lo define el plomero."
-  - "Columna B2: tubos dejados para los tableros (dicho por el usuario). ¿En qué pisos salen y por qué cara de la columna (hall, dormitorio, escalera)? Define dónde va cada tablero."
+  - "Columna B2: los tubos para los tableros salen en las dos losas (+3.40 y +6.60, dicho por el usuario). Salen por la cara sur. Falta: ¿dónde arrancan en PB (cómo llegan desde el TD del ingreso)?"
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
