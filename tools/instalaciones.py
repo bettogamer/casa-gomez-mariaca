@@ -36,26 +36,39 @@ CIRCUITOS = {
         ("C11", "Tomas cuartos de los hijos", "toma"),
         ("C12", "Termotanque de la suite principal", "especial"),
     ],
+    "altillo": [
+        ("C13", "Iluminación altillo (interior, terraza y franja)", "luz"),
+        ("C14", "Tomas estar y dormitorio", "toma"),
+        ("C15", "Tomas cocina, baño y lavandería (con diferencial)", "toma"),
+        ("C16", "Anafe eléctrico", "especial"),
+        ("C17", "Termotanque del altillo", "especial"),
+    ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
 TOMA_POR_AMBIENTE = {"p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
 # Qué circuito usa cada clase de punto, por nivel
 USO = {
-    "pb": {"luz_social": "C1", "luz": "C2", "toma": "C3", "toma_comedor": "C4", "toma_humeda": "C7", "isla": "C4"},
-    "p1": {"luz_social": "C8", "luz": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10", "isla": "C9"},
+    "pb": {"luz_social": "C1", "luz": "C2", "toma": "C3", "toma_comedor": "C4", "toma_humeda": "C7", "isla": "C4",
+           "cocina_esp": "C5", "lavado": "C6"},
+    "p1": {"luz_social": "C8", "luz": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10", "isla": "C9",
+           "termo": "C12"},
+    "altillo": {"luz_social": "C13", "luz": "C13", "toma": "C14", "toma_comedor": "C15", "toma_humeda": "C15", "isla": "C15",
+                "cocina_esp": "C15", "anafe": "C16", "termo": "C17"},
 }
 SOCIALES = {"living", "ingreso", "hall", "pasillo_pb", "comedor", "terraza", "acceso"}
-CON_INTERRUPTOR_EXTERIOR = {"terraza", "logia"}
+CON_INTERRUPTOR_EXTERIOR = {"terraza", "logia", "terraza_alt", "franja_sur_alt"}
 VA_LUZ, VA_TOMA = 100, 200
 
-# Muebles que piden una toma especial: tipo/nombre -> (letra, VA, circuito, descripción)
+# Muebles que piden una toma especial: tipo/nombre -> (letra, VA, clase de circuito, descripción)
 ESPECIALES = {
-    "refrigerador": ("R", 300, "C5", "refrigerador"),
-    "Torre horno": ("H", 2000, "C5", "horno / microondas"),
-    "cocina": ("C", 150, "C5", "campana + encendido"),
-    "L": ("L", 800, "C6", "lavadora"),
-    "S": ("S", 2500, "C6", "secadora"),
-    "Termotanque": ("T", 2000, "C12", "termotanque eléctrico"),
+    "refrigerador": ("R", 300, "cocina_esp", "refrigerador"),
+    "Torre horno": ("H", 2000, "cocina_esp", "horno / microondas"),
+    "cocina": ("C", 150, "cocina_esp", "campana + encendido"),
+    "Anafe": ("A", 3000, "anafe", "anafe eléctrico / inducción"),
+    "L": ("L", 800, "lavado", "lavadora"),
+    "S": ("S", 2500, "lavado", "secadora"),
+    "Lavadora manual": ("L", 500, "toma_humeda", "lavadora semiautomática"),
+    "Termotanque": ("T", 2000, "termo", "termotanque eléctrico"),
 }
 # Muebles que piden una toma común extra junto a ellos (clase de uso)
 TOMA_JUNTO = {"escritorio": "toma", "TV": "toma", "Isla": "isla", "lavamanos": "toma_humeda"}
@@ -162,7 +175,7 @@ def electrico(casa, nivel_id):
         clave = m.get("nombre") if m.get("nombre") in ESPECIALES else m["tipo"]
         if clave in ESPECIALES:
             letra, va, circ, desc = ESPECIALES[clave]
-            puntos.append({"tipo": "especial", "pos": c, "circuito": circ, "va": va, "etiqueta": letra, "desc": desc})
+            puntos.append({"tipo": "especial", "pos": c, "circuito": uso[circ], "va": va, "etiqueta": letra, "desc": desc})
         clave = m.get("nombre") if m.get("nombre") in TOMA_JUNTO else m["tipo"]
         if clave in TOMA_JUNTO:
             puntos.append({"tipo": "toma", "pos": (x1 + 0.12, c[1]) if clave != "TV" else (c[0], y1 + 0.10),
@@ -247,6 +260,7 @@ def cuadro_cargas(puntos, nivel_id="pb"):
 ARTEFACTOS = {  # tipo/nombre de mueble -> (agua fría, agua caliente, desagüe Ø)
     "inodoro": (True, False, "110"), "lavamanos": (True, True, "50"), "ducha": (True, True, "50"),
     "lavaplatos": (True, True, "50"), "L": (True, False, "50"), "lavadero": (True, True, "50"),
+    "Lavadora manual": (True, False, "50"),
 }
 
 
