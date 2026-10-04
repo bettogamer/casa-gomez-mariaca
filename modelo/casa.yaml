@@ -171,8 +171,8 @@ ambientes:
       poly: [[5.85, 4.20], [7.05, 4.20], [7.05, 3.73], [9.40, 3.73], [9.40, 6.67], [5.85, 6.67]]
       etiqueta: [7.60, 6.20]
       estado: propuesto
-      nota: "sala de TV familiar, más amplia (~3.4 × 2.3 libres + la entrada; ~9.5 m²); abierta al pasillo y al hall; SIN VENTANA: el muro sur es medianero (Lote 103); muro x=5.85 sin muro debajo (drywall o ladrillo hueco); ducto de la bajante del Baño 2 en la esquina noreste"
-    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.73, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.80 libres, mismo ancho que el Baño 1; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo hueco o drywall); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga)"}
+      nota: "sala de TV familiar, más amplia (~3.4 × 2.3 libres + la entrada; ~9.5 m²); abierta al pasillo y al hall (sin muro: se ve desde la llegada de la escalera); SIN VENTANA: el muro sur es medianero (Lote 103); muro x=5.85 sin muro debajo: ladrillo de 6 huecos; ducto de la bajante del Baño 2 en la esquina noreste"
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.73, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.80 libres, mismo ancho que el Baño 1; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo de 6 huecos); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga)"}
     - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 12.50, 4.085], etiqueta: [11.85, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
     - id: cuarto_hijo_1
       nombre: Cuarto 1
@@ -187,11 +187,11 @@ ambientes:
       poly: [[12.50, 3.335], [16.90, 3.335], [16.90, 6.67], [11.20, 6.67], [11.20, 4.085], [12.50, 4.085]]
       etiqueta: [14.20, 4.90]
       estado: definido
-      nota: "~5.45 × 3.15 libres; ventana al este (patio). Muro entre cuartos sobre la mitad del paño de losa B–C, sin muro debajo: drywall con lana mineral (liviano y aísla ruido), con junta arriba; confirmar con el ingeniero"
+      nota: "~5.45 × 3.15 libres; ventana al este (patio). Muro entre cuartos sobre la mitad del paño de losa B–C, sin muro debajo: ladrillo de 6 huecos (liviano; los roperos ayudan con el ruido), con junta arriba; confirmar con el ingeniero"
     # ── Primer piso, frente: suite principal (aprobado 2026-10-03) ──
     # Se usa el volado de 1 m: logia frente al dormitorio y baño que avanza hasta el borde.
     - {id: hall_p1, nombre: Hall, tipo: circulacion, rect: [4.40, 2.68, 7.05, 4.20], etiqueta: [6.30, 3.95], estado: definido, nota: "llegada de la escalera; sigue al altillo, al pasillo de los chicos y a la suite principal"}
-    - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: definido, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; cabecera contra el muro de la escalera: revestimiento acústico (drywall + lana mineral sobre el ladrillo); puerta a la logia en la esquina sur; ventana al norte"}
+    - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: definido, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; cabecera contra el muro de la escalera: revestimiento acústico sobre el ladrillo (a definir con el constructor; en Bolivia no se usa drywall); puerta a la logia en la esquina sur; ventana al norte"}
     - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: definido, nota: "balcón cubierto sobre el volado de 1 m (la losa del altillo vuela igual y lo techa); cerrado a los costados, baranda al frente; sombrea el dormitorio del sol de la tarde"}
     - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [3.40, 4.20, 5.85, 6.67], etiqueta: [4.60, 5.45], estado: propuesto, nota: "~2.3 × 2.32 libres (achicado para agrandar el estar), muebles en U con pasillo de 1.20; se entra desde los lavamanos"}
     - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: definido, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta; sin ventana: extractor en cielo falso con ducto corto al frente (por encima del inodoro)"}
@@ -268,6 +268,7 @@ aberturas:
     - {id: pasillo_vest, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.73], estado: definido}
     - {id: estar_pasillo, tipo: vano, de: [7.05, 3.73], a: [9.40, 3.73], estado: propuesto, nota: "estar abierto al pasillo"}
     - {id: estar_hall, tipo: vano, de: [7.05, 3.73], a: [7.05, 4.20], estado: propuesto, nota: "estar abierto al hall"}
+    - {id: estar_hall_sur, tipo: vano, de: [5.85, 4.20], a: [7.05, 4.20], estado: propuesto, nota: "sin muro entre el hall y el estar: al subir se ve el estar, no una pared"}
     - {id: ventana_blancos, tipo: ventana, de: [7.70, 0.00], a: [8.70, 0.00], antepecho: 1.50, alto: 2.10, estado: propuesto, nota: "1.00 × 0.60 alta al norte, para ventilar los blancos"}
     - {id: puerta_bano_1, tipo: puerta, de: [11.20, 0.95], a: [11.20, 1.65], abre_hacia: bano_hijo_1, estado: definido, nota: "0.70, desde el Cuarto 1, al lado del escritorio (antes quedaba detrás)"}
     - {id: ventana_bano_1, tipo: ventana, de: [10.00, 0.00], a: [10.70, 0.00], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta, sobre el inodoro y el lavamanos"}
@@ -526,7 +527,7 @@ instalaciones:
 
   p1:
     electrico:
-      tablero: {pos: [6.80, 4.08], nota: "subtablero del primer piso en el hall, alimentado desde el TD de PB"}
+      tablero: {pos: [5.97, 4.40], nota: "subtablero del primer piso en el muro del vestidor, lado del estar, junto al hall (antes iba en el muro que se quitó); alimentado desde el TD de PB"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
       # calefón de PB por el mismo lugar. Troncales por los blancos y el pasillo hacia los baños de los hijos y,

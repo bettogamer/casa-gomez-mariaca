@@ -16,7 +16,7 @@ propuesta) con la estructura construida:
    aceptable pero se señala.
 2. **Muros nuevos en pisos altos**: un muro de ladrillo sobre losa sin muro o viga
    debajo agrega carga puntual/lineal. Señala longitud y si cae sobre ejes.
-   Sugiere tabique liviano (drywall) como alternativa.
+   Sugiere tabique liviano de ladrillo de 6 huecos como alternativa (en Bolivia no se usa drywall).
 3. **Aberturas en losa** (ductos, ampliar escalera, doble altura): siempre requieren
    ingeniero.
 4. **Voladizos** (balcón más grande, terraza en altillo): requieren ingeniero.
