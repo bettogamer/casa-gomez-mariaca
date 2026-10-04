@@ -39,6 +39,8 @@ PLANTILLA = r"""<!doctype html>
     <label><input type="checkbox" id="etiquetas" checked> Nombres de ambientes</label>
     <label><input type="checkbox" id="lote" checked> Lote</label>
   </div>
+  <div class="grupo"><b>Vistas</b><br><select id="vista" style="width:100%;margin-top:4px"><option value="">— elegir un ambiente —</option></select>
+    <button id="vista-general" style="margin-top:6px">Vista general</button></div>
   <div class="mini">Arrastrar: girar · Rueda: zoom · Clic derecho: mover<br>Rojo = columnas construidas</div>
 </div>
 <div id="info">Generado desde modelo/casa.yaml</div>
@@ -116,6 +118,8 @@ G.lote.add(suelo);
 const E = D.estructura;
 const h0 = D.huella;
 // Losas con el hueco de la escalera que llega a ese nivel
+const LOSAS = [], COLUMNAS = [];
+let nivelVista = null;   // en una vista de ambiente: solo se rotula ese nivel
 D.losas.forEach(l => {
   const forma = new THREE.Shape([[h0[0], h0[1]], [h0[2], h0[1]], [h0[2], h0[3]], [h0[0], h0[3]]].map(p => new THREE.Vector2(p[0], p[1])));
   if (l.hueco) {
@@ -127,11 +131,15 @@ D.losas.forEach(l => {
   m.rotation.x = Math.PI / 2;      // (x, y) del plano -> (x, z) del 3D; la extrusión baja desde la cota
   m.position.y = l.cota;
   m.castShadow = m.receiveShadow = true;
+  m.userData.cota = l.cota;
+  LOSAS.push(m);
   G.obra.add(m);
 });
 D.columnas.forEach(c => {
   const s = E.seccion / 2;
-  G.obra.add(caja(c.x - s, 0, c.y - s, c.x + s, E.alto_columnas, c.y + s, 0xc62828));
+  const col = caja(c.x - s, 0, c.y - s, c.x + s, E.alto_columnas, c.y + s, 0xc62828);
+  COLUMNAS.push(col);
+  G.obra.add(col);
 });
 // Escalera (geometría calculada en tools/casa.py: cada peldaño es un bloque macizo hasta su pisada)
 D.escalera.forEach(e => {
@@ -224,7 +232,14 @@ function actualizar() {
   cont.querySelectorAll("input").forEach(i => vis[i.dataset.nivel] = i.checked);
   Object.entries(G.niveles).forEach(([id, g]) => g.visible = modo === "proyecto" && vis[id]);
   G.etiquetas.visible = modo === "proyecto" && document.getElementById("etiquetas").checked;
-  G.etiquetas.children.forEach(s => s.visible = vis[s.userData.nivel]);
+  G.etiquetas.children.forEach(s => s.visible = vis[s.userData.nivel] && (nivelVista === null || s.userData.nivel === nivelVista));
+  // losas y columnas: en "Proyecto" no se dibuja lo que está por encima del último nivel visible
+  const visibles = D.niveles.filter(n => vis[n.id]);
+  const tope = visibles.length ? Math.max(...visibles.map(n => n.cota)) : 0;
+  LOSAS.forEach(m => m.visible = modo === "obra" || m.userData.cota <= tope + 0.01);
+  const altoCol = modo === "obra" ? E.alto_columnas
+    : Math.min(E.alto_columnas, tope + (document.getElementById("corte").checked ? 1.2 : 3.0));
+  COLUMNAS.forEach(c => { c.scale.y = altoCol / E.alto_columnas; c.position.y = altoCol / 2; });
   G.lote.visible = document.getElementById("lote").checked;
   Object.values(G.niveles).forEach(g => g.userData.muebles.visible = document.getElementById("muebles").checked);
   alturaMuros();
@@ -238,11 +253,52 @@ document.querySelectorAll(".modo button").forEach(b => b.addEventListener("click
   document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o === b));
   actualizar();
 }));
+// Vistas por ambiente: muestra ese nivel y los de abajo, muros cortados, cámara en diagonal sobre el ambiente
+const selVista = document.getElementById("vista");
+const VISTAS = [];
+D.niveles.forEach(nv => nv.ambientes.forEach(a => {
+  if (!["dormitorio", "social", "bano", "cocina", "servicio", "exterior"].includes(a.tipo)) return;
+  VISTAS.push({ nv, a });
+  const o = document.createElement("option");
+  o.value = VISTAS.length - 1;
+  o.textContent = `${nv.nombre}: ${a.nombre}`;
+  selVista.appendChild(o);
+}));
+function irAVista(k) {
+  const { nv, a } = VISTAS[k];
+  nivelVista = nv.id;
+  modo = "proyecto";
+  document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o.dataset.modo === "proyecto"));
+  cont.querySelectorAll("input").forEach(i => {
+    const otro = D.niveles.find(n => n.id === i.dataset.nivel);
+    i.checked = otro.cota <= nv.cota + 0.01;
+  });
+  document.getElementById("corte").checked = true;
+  document.getElementById("muebles").checked = true;
+  actualizar();
+  const xs = a.poly.map(p => p[0]), zs = a.poly.map(p => p[1]);
+  const x = (Math.min(...xs) + Math.max(...xs)) / 2, z = (Math.min(...zs) + Math.max(...zs)) / 2;
+  const t = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs)) * 1.1 + 3.5;
+  ctl.target.set(x, nv.cota + 0.3, z);
+  camara.position.set(x - t * 0.20, nv.cota + t * 1.9, z + t * 0.55);
+  ctl.update();
+}
+selVista.addEventListener("change", () => { if (selVista.value !== "") irAVista(+selVista.value); });
+document.getElementById("vista-general").addEventListener("click", () => {
+  selVista.value = "";
+  nivelVista = null;
+  cont.querySelectorAll("input").forEach(i => i.checked = true);
+  actualizar();
+  camara.position.set(cx - 14, 16, cz + 20); ctl.target.set(cx, 2.5, cz); ctl.update();
+});
 // Atajos por URL: #obra (solo lo construido), #retiro (cámara desde el retiro lateral, Lote 105), #pb (solo planta baja)
 if (location.hash.includes("obra")) document.querySelector('[data-modo="obra"]').click();
 if (location.hash.includes("retiro")) { camara.position.set(cx - 4, 7, cz - 13); ctl.target.set(cx - 3, 1.2, cz); ctl.update(); }
 if (location.hash.includes("pb")) cont.querySelectorAll("input").forEach(i => i.checked = i.dataset.nivel === "pb");
 actualizar();
+// #vista=Cuarto 1 → abre directamente la vista de ese ambiente (busca por nombre)
+const mv = decodeURIComponent(location.hash).match(/vista=([^&]+)/);
+if (mv) { const k = VISTAS.findIndex(v => (v.nv.nombre + ": " + v.a.nombre).toLowerCase().includes(mv[1].toLowerCase())); if (k >= 0) { selVista.value = k; irAVista(k); } }
 
 addEventListener("resize", () => {
   camara.aspect = innerWidth / innerHeight;
