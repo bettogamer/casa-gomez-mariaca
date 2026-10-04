@@ -268,7 +268,7 @@ aberturas:
     - {id: puerta_bano_2, tipo: puerta, de: [11.20, 6.47], a: [11.20, 5.77], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
     - {id: puerta_cuarto_1, tipo: puerta, de: [11.42, 2.585], a: [12.32, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
     - {id: puerta_cuarto_2, tipo: puerta, de: [11.42, 4.085], a: [12.32, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
-    - {id: ventana_cuarto_1_norte, tipo: ventana, de: [12.00, 0.00], a: [13.50, 0.00], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.50 × 1.20 al norte, sobre el escritorio (la cabecera de la cama ocupa el centro del muro); antepecho 1.00 (planta alta)"}
+    - {id: ventana_cuarto_1_norte, tipo: ventana, de: [12.85, 0.00], a: [14.65, 0.00], antepecho: 0.90, alto: 2.10, estado: definido, nota: "1.80 × 1.20 al norte sobre el banco-cama empotrado (pedido de la hija): antepecho 0.90 = ~0.45 sobre el banco; vidrio de seguridad o limitador de apertura"}
     - {id: ventana_cuarto_1_este, tipo: ventana, de: [16.90, 0.40], a: [16.90, 1.60], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.20 × 1.20 al patio, sobre el escritorio; antepecho 1.00 (planta alta)"}
     - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.40], a: [16.90, 6.40], antepecho: 1.00, alto: 2.10, estado: definido, nota: "2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana); antepecho 1.00 (planta alta)"}
     # Suite principal
@@ -381,14 +381,16 @@ muebles:
     - {tipo: ducha, rect: [9.48, 3.81, 11.12, 4.71]}
     - {tipo: inodoro, rect: [9.48, 4.95, 10.17, 5.35]}
     - {tipo: lavamanos, rect: [10.67, 4.85, 11.12, 5.40]}
-    # Cuarto 1 (norte): ropero empotrado contra el muro entre cuartos (espalda con espalda con el del
-    # Cuarto 2: aísla el ruido); cama con cabecera en el muro norte; escritorio bajo la ventana norte
+    # Cuarto 1 (norte, hija): banco-cama empotrado bajo la ventana norte entre dos libreros (pedido de la hija,
+    # foto de referencia); cama contra el muro del patio con un solo velador (el librero); escritorio junto a la
+    # ventana; ropero empotrado contra el muro entre cuartos (aísla el ruido)
     - {tipo: closet, nombre: Ropero empotrado, rect: [12.55, 2.71, 16.77, 3.26]}
-    - {tipo: cama, nombre: Queen, rect: [14.30, 0.13, 15.90, 2.13]}
-    - {tipo: estante, nombre: Velador, rect: [13.80, 0.13, 14.25, 0.58], alto: 0.55}
-    - {tipo: estante, nombre: Velador, rect: [15.95, 0.13, 16.40, 0.58], alto: 0.55}
-    - {tipo: escritorio, rect: [12.05, 0.13, 13.45, 0.73]}
-    - {tipo: silla, rect: [12.50, 0.85, 13.00, 1.35]}
+    - {tipo: escritorio, rect: [11.33, 0.13, 12.33, 0.73]}
+    - {tipo: silla, rect: [11.58, 0.80, 12.08, 1.25]}
+    - {tipo: estante, nombre: Librero, rect: [12.35, 0.13, 12.75, 0.50], alto: 2.20}
+    - {tipo: sofa, nombre: Banco ventana, rect: [12.75, 0.13, 14.75, 0.90]}
+    - {tipo: estante, nombre: Librero-velador, rect: [14.75, 0.13, 15.15, 0.50], alto: 2.20}
+    - {tipo: cama, nombre: Queen, rect: [15.17, 0.13, 16.77, 2.13]}
     # Cuarto 2 (sur): espejo, cabecera en el muro sur; escritorio bajo la ventana del patio
     - {tipo: closet, nombre: Ropero empotrado, rect: [12.55, 3.41, 16.77, 3.96]}
     - {tipo: cama, nombre: Queen, rect: [13.70, 4.54, 15.30, 6.54]}
