@@ -37,9 +37,13 @@ lote:
   # eje C / vecino (Lote 103) = SUR, patio del fondo = ESTE (sol de mañana).
   orientacion: {frente: oeste, lado_A: norte, lado_C: sur, fondo: este, norte_en_planta: [0, -1]}
   estacionamiento: "2 autos en el jardín delantero (dicho por el usuario)"
-  # Normativa (dicho por el usuario 2026-10-03): el altillo deja 2 m libres al sur (Lote 103). Se toma desde la cara
-  # del muro medianero (y=6.795): muro del altillo en y=4.67 (cara exterior 4.795). Confirmar con el arquitecto.
+  # Normativa: Reglamento Complementario a la Normativa Urbana, OM 4100/10 (reglamento/, resumen en docs/normativa.md).
+  # Zona de Renovación de la Imagen Urbana, edificación aislada; frente 9.02 (8.01–10.00) y vía 9.00 (9.00–12.50):
+  # 3 plantas = PB y 1er piso con un retiro lateral de 2.00 (incluido voladizo) y apoyo en el otro; 2do piso
+  # (altillo) con 2.00 m en AMBOS laterales, sin volado; retiro de fondo ≥ 3.00; voladizo frontal ≤ 1.20.
+  # El 2.00 del sur se toma desde la cara del muro medianero (y=6.795): muro del altillo en y=4.67 (cara 4.795).
   retiro_altillo_sur: 2.00
+  normativa: {ordenanza: "OM 4100/10", zona: "Renovación de la Imagen Urbana — edificación aislada", plantas_max: 3, retiro_lateral: 2.00, retiro_fondo_min: 3.00, voladizo_frontal_max: 1.20}
   colindantes:
     arriba: Lote 105 — Jesús Maldonado
     abajo: Lote 103 — Germán Sánchez
@@ -233,7 +237,7 @@ muros:
 proyecciones:
   altillo:
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
-    - {rect: [9.45, 4.67, 11.65, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora"}
+    - {rect: [9.45, 4.67, 11.65, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora. OJO: es un volado dentro de la separación lateral de 2 m del 2do piso (OM 4100/10 pide 'sin volado'): consultar al arquitecto; alternativa, toldo retráctil o lavandería bajo techo"}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PLANTA DE TECHOS (propuesta 2026-10-04; ESQUEMA para conversar con el ingeniero y el techador).
@@ -246,35 +250,37 @@ techos:
   aguas:
     - id: techo_depto
       nombre: Departamento
-      poly: [[4.40, 0.00], [16.90, 0.00], [16.90, 4.80], [4.40, 4.80]]
+      poly: [[4.40, 0.00], [16.90, 0.00], [16.90, 4.67], [4.40, 4.67]]
       cae_hacia: sur
       pendiente: 0.15
       cota_alta: 10.05
       cota_baja: 9.35
       estado: propuesto
-      nota: "oculto al norte y al este detrás del antepecho; al sur sale 13 cm del muro y descarga en la canaleta (vista, sobre la franja: si rebalsa cae afuera, no adentro)"
+      nota: "oculto detrás del antepecho en el norte, el este y el sur. NO puede volar sobre la franja: el reglamento pide 2.00 m de separación lateral SIN VOLADO en el 2do piso (OM 4100/10). Canaleta interior junto al antepecho sur, con rebosaderos (gárgolas) a la franja cada ~4 m por si se tapa"
     - id: techo_terraza
       nombre: Terraza
-      poly: [[-1.125, 0.00], [4.40, 0.00], [4.40, 4.80], [-1.125, 4.80]]
+      poly: [[-1.125, 0.00], [4.40, 0.00], [4.40, 4.67], [-1.125, 4.67]]
       cae_hacia: sur
       pendiente: 0.15
       cota_alta: 10.05
       cota_baja: 9.35
       estado: propuesto
-      nota: "continuación del techo del departamento, abierto a los costados; cenefa al frente y al norte (de frente se ve una caja recta). Apoyos: postes metálicos sobre A1 y B1 y vigas hacia el muro del departamento (x=4.40); la esquina sur (y=4.80) en voladizo desde B1 o con un poste extra. Lo define el ingeniero"
+      nota: "continuación del techo del departamento, abierto a los costados; cenefa al frente y al norte (de frente se ve una caja recta). Apoyos: postes metálicos sobre A1 y B1 y vigas hacia el muro del departamento (x=4.40); la esquina sur (y=4.67) en voladizo desde B1 o con un poste extra. Lo define el ingeniero"
   antepechos:
     - {de: [4.40, 0.00], a: [16.90, 0.00], nota: "antepecho norte del departamento: tapa el borde alto"}
     - {de: [16.90, 0.00], a: [16.90, 4.67], nota: "antepecho del fondo, sigue la pendiente"}
+    - {de: [4.40, 4.67], a: [16.90, 4.67], nota: "antepecho sur del departamento: la canaleta va por dentro (nada sale a la franja de 2 m)"}
   cenefas:
-    - {de: [-1.125, 0.00], a: [-1.125, 4.80], nota: "cenefa del frente (misma altura que el antepecho)"}
+    - {de: [-1.125, 0.00], a: [-1.125, 4.67], nota: "cenefa del frente (misma altura que el antepecho)"}
     - {de: [-1.125, 0.00], a: [4.40, 0.00], nota: "cenefa norte de la terraza"}
   postes:
     - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
     - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
-  # Canaleta en el borde bajo (y≈4.87), de chapa galvanizada; punto alto al medio y 0.5% hacia cada esquina.
+  # Canaleta en el borde bajo, POR DENTRO de la línea y=4.67 (no invade la separación de 2 m); chapa galvanizada,
+  # punto alto al medio y 0.5% hacia cada esquina. En la terraza cuelga bajo el borde del techo.
   canaletas:
-    - {de: [7.90, 4.87], a: [-1.00, 4.87], pendiente: 0.005}
-    - {de: [7.90, 4.87], a: [16.78, 4.87], pendiente: 0.005}
+    - {de: [7.90, 4.58], a: [-1.00, 4.58], pendiente: 0.005}
+    - {de: [7.90, 4.58], a: [16.78, 4.58], pendiente: 0.005}
   # La terraza y la franja forman una franja continua de losa descubierta (y 4.67–6.67): punto alto al medio,
   # caída 1.5% hacia las dos esquinas sur, donde están los sumideros y las bajantes pluviales.
   pendientes_losa:
@@ -286,8 +292,8 @@ techos:
     - {pos: [16.55, 6.40]}
   # La canaleta baja por un tubo pegado al antepecho hasta la bajante de la esquina (no se vuelca sobre la losa).
   conexiones:
-    - [[-1.00, 4.87], [-1.00, 6.55]]
-    - [[16.78, 4.87], [16.78, 6.55]]
+    - [[-1.00, 4.58], [-1.00, 6.55]]
+    - [[16.78, 4.58], [16.78, 6.55]]
   bajantes:
     - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: canaleta oeste + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
     - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): canaleta este + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
@@ -732,4 +738,8 @@ verificar_en_obra:
   - "P1: muro norte del Baño 2 en y=3.88, corrido 15 cm del muro de PB (y=3.73): ¿se acepta? Impermeabilizar (ducha pegada)."
   - "P1: ¿cuánto cuelga la viga del eje 3 (B3–C3) bajo la losa del altillo? Queda a la vista en el techo del estar."
   - "P1: bajante del Baño 2 en la esquina noreste del estar (≈9.30, 3.85) → almacén de PB: ¿pase de losa libre de vigas? El inodoro queda a ~1.4 m del ducto: desnivel suficiente o por cielo falso del almacén."
+  - "Normativa (OM 4100/10, art. 44 y Código Civil art. 124): no se permiten balcones ni 'elementos de acceso permanente' con vista directa a menos de 2.00 m del vecino. La franja sur del altillo (lavandería, tendedero) y la parte sur de la terraza llegan hasta el lindero del Lote 103. ¿Se aprueba así? Opción: antepecho sur ciego y alto (~1.80) o acceso solo de mantenimiento. Lo define el arquitecto."
+  - "Normativa: confirmar con el arquitecto la zona (Renovación de la Imagen Urbana, como marcó el usuario) y si la calle cuenta como pasaje (art. 28 c: +1 piso con faja jardín de 5 m)."
+  - "Normativa: el estar del primer piso no tiene ventana. Revisar con el arquitecto si el Reglamento General (OM 1061/91) acepta un ambiente habitable sin ventana propia (la OM 4100/10 trata la sala de estar como habitable)."
+  - "Cambios respecto al plano aprobado (si existe): el art. 57 b pide aprobar cada modificación en la Alcaldía."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
