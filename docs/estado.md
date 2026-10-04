@@ -29,11 +29,13 @@ _Última actualización: 2026-10-03_
 - **Instalaciones P1 (esquema preliminar):** eléctrico con subtablero en el hall y 4 circuitos (C8–C11), agua
   desde el núcleo técnico, 3 bajantes, extractores del Baño 2 y de los lavamanos de la suite; termotanque eléctrico propio en la suite principal (C12). Sin gas.
 
+- **Altillo aprobado:** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
+  adentro, terraza adelante, franja de 2 m al sur con lavandería; techo de calamina oculto; tanque sobre la
+  columna A3. Instalaciones (esquema): C13–C17, anafe y termotanque eléctricos, presurizadora a definir.
+
 ## Próximo paso
-**Altillo.** Mismo método, pieza por pieza. Aún sin techo: definir uso (terraza, lavandería, estar grande,
-depósito), el tanque elevado (encima del núcleo técnico, muro norte ejes 3–4) y el techo. La escalera llega
-por el lado del comedor (tramo de 10 sobre el eje 3).
-Antes: pasar el primer piso por `revisor-estructural` y `revisor-habitabilidad`.
+Revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`). Después, para toda la casa junta:
+exteriores (portón, jardín, parrilla en la terraza de PB, tendedero), fachada, terminaciones, carpintería y rejas.
 
 ## Pendientes abiertos
 - Confirmar orientación: ¿al mediodía el sol entra por el retiro (Lote 105)?

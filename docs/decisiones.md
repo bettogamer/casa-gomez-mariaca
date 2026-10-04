@@ -240,3 +240,19 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   (C12, 2000 VA). El agua caliente de la suite sale de ahí; del calefón de PB solo llegan los baños de los hijos.
 - **Descartado:** segundo calefón a gas (subir gas y chimenea al primer piso) y recirculación de agua caliente.
 - **Estado:** decidido por el usuario.
+
+## 2026-10-03 — Altillo: departamento temporal (aprobado) e instalaciones
+- **Uso:** departamento temporal para un hijo que se case (pareja + bebé); también para invitados o alquiler.
+- **Normativa (dicho por el usuario):** 2 m libres al sur → muro del departamento en y=4.67; franja descubierta.
+- **Distribución:** la escalera llega ADENTRO del departamento (que el viento y la lluvia no bajen); llegada con puerta
+  a la terraza; estar-comedor-cocina (19.4 m², TV en el muro de la escalera, comedor para 4, cocina en L pegada al
+  baño); hall; baño de ~1.65 × 2.25; **dormitorio único de 18 m²** (se unió el cuarto chico, idea del usuario) con
+  cama queen, ropero, zona flexible para cuna o cama de 1 plaza, escritorio; terraza de 37 m² adelante (sin parrilla:
+  irá en la terraza de PB); franja sur con lavandería (piletas + lavadora manual, con alero) y tendedero.
+- **Techo:** calamina a un agua hacia el sur, oculta tras antepecho perimetral de ladrillo. **Tanque:** base propia
+  sobre la columna A3, forrado de ladrillo (volumen cuadrado).
+- **Instalaciones:** subtablero en el hall (C13–C17); anafe eléctrico y termotanque eléctrico (el gas no sube);
+  bajante del baño y la cocina por fuera del muro norte (x≈11.40); lavandería sobre el Baño 2 del P1 (bajante
+  compartida; por eso se corrió la corrediza del estar). **Presión de agua baja** (tanque ~1.5 m sobre la ducha):
+  presurizadora o tanque más alto.
+- **Estado:** aprobado por el usuario (instalaciones: esquema preliminar).

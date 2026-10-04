@@ -189,16 +189,16 @@ ambientes:
     - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
     - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
   altillo:
-    # ── Altillo: departamento temporal para un hijo casado (pareja + bebé), propuesta 2026-10-03, paso 1 ──
+    # ── Altillo: departamento temporal para un hijo casado (pareja + bebé), aprobado 2026-10-03 ──
     # Terraza adelante; franja de 2 m libre al sur (normativa); la escalera llega ADENTRO del departamento
     # (que el viento y la lluvia no bajen a los pisos de abajo). Techo de calamina oculto tras antepecho.
-    - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: propuesto, nota: "caja de escalera dentro del departamento; puerta a la terraza"}
-    - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: propuesto, nota: "~4.0 × 4.5 libres; cocina en L pegada al baño (pared húmeda compartida); estar con TV en el muro de la escalera; comedor para 4; corrediza a la franja sur"}
-    - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.40], etiqueta: [11.85, 1.95], estado: propuesto, nota: "~1.65 × 2.25 libres; ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
-    - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.40, 13.00, 4.67], etiqueta: [12.10, 3.20], estado: propuesto, nota: "reparte al baño y al dormitorio"}
-    - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 4.67], etiqueta: [14.20, 1.20], estado: propuesto, nota: "dormitorio y cuarto chico unidos (idea del usuario): ~3.70 × 4.45 libres (~16.5 m²); cama queen + zona flexible (cuna, cama de 1 plaza o escritorio); ventanas al norte y al patio"}
-    - {id: terraza_alt, nombre: Terraza, tipo: exterior, rect: [-1.125, 0.00, 4.40, 6.67], etiqueta: [1.60, 3.30], estado: propuesto, nota: "sobre la suite principal y el volado; antepecho perimetral"}
-    - {id: franja_sur_alt, nombre: Franja libre 2 m, tipo: exterior, rect: [4.40, 4.67, 16.90, 6.67], etiqueta: [10.60, 5.70], estado: propuesto, nota: "retiro sur exigido (normativa); patio de servicio descubierto: lavandería con alero, tendedero"}
+    - {id: llegada_alt, nombre: Llegada, tipo: circulacion, rect: [4.40, 0.00, 7.05, 4.67], etiqueta: [5.70, 4.40], estado: definido, nota: "caja de escalera dentro del departamento; puerta a la terraza"}
+    - {id: estar_alt, nombre: Estar-comedor-cocina, tipo: social, rect: [7.05, 0.00, 11.20, 4.67], etiqueta: [9.10, 2.60], estado: definido, nota: "~4.0 × 4.5 libres; cocina en L pegada al baño (pared húmeda compartida); estar con TV en el muro de la escalera; comedor para 4; corrediza a la franja sur"}
+    - {id: bano_alt, nombre: Baño, tipo: bano, rect: [11.20, 0.00, 13.00, 2.40], etiqueta: [11.85, 1.95], estado: definido, nota: "~1.65 × 2.25 libres; ventana al norte; bajante por fuera del muro norte en x≈11.40 (entre ventanas de abajo)"}
+    - {id: hall_alt, nombre: Hall, tipo: circulacion, rect: [11.20, 2.40, 13.00, 4.67], etiqueta: [12.10, 3.20], estado: definido, nota: "reparte al baño y al dormitorio"}
+    - {id: dorm_alt, nombre: Dormitorio, tipo: dormitorio, rect: [13.00, 0.00, 16.90, 4.67], etiqueta: [14.20, 1.20], estado: definido, nota: "dormitorio y cuarto chico unidos (idea del usuario): ~3.70 × 4.45 libres (~16.5 m²); cama queen + zona flexible (cuna, cama de 1 plaza o escritorio); ventanas al norte y al patio"}
+    - {id: terraza_alt, nombre: Terraza, tipo: exterior, rect: [-1.125, 0.00, 4.40, 6.67], etiqueta: [1.60, 3.30], estado: definido, nota: "sobre la suite principal y el volado; antepecho perimetral"}
+    - {id: franja_sur_alt, nombre: Franja libre 2 m, tipo: exterior, rect: [4.40, 4.67, 16.90, 6.67], etiqueta: [10.60, 5.70], estado: definido, nota: "retiro sur exigido (normativa); patio de servicio descubierto: lavandería con alero, tendedero"}
 
 # Muros que no son de ladrillo. `de` / `a` = extremos del eje del muro.
 muros:
@@ -219,7 +219,7 @@ muros:
 proyecciones:
   altillo:
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
-    - {rect: [11.30, 4.67, 13.50, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora"}
+    - {rect: [9.45, 4.67, 11.65, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
@@ -280,18 +280,18 @@ aberturas:
     - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
     - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
   altillo:
-    - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.90], a: [4.40, 4.60], abre_hacia: llegada_alt, estado: propuesto, nota: "0.70, de la llegada a la terraza"}
-    - {id: llegada_estar, tipo: vano, de: [7.05, 3.85], a: [7.05, 4.67], estado: propuesto, nota: "llegada abierta al estar"}
-    - {id: estar_franja, tipo: corrediza, de: [8.20, 4.67], a: [10.60, 4.67], estado: propuesto, nota: "2.40 a la franja sur"}
-    - {id: ventana_cocina_alt, tipo: ventana, de: [9.90, 0.00], a: [10.90, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "1.00 × 1.00 al norte, sobre el lavaplatos"}
-    - {id: ventana_estar_alt, tipo: ventana, de: [7.70, 0.00], a: [9.30, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.60 × 1.10 al norte, sobre el estar"}
-    - {id: puerta_hall_alt, tipo: puerta, de: [11.20, 4.45], a: [11.20, 3.65], abre_hacia: hall_alt, estado: propuesto, nota: "0.80, del estar a la zona privada"}
-    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.40], a: [12.15, 2.40], abre_hacia: bano_alt, estado: propuesto, nota: "0.70"}
-    - {id: ventana_bano_alt, tipo: ventana, de: [12.00, 0.00], a: [12.60, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.60 × 0.50 alta"}
-    - {id: puerta_dorm_alt, tipo: puerta, de: [13.00, 4.55], a: [13.00, 3.80], abre_hacia: dorm_alt, estado: propuesto, nota: "0.75"}
-    - {id: ventana_dorm_alt_norte, tipo: ventana, de: [14.20, 0.00], a: [15.70, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.50 × 1.10 al norte"}
-    - {id: ventana_dorm_alt_este, tipo: ventana, de: [16.90, 0.50], a: [16.90, 1.70], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
-    - {id: ventana_dorm_alt_este_2, tipo: ventana, de: [16.90, 3.20], a: [16.90, 4.40], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio"}
+    - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.90], a: [4.40, 4.60], abre_hacia: llegada_alt, estado: definido, nota: "0.70, de la llegada a la terraza"}
+    - {id: llegada_estar, tipo: vano, de: [7.05, 3.85], a: [7.05, 4.67], estado: definido, nota: "llegada abierta al estar"}
+    - {id: estar_franja, tipo: corrediza, de: [7.25, 4.67], a: [9.35, 4.67], estado: definido, nota: "2.10 a la franja sur (corrida para dejar lugar a la lavandería)"}
+    - {id: ventana_cocina_alt, tipo: ventana, de: [9.90, 0.00], a: [10.90, 0.00], antepecho: 1.10, alto: 2.10, estado: definido, nota: "1.00 × 1.00 al norte, sobre el lavaplatos"}
+    - {id: ventana_estar_alt, tipo: ventana, de: [7.70, 0.00], a: [9.30, 0.00], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.60 × 1.10 al norte, sobre el estar"}
+    - {id: puerta_hall_alt, tipo: puerta, de: [11.20, 4.45], a: [11.20, 3.65], abre_hacia: hall_alt, estado: definido, nota: "0.80, del estar a la zona privada"}
+    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.40], a: [12.15, 2.40], abre_hacia: bano_alt, estado: definido, nota: "0.70"}
+    - {id: ventana_bano_alt, tipo: ventana, de: [12.00, 0.00], a: [12.60, 0.00], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.60 × 0.50 alta"}
+    - {id: puerta_dorm_alt, tipo: puerta, de: [13.00, 4.55], a: [13.00, 3.80], abre_hacia: dorm_alt, estado: definido, nota: "0.75"}
+    - {id: ventana_dorm_alt_norte, tipo: ventana, de: [14.20, 0.00], a: [15.70, 0.00], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.50 × 1.10 al norte"}
+    - {id: ventana_dorm_alt_este, tipo: ventana, de: [16.90, 0.50], a: [16.90, 1.70], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.20 × 1.10 al patio"}
+    - {id: ventana_dorm_alt_este_2, tipo: ventana, de: [16.90, 3.20], a: [16.90, 4.40], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.20 × 1.10 al patio"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -427,12 +427,13 @@ muebles:
     - {tipo: meson, rect: [9.85, 0.13, 11.12, 0.73]}
     - {tipo: lavaplatos, rect: [10.05, 0.18, 10.75, 0.68]}
     - {tipo: meson, rect: [10.52, 0.73, 11.12, 2.40]}
-    - {tipo: cocina, rect: [10.52, 1.20, 11.12, 1.80]}
+    - {tipo: cocina, nombre: Anafe, rect: [10.52, 1.20, 11.12, 1.80]}
     - {tipo: refrigerador, rect: [10.42, 2.45, 11.12, 3.15]}
     # Baño: inodoro contra el muro norte (bajante por fuera en x≈11.40), ducha bajo la ventana, lavamanos
     - {tipo: inodoro, rect: [11.28, 0.13, 11.68, 0.82]}
     - {tipo: ducha, rect: [12.02, 0.13, 12.92, 1.33]}
     - {tipo: lavamanos, rect: [12.40, 1.55, 12.92, 2.10]}
+    - {tipo: estante, nombre: Termotanque, rect: [11.28, 1.35, 11.73, 1.85], alto: 0.80}
     # Dormitorio grande: cama queen con cabecera en el muro del patio (entre las dos ventanas), ropero en el
     # muro del hall, zona flexible al norte (cama de 1 plaza / cuna) y escritorio junto a la puerta
     - {tipo: closet, rect: [13.08, 0.13, 13.68, 2.60]}
@@ -451,8 +452,8 @@ muebles:
     - {tipo: silla, rect: [0.10, 2.32, 0.55, 2.77]}
     - {tipo: silla, rect: [2.45, 2.32, 2.90, 2.77]}
     # Franja sur: lavandería (piletas + lavadora manual) con alero, y tendedero
-    - {tipo: lavadero, nombre: Piletas, rect: [11.40, 4.75, 12.60, 5.35]}
-    - {tipo: lavadora, nombre: Lavadora manual, rect: [12.65, 4.75, 13.25, 5.35]}
+    - {tipo: lavadero, nombre: Piletas, rect: [9.55, 4.75, 10.75, 5.35]}
+    - {tipo: lavadora, nombre: Lavadora manual, rect: [10.80, 4.75, 11.40, 5.35]}
     - {tipo: alfombra, nombre: Tendedero, rect: [13.80, 5.00, 16.60, 6.45]}
 
 # Instalaciones (ESQUEMA PRELIMINAR para conversar con el ingeniero/instalador; no es un proyecto
@@ -548,6 +549,27 @@ instalaciones:
         - {rect: [9.40, 0.00, 11.20, 2.68], alto: 2.70, nota: "Baño 1 de los hijos"}
         - {rect: [-1.125, 4.20, 3.40, 5.45], alto: 2.70, nota: "inodoro y lavamanos de la suite"}
 
+  altillo:
+    electrico:
+      tablero: {pos: [12.85, 4.50], nota: "subtablero del altillo en el hall (puede llevar medidor propio si se alquila)"}
+    sanitario:
+      # El gas no llega: anafe eléctrico y termotanque eléctrico propio. El tanque está encima (~1.5 m sobre la ducha):
+      # poca presión → bomba presurizadora chica o tanque más alto (lo define el plomero).
+      bajada_tanque: {pos: [7.30, 0.80], etiqueta: "AF ↓ del tanque (encima) · presurizadora"}
+      agua_fria: [[[7.30, 0.80], [7.30, 0.30], [11.20, 0.30], [11.20, 2.30], [12.30, 2.30]], [[11.20, 2.30], [11.20, 4.60], [10.20, 4.60]]]
+      termotanque: {pos: [11.50, 1.60], nota: "termotanque eléctrico 50 L en el baño, circuito propio C17"}
+      agua_caliente: [[[11.50, 1.60], [11.35, 1.60], [11.35, 0.45], [10.40, 0.45]], [[11.35, 1.60], [11.35, 2.20], [12.60, 2.20]], [[11.35, 2.20], [11.35, 4.50], [10.15, 4.50]]]
+      bajantes:
+        - {pos: [11.40, -0.25], ambientes: [bano_alt, estar_alt], etiqueta: "baño y cocina → por fuera del muro norte (x≈11.40)"}
+        - {pos: [9.60, 4.85], ambientes: [franja_sur_alt], etiqueta: "lavandería → baja por el Baño 2 del P1"}
+    ventilacion:
+      ductos:
+        - id: campana
+          linea: [[10.82, 1.50], [10.82, -0.20]]
+          diametro: 150
+          estado: definido
+          nota: "campana de la cocina → muro norte"
+
 # ─────────────────────────────────────────────────────────────────────────────
 # REFERENCIA: juego impreso fotografiado (IMG_8276, IMG_8277). Solo para consulta;
 # se dibuja en gris debajo del diseño nuevo.
@@ -611,4 +633,5 @@ verificar_en_obra:
   - "Tanque elevado: base propia de hormigón sobre el núcleo técnico (muro norte, ejes 3–4), oculta en un volumen de ladrillo; lo dimensiona el ingeniero."
   - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
   - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
+  - "Altillo: presión de agua (el tanque queda ~1.5 m sobre la ducha): bomba presurizadora o tanque más alto; lo define el plomero."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
