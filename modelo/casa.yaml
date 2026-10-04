@@ -533,7 +533,7 @@ instalaciones:
 
   p1:
     electrico:
-      tablero: {pos: [4.52, 3.00], nota: "subtablero del primer piso pegado a la columna B2, lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): los tubos salen por la cara sur de B2, dentro de ese mismo muro (dicho por el usuario 2026-10-04); alimentado desde el TD de PB (tubos por dentro de B2 en las dos losas)"}
+      tablero: {pos: [4.52, 3.12], nota: "subtablero del primer piso junto a la columna B2 (corrido hacia la puerta del dormitorio: no al pie de la grada al altillo), lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): los tubos salen por la cara sur de B2, dentro de ese mismo muro (dicho por el usuario 2026-10-04); alimentado desde el TD de PB (tubos por dentro de B2 en las dos losas)"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
       # calefón de PB por el mismo lugar. Troncales por los blancos y el pasillo hacia los baños de los hijos y,
