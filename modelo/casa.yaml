@@ -65,9 +65,8 @@ niveles:
     cota: 6.60
     altura_libre: 3.00  # altillo aún sin techo construido; altura por definir
     altura: 3.20
-    # Techo (propuesta 2026-10-03): calamina a un agua, OCULTA detrás de un antepecho perimetral de ladrillo
-    # (desde la calle se ve una caja recta). Pendiente hacia el sur, canaleta escondida detrás del antepecho
-    # del muro sur, bajante pluvial a la franja. Estructura de madera o metal: la define el ingeniero.
+    # Techo: ver la sección `techos` (planta de techos, 2026-10-04). Calamina a un agua hacia el sur, oculta al
+    # norte y al este tras el antepecho, sigue sobre la terraza; canaleta vista sobre la franja. Estructura metálica.
     techo: {tipo: calamina, oculto: true, pendiente_hacia: sur, estado: propuesto}
 
 estructura:
@@ -235,6 +234,63 @@ proyecciones:
   altillo:
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
     - {rect: [9.45, 4.67, 11.65, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora"}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PLANTA DE TECHOS (propuesta 2026-10-04; ESQUEMA para conversar con el ingeniero y el techador).
+# Calamina sobre estructura metálica, a un agua hacia el SUR. El techo del departamento sigue sin cortes sobre la
+# terraza (pedido del usuario): un solo plano y una sola canaleta. La franja de 2 m al sur (retiro) queda descubierta.
+# Cotas aproximadas: 2.50 libres bajo el cielo raso en el lado bajo + estructura y aislación.
+# ─────────────────────────────────────────────────────────────────────────────
+techos:
+  material: "calamina galvanizada prepintada (ondulada o trapezoidal), con aislación (lana de vidrio + cielo raso)"
+  aguas:
+    - id: techo_depto
+      nombre: Departamento
+      poly: [[4.40, 0.00], [16.90, 0.00], [16.90, 4.80], [4.40, 4.80]]
+      cae_hacia: sur
+      pendiente: 0.15
+      cota_alta: 10.05
+      cota_baja: 9.35
+      estado: propuesto
+      nota: "oculto al norte y al este detrás del antepecho; al sur sale 13 cm del muro y descarga en la canaleta (vista, sobre la franja: si rebalsa cae afuera, no adentro)"
+    - id: techo_terraza
+      nombre: Terraza
+      poly: [[-1.125, 0.00], [4.40, 0.00], [4.40, 4.80], [-1.125, 4.80]]
+      cae_hacia: sur
+      pendiente: 0.15
+      cota_alta: 10.05
+      cota_baja: 9.35
+      estado: propuesto
+      nota: "continuación del techo del departamento, abierto a los costados; cenefa al frente y al norte (de frente se ve una caja recta). Apoyos: postes metálicos sobre A1 y B1 y vigas hacia el muro del departamento (x=4.40); la esquina sur (y=4.80) en voladizo desde B1 o con un poste extra. Lo define el ingeniero"
+  antepechos:
+    - {de: [4.40, 0.00], a: [16.90, 0.00], nota: "antepecho norte del departamento: tapa el borde alto"}
+    - {de: [16.90, 0.00], a: [16.90, 4.67], nota: "antepecho del fondo, sigue la pendiente"}
+  cenefas:
+    - {de: [-1.125, 0.00], a: [-1.125, 4.80], nota: "cenefa del frente (misma altura que el antepecho)"}
+    - {de: [-1.125, 0.00], a: [4.40, 0.00], nota: "cenefa norte de la terraza"}
+  postes:
+    - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
+    - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
+  # Canaleta en el borde bajo (y≈4.87), de chapa galvanizada; punto alto al medio y 0.5% hacia cada esquina.
+  canaletas:
+    - {de: [7.90, 4.87], a: [-1.00, 4.87], pendiente: 0.005}
+    - {de: [7.90, 4.87], a: [16.78, 4.87], pendiente: 0.005}
+  # La terraza y la franja forman una franja continua de losa descubierta (y 4.67–6.67): punto alto al medio,
+  # caída 1.5% hacia las dos esquinas sur, donde están los sumideros y las bajantes pluviales.
+  pendientes_losa:
+    - {de: [7.90, 6.05], a: [0.20, 6.05], texto: "losa 1.5%"}
+    - {de: [7.90, 6.05], a: [15.60, 6.05], texto: "losa 1.5%"}
+    - {de: [-0.55, 2.80], a: [-0.55, 4.40], texto: "piso 1%"}
+  sumideros:
+    - {pos: [-0.75, 6.40]}
+    - {pos: [16.55, 6.40]}
+  # La canaleta baja por un tubo pegado al antepecho hasta la bajante de la esquina (no se vuelca sobre la losa).
+  conexiones:
+    - [[-1.00, 4.87], [-1.00, 6.55]]
+    - [[16.78, 4.87], [16.78, 6.55]]
+  bajantes:
+    - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: canaleta oeste + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
+    - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): canaleta este + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
