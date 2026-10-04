@@ -501,6 +501,95 @@ def planta_techos(casa):
     return L.svg("Planta de techos")
 
 
+def planta_losa(casa, nivel):
+    """Losa sobre la que apoya el nivel: viguetas por paño y los muros de ese nivel, según cómo apoyan."""
+    est = casa["estructura"]
+    vg = est["viguetas"]
+    niveles = [n["id"] for n in casa["niveles"]]
+    debajo = niveles[niveles.index(nivel["id"]) - 1]
+    hx0, hy0, hx1, hy1 = huella_casa(casa)
+    xs = [p[0] for pa in vg["panos"] for p in (pa["rect"][:2], pa["rect"][2:])]
+    ys = [p[1] for pa in vg["panos"] for p in (pa["rect"][:2], pa["rect"][2:])]
+    x0, y0, x1, y1 = min(xs + [hx0]), min(ys + [hy0]), max(xs + [hx1]), max(ys + [hy1])
+    L = Lienzo(x0, y0, x1, y1)
+    L.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], 'fill="#fafafa" stroke="#bbb" stroke-width="1"')
+    AZUL = "#64b5f6"
+    for pa in vg["panos"]:
+        rx0, ry0, rx1, ry1 = pa["rect"]
+        L.poly([[rx0, ry0], [rx1, ry0], [rx1, ry1], [rx0, ry1]], 'fill="#eef5fb" stroke="#90a4ae" stroke-width="1"')
+        n = pa["n"]
+        for i in range(n):
+            if pa["dir"] == "y":
+                x = rx0 + (i + 0.5) * (rx1 - rx0) / n
+                L.linea(x, ry0, x, ry1, f'stroke="{AZUL}" stroke-width="2"')
+            else:
+                y = ry0 + (i + 0.5) * (ry1 - ry0) / n
+                L.linea(rx0, y, rx1, y, f'stroke="{AZUL}" stroke-width="2"')
+        L.texto((rx0 + rx1) / 2, (ry0 + ry1) / 2 + 0.05, f"{n} V. de {pa['largo']:.2f}", 8,
+                'fill="#1565c0" stroke="#fff" stroke-width="3" paint-order="stroke"')
+    hx_0, hy_0, hx_1, hy_1 = vg["hueco"]["rect"]
+    L.poly([[hx_0, hy_0], [hx_1, hy_0], [hx_1, hy_1], [hx_0, hy_1]], 'fill="#fff" stroke="#555" stroke-width="1"')
+    L.linea(hx_0, hy_0, hx_1, hy_1, 'stroke="#555"')
+    L.linea(hx_0, hy_1, hx_1, hy_0, 'stroke="#555"')
+    L.texto((hx_0 + hx_1) / 2, (hy_0 + hy_1) / 2 - 0.25, "hueco escalera", 8, 'fill="#555"')
+
+    ejx, ejy = list(est["ejes_x"].values()), list(est["ejes_y"].values())
+    abajo = [m for m in muros(casa, debajo) if m["tipo"] == "ladrillo"]
+
+    def horizontal(m):
+        return abs(m["de"][1] - m["a"][1]) < 0.01
+
+    def sobre_muro(m):
+        h = horizontal(m)
+        c = m["de"][1] if h else m["de"][0]
+        lo, hi = sorted([m["de"][0], m["a"][0]] if h else [m["de"][1], m["a"][1]])
+        tapado = 0.0
+        for o in abajo:
+            if horizontal(o) != h:
+                continue
+            oc = o["de"][1] if h else o["de"][0]
+            if abs(oc - c) > 0.08:
+                continue
+            olo, ohi = sorted([o["de"][0], o["a"][0]] if h else [o["de"][1], o["a"][1]])
+            tapado += max(0.0, min(hi, ohi) - max(lo, olo))
+        return tapado >= 0.5 * (hi - lo)
+
+    cuenta = {"apoyado": 0, "cruza": 0, "paralelo": 0}
+    for m in muros(casa, nivel["id"]):
+        if m["tipo"] not in ("ladrillo", "baranda"):
+            continue
+        if m["tipo"] == "baranda" and (m.get("alto") or 1.1) <= 1.2:   # barandas livianas: solo referencia
+            L.linea(*m["de"], *m["a"], 'stroke="#9e9e9e" stroke-width="2"')
+            continue
+        h = horizontal(m)
+        c = m["de"][1] if h else m["de"][0]
+        mx, my = (m["de"][0] + m["a"][0]) / 2, (m["de"][1] + m["a"][1]) / 2
+        if any(abs(c - e) < 0.08 for e in (ejy if h else ejx)) or sobre_muro(m):
+            tipo = "apoyado"
+        else:
+            pano = next((pa for pa in vg["panos"] if pa["rect"][0] - 0.01 <= mx <= pa["rect"][2] + 0.01
+                         and pa["rect"][1] - 0.01 <= my <= pa["rect"][3] + 0.01), None)
+            if pano is None:
+                continue
+            tipo = "paralelo" if (pano["dir"] == "y") != h else "cruza"
+        cuenta[tipo] += 1
+        color = {"apoyado": "#9e9e9e", "cruza": "#ef6c00", "paralelo": "#c62828"}[tipo]
+        L.linea(*m["de"], *m["a"], f'stroke="{color}" stroke-width="{7 if tipo != "apoyado" else 5}" stroke-linecap="square"')
+    dibujar_ejes(L, casa, x0, y0, x1, y1)
+    dibujar_columnas(L, casa)
+    # leyenda
+    lx, ly = x1 - 9.0, y1 + 2.45
+    for k, (color, txt) in enumerate([("#9e9e9e", "muro sobre viga o sobre muro de abajo"),
+                                      ("#ef6c00", "muro que cruza las viguetas"),
+                                      ("#c62828", "muro paralelo a las viguetas (ingeniero)")]):
+        L.linea(lx + k * 3.2, ly, lx + k * 3.2 + 0.5, ly, f'stroke="{color}" stroke-width="6"')
+        L.texto(lx + k * 3.2 + 0.6, ly + 0.05, txt, 7, 'text-anchor="start"')
+    leyenda(L, x0 - 1.5, y1 + 1.6, f"LOSA BAJO {nivel['nombre'].upper()} (+{nivel['cota']:.2f}) — VIGUETAS",
+            "viguetas pretensadas + plastoformo, según el pedido del proveedor (las dos losas son iguales) · "
+            "posición de cada vigueta aproximada")
+    return L.svg(f"Losa — {nivel['nombre']}")
+
+
 def emplazamiento(casa):
     lt = casa["lote"]
     lx0, ly0 = lt["origen_x"], lt["origen_y"]
@@ -534,6 +623,11 @@ def main():
         f = SALIDA / f"planta-{nivel['id']}.svg"
         f.write_text(planta(casa, nivel), encoding="utf-8")
         archivos.append(f)
+    for nivel in casa["niveles"]:
+        if nivel["id"] in (casa["estructura"].get("viguetas") or {}).get("igual_en", []):
+            f = SALIDA / f"planta-losa-{nivel['id']}.svg"
+            f.write_text(planta_losa(casa, nivel), encoding="utf-8")
+            archivos.append(f)
     if casa.get("techos"):
         f = SALIDA / "planta-techos.svg"
         f.write_text(planta_techos(casa), encoding="utf-8")

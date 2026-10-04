@@ -1,8 +1,8 @@
 # Viguetas de las losas — lectura del plano del proveedor
 
 Fuente: `planos-arqui/PLANO ViGETAS.pdf`, de **Viguetas Pretensadas T.S.D.**, fechado el 24 de agosto de 2026
-(maestro: Juan; reclamos: Arq. Giovana Ayala). Es la planilla de pedido de **una** losa. Falta confirmar si es la del
-primer piso, la del altillo, o si las dos se armaron igual.
+(maestro: Juan; reclamos: Arq. Giovana Ayala). Es la planilla de pedido de una losa; **las dos losas (+3.40 y +6.60) se armaron igual** (confirmado por el
+usuario 2026-10-04). Plano generado: `salida/planta-losa-p1.svg` y `salida/planta-losa-altillo.svg`.
 
 > Lectura nuestra del dibujo. Las direcciones, cantidades y largos son los del pedido. Lo que se armó en obra lo confirma
 > el maestro o el ingeniero.
