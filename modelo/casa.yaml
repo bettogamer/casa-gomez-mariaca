@@ -406,10 +406,10 @@ muebles:
     - {tipo: sofa, nombre: Banco ventana, rect: [12.75, 0.13, 14.75, 0.90]}
     - {tipo: estante, nombre: Librero-velador, rect: [14.75, 0.13, 15.15, 0.50], alto: 2.20}
     - {tipo: cama, nombre: Queen, rect: [15.17, 0.13, 16.77, 2.13]}
-    # Cuarto 2 (sur): espejo, cabecera en el muro sur; escritorio de la computadora en la punta oeste del ropero
-    - {tipo: escritorio, nombre: Computadora, rect: [12.58, 3.41, 13.78, 4.01]}
+    # Cuarto 2 (sur): espejo, cabecera en el muro sur; mueble de computadora de ~2 m (dicho por el usuario) en la punta oeste del ropero
+    - {tipo: escritorio, nombre: Computadora, rect: [12.58, 3.41, 14.58, 4.01]}
     - {tipo: silla, rect: [12.95, 4.06, 13.40, 4.51]}
-    - {tipo: closet, nombre: Ropero empotrado, rect: [13.80, 3.41, 16.77, 3.96]}
+    - {tipo: closet, nombre: Ropero empotrado, rect: [14.60, 3.41, 16.77, 3.96]}
     - {tipo: cama, nombre: Queen, rect: [13.70, 4.54, 15.30, 6.54]}
     - {tipo: estante, nombre: Velador, rect: [13.20, 6.09, 13.65, 6.54], alto: 0.55}
     - {tipo: estante, nombre: Velador, rect: [15.35, 6.09, 15.80, 6.54], alto: 0.55}
