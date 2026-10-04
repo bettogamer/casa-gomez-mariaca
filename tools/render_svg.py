@@ -320,6 +320,14 @@ def flecha_norte(L, casa, x, y):
     L.add(f'<text x="{cx:.1f}" y="{cy + r + 14:.1f}" font-size="8" text-anchor="middle" fill="#666">frente: {ori["frente"]}</text>')
 
 
+def dibujar_proyecciones(L, casa, nivel_id):
+    """Lo que está por encima del plano de corte (aleros, tanque sobre el techo): contorno punteado."""
+    for e in (casa.get("proyecciones") or {}).get(nivel_id) or []:
+        x0, y0, x1, y1 = e["rect"]
+        L.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], 'fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="8 4"')
+        L.texto((x0 + x1) / 2, (y0 + y1) / 2 + 0.05, e["nombre"], 7, 'fill="#555" font-style="italic"')
+
+
 def leyenda(L, x, y, titulo, subt):
     L.add(f'<text x="{L.p(x, y)[0]:.1f}" y="{L.p(x, y)[1]:.1f}" font-size="18" font-weight="bold">{escape(titulo)}</text>')
     L.add(f'<text x="{L.p(x, y + 0.4)[0]:.1f}" y="{L.p(x, y + 0.4)[1]:.1f}" font-size="10" fill="#666">{escape(subt)}</text>')
@@ -346,6 +354,7 @@ def planta(casa, nivel):
     dibujar_ambientes(L, ambs)
     dibujar_escalera(L, casa, nivel["id"])
     dibujar_muebles(L, casa, nivel["id"])
+    dibujar_proyecciones(L, casa, nivel["id"])
     dibujar_ejes(L, casa, x0, y0, x1, y1)
     dibujar_muros(L, casa, nivel["id"])
     dibujar_aberturas(L, casa, nivel["id"])

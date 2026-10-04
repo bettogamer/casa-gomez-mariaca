@@ -65,6 +65,10 @@ niveles:
     cota: 6.60
     altura_libre: 3.00  # altillo aún sin techo construido; altura por definir
     altura: 3.20
+    # Techo (propuesta 2026-10-03): calamina a un agua, OCULTA detrás de un antepecho perimetral de ladrillo
+    # (desde la calle se ve una caja recta). Pendiente hacia el sur, canaleta escondida detrás del antepecho
+    # del muro sur, bajante pluvial a la franja. Estructura de madera o metal: la define el ingeniero.
+    techo: {tipo: calamina, oculto: true, pendiente_hacia: sur, estado: propuesto}
 
 estructura:
   estado: construido
@@ -203,6 +207,19 @@ muros:
   p1:
     - {id: baranda_logia, tipo: baranda, de: [-1.125, 0.00], a: [-1.125, 4.20], nota: "baranda o antepecho ≥ 1.00 m al frente de la logia"}
     - {id: baranda_logia_norte, tipo: baranda, de: [-1.125, 0.00], a: [0.00, 0.00], nota: "costado norte de la logia (≥ 1.00 m; puede ser muro bajo + vidrio)"}
+
+  altillo:
+    # Antepechos de la terraza y de la franja (≥ 1.10 m, de ladrillo: siguen la línea del antepecho del techo)
+    - {id: antepecho_frente_alt, tipo: baranda, de: [-1.125, 0.00], a: [-1.125, 6.67], nota: "antepecho del frente (terraza), ≥ 1.10 m"}
+    - {id: antepecho_norte_alt, tipo: baranda, de: [-1.125, 0.00], a: [4.40, 0.00], nota: "antepecho norte de la terraza"}
+    - {id: antepecho_sur_alt, tipo: baranda, de: [-1.125, 6.67], a: [16.90, 6.67], nota: "antepecho sur (terraza y franja, lindero)"}
+    - {id: antepecho_fondo_alt, tipo: baranda, de: [16.90, 4.67], a: [16.90, 6.67], nota: "antepecho del fondo de la franja"}
+
+# Lo que queda por encima del plano de corte (se dibuja punteado): aleros, tanque sobre el techo.
+proyecciones:
+  altillo:
+    - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
+    - {rect: [11.30, 4.67, 13.50, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
@@ -592,4 +609,6 @@ verificar_en_obra:
   - "¿Hay losa o hueco sobre el arranque de la escalera de PB (x 4.40–5.725, y 2.68–4.20)? ¿Dónde está el borde del hueco y si tiene viga de borde? Define el hall del primer piso."
   - "Altillo: confirmar con el arquitecto el retiro de 2 m al sur (desde dónde se mide), la altura máxima y el número de plantas permitidos."
   - "Tanque elevado: base propia de hormigón sobre el núcleo técnico (muro norte, ejes 3–4), oculta en un volumen de ladrillo; lo dimensiona el ingeniero."
+  - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
+  - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
