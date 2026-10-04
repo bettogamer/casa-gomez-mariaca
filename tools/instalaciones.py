@@ -334,7 +334,7 @@ def _base(casa, nivel, titulo, subt, extra=()):
     dibujar_escalera(L, casa, nivel["id"])
     dibujar_muros(L, casa, nivel["id"])
     dibujar_aberturas(L, casa, nivel["id"])
-    dibujar_columnas(L, casa)
+    dibujar_columnas(L, casa, nivel["id"])
     for a in ambs:
         cx, cy = a.get("etiqueta") or centroide(a["poly"])
         L.texto(cx, cy + 0.35, a["nombre"].upper(), 8, 'fill="#999" font-weight="bold"')
