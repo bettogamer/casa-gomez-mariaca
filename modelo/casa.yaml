@@ -286,7 +286,7 @@ aberturas:
     - {id: ventana_cocina_alt, tipo: ventana, de: [9.90, 0.00], a: [10.90, 0.00], antepecho: 1.10, alto: 2.10, estado: definido, nota: "1.00 × 1.00 al norte, sobre el lavaplatos"}
     - {id: ventana_estar_alt, tipo: ventana, de: [7.70, 0.00], a: [9.30, 0.00], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.60 × 1.10 al norte, sobre el estar"}
     - {id: puerta_hall_alt, tipo: puerta, de: [11.20, 4.45], a: [11.20, 3.65], abre_hacia: hall_alt, estado: definido, nota: "0.80, del estar a la zona privada"}
-    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.40], a: [12.15, 2.40], abre_hacia: bano_alt, estado: definido, nota: "0.70"}
+    - {id: puerta_bano_alt, tipo: puerta, de: [11.45, 2.40], a: [12.15, 2.40], abre_hacia: hall_alt, estado: definido, nota: "0.70, abre hacia el hall (hacia adentro chocaba con el termotanque)"}
     - {id: ventana_bano_alt, tipo: ventana, de: [12.00, 0.00], a: [12.60, 0.00], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.60 × 0.50 alta"}
     - {id: puerta_dorm_alt, tipo: puerta, de: [13.00, 4.55], a: [13.00, 3.80], abre_hacia: dorm_alt, estado: definido, nota: "0.75"}
     - {id: ventana_dorm_alt_norte, tipo: ventana, de: [14.20, 0.00], a: [15.70, 0.00], antepecho: 1.00, alto: 2.10, estado: definido, nota: "1.50 × 1.10 al norte"}
@@ -630,7 +630,9 @@ verificar_en_obra:
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay losa o hueco sobre el arranque de la escalera de PB (x 4.40–5.725, y 2.68–4.20)? ¿Dónde está el borde del hueco y si tiene viga de borde? Define el hall del primer piso."
   - "Altillo: confirmar con el arquitecto el retiro de 2 m al sur (desde dónde se mide), la altura máxima y el número de plantas permitidos."
-  - "Tanque elevado: base propia de hormigón sobre el núcleo técnico (muro norte, ejes 3–4), oculta en un volumen de ladrillo; lo dimensiona el ingeniero."
+  - "Tanque elevado (3–4 t con base y forro): sobre la columna A3 prolongada + otra columna (B3 o A2) con vigas de mesa; la mitad cae sobre el hueco de la escalera. Forro liviano si es posible. Lo dimensiona el ingeniero."
+  - "Altillo: ¿quedaron varillas de espera en lo alto de las columnas (+6.60)? Cuántas, diámetro y largo (define la prolongación de columnas)."
+  - "Losa del altillo: espesor real, maciza o alivianada, y dónde hay vigas (ejes A, B, C y 2–5); borde y viga del hueco de la escalera."
   - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
   - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
   - "Altillo: presión de agua (el tanque queda ~1.5 m sobre la ducha): bomba presurizadora o tanque más alto; lo define el plomero."
