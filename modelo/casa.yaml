@@ -746,5 +746,8 @@ verificar_en_obra:
   - "P1: ¿cuánto cuelga la viga del eje 3 (B3–C3) bajo la losa del altillo? Queda a la vista en el techo del estar."
   - "P1: bajante del Baño 2 en la esquina noreste del estar (≈9.30, 3.85) → almacén de PB: ¿pase de losa libre de vigas? El inodoro queda a ~1.4 m del ducto: desnivel suficiente o por cielo falso del almacén."
   - "Normativa (OM 4100/10 art. 44): la franja sur y la terraza sur llegan al lindero del Lote 103; se propone muro ciego de ~1.80 (sin vista directa) y semisombra desmontable sobre la lavandería. Confirmar con el arquitecto que así se aprueba."
+  - "Viguetas (planos-arqui/PLANO ViGETAS.pdf, ver docs/viguetas.md): ¿esa distribución es de la losa del P1, de la del altillo o de las dos? Losa alivianada con viguetas pretensadas norte–sur (en el paño 3–4 A–B, este–oeste). Falta el espesor total."
+  - "Viguetas: muros nuevos PARALELOS a las viguetas, sin muro debajo: vestidor x=5.85 y Baño 2 x=9.40 (P1), vestíbulo x=12.50 (P1), muro x=13.00 (altillo). El ingeniero decide si van de ladrillo de 6 huecos, con refuerzo, o como mueble de piso a techo."
+  - "Viguetas pretensadas: no se cortan. Ubicar cada pase de bajante o ducto entre viguetas antes de perforar."
   - "Tanque elevado: definir capacidad y medidas reales (en el 3D se dibuja uno de ~2500 L, 1.60 × 1.60 × 1.80 forrado, sobre base a +10.20; supuesto)."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
