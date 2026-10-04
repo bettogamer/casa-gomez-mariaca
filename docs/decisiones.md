@@ -287,3 +287,20 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Para el ingeniero:** muro x=5.85 en medio del paño B2-B3-C2-C3 (plan B: ropero de piso a techo); muro del Baño 2
   corrido 15 cm del de PB; viga del eje 3 a la vista en el estar; pase de la bajante del Baño 2 (ver `verificar_en_obra`).
 - **Estado:** aprobado por el usuario (revisores estructural y de habitabilidad: sin cambios incompatibles con lo construido).
+
+## 2026-10-04 — Normativa (OM 4100/10), techos y franja sur del altillo
+- **Normativa revisada:** Reglamento Complementario OM 4100/10 (`reglamento/`, resumen en `docs/normativa.md`). Zona de
+  Renovación, frente 9.02 y vía 9.00 → 3 plantas con 2.00 libres de un lado en PB/P1 y de ambos lados en el altillo,
+  **sin volado**. La casa cumple. No es pasaje.
+- **Techos (planta de techos nueva):** todo de calamina a un agua al sur. Departamento con techo **oculto** tras antepecho
+  en los cuatro lados; canaleta interior hacia el este (BP2) con rebosaderos. Terraza con techo propio de **calamina sobre
+  fierro** a la vista (postes sobre A1 y B1), más bajo, bajante BP1 en la esquina del frente. La parte sur de la terraza
+  y la franja quedan sin techar (separación de 2 m).
+- **Franja sur:** **muro ciego de ~1.80** hacia el vecino (servidumbre de vista, art. 44) y **semisombra** desmontable
+  sobre la lavandería (reemplaza el alero, que era un volado dentro de los 2 m). Tendedero al sol.
+- **Estar del P1:** se queda sin ventana propia (decisión del usuario: abierto al pasillo y ventilado por la escalera).
+- **Subida de cables (montante) en la columna B2:** tubo por debajo del contrapiso desde el TD del ingreso (antes de
+  hacer el piso); lo confirma el electricista.
+- **Para el ingeniero:** postes y voladizo de la esquina sur del techo de la terraza, peso del muro ciego sur sobre la
+  losa del altillo, antepechos del departamento.
+- **Estado:** aprobado por el usuario (cotas del techo aproximadas).

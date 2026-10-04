@@ -34,6 +34,10 @@ _Última actualización: 2026-10-04_
   adentro, terraza adelante, franja de 2 m al sur con lavandería; techo de calamina oculto; tanque sobre la
   columna A3. Instalaciones (esquema): C13–C17, anafe y termotanque eléctricos, presurizadora a definir.
 
+- **Normativa y techos (2026-10-04):** OM 4100/10 revisada (`docs/normativa.md`); planta de techos (`salida/planta-techos.svg`):
+  calamina, departamento oculto tras antepecho, terraza con techo sobre fierro; muro ciego sur de ~1.80 y semisombra
+  sobre la lavandería. Montante eléctrico en la columna B2.
+
 ## Próximo paso
 Revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`). Después, para toda la casa junta:
 exteriores (portón, jardín, parrilla en la terraza de PB, tendedero), fachada, terminaciones, carpintería y rejas.

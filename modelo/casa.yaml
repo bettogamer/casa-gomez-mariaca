@@ -37,9 +37,13 @@ lote:
   # eje C / vecino (Lote 103) = SUR, patio del fondo = ESTE (sol de mañana).
   orientacion: {frente: oeste, lado_A: norte, lado_C: sur, fondo: este, norte_en_planta: [0, -1]}
   estacionamiento: "2 autos en el jardín delantero (dicho por el usuario)"
-  # Normativa (dicho por el usuario 2026-10-03): el altillo deja 2 m libres al sur (Lote 103). Se toma desde la cara
-  # del muro medianero (y=6.795): muro del altillo en y=4.67 (cara exterior 4.795). Confirmar con el arquitecto.
+  # Normativa: Reglamento Complementario a la Normativa Urbana, OM 4100/10 (reglamento/, resumen en docs/normativa.md).
+  # Zona de Renovación de la Imagen Urbana, edificación aislada; frente 9.02 (8.01–10.00) y vía 9.00 (9.00–12.50):
+  # 3 plantas = PB y 1er piso con un retiro lateral de 2.00 (incluido voladizo) y apoyo en el otro; 2do piso
+  # (altillo) con 2.00 m en AMBOS laterales, sin volado; retiro de fondo ≥ 3.00; voladizo frontal ≤ 1.20.
+  # El 2.00 del sur se toma desde la cara del muro medianero (y=6.795): muro del altillo en y=4.67 (cara 4.795).
   retiro_altillo_sur: 2.00
+  normativa: {ordenanza: "OM 4100/10", zona: "Renovación de la Imagen Urbana — edificación aislada", plantas_max: 3, retiro_lateral: 2.00, retiro_fondo_min: 3.00, voladizo_frontal_max: 1.20}
   colindantes:
     arriba: Lote 105 — Jesús Maldonado
     abajo: Lote 103 — Germán Sánchez
@@ -65,10 +69,9 @@ niveles:
     cota: 6.60
     altura_libre: 3.00  # altillo aún sin techo construido; altura por definir
     altura: 3.20
-    # Techo (propuesta 2026-10-03): calamina a un agua, OCULTA detrás de un antepecho perimetral de ladrillo
-    # (desde la calle se ve una caja recta). Pendiente hacia el sur, canaleta escondida detrás del antepecho
-    # del muro sur, bajante pluvial a la franja. Estructura de madera o metal: la define el ingeniero.
-    techo: {tipo: calamina, oculto: true, pendiente_hacia: sur, estado: propuesto}
+    # Techo: ver la sección `techos` (planta de techos, 2026-10-04). Calamina a un agua hacia el sur, oculta tras el
+    # antepecho; la terraza con su propio techo de calamina sobre fierro.
+    techo: {tipo: calamina, oculto: true, pendiente_hacia: sur, estado: definido}
 
 estructura:
   estado: construido
@@ -226,7 +229,7 @@ muros:
     # Antepechos de la terraza y de la franja (≥ 1.10 m, de ladrillo: siguen la línea del antepecho del techo)
     - {id: antepecho_frente_alt, tipo: baranda, de: [-1.125, 0.00], a: [-1.125, 6.67], nota: "antepecho del frente (terraza), ≥ 1.10 m"}
     - {id: antepecho_norte_alt, tipo: baranda, de: [-1.125, 0.00], a: [4.40, 0.00], nota: "antepecho norte de la terraza"}
-    - {id: antepecho_sur_alt, tipo: baranda, de: [-1.125, 6.67], a: [16.90, 6.67], nota: "antepecho sur (terraza y franja, lindero)"}
+    - {id: antepecho_sur_alt, tipo: baranda, de: [-1.125, 6.67], a: [16.90, 6.67], nota: "MURO CIEGO hacia el vecino (Lote 103), ~1.80 m sobre el piso de la terraza y la franja: sin vista directa (OM 4100/10 art. 44); ladrillo de 6 huecos sobre el muro medianero"}
     - {id: antepecho_fondo_alt, tipo: baranda, de: [16.90, 4.67], a: [16.90, 6.67], nota: "antepecho del fondo de la franja"}
     - {id: baranda_hueco_alt, tipo: baranda, de: [4.40, 3.85], a: [5.72, 3.85], nota: "baranda del hueco de la escalera, 1.10 m, barrotes verticales ≤ 10 cm (bebé); puerta de seguridad removible en el último escalón"}
 
@@ -234,7 +237,69 @@ muros:
 proyecciones:
   altillo:
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
-    - {rect: [9.45, 4.67, 11.65, 5.60], nombre: "alero lavandería", nota: "alero sobre las piletas y la lavadora"}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PLANTA DE TECHOS (2026-10-04; ESQUEMA para conversar con el ingeniero y el techador). Todo de calamina.
+# - Departamento: techo OCULTO detrás de un antepecho en los cuatro lados (caja recta), a un agua al sur.
+# - Terraza: techo aparte de calamina sobre estructura de fierro a la vista (postes y vigas), más bajo que el
+#   antepecho del departamento, también al sur.
+# - Nada vuela sobre la franja de 2 m del sur (OM 4100/10: separación lateral SIN VOLADO en el 2do piso). Sobre la
+#   lavandería, semisombra liviana y desmontable.
+# Cotas aproximadas: las define el ingeniero.
+# ─────────────────────────────────────────────────────────────────────────────
+techos:
+  material: "calamina galvanizada prepintada (ondulada o trapezoidal); en el departamento con aislación (lana de vidrio + cielo raso)"
+  aguas:
+    - id: techo_depto
+      nombre: Departamento
+      poly: [[4.40, 0.00], [16.90, 0.00], [16.90, 4.67], [4.40, 4.67]]
+      cae_hacia: sur
+      pendiente: 0.15
+      cota_alta: 10.05
+      cota_baja: 9.35
+      estado: definido
+      nota: "oculto detrás del antepecho en los cuatro lados; canaleta interior junto al antepecho sur, toda hacia el este (BP2), con rebosaderos (gárgolas) a la franja cada ~4 m por si se tapa"
+    - id: techo_terraza
+      nombre: Terraza
+      poly: [[-1.125, 0.00], [4.40, 0.00], [4.40, 4.67], [-1.125, 4.67]]
+      cae_hacia: sur
+      pendiente: 0.15
+      cota_alta: 9.70
+      cota_baja: 9.00
+      estado: definido
+      nota: "calamina sobre estructura de fierro a la vista (pedido del usuario), abierta a los costados; ~2.25 libres en el borde bajo. Apoyos: postes metálicos sobre A1 y B1 y vigas hacia el muro del departamento (x=4.40); la esquina sur (y=4.67) en voladizo desde B1 o con un poste extra. Babeta contra el muro del departamento. Lo define el ingeniero"
+  antepechos:
+    - {de: [4.40, 0.00], a: [16.90, 0.00], nota: "antepecho norte del departamento: tapa el borde alto"}
+    - {de: [16.90, 0.00], a: [16.90, 4.67], nota: "antepecho del fondo, sigue la pendiente"}
+    - {de: [4.40, 4.67], a: [16.90, 4.67], nota: "antepecho sur del departamento: la canaleta va por dentro (nada sale a la franja de 2 m)"}
+    - {de: [4.40, 0.00], a: [4.40, 4.67], nota: "antepecho oeste del departamento: el techo de la terraza se apoya debajo"}
+    - {de: [-1.125, 6.67], a: [16.90, 6.67], nota: "muro ciego sur hacia el vecino, ~1.80 sobre la losa (ver muros.altillo)"}
+  postes:
+    - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
+    - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
+  # Canaletas por dentro de la línea y=4.67 (no invaden la separación de 2 m), de chapa galvanizada, 0.5%.
+  canaletas:
+    - {de: [4.55, 4.58], a: [16.78, 4.58], pendiente: 0.005}
+    - {de: [4.25, 4.58], a: [-1.00, 4.58], pendiente: 0.005}
+  # Semisombra (malla raschel o toldo) sobre la lavandería: liviana y desmontable, a la altura del antepecho sur.
+  semisombras:
+    - {rect: [9.40, 4.67, 13.00, 6.67], nombre: "semisombra lavandería", nota: "malla semisombra o toldo retráctil sobre perfiles livianos, entre el muro del departamento y el muro ciego sur; desmontable (no es techo ni volado: confirmar con el arquitecto). El tendedero queda al sol"}
+  # La terraza y la franja forman una franja continua de losa descubierta (y 4.67–6.67): punto alto al medio,
+  # caída 1.5% hacia las dos esquinas sur, donde están los sumideros y las bajantes pluviales.
+  pendientes_losa:
+    - {de: [7.90, 6.05], a: [0.20, 6.05], texto: "losa 1.5%"}
+    - {de: [7.90, 6.05], a: [15.60, 6.05], texto: "losa 1.5%"}
+    - {de: [-0.55, 2.80], a: [-0.55, 4.40], texto: "piso 1%"}
+  sumideros:
+    - {pos: [-0.75, 6.40]}
+    - {pos: [16.55, 6.40]}
+  # Cada canaleta baja por un tubo pegado al antepecho hasta la bajante de la esquina (no se vuelca sobre la losa).
+  conexiones:
+    - [[-1.00, 4.58], [-1.00, 6.55]]
+    - [[16.78, 4.58], [16.78, 6.55]]
+  bajantes:
+    - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: techo de la terraza + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
+    - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): techo del departamento + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
@@ -478,7 +543,7 @@ muebles:
     - {tipo: silla, rect: [1.60, 3.05, 2.05, 3.50]}
     - {tipo: silla, rect: [0.10, 2.32, 0.55, 2.77]}
     - {tipo: silla, rect: [2.45, 2.32, 2.90, 2.77]}
-    # Franja sur: lavandería (piletas + lavadora manual) con alero, y tendedero
+    # Franja sur: lavandería (piletas + lavadora manual) bajo semisombra, y tendedero al sol
     - {tipo: lavadero, nombre: Piletas, rect: [9.55, 4.75, 10.75, 5.35]}
     - {tipo: lavadora, nombre: Lavadora manual, rect: [10.80, 4.75, 11.40, 5.35]}
     - {tipo: alfombra, nombre: Tendedero, rect: [13.80, 5.00, 16.60, 6.45]}
@@ -490,6 +555,10 @@ instalaciones:
   pb:
     electrico:
       tablero: {pos: [2.75, 6.45], nota: "TD en el hall, junto al ingreso"}
+      # Montante: tubos dejados en la losa por los albañiles, al lado sur de la columna B2 (dicho por el usuario 2026-10-04): por ahí suben los cables a los pisos de arriba. En PB no hay camino definido: se propone
+      # bajar del TD al contrapiso (el piso aún no está hecho), ir por debajo del piso y subir por el muro x=4.40 (lado living).
+      montante: {pos: [4.40, 2.88], etiqueta: "montante ↑ P1 y altillo (B2)"}
+      alimentador: [[2.75, 6.45], [4.28, 6.45], [4.28, 2.88], [4.40, 2.88]]
       acometida: {pos: [-0.30, 6.10], nota: "desde el medidor en el muro de la calle (frente del lote)"}
       timbre: [-0.20, 6.45]
       luces_extra:
@@ -540,6 +609,8 @@ instalaciones:
 
   p1:
     electrico:
+      montante: {pos: [4.40, 2.88], etiqueta: "montante ↕ (B2)"}
+      alimentador: [[4.40, 2.88], [4.52, 3.12]]
       tablero: {pos: [4.52, 3.12], nota: "subtablero del primer piso junto a la columna B2 (corrido hacia la puerta del dormitorio: no al pie de la grada al altillo), lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): los tubos salen por la cara sur de B2, dentro de ese mismo muro (dicho por el usuario 2026-10-04); alimentado desde el TD de PB (tubos por dentro de B2 en las dos losas)"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
@@ -578,6 +649,8 @@ instalaciones:
 
   altillo:
     electrico:
+      montante: {pos: [4.40, 2.88], etiqueta: "montante ↓ (B2)"}
+      alimentador: [[4.40, 2.88], [4.40, 3.95], [4.75, 3.95], [4.75, 4.55]]
       tablero: {pos: [4.75, 4.55], nota: "subtablero del altillo en la llegada (zona común), muro sur junto a la puerta de la terraza: los tubos salen por la cara sur de B2 (dicho por el usuario 2026-10-04) dentro del muro x=4.40, que del lado de la llegada da al hueco de la escalera y del otro a la terraza; siguen ~2 m por ese muro y el muro sur hasta el tablero. Puede llevar medidor propio si se alquila"}
     sanitario:
       # El gas no llega: anafe eléctrico y termotanque eléctrico propio. El tanque está encima (~1.5 m sobre la ducha):
@@ -663,9 +736,10 @@ verificar_en_obra:
   - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
   - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
   - "Altillo: presión de agua (el tanque queda ~1.5 m sobre la ducha): bomba presurizadora o tanque más alto; lo define el plomero."
-  - "Columna B2: los tubos para los tableros salen en las dos losas (+3.40 y +6.60, dicho por el usuario). Salen por la cara sur. Falta: ¿dónde arrancan en PB (cómo llegan desde el TD del ingreso)?"
+  - "Columna B2: tubitos para los cables en las dos losas (+3.40 y +6.60), al lado sur de la columna (dicho por el usuario). Contar cuántos y de qué diámetro. En PB no hay camino: se propone tubo por debajo del contrapiso desde el TD del ingreso hasta el muro x=4.40 (definirlo ANTES de hacer el piso; lo confirma el electricista)."
   - "P1 (2026-10-04): ¿la losa B2-B3-C2-C3 aguanta el muro nuevo del vestidor en x=5.85 (2.47 m de ladrillo de 6 huecos, en medio del paño, en L con el de y=4.20) más los roperos? Si no: ropero de piso a techo como división."
   - "P1: muro norte del Baño 2 en y=3.88, corrido 15 cm del muro de PB (y=3.73): ¿se acepta? Impermeabilizar (ducha pegada)."
   - "P1: ¿cuánto cuelga la viga del eje 3 (B3–C3) bajo la losa del altillo? Queda a la vista en el techo del estar."
   - "P1: bajante del Baño 2 en la esquina noreste del estar (≈9.30, 3.85) → almacén de PB: ¿pase de losa libre de vigas? El inodoro queda a ~1.4 m del ducto: desnivel suficiente o por cielo falso del almacén."
+  - "Normativa (OM 4100/10 art. 44): la franja sur y la terraza sur llegan al lindero del Lote 103; se propone muro ciego de ~1.80 (sin vista directa) y semisombra desmontable sobre la lavandería. Confirmar con el arquitecto que así se aprueba."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."

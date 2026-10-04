@@ -375,6 +375,119 @@ def planta(casa, nivel):
     return L.svg(nivel["nombre"])
 
 
+def _flecha(L, a, b, estilo, punta=0.18):
+    """Línea de a hacia b con punta de flecha en b."""
+    L.linea(a[0], a[1], b[0], b[1], estilo)
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    n = math.hypot(dx, dy) or 1
+    ux, uy = dx / n, dy / n
+    p1 = (b[0] - ux * punta - uy * punta * 0.5, b[1] - uy * punta + ux * punta * 0.5)
+    p2 = (b[0] - ux * punta + uy * punta * 0.5, b[1] - uy * punta - ux * punta * 0.5)
+    color = estilo.split('stroke="')[1].split('"')[0]
+    L.poly([b, p1, p2], f'fill="{color}"')
+
+
+CAIDA = {"sur": (0, 1), "norte": (0, -1), "este": (1, 0), "oeste": (-1, 0)}
+
+
+def planta_techos(casa):
+    """Planta de techos: aguas de calamina, pendientes, canaletas, bajantes pluviales y sumideros."""
+    t = casa.get("techos") or {}
+    hx0, hy0, hx1, hy1 = huella_casa(casa)
+    ambs = ambientes(casa, "altillo")
+    pts = [p for a in ambs for p in a["poly"]] + [[hx0, hy0], [hx1, hy1]]
+    x0, y0 = min(p[0] for p in pts), min(p[1] for p in pts)
+    x1, y1 = max(p[0] for p in pts), max(p[1] for p in pts)
+    L = Lienzo(x0, y0, x1, y1)
+    # losa del altillo y ambientes debajo (referencia tenue)
+    L.poly([[hx0, hy0], [hx1, hy0], [hx1, hy1], [hx0, hy1]], 'fill="#f1f3f4" stroke="#bbb" stroke-width="1"')
+    for a in ambs:
+        L.poly(a["poly"], 'fill="none" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"')
+    AZUL = "#1565c0"
+    for ag in t.get("aguas", []):
+        poly = ag["poly"]
+        L.poly(poly, 'fill="#cfd8dc" fill-opacity="0.85" stroke="#455a64" stroke-width="1.5"')
+        ax0, ay0 = min(p[0] for p in poly), min(p[1] for p in poly)
+        ax1, ay1 = max(p[0] for p in poly), max(p[1] for p in poly)
+        dx, dy = CAIDA[ag["cae_hacia"]]
+        # ondas de la calamina: corren en el sentido de la caída
+        if dy:
+            x = ax0 + 0.25
+            while x < ax1:
+                L.linea(x, ay0, x, ay1, 'stroke="#90a4ae" stroke-width="0.6"')
+                x += 0.25
+        else:
+            y = ay0 + 0.25
+            while y < ay1:
+                L.linea(ax0, y, ax1, y, 'stroke="#90a4ae" stroke-width="0.6"')
+                y += 0.25
+        cx, cy = (ax0 + ax1) / 2, (ay0 + ay1) / 2
+        largo = 1.6
+        _flecha(L, (cx - dx * largo / 2, cy - dy * largo / 2), (cx + dx * largo / 2, cy + dy * largo / 2),
+                'stroke="#b71c1c" stroke-width="2.5"', 0.3)
+        ty = cy - 1.0
+        L.add(f'<rect x="{L.p(cx + 0.25, ty - 0.32)[0]:.1f}" y="{L.p(cx + 0.25, ty - 0.32)[1]:.1f}" width="{2.2 * ESC:.0f}" height="{0.62 * ESC:.0f}" fill="#fff" fill-opacity="0.85"/>')
+        L.texto(cx + 0.35, ty - 0.08, f"{ag['nombre']}", 9, 'font-weight="bold" text-anchor="start"')
+        L.texto(cx + 0.35, ty + 0.20, f"cae {ag['pendiente'] * 100:.0f}% al {ag['cae_hacia']}", 8, 'fill="#b71c1c" text-anchor="start"')
+        if "cota_alta" in ag:
+            L.texto(cx, ay0 + 0.35, f"borde alto ≈ +{ag['cota_alta']:.2f}", 7, 'fill="#37474f"')
+            L.texto(cx, ay1 - 0.15, f"borde bajo ≈ +{ag['cota_baja']:.2f}", 7, 'fill="#37474f"')
+    for m in t.get("antepechos", []):
+        L.linea(*m["de"], *m["a"], 'stroke="#424242" stroke-width="6"')
+    for ss in t.get("semisombras", []):
+        sx0, sy0, sx1, sy1 = ss["rect"]
+        L.poly([[sx0, sy0], [sx1, sy0], [sx1, sy1], [sx0, sy1]], 'fill="#c8e6c9" fill-opacity="0.6" stroke="#2e7d32" stroke-width="1.2" stroke-dasharray="6 3"')
+        x = sx0 + 0.3
+        while x < sx1:
+            L.linea(x, sy0, x - 0.3, sy1, 'stroke="#66bb6a" stroke-width="0.6"')
+            x += 0.3
+        L.texto((sx0 + sx1) / 2, sy0 + 1.15, ss["nombre"], 7, 'fill="#1b5e20" font-style="italic"')
+    for m in t.get("cenefas", []):
+        L.linea(*m["de"], *m["a"], 'stroke="#6d4c41" stroke-width="4"')
+    # losa descubierta: pendientes hacia los sumideros
+    for pl in t.get("pendientes_losa", []):
+        _flecha(L, pl["de"], pl["a"], f'stroke="{AZUL}" stroke-width="1" stroke-dasharray="5 3"', 0.18)
+        L.texto((pl["de"][0] + pl["a"][0]) / 2, (pl["de"][1] + pl["a"][1]) / 2 - 0.1, pl.get("texto", ""), 7, f'fill="{AZUL}"')
+    for c in t.get("canaletas", []):
+        L.linea(*c["de"], *c["a"], f'stroke="{AZUL}" stroke-width="4"')
+        mx, my = (c["de"][0] + c["a"][0]) / 2, (c["de"][1] + c["a"][1]) / 2
+        sx = 1 if c["a"][0] > c["de"][0] else -1
+        _flecha(L, (mx - sx * 0.4, my + 0.28), (mx + sx * 0.4, my + 0.28), f'stroke="{AZUL}" stroke-width="1.2"', 0.15)
+        L.texto(mx, my + 0.55, f"canaleta {c.get('pendiente', 0.005) * 100:.1f}%", 7, f'fill="{AZUL}"')
+    for linea in t.get("conexiones", []):
+        for a, b in zip(linea, linea[1:]):
+            L.linea(*a, *b, f'stroke="{AZUL}" stroke-width="2" stroke-dasharray="4 2"')
+    for sm in t.get("sumideros", []):
+        x, y = sm["pos"]
+        L.poly([[x - 0.12, y - 0.12], [x + 0.12, y - 0.12], [x + 0.12, y + 0.12], [x - 0.12, y + 0.12]], f'fill="#fff" stroke="{AZUL}" stroke-width="1.2"')
+        L.linea(x - 0.12, y - 0.12, x + 0.12, y + 0.12, f'stroke="{AZUL}"')
+        L.linea(x - 0.12, y + 0.12, x + 0.12, y - 0.12, f'stroke="{AZUL}"')
+    for bp in t.get("bajantes", []):
+        x, y = bp["pos"]
+        cx_, cy_ = L.p(x, y)
+        L.add(f'<circle cx="{cx_:.1f}" cy="{cy_:.1f}" r="7" fill="{AZUL}"/>')
+        L.texto(x, y + 0.48, f"{bp['id']} ↓", 8, f'fill="{AZUL}" font-weight="bold"')
+    for po in t.get("postes", []):
+        x, y = po["pos"]
+        L.poly([[x - 0.08, y - 0.08], [x + 0.08, y - 0.08], [x + 0.08, y + 0.08], [x - 0.08, y + 0.08]], 'fill="#212121"')
+    dibujar_proyecciones(L, casa, "altillo")
+    dibujar_ejes(L, casa, x0, y0, x1, y1)
+    dibujar_columnas(L, casa, "altillo")
+    L.texto(6.30, 6.45, "franja 2 m descubierta (retiro)", 8, 'fill="#777" font-style="italic"')
+    L.texto(1.60, 6.45, "terraza descubierta", 8, 'fill="#777" font-style="italic"')
+    # leyenda de símbolos
+    lx, ly = x1 - 5.2, y1 + 2.45
+    L.linea(lx, ly, lx + 0.5, ly, f'stroke="{AZUL}" stroke-width="4"'); L.texto(lx + 0.6, ly + 0.05, "canaleta", 7, 'text-anchor="start"')
+    cx_, cy_ = L.p(lx + 2.0, ly)
+    L.add(f'<circle cx="{cx_:.1f}" cy="{cy_:.1f}" r="5" fill="{AZUL}"/>'); L.texto(lx + 2.2, ly + 0.05, "bajante pluvial", 7, 'text-anchor="start"')
+    L.linea(lx + 4.0, ly, lx + 4.5, ly, 'stroke="#424242" stroke-width="6"'); L.texto(lx + 4.6, ly + 0.05, "antepecho", 7, 'text-anchor="start"')
+    L.linea(lx, ly + 0.4, lx + 0.5, ly + 0.4, 'stroke="#6d4c41" stroke-width="4"'); L.texto(lx + 0.6, ly + 0.45, "cenefa", 7, 'text-anchor="start"')
+    L.poly([[lx + 1.92, ly + 0.32], [lx + 2.08, ly + 0.32], [lx + 2.08, ly + 0.48], [lx + 1.92, ly + 0.48]], 'fill="#212121"'); L.texto(lx + 2.2, ly + 0.45, "poste metálico", 7, 'text-anchor="start"')
+    leyenda(L, x0 - 1.5, y1 + 1.6, "PLANTA DE TECHOS (esquema)",
+            "calamina a un agua · flecha roja = caída del techo · azul = agua de lluvia · cotas aproximadas, las define el ingeniero")
+    return L.svg("Planta de techos")
+
+
 def emplazamiento(casa):
     lt = casa["lote"]
     lx0, ly0 = lt["origen_x"], lt["origen_y"]
@@ -407,6 +520,10 @@ def main():
     for nivel in casa["niveles"]:
         f = SALIDA / f"planta-{nivel['id']}.svg"
         f.write_text(planta(casa, nivel), encoding="utf-8")
+        archivos.append(f)
+    if casa.get("techos"):
+        f = SALIDA / "planta-techos.svg"
+        f.write_text(planta_techos(casa), encoding="utf-8")
         archivos.append(f)
     f = SALIDA / "emplazamiento.svg"
     f.write_text(emplazamiento(casa), encoding="utf-8")

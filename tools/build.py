@@ -26,6 +26,9 @@ def tablero(casa, res, resumen, cargas):
         f'<section><h2>{escape(n["nombre"])}</h2>{(SALIDA / ("planta-" + n["id"] + ".svg")).read_text(encoding="utf-8")}</section>'
         for n in casa["niveles"]
     )
+    techos = SALIDA / "planta-techos.svg"
+    if techos.exists():
+        plantas += f'<section><h2>Planta de techos</h2>{techos.read_text(encoding="utf-8")}</section>'
     empl = (SALIDA / "emplazamiento.svg").read_text(encoding="utf-8")
     inst = ""
     for nid, filas in cargas.items():
