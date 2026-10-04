@@ -391,6 +391,15 @@ def plano_electrico(casa, nivel):
         L.linea(x - 1.4, y, x, y, 'stroke="#212121" stroke-width="2"')
         L.linea(x, y, tx, ty, 'stroke="#212121" stroke-width="1.2" stroke-dasharray="6 3"')
         L.texto(x - 1.0, y - 0.15, "← medidor (calle)", 7, 'fill="#212121"')
+    # alimentador entre el tablero y el montante (tubos que suben por las losas)
+    for linea in _lineas(cfg.get("alimentador")):
+        for a, c in zip(linea, linea[1:]):
+            L.linea(a[0], a[1], c[0], c[1], 'stroke="#212121" stroke-width="1.2" stroke-dasharray="6 3"')
+    if cfg.get("montante"):
+        x, y = cfg["montante"]["pos"]
+        _circulo(L, x, y, 0.12, 'fill="#fff" stroke="#212121" stroke-width="1.5"')
+        L.linea(x - 0.08, y + 0.08, x + 0.08, y - 0.08, 'stroke="#212121" stroke-width="1.2"')
+        L.texto(x - 0.18, y + 0.30, cfg["montante"].get("etiqueta", "montante"), 6, 'fill="#212121" text-anchor="end"')
     if cfg.get("timbre"):
         x, y = cfg["timbre"]
         _circulo(L, x, y, 0.08, 'fill="#fff" stroke="#212121"')

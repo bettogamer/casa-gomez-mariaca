@@ -490,6 +490,10 @@ instalaciones:
   pb:
     electrico:
       tablero: {pos: [2.75, 6.45], nota: "TD en el hall, junto al ingreso"}
+      # Montante: tubos dejados en la losa por los albañiles, al lado sur de la columna B2 (dicho por el usuario 2026-10-04): por ahí suben los cables a los pisos de arriba. En PB no hay camino definido: se propone
+      # bajar del TD al contrapiso (el piso aún no está hecho), ir por debajo del piso y subir por el muro x=4.40 (lado living).
+      montante: {pos: [4.40, 2.88], etiqueta: "montante ↑ P1 y altillo (B2)"}
+      alimentador: [[2.75, 6.45], [4.28, 6.45], [4.28, 2.88], [4.40, 2.88]]
       acometida: {pos: [-0.30, 6.10], nota: "desde el medidor en el muro de la calle (frente del lote)"}
       timbre: [-0.20, 6.45]
       luces_extra:
@@ -540,6 +544,8 @@ instalaciones:
 
   p1:
     electrico:
+      montante: {pos: [4.40, 2.88], etiqueta: "montante ↕ (B2)"}
+      alimentador: [[4.40, 2.88], [4.52, 3.12]]
       tablero: {pos: [4.52, 3.12], nota: "subtablero del primer piso junto a la columna B2 (corrido hacia la puerta del dormitorio: no al pie de la grada al altillo), lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): los tubos salen por la cara sur de B2, dentro de ese mismo muro (dicho por el usuario 2026-10-04); alimentado desde el TD de PB (tubos por dentro de B2 en las dos losas)"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
@@ -578,6 +584,8 @@ instalaciones:
 
   altillo:
     electrico:
+      montante: {pos: [4.40, 2.88], etiqueta: "montante ↓ (B2)"}
+      alimentador: [[4.40, 2.88], [4.40, 3.95], [4.75, 3.95], [4.75, 4.55]]
       tablero: {pos: [4.75, 4.55], nota: "subtablero del altillo en la llegada (zona común), muro sur junto a la puerta de la terraza: los tubos salen por la cara sur de B2 (dicho por el usuario 2026-10-04) dentro del muro x=4.40, que del lado de la llegada da al hueco de la escalera y del otro a la terraza; siguen ~2 m por ese muro y el muro sur hasta el tablero. Puede llevar medidor propio si se alquila"}
     sanitario:
       # El gas no llega: anafe eléctrico y termotanque eléctrico propio. El tanque está encima (~1.5 m sobre la ducha):
@@ -663,7 +671,7 @@ verificar_en_obra:
   - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
   - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
   - "Altillo: presión de agua (el tanque queda ~1.5 m sobre la ducha): bomba presurizadora o tanque más alto; lo define el plomero."
-  - "Columna B2: los tubos para los tableros salen en las dos losas (+3.40 y +6.60, dicho por el usuario). Salen por la cara sur. Falta: ¿dónde arrancan en PB (cómo llegan desde el TD del ingreso)?"
+  - "Columna B2: tubitos para los cables en las dos losas (+3.40 y +6.60), al lado sur de la columna (dicho por el usuario). Contar cuántos y de qué diámetro. En PB no hay camino: se propone tubo por debajo del contrapiso desde el TD del ingreso hasta el muro x=4.40 (definirlo ANTES de hacer el piso; lo confirma el electricista)."
   - "P1 (2026-10-04): ¿la losa B2-B3-C2-C3 aguanta el muro nuevo del vestidor en x=5.85 (2.47 m de ladrillo de 6 huecos, en medio del paño, en L con el de y=4.20) más los roperos? Si no: ropero de piso a techo como división."
   - "P1: muro norte del Baño 2 en y=3.88, corrido 15 cm del muro de PB (y=3.73): ¿se acepta? Impermeabilizar (ducha pegada)."
   - "P1: ¿cuánto cuelga la viga del eje 3 (B3–C3) bajo la losa del altillo? Queda a la vista en el techo del estar."
