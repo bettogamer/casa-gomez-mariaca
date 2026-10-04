@@ -162,7 +162,12 @@ ambientes:
     # ── Primer piso, fondo: cuartos gemelos de los hijos y sus baños (aprobado 2026-10-03) ──
     # Baños privados pegados al eje 4 (puerta desde cada cuarto) y roperos empotrados en los cuartos.
     # Entre la escalera y los baños: blancos al norte y estar al sur (entre el vestidor y el Baño 2). Cuartos en todo A4–C5.
-    - {id: pasillo_p1, nombre: Pasillo, tipo: circulacion, rect: [7.05, 2.68, 11.20, 3.73], estado: definido, nota: "desde la llegada de la escalera; mismo trazo que el pasillo de PB (0.90 libres, 0.85 en la columna B4)"}
+    - id: pasillo_p1
+      nombre: Pasillo
+      tipo: circulacion
+      poly: [[7.05, 2.68], [11.20, 2.68], [11.20, 3.88], [9.40, 3.88], [9.40, 3.73], [7.05, 3.73]]
+      estado: propuesto
+      nota: "desde la llegada de la escalera, abierto al estar; entre los baños 1.05 libres (1.00 en la columna B4): se le quitaron 15 cm al Baño 2"
     - {id: blancos, nombre: Blancos, tipo: servicio, rect: [7.05, 0.00, 9.40, 2.68], etiqueta: [8.22, 2.30], estado: propuesto, nota: "cuarto de blancos y limpieza, desde el pasillo; ventana chica al norte para ventilar; encima del baño de PB"}
     - {id: bano_hijo_1, nombre: Baño 1, tipo: bano, rect: [9.40, 0.00, 11.20, 2.68], etiqueta: [10.30, 2.30], estado: definido, nota: "privado del Cuarto 1 (puerta por el eje 4); ~1.65 × 2.50 libres (como el de PB); ventana al retiro; bajante por fuera en el núcleo técnico (desviarla a x ≤ 9.25 para no tapar la ventana del estudio de PB)"}
     - id: estar_p1
@@ -172,7 +177,7 @@ ambientes:
       etiqueta: [7.60, 6.20]
       estado: propuesto
       nota: "sala de TV familiar, más amplia (~3.4 × 2.3 libres + la entrada; ~9.5 m²); abierta al pasillo y al hall (sin muro: se ve desde la llegada de la escalera); SIN VENTANA: el muro sur es medianero (Lote 103); muro x=5.85 sin muro debajo: ladrillo de 6 huecos; ducto de la bajante del Baño 2 en la esquina noreste"
-    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.73, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.80 libres, mismo ancho que el Baño 1; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo de 6 huecos); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga)"}
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.88, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: propuesto, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.65 libres (15 cm menos para ensanchar el pasillo), mismo ancho que el Baño 1; muro norte en y=3.88, sin muro debajo (el de PB está en 3.73): ladrillo de 6 huecos; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo de 6 huecos); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga)"}
     - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 12.50, 4.085], etiqueta: [11.85, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
     - id: cuarto_hijo_1
       nombre: Cuarto 1
@@ -265,8 +270,9 @@ aberturas:
     - {id: ventana_cocina, tipo: ventana, de: [16.90, 4.55], a: [16.90, 5.75], antepecho: 1.05, alto: 2.10, nota: "1.20 × 1.05 sobre el lavaplatos, al patio"}
   p1:
     - {id: escalera_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], estado: definido, nota: "llegada de la escalera al pasillo"}
-    - {id: pasillo_vest, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.73], estado: definido}
+    - {id: pasillo_vest, tipo: vano, de: [11.20, 2.68], a: [11.20, 3.88], estado: definido}
     - {id: estar_pasillo, tipo: vano, de: [7.05, 3.73], a: [9.40, 3.73], estado: propuesto, nota: "estar abierto al pasillo"}
+    - {id: estar_pasillo_esquina, tipo: vano, de: [9.40, 3.73], a: [9.40, 3.88], estado: propuesto}
     - {id: estar_hall, tipo: vano, de: [7.05, 3.73], a: [7.05, 4.20], estado: propuesto, nota: "estar abierto al hall"}
     - {id: estar_hall_sur, tipo: vano, de: [5.85, 4.20], a: [7.05, 4.20], estado: propuesto, nota: "sin muro entre el hall y el estar: al subir se ve el estar, no una pared"}
     - {id: ventana_blancos, tipo: ventana, de: [7.70, 0.00], a: [8.70, 0.00], antepecho: 1.50, alto: 2.10, estado: propuesto, nota: "1.00 × 0.60 alta al norte, para ventilar los blancos"}
@@ -386,9 +392,9 @@ muebles:
     - {tipo: estante, rect: [7.13, 0.53, 7.58, 1.75], alto: 2.10}
     - {tipo: estante, rect: [8.87, 0.53, 9.32, 2.60], alto: 2.10}
     # Baño 2 (privado del Cuarto 2): ducha junto al pasillo, inodoro contra el muro x=9.40
-    - {tipo: ducha, rect: [9.48, 3.81, 11.12, 4.71]}
-    - {tipo: inodoro, rect: [9.48, 4.95, 10.17, 5.35]}
-    - {tipo: lavamanos, rect: [10.67, 4.85, 11.12, 5.40]}
+    - {tipo: ducha, rect: [9.48, 3.96, 11.12, 4.86]}
+    - {tipo: inodoro, rect: [9.48, 5.05, 10.17, 5.45]}
+    - {tipo: lavamanos, rect: [10.67, 4.95, 11.12, 5.50]}
     # Cuarto 1 (norte, hija): banco-cama empotrado bajo la ventana norte entre dos libreros (pedido de la hija,
     # foto de referencia); cama contra el muro del patio con un solo velador (el librero); escritorio junto a la
     # ventana; ropero empotrado contra el muro entre cuartos (aísla el ruido)
@@ -558,8 +564,8 @@ instalaciones:
           estado: definido
           nota: "extractor de los lavamanos de la suite → frente, por el cielo falso del inodoro"
       cielos_falsos:
-        - {rect: [9.40, 3.73, 11.20, 6.67], alto: 2.70, nota: "Baño 2 de los hijos"}
-        - {rect: [10.60, 2.68, 11.20, 3.73], alto: 2.70, nota: "franja del pasillo"}
+        - {rect: [9.40, 3.88, 11.20, 6.67], alto: 2.70, nota: "Baño 2 de los hijos"}
+        - {rect: [10.60, 2.68, 11.20, 3.88], alto: 2.70, nota: "franja del pasillo"}
         - {rect: [9.40, 0.00, 11.20, 2.68], alto: 2.70, nota: "Baño 1 de los hijos"}
         - {rect: [-1.125, 4.20, 3.40, 5.45], alto: 2.70, nota: "inodoro y lavamanos de la suite"}
 
