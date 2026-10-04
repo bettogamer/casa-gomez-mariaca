@@ -38,9 +38,11 @@ PLANTILLA = r"""<!doctype html>
     <label><input type="checkbox" id="muebles" checked> Muebles</label>
     <label><input type="checkbox" id="etiquetas" checked> Nombres de ambientes</label>
     <label><input type="checkbox" id="lote" checked> Lote</label>
+    <label><input type="checkbox" id="techos"> Techos y tanque</label>
   </div>
   <div class="grupo"><b>Vistas</b><br><select id="vista" style="width:100%;margin-top:4px"><option value="">— elegir un ambiente —</option></select>
-    <button id="vista-general" style="margin-top:6px">Vista general</button></div>
+    <button id="vista-general" style="margin-top:6px">Vista general</button>
+    <button id="vista-techos" style="margin-top:6px">Vista con techos</button></div>
   <div class="mini">Arrastrar: girar · Rueda: zoom · Clic derecho: mover<br>Rojo = columnas construidas</div>
 </div>
 <div id="info">Generado desde modelo/casa.yaml</div>
@@ -183,7 +185,8 @@ D.niveles.forEach(nv => {
       }
       return;
     }
-    const alto = m.alto ? Math.min(m.alto, nv.alto_muro) : nv.alto_muro;   // bajo la escalera, hasta su cara inferior
+    // barandas y antepechos con su propio alto; bajo la escalera, hasta su cara inferior
+    const alto = m.alto ? Math.min(m.alto, nv.alto_muro) : (m.tipo === "baranda" ? 1.1 : nv.alto_muro);
     const w = segmento(m.de, m.a, nv.cota, nv.cota + alto, m.grosor, 0xf4f1ea);
     w.userData.alto = alto; w.userData.base = nv.cota;
     muros.push(w); grupo.add(w);
@@ -216,6 +219,54 @@ D.niveles.forEach(nv => {
   cont.appendChild(lb);
 });
 
+// Techos (planta de techos del modelo): aguas inclinadas, antepechos, tanque, postes, canaletas, bajantes, semisombra
+G.techos = new THREE.Group();
+escena.add(G.techos);
+if (D.techos) {
+  const T = D.techos;
+  T.aguas.forEach(ag => {
+    const ts = ag.poly.map(p => p[0] * ag.dir[0] + p[1] * ag.dir[1]);
+    const t0 = Math.min(...ts), t1 = Math.max(...ts);
+    const h = p => ag.alta - ((p[0] * ag.dir[0] + p[1] * ag.dir[1] - t0) / ((t1 - t0) || 1)) * (ag.alta - ag.baja);
+    const v = ag.poly.map(p => new THREE.Vector3(p[0], h(p), p[1]));
+    const g = new THREE.BufferGeometry().setFromPoints([v[0], v[1], v[2], v[0], v[2], v[3]]);
+    g.computeVertexNormals();
+    const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0x90a4ae, side: THREE.DoubleSide }));
+    m.castShadow = m.receiveShadow = true;
+    G.techos.add(m);
+    // ondas de la calamina: líneas en el sentido de la caída
+    const perp = [-ag.dir[1], ag.dir[0]];
+    const ps = ag.poly.map(p => p[0] * perp[0] + p[1] * perp[1]);
+    const pts = [];
+    for (let s = Math.min(...ps) + 0.25; s < Math.max(...ps); s += 0.25) {
+      const a = [perp[0] * s + ag.dir[0] * t0, perp[1] * s + ag.dir[1] * t0];
+      const b = [perp[0] * s + ag.dir[0] * t1, perp[1] * s + ag.dir[1] * t1];
+      pts.push(new THREE.Vector3(a[0], h(a) + 0.01, a[1]), new THREE.Vector3(b[0], h(b) + 0.01, b[1]));
+    }
+    G.techos.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: 0x607d8b })));
+  });
+  T.antepechos.forEach(a => G.techos.add(segmento(a.de, a.a, a.base, a.tope, 0.15, 0xf4f1ea)));
+  if (T.tanque) {
+    const [x0, z0, x1, z1] = T.tanque.rect, b = T.tanque.cota_base;
+    G.techos.add(caja(x0, b - 0.20, z0, x1, b, z1, 0x9e9e9e));                       // base de hormigón
+    G.techos.add(caja(x0 + 0.05, b, z0 + 0.05, x1 - 0.05, b + T.tanque.alto, z1 - 0.05, 0xc1866b));  // forro de ladrillo
+    G.techos.add(caja(x0, b + T.tanque.alto, z0, x1, b + T.tanque.alto + 0.08, z1, 0xbdbdbd));       // tapa
+    const s = etiqueta("Tanque " + (T.tanque.capacidad || ""), (x0 + x1) / 2, b + T.tanque.alto + 0.6, (z0 + z1) / 2);
+    G.techos.add(s);
+  }
+  T.postes.forEach(p => G.techos.add(caja(p.pos[0] - 0.05, 6.60, p.pos[1] - 0.05, p.pos[0] + 0.05, p.tope, p.pos[1] + 0.05, 0x37474f)));
+  T.canaletas.forEach(c => G.techos.add(segmento(c.de, c.a, c.cota, c.cota + 0.12, 0.12, 0x1565c0)));
+  T.bajantes.forEach(b => {
+    const cil = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, b.tope, 12), new THREE.MeshLambertMaterial({ color: 0x1565c0 }));
+    cil.position.set(b.pos[0], b.tope / 2, b.pos[1]);
+    G.techos.add(cil);
+  });
+  T.semisombras.forEach(s => {
+    const [x0, z0, x1, z1] = s.rect;
+    G.techos.add(caja(x0, s.cota, z0, x1, s.cota + 0.02, z1, 0x2e7d32, { op: 0.45 }));
+  });
+}
+
 function alturaMuros() {
   const corte = document.getElementById("corte").checked;
   Object.values(G.niveles).forEach(g => g.userData.muros.forEach(m => {
@@ -241,6 +292,8 @@ function actualizar() {
     : Math.min(E.alto_columnas, tope + (document.getElementById("corte").checked ? 1.2 : 3.0));
   COLUMNAS.forEach(c => { c.scale.y = altoCol / E.alto_columnas; c.position.y = altoCol / 2; });
   G.lote.visible = document.getElementById("lote").checked;
+  const conTecho = document.getElementById("techos").checked;
+  G.techos.visible = modo === "proyecto" && conTecho && vis["altillo"] !== false;
   Object.values(G.niveles).forEach(g => g.userData.muebles.visible = document.getElementById("muebles").checked);
   alturaMuros();
   document.getElementById("info").textContent = modo === "obra"
@@ -275,6 +328,7 @@ function irAVista(k) {
   });
   document.getElementById("corte").checked = true;
   document.getElementById("muebles").checked = true;
+  document.getElementById("techos").checked = false;
   actualizar();
   const xs = a.poly.map(p => p[0]), zs = a.poly.map(p => p[1]);
   const x = (Math.min(...xs) + Math.max(...xs)) / 2, z = (Math.min(...zs) + Math.max(...zs)) / 2;
@@ -291,11 +345,24 @@ document.getElementById("vista-general").addEventListener("click", () => {
   actualizar();
   camara.position.set(cx - 14, 16, cz + 20); ctl.target.set(cx, 2.5, cz); ctl.update();
 });
+document.getElementById("vista-techos").addEventListener("click", () => {
+  selVista.value = "";
+  nivelVista = null;
+  cont.querySelectorAll("input").forEach(i => i.checked = true);
+  document.getElementById("techos").checked = true;
+  document.getElementById("corte").checked = false;
+  document.getElementById("etiquetas").checked = false;
+  modo = "proyecto";
+  document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o.dataset.modo === "proyecto"));
+  actualizar();
+  camara.position.set(cx - 17, 17, cz + 15); ctl.target.set(cx, 6, cz); ctl.update();
+});
 // Atajos por URL: #obra (solo lo construido), #retiro (cámara desde el retiro lateral, Lote 105), #pb (solo planta baja)
 if (location.hash.includes("obra")) document.querySelector('[data-modo="obra"]').click();
 if (location.hash.includes("retiro")) { camara.position.set(cx - 4, 7, cz - 13); ctl.target.set(cx - 3, 1.2, cz); ctl.update(); }
 if (location.hash.includes("pb")) cont.querySelectorAll("input").forEach(i => i.checked = i.dataset.nivel === "pb");
 actualizar();
+if (location.hash.includes("techos")) document.getElementById("vista-techos").click();   // #techos
 // #vista=Cuarto 1 → abre directamente la vista de ese ambiente (busca por nombre)
 const mv = decodeURIComponent(location.hash).match(/vista=([^&]+)/);
 if (mv) { const k = VISTAS.findIndex(v => (v.nv.nombre + ": " + v.a.nombre).toLowerCase().includes(mv[1].toLowerCase())); if (k >= 0) { selVista.value = k; irAVista(k); } }
@@ -338,7 +405,7 @@ def datos(casa):
                     (abs(y0 - y1) < 0.01 and any(abs(y0 - v) < 0.01 for v in (min(by), max(by))))
             grosor = est["espesor_muro_ext" if perim else "espesor_muro_int"]
             if m["tipo"] != "ladrillo":
-                lista_muros.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "grosor": grosor, "alto": None})
+                lista_muros.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "grosor": grosor, "alto": m.get("alto")})
                 continue
             for d, a, alto in tramos_bajo_escalera(casa, n["id"], m["de"], m["a"]):
                 lista_muros.append({"de": d, "a": a, "tipo": "ladrillo", "grosor": grosor, "alto": alto})
@@ -367,6 +434,51 @@ def datos(casa):
         },
         "escalera": escalera(casa),
         "niveles": niveles,
+        "techos": datos_techos(casa),
+    }
+
+
+def datos_techos(casa):
+    """Techos para el 3D: aguas inclinadas, antepechos, tanque, postes, canaletas, bajantes y semisombras."""
+    t = casa.get("techos")
+    if not t:
+        return None
+    caida = {"sur": (0, 1), "norte": (0, -1), "este": (1, 0), "oeste": (-1, 0)}
+    aguas = []
+    for ag in t["aguas"]:
+        aguas.append({"poly": ag["poly"], "dir": caida[ag["cae_hacia"]], "alta": ag["cota_alta"], "baja": ag["cota_baja"]})
+
+    def agua_en(x, y):
+        for ag in aguas:
+            xs, ys = [p[0] for p in ag["poly"]], [p[1] for p in ag["poly"]]
+            if min(xs) - 0.01 <= x <= max(xs) + 0.01 and min(ys) - 0.01 <= y <= max(ys) + 0.01:
+                return ag
+        return None
+
+    def altura(ag, x, y):
+        d = ag["dir"]
+        ts = [p[0] * d[0] + p[1] * d[1] for p in ag["poly"]]
+        k = (x * d[0] + y * d[1] - min(ts)) / ((max(ts) - min(ts)) or 1)
+        return ag["alta"] - k * (ag["alta"] - ag["baja"])
+
+    postes = []
+    for po in t.get("postes", []):
+        ag = agua_en(*po["pos"])
+        postes.append({"pos": po["pos"], "tope": altura(ag, *po["pos"]) - 0.05 if ag else 9.0})
+    canaletas = []
+    for c in t.get("canaletas", []):
+        ag = agua_en(*c["de"]) or agua_en(*c["a"])
+        canaletas.append({"de": c["de"], "a": c["a"], "cota": (ag["baja"] if ag else 9.0) - 0.12})
+    bajantes = [{"pos": b["pos"], "tope": min(a["baja"] for a in aguas)} for b in t.get("bajantes", [])]
+    return {
+        "aguas": aguas,
+        "antepechos": [{"de": m["de"], "a": m["a"], "base": m["cota_base"], "tope": m["cota_tope"]}
+                       for m in t.get("antepechos", []) if "cota_tope" in m],
+        "tanque": t.get("tanque"),
+        "postes": postes,
+        "canaletas": canaletas,
+        "bajantes": bajantes,
+        "semisombras": [{"rect": s["rect"], "cota": 8.40} for s in t.get("semisombras", [])],
     }
 
 

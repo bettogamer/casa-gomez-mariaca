@@ -179,7 +179,7 @@ def muros(casa, nivel_id):
                 hechos.append((c, d))
                 out.append({"de": c, "a": d, "tipo": "ladrillo"})
     for m in especiales:
-        out.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "id": m.get("id")})
+        out.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "id": m.get("id"), "alto": m.get("alto")})
     return out
 
 
