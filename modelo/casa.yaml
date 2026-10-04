@@ -527,7 +527,7 @@ instalaciones:
 
   p1:
     electrico:
-      tablero: {pos: [5.97, 4.40], nota: "subtablero del primer piso en el muro del vestidor, lado del estar, junto al hall (antes iba en el muro que se quitó); alimentado desde el TD de PB"}
+      tablero: {pos: [4.52, 3.00], nota: "subtablero del primer piso pegado a la columna B2, lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): ahí los albañiles dejaron los tubos en la columna (dicho por el usuario 2026-10-04); alimentado desde el TD de PB"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
       # calefón de PB por el mismo lugar. Troncales por los blancos y el pasillo hacia los baños de los hijos y,
@@ -650,4 +650,5 @@ verificar_en_obra:
   - "Altillo: pendientes y desagües pluviales de la terraza y de la franja (son losa descubierta): sumideros, bajantes pluviales e impermeabilización."
   - "Altillo: ¿prolongar columnas para el muro sur (y=4.67, sin viga debajo) y para el techo de calamina? Lo define el ingeniero."
   - "Altillo: presión de agua (el tanque queda ~1.5 m sobre la ducha): bomba presurizadora o tanque más alto; lo define el plomero."
+  - "Columna B2: tubos dejados para los tableros (dicho por el usuario). ¿En qué pisos salen y por qué cara de la columna (hall, dormitorio, escalera)? Define dónde va cada tablero."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
