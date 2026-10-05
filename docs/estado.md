@@ -40,16 +40,16 @@ _Última actualización: 2026-10-05_
   sobre la lavandería. Montante eléctrico en la columna B2.
 
 ## Próximo paso
-**PB amoblada y con su plano eléctrico definido a mano por el `interiorista` (2026-10-05, ver `docs/decisiones.md`);
-generador eléctrico nuevo (caras reales de muro, conmutadores, puntos a mano, seguridad, circuitos C18–C24).**
-**P1 amoblado y con puntos eléctricos (2026-10-05).** Sigue: el amoblamiento del altillo con el interiorista (incluye
-los muebles que chocan con columnas: refrigerador B4, cama B5, silla B1; y la tecla de arriba de la escalera P1↔altillo):
-muebles + luces, enchufes, interruptores y agua, para el electricista y el plomero. Ojo: `tools/instalaciones.py`
-reparte los enchufes generales sin mirar camas, sofás ni roperos (solo closets) y no pone enchufes junto a la
-cama ni conmutador: probablemente haya que mejorarlo.
+**Amoblamiento definitivo de toda la casa listo (2026-10-05):** PB, P1 y altillo con muebles y puntos eléctricos a mano
+(`instalaciones.<nivel>.electrico.puntos`) hechos por el `interiorista`; generador eléctrico nuevo (caras reales de
+muro, conmutadores, seguridad, circuitos C18–C25). Ver `docs/decisiones.md`.
 
-Revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`). Después, para toda la casa junta:
-exteriores (portón, jardín, parrilla en la terraza de PB, tendedero), fachada, terminaciones, carpintería y rejas.
+Falta decidir: si la salida del estar del altillo a la franja sigue corrediza.
+
+Después: revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`) y, para toda la casa junta,
+exteriores (portón, jardín, parrilla movible en el patio), fachada, terminaciones, carpintería y rejas.
+Mejoras del generador que quedan (hoy se resuelven con puntos a mano): enchufes junto a la cama, tecla del lado de la
+bisagra cuando no hay lugar, hueco de la escalera, exteriores sin techo, uniones entre pisos.
 
 ## Pendientes abiertos
 - Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el

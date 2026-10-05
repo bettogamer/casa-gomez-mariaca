@@ -47,6 +47,7 @@ CIRCUITOS = {
         ("C14", "Tomas estar y dormitorio", "toma"),
         ("C15", "Tomas cocina, baño y lavandería (con diferencial)", "toma"),
         ("C16", "Anafe eléctrico", "especial"),
+        ("C25", "Altillo: lavandería y tomas exteriores (con diferencial)", "toma"),
     ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
@@ -60,7 +61,7 @@ USO = {
            "isla": "C9", "toma_ext": "C10"},
     "altillo": {"luz_social": "C13", "luz": "C13", "luz_ext": "C13", "toma": "C14", "toma_comedor": "C15",
                 "toma_humeda": "C15", "isla": "C15", "cocina_esp": "C15", "anafe": "C16",
-                "toma_ext": "C15", "lavado": "C15", "horno": "C15", "lavavajillas": "C15"},
+                "toma_ext": "C25", "lavado": "C25", "horno": "C15", "lavavajillas": "C15"},
 }
 SOCIALES = {"living", "ingreso", "hall", "pasillo_pb", "comedor", "terraza", "acceso"}
 VA_LUZ, VA_TOMA = 100, 200
