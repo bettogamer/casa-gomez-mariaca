@@ -378,3 +378,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   el arquitecto (~1/6, al borde de la regla práctica).
 - **Pendiente:** en `tools/instalaciones.py` el enchufe de la TV sale al pie del mueble y hay un enchufe general detrás de él.
 - **Estado:** propuesto (falta el visto bueno del usuario sobre el amoblado).
+
+## 2026-10-05 — Ladrillo y forma de asentarlo
+- **Qué:** en toda la casa se usa ladrillo cerámico **6 huecos económico rayado** (25 × 15 × 10 cm, 2.7 kg, 23 pzas/m²).
+  Los muros exteriores del **living** (oeste y norte) van **de cabeza** (~0.25 + revoque), al ras de las columnas, para
+  que no se noten. **Todo el resto de la casa va de soga** (~0.10 + revoques ≈ 0.15), exteriores incluidos: ahí las
+  columnas de 25 sobresalen ~10 cm de la pared.
+- **Consecuencia:** el modelo usa hoy 0.25 para todos los muros perimetrales (`espesor_muro_ext`); hay que pasar a espesor
+  por muro (0.25 living, 0.15 el resto) y revisar de qué lado se alinea el muro de soga respecto de la columna. Los pesos
+  de muro son mucho menores que con ladrillo macizo.
+- **Estado:** dato del usuario (decidido en obra). Ajuste del modelo pendiente.
