@@ -693,7 +693,7 @@ instalaciones:
         - {pos: [-0.55, 3.80], nota: "terraza: luz empotrada bajo el volado (misma tecla)", estado: propuesto}
         - {pos: [-0.55, 5.85], nota: "acceso: luz bajo el volado sobre la puerta; tecla en el ingreso; fotocélula o sensor opcional", estado: propuesto}
         - {id: luz_patio, pos: [17.25, 1.35], nota: "patio: aplique en el muro este junto a la corrediza del comedor, a ~2.20 (parrilla movible en el patio); tecla adentro", estado: propuesto}
-        - {pos: [6.47, -0.25], nota: "retiro norte: aplique sobre la puerta del depósito (alumbra también el calefón), con sensor de movimiento + fotocélula (sin tecla)", estado: propuesto}
+        - {pos: [6.47, -0.25], nota: "retiro norte: aplique sobre la puerta del depósito, con sensor de movimiento + fotocélula (sin tecla)", estado: propuesto}
       # Puntos A MANO (interiorista 2026-10-05): reemplazan a los generados de su familia en su ambiente.
       # Alturas al eje de la caja, desde el piso terminado; las confirma el electricista (NB 777).
       puntos:
@@ -702,7 +702,7 @@ instalaciones:
         - {amb: ingreso, tipo: conmutador, pos: [0.37, 6.645], alto: 1.10, luces: [hall], estado: propuesto, nota: "juego de la entrada (2 de 3): luces del hall, conmutadas con el juego del hall (x 6.975)"}
         - {amb: ingreso, tipo: interruptor, pos: [0.47, 6.645], alto: 1.10, luces: [acceso, terraza], estado: propuesto, nota: "juego de la entrada (3 de 3): luces exteriores bajo el volado (acceso y terraza), tecla doble"}
         # Hall: juego en el muro del lavado, al norte de la banca; luz general + luz de escalera (sobre el tramo de 10)
-        - {tipo: toma_ext, pos: [8.45, -0.20], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (pide 220 V): enchufe con tapa junto al nicho; lo ubica el gasista"}
+        - {tipo: toma_ext, pos: [12.30, -0.20], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (pide 220 V): enchufe con tapa junto al nicho; lo ubica el gasista"}
         - {amb: hall, tipo: conmutador, pos: [6.975, 3.92], alto: 1.10, luces: [hall], estado: propuesto, nota: "luces del hall, conmutada con la entrada"}
         - {amb: hall, tipo: conmutador, pos: [6.975, 4.04], alto: 1.10, luces: [luz_escalera, luz_escalera_descanso], estado: propuesto, nota: "luz de ESCALERA (tramo de 10 + descanso), conmutada con el hall del primer piso (la otra tecla se pone con el P1)"}
         - {amb: hall, tipo: luz, pos: [5.24, 5.18], estado: propuesto, nota: "luz general del hall"}
@@ -780,8 +780,9 @@ instalaciones:
       bajada_tanque: {pos: [9.10, -0.30], nota: "bajada de agua fría desde el tanque elevado (muro norte)"}
       # Varias troncales: listas de polilíneas.
       agua_fria: [[[9.10, -0.30], [9.10, 3.10], [16.60, 3.10]], [[9.10, 3.10], [7.20, 3.10]]]
-      agua_caliente: [[[8.80, -0.30], [8.80, 3.35], [16.55, 3.35]], [[8.80, 3.35], [7.40, 3.35]]]
-      calefon: {pos: [8.80, -0.30], nota: "calefón a gas natural, exterior en el muro norte (retiro), en nicho; da agua caliente a TODA la casa salvo el altillo (sin termotanque en la suite, 2026-10-05). SUGERIDO (aún no comprado): ~18–20 L/min nominal (en Cochabamba, a ~2550 m, rinde ~20–25 % menos: queda para 2 duchas a la vez), tiro forzado, electrónico modulante/termostático (temperatura estable aunque se abran otras canillas), apto exterior o en nicho ventilado; pide enchufe. Lo dimensiona y aprueba el gasista (YPFB)"}
+      # El calefón está en x 11.90 (2026-10-05); la subida al P1 sigue en el núcleo técnico (x 8.80), por fuera del muro norte.
+      agua_caliente: [[[11.90, -0.30], [11.90, 3.35], [16.55, 3.35]], [[11.90, 3.35], [7.40, 3.35]], [[11.90, -0.30], [8.80, -0.30]]]
+      calefon: {pos: [11.90, -0.30], estado: propuesto, nota: "calefón a gas natural, exterior en el muro norte (retiro), en nicho, en x≈11.90: único tramo SIN VENTANAS en los tres pisos (PB entre estudio y comedor; P1 entre Baño 1 y Cuarto 1), al costado de la columna A4 sin picarla. Antes en x 8.80, a 0.5 m de las ventanas del baño y del estudio y debajo de las de blancos y del estar del altillo (gases). Distancias de la salida de gases a ventanas (también del vecino, Lote 105) las confirma el gasista; da agua caliente a TODA la casa salvo el altillo (sin termotanque en la suite, 2026-10-05). SUGERIDO (aún no comprado): ~18–20 L/min nominal (en Cochabamba, a ~2550 m, rinde ~20–25 % menos: queda para 2 duchas a la vez), tiro forzado, electrónico modulante/termostático (temperatura estable aunque se abran otras canillas), apto exterior o en nicho ventilado; pide enchufe. Lo dimensiona y aprueba el gasista (YPFB)"}
       # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
       # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
       colector: [[17.70, 5.15], [17.70, -0.85], [-3.00, -0.85]]
