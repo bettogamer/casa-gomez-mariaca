@@ -198,7 +198,7 @@ ambientes:
       etiqueta: [7.60, 5.30]
       estado: definido
       nota: "sala de TV familiar, más amplia (~3.4 × 2.3 libres + la entrada; ~9.5 m²); abierta al pasillo y al hall (sin muro: se ve desde la llegada de la escalera); SIN VENTANA: el muro sur es medianero (Lote 103); muro x=5.85 sin muro debajo: ladrillo de 6 huecos; ducto de la bajante del Baño 2 en la esquina noreste"
-    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.88, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.65 libres (15 cm menos para ensanchar el pasillo), mismo ancho que el Baño 1; muro norte en y=3.88, sin muro debajo (el de PB está en 3.73): ladrillo de 6 huecos; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo de 6 huecos); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga)"}
+    - {id: bano_hijo_2, nombre: Baño 2, tipo: bano, rect: [9.40, 3.88, 11.20, 6.67], etiqueta: [10.30, 5.80], estado: definido, nota: "privado del Cuarto 2 (puerta por el eje 4); ~1.65 × 2.65 libres (15 cm menos para ensanchar el pasillo), mismo ancho que el Baño 1; muro norte en y=3.88, sin muro debajo (el de PB está en 3.73): ladrillo de 6 huecos; sin ventana: extractor al retiro norte por cielo falso del pasillo y del Baño 1; encima del almacén de PB; muro x=9.40 sin muro debajo (ladrillo de 6 huecos); inodoro contra ese muro, bajante en ducto en la esquina del almacén (no en el eje 4: viga). PROPUESTO (2026-10-04): tragaluz cenital por la franja de 2 m del altillo, sobre la zona del lavamanos y la puerta: luz natural y ventilación; podría reemplazar el ducto largo del extractor por uno corto y vertical en el domo"}
     - {id: vestibulo_hijos, nombre: Vestíbulo, tipo: circulacion, rect: [11.20, 2.585, 12.50, 4.085], etiqueta: [11.85, 3.70], estado: definido, nota: "remate del pasillo; puertas a los dos cuartos"}
     - id: cuarto_hijo_1
       nombre: Cuarto 1
@@ -253,6 +253,8 @@ muros:
 
 # Lo que queda por encima del plano de corte (se dibuja punteado): aleros, tanque sobre el techo.
 proyecciones:
+  p1:
+    - {rect: [9.75, 5.30, 10.90, 6.20], nombre: "tragaluz", nota: "PROPUESTO: tragaluz cenital del Baño 2, dos ranuras de ~0.30 × 0.70 en la losa del altillo, centradas entre viguetas a cada lado de la de x≈10.31 (las viguetas no se cortan), lejos de la viga C; bajo un domo en la franja descubierta"}
   altillo:
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
 
@@ -568,9 +570,11 @@ muebles:
     - {tipo: silla, rect: [1.60, 3.05, 2.05, 3.50]}
     - {tipo: silla, rect: [0.10, 2.32, 0.55, 2.77]}
     - {tipo: silla, rect: [2.45, 2.32, 2.90, 2.77]}
-    # Franja sur: lavandería (piletas + lavadora manual) bajo semisombra, y tendedero al sol
-    - {tipo: lavadero, nombre: Piletas, rect: [9.55, 4.75, 10.75, 5.35]}
-    - {tipo: lavadora, nombre: Lavadora manual, rect: [10.80, 4.75, 11.40, 5.35]}
+    # Franja sur: lavandería (piletas + lavadora manual) bajo semisombra, y tendedero al sol.
+    # Propuesto: corrida al este para dejar libre el domo del tragaluz del Baño 2 (abajo).
+    - {tipo: estante, nombre: Domo tragaluz, rect: [9.75, 5.30, 10.90, 6.20], alto: 0.40}
+    - {tipo: lavadero, nombre: Piletas, rect: [11.00, 4.75, 12.20, 5.35]}
+    - {tipo: lavadora, nombre: Lavadora manual, rect: [12.25, 4.75, 12.85, 5.35]}
     - {tipo: alfombra, nombre: Tendedero, rect: [13.80, 5.00, 16.60, 6.45]}
 
 # Instalaciones (ESQUEMA PRELIMINAR para conversar con el ingeniero/instalador; no es un proyecto
@@ -686,7 +690,7 @@ instalaciones:
       agua_caliente: [[[11.50, 1.60], [11.35, 1.60], [11.35, 0.45], [10.40, 0.45]], [[11.35, 1.60], [11.35, 2.20], [12.60, 2.20]], [[11.35, 2.20], [11.35, 4.50], [10.15, 4.50]]]
       bajantes:
         - {pos: [11.40, -0.25], ambientes: [bano_alt, estar_alt], etiqueta: "baño y cocina → por fuera del muro norte (x≈11.40)"}
-        - {pos: [9.60, 4.85], ambientes: [franja_sur_alt], etiqueta: "lavandería → baja por el Baño 2 del P1"}
+        - {pos: [9.60, 4.85], ambientes: [franja_sur_alt], etiqueta: "lavandería → baja por el Baño 2 del P1 (desagüe ~1.7 m por el contrapiso; pase entre viguetas, sin tocar el nervio)"}
     ventilacion:
       ductos:
         - id: campana
@@ -770,5 +774,6 @@ verificar_en_obra:
   - "Viguetas (docs/viguetas.md): las dos losas son iguales (confirmado). Falta el espesor total de la losa y qué es la franja amarilla del paño 1–2 B–C. El paño 2–3 B–C tiene solo 4 viguetas en 2.65 m: ¿parte es hueco sobre el arranque de la escalera?"
   - "Viguetas: muros nuevos PARALELOS a las viguetas, sin muro debajo: vestidor x=5.85 y Baño 2 x=9.40 (P1), vestíbulo x=12.50 (P1), muro x=13.00 (altillo). El ingeniero decide si van de ladrillo de 6 huecos, con refuerzo, o como mueble de piso a techo."
   - "Viguetas pretensadas: no se cortan. Ubicar cada pase de bajante o ducto entre viguetas antes de perforar."
+  - "PROPUESTO — tragaluz del Baño 2 (revisor estructural 2026-10-04): dos ranuras de ~0.30 × 0.70 (y 5.40–6.10) centradas entre viguetas, a ≥0.5 de la viga C; borde macizado ~10 cm con fierro perimetral y diagonales; brocal de hormigón vaciado con el borde, membrana subida 15–20 cm, domo tipo gorro antivandálico o con reja; ≥0.40 libres hacia el antepecho sur. ANTES de abrir medir desde abajo: posición real y ancho de las viguetas entre x 9.40 y 11.20, espesor de losa, ancho de la viga C y franja maciza, nervio transversal. Si las viguetas no dejan lugar: tubos solares de 25–35 cm. Lo aprueba el ingeniero."
   - "Tanque elevado: definir capacidad y medidas reales (en el 3D se dibuja uno de ~2500 L, 1.60 × 1.60 × 1.80 forrado, sobre base a +10.20; supuesto)."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
