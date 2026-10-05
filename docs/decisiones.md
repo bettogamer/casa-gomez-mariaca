@@ -456,3 +456,10 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   forzado, electrónico modulante/termostático, apto exterior o en nicho ventilado; enchufe con tapa junto al nicho (C21).
   Lo dimensiona y aprueba el gasista (YPFB).
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Cañerías de agua en PPR
+- **Qué:** agua fría y caliente en **PPR por termofusión** (fría PN16–PN20; caliente PN20 como mínimo, mejor PPR con
+  fibra/compuesto). Troncales de 25 mm (¾"), ramales de 20 mm (½"). La caliente va aislada con coquilla de espuma.
+  Desagües en PVC sanitario (110 mm inodoros y bajantes, 50 mm el resto). Gas aparte, lo define el gasista con YPFB.
+- **Por qué:** es lo más usado en Cochabamba, uniones soldadas sin pérdidas, un solo sistema para fría y caliente.
+- **Estado:** aprobado por el usuario; el plomero confirma clase y diámetros.
