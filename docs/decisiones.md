@@ -312,3 +312,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   hacia la esquina sur y descarga en la bajante BP1.
 - **Por qué:** desde la calle se ve un borde horizontal con su canaleta; se ve mejor para la casa (pedido del usuario).
 - **Estado:** aprobado por el usuario. También se agregaron los techos y el tanque al visor 3D (tanque de ~2500 L supuesto).
+
+## 2026-10-05 — Puerta de entrada pivotante con vidrio lateral
+- **Qué:** la puerta de entrada (0.92) y el vidrio fijo de al lado (0.30) se juntan en **un solo marco de madera**: puerta
+  **pivotante de 1.05**, maciza, de listones verticales con tirador grande, y **paño fijo de vidrio de 0.27** al norte, los
+  dos de piso a ~2.60 (hasta la viga del eje 1). El borde sur sigue en 6.37 (muro hasta C1 por la bajante de la suite).
+- **Por qué:** entrada más ancha (muebles) y más importante; el vidrio sigue dando luz al hall (foto de referencia del usuario).
+- **A cuidar:** vidrio laminado de seguridad; barniz exterior (fachada oeste, la protege el volado); burletes; herraje
+  pivotante de piso para una hoja pesada. Alto final según cuánto cuelga la viga del eje 1 (ya en `verificar_en_obra`).
+- **Estado:** propuesto (aceptado en idea por el usuario); medidas finales con el carpintero.
