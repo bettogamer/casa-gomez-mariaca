@@ -39,7 +39,9 @@ _Última actualización: 2026-10-05_
   sobre la lavandería. Montante eléctrico en la columna B2.
 
 ## Próximo paso
-**Amoblamiento definitivo con el agente `interiorista`** (creado 2026-10-05), piso por piso empezando por PB:
+**PB amoblada con el `interiorista` (2026-10-05, ver `docs/decisiones.md`).** Sigue: arreglar `tools/instalaciones.py`
+(interruptores, conmutadores, enchufes, circuito del horno, exteriores; bomba y seguridad en `instalaciones`) y luego
+el amoblamiento de P1 y altillo:
 muebles + luces, enchufes, interruptores y agua, para el electricista y el plomero. Ojo: `tools/instalaciones.py`
 reparte los enchufes generales sin mirar camas, sofás ni roperos (solo closets) y no pone enchufes junto a la
 cama ni conmutador: probablemente haya que mejorarlo.
