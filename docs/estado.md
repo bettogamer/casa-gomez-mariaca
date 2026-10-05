@@ -44,7 +44,7 @@ _Última actualización: 2026-10-05_
 (`instalaciones.<nivel>.electrico.puntos`) hechos por el `interiorista`; generador eléctrico nuevo (caras reales de
 muro, conmutadores, seguridad, circuitos C18–C25). Ver `docs/decisiones.md`.
 
-Falta decidir: si la salida del estar del altillo a la franja sigue corrediza.
+Decidido: la salida del estar del altillo a la franja queda corrediza.
 
 Después: revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`) y, para toda la casa junta,
 exteriores (portón, jardín, parrilla movible en el patio), fachada, terminaciones, carpintería y rejas.

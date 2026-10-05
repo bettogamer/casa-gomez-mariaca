@@ -530,3 +530,8 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   usuario, ladrillo de 6 huecos sobre el borde del hueco) y la baranda pasa al costado del tramo de 10 (x 5.725).
 - **Pendiente:** ingeniero, si hay viga B entre B2 y el hueco y si aguanta el muro; medir el hueco extra.
 - **Estado:** muro propuesto (consultar ingeniero); el hueco, confirmado por el usuario sin medidas.
+
+## 2026-10-05 — Salida del estar del altillo a la franja: corrediza
+- **Qué:** la salida `estar_franja` (2.10, a la franja sur) se queda **corrediza** (hoja fija al oeste, la que corre al
+  este). El "sin corredizas" del usuario era para la puerta del baño de PB.
+- **Estado:** aprobado por el usuario.
