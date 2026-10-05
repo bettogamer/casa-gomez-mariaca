@@ -474,7 +474,7 @@ muebles:
     # (este: lavaplatos bajo la ventana, lavavajillas, refrigerador en la punta); isla de trabajo y desayuno.
     # Mesones del muro sur en dos tramos (a cada lado de las hornallas): así las tomas del mesón quedan
     # a ≥0.60 de las hornallas; el tramo del lavaplatos va con nombre (sin toma encima del agua).
-    - {tipo: refrigerador, rect: [16.03, 3.30, 16.78, 4.05], estado: propuesto, nota: "con dispensador de agua (dicho por el usuario): punto de agua fría con llave de paso detrás, a ~0.30; enchufe propio a 0.50 detrás"}
+    - {tipo: refrigerador, rect: [16.03, 3.30, 16.78, 4.05], agua: true, estado: propuesto, nota: "con dispensador de agua (dicho por el usuario): punto de agua fría con llave de paso detrás, a ~0.30; enchufe propio a 0.50 detrás"}
     - {tipo: meson, nombre: Lavavajillas, rect: [16.18, 4.05, 16.78, 4.65], estado: propuesto, nota: "lavavajillas bajo mesón junto al lavaplatos (dicho por el usuario): enchufe propio a 0.50 en el mueble del lavaplatos, agua fría y desagüe al sifón del lavaplatos; la puerta abierta deja ~0.50 hasta la isla"}
     - {tipo: meson, nombre: Mesón lavaplatos, rect: [16.18, 4.65, 16.78, 5.95], estado: propuesto}
     - {tipo: lavaplatos, rect: [16.23, 4.75, 16.73, 5.55]}
@@ -630,7 +630,29 @@ instalaciones:
       montante: {pos: [4.40, 2.88], etiqueta: "montante ↑ P1 y altillo (B2)"}
       alimentador: [[2.75, 6.45], [4.28, 6.45], [4.28, 2.88], [4.40, 2.88]]
       acometida: {pos: [-0.30, 6.10], nota: "desde el medidor en el muro de la calle (frente del lote)"}
-      timbre: [-0.20, 6.45]
+      # Sin timbre cableado en la puerta (caía sobre la bajante de la suite): portero eléctrico en el portón y,
+      # si se quiere, timbre inalámbrico en el marco de la puerta.
+      # Seguridad (el usuario quiere todo, 2026-10-05). ESQUEMA PROPUESTO: ubicaciones a definir con el instalador;
+      # dejar tubos vacíos antes de revocar. Circuitos C22 (portón) y C23 (alarma, cámaras, portero; con respaldo).
+      seguridad:
+        porton: {pos: [-1.30, 6.40], etiqueta: "← portón con motor + portero (calle)", nota: "motor y portero en el portón de la calle (~15 m); tubo enterrado hasta el ingreso"}
+        portero: {pos: [0.65, 6.60], nota: "monitor del portero en el ingreso, junto al juego de teclas, a 1.40", estado: propuesto}
+        camaras:
+          - {pos: [-0.25, 4.85], nota: "frente: acceso y terraza", estado: propuesto}
+          - {pos: [5.90, -0.20], nota: "retiro norte: puerta del depósito y calefón", estado: propuesto}
+          - {pos: [17.05, 0.30], nota: "patio (esquina noreste)", estado: propuesto}
+        alarma:
+          central: {pos: [5.45, 6.50], nota: "dentro del closet de abrigos, cerca del TD", estado: propuesto}
+          teclado: {pos: [0.95, 6.60], nota: "en el ingreso, junto a la puerta", estado: propuesto}
+          sirena: {pos: [-0.25, 0.40], nota: "exterior, en la fachada, alta", estado: propuesto}
+          sensores:
+            - {pos: [0.10, 5.85], tipo: magnetico, nota: "puerta de entrada"}
+            - {pos: [16.80, 1.40], tipo: magnetico, nota: "corrediza del comedor al patio"}
+            - {pos: [6.47, 0.10], tipo: magnetico, nota: "puerta del depósito"}
+            - {pos: [4.20, 0.25], tipo: movimiento, nota: "living"}
+            - {pos: [6.85, 6.45], tipo: movimiento, nota: "hall"}
+            - {pos: [16.70, 2.90], tipo: movimiento, nota: "cocina (ve la corrediza del comedor)"}
+            - {pos: [13.20, 0.25], tipo: movimiento, nota: "comedor"}
       luces_extra:
         # Cocina
         - {pos: [13.60, 4.40], nota: "colgante sobre la isla (1 de 2)", estado: propuesto}
@@ -653,7 +675,7 @@ instalaciones:
       # Agua: pozo en el patio + bomba -> tanque elevado en el último piso -> baja por gravedad a toda
       # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
       # estudio (exterior, en el retiro): bajada de agua fría del tanque + calefón a gas natural.
-      pozo: {pos: [21.20, 3.00], nota: "pozo con bomba; distancias a desagües a confirmar con el instalador"}
+      pozo: {pos: [21.20, 3.00], va_bomba: 750, nota: "pozo con bomba (aún no comprada: sumergible ~½–1 HP según profundidad, la elige el pocero/plomero); circuito propio C20 con guardamotor y flotante del tanque; distancias a desagües a confirmar con el instalador"}
       impulsion: [[21.20, 3.00], [17.15, 3.00], [17.15, 0.10]]   # del pozo a la subida al tanque (esquina NE)
       bajada_tanque: {pos: [9.10, -0.30], nota: "bajada de agua fría desde el tanque elevado (muro norte)"}
       # Varias troncales: listas de polilíneas.
