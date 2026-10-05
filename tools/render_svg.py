@@ -529,6 +529,13 @@ def planta_losa(casa, nivel):
     L.linea(hx_0, hy_0, hx_1, hy_1, 'stroke="#555"')
     L.linea(hx_0, hy_1, hx_1, hy_0, 'stroke="#555"')
     L.texto((hx_0 + hx_1) / 2, (hy_0 + hy_1) / 2 - 0.25, "hueco escalera", 8, 'fill="#555"')
+    for h in vg.get("huecos_extra") or []:       # huecos que solo tiene la losa de un nivel
+        if h.get("nivel") != nivel["id"]:
+            continue
+        hx_0, hy_0, hx_1, hy_1 = h["rect"]
+        L.poly([[hx_0, hy_0], [hx_1, hy_0], [hx_1, hy_1], [hx_0, hy_1]], 'fill="#fff" stroke="#555" stroke-width="1" stroke-dasharray="4 2"')
+        L.linea(hx_0, hy_0, hx_1, hy_1, 'stroke="#555"')
+        L.linea(hx_0, hy_1, hx_1, hy_0, 'stroke="#555"')
 
     ejx, ejy = list(est["ejes_x"].values()), list(est["ejes_y"].values())
     abajo = [m for m in muros(casa, debajo) if m["tipo"] == "ladrillo"]
