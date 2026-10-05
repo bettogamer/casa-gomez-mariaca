@@ -13,7 +13,7 @@ empresa de agua y de YPFB). Sirve para ubicar y conversar.
 """
 import math
 
-from casa import SALIDA, _intervalo, aberturas, ambientes, area, caja, cargar, centroide, dentro, muebles
+from casa import SALIDA, _intervalo, aberturas, ambientes, area, caja, cargar, centroide, columnas, dentro, muebles, muros
 from render_svg import ESC, Lienzo, dibujar_aberturas, dibujar_columnas, dibujar_escalera, dibujar_muros, flecha_norte, leyenda
 
 TENSION = 220  # V
@@ -21,13 +21,20 @@ TENSION = 220  # V
 # Circuitos por nivel: (id, nombre, tipo)
 CIRCUITOS = {
     "pb": [
-        ("C1", "Iluminación zona social", "luz"),
+        ("C1", "Iluminación zona social y exteriores", "luz"),
         ("C2", "Iluminación zona de servicio y estudio", "luz"),
         ("C3", "Tomas living, hall, ingreso y estudio", "toma"),
         ("C4", "Tomas comedor y cocina (generales)", "toma"),
-        ("C5", "Cocina: refrigerador, horno, campana", "especial"),
-        ("C6", "Lavado: lavadora y secadora", "especial"),
+        ("C5", "Cocina: refrigerador, freezer, campana, microondas", "especial"),
+        ("C6", "Lavado: lavadoras (con diferencial)", "especial"),
         ("C7", "Tomas baño, depósito, almacén (con diferencial)", "toma"),
+        ("C18", "Horno eléctrico", "especial"),
+        ("C19", "Lavavajillas (con diferencial)", "especial"),
+        ("C20", "Bomba del pozo (guardamotor + flotante)", "especial"),
+        ("C21", "Tomas exteriores con tapa (con diferencial)", "toma"),
+        ("C22", "Portón eléctrico", "especial"),
+        ("C23", "Seguridad: alarma, cámaras, portero (con respaldo)", "especial"),
+        ("C24", "Tomas estudio / invitados (computadora, router)", "toma"),
     ],
     "p1": [
         ("C8", "Iluminación primer piso", "luz"),
@@ -45,33 +52,41 @@ CIRCUITOS = {
     ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
-TOMA_POR_AMBIENTE = {"p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
+TOMA_POR_AMBIENTE = {"pb": {"estudio": "C24"}, "p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
 # Qué circuito usa cada clase de punto, por nivel
 USO = {
-    "pb": {"luz_social": "C1", "luz": "C2", "toma": "C3", "toma_comedor": "C4", "toma_humeda": "C7", "isla": "C4",
-           "cocina_esp": "C5", "lavado": "C6"},
-    "p1": {"luz_social": "C8", "luz": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10", "isla": "C9",
-           "termo": "C12"},
-    "altillo": {"luz_social": "C13", "luz": "C13", "toma": "C14", "toma_comedor": "C15", "toma_humeda": "C15", "isla": "C15",
-                "cocina_esp": "C15", "anafe": "C16", "termo": "C17"},
+    "pb": {"luz_social": "C1", "luz": "C2", "luz_ext": "C1", "toma": "C3", "toma_comedor": "C4", "toma_humeda": "C7",
+           "isla": "C4", "cocina_esp": "C5", "lavado": "C6", "horno": "C18", "lavavajillas": "C19", "bomba": "C20",
+           "toma_ext": "C21", "porton": "C22", "seguridad": "C23"},
+    "p1": {"luz_social": "C8", "luz": "C8", "luz_ext": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10",
+           "isla": "C9", "termo": "C12", "toma_ext": "C10"},
+    "altillo": {"luz_social": "C13", "luz": "C13", "luz_ext": "C13", "toma": "C14", "toma_comedor": "C15",
+                "toma_humeda": "C15", "isla": "C15", "cocina_esp": "C15", "anafe": "C16", "termo": "C17",
+                "toma_ext": "C15", "lavado": "C15", "horno": "C15", "lavavajillas": "C15"},
 }
 SOCIALES = {"living", "ingreso", "hall", "pasillo_pb", "comedor", "terraza", "acceso"}
-CON_INTERRUPTOR_EXTERIOR = {"terraza", "logia", "terraza_alt", "franja_sur_alt"}
 VA_LUZ, VA_TOMA = 100, 200
 
-# Muebles que piden una toma especial: tipo/nombre -> (letra, VA, clase de circuito, descripción)
+# Muebles que piden una toma especial: tipo/nombre -> [(letra, VA, clase de circuito, descripción)]
 ESPECIALES = {
-    "refrigerador": ("R", 300, "cocina_esp", "refrigerador"),
-    "Torre horno": ("H", 2000, "cocina_esp", "horno / microondas"),
-    "cocina": ("C", 150, "cocina_esp", "campana + encendido"),
-    "Anafe": ("A", 3000, "anafe", "anafe eléctrico / inducción"),
-    "L": ("L", 800, "lavado", "lavadora"),
-    "S": ("S", 2500, "lavado", "secadora"),
-    "Lavadora manual": ("L", 500, "toma_humeda", "lavadora semiautomática"),
-    "Termotanque": ("T", 2000, "termo", "termotanque eléctrico"),
+    "refrigerador": [("R", 300, "cocina_esp", "refrigerador")],
+    "Freezer": [("F", 300, "cocina_esp", "freezer")],
+    "Torre horno": [("H", 2500, "horno", "horno eléctrico"), ("M", 1200, "cocina_esp", "microondas")],
+    "cocina": [("C", 150, "cocina_esp", "campana + encendido")],
+    "Anafe": [("A", 3000, "anafe", "anafe eléctrico / inducción")],
+    "Lavavajillas": [("LV", 1800, "lavavajillas", "lavavajillas")],
+    "L": [("L", 800, "lavado", "lavadora")],
+    "S": [("S", 2500, "lavado", "secadora")],
+    "Lavadora manual": [("LM", 500, "lavado", "lavadora semiautomática")],
+    "Termotanque": [("T", 2000, "termo", "termotanque eléctrico")],
 }
-# Muebles que piden una toma común extra junto a ellos (clase de uso)
+# Muebles que piden una toma común extra en el muro de atrás (clase de uso)
 TOMA_JUNTO = {"escritorio": "toma", "TV": "toma", "Isla": "isla", "lavamanos": "toma_humeda"}
+# Muebles que no tapan un enchufe ni un interruptor (bajos o que se corren)
+NO_TAPAN = {"alfombra", "mesa", "silla", "taburete"}
+# Familias de puntos: un punto puesto a mano en `electrico.puntos` reemplaza a los generados de su familia en su ambiente
+FAMILIA = {"interruptor": "tecla", "conmutador": "tecla", "toma": "toma", "toma_piso": "toma", "toma_ext": "toma",
+           "datos": "datos", "luz": "luz"}
 
 
 def _borde_de(amb, ab):
@@ -109,27 +124,219 @@ def _prioridad_entrada(casa, nivel_id, amb, ab):
     return (0 if desde_circulacion else 1, 0 if ab["tipo"].startswith("puerta") else 1)
 
 
-def _hacia_adentro(amb, x, y, d):
-    cx, cy = centroide(amb["poly"])
-    L = math.hypot(cx - x, cy - y) or 1
-    return x + (cx - x) / L * d, y + (cy - y) / L * d
+def _amb_de(casa, nivel_id, pos):
+    return next((a for a in ambientes(casa, nivel_id) if dentro(a["poly"], *pos)), None)
+
+
+def _dist_seg(p, a, b):
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    L2 = dx * dx + dy * dy or 1e-9
+    t = max(0, min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2))
+    return math.dist(p, (a[0] + t * dx, a[1] + t * dy))
+
+
+def _dist_rect(p, r):
+    dx = max(r[0] - p[0], 0, p[0] - r[2])
+    dy = max(r[1] - p[1], 0, p[1] - r[3])
+    return math.hypot(dx, dy)
+
+
+def _caras(casa, nivel_id, amb):
+    """Tramos de muro de LADRILLO del ambiente, sobre la cara que da al ambiente (con su espesor real):
+    [(p, q, (nx, ny))], n = normal hacia adentro. Celosías, vanos y aberturas no son pared."""
+    out = []
+    pts = amb["poly"]
+    for m in muros(casa, nivel_id):
+        if m["tipo"] != "ladrillo":
+            continue
+        for p, q in zip(pts, pts[1:] + pts[:1]):
+            iv = _intervalo(m["de"], m["a"], p, q)
+            if not iv:
+                continue
+            t0, t1 = max(0.0, iv[0]), min(1.0, iv[1])
+            (ax, ay), (bx, by) = m["de"], m["a"]
+            s0 = (ax + (bx - ax) * t0, ay + (by - ay) * t0)
+            s1 = (ax + (bx - ax) * t1, ay + (by - ay) * t1)
+            L = math.dist(s0, s1)
+            if L < 0.05:
+                continue
+            ux, uy = (s1[0] - s0[0]) / L, (s1[1] - s0[1]) / L
+            nx, ny = -uy, ux
+            mx, my = (s0[0] + s1[0]) / 2, (s0[1] + s1[1]) / 2
+            if not dentro(pts, mx + nx * 0.2, my + ny * 0.2):
+                nx, ny = -nx, -ny
+            off = m["grosor"] / 2 + m["dx"] * nx + m["dy"] * ny
+            r = 0.08 if L > 0.30 else 0.0       # sin las esquinas: ahí está el muro que llega de costado
+            s0 = (s0[0] + ux * r, s0[1] + uy * r)
+            s1 = (s1[0] - ux * r, s1[1] - uy * r)
+            out.append(((s0[0] + nx * off, s0[1] + ny * off), (s1[0] + nx * off, s1[1] + ny * off), (nx, ny)))
+    return out
+
+
+def _en_cara(caras, pt, tol=0.03):
+    return any(_dist_seg(pt, p, q) < tol for p, q, _ in caras)
+
+
+def _giro(ab, ambs):
+    """Rectángulo que barre una puerta batiente del lado al que abre (None si no aplica)."""
+    if ab["tipo"] != "puerta" or ab.get("abre_hacia") not in ambs:
+        return None
+    (x0, y0), (x1, y1) = ab["de"], ab["a"]
+    largo = math.dist((x0, y0), (x1, y1))
+    cx, cy = centroide(ambs[ab["abre_hacia"]]["poly"])
+    nx, ny = -(y1 - y0) / largo, (x1 - x0) / largo
+    if (cx - x0) * nx + (cy - y0) * ny < 0:
+        nx, ny = -nx, -ny
+    xs = [x0, x1, x0 + nx * largo, x1 + nx * largo]
+    ys = [y0, y1, y0 + ny * largo, y1 + ny * largo]
+    return (min(xs), min(ys), max(xs), max(ys))
+
+
+class _Entorno:
+    """Lo que estorba a un enchufe o un interruptor en un nivel: columnas, aberturas, giros de puertas y muebles."""
+
+    def __init__(self, casa, nivel_id):
+        s = casa["estructura"]["seccion_columna"] / 2 + 0.05
+        self.columnas = [(c["x"] - s, c["y"] - s, c["x"] + s, c["y"] + s) for c in columnas(casa)]
+        self.aberturas = aberturas(casa, nivel_id)
+        ambs = {a["id"]: a for a in ambientes(casa, nivel_id)}
+        self.giros = [g for g in (_giro(ab, ambs) for ab in self.aberturas) if g]
+        self.muebles = [m["rect"] for m in muebles(casa, nivel_id) if m["tipo"] not in NO_TAPAN]
+
+    def libre(self, pt, margen_abertura=0.30, muebles=True):
+        if any(_dist_rect(pt, r) < 0.01 for r in self.columnas):
+            return False
+        if any(_dist_seg(pt, ab["de"], ab["a"]) < margen_abertura for ab in self.aberturas):
+            return False
+        if any(_dist_rect(pt, g) < 0.01 for g in self.giros):
+            return False
+        if muebles and any(_dist_rect(pt, r) < 0.12 for r in self.muebles):
+            return False
+        return True
+
+
+def _repartir(caras, n, libre, ocupados, sep=0.6):
+    """n puntos repartidos sobre las caras de muro, en lugares libres y separados de `ocupados`."""
+    cand = []
+    for p, q, nrm in caras:
+        L = math.dist(p, q)
+        k = int(L / 0.05)
+        for i in range(1, k):
+            pt = (p[0] + (q[0] - p[0]) * i / k, p[1] + (q[1] - p[1]) * i / k)
+            cand.append(pt)
+    total = len(cand)
+    out = []
+    for j in range(n):
+        objetivo = int(total * (j + 0.5) / n) if total else 0
+        for d in range(total):
+            hecho = False
+            for idx in (objetivo + d, objetivo - d):
+                if 0 <= idx < total:
+                    pt = cand[idx]
+                    if libre(pt) and all(math.dist(pt, o) >= sep for o in ocupados + out):
+                        out.append(pt)
+                        hecho = True
+                        break
+            if hecho:
+                break
+    return out
+
+
+def _detras(rect, caras):
+    """Punto del muro contra el que está apoyado el mueble (o None si está suelto, como una isla)."""
+    x0, y0, x1, y1 = rect
+    c = ((x0 + x1) / 2, (y0 + y1) / 2)
+    mejor, clave = None, None
+    for p, q, (nx, ny) in caras:
+        if abs(nx) > 0.5:      # muro vertical: el mueble se apoya con su lado x0 o x1
+            lo, hi = sorted([p[1], q[1]])
+            if min(y1, hi) - max(y0, lo) < 0.10:
+                continue
+            d = (x0 - p[0]) if nx > 0 else (p[0] - x1)
+            apoyo = min(y1, hi) - max(y0, lo)
+            pt = (p[0], min(max(c[1], lo + 0.05), hi - 0.05))
+        else:
+            lo, hi = sorted([p[0], q[0]])
+            if min(x1, hi) - max(x0, lo) < 0.10:
+                continue
+            d = (y0 - p[1]) if ny > 0 else (p[1] - y1)
+            apoyo = min(x1, hi) - max(x0, lo)
+            pt = (min(max(c[0], lo + 0.05), hi - 0.05), p[1])
+        # el muro más cercano; si dos están igual de cerca (rincón), el del lado largo del mueble
+        k = (round(d / 0.10), -round(apoyo, 2), d)
+        if -0.05 <= d < 0.30 and (clave is None or k < clave):
+            mejor, clave = pt, k
+    return mejor
+
+
+def _correr_fuera_de_columna(pt, caras, ent):
+    """Si el punto cae en una columna, lo desliza por su muro hasta salir de ella."""
+    if ent.libre(pt, margen_abertura=0.0, muebles=False):
+        return pt
+    for p, q, _ in caras:
+        if _dist_seg(pt, p, q) > 0.03:
+            continue
+        L = math.dist(p, q)
+        ux, uy = (q[0] - p[0]) / L, (q[1] - p[1]) / L
+        for d in [k * 0.05 for k in range(1, 20)]:
+            for sg in (1, -1):
+                c = (pt[0] + ux * d * sg, pt[1] + uy * d * sg)
+                if _dist_seg(c, p, q) < 0.01 and ent.libre(c, margen_abertura=0.0, muebles=False):
+                    return c
+    return pt
+
+
+def _tecla_junto(casa, nivel_id, amb, ab, caras, ent, cara_amb=None):
+    """Interruptor a 0.15 del marco, del lado de la manija si se puede, sobre muro del ambiente."""
+    (ax, ay), (bx, by) = ab["de"], ab["a"]
+    L = math.hypot(bx - ax, by - ay)
+    ux, uy = (bx - ax) / L, (by - ay) / L
+    for ex, ey, sg in ((bx, by, 1), (ax, ay, -1)):     # `a` = lado de la manija (la bisagra va en `de`)
+        sx, sy = ex + ux * 0.15 * sg, ey + uy * 0.15 * sg
+        for p, q, (nx, ny) in caras:
+            d = (sx - p[0]) * nx + (sy - p[1]) * ny     # distancia del eje de la abertura a la cara
+            if abs(d) > 0.30:                           # no es la línea de este muro
+                continue
+            pt = (sx - nx * d, sy - ny * d)
+            if _dist_seg(pt, p, q) < 0.02 and ent.libre(pt, margen_abertura=0.10, muebles=True):
+                return pt
+    return None
+
+
+def _accesos(casa, nivel_id, amb, abs_):
+    propias = [ab for ab in abs_ if _borde_de(amb, ab) and ab["tipo"] != "ventana"]
+    propias.sort(key=lambda ab: _prioridad_entrada(casa, nivel_id, amb, ab))
+    return propias
 
 
 def electrico(casa, nivel_id):
-    """Devuelve (puntos, cables). puntos: dict(tipo, pos, circuito, etiqueta, va)."""
+    """Devuelve (puntos, cables). puntos: dict(tipo, pos, circuito, etiqueta, va, amb, gen)."""
     puntos, cables = [], []
     uso = USO.get(nivel_id, USO["pb"])
     abs_ = aberturas(casa, nivel_id)
     mbs = muebles(casa, nivel_id)
-    for amb in ambientes(casa, nivel_id):
+    ambs = ambientes(casa, nivel_id)
+    ent = _Entorno(casa, nivel_id)
+    cfg = casa.get("instalaciones", {}).get(nivel_id, {}).get("electrico", {})
+    extras = cfg.get("luces_extra") or []
+    caras_de = {a["id"]: _caras(casa, nivel_id, a) for a in ambs}
+
+    def agregar(**p):
+        p.setdefault("gen", True)
+        puntos.append(p)
+        return len(puntos) - 1
+
+    for amb in ambs:
         social = amb["id"] in SOCIALES
         circ_luz = uso["luz_social"] if social else uso["luz"]
         x0, y0, x1, y1 = caja(amb["poly"])
+        caras = caras_de[amb["id"]]
         # luces
         if amb["tipo"] == "exterior":
-            luces = [centroide(amb["poly"])]
+            # bajo techo solo donde lo dice el modelo (luces_extra); si no hay, una al centro
+            luces = [] if any(dentro(amb["poly"], *l["pos"]) for l in extras) else [centroide(amb["poly"])]
         elif area(amb["poly"]) < 12 or amb["tipo"] == "circulacion":
-            luces = [amb.get("etiqueta") and centroide(amb["poly"]) or centroide(amb["poly"])]
+            luces = [centroide(amb["poly"])]
         else:
             if x1 - x0 >= y1 - y0:
                 luces = [(x0 + (x1 - x0) * f, (y0 + y1) / 2) for f in (0.3, 0.7)]
@@ -141,102 +348,187 @@ def electrico(casa, nivel_id):
         if mesa and amb["tipo"] != "exterior":
             r = mesa[0]["rect"]
             luces = [((r[0] + r[2]) / 2, (r[1] + r[3]) / 2)]
-        ids_luz = []
         for l in luces:
-            puntos.append({"tipo": "luz", "pos": l, "circuito": circ_luz, "va": VA_LUZ, "amb": amb["id"]})
-            ids_luz.append(len(puntos) - 1)
-        # interruptor junto a la primera puerta (o paso) del ambiente
-        if amb["tipo"] != "exterior" or amb["id"] in CON_INTERRUPTOR_EXTERIOR:
-            propias = [ab for ab in abs_ if _borde_de(amb, ab)]
-            propias.sort(key=lambda ab: _prioridad_entrada(casa, nivel_id, amb, ab))
-            if propias:
-                ab = propias[0]
-                (ax, ay), (bx, by) = ab["de"], ab["a"]
-                L = math.hypot(bx - ax, by - ay)
-                ux, uy = (bx - ax) / L, (by - ay) / L
-                sx, sy = bx + ux * 0.15, by + uy * 0.15
-                if not dentro(amb["poly"], *_hacia_adentro(amb, sx, sy, 0.12)):
-                    sx, sy = ax - ux * 0.15, ay - uy * 0.15
-                sx, sy = _hacia_adentro(amb, sx, sy, 0.12)
-                puntos.append({"tipo": "interruptor", "pos": (sx, sy), "circuito": circ_luz, "va": 0, "amb": amb["id"]})
-                for i in ids_luz:
-                    cables.append(((sx, sy), puntos[i]["pos"]))
-        # tomas generales repartidas por el perímetro (no en exteriores ni en la cocina: van por mesón)
+            agregar(tipo="luz", pos=l, circuito=circ_luz, va=VA_LUZ, amb=amb["id"])
+        # interruptor junto al acceso principal; conmutador si hay un segundo acceso lejos (pasillos, halls, salas)
+        if amb["tipo"] != "exterior":
+            teclas = []
+            for ab in _accesos(casa, nivel_id, amb, abs_):
+                pt = _tecla_junto(casa, nivel_id, amb, ab, caras, ent)
+                if pt is None:
+                    continue
+                if not teclas:
+                    teclas.append(pt)
+                elif amb["tipo"] in ("circulacion", "social") and math.dist(pt, teclas[0]) >= 3.0:
+                    teclas.append(pt)
+                    break
+            for pt in teclas:
+                agregar(tipo="conmutador" if len(teclas) > 1 else "interruptor", pos=pt, circuito=circ_luz, va=0,
+                        amb=amb["id"])
+        # tomas generales repartidas por los muros (no en exteriores ni en la cocina: van por mesón)
         if amb["tipo"] in ("social", "dormitorio", "servicio") or amb["id"] == "hall":
             per = sum(math.dist(a, b) for a, b in zip(amb["poly"], amb["poly"][1:] + amb["poly"][:1]))
             n = {"social": max(2, math.ceil(per / 4)), "dormitorio": max(3, math.ceil(per / 4))}.get(amb["tipo"], 1)
             circ = uso["toma_comedor"] if amb["id"] == "comedor" else (uso["toma_humeda"] if amb["tipo"] == "servicio" else uso["toma"])
-            for pt in _repartir(amb, abs_, n, [m["rect"] for m in mbs if m["tipo"] == "closet"]):
-                puntos.append({"tipo": "toma", "pos": pt, "circuito": circ, "va": VA_TOMA, "amb": amb["id"]})
-    # muebles: tomas especiales y tomas junto a muebles
+            ocupados = [q["pos"] for q in puntos if q["tipo"] in ("toma", "interruptor", "conmutador")]
+            for pt in _repartir(caras, n, ent.libre, ocupados):
+                agregar(tipo="toma", pos=pt, circuito=circ, va=VA_TOMA, amb=amb["id"])
+    # muebles: tomas especiales y tomas junto a muebles, en el muro de atrás
+    especiales = []
     for m in mbs:
         x0, y0, x1, y1 = m["rect"]
         c = ((x0 + x1) / 2, (y0 + y1) / 2)
+        amb = _amb_de(casa, nivel_id, c)
+        caras = caras_de[amb["id"]] if amb else []
+        atras = _detras(m["rect"], caras)
+        if atras:
+            atras = _correr_fuera_de_columna(atras, caras, ent)
         clave = m.get("nombre") if m.get("nombre") in ESPECIALES else m["tipo"]
-        if clave in ESPECIALES:
-            letra, va, circ, desc = ESPECIALES[clave]
-            puntos.append({"tipo": "especial", "pos": c, "circuito": uso[circ], "va": va, "etiqueta": letra, "desc": desc})
+        for k, (letra, va, circ, desc) in enumerate(ESPECIALES.get(clave, [])):
+            base = atras or c
+            v = _vertical(base, caras)
+            pos = (base[0] + (0 if v else 0.30 * k), base[1] + (0.30 * k if v else 0))
+            especiales.append(m["rect"])
+            agregar(tipo="especial", pos=pos, circuito=uso.get(circ, uso["toma"]), va=va, etiqueta=letra, desc=desc,
+                    amb=amb and amb["id"])
         clave = m.get("nombre") if m.get("nombre") in TOMA_JUNTO else m["tipo"]
         if clave in TOMA_JUNTO:
-            puntos.append({"tipo": "toma", "pos": (x1 + 0.12, c[1]) if clave != "TV" else (c[0], y1 + 0.10),
-                           "circuito": uso[TOMA_JUNTO[clave]], "va": VA_TOMA})
-            if clave in ("escritorio", "TV"):
-                puntos.append({"tipo": "datos", "pos": (x1 + 0.12, c[1] + 0.25) if clave != "TV" else (c[0] + 0.3, y1 + 0.10),
-                               "circuito": "-", "va": 0})
-        if m["tipo"] == "meson" and not m.get("nombre"):
-            # tomas sobre el mesón cada ~1.2 m
-            largo = max(x1 - x0, y1 - y0)
-            for k in range(max(1, int(largo / 1.2))):
-                f = (k + 0.5) / max(1, int(largo / 1.2))
-                pos = (x0 + (x1 - x0) * f, c[1]) if x1 - x0 >= y1 - y0 else (c[0], y0 + (y1 - y0) * f)
-                if not any(math.dist(pos, q["pos"]) < 0.5 for q in puntos if q["tipo"] == "especial"):
-                    puntos.append({"tipo": "toma", "pos": pos, "circuito": uso["toma_comedor"], "va": VA_TOMA})
+            circ = uso[TOMA_JUNTO[clave]]
+            if atras:
+                agregar(tipo="toma", pos=atras, circuito=circ, va=VA_TOMA, amb=amb and amb["id"])
+            else:
+                agregar(tipo="toma_piso", pos=c, circuito=circ, va=VA_TOMA, amb=amb and amb["id"])
+            if clave in ("escritorio", "TV") and atras:
+                v = _vertical(atras, caras)
+                agregar(tipo="datos", pos=(atras[0] + (0 if v else 0.25), atras[1] + (0.25 if v else 0)),
+                        circuito="-", va=0, amb=amb and amb["id"])
+    # tomas sobre el mesón cada ~1.2 m, en el muro de atrás, a ≥ 0.60 de hornallas y lavaplatos
+    peligro = [m["rect"] for m in mbs if m["tipo"] in ("cocina", "lavaplatos") or m.get("nombre") in ("Anafe",)]
+    for m in mbs:
+        if m["tipo"] != "meson" or m.get("nombre"):
+            continue
+        x0, y0, x1, y1 = m["rect"]
+        amb = _amb_de(casa, nivel_id, ((x0 + x1) / 2, (y0 + y1) / 2))
+        caras = caras_de[amb["id"]] if amb else []
+        atras = _detras(m["rect"], caras)
+        if not atras:
+            continue
+        horizontal = abs(atras[1] - (y0 + y1) / 2) > abs(atras[0] - (x0 + x1) / 2)
+        lo, hi = (x0, x1) if horizontal else (y0, y1)
+        cand = [lo + 0.15 + k * 0.05 for k in range(int((hi - lo - 0.30) / 0.05) + 1)]
+        elegidos = []
+        for t in cand:
+            pt = (t, atras[1]) if horizontal else (atras[0], t)
+            if any(_dist_rect(pt, r) < 0.60 for r in peligro):
+                continue
+            if any(_dist_rect(pt, r) < 0.05 for r in especiales):
+                continue
+            if not ent.libre(pt, margen_abertura=0.15, muebles=False):
+                continue
+            if all(math.dist(pt, e) >= 1.2 for e in elegidos):
+                elegidos.append(pt)
+        for pt in elegidos:
+            agregar(tipo="toma", pos=pt, circuito=uso["toma_comedor"], va=VA_TOMA, amb=amb["id"])
     # extractores: al inicio de los ductos de ventilación que lo piden
     vent = casa.get("instalaciones", {}).get(nivel_id, {}).get("ventilacion", {})
     for d in vent.get("ductos") or []:
         if d.get("extractor"):
-            puntos.append({"tipo": "extractor", "pos": tuple(d["linea"][0]), "circuito": uso["luz"] if nivel_id == "pb" else uso["toma_humeda"], "va": 50})
-    for l in (casa.get("instalaciones", {}).get(nivel_id, {}).get("electrico", {}).get("luces_extra") or []):
-        puntos.append({"tipo": "luz", "pos": tuple(l["pos"]), "circuito": uso["luz"], "va": VA_LUZ})
-    for amb in ambientes(casa, nivel_id):
+            agregar(tipo="extractor", pos=tuple(d["linea"][0]), circuito=uso["luz"] if nivel_id == "pb" else uso["toma_humeda"], va=50,
+                    amb=None, gen=False)
+    # luces puestas en el modelo: circuito según dónde caen
+    for l in extras:
+        amb = _amb_de(casa, nivel_id, l["pos"])
+        if amb is None or amb["tipo"] == "exterior":
+            circ = uso["luz_ext"]
+        else:
+            circ = uso["luz_social"] if amb["id"] in SOCIALES else uso["luz"]
+        agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False, id=l.get("id"))
+    # bomba del pozo (en el pozo)
+    pozo = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {}).get("pozo")
+    if pozo and "bomba" in uso:
+        agregar(tipo="especial", pos=tuple(pozo["pos"]), circuito=uso["bomba"], va=pozo.get("va_bomba", 750), etiqueta="B",
+                desc="bomba del pozo", amb=None, gen=False)
+    # seguridad: cargas del portón y de alarma + cámaras + portero (se dibujan aparte)
+    seg = cfg.get("seguridad") or {}
+    if seg.get("porton") and "porton" in uso:
+        agregar(tipo="carga", pos=tuple(seg["porton"]["pos"]), circuito=uso["porton"], va=500, amb=None, gen=False)
+    if (seg.get("alarma") or seg.get("camaras") or seg.get("portero")) and "seguridad" in uso:
+        agregar(tipo="carga", pos=(0, 0), circuito=uso["seguridad"], va=50 + 15 * len(seg.get("camaras") or []) + 30, amb=None, gen=False)
+    # puntos puestos a mano (interiorista): reemplazan a los generados de su familia en su ambiente
+    manuales = cfg.get("puntos") or []
+
+    def familia(q):    # una toma especial a mano reemplaza solo a la de su misma letra
+        return ("especial", q.get("etiqueta")) if q["tipo"] == "especial" else FAMILIA.get(q["tipo"], q["tipo"])
+
+    quitar = set()
+    for mp in manuales:
+        amb_id = mp.get("amb") or (_amb_de(casa, nivel_id, mp["pos"]) or {}).get("id")
+        quitar.add((amb_id, familia(mp)))
+    puntos[:] = [q for q in puntos if not (q.get("gen") and (q.get("amb"), familia(q)) in quitar)]
+    for mp in manuales:
+        amb_id = mp.get("amb") or (_amb_de(casa, nivel_id, mp["pos"]) or {}).get("id")
+        t = mp["tipo"]
+        if mp.get("circuito"):
+            circ = mp["circuito"]
+        elif t in ("interruptor", "conmutador", "luz"):
+            amb = next((a for a in ambs if a["id"] == amb_id), None)
+            circ = uso["luz_social"] if amb_id in SOCIALES or (amb and amb["tipo"] == "exterior") else uso["luz"]
+        elif t == "toma_ext":
+            circ = uso["toma_ext"]
+        elif t == "datos":
+            circ = "-"
+        else:
+            amb = next((a for a in ambs if a["id"] == amb_id), None)
+            tipo_amb = amb["tipo"] if amb else "social"
+            circ = (uso["toma_comedor"] if tipo_amb == "cocina" or amb_id == "comedor"
+                    else uso["toma_humeda"] if tipo_amb in ("bano", "servicio") else uso["toma"])
+        if t == "especial" and not mp.get("circuito"):
+            gen = next((q for q in ESPECIALES.values() for q in q if q[0] == mp.get("etiqueta")), None)
+            circ = uso.get(gen[2], uso["toma"]) if gen else uso["toma"]
+        va = mp.get("va", VA_TOMA if FAMILIA.get(t) == "toma" else VA_LUZ if t == "luz" else 0)
+        if t == "especial" and "va" not in mp:
+            va = next((q[1] for q in ESPECIALES.values() for q in q if q[0] == mp.get("etiqueta")), VA_TOMA)
+        agregar(tipo=t if t in FAMILIA or t == "especial" else "toma", pos=tuple(mp["pos"]), circuito=circ, va=va,
+                etiqueta=mp.get("etiqueta", ""), amb=amb_id, gen=False, manual=True, luces=mp.get("luces"),
+                id=mp.get("id"), alto=mp.get("alto"))
+    # tomas comunes a otro circuito según el ambiente
+    for amb in ambs:
         nuevo = TOMA_POR_AMBIENTE.get(nivel_id, {}).get(amb["id"])
         if nuevo:
             for q in puntos:
                 if q["tipo"] == "toma" and q["circuito"] == uso["toma"] and dentro(amb["poly"], *q["pos"]):
                     q["circuito"] = nuevo
+    # sin repetidos: tomas a menos de 0.25 de otra se juntan
+    limpio = []
+    for q in puntos:
+        if q["tipo"] in ("toma", "toma_piso") and any(o["tipo"] == q["tipo"] and math.dist(o["pos"], q["pos"]) < 0.25 for o in limpio):
+            continue
+        limpio.append(q)
+    puntos[:] = limpio
+    # cables: cada tecla a las luces de su ambiente, o a lo que dice `luces` (ids de ambientes o de luces).
+    # Una luz con `id` nombrada por alguna tecla solo se une a las teclas que la nombran.
+    nombradas = {d for q in puntos if q["tipo"] in ("interruptor", "conmutador") for d in (q.get("luces") or [])}
+    for q in puntos:
+        if q["tipo"] not in ("interruptor", "conmutador"):
+            continue
+        destinos = set(q.get("luces") or [q.get("amb")])
+        for l in puntos:
+            if l["tipo"] != "luz":
+                continue
+            if l.get("id") and l["id"] in nombradas:
+                if l["id"] in destinos:
+                    cables.append((q["pos"], l["pos"]))
+            elif l.get("amb") in destinos:
+                cables.append((q["pos"], l["pos"]))
     return puntos, cables
 
 
-def _repartir(amb, abs_, n, bloqueos=()):
-    """n puntos sobre el perímetro del ambiente, lejos de puertas, ventanas y roperos, 0.12 m hacia adentro."""
-    pts = amb["poly"]
-    bordes = list(zip(pts, pts[1:] + pts[:1]))
-    per = sum(math.dist(a, b) for a, b in bordes)
-    out = []
-    for k in range(n):
-        objetivo = per * (k + 0.5) / n
-        for intento in range(40):
-            t = (objetivo + intento * 0.25) % per
-            acc = 0
-            for a, b in bordes:
-                L = math.dist(a, b)
-                if acc + L >= t:
-                    f = (t - acc) / L
-                    x, y = a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f
-                    break
-                acc += L
-            libre = True
-            for ab in abs_:
-                iv = _intervalo(a, b, ab["de"], ab["a"])
-                if iv and iv[0] - 0.4 / L <= f <= iv[1] + 0.4 / L:
-                    libre = False
-            q = _hacia_adentro(amb, x, y, 0.12)
-            if any(r[0] - 0.15 <= q[0] <= r[2] + 0.15 and r[1] - 0.15 <= q[1] <= r[3] + 0.15 for r in bloqueos):
-                libre = False
-            if libre:
-                out.append(q)
-                break
-    return out
+def _vertical(pt, caras):
+    """¿El punto está sobre un muro vertical (x constante)?"""
+    for p, q, (nx, ny) in caras:
+        if _dist_seg(pt, p, q) < 0.03:
+            return abs(nx) > 0.5
+    return False
 
 
 def cuadro_cargas(puntos, nivel_id="pb"):
@@ -260,7 +552,7 @@ def cuadro_cargas(puntos, nivel_id="pb"):
 ARTEFACTOS = {  # tipo/nombre de mueble -> (agua fría, agua caliente, desagüe Ø)
     "inodoro": (True, False, "110"), "lavamanos": (True, True, "50"), "ducha": (True, True, "50"),
     "lavaplatos": (True, True, "50"), "L": (True, False, "50"), "lavadero": (True, True, "50"),
-    "Lavadora manual": (True, False, "50"),
+    "Lavadora manual": (True, False, "50"), "Lavavajillas": (True, False, "50"), "Piletas": (True, True, "50"),
 }
 
 
@@ -298,9 +590,9 @@ def sanitario(casa, nivel_id):
     puntos = []
     for m in muebles(casa, nivel_id):
         clave = m.get("nombre") if m.get("nombre") in ARTEFACTOS else m["tipo"]
-        if clave not in ARTEFACTOS:
+        if clave not in ARTEFACTOS and not m.get("agua"):
             continue
-        af, ac, ds = ARTEFACTOS[clave]
+        af, ac, ds = ARTEFACTOS.get(clave, (True, False, None))    # `agua: true` = solo agua fría (dispensador)
         x0, y0, x1, y1 = m["rect"]
         c = ((x0 + x1) / 2, (y0 + y1) / 2)
         puntos.append({"pos": c, "af": af, "ac": ac, "desague": ds, "nombre": m.get("nombre") or m["tipo"]})
@@ -310,6 +602,8 @@ def sanitario(casa, nivel_id):
             ramas["agua_fria"].append(_escuadra(p["pos"], _proyectar(p["pos"], cfg["agua_fria"])))
         if p["ac"] and cfg.get("agua_caliente"):
             ramas["agua_caliente"].append(_escuadra(p["pos"], _proyectar(p["pos"], cfg["agua_caliente"])))
+        if not p["desague"]:
+            continue
         if cfg.get("colector"):
             ramas["desague"].append((_escuadra(p["pos"], _proyectar(p["pos"], cfg["colector"])), p["desague"]))
         elif cfg.get("bajantes"):
@@ -317,6 +611,20 @@ def sanitario(casa, nivel_id):
             cand = [b for b in cfg["bajantes"] if amb in b.get("ambientes", [amb])] or cfg["bajantes"]
             b = min(cand, key=lambda b: math.dist(p["pos"], b["pos"]))
             ramas["desague"].append((_escuadra(p["pos"], tuple(b["pos"])), p["desague"]))
+    # bajantes de los pisos de arriba: llegan a este nivel y van al colector por debajo del piso
+    ramas["llegan"] = []
+    if cfg.get("colector"):
+        cota = {n["id"]: n["cota"] for n in casa["niveles"]}
+        for nid, inst in (casa.get("instalaciones") or {}).items():
+            if cota.get(nid, 0) <= cota.get(nivel_id, 0):
+                continue
+            for b in (inst.get("sanitario") or {}).get("bajantes") or []:
+                if b.get("hasta") and cota.get(b["hasta"], 0) > cota.get(nivel_id, 0):
+                    continue     # se une a otra bajante en un piso de arriba
+                pos = tuple(b["pos"])
+                if any(math.dist(pos, q[0]) < 0.3 for q in ramas["llegan"]):
+                    continue
+                ramas["llegan"].append((pos, _escuadra(pos, _proyectar(pos, cfg["colector"])), b.get("etiqueta", "")))
     return cfg, puntos, ramas
 
 
@@ -351,8 +659,10 @@ def _circulo(L, x, y, r, estilo):
 def plano_electrico(casa, nivel):
     puntos, cables = electrico(casa, nivel["id"])
     cfg = casa.get("instalaciones", {}).get(nivel["id"], {}).get("electrico", {})
+    pozo = casa.get("instalaciones", {}).get(nivel["id"], {}).get("sanitario", {}).get("pozo")
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — ELÉCTRICO (esquema)",
-                                "Preliminar, para conversar con el electricista. Diseño definitivo según NB 777.")
+                                "Preliminar, para conversar con el electricista. Diseño definitivo según NB 777.",
+                                [pozo["pos"]] if pozo else [])
     naranja = "#e65100"
     for a, b in cables:
         L.linea(a[0], a[1], b[0], b[1], f'stroke="{naranja}" stroke-width="0.8" stroke-dasharray="4 3"')
@@ -363,23 +673,28 @@ def plano_electrico(casa, nivel):
             _circulo(L, x, y, 0.16, f'fill="#fff3e0" stroke="{naranja}" stroke-width="1.2"')
             L.linea(x - 0.11, y - 0.11, x + 0.11, y + 0.11, f'stroke="{naranja}" stroke-width="1"')
             L.linea(x - 0.11, y + 0.11, x + 0.11, y - 0.11, f'stroke="{naranja}" stroke-width="1"')
-        elif t == "interruptor":
+        elif t in ("interruptor", "conmutador"):
             _circulo(L, x, y, 0.07, f'fill="{naranja}"')
-            L.texto(x + 0.18, y + 0.05, "S", 7, f'fill="{naranja}" font-weight="bold"')
-        elif t == "toma":
-            _circulo(L, x, y, 0.09, 'fill="#fff" stroke="#1565c0" stroke-width="1.2"')
+            L.texto(x + 0.20, y + 0.05, "S" if t == "interruptor" else "Sc", 7, f'fill="{naranja}" font-weight="bold"')
+        elif t in ("toma", "toma_piso", "toma_ext"):
+            if t == "toma_piso":
+                L.poly([[x - 0.13, y - 0.13], [x + 0.13, y - 0.13], [x + 0.13, y + 0.13], [x - 0.13, y + 0.13]],
+                       'fill="none" stroke="#1565c0" stroke-width="1"')
+            _circulo(L, x, y, 0.09, f'fill="{"#e3f2fd" if t == "toma_ext" else "#fff"}" stroke="#1565c0" stroke-width="1.2"')
             L.linea(x - 0.04, y - 0.05, x - 0.04, y + 0.05, 'stroke="#1565c0" stroke-width="1"')
             L.linea(x + 0.04, y - 0.05, x + 0.04, y + 0.05, 'stroke="#1565c0" stroke-width="1"')
-            L.texto(x, y - 0.14, p["circuito"], 6, 'fill="#1565c0"')
+            L.texto(x, y - 0.14, p["circuito"] + (" IP" if t == "toma_ext" else ""), 6, 'fill="#1565c0"')
         elif t == "especial":
             L.poly([[x - 0.13, y - 0.13], [x + 0.13, y - 0.13], [x + 0.13, y + 0.13], [x - 0.13, y + 0.13]], 'fill="#1565c0"')
-            L.texto(x, y + 0.05, p["etiqueta"], 8, 'fill="#fff" font-weight="bold"')
+            L.texto(x, y + 0.05, p["etiqueta"], 8 if len(p["etiqueta"]) < 2 else 6, 'fill="#fff" font-weight="bold"')
             L.texto(x, y - 0.20, p["circuito"], 6, 'fill="#1565c0"')
         elif t == "datos":
             L.poly([[x, y - 0.11], [x + 0.11, y + 0.09], [x - 0.11, y + 0.09]], 'fill="#6a1b9a"')
         elif t == "extractor":
             _circulo(L, x, y, 0.16, 'fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"')
             L.texto(x, y + 0.05, "E", 8, 'fill="#2e7d32" font-weight="bold"')
+        if p.get("alto") and t != "luz":
+            L.texto(x, y + 0.27, f"h{p['alto']:.2f}", 5, 'fill="#555"')
     if cfg.get("tablero"):
         x, y = cfg["tablero"]["pos"]
         L.poly([[x - 0.30, y - 0.10], [x + 0.30, y - 0.10], [x + 0.30, y + 0.08], [x - 0.30, y + 0.08]], 'fill="#212121"')
@@ -404,9 +719,10 @@ def plano_electrico(casa, nivel):
         x, y = cfg["timbre"]
         _circulo(L, x, y, 0.08, 'fill="#fff" stroke="#212121"')
         L.texto(x - 0.3, y + 0.05, "timbre", 6, 'fill="#212121"')
+    _dibujar_seguridad(L, cfg.get("seguridad") or casa.get("instalaciones", {}).get(nivel["id"], {}).get("seguridad"))
     # leyenda de símbolos
     lx, ly = x0 + 6, y1 + 1.15
-    items = [("luz", "luz de techo"), ("interruptor", "interruptor"), ("toma", "tomacorriente (circuito)"),
+    items = [("luz", "luz de techo"), ("interruptor", "interruptor (Sc = conmutador)"), ("toma", "tomacorriente (circuito)"),
              ("especial", "toma especial"), ("datos", "datos / TV"), ("extractor", "extractor")]
     for k, (t, txt) in enumerate(items):
         cx = lx + k * 2.2
@@ -414,6 +730,39 @@ def plano_electrico(casa, nivel):
         _dibujar_simbolo(L, fake, naranja)
         L.texto(cx + 0.25, ly + 0.05, txt, 7, 'fill="#444" text-anchor="start"')
     return L.svg(f"{nivel['nombre']} — eléctrico"), puntos
+
+
+def _dibujar_seguridad(L, seg):
+    """Portón, portero, cámaras y alarma (esquema; lo define el instalador)."""
+    if not seg:
+        return
+    VIO = "#6a1b9a"
+    if seg.get("porton"):
+        x, y = seg["porton"]["pos"]
+        L.linea(x - 1.4, y, x, y, f'stroke="{VIO}" stroke-width="2"')
+        L.texto(x - 1.0, y - 0.15, seg["porton"].get("etiqueta", "← portón con motor + portero (calle)"), 7,
+                f'fill="{VIO}" text-anchor="start"')
+    if seg.get("portero"):
+        x, y = seg["portero"]["pos"]
+        L.poly([[x - 0.10, y - 0.10], [x + 0.10, y - 0.10], [x + 0.10, y + 0.10], [x - 0.10, y + 0.10]], f'fill="#fff" stroke="{VIO}" stroke-width="1.2"')
+        L.texto(x, y + 0.04, "P", 6, f'fill="{VIO}" font-weight="bold"')
+        if seg.get("porton"):
+            px, py = seg["porton"]["pos"]
+            L.linea(px, py, x, y, f'stroke="{VIO}" stroke-width="0.8" stroke-dasharray="4 3"')
+    for c in seg.get("camaras") or []:
+        x, y = c["pos"]
+        L.poly([[x - 0.12, y - 0.08], [x + 0.08, y - 0.08], [x + 0.08, y + 0.08], [x - 0.12, y + 0.08]], f'fill="{VIO}"')
+        L.poly([[x + 0.08, y - 0.04], [x + 0.18, y - 0.10], [x + 0.18, y + 0.10], [x + 0.08, y + 0.04]], f'fill="{VIO}"')
+    al = seg.get("alarma") or {}
+    for clave, letra in (("central", "AL"), ("teclado", "TK"), ("sirena", "SI")):
+        if al.get(clave):
+            x, y = al[clave]["pos"] if isinstance(al[clave], dict) else al[clave]
+            L.poly([[x - 0.14, y - 0.10], [x + 0.14, y - 0.10], [x + 0.14, y + 0.10], [x - 0.14, y + 0.10]], f'fill="{VIO}"')
+            L.texto(x, y + 0.04, letra, 5, 'fill="#fff" font-weight="bold"')
+    for s_ in al.get("sensores") or []:
+        x, y = s_["pos"]
+        _circulo(L, x, y, 0.07, f'fill="#fff" stroke="{VIO}" stroke-width="1.2"')
+        L.texto(x, y - 0.12, "PIR" if s_.get("tipo") == "movimiento" else "MG", 5, f'fill="{VIO}"')
 
 
 def _dibujar_simbolo(L, p, naranja):
@@ -465,6 +814,11 @@ def plano_sanitario(casa, nivel):
         L.texto(x, y + 0.05, "BV", 6, f'fill="{CAFE}" font-weight="bold"')
         if b.get("etiqueta"):
             L.texto(x + 0.25, y - 0.22, b["etiqueta"], 7, f'fill="{CAFE}" text-anchor="start"')
+    for pos, ruta, etiqueta in ramas.get("llegan", []):
+        poli(ruta, f'stroke="{CAFE}" stroke-width="2.5" stroke-dasharray="2 3"')
+        _circulo(L, pos[0], pos[1], 0.16, f'fill="{CAFE}" stroke="{CAFE}" stroke-width="1.5"')
+        L.texto(pos[0], pos[1] + 0.05, "BV", 6, 'fill="#fff" font-weight="bold"')
+        L.texto(pos[0] + 0.22, pos[1] + 0.35, "↓ de arriba Ø110 (bajo el piso, antes del contrapiso)", 6, f'fill="{CAFE}" text-anchor="start"')
     for ruta, d in ramas["desague"]:
         poli(ruta, f'stroke="{CAFE}" stroke-width="2" stroke-dasharray="7 3"')
         p, q = ruta[0], ruta[1]

@@ -41,14 +41,15 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
 - `revisor-estructural` — contrasta cambios con lo construido (solo lectura).
 - `revisor-habitabilidad` — luz, ventilación, circulación, normativa (solo lectura).
 - `interiorista` — muebles + luces, enchufes, interruptores y puntos de agua de cada ambiente
-  (deja el amoblamiento definitivo para el electricista y el plomero). Solo toca `muebles` y `luces_extra`.
+  (deja el amoblamiento definitivo para el electricista y el plomero). Solo toca `muebles`, `luces_extra` y `electrico.puntos`.
 
 Flujo típico de un cambio: `disenador` → `revisor-estructural` + `revisor-habitabilidad`
 → `interiorista` (si cambian muebles o puntos) → el usuario decide → se registra en `docs/decisiones.md`.
 
 ## Instalaciones
 `tools/instalaciones.py` genera los planos eléctrico y sanitario/gas desde ambientes, aberturas y
-muebles; en `instalaciones` del modelo solo van tablero, calefón, troncales, cámaras y gas. Son
+muebles; en `instalaciones` del modelo van tablero, calefón, troncales, cámaras, gas, seguridad y los
+puntos eléctricos puestos a mano (`electrico.puntos`, reemplazan a los generados de su familia en su ambiente). Son
 **esquemas preliminares** (NB 777, normas de agua y YPFB los define el profesional).
 
 ## Comandos
