@@ -501,7 +501,8 @@ def electrico(casa, nivel_id):
     # sin repetidos: tomas a menos de 0.25 de otra se juntan
     limpio = []
     for q in puntos:
-        if q["tipo"] in ("toma", "toma_piso") and any(o["tipo"] == q["tipo"] and math.dist(o["pos"], q["pos"]) < 0.25 for o in limpio):
+        if q["tipo"] in ("toma", "toma_piso") and any(o["tipo"] == q["tipo"] and o.get("amb") == q.get("amb")
+                                                      and math.dist(o["pos"], q["pos"]) < 0.25 for o in limpio):
             continue
         limpio.append(q)
     puntos[:] = limpio
