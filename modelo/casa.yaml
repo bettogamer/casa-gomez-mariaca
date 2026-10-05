@@ -769,6 +769,9 @@ instalaciones:
         - {amb: lavado, tipo: toma, pos: [7.125, 5.45], alto: 1.10, estado: propuesto, nota: "PLANCHA: se plancha en el medio del lavado; con diferencial"}
         - {amb: lavado, tipo: toma, pos: [9.05, 5.60], alto: 1.10, estado: propuesto, nota: "general, entre el ropero de blancos y la lavadora manual"}
     sanitario:
+      # Materiales (usuario 2026-10-05): agua fría y caliente en PPR por termofusión (fría PN16–PN20; caliente PN20
+      # mínimo, mejor PPR con fibra/compuesto; troncales 25 mm, ramales 20 mm; caliente aislada con coquilla).
+      # Desagües en PVC sanitario (110 inodoros y bajantes, 50 el resto). Gas: material que define el gasista (YPFB).
       # Agua: pozo en el patio + bomba -> tanque elevado en el último piso -> baja por gravedad a toda
       # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
       # estudio (exterior, en el retiro): bajada de agua fría del tanque + calefón a gas natural.
