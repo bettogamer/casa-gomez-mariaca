@@ -535,3 +535,11 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Qué:** la salida `estar_franja` (2.10, a la franja sur) se queda **corrediza** (hoja fija al oeste, la que corre al
   este). El "sin corredizas" del usuario era para la puerta del baño de PB.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Logia de la suite: muro bajo + celosía al norte
+- **Qué:** el costado norte de la logia (sobre el volado, a 2.01 m del Lote 105) lleva **muro bajo de 1.00** de ladrillo de 6
+  huecos y **celosía de madera fija** hasta la losa del altillo, igual a la del ingreso de PB. El frente sigue con baranda.
+- **Por qué:** privacidad hacia el vecino y sin vista directa (la logia cumple la distancia por 1 cm), deja pasar luz y
+  aire, y pesa poco en la punta del volado. Descartados: abierto con baranda (poca privacidad) y muro entero (pesado y oscuro).
+- **Pendiente:** ingeniero (peso y anclaje), arquitecto (servidumbre de vista).
+- **Estado:** aprobado por el usuario.

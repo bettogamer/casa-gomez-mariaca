@@ -233,7 +233,7 @@ ambientes:
     # Se usa el volado de 1 m: logia frente al dormitorio y baño que avanza hasta el borde.
     - {id: hall_p1, nombre: Hall, tipo: circulacion, rect: [4.40, 2.68, 7.05, 4.20], etiqueta: [6.30, 3.95], estado: definido, nota: "llegada de la escalera; sigue al altillo, al pasillo de los chicos y a la suite principal"}
     - {id: dorm_principal, nombre: Dormitorio principal, tipo: dormitorio, rect: [0.00, 0.00, 4.40, 4.20], etiqueta: [1.50, 2.10], estado: definido, nota: "~4.25 × 4.05 libres (17 m²); muro ciego al oeste (sol de la tarde) con la TV; cabecera contra el muro de la escalera: revestimiento acústico sobre el ladrillo (a definir con el constructor; en Bolivia no se usa drywall); puerta a la logia en la esquina sur; ventana al norte"}
-    - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: definido, nota: "balcón cubierto sobre el volado de 1 m (la losa del altillo vuela igual y lo techa); cerrado a los costados, baranda al frente; sombrea el dormitorio del sol de la tarde"}
+    - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: definido, nota: "balcón cubierto sobre el volado de 1 m (la losa del altillo vuela igual y lo techa); al sur la pared del baño, al norte muro bajo de 1.00 + celosía de madera hasta la losa (2026-10-05), baranda al frente; sombrea el dormitorio del sol de la tarde"}
     - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [3.40, 4.20, 5.85, 6.67], etiqueta: [4.60, 5.45], estado: definido, nota: "~2.3 × 2.32 libres (achicado para agrandar el estar), muebles en U con pasillo de 1.20; se entra desde los lavamanos"}
     - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: definido, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta; sin ventana: extractor en cielo falso con ducto corto al frente (por encima del inodoro)"}
     - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
@@ -256,7 +256,8 @@ muros:
     - {id: celosia_ingreso, tipo: celosia_madera, de: [0.00, 4.95], a: [2.58, 4.95], nota: "separa living e ingreso; de piso a techo"}
   p1:
     - {id: baranda_logia, tipo: baranda, alto: 1.00, de: [-1.125, 0.00], a: [-1.125, 4.20], nota: "baranda o antepecho ≥ 1.00 m al frente de la logia"}
-    - {id: baranda_logia_norte, tipo: baranda, alto: 1.00, de: [-1.125, 0.00], a: [0.00, 0.00], nota: "costado norte de la logia (≥ 1.00 m; puede ser muro bajo + vidrio)"}
+    - {id: baranda_logia_norte, tipo: baranda, alto: 1.00, de: [-1.125, 0.00], a: [0.00, 0.00], estado: propuesto, nota: "costado norte de la logia: MURO BAJO de ladrillo de 6 huecos de 1.00 (decisión del usuario 2026-10-05)"}
+    - {id: celosia_logia_norte, tipo: celosia_madera, de: [-1.125, 0.00], a: [0.00, 0.00], estado: propuesto, nota: "celosía de madera fija sobre el muro bajo, de 1.00 hasta la losa, igual a la del ingreso de PB: privacidad hacia el Lote 105 sin vista directa, deja pasar luz y aire; liviana (punta del volado). Madera para exterior con protector"}
 
   altillo:
     # Antepechos de la terraza y de la franja (≥ 1.10 m, de ladrillo: siguen la línea del antepecho del techo)
@@ -1125,6 +1126,7 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
+  - "Logia de la suite (P1): muro bajo de 1.00 + celosía de madera en el costado norte, en la punta del volado: el ingeniero confirma el peso y el anclaje de la celosía a la losa del altillo; el arquitecto, que con celosía no hay vista directa al Lote 105 (logia a 2.01 del lindero)"
   - "Tanque elevado: base subida a +10.50 (~2.5 m sobre la entrada del calefón del altillo). Base propia de hormigón sobre A3 y el muro de la escalera, aún no construida: el ingeniero la dimensiona con la nueva altura (más palanca con viento y sismo)"
   - "Calefón en la terraza del altillo (junto a A2): el gasista confirma con YPFB la subida de gas a la vista por la fachada norte, la salida de gases por encima del techo de la terraza y las distancias; el plomero, que el modelo elegido encienda con ~0.25 bar (si no, presurizadora para toda la casa)"
   - "Hall del P1: borde real del hueco de la losa del altillo sobre el hall (define si la luz del hall es plafón o aplique a 2.20). Contrapiso de los baños del P1: que dé la pendiente para el inodoro del Baño 1 (~1 m hasta la bajante) y el lavamanos del Baño 2 (~3 m) sin tocar viguetas"
