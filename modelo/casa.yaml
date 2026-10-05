@@ -409,65 +409,90 @@ muebles:
   pb:
     # Living: TV en el muro norte (luz de costado, sin reflejo del sol de la tarde por la corrediza oeste)
     - {tipo: alfombra, rect: [1.20, 1.00, 3.90, 3.60]}
-    - {tipo: estante, nombre: TV, rect: [2.30, 0.13, 3.90, 0.58], alto: 0.60}
+    # TV de 60" COLGADA en el muro norte (dicho por el usuario 2026-10-05); el mueble bajo lleva el decodificador.
+    - {tipo: estante, nombre: TV, rect: [2.30, 0.13, 3.90, 0.58], alto: 0.50, estado: propuesto, nota: "mueble bajo con decodificador; TV 60\" colgada encima (centro de pantalla ~1.15). Detrás de la TV, en el muro (x≈3.10): toma doble + datos + cable a ~1.15; tubo vacío de 1\" del mueble (0.40) a la TV para el HDMI"}
     - {tipo: sofa, nombre: Sofá 3, rect: [1.60, 2.90, 3.70, 3.80]}
     - {tipo: mesa, nombre: Centro, rect: [2.20, 1.70, 3.20, 2.30], alto: 0.40}
-    - {tipo: sillon, rect: [0.40, 1.40, 1.20, 2.20]}
+    # Sillón de lectura en el rincón noroeste, bajo la ventana: deja libre el paso a la corrediza de la terraza
+    # (antes quedaba a 0.27 de la corrediza). Enchufe para la lámpara bajo la ventana (x≈0.85, h 0.30).
+    - {tipo: sillon, nombre: Lectura, rect: [0.45, 0.35, 1.25, 1.15], estado: propuesto, nota: "sillón de lectura con lámpara de pie; enchufe bajo la ventana a 0.30"}
     - {tipo: sillon, rect: [3.45, 1.40, 4.25, 2.20]}
     # Ingreso y hall
     - {tipo: estante, nombre: Zapatero, rect: [1.20, 6.10, 2.40, 6.54], alto: 0.90}
     - {tipo: closet, nombre: Abrigos, rect: [5.20, 5.95, 6.95, 6.54]}
-    - {tipo: estante, nombre: Consola + espejo, rect: [3.00, 6.19, 4.30, 6.54], alto: 0.85}
-    - {tipo: estante, nombre: Banca + perchero, rect: [6.60, 4.30, 7.00, 5.50], alto: 0.45}
+    # Consola corrida 0.20 al este: deja 0.80 de muro libre para el tablero (TD en x≈2.75)
+    - {tipo: estante, nombre: Consola + espejo, rect: [3.20, 6.19, 4.50, 6.54], alto: 0.85, estado: propuesto, nota: "enchufe sobre la consola a 1.00 (x≈3.40); aplique sobre el espejo a ~1.90"}
+    # Banca acortada a 1.00: las puertas del closet de abrigos ya no chocan con su punta
+    - {tipo: estante, nombre: Banca + perchero, rect: [6.60, 4.30, 7.00, 5.30], alto: 0.45, estado: propuesto}
     - {tipo: estante, nombre: Cajonera, rect: [4.50, 2.75, 5.65, 3.95], alto: 0.40, nota: "bajo el tramo de 10, se abre hacia el hall (tentativo: el usuario aún decide el uso)"}
     # Depósito bajo la grada: estantes del lado bajo
     - {tipo: estante, nombre: Herramientas, rect: [4.48, 0.20, 4.90, 2.55], alto: 0.80}
     # Baño: ducha al fondo, inodoro y lavamanos alternados
-    - {tipo: ducha, rect: [7.13, 0.13, 8.77, 1.03]}
-    - {tipo: inodoro, rect: [8.08, 1.20, 8.77, 1.60]}
-    - {tipo: lavamanos, rect: [7.13, 1.90, 7.58, 2.45]}
-    # Estudio: escritorio contra el muro oeste (luz norte de costado, sin sol sobre la pantalla)
-    - {tipo: escritorio, rect: [8.93, 0.35, 9.63, 1.75]}
+    - {tipo: ducha, rect: [7.13, 0.13, 8.77, 1.03], estado: propuesto, nota: "AL RAS DEL PISO con cancel (dicho por el usuario 2026-10-05): rebajar el contrapiso ~5–8 cm en la zona de la ducha ANTES de hacerlo, con pendiente al sumidero"}
+    # Inodoro corrido 5 cm al sur: su eje queda a 0.40 del borde de la ducha
+    - {tipo: inodoro, rect: [8.08, 1.25, 8.77, 1.65], estado: propuesto}
+    - {tipo: lavamanos, rect: [7.13, 1.90, 7.58, 2.45], nota: "espejo encima; enchufe en el muro oeste al costado (x 7.125, y≈1.75) a 1.30 (≥0.60 de la ducha); aplique sobre el espejo a ~2.00"}
+    # Estudio: escritorio contra el muro oeste (luz norte de costado, sin sol sobre la pantalla).
+    # Lo usa una persona diestra (2026-10-05): la luz del norte le llega por la derecha, así que se suma luz de
+    # trabajo por la IZQUIERDA (lado sur): punto de luz sobre la mesa y lámpara en la punta sur del escritorio.
+    - {tipo: escritorio, rect: [8.93, 0.35, 9.63, 1.75], estado: propuesto, nota: "LLEGADA DE INTERNET + ROUTER (dicho por el usuario). En el muro oeste detrás del escritorio (x 8.925, y≈1.05): toma doble + datos a 0.90 y toma doble a 0.30. Lámpara de escritorio en la punta SUR (izquierda del usuario diestro); cortina translúcida en la ventana norte"}
     - {tipo: silla, rect: [9.75, 0.80, 10.25, 1.30]}
-    - {tipo: estante, nombre: Librero bajo, rect: [9.75, 0.13, 11.00, 0.48], alto: 0.85}
-    - {tipo: sofa, nombre: Sofá cama, rect: [12.05, 0.35, 12.92, 2.35]}
+    # Librero bajo acortado (antes hasta 11.00): no choca con el sofá cama abierto
+    - {tipo: estante, nombre: Librero bajo, rect: [9.75, 0.13, 10.80, 0.48], alto: 0.85, estado: propuesto}
+    # Sofá cama corrido 0.20 al norte: abierto (~2.0 m hacia el oeste) ya no pisa el frente del closet y deja ~0.75
+    # para subirse por el lado sur. Enchufes de velador a 0.60 en el muro norte (x≈12.40) y en el sur (x≈12.60).
+    - {tipo: sofa, nombre: Sofá cama, rect: [12.05, 0.15, 12.92, 2.15], estado: propuesto, nota: "cabecera contra el muro este; enchufes de velador a 0.60 a los dos lados (no detrás del sofá) y conmutador de la luz junto a la cabecera (x≈12.40, muro norte, a 0.90)"}
     - {tipo: closet, nombre: Closet, rect: [9.95, 1.95, 11.45, 2.55]}
     # Comedor para 6
-    - {tipo: mesa, nombre: Mesa 6, rect: [13.70, 0.92, 15.50, 1.82]}
-    - {tipo: silla, rect: [14.05, 0.42, 14.50, 0.87]}
-    - {tipo: silla, rect: [14.70, 0.42, 15.15, 0.87]}
-    - {tipo: silla, rect: [14.05, 1.87, 14.50, 2.32]}
-    - {tipo: silla, rect: [14.70, 1.87, 15.15, 2.32]}
-    - {tipo: silla, rect: [13.20, 1.15, 13.65, 1.60]}
-    - {tipo: silla, rect: [15.55, 1.15, 16.00, 1.60]}
+    # Mesa de 1.80 (se queda, dicho por el usuario) con 3 sillas por lado y SIN cabeceras (2026-10-05): la corrediza
+    # del patio queda totalmente libre (1.27 entre la mesa y la corrediza) y ninguna silla queda contra el muro oeste.
+    # 0.60 por persona (justo pero estándar para 1.80).
+    - {tipo: mesa, nombre: Mesa 6, rect: [13.70, 0.92, 15.50, 1.82], estado: propuesto, nota: "3 sillas por lado, sin cabeceras: paso libre a la corrediza del patio"}
+    - {tipo: silla, rect: [13.78, 0.42, 14.23, 0.87], estado: propuesto}
+    - {tipo: silla, rect: [14.38, 0.42, 14.83, 0.87], estado: propuesto}
+    - {tipo: silla, rect: [14.98, 0.42, 15.43, 0.87], estado: propuesto}
+    - {tipo: silla, rect: [13.78, 1.87, 14.23, 2.32], estado: propuesto}
+    - {tipo: silla, rect: [14.38, 1.87, 14.83, 2.32], estado: propuesto}
+    - {tipo: silla, rect: [14.98, 1.87, 15.43, 2.32], estado: propuesto}
     # Cocina en L + isla: muebles contra el muro del vecino (sur: cocina y campana) y del patio
-    # (este: lavaplatos bajo la ventana, refrigerador en la punta); isla de trabajo y desayuno.
-    - {tipo: refrigerador, rect: [16.03, 3.30, 16.78, 4.05]}
-    - {tipo: meson, rect: [16.18, 4.05, 16.78, 5.95]}
+    # (este: lavaplatos bajo la ventana, lavavajillas, refrigerador en la punta); isla de trabajo y desayuno.
+    # Mesones del muro sur en dos tramos (a cada lado de las hornallas): así las tomas del mesón quedan
+    # a ≥0.60 de las hornallas; el tramo del lavaplatos va con nombre (sin toma encima del agua).
+    - {tipo: refrigerador, rect: [16.03, 3.30, 16.78, 4.05], estado: propuesto, nota: "con dispensador de agua (dicho por el usuario): punto de agua fría con llave de paso detrás, a ~0.30; enchufe propio a 0.50 detrás"}
+    - {tipo: meson, nombre: Lavavajillas, rect: [16.18, 4.05, 16.78, 4.65], estado: propuesto, nota: "lavavajillas bajo mesón junto al lavaplatos (dicho por el usuario): enchufe propio a 0.50 en el mueble del lavaplatos, agua fría y desagüe al sifón del lavaplatos; la puerta abierta deja ~0.50 hasta la isla"}
+    - {tipo: meson, nombre: Mesón lavaplatos, rect: [16.18, 4.65, 16.78, 5.95], estado: propuesto}
     - {tipo: lavaplatos, rect: [16.23, 4.75, 16.73, 5.55]}
-    - {tipo: meson, rect: [12.80, 5.95, 16.78, 6.54]}
-    - {tipo: cocina, rect: [14.40, 5.95, 15.15, 6.54]}
-    - {tipo: closet, nombre: Torre horno, rect: [12.20, 5.95, 12.80, 6.54]}
-    - {tipo: meson, nombre: Isla, rect: [13.10, 3.90, 15.30, 4.90]}
-    - {tipo: taburete, rect: [13.40, 3.45, 13.80, 3.85]}
-    - {tipo: taburete, rect: [14.00, 3.45, 14.40, 3.85]}
-    - {tipo: taburete, rect: [14.60, 3.45, 15.00, 3.85]}
+    - {tipo: meson, rect: [12.80, 5.95, 14.40, 6.54], estado: propuesto, nota: "zona de preparación; enchufes dobles a 1.10 (x≈13.15 y 13.75)"}
+    - {tipo: cocina, rect: [14.40, 5.95, 15.15, 6.54], nota: "hornallas a gas natural; campana a 2.00 (enchufe dentro del cajón)"}
+    - {tipo: meson, rect: [15.15, 5.95, 16.78, 6.54], estado: propuesto, nota: "enchufe doble a 1.10 a ≥0.65 de las hornallas (x≈15.80–16.00)"}
+    - {tipo: closet, nombre: Torre horno, rect: [12.20, 5.95, 12.80, 6.54], nota: "horno eléctrico abajo (circuito PROPIO, enchufe a 0.50 al costado) y microondas arriba (enchufe a ~1.60 dentro de la torre)"}
+    # Isla de 2.00 (antes 2.20): quedan 0.93 al refrigerador y 1.08 al mesón del este; 3 taburetes de 0.50
+    - {tipo: meson, nombre: Isla, rect: [13.10, 3.90, 15.10, 4.90], estado: propuesto, nota: "sin bacha. Enchufe doble en la cara oeste a 0.90, alimentado por tubo BAJO EL CONTRAPISO desde el muro sur (dejarlo antes de hacer el piso)"}
+    - {tipo: taburete, rect: [13.40, 3.45, 13.80, 3.85], estado: propuesto}
+    - {tipo: taburete, rect: [13.90, 3.45, 14.30, 3.85], estado: propuesto}
+    - {tipo: taburete, rect: [14.40, 3.45, 14.80, 3.85], estado: propuesto}
     - {tipo: closet, nombre: Alacena, rect: [11.28, 3.85, 11.88, 5.35]}
-    # Almacén: estantes en U, libre el giro de la puerta
-    - {tipo: estante, rect: [9.20, 3.81, 11.12, 4.25], alto: 2.00}
-    - {tipo: estante, rect: [9.20, 4.25, 9.65, 6.54], alto: 2.00}
+    # Almacén: estantes en U, libre el giro de la puerta. Rincón noroeste (x 9.20–9.55, y 3.81–4.10) LIBRE: por ahí
+    # baja el desagüe del Baño 2 del primer piso (ducto con tapa de registro). Freezer vertical de 1.00 contra el muro
+    # oeste, de frente a la puerta, con 1.22 libres delante para abrirlo (2026-10-05).
+    - {tipo: estante, rect: [9.55, 3.81, 11.12, 4.25], alto: 2.00, estado: propuesto, nota: "empieza en x 9.55: deja libre el rincón del ducto de la bajante del Baño 2 (P1) con su registro"}
+    - {tipo: estante, rect: [9.20, 4.25, 9.65, 5.00], alto: 2.00, estado: propuesto, nota: "acortado para el freezer"}
     - {tipo: estante, rect: [9.65, 6.10, 10.30, 6.54], alto: 2.00}
-    # Lavado: lavadora, secadora y lavadero contra el muro del vecino; estante de planchado
-    - {tipo: lavadora, nombre: L, rect: [7.20, 5.94, 7.80, 6.54]}
-    - {tipo: lavadora, nombre: S, rect: [7.85, 5.94, 8.45, 6.54], nota: "secadora de condensación o bomba de calor: sin ducto (decisión del usuario)"}
-    - {tipo: lavadero, rect: [8.45, 5.94, 9.05, 6.54]}
-    - {tipo: estante, nombre: Planchado, rect: [8.60, 4.00, 9.05, 5.60], alto: 2.00}
-    # Terraza
-    - {tipo: mesa, rect: [-1.90, 1.90, -0.90, 2.90]}
-    - {tipo: silla, rect: [-2.45, 2.17, -2.00, 2.62]}
-    - {tipo: silla, rect: [-0.80, 2.17, -0.35, 2.62]}
-    - {tipo: silla, rect: [-1.62, 1.35, -1.17, 1.80]}
-    - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45]}
+    - {tipo: refrigerador, nombre: Freezer, rect: [9.20, 5.05, 9.90, 6.05], alto: 1.80, estado: propuesto, nota: "freezer VERTICAL (dicho por el usuario): 1.00 de ancho; fondo ~0.70 y alto ~1.80 SUPUESTOS, confirmar con el modelo comprado (y hacia qué lado abre la puerta: mejor bisagra al sur). Enchufe propio a 0.50 detrás, en el muro oeste. Fuera del giro de la puerta del almacén y del rincón del ducto; 1.22 libres delante"}
+    - {tipo: estante, rect: [10.72, 4.25, 11.12, 5.40], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro este (recuperan lo que se quitó al estante oeste); terminan antes del giro de la puerta"}
+    # Lavado (2026-10-05, dicho por el usuario): SOLO lavadora (sin secadora) + lavadora manual chica para prendas
+    # menores, lavadero entre las dos (un solo desagüe), y el resto con muebles para guardar blancos.
+    - {tipo: lavadora, nombre: L, rect: [7.20, 5.94, 7.80, 6.54], estado: propuesto, nota: "enchufe a 1.20 encima (nunca bajo el lavadero); llave de agua fría a ~1.00 y desagüe con sifón a ~0.85"}
+    - {tipo: lavadero, rect: [7.85, 5.94, 8.45, 6.54], estado: propuesto}
+    - {tipo: lavadora, nombre: Lavadora manual, rect: [8.50, 6.04, 9.00, 6.54], estado: propuesto, nota: "chica, para prendas menores; desagüe al mismo ramal del lavadero; enchufe con diferencial a 1.20"}
+    - {tipo: closet, nombre: Blancos, rect: [8.45, 4.00, 9.05, 5.40], alto: 2.10, estado: propuesto, nota: "ropero de blancos de 0.60, debajo de la banderola (2.20); termina en 5.40 para dejar 0.64 delante de la lavadora manual"}
+    - {tipo: estante, nombre: Blancos, rect: [7.13, 4.60, 7.53, 5.30], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro del hall (después del giro de la puerta); terminan en 5.30 para abrir la lavadora. PLANCHADO en el medio del lavado (decidido por el usuario 2026-10-05): ENCHUFE DE LA PLANCHA a 1.10 en este muro (x 7.125), en y≈5.45, entre las repisas y la lavadora, con diferencial"}
+    # Terraza: mesa corrida 1.30 al sur para dejar libre la corrediza del living
+    - {tipo: mesa, rect: [-1.90, 3.20, -0.90, 4.20], estado: propuesto}
+    - {tipo: silla, rect: [-2.45, 3.47, -2.00, 3.92], estado: propuesto}
+    - {tipo: silla, rect: [-0.80, 3.47, -0.35, 3.92], estado: propuesto}
+    - {tipo: silla, rect: [-1.62, 2.65, -1.17, 3.10], estado: propuesto}
+    - {tipo: silla, rect: [-1.62, 4.30, -1.17, 4.75], estado: propuesto}
 
   p1:
     # Estar: TV en un mueble bajo contra el muro del vestidor, sofá contra el muro del Baño 2, alfombra;
@@ -591,8 +616,23 @@ instalaciones:
       acometida: {pos: [-0.30, 6.10], nota: "desde el medidor en el muro de la calle (frente del lote)"}
       timbre: [-0.20, 6.45]
       luces_extra:
-        - {pos: [14.20, 4.40], nota: "colgantes sobre la isla"}
-        - {pos: [16.45, 5.15], nota: "bajo alacena / sobre lavaplatos"}
+        # Cocina
+        - {pos: [13.60, 4.40], nota: "colgante sobre la isla (1 de 2)", estado: propuesto}
+        - {pos: [14.60, 4.40], nota: "colgante sobre la isla (2 de 2)", estado: propuesto}
+        - {pos: [16.30, 5.15], nota: "luz de techo sobre el lavaplatos (ahí hay ventana, no alacena)", estado: propuesto}
+        - {pos: [13.60, 6.25], nota: "tira LED bajo las alacenas del muro sur, x 12.80–14.40, a ~1.45, con tecla propia", estado: propuesto}
+        - {pos: [15.95, 6.25], nota: "tira LED bajo las alacenas del muro sur, x 15.15–16.78, a ~1.45 (misma tecla)", estado: propuesto}
+        # Hall, pasillo, baño, estudio
+        - {pos: [6.40, 3.40], nota: "hall: tramo hacia el pasillo (conmutada con la entrada)", estado: propuesto}
+        - {pos: [8.20, 3.21], nota: "pasillo: segunda luz (conmutador en el hall y al final, junto a la cocina)", estado: propuesto}
+        - {pos: [7.30, 2.17], nota: "baño: aplique sobre el espejo a ~2.00", estado: propuesto}
+        - {pos: [9.40, 1.45], nota: "estudio: luz de trabajo sobre el escritorio, a la IZQUIERDA del usuario diestro", estado: propuesto}
+        # Exteriores (bajo el volado del primer piso: ahí sí hay techo)
+        - {pos: [-0.55, 1.20], nota: "terraza: luz empotrada bajo el volado; tecla junto a la corrediza, adentro del living", estado: propuesto}
+        - {pos: [-0.55, 3.80], nota: "terraza: luz empotrada bajo el volado (misma tecla)", estado: propuesto}
+        - {pos: [-0.55, 5.85], nota: "acceso: luz bajo el volado sobre la puerta; tecla en el ingreso; fotocélula o sensor opcional", estado: propuesto}
+        - {pos: [17.25, 1.35], nota: "patio: aplique en el muro este junto a la corrediza del comedor, a ~2.20 (parrilla movible en el patio); tecla adentro", estado: propuesto}
+        - {pos: [6.47, -0.25], nota: "retiro norte: aplique sobre la puerta del depósito (alumbra también el calefón)", estado: propuesto}
     sanitario:
       # Agua: pozo en el patio + bomba -> tanque elevado en el último piso -> baja por gravedad a toda
       # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
@@ -777,3 +817,5 @@ verificar_en_obra:
   - "PROPUESTO — tragaluz del Baño 2 (revisor estructural 2026-10-04): dos ranuras de ~0.30 × 0.70 (y 5.40–6.10) centradas entre viguetas, a ≥0.5 de la viga C; borde macizado ~10 cm con fierro perimetral y diagonales; brocal de hormigón vaciado con el borde, membrana subida 15–20 cm, domo tipo gorro antivandálico o con reja; ≥0.40 libres hacia el antepecho sur. ANTES de abrir medir desde abajo: posición real y ancho de las viguetas entre x 9.40 y 11.20, espesor de losa, ancho de la viga C y franja maciza, nervio transversal. Si las viguetas no dejan lugar: tubos solares de 25–35 cm. Lo aprueba el ingeniero."
   - "Tanque elevado: definir capacidad y medidas reales (en el 3D se dibuja uno de ~2500 L, 1.60 × 1.60 × 1.80 forrado, sobre base a +10.20; supuesto)."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
+  - "PB, ANTES DEL CONTRAPISO (interiorista 2026-10-05): rebaje de ~5–8 cm para la ducha del baño al ras del piso (con cancel); tubo eléctrico del muro sur de la cocina a la isla (enchufe de la isla); tubo del TD a la columna B2 (montante); desagüe de la bajante del Baño 2 (P1), que baja en el rincón noroeste del almacén (≈9.30, 3.85), hasta el colector del retiro norte (pasa bajo el pasillo y el estudio; registro accesible); desagües de lavadora, lavadero y lavadora manual; agua y desagüe del lavavajillas; agua fría para el dispensador del refrigerador."
+  - "Losa del primer piso (ya hecha): ¿dejaron cajas de luz o tubos embutidos? ¿Dónde? Probablemente no coinciden con las luces del diseño nuevo; las nuevas van entre viguetas (sin cortarlas). Lo resuelve el electricista."
