@@ -40,9 +40,11 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
 - `disenador` — propone y aplica cambios de distribución.
 - `revisor-estructural` — contrasta cambios con lo construido (solo lectura).
 - `revisor-habitabilidad` — luz, ventilación, circulación, normativa (solo lectura).
+- `interiorista` — muebles + luces, enchufes, interruptores y puntos de agua de cada ambiente
+  (deja el amoblamiento definitivo para el electricista y el plomero). Solo toca `muebles` y `luces_extra`.
 
 Flujo típico de un cambio: `disenador` → `revisor-estructural` + `revisor-habitabilidad`
-→ el usuario decide → se registra en `docs/decisiones.md`.
+→ `interiorista` (si cambian muebles o puntos) → el usuario decide → se registra en `docs/decisiones.md`.
 
 ## Instalaciones
 `tools/instalaciones.py` genera los planos eléctrico y sanitario/gas desde ambientes, aberturas y
