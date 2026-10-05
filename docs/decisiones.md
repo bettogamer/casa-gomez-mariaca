@@ -446,3 +446,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Pendiente:** el generador no une teclas y luces de pisos distintos (anotado en las notas); detector de humo en el
   hall del P1; con el maestro, si 12.5 / 7.5 cm de muro alcanzan para los marcos.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Sin termotanque en la suite: agua caliente desde el calefón
+- **Qué:** se saca el termotanque eléctrico del vestidor (revierte la decisión del 2026-10-03; sale el circuito C12). La
+  suite toma agua caliente del calefón de PB por un ramal de ~15 m, paralelo al de agua fría (blancos → hall → vestidor).
+  El caño va **aislado** (coquilla de espuma) antes de taparlo. Sin retorno ni bomba de recirculación: al usuario no le
+  importa la espera (~30–60 s en la suite). El rincón del vestidor queda libre.
+- **Calefón sugerido (aún no comprado):** gas natural, ~18–20 L/min nominal (a ~2550 m rinde ~20–25 % menos), tiro
+  forzado, electrónico modulante/termostático, apto exterior o en nicho ventilado; enchufe con tapa junto al nicho (C21).
+  Lo dimensiona y aprueba el gasista (YPFB).
+- **Estado:** aprobado por el usuario.

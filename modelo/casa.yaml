@@ -586,7 +586,6 @@ muebles:
     # Vestidor en U. El del sur pasa por delante de la columna C2 (antes la pisaba): 0.55 de fondo
     - {tipo: closet, nombre: Vestidor, rect: [3.475, 5.995, 5.775, 6.545], estado: propuesto}
     - {tipo: closet, rect: [5.225, 4.28, 5.775, 5.995], estado: propuesto}
-    - {tipo: estante, nombre: Termotanque, rect: [3.475, 5.445, 3.975, 5.995], alto: 1.30, estado: propuesto}
     - {tipo: closet, rect: [3.95, 4.28, 5.225, 4.83]}
     # Lavamanos abierto, inodoro y ducha en ambientes propios
     # Mesón acortado a 2.03 (empieza en x 1.30): la puerta vaivén de la ducha (0.60, bisagra al norte) abre 90° hacia
@@ -703,6 +702,7 @@ instalaciones:
         - {amb: ingreso, tipo: conmutador, pos: [0.37, 6.645], alto: 1.10, luces: [hall], estado: propuesto, nota: "juego de la entrada (2 de 3): luces del hall, conmutadas con el juego del hall (x 6.975)"}
         - {amb: ingreso, tipo: interruptor, pos: [0.47, 6.645], alto: 1.10, luces: [acceso, terraza], estado: propuesto, nota: "juego de la entrada (3 de 3): luces exteriores bajo el volado (acceso y terraza), tecla doble"}
         # Hall: juego en el muro del lavado, al norte de la banca; luz general + luz de escalera (sobre el tramo de 10)
+        - {tipo: toma_ext, pos: [8.45, -0.20], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (pide 220 V): enchufe con tapa junto al nicho; lo ubica el gasista"}
         - {amb: hall, tipo: conmutador, pos: [6.975, 3.92], alto: 1.10, luces: [hall], estado: propuesto, nota: "luces del hall, conmutada con la entrada"}
         - {amb: hall, tipo: conmutador, pos: [6.975, 4.04], alto: 1.10, luces: [luz_escalera, luz_escalera_descanso], estado: propuesto, nota: "luz de ESCALERA (tramo de 10 + descanso), conmutada con el hall del primer piso (la otra tecla se pone con el P1)"}
         - {amb: hall, tipo: luz, pos: [5.24, 5.18], estado: propuesto, nota: "luz general del hall"}
@@ -778,7 +778,7 @@ instalaciones:
       # Varias troncales: listas de polilíneas.
       agua_fria: [[[9.10, -0.30], [9.10, 3.10], [16.60, 3.10]], [[9.10, 3.10], [7.20, 3.10]]]
       agua_caliente: [[[8.80, -0.30], [8.80, 3.35], [16.55, 3.35]], [[8.80, 3.35], [7.40, 3.35]]]
-      calefon: {pos: [8.80, -0.30], nota: "calefón a gas natural, exterior en el muro norte (retiro), en nicho; centro de los consumos de agua caliente"}
+      calefon: {pos: [8.80, -0.30], nota: "calefón a gas natural, exterior en el muro norte (retiro), en nicho; da agua caliente a TODA la casa salvo el altillo (sin termotanque en la suite, 2026-10-05). SUGERIDO (aún no comprado): ~18–20 L/min nominal (en Cochabamba, a ~2550 m, rinde ~20–25 % menos: queda para 2 duchas a la vez), tiro forzado, electrónico modulante/termostático (temperatura estable aunque se abran otras canillas), apto exterior o en nicho ventilado; pide enchufe. Lo dimensiona y aprueba el gasista (YPFB)"}
       # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
       # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
       colector: [[17.70, 5.15], [17.70, -0.85], [-3.00, -0.85]]
@@ -872,10 +872,9 @@ instalaciones:
         # Inodoro y ducha de la suite: teclas AFUERA, en el tramo de muro entre las dos puertas (lado de la manija de ambas)
         - {amb: wc_ppal, tipo: interruptor, pos: [0.975, 5.40], alto: 1.10, estado: propuesto, nota: "afuera, en los lavamanos (adentro quedaba detrás de la hoja)"}
         - {amb: ducha_ppal, tipo: interruptor, pos: [0.975, 5.47], alto: 1.10, estado: propuesto, nota: "afuera, en los lavamanos (no dentro de la ducha); luminaria hermética adentro"}
-        # Vestidor: tecla al entrar desde los lavamanos (el termotanque tapa el otro lado del paso)
+        # Vestidor: tecla al entrar desde los lavamanos
         - {amb: vestidor_principal, tipo: interruptor, pos: [3.60, 4.275], alto: 1.10, estado: propuesto, nota: "a la izquierda al entrar, antes del mueble norte"}
         - {amb: vestidor_principal, tipo: toma, pos: [3.80, 4.275], alto: 1.10, estado: propuesto, nota: "plancha vertical a vapor / espejo"}
-        - {amb: vestidor_principal, tipo: especial, etiqueta: T, pos: [3.475, 5.72], alto: 1.50, estado: propuesto, nota: "termotanque: caja encima del equipo, con térmica y diferencial propios (C12)"}
         # Baño 1 (Cuarto 1): tecla afuera (adentro, del lado de la manija, cae la ducha); toma al costado del espejo
         - {amb: bano_hijo_1, tipo: interruptor, pos: [11.275, 0.80], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 1, junto a la puerta (al sur la tapaba la puerta abierta del cuarto)"}
         - {amb: bano_hijo_1, tipo: luz, pos: [10.30, 1.30], estado: propuesto, nota: "general (cielo falso 2.70)"}
@@ -917,13 +916,12 @@ instalaciones:
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
       # calefón de PB por el mismo lugar. Troncales por los blancos y el pasillo hacia los baños de los hijos y,
-      # por el hall y el vestidor, hacia la suite principal (solo agua fría: la caliente sale del termotanque).
+      # por el hall y el vestidor, hacia la suite principal. Agua caliente también desde el calefón (sin termotanque,
+      # decisión del usuario 2026-10-05): ~15 m de caño, AISLADO con coquilla de espuma; la espera no le importa.
       bajada_tanque: {pos: [9.10, -0.30], etiqueta: "AF ↓ tanque"}
       subida_caliente: {pos: [8.80, -0.30], etiqueta: "AC ↑ calefón (PB)"}
       agua_fria: [[[9.10, -0.30], [9.10, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
-      agua_caliente: [[[8.80, -0.30], [8.80, 0.20], [9.20, 0.20], [9.20, 3.45], [11.35, 3.45]], [[3.73, 5.77], [3.73, 5.65], [-0.20, 5.65]]]
-      # La suite principal tiene su propio termotanque eléctrico (decisión del usuario 2026-10-03): agua caliente corta.
-      termotanque: {pos: [3.73, 5.77], nota: "termotanque eléctrico 50–80 L en la esquina del vestidor, junto a los lavamanos; circuito propio C12"}
+      agua_caliente: [[[8.80, -0.30], [8.80, 0.20], [9.20, 0.20], [9.20, 3.45], [11.35, 3.45]], [[9.20, 3.45], [6.75, 3.45], [6.75, 4.35], [5.95, 4.35], [5.95, 5.65], [-0.20, 5.65]]]
       # Sin colector en este piso: cada artefacto va a su bajante (BV).
       bajantes:
         - {pos: [9.25, -0.70], ambientes: [bano_hijo_1], etiqueta: "Baño 1, por fuera (x ≤ 9.25)"}
