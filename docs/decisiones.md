@@ -350,3 +350,31 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   bomba del pozo (circuito propio), portero eléctrico, motor del portón, cámaras y alarma; timbre sobre la bajante de la
   suite. Corredizas (qué hoja corre) y tipo de calefón sin definir. Medidas del freezer a confirmar con el modelo comprado.
 - **Estado:** aprobado por el usuario (muebles); puntos eléctricos y sanitarios en `nota`, a pasar al generador.
+
+## 2026-10-05 — Living: sin corrediza a la terraza, TV al oeste, ventana norte grande
+- **Qué:** se quita la corrediza `living_terraza` (2.43 entre A1 y B1): a la terraza se sale por la entrada (decisión del
+  usuario). La TV de 60" pasa al **muro oeste**, apoyada sobre un mueble (y 1.90–3.50), centrada en la columna B1; la
+  columna no se pica (enchufes y tubos en el ladrillo del costado, lo define el interiorista). El muro oeste del living
+  queda **ciego**. La ventana norte crece de 1.20 × 1.20 (x 0.40–1.60) a **3.00 × 1.20** (x 0.70–3.70, antepecho 0.90,
+  dintel a 2.10), centrada en el muro.
+- **Por qué sin ventana al oeste:** quien mira la TV mira al oeste; cualquier ventana en ese muro queda a 25–35° de la
+  pantalla y el sol de la tarde (la hora de la TV) entra bajo el volado de 1 m (solo frena el sol más alto que ~42°):
+  deslumbra y calienta. Al sur de B1 pasa lo mismo con el sol de verano (se pone al oeste-sudoeste). La ventana norte da
+  el sol bueno, no se refleja en la pantalla ni da sol en los ojos del que mira la TV, y casi no recibe sol en verano.
+- **Vidrio del living:** antes 6.54 m² (corrediza 5.10 + ventana 1.44); ahora 3.60 m² (~1/6 de los 21.8 m²). Ventilación
+  por la ventana norte y por el living abierto al ingreso, al hall y a la escalera (ya no es cruzada directa).
+- **Descartado:** ventana chica al oeste entre A1 y la TV (deslumbra y da sol de tarde de frente); ventana al sur de B1
+  (igual, con el sol de verano, y compite con el vidrio de la entrada). Si el usuario extraña la vista a la terraza, se
+  puede abrir después una ventana angosta (y 0.40–1.10) con cortina enrollable: es muro de relleno, solo pide dintel.
+- **Interiorista:** sofá de 3 mirando al oeste a ~2.9 m de la pantalla, ventana al costado; mesa de centro y alfombra
+  giradas; sillón de lectura frente al paño fijo norte (las hojas abren hacia adentro sin tocarlo); segundo sillón al
+  suroeste. Puntos de la TV en el ladrillo a cada lado de B1 (toma + datos + cable a 0.70 al sur; toma a 0.30 al norte;
+  tubo de 1" para HDMI). Tecla de las luces de la terraza en el ingreso. Mesa de la terraza vuelve al centro.
+- **Revisores:** estructural sin impacto en lo construido. El eje 1 entre A1 y B1 **tiene cimiento corrido y aún no tiene
+  muro** (confirmado por el usuario): el ingeniero define el anclaje del muro a A1/B1 y el dintel de H°A° de 3.00 bajo la
+  viga del eje A (cuánto cuelga, en `verificar_en_obra`); la ventana no se estira hasta las columnas (columna corta).
+  Habitabilidad: aceptable; ventana con fijos laterales esmerilados hasta ~1.50 y 2 hojas centrales batientes hacia
+  adentro con mosquitero (≥1.50 abribles), roller screen. Proporción de luz/ventilación según OM 1061/91: confirmar con
+  el arquitecto (~1/6, al borde de la regla práctica).
+- **Pendiente:** en `tools/instalaciones.py` el enchufe de la TV sale al pie del mueble y hay un enchufe general detrás de él.
+- **Estado:** propuesto (falta el visto bueno del usuario sobre el amoblado).

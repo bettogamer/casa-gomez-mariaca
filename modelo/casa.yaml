@@ -339,9 +339,12 @@ aberturas:
     - {id: living_estar, tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
     # Depósito: puerta al costado de la columna A3, donde el techo interior sube (bajo el tramo de 6).
     - {id: puerta_deposito, tipo: puerta, de: [6.87, 0.00], a: [6.07, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso (~1.92 libres)"}
-    # Living → terraza: abertura de 2.43 entre las columnas A1 y B1, como en la referencia.
-    - {id: living_terraza, tipo: corrediza, de: [0.00, 0.125], a: [0.00, 2.555], nota: "2.43 m, puerta corrediza/ventanal a la terraza"}
-    - {id: ventana_living, tipo: ventana, de: [0.40, 0.00], a: [1.60, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.20 × 1.20 al norte (retiro): ventilación cruzada con la terraza; deja la pared libre para la TV"}
+    # Living (2026-10-05, PROPUESTO): se quita la corrediza a la terraza (2.43 entre A1 y B1; decisión del usuario: a la
+    # terraza se sale por la entrada). El muro oeste queda CIEGO: ahí va la TV, centrada en la columna B1, sobre un
+    # mueble (y 1.90–3.50). Sin ventana al oeste: el sol de la tarde entra bajo el volado (no lo frena a menos de ~42° de
+    # altura) y quedaría a ~25–35° de la pantalla, de frente a quien mira la TV. La luz se compensa con la ventana norte
+    # (sol bueno, sin sol de frente a los ojos ni reflejo en la pantalla), que crece de 1.20 × 1.20 a 3.00 × 1.20.
+    - {id: ventana_living, tipo: ventana, de: [0.70, 0.00], a: [3.70, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "3.00 × 1.20 al norte (retiro), centrada en el muro (0.575 de ladrillo a cada columna, A1 y A2). Única ventana del living: 3.60 m² de vidrio (~1/6 del piso). Sugerido (revisores 2026-10-05): 2 paños fijos de ~0.75 a los costados (vidrio esmerilado hasta ~1.50 por privacidad hacia el retiro) y 2 hojas centrales de ~0.75 batientes hacia adentro, con mosquitero (≥1.50 abribles); que no abran hacia el retiro. Roller screen para las horas de TV. Dintel de H°A° (3.00 de luz, apoyo 20–25 cm por lado) bajo la viga del eje A, lo define el ingeniero. NO estirar hasta las columnas (columna corta). Servidumbre de vista: queda a ~2.01 del lindero, medir en obra. Proporción de luz/ventilación de sala según OM 1061/91: confirmar con el arquitecto"}
     # ── Planta baja v4, aprobada 2026-10-03 ──
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
@@ -407,16 +410,19 @@ aberturas:
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
 muebles:
   pb:
-    # Living: TV en el muro norte (luz de costado, sin reflejo del sol de la tarde por la corrediza oeste)
-    - {tipo: alfombra, rect: [1.20, 1.00, 3.90, 3.60]}
-    # TV de 60" COLGADA en el muro norte (dicho por el usuario 2026-10-05); el mueble bajo lleva el decodificador.
-    - {tipo: estante, nombre: TV, rect: [2.30, 0.13, 3.90, 0.58], alto: 0.50, estado: propuesto, nota: "mueble bajo con decodificador; TV 60\" colgada encima (centro de pantalla ~1.15). Detrás de la TV, en el muro (x≈3.10): toma doble + datos + cable a ~1.15; tubo vacío de 1\" del mueble (0.40) a la TV para el HDMI"}
-    - {tipo: sofa, nombre: Sofá 3, rect: [1.60, 2.90, 3.70, 3.80]}
-    - {tipo: mesa, nombre: Centro, rect: [2.20, 1.70, 3.20, 2.30], alto: 0.40}
-    # Sillón de lectura en el rincón noroeste, bajo la ventana: deja libre el paso a la corrediza de la terraza
-    # (antes quedaba a 0.27 de la corrediza). Enchufe para la lámpara bajo la ventana (x≈0.85, h 0.30).
-    - {tipo: sillon, nombre: Lectura, rect: [0.45, 0.35, 1.25, 1.15], estado: propuesto, nota: "sillón de lectura con lámpara de pie; enchufe bajo la ventana a 0.30"}
-    - {tipo: sillon, rect: [3.45, 1.40, 4.25, 2.20]}
+    # Living (2026-10-05): TV en el muro OESTE, que queda ciego; luz por la ventana norte de 3.00, de costado a la TV y
+    # al sofá (no de frente ni detrás de la pantalla). Sofá mirando al oeste, a ~2.9 m de la pantalla (60"); mesa de centro
+    # entre los dos; la U queda abierta hacia el sur (se entra desde el paso del hall, x 2.58–4.40) y hacia la ventana.
+    - {tipo: alfombra, rect: [1.20, 1.40, 3.20, 4.00], estado: propuesto}
+    # TV de 60" APOYADA sobre un mueble (no colgada; decisión del usuario 2026-10-05), centrada en la columna B1 (y=2.68).
+    - {tipo: estante, nombre: TV, rect: [0.13, 1.90, 0.58, 3.50], alto: 0.50, estado: propuesto, nota: "mueble bajo con decodificador; TV 60\" (~1.35 de ancho, pantalla de y≈2.00 a 3.35) APOYADA encima, centrada en la columna B1. La columna NO se pica: todo en el LADRILLO a los costados de B1 (la columna ocupa y 2.555–2.805). Detrás de la pantalla, al SUR de B1 (y≈3.00): toma doble + datos + cable a 0.70 (justo encima del mueble, tapados por la TV). Detrás del mueble, al NORTE de B1 (y≈2.35): toma doble a 0.30 para el decodificador y otros equipos. Tubo vacío de 1\" entre las dos cajas (HDMI). El router de internet va en el estudio"}
+    - {tipo: sofa, nombre: Sofá 3, rect: [2.80, 1.65, 3.70, 3.75], estado: propuesto, nota: "mira al oeste, centrado en la TV; ojos a ~2.9 m de la pantalla. Detrás quedan ~0.60 al muro este (no es paso). Tecla de las luces del living en el muro este, cara del living, en y≈3.85 a 1.10, junto al paso del hall; enchufe para lámpara de pie en el muro este en y≈1.30 a 0.30 (al costado del sofá, no detrás)"}
+    - {tipo: mesa, nombre: Centro, rect: [1.80, 2.20, 2.40, 3.20], alto: 0.40, estado: propuesto, nota: "a 0.40 del sofá; 1.22 libres hasta el mueble de la TV"}
+    # Sillón de lectura en el rincón noroeste, junto al paño FIJO de la ventana (x 0.70–1.45): no lo tocan las hojas
+    # batientes centrales (x ~1.45–2.95, giran ~0.75 hacia adentro por encima del antepecho de 0.90).
+    - {tipo: sillon, nombre: Lectura, rect: [0.45, 0.35, 1.25, 1.15], estado: propuesto, nota: "sillón de lectura con lámpara de pie; enchufe en el muro oeste (ladrillo), en y≈0.50, a 0.30; luz de día del norte de costado. Delante de las hojas batientes (y < 0.90) no poner nada más alto que 0.90 (lámparas, plantas)"}
+    # Segundo sillón al suroeste, mirando a la mesa: deja 1.05 libres hasta el sofá para entrar a la zona de estar.
+    - {tipo: sillon, rect: [0.95, 3.75, 1.75, 4.55], estado: propuesto}
     # Ingreso y hall
     - {tipo: estante, nombre: Zapatero, rect: [1.20, 6.10, 2.40, 6.54], alto: 0.90}
     - {tipo: closet, nombre: Abrigos, rect: [5.20, 5.95, 6.95, 6.54]}
@@ -487,12 +493,12 @@ muebles:
     - {tipo: lavadora, nombre: Lavadora manual, rect: [8.50, 6.04, 9.00, 6.54], estado: propuesto, nota: "chica, para prendas menores; desagüe al mismo ramal del lavadero; enchufe con diferencial a 1.20"}
     - {tipo: closet, nombre: Blancos, rect: [8.45, 4.00, 9.05, 5.40], alto: 2.10, estado: propuesto, nota: "ropero de blancos de 0.60, debajo de la banderola (2.20); termina en 5.40 para dejar 0.64 delante de la lavadora manual"}
     - {tipo: estante, nombre: Blancos, rect: [7.13, 4.60, 7.53, 5.30], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro del hall (después del giro de la puerta); terminan en 5.30 para abrir la lavadora. PLANCHADO en el medio del lavado (decidido por el usuario 2026-10-05): ENCHUFE DE LA PLANCHA a 1.10 en este muro (x 7.125), en y≈5.45, entre las repisas y la lavadora, con diferencial"}
-    # Terraza: mesa corrida 1.30 al sur para dejar libre la corrediza del living
-    - {tipo: mesa, rect: [-1.90, 3.20, -0.90, 4.20], estado: propuesto}
-    - {tipo: silla, rect: [-2.45, 3.47, -2.00, 3.92], estado: propuesto}
-    - {tipo: silla, rect: [-0.80, 3.47, -0.35, 3.92], estado: propuesto}
-    - {tipo: silla, rect: [-1.62, 2.65, -1.17, 3.10], estado: propuesto}
-    - {tipo: silla, rect: [-1.62, 4.30, -1.17, 4.75], estado: propuesto}
+    # Terraza: sin corrediza al living (2026-10-05) la mesa vuelve al centro de la terraza; se llega por el acceso
+    - {tipo: mesa, rect: [-1.90, 1.90, -0.90, 2.90], estado: propuesto}
+    - {tipo: silla, rect: [-2.45, 2.17, -2.00, 2.62], estado: propuesto}
+    - {tipo: silla, rect: [-0.80, 2.17, -0.35, 2.62], estado: propuesto}
+    - {tipo: silla, rect: [-1.62, 1.35, -1.17, 1.80], estado: propuesto}
+    - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45], estado: propuesto}
 
   p1:
     # Estar: TV en un mueble bajo contra el muro del vestidor, sofá contra el muro del Baño 2, alfombra;
@@ -628,7 +634,7 @@ instalaciones:
         - {pos: [7.30, 2.17], nota: "baño: aplique sobre el espejo a ~2.00", estado: propuesto}
         - {pos: [9.40, 1.45], nota: "estudio: luz de trabajo sobre el escritorio, a la IZQUIERDA del usuario diestro", estado: propuesto}
         # Exteriores (bajo el volado del primer piso: ahí sí hay techo)
-        - {pos: [-0.55, 1.20], nota: "terraza: luz empotrada bajo el volado; tecla junto a la corrediza, adentro del living", estado: propuesto}
+        - {pos: [-0.55, 1.20], nota: "terraza: luz empotrada bajo el volado; tecla en el ingreso, en el juego de teclas junto a la puerta de entrada (muro sur del ingreso, x≈0.35, a 1.10, lado de la manija) con la del acceso y la del ingreso", estado: propuesto}
         - {pos: [-0.55, 3.80], nota: "terraza: luz empotrada bajo el volado (misma tecla)", estado: propuesto}
         - {pos: [-0.55, 5.85], nota: "acceso: luz bajo el volado sobre la puerta; tecla en el ingreso; fotocélula o sensor opcional", estado: propuesto}
         - {pos: [17.25, 1.35], nota: "patio: aplique en el muro este junto a la corrediza del comedor, a ~2.20 (parrilla movible en el patio); tecla adentro", estado: propuesto}
@@ -797,6 +803,8 @@ verificar_en_obra:
   - "Cuánto cuelga la viga del eje A entre A2 y A3 bajo la losa del altillo (define el alto de la ventana de la escalera)."
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
+  - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
+  - "Eje 1 entre A1 y B1: hay cimiento corrido y aún no hay muro (confirmado por el usuario 2026-10-05). El ingeniero define cómo atar el muro nuevo a A1/B1 (chicotes con epóxico o malla) y su remate contra la viga"
   - "¿Hay losa o hueco sobre el arranque de la escalera de PB (x 4.40–5.725, y 2.68–4.20)? ¿Dónde está el borde del hueco y si tiene viga de borde? Define el hall del primer piso."
   - "Altillo: confirmar con el arquitecto el retiro de 2 m al sur (desde dónde se mide), la altura máxima y el número de plantas permitidos."
   - "Tanque elevado (3–4 t con base y forro): sobre la columna A3 prolongada + otra columna (B3 o A2) con vigas de mesa; la mitad cae sobre el hueco de la escalera. Forro liviano si es posible. Lo dimensiona el ingeniero."
