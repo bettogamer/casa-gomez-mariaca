@@ -321,3 +321,10 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **A cuidar:** vidrio laminado de seguridad; barniz exterior (fachada oeste, la protege el volado); burletes; herraje
   pivotante de piso para una hoja pesada. Alto final según cuánto cuelga la viga del eje 1 (ya en `verificar_en_obra`).
 - **Estado:** propuesto (aceptado en idea por el usuario); medidas finales con el carpintero.
+
+## 2026-10-05 — Puerta del baño de PB batiente
+- **Qué:** la puerta corrediza embutida del baño de PB pasa a ser una **puerta normal (batiente) de 0.70**. Se corre
+  hacia el este (de x 7.35–8.05 a 8.00–8.70) para no chocar con el lavamanos; abre hacia el baño, con la bisagra del lado
+  este: la hoja abierta queda contra el muro, delante del inodoro.
+- **Por qué:** el usuario no quiere puertas corredizas. Hacia el pasillo no puede abrir: tiene 0.90 y la hoja lo taparía.
+- **Estado:** aprobado por el usuario.
