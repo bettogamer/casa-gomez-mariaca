@@ -17,9 +17,9 @@ _Última actualización: 2026-10-05_
   sin ducto); paso al patio por la corrediza del comedor; puerta de entrada pivotante de 1.05 con vidrio fijo al lado (2026-10-05, propuesto); cajonera bajo la
   grada; pasillo de 0.90 aceptado. Ver `docs/revision-pb.md`.
 - **Instalaciones PB (esquema preliminar):** eléctrico con 7 circuitos y cuadro de cargas;
-  agua (pozo + bomba → tanque elevado → gravedad), calefón a gas natural en el **muro norte,
-  x≈11.90** (tramo sin ventanas en los tres pisos; el núcleo técnico entre baño y estudio queda para la bajada del
-  tanque y la subida de agua caliente), desagüe por el retiro norte con CI y desgrasadora, gas natural por el retiro
+  agua (pozo + bomba → tanque elevado → gravedad), **calefón a gas natural de toda la casa
+  en la terraza del altillo, junto a la columna A2** (2026-10-05; gas sube a la vista por la fachada norte; agua
+  caliente baja por fuera del muro norte junto a A2; sin termotanques en la suite ni en el altillo; tanque a +10.50), desagüe por el retiro norte con CI y desgrasadora, gas natural por el retiro
   norte. Horno eléctrico; sin secadora.
 
 - **Primer piso aprobado (completo):** suite principal al frente (dormitorio con TV en el muro oeste, logia
@@ -33,7 +33,7 @@ _Última actualización: 2026-10-05_
 
 - **Altillo aprobado:** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
   adentro, terraza adelante, franja de 2 m al sur con lavandería; techo de calamina oculto; tanque sobre la
-  columna A3. Instalaciones (esquema): C13–C17, anafe y termotanque eléctricos, presurizadora a definir.
+  columna A3. Instalaciones (esquema): C13–C16, anafe eléctrico; agua caliente del calefón de la terraza; presurizadora solo si el calefón no enciende.
 
 - **Normativa y techos (2026-10-04):** OM 4100/10 revisada (`docs/normativa.md`); planta de techos (`salida/planta-techos.svg`):
   calamina, departamento oculto tras antepecho, terraza con techo sobre fierro; muro ciego sur de ~1.80 y semisombra

@@ -474,3 +474,21 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   ~3 m más lejos (al usuario no le importa la espera).
 - **Pendiente:** el gasista confirma distancias de la salida de gases a ventanas (propias y del Lote 105) según YPFB.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Calefón de toda la casa en la terraza del altillo (junto a A2)
+- **Qué:** el calefón a gas natural pasa a la **terraza del altillo**, colgado en el muro x=4.40 (cara de la terraza)
+  junto a la columna A2 (lugar elegido por el usuario). Da agua caliente a TODA la casa: se quita también el
+  **termotanque del altillo** (sale C17). El agua caliente baja por fuera del muro norte junto a A2 (x≈4.20, aislada y
+  con cajón) y entra bajo el piso del P1 (suite al lado) y de PB (troncal del hall y el pasillo). El gas sube **a la
+  vista por la fachada norte** junto a A2 desde la línea del retiro (YPFB). El retiro de PB queda libre.
+- **Presión:** el usuario sube el tanque para que quede ~2.5 m sobre el calefón (base +10.50). Calefón de **encendido a
+  baja presión** (~0.1 bar); si no alcanza, presurizadora para TODA la casa (si se presuriza solo la caliente, las
+  duchas mezclan mal).
+- **Protección:** el techo de la terraza lo cubre de la lluvia; gabinete metálico para exterior con rejillas arriba y
+  abajo (nunca hermético) y candado; salida de gases por encima del techo de la terraza; modelo con antihielo;
+  llave de gas a la vista; enchufe con tapa al costado.
+- **Descartado:** casilla de ladrillo en la franja sur del altillo: es el retiro lateral de 2 m exigido en el 2do piso
+  (OM 4100/10, "sin volado"; por eso el alero de la lavandería ya se cambió por una semisombra desmontable), así que una
+  construcción ahí probablemente no se aprueba. En la terraza el gabinete es un equipo, no una construcción.
+- **Pendiente:** ingeniero, base del tanque más alta; gasista, subida de gas, salida de gases y distancias (YPFB).
+- **Estado:** aprobado por el usuario.

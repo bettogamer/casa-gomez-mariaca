@@ -307,7 +307,8 @@ techos:
     - {de: [-1.125, 6.67], a: [16.90, 6.67], cota_base: 6.60, cota_tope: 8.40, nota: "muro ciego sur hacia el vecino, ~1.80 sobre la losa (ver muros.altillo)"}
   # Tanque elevado: base propia de hormigón sobre la columna A3 y el muro de la escalera, forrado de ladrillo.
   # Capacidad y altura SUPUESTAS (tanque de ~2500 L, ~1.55 de diámetro × 1.55 de alto): las define el plomero/ingeniero.
-  tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.20, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado}
+  # Base subida a +10.50 (usuario 2026-10-05): ~2.5 m sobre la entrada de agua del calefón del altillo (~+8.00).
+  tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.50, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado}
   postes:
     - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
     - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
@@ -616,7 +617,6 @@ muebles:
     - {tipo: inodoro, rect: [11.28, 0.13, 11.68, 0.82]}
     - {tipo: ducha, rect: [12.02, 0.13, 12.92, 1.33]}
     - {tipo: lavamanos, rect: [12.40, 1.55, 12.92, 2.10]}
-    - {tipo: estante, nombre: Termotanque, rect: [11.28, 1.35, 11.73, 1.85], alto: 0.80}
     # Dormitorio grande: cama queen con cabecera en el muro del patio (entre las dos ventanas), ropero en el
     # muro del hall, zona flexible al norte (cama de 1 plaza / cuna) y escritorio junto a la puerta
     - {tipo: closet, rect: [13.08, 0.13, 13.68, 2.60]}
@@ -662,7 +662,7 @@ instalaciones:
         portero: {pos: [0.65, 6.60], nota: "monitor del portero en el ingreso, junto al juego de teclas, a 1.40", estado: propuesto}
         camaras:
           - {pos: [-0.25, 4.85], nota: "frente: acceso y terraza", estado: propuesto}
-          - {pos: [5.90, -0.20], nota: "retiro norte: puerta del depósito y calefón", estado: propuesto}
+          - {pos: [5.90, -0.20], nota: "retiro norte: puerta del depósito y la subida de gas", estado: propuesto}
           - {pos: [17.05, 0.30], nota: "patio (esquina noreste)", estado: propuesto}
         alarma:
           central: {pos: [5.45, 6.50], nota: "dentro del closet de abrigos, cerca del TD", estado: propuesto}
@@ -702,7 +702,6 @@ instalaciones:
         - {amb: ingreso, tipo: conmutador, pos: [0.37, 6.645], alto: 1.10, luces: [hall], estado: propuesto, nota: "juego de la entrada (2 de 3): luces del hall, conmutadas con el juego del hall (x 6.975)"}
         - {amb: ingreso, tipo: interruptor, pos: [0.47, 6.645], alto: 1.10, luces: [acceso, terraza], estado: propuesto, nota: "juego de la entrada (3 de 3): luces exteriores bajo el volado (acceso y terraza), tecla doble"}
         # Hall: juego en el muro del lavado, al norte de la banca; luz general + luz de escalera (sobre el tramo de 10)
-        - {tipo: toma_ext, pos: [12.30, -0.20], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (pide 220 V): enchufe con tapa junto al nicho; lo ubica el gasista"}
         - {amb: hall, tipo: conmutador, pos: [6.975, 3.92], alto: 1.10, luces: [hall], estado: propuesto, nota: "luces del hall, conmutada con la entrada"}
         - {amb: hall, tipo: conmutador, pos: [6.975, 4.04], alto: 1.10, luces: [luz_escalera, luz_escalera_descanso], estado: propuesto, nota: "luz de ESCALERA (tramo de 10 + descanso), conmutada con el hall del primer piso (la otra tecla se pone con el P1)"}
         - {amb: hall, tipo: luz, pos: [5.24, 5.18], estado: propuesto, nota: "luz general del hall"}
@@ -774,23 +773,27 @@ instalaciones:
       # Desagües en PVC sanitario (110 inodoros y bajantes, 50 el resto). Gas: material que define el gasista (YPFB).
       # Agua: pozo en el patio + bomba -> tanque elevado en el último piso -> baja por gravedad a toda
       # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
-      # estudio (exterior, en el retiro): bajada de agua fría del tanque + calefón a gas natural.
+      # estudio (exterior, en el retiro): bajada de agua fría del tanque. El calefón está en el ALTILLO (2026-10-05).
       pozo: {pos: [21.20, 3.00], va_bomba: 750, nota: "pozo con bomba (aún no comprada: sumergible ~½–1 HP según profundidad, la elige el pocero/plomero); circuito propio C20 con guardamotor y flotante del tanque; distancias a desagües a confirmar con el instalador"}
       impulsion: [[21.20, 3.00], [17.15, 3.00], [17.15, 0.10]]   # del pozo a la subida al tanque (esquina NE)
       bajada_tanque: {pos: [9.10, -0.30], nota: "bajada de agua fría desde el tanque elevado (muro norte)"}
       # Varias troncales: listas de polilíneas.
       agua_fria: [[[9.10, -0.30], [9.10, 3.10], [16.60, 3.10]], [[9.10, 3.10], [7.20, 3.10]]]
-      # El calefón está en x 11.90 (2026-10-05); la subida al P1 sigue en el núcleo técnico (x 8.80), por fuera del muro norte.
-      agua_caliente: [[[11.90, -0.30], [11.90, 3.35], [16.55, 3.35]], [[11.90, 3.35], [7.40, 3.35]], [[11.90, -0.30], [8.80, -0.30]]]
-      calefon: {pos: [11.90, -0.30], estado: propuesto, nota: "calefón a gas natural, exterior en el muro norte (retiro), en x≈11.90, colgado con caja protectora metálica (el muro de soga de 0.15 no da para nicho): sobresale ~0.30 y deja ~1.70 libres de paso en el retiro; base a ~1.40 del piso; la cámara de inspección de x 12.70 queda libre: único tramo SIN VENTANAS en los tres pisos (PB entre estudio y comedor; P1 entre Baño 1 y Cuarto 1), al costado de la columna A4 sin picarla. Antes en x 8.80, a 0.5 m de las ventanas del baño y del estudio y debajo de las de blancos y del estar del altillo (gases). Distancias de la salida de gases a ventanas (también del vecino, Lote 105) las confirma el gasista; da agua caliente a TODA la casa salvo el altillo (sin termotanque en la suite, 2026-10-05). SUGERIDO (aún no comprado): ~18–20 L/min nominal (en Cochabamba, a ~2550 m, rinde ~20–25 % menos: queda para 2 duchas a la vez), tiro forzado, electrónico modulante/termostático (temperatura estable aunque se abran otras canillas), apto exterior o en nicho ventilado; pide enchufe. Lo dimensiona y aprueba el gasista (YPFB)"}
+      # Agua caliente: baja del calefón del altillo por FUERA del muro norte junto a A2 (x 4.20, aislada y con cajón de
+      # protección), entra bajo el piso y sigue la troncal de siempre por el hall y el pasillo.
+      subida_caliente: {pos: [4.20, -0.30], etiqueta: "AC ↓ del calefón (altillo), por fuera"}
+      agua_caliente: [[[4.20, -0.30], [4.20, 3.35], [16.55, 3.35]]]
       # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
       # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
       colector: [[17.70, 5.15], [17.70, -0.85], [-3.00, -0.85]]
       camaras: [[17.70, -0.85], [12.70, -0.85], [8.00, -0.85], [2.00, -0.85]]
       desgrasadora: [17.70, 5.15]
       # Gas natural (red): desde el medidor en el frente, por el retiro norte (exterior, nunca bajo
-      # la losa), al calefón y a la cocina por detrás del mesón del muro sur.
+      # la losa), a la cocina por detrás del mesón del muro sur, y una SUBIDA a la vista por la fachada norte
+      # junto a A2 hasta el calefón del altillo (lo aprueba YPFB).
       gas: [[-0.40, -0.55], [17.25, -0.55], [17.25, 6.30], [16.90, 6.30], [14.78, 6.30]]
+      gas_ramales:
+        - {linea: [[3.90, -0.55], [3.90, -0.30]], etiqueta: "GN ↑ al calefón del altillo (por la fachada norte, a la vista)"}
     # Ventilación mecánica (aprobada 2026-10-03). Solo lo que no tiene ventana propia: campana de la
     # cocina y extractor del lavado. Baño, estudio, comedor y cocina ya ventilan por ventana; el almacén
     # por su banderola. La losa ya está hecha: los ductos van BAJO la losa y BAJO las vigas (nunca
@@ -918,14 +921,13 @@ instalaciones:
         - {amb: cuarto_hijo_2, tipo: toma, pos: [16.875, 4.18], alto: 0.30, estado: propuesto, nota: "general, entre el ropero y la ventana"}
         - {amb: cuarto_hijo_2, tipo: toma, pos: [11.275, 5.25], alto: 0.30, estado: propuesto, nota: "general (fuera de la hoja abierta del cuarto)"}
     sanitario:
-      # Agua fría baja del tanque elevado por el núcleo técnico (muro norte); el agua caliente sube desde el
-      # calefón de PB por el mismo lugar. Troncales por los blancos y el pasillo hacia los baños de los hijos y,
-      # por el hall y el vestidor, hacia la suite principal. Agua caliente también desde el calefón (sin termotanque,
-      # decisión del usuario 2026-10-05): ~15 m de caño, AISLADO con coquilla de espuma; la espera no le importa.
+      # Agua fría baja del tanque elevado por el núcleo técnico (muro norte). El agua caliente BAJA del calefón del
+      # altillo por fuera del muro norte junto a A2 (x 4.20) y entra bajo el piso: suite cerca; baños de los hijos por
+      # el hall y el pasillo. Sin termotanque (2026-10-05). Caños de agua caliente aislados con coquilla.
       bajada_tanque: {pos: [9.10, -0.30], etiqueta: "AF ↓ tanque"}
-      subida_caliente: {pos: [8.80, -0.30], etiqueta: "AC ↑ calefón (PB)"}
+      subida_caliente: {pos: [4.20, -0.30], etiqueta: "AC ↓ del calefón (altillo), por fuera"}
       agua_fria: [[[9.10, -0.30], [9.10, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
-      agua_caliente: [[[8.80, -0.30], [8.80, 0.20], [9.20, 0.20], [9.20, 3.45], [11.35, 3.45]], [[9.20, 3.45], [6.75, 3.45], [6.75, 4.35], [5.95, 4.35], [5.95, 5.65], [-0.20, 5.65]]]
+      agua_caliente: [[[4.20, -0.30], [4.20, 4.35], [5.95, 4.35], [5.95, 5.65], [-0.20, 5.65]], [[5.95, 4.35], [6.75, 4.35], [6.75, 3.45], [11.35, 3.45]]]
       # Sin colector en este piso: cada artefacto va a su bajante (BV).
       bajantes:
         - {pos: [9.25, -0.70], ambientes: [bano_hijo_1], etiqueta: "Baño 1, por fuera (x ≤ 9.25)"}
@@ -955,14 +957,22 @@ instalaciones:
     electrico:
       montante: {pos: [4.40, 2.88], etiqueta: "montante ↓ (B2)"}
       alimentador: [[4.40, 2.88], [4.40, 3.95], [4.75, 3.95], [4.75, 4.55]]
+      puntos:
+        - {amb: terraza_alt, tipo: toma_ext, pos: [4.325, 1.35], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (220 V): enchufe con tapa al costado del gabinete"}
       tablero: {pos: [4.75, 4.55], nota: "subtablero del altillo en la llegada (zona común), muro sur junto a la puerta de la terraza: los tubos salen por la cara sur de B2 (dicho por el usuario 2026-10-04) dentro del muro x=4.40, que del lado de la llegada da al hueco de la escalera y del otro a la terraza; siguen ~2 m por ese muro y el muro sur hasta el tablero. Puede llevar medidor propio si se alquila"}
     sanitario:
-      # El gas no llega: anafe eléctrico y termotanque eléctrico propio. El tanque está encima (~1.5 m sobre la ducha):
-      # poca presión → bomba presurizadora chica o tanque más alto (lo define el plomero).
-      bajada_tanque: {pos: [7.30, 0.80], etiqueta: "AF ↓ del tanque (encima) · presurizadora"}
-      agua_fria: [[[7.30, 0.80], [7.30, 0.30], [11.20, 0.30], [11.20, 2.30], [12.30, 2.30]], [[11.20, 2.30], [11.20, 4.60], [10.20, 4.60]]]
-      termotanque: {pos: [11.50, 1.60], nota: "termotanque eléctrico 50 L en el baño, circuito propio C17"}
-      agua_caliente: [[[11.50, 1.60], [11.35, 1.60], [11.35, 0.45], [10.40, 0.45]], [[11.35, 1.60], [11.35, 2.20], [12.60, 2.20]], [[11.35, 2.20], [11.35, 4.50], [10.15, 4.50]]]
+      # CALEFÓN DE TODA LA CASA en la terraza, contra el muro x=4.40 junto a la columna A2 (usuario 2026-10-05):
+      # bajo el techo de la terraza (sin lluvia), fuera de los retiros, sin ventanas cerca. Sin termotanque.
+      # Anafe eléctrico (el gas sube solo al calefón). Tanque a ~2.5 m sobre el calefón: poca presión →
+      # calefón de ENCENDIDO A BAJA PRESIÓN; si no alcanza, presurizadora para TODA la casa (lo define el plomero).
+      bajada_tanque: {pos: [7.30, 0.80], etiqueta: "AF ↓ del tanque (encima)"}
+      agua_fria: [[[7.30, 0.80], [7.30, 0.30], [11.20, 0.30], [11.20, 2.30], [12.30, 2.30]], [[11.20, 2.30], [11.20, 4.60], [10.20, 4.60]], [[7.30, 0.30], [4.15, 0.30], [4.15, 0.55]]]
+      calefon: {pos: [4.15, 0.80], estado: propuesto, nota: "calefón a gas natural de TODA la casa, en la terraza del altillo, colgado en el muro x=4.40 (cara de la terraza) junto a la columna A2, base a ~1.40. SUGERIDO: ~18–20 L/min nominal (a ~2550 m rinde ~20–25 % menos), tiro forzado, electrónico modulante, ENCENDIDO A BAJA PRESIÓN (~0.1 bar: el tanque queda ~2.5 m arriba), con protección ANTIHIELO, apto exterior. PROTECCIÓN: gabinete metálico para calefón de exterior (chapa galvanizada pintada, rejillas arriba y abajo, nunca hermético), con candado; el techo de la terraza ya lo protege de la lluvia; salida de gases por un caño que sube por encima del techo de la terraza; llave de paso del gas a la vista. Lo dimensiona y aprueba el gasista (YPFB)"}
+      gas: [[3.90, -0.30], [3.90, 0.80], [4.00, 0.80]]
+      gas_inicio: "GN ↑ desde el retiro norte (subida por la fachada)"
+      gas_fin: "calefón"
+      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [11.35, 0.45], [11.35, 2.20], [12.60, 2.20]], [[11.35, 2.20], [11.35, 4.50], [10.15, 4.50]], [[4.15, 0.80], [4.15, -0.30]]]
+      subida_caliente: {pos: [4.15, -0.30], etiqueta: "AC ↓ a P1 y PB, por fuera"}
       bajantes:
         - {pos: [11.40, -0.25], ambientes: [bano_alt, estar_alt], etiqueta: "baño y cocina → por fuera del muro norte (x≈11.40)"}
         - {pos: [9.60, 4.85], ambientes: [franja_sur_alt], hasta: p1, etiqueta: "lavandería → baja por el Baño 2 del P1 (desagüe ~1.7 m por el contrapiso; pase entre viguetas, sin tocar el nervio)"}
@@ -1033,6 +1043,8 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
+  - "Tanque elevado: base subida a +10.50 (~2.5 m sobre la entrada del calefón del altillo). Base propia de hormigón sobre A3 y el muro de la escalera, aún no construida: el ingeniero la dimensiona con la nueva altura (más palanca con viento y sismo)"
+  - "Calefón en la terraza del altillo (junto a A2): el gasista confirma con YPFB la subida de gas a la vista por la fachada norte, la salida de gases por encima del techo de la terraza y las distancias; el plomero, que el modelo elegido encienda con ~0.25 bar (si no, presurizadora para toda la casa)"
   - "Hall del P1: borde real del hueco de la losa del altillo sobre el hall (define si la luz del hall es plafón o aplique a 2.20). Contrapiso de los baños del P1: que dé la pendiente para el inodoro del Baño 1 (~1 m hasta la bajante) y el lavamanos del Baño 2 (~3 m) sin tocar viguetas"
   - "Muros perimetrales de soga al ras de la cara exterior de las columnas (recomendación, 2026-10-05): confirmar con el maestro. Junto a la escalera (muro norte A2–A3) el muro de soga queda ~10 cm antes del borde del descanso: ¿el descanso está pegado a la cara exterior? Si queda luz, rellenar o engrosar ese tramo"
   - "Eje 1 entre A1 y B1: hay cimiento corrido y aún no hay muro (confirmado por el usuario 2026-10-05). El ingeniero define cómo atar el muro nuevo a A1/B1 (chicotes con epóxico o malla) y su remate contra la viga"

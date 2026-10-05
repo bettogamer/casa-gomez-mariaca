@@ -47,7 +47,6 @@ CIRCUITOS = {
         ("C14", "Tomas estar y dormitorio", "toma"),
         ("C15", "Tomas cocina, baño y lavandería (con diferencial)", "toma"),
         ("C16", "Anafe eléctrico", "especial"),
-        ("C17", "Termotanque del altillo", "especial"),
     ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
@@ -60,7 +59,7 @@ USO = {
     "p1": {"luz_social": "C8", "luz": "C8", "luz_ext": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10",
            "isla": "C9", "toma_ext": "C10"},
     "altillo": {"luz_social": "C13", "luz": "C13", "luz_ext": "C13", "toma": "C14", "toma_comedor": "C15",
-                "toma_humeda": "C15", "isla": "C15", "cocina_esp": "C15", "anafe": "C16", "termo": "C17",
+                "toma_humeda": "C15", "isla": "C15", "cocina_esp": "C15", "anafe": "C16",
                 "toma_ext": "C15", "lavado": "C15", "horno": "C15", "lavavajillas": "C15"},
 }
 SOCIALES = {"living", "ingreso", "hall", "pasillo_pb", "comedor", "terraza", "acceso"}
@@ -850,10 +849,15 @@ def plano_sanitario(casa, nivel):
     if cfg.get("gas"):
         poli(cfg["gas"], f'stroke="{GAS}" stroke-width="2.5" stroke-dasharray="10 4"')
         a = cfg["gas"][0]
-        L.texto(a[0] - 0.15, a[1] - 0.15, "GN ← medidor de gas (calle)", 7, 'fill="#9a6700" text-anchor="end"')
+        L.texto(a[0] - 0.15, a[1] - 0.15, cfg.get("gas_inicio", "GN ← medidor de gas (calle)"), 7, 'fill="#9a6700" text-anchor="end"')
         b = cfg["gas"][-1]
         _circulo(L, b[0], b[1], 0.10, f'fill="{GAS}"')
-        L.texto(b[0], b[1] - 0.18, "cocina", 6, 'fill="#9a6700"')
+        L.texto(b[0], b[1] - 0.18, cfg.get("gas_fin", "cocina"), 6, 'fill="#9a6700"')
+    for g in cfg.get("gas_ramales") or []:     # ramales extra (p. ej. la subida al calefón)
+        poli(g["linea"], f'stroke="{GAS}" stroke-width="2.5" stroke-dasharray="10 4"')
+        b = g["linea"][-1]
+        _circulo(L, b[0], b[1], 0.10, f'fill="{GAS}"')
+        L.texto(b[0] + 0.15, b[1] - 0.18, g.get("etiqueta", ""), 6, 'fill="#9a6700" text-anchor="start"')
     if cfg.get("subida_caliente"):
         x, y = cfg["subida_caliente"]["pos"]
         _circulo(L, x, y, 0.13, f'fill="{ROJO}"')
