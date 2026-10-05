@@ -521,3 +521,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Pendiente:** si la salida del estar a la franja sigue corrediza (el usuario no quería corredizas en el baño de PB);
   desagüe de las piletas ~0.55 más largo (plomero); marco angosto u hoja de 0.65 en la puerta de la llegada.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Llegada del altillo según lo construido
+- **Qué:** el usuario confirmó con foto que en la losa del altillo, junto a B2, el hueco de la escalera termina en el eje
+  B y hay losa entre B2 y la escalera; sobre el tramo de 10 (ya construido, "llega largo") el hueco pasa el eje B. Se
+  modela ese hueco extra (`estructura.viguetas.huecos_extra`, x 5.725–7.05, y 2.68–3.85, aproximado). La llegada gana
+  piso entre el eje B y y 3.85 del lado de B2. Se propone el **muro sobre el eje B** de B2 hasta la escalera (idea del
+  usuario, ladrillo de 6 huecos sobre el borde del hueco) y la baranda pasa al costado del tramo de 10 (x 5.725).
+- **Pendiente:** ingeniero, si hay viga B entre B2 y el hueco y si aguanta el muro; medir el hueco extra.
+- **Estado:** muro propuesto (consultar ingeniero); el hueco, confirmado por el usuario sin medidas.

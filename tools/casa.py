@@ -223,7 +223,10 @@ def muros(casa, nivel_id):
                 g, dx, dy = seccion_muro(casa, nivel_id, c, d)
                 out.append({"de": c, "a": d, "tipo": "ladrillo", "grosor": g, "dx": dx, "dy": dy, "amb": amb["id"]})
     for m in especiales:
-        out.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "id": m.get("id"), "alto": m.get("alto")})
+        e = {"de": m["de"], "a": m["a"], "tipo": m["tipo"], "id": m.get("id"), "alto": m.get("alto")}
+        if m["tipo"] == "ladrillo":      # muro suelto (no es borde de ambiente)
+            e["grosor"], e["dx"], e["dy"] = seccion_muro(casa, nivel_id, m["de"], m["a"])
+        out.append(e)
     return out
 
 
