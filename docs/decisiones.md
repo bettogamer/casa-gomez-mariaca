@@ -492,3 +492,32 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   construcción ahí probablemente no se aprueba. En la terraza el gabinete es un equipo, no una construcción.
 - **Pendiente:** ingeniero, base del tanque más alta; gasista, subida de gas, salida de gases y distancias (YPFB).
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Altillo: puerta del baño hacia adentro, bisagra de la llegada al sur, tragaluz del Baño 2
+- **Puerta del baño del altillo:** abre **hacia adentro del baño**, bisagra al oeste (antes abría al hall por el
+  termotanque, que ya no existe). Abierta deja ~0.88 delante del inodoro y no toca el lavamanos ni la ducha. Cerradura
+  de baño con destrabe desde afuera.
+- **Puerta de la llegada al estar:** bisagra al **sur**. La tecla de entrada del estar (7.125, 3.72) queda del lado de
+  la manija; la hoja abierta se apoya contra el muro sur, delante de la hoja **fija** (oeste, x 7.25–8.30) de la
+  corrediza a la franja. Tope de piso para que la manija no golpee el vidrio. El marco del lado de la bisagra queda a
+  ~2.5 cm de la cara del muro sur (la llegada solo deja 0.745): marco angosto u hoja de 0.65, lo ve el carpintero.
+- **Tragaluz del Baño 2 (P1):** para dejar **0.65 de paso** entre el muro del departamento y el domo (camino a la
+  lavandería con el canasto) se corre solo el **borde norte** 0.10 al sur: domo x 9.75–10.90, y 5.40–6.20; ranuras de
+  ~0.30 × **0.60** (y 5.50–6.10). **Descartado** correr todo el tragaluz 0.10 al sur: dejaba ~0.35 libres hacia el
+  antepecho sur (el revisor pidió ≥ 0.40) y la ranura a 0.47 del eje C (pidió ≥ 0.5). Se pierde ~14 % de abertura
+  (0.36 m² en vez de 0.42). Alternativa si se quiere conservar 0.70: domo bajo y pisable (vidrio laminado a ras), que
+  choca con el brocal de 15–20 cm que pidió el revisor para la impermeabilización: consultar al ingeniero.
+- **Estado:** aprobado por el usuario (recomendaciones aceptadas; el tragaluz se acortó en vez de correrse para cumplir al revisor: lo confirma el ingeniero).
+
+## 2026-10-05 — Amoblamiento definitivo del altillo (interiorista)
+- **Qué:** en el altillo no hay columnas (terminan en +6.60); igual se corrieron refrigerador y cama por si se prolongan
+  B4/B5, y la mesa de la terraza 0.25 por el poste de B1. Llegada con teclas y aplique en el muro sur (no sobre el
+  hueco), conmutador de arriba de la escalera P1↔altillo. Cocina con **anafe de 2 hornallas**, dos enchufes de mesón
+  a ≥ 0.60, **microondas en repisa** a ~1.45, campana (ducto ajustado al anafe), LED bajo alacena. Estar con **TV de
+  50"** apoyada. Baño: inodoro separado de la pared, enchufe al costado del espejo, tecla afuera. Dormitorio: luz desde
+  3 puntos, **cuna en el muro sur** (escritorio al rincón noreste mientras haya bebé). Franja: piletas y lavadora
+  manual 0.55 al este para dejar 0.65 de paso junto al domo; semisombra hasta x 13.50; apliques IP65 y tomas con tapa.
+  Calefón con ≥ 0.80 libres delante. Nuevo circuito C25 (lavandería y tomas exteriores del altillo).
+- **Pendiente:** si la salida del estar a la franja sigue corrediza (el usuario no quería corredizas en el baño de PB);
+  desagüe de las piletas ~0.55 más largo (plomero); marco angosto u hoja de 0.65 en la puerta de la llegada.
+- **Estado:** aprobado por el usuario.
