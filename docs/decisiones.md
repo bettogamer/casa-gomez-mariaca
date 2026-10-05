@@ -328,3 +328,25 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   este: la hoja abierta queda contra el muro, delante del inodoro.
 - **Por qué:** el usuario no quiere puertas corredizas. Hacia el pasillo no puede abrir: tiene 0.90 y la hoja lo taparía.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Amoblamiento definitivo de PB (interiorista)
+- **Qué:** el `interiorista` revisó la planta baja y se aplicaron sus propuestas con las respuestas del usuario:
+  - **Living:** sillón al rincón noroeste (lectura) y salida a la terraza libre (~1.65); TV de 60" colgada, decodificador
+    en el mueble bajo, tubo de 1" para HDMI.
+  - **Terraza / acceso:** mesa corrida 1.30 al sur; luces empotradas bajo el volado.
+  - **Hall:** consola 0.20 al este (muro libre para el TD), banca de 1.00, segunda luz hacia el pasillo.
+  - **Baño:** inodoro 5 cm al sur; ducha al ras con cancel (rebaje del contrapiso); aplique sobre el espejo.
+  - **Estudio:** router de internet en el escritorio; usuario diestro → luz de trabajo a su izquierda; sofá cama 0.20 al norte.
+  - **Comedor:** mesa de 1.80 con 3 sillas por lado, sin cabeceras: deja 1.27 libres a la corrediza del patio.
+  - **Lavado:** sin secadora; lavadora + lavadero + lavadora manual chica en el muro sur, ropero y repisas de blancos,
+    se plancha en el centro (0.92 libres).
+  - **Almacén:** freezer vertical de 1.00 contra el muro oeste; rincón libre con registro para el desagüe del Baño 2 de P1.
+  - **Cocina:** isla de 2.00 × 1.00 con enchufe (tubo bajo contrapiso); lavavajillas junto al lavaplatos; refrigerador
+    con dispensador; mesón partido para que no haya enchufes tras las hornallas; colgantes, LED bajo alacena.
+  - **Exteriores:** aplique en el patio (parrilla movible) y en el retiro sobre el depósito.
+- **Por qué:** dejar el amoblamiento definitivo antes de que el electricista y el plomero piquen las paredes.
+- **Pendiente:** `tools/instalaciones.py` todavía ubica mal interruptores y enchufes (celosía, dentro del baño, detrás de
+  muebles), no genera conmutadores, ni circuito propio del horno, ni enchufes exteriores. Faltan en `instalaciones`:
+  bomba del pozo (circuito propio), portero eléctrico, motor del portón, cámaras y alarma; timbre sobre la bajante de la
+  suite. Corredizas (qué hoja corre) y tipo de calefón sin definir. Medidas del freezer a confirmar con el modelo comprado.
+- **Estado:** aprobado por el usuario (muebles); puntos eléctricos y sanitarios en `nota`, a pasar al generador.
