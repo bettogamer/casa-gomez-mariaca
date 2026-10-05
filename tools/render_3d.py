@@ -4,7 +4,7 @@ El HTML lleva los datos embebidos, así que se abre con doble clic (file://).
 """
 import json
 
-from casa import COLORES_TIPO, SALIDA, aberturas, tramos_bajo_escalera, ambientes, area, cargar, columnas, escalera, huella_casa, muebles, muros
+from casa import COLORES_TIPO, SALIDA, aberturas, tramos_bajo_escalera, ambientes, area, cargar, columnas, escalera, huella_casa, muebles, muro_soga, muros, seccion_muro
 
 PLANTILLA = r"""<!doctype html>
 <html lang="es">
@@ -195,10 +195,10 @@ D.niveles.forEach(nv => {
   const dinteles = [];
   nv.aberturas.forEach(ab => {
     if (ab.tipo === "vano") return;
-    const d = segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, E.muro, 0xe8e4da);
+    const d = segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, ab.grosor, 0xe8e4da);
     dinteles.push(d); grupo.add(d);
     if (ab.tipo === "ventana") {
-      const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + ab.antepecho, E.muro, 0xf4f1ea);
+      const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + ab.antepecho, ab.grosor, 0xf4f1ea);
       ap.userData.alto = ab.antepecho; ap.userData.base = nv.cota;
       muros.push(ap); grupo.add(ap);
     }
@@ -379,6 +379,12 @@ addEventListener("resize", () => {
 """
 
 
+
+def _sobre_muro(casa, nivel_id, ab):
+    """Extremos y grosor de una abertura sobre el eje real de su muro (perimetrales de soga corridos)."""
+    g, dx, dy = seccion_muro(casa, nivel_id, ab["de"], ab["a"])
+    return {"de": [ab["de"][0] + dx, ab["de"][1] + dy], "a": [ab["a"][0] + dx, ab["a"][1] + dy], "grosor": g}
+
 def datos(casa):
     est = casa["estructura"]
     lt = casa["lote"]
@@ -397,22 +403,20 @@ def datos(casa):
                 "area": round(area(a["poly"]), 2),
                 "propuesto": a.get("estado") == "propuesto",
             })
-        bx, by = est["ejes_x"].values(), est["ejes_y"].values()
         lista_muros = []
         for m in muros(casa, n["id"]):
-            (x0, y0), (x1, y1) = m["de"], m["a"]
-            perim = (abs(x0 - x1) < 0.01 and any(abs(x0 - v) < 0.01 for v in (min(bx), max(bx)))) or \
-                    (abs(y0 - y1) < 0.01 and any(abs(y0 - v) < 0.01 for v in (min(by), max(by))))
-            grosor = est["espesor_muro_ext" if perim else "espesor_muro_int"]
             if m["tipo"] != "ladrillo":
+                grosor = seccion_muro(casa, n["id"], m["de"], m["a"])[0]
                 lista_muros.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "grosor": grosor, "alto": m.get("alto")})
                 continue
+            dx, dy = m["dx"], m["dy"]
             for d, a, alto in tramos_bajo_escalera(casa, n["id"], m["de"], m["a"]):
-                lista_muros.append({"de": d, "a": a, "tipo": "ladrillo", "grosor": grosor, "alto": alto})
+                lista_muros.append({"de": [d[0] + dx, d[1] + dy], "a": [a[0] + dx, a[1] + dy], "tipo": "ladrillo",
+                                    "grosor": m["grosor"], "alto": alto})
         niveles.append({"id": n["id"], "nombre": n["nombre"], "cota": n["cota"],
                         "muros": lista_muros,
                         "muebles": [{"rect": m["rect"], "alto": m["alto"], "color": m["color"]} for m in muebles(casa, n["id"])],
-                        "aberturas": [{"de": ab["de"], "a": ab["a"], "tipo": ab["tipo"], "alto": ab.get("alto", 2.10),
+                        "aberturas": [{**_sobre_muro(casa, n["id"], ab), "tipo": ab["tipo"], "alto": ab.get("alto", 2.10),
                                        "antepecho": ab.get("antepecho", 1.0)}
                                       for ab in aberturas(casa, n["id"])],
                         "alto_muro": n["altura"] - est["espesor_losa"], "ambientes": ambs})
@@ -429,7 +433,7 @@ def datos(casa):
         "losas": losas,
         "columnas": columnas(casa),
         "estructura": {
-            "seccion": est["seccion_columna"], "losa": est["espesor_losa"], "muro": est["espesor_muro_int"],
+            "seccion": est["seccion_columna"], "losa": est["espesor_losa"], "muro": muro_soga(casa),
             "alto_columnas": max(l["cota"] for l in losas),
         },
         "escalera": escalera(casa),

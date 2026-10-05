@@ -387,4 +387,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Consecuencia:** el modelo usa hoy 0.25 para todos los muros perimetrales (`espesor_muro_ext`); hay que pasar a espesor
   por muro (0.25 living, 0.15 el resto) y revisar de qué lado se alinea el muro de soga respecto de la columna. Los pesos
   de muro son mucho menores que con ladrillo macizo.
-- **Estado:** dato del usuario (decidido en obra). Ajuste del modelo pendiente.
+- **Recomendación (aceptada por el usuario):** los muros perimetrales de soga van **al ras de la cara exterior de las
+  columnas** (fachada lisa, un solo revoque; el muro al vecino tiene que ir así sí o sí); la columna sobresale ~10 cm
+  hacia adentro y se aprovecha con roperos, mesadas o nichos. Interiores de soga centrados en el eje.
+- **Modelo:** nueva sección `albanileria` (sale `espesor_muro_ext/int` de `estructura`, que no es estructura); el
+  programa da a cada muro su espesor y corrimiento (`seccion_muro` en `tools/casa.py`) en planta, 3D y aberturas.
+  Medidas de ambientes siguen a eje; los perimetrales (salvo el living) ganan ~10 cm libres. Ningún mueble choca por el
+  cambio (las columnas no se movieron). Choques previos con columnas, a revisar con el interiorista: cajonera PB (B2),
+  librero, ducha del Baño 2, estante, vestidor y ducha de la suite en P1 (C3, B4, A3, C2, C1); refrigerador, cama y
+  silla del altillo (B4, B5, B1).
+- **Estado:** aprobado por el usuario; confirmar con el maestro.

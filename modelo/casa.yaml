@@ -99,8 +99,6 @@ estructura:
       - {rect: [-1.125, 0.00, 0.00, 2.68], dir: y, n: 2, largo: 2.85, nota: "volado"}
       - {rect: [-1.125, 2.68, 0.00, 6.67], dir: y, n: 2, largo: 4.05, nota: "volado"}
     hueco: {rect: [4.40, 0.00, 7.05, 2.68], nota: "escalera (paño 2–3 A–B, cruz en el plano)"}
-  espesor_muro_ext: 0.25
-  espesor_muro_int: 0.15
   # Ejes según planos-arqui/IMG_8278.png: plano con el que se construyeron las columnas
   # (confirmado por el usuario 2026-10-03). IMG_8278 copy.png = misma foto + línea roja B4-B5
   # que solo indica la distancia de ese tramo (no es viga ni muro).
@@ -134,6 +132,18 @@ estructura:
       - {desde: pb, hasta: p1, tramos: [{lado: "2", escalones: 10}, {lado: "3", escalones: 6}]}
       # Invertida para no quitar el pasaje central del primer piso; el tramo de 10 sobresale en el altillo.
       - {desde: p1, hasta: altillo, tramos: [{lado: "2", escalones: 6}, {lado: "3", escalones: 10}]}
+
+# Albañilería (no es estructura): ladrillo y forma de asentarlo. Dato del usuario 2026-10-05.
+albanileria:
+  ladrillo: "cerámico 6 huecos económico rayado, 25 × 15 × 10 cm, 2.7 kg, 23 pzas/m²"
+  muro_soga: 0.15     # ladrillo de soga (10) + revoques: todos los muros, salvo los de `de_cabeza`
+  muro_cabeza: 0.25   # ladrillo de cabeza (25), al ras de las columnas (con revoque ~0.29)
+  # Ambientes cuyos muros PERIMETRALES van de cabeza (para que no se noten las columnas).
+  de_cabeza: [living]
+  # Perimetrales de soga: al ras de la CARA EXTERIOR de las columnas (fachada lisa; la columna
+  # sobresale ~0.10 hacia adentro). Recomendación nuestra, a confirmar con el maestro.
+  perimetral_al_ras: exterior
+  # Interiores de soga: centrados en el eje.
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DISEÑO NUEVO (2026-10-03 en adelante). Se define pieza por pieza con el usuario.
@@ -804,6 +814,7 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
+  - "Muros perimetrales de soga al ras de la cara exterior de las columnas (recomendación, 2026-10-05): confirmar con el maestro. Junto a la escalera (muro norte A2–A3) el muro de soga queda ~10 cm antes del borde del descanso: ¿el descanso está pegado a la cara exterior? Si queda luz, rellenar o engrosar ese tramo"
   - "Eje 1 entre A1 y B1: hay cimiento corrido y aún no hay muro (confirmado por el usuario 2026-10-05). El ingeniero define cómo atar el muro nuevo a A1/B1 (chicotes con epóxico o malla) y su remate contra la viga"
   - "¿Hay losa o hueco sobre el arranque de la escalera de PB (x 4.40–5.725, y 2.68–4.20)? ¿Dónde está el borde del hueco y si tiene viga de borde? Define el hall del primer piso."
   - "Altillo: confirmar con el arquitecto el retiro de 2 m al sur (desde dónde se mide), la altura máxima y el número de plantas permitidos."
