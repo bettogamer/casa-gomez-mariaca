@@ -41,7 +41,6 @@ CIRCUITOS = {
         ("C9", "Tomas suite principal, hall y estar", "toma"),
         ("C10", "Tomas baños, blancos y vestidor; extractores (con diferencial)", "toma"),
         ("C11", "Tomas cuartos de los hijos", "toma"),
-        ("C12", "Termotanque de la suite principal", "especial"),
     ],
     "altillo": [
         ("C13", "Iluminación altillo (interior, terraza y franja)", "luz"),
@@ -59,7 +58,7 @@ USO = {
            "isla": "C4", "cocina_esp": "C5", "lavado": "C6", "horno": "C18", "lavavajillas": "C19", "bomba": "C20",
            "toma_ext": "C21", "porton": "C22", "seguridad": "C23"},
     "p1": {"luz_social": "C8", "luz": "C8", "luz_ext": "C8", "toma": "C9", "toma_comedor": "C9", "toma_humeda": "C10",
-           "isla": "C9", "termo": "C12", "toma_ext": "C10"},
+           "isla": "C9", "toma_ext": "C10"},
     "altillo": {"luz_social": "C13", "luz": "C13", "luz_ext": "C13", "toma": "C14", "toma_comedor": "C15",
                 "toma_humeda": "C15", "isla": "C15", "cocina_esp": "C15", "anafe": "C16", "termo": "C17",
                 "toma_ext": "C15", "lavado": "C15", "horno": "C15", "lavavajillas": "C15"},

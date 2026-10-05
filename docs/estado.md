@@ -28,7 +28,7 @@ _Última actualización: 2026-10-05_
   tocador y banco ventana). Ver `docs/revision-p1.md` y la entrada del 2026-10-04 en `docs/decisiones.md`.
 
 - **Instalaciones P1 (esquema preliminar):** eléctrico con subtablero en el hall junto a la columna B2 y 4 circuitos (C8–C11), agua
-  desde el núcleo técnico, 3 bajantes, extractores del Baño 2 y de los lavamanos de la suite; termotanque eléctrico propio en la suite principal (C12). Sin gas.
+  desde el núcleo técnico, 3 bajantes, extractores del Baño 2 y de los lavamanos de la suite; agua caliente de la suite desde el calefón de PB (sin termotanque, 2026-10-05). Sin gas.
 
 - **Altillo aprobado:** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
   adentro, terraza adelante, franja de 2 m al sur con lavandería; techo de calamina oculto; tanque sobre la
