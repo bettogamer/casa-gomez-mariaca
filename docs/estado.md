@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-04_
+_Última actualización: 2026-10-05_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -14,7 +14,7 @@ _Última actualización: 2026-10-04_
   vecino (Lote 103) sur, patio este. Muebles acomodados por el sol.
 - **Planta baja cerrada (salvo terminaciones):** ductos de aire (campana → patio en cajón; extractor del
   lavado → retiro, con cielo falso ~2.70 en lavado, baño y arranque del pasillo; secadora de condensación
-  sin ducto); paso al patio por la corrediza del comedor; vidrio fijo junto a la entrada; cajonera bajo la
+  sin ducto); paso al patio por la corrediza del comedor; puerta de entrada pivotante de 1.05 con vidrio fijo al lado (2026-10-05, propuesto); cajonera bajo la
   grada; pasillo de 0.90 aceptado. Ver `docs/revision-pb.md`.
 - **Instalaciones PB (esquema preliminar):** eléctrico con 7 circuitos y cuadro de cargas;
   agua (pozo + bomba → tanque elevado → gravedad), calefón a gas natural en el **núcleo técnico

@@ -327,8 +327,11 @@ techos:
 aberturas:
   pb:
     # Definidas (ingreso y living)
-    - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.45], a: [0.00, 6.37], abre_hacia: ingreso, nota: "0.92 m, como en la referencia"}
-    - {id: vidrio_entrada, tipo: ventana, de: [0.00, 5.10], a: [0.00, 5.40], antepecho: 0.00, alto: 2.10, estado: definido, nota: "paño fijo de vidrio 0.30 junto a la puerta (luz al hall; la puerta queda maciza)"}
+    # Entrada (2026-10-05, referencia del usuario): puerta PIVOTANTE de madera con listones verticales y paño fijo de
+    # vidrio al costado, los dos en UN SOLO MARCO de madera y del mismo alto (casi hasta el techo). El borde sur
+    # queda en 6.37: hace falta muro hasta la columna C1 (bajante de la suite por fuera).
+    - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.32], a: [0.00, 6.37], abre_hacia: ingreso, alto: 2.60, estado: propuesto, nota: "1.05 PIVOTANTE (gira sobre un eje en el piso y el marco, no sobre bisagras), maciza, madera con listones verticales y tirador grande; alto ~2.60 hasta la viga del eje 1 (medir cuánto cuelga); barniz exterior: da al oeste (sol de la tarde), el volado de 1 m la protege; burletes contra polvo y viento"}
+    - {id: vidrio_entrada, tipo: ventana, de: [0.00, 5.05], a: [0.00, 5.32], antepecho: 0.00, alto: 2.60, estado: propuesto, nota: "paño fijo de vidrio 0.27 de piso a techo, en el mismo marco que la puerta (luz al hall); vidrio LAMINADO de seguridad"}
     - {id: ingreso_estar, tipo: vano, de: [2.58, 4.95], a: [2.58, 6.67], nota: "ingreso abierto hacia el estar"}
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}
     - {id: living_estar, tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
