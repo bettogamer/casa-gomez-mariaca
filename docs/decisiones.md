@@ -397,3 +397,22 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   librero, ducha del Baño 2, estante, vestidor y ducha de la suite en P1 (C3, B4, A3, C2, C1); refrigerador, cama y
   silla del altillo (B4, B5, B1).
 - **Estado:** aprobado por el usuario; confirmar con el maestro.
+
+## 2026-10-05 — Generador eléctrico nuevo y puntos de PB a mano
+- **Qué:** `tools/instalaciones.py` ubica luces, teclas y tomas sobre la **cara real** de los muros de ladrillo (celosías,
+  vanos, aberturas y columnas no son pared), esquiva muebles y giros de puertas, pone teclas del lado de la manija y
+  conmutadores en circulaciones y salas con dos accesos lejanos, tomas de mesón a ≥ 0.60 de hornallas y lavaplatos,
+  especiales en el muro de atrás, isla con toma de piso, y no repite puntos. Acepta **puntos a mano**
+  (`instalaciones.<nivel>.electrico.puntos`, que reemplazan a los generados de su familia en su ambiente; las teclas
+  pueden nombrar luces por `id`) y dibuja la altura de cada punto a mano.
+- **Circuitos nuevos en PB:** C18 horno, C19 lavavajillas, C20 bomba del pozo (~750 VA supuesto, guardamotor y
+  flotante), C21 tomas exteriores con tapa, C22 portón eléctrico, C23 seguridad, C24 tomas del estudio. Sin secadora.
+- **Seguridad (propuesta):** portón con motor y portero, monitor en el ingreso, 3 cámaras (frente, retiro, patio),
+  alarma con central en el closet de abrigos, teclado en el ingreso, sirena en la fachada, sensores magnéticos y de
+  movimiento. Sin timbre cableado en la puerta (caía sobre la bajante de la suite).
+- **Sanitario:** lavavajillas y dispensador del refrigerador; las bajantes de P1 y altillo se dibujan llegando a PB y
+  al colector (la de la lavandería del altillo se une en P1).
+- **PB:** el `interiorista` cargó 61 puntos a mano (juego de teclas del ingreso, hall y escalera conmutados, cocina al
+  final del pasillo, estudio con conmutador en la cabecera, TV junto a B1 sin picar la columna, tomas exteriores, etc.).
+  El `interiorista` ahora puede editar `electrico.puntos`.
+- **Estado:** propuesto, esquema preliminar: circuitos, secciones y protecciones los define el electricista (NB 777).

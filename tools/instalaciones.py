@@ -34,6 +34,7 @@ CIRCUITOS = {
         ("C21", "Tomas exteriores con tapa (con diferencial)", "toma"),
         ("C22", "Portón eléctrico", "especial"),
         ("C23", "Seguridad: alarma, cámaras, portero (con respaldo)", "especial"),
+        ("C24", "Tomas estudio / invitados (computadora, router)", "toma"),
     ],
     "p1": [
         ("C8", "Iluminación primer piso", "luz"),
@@ -51,7 +52,7 @@ CIRCUITOS = {
     ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
-TOMA_POR_AMBIENTE = {"p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
+TOMA_POR_AMBIENTE = {"pb": {"estudio": "C24"}, "p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
 # Qué circuito usa cada clase de punto, por nivel
 USO = {
     "pb": {"luz_social": "C1", "luz": "C2", "luz_ext": "C1", "toma": "C3", "toma_comedor": "C4", "toma_humeda": "C7",
@@ -441,7 +442,7 @@ def electrico(casa, nivel_id):
             circ = uso["luz_ext"]
         else:
             circ = uso["luz_social"] if amb["id"] in SOCIALES else uso["luz"]
-        agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False)
+        agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False, id=l.get("id"))
     # bomba del pozo (en el pozo)
     pozo = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {}).get("pozo")
     if pozo and "bomba" in uso:
@@ -488,7 +489,8 @@ def electrico(casa, nivel_id):
         if t == "especial" and "va" not in mp:
             va = next((q[1] for q in ESPECIALES.values() for q in q if q[0] == mp.get("etiqueta")), VA_TOMA)
         agregar(tipo=t if t in FAMILIA or t == "especial" else "toma", pos=tuple(mp["pos"]), circuito=circ, va=va,
-                etiqueta=mp.get("etiqueta", ""), amb=amb_id, gen=False, manual=True, luces=mp.get("luces"))
+                etiqueta=mp.get("etiqueta", ""), amb=amb_id, gen=False, manual=True, luces=mp.get("luces"),
+                id=mp.get("id"), alto=mp.get("alto"))
     # tomas comunes a otro circuito según el ambiente
     for amb in ambs:
         nuevo = TOMA_POR_AMBIENTE.get(nivel_id, {}).get(amb["id"])
@@ -503,13 +505,20 @@ def electrico(casa, nivel_id):
             continue
         limpio.append(q)
     puntos[:] = limpio
-    # cables: cada tecla a las luces de su ambiente (o de los ambientes que dice `luces`)
+    # cables: cada tecla a las luces de su ambiente, o a lo que dice `luces` (ids de ambientes o de luces).
+    # Una luz con `id` nombrada por alguna tecla solo se une a las teclas que la nombran.
+    nombradas = {d for q in puntos if q["tipo"] in ("interruptor", "conmutador") for d in (q.get("luces") or [])}
     for q in puntos:
         if q["tipo"] not in ("interruptor", "conmutador"):
             continue
-        destinos = q.get("luces") or [q.get("amb")]
+        destinos = set(q.get("luces") or [q.get("amb")])
         for l in puntos:
-            if l["tipo"] == "luz" and l.get("amb") in destinos:
+            if l["tipo"] != "luz":
+                continue
+            if l.get("id") and l["id"] in nombradas:
+                if l["id"] in destinos:
+                    cables.append((q["pos"], l["pos"]))
+            elif l.get("amb") in destinos:
                 cables.append((q["pos"], l["pos"]))
     return puntos, cables
 
@@ -610,6 +619,8 @@ def sanitario(casa, nivel_id):
             if cota.get(nid, 0) <= cota.get(nivel_id, 0):
                 continue
             for b in (inst.get("sanitario") or {}).get("bajantes") or []:
+                if b.get("hasta") and cota.get(b["hasta"], 0) > cota.get(nivel_id, 0):
+                    continue     # se une a otra bajante en un piso de arriba
                 pos = tuple(b["pos"])
                 if any(math.dist(pos, q[0]) < 0.3 for q in ramas["llegan"]):
                     continue
@@ -682,6 +693,8 @@ def plano_electrico(casa, nivel):
         elif t == "extractor":
             _circulo(L, x, y, 0.16, 'fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"')
             L.texto(x, y + 0.05, "E", 8, 'fill="#2e7d32" font-weight="bold"')
+        if p.get("alto") and t != "luz":
+            L.texto(x, y + 0.27, f"h{p['alto']:.2f}", 5, 'fill="#555"')
     if cfg.get("tablero"):
         x, y = cfg["tablero"]["pos"]
         L.poly([[x - 0.30, y - 0.10], [x + 0.30, y - 0.10], [x + 0.30, y + 0.08], [x - 0.30, y + 0.08]], 'fill="#212121"')
