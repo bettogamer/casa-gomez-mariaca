@@ -416,3 +416,33 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   final del pasillo, estudio con conmutador en la cabecera, TV junto a B1 sin picar la columna, tomas exteriores, etc.).
   El `interiorista` ahora puede editar `electrico.puntos`.
 - **Estado:** propuesto, esquema preliminar: circuitos, secciones y protecciones los define el electricista (NB 777).
+
+## 2026-10-05 — Primer piso: puerta del dormitorio principal y puerta de la ducha de la suite
+- **Qué (pedido del usuario):**
+  - Puerta del dormitorio principal (muro x=4.40, desde el hall): corrida 0.10 al norte, de y 3.30–4.10 a **3.20–4.00**.
+    Antes quedaba a 2.5 cm de la cara del muro sur y no entraba el marco; ahora quedan 12.5 cm. Bisagra al norte igual.
+    La tecla del dormitorio sigue en el muro sur, a la vuelta del marco (4.17, 4.125): 12.5 cm no alcanzan para una
+    tecla al costado del marco. Del lado del hall, el subtablero (4.52, 3.12) queda a 8 cm del borde de la puerta:
+    conviene correrlo hacia la columna B2 (y ≈ 2.98).
+  - Puerta vaivén de la ducha de la suite (muro x=0.90): de 0.70 (y 5.55–6.25, bisagra al sur) a **0.60 (y 5.60–6.20,
+    bisagra al norte)**, con 7.5 cm de muro en la esquina para el marco. Entre la cara del muro norte de la ducha (5.525)
+    y el frente del mesón de lavamanos (6.09) hay solo 0.565: una hoja de 0.60 no cabe entera al norte del mesón. Con
+    bisagra al norte la hoja, al abrir hacia los lavamanos, roza la esquina del mesón (zona x 0.975–1.25, y 6.09–6.20);
+    para que abra 90° el mesón tiene que empezar en x ≈ 1.30 (2.03 m, primer lavamanos ~1.50–1.95). Lo ajusta el
+    interiorista. Con bisagra al sur abriría solo ~35° hacia afuera (descartado).
+- **Estado:** propuesto. Pendiente: mesón y subtablero (interiorista).
+
+## 2026-10-05 — Amoblamiento definitivo del P1 (interiorista)
+- **Qué:** muebles que chocaban con columnas resueltos (librero del estar, ducha del Baño 1, blancos, vestidor, ducha de
+  la suite); se aprovechan los ~10 cm de los muros de soga (pie de cama de los cuartos 0.68, ropero del Cuarto 2 +10 cm,
+  cama de la suite 0.15 al norte). 77+ puntos eléctricos a mano: camas con enchufe en cada velador y conmutador
+  (suite: puerta + dos veladores, esposa al norte y dueño al sur), baños con enchufe y aplique junto al espejo y teclas
+  afuera, escalera PB↔P1 y P1↔altillo conmutadas, pasillo + vestíbulo conmutados, access point WiFi en el estar (cable
+  desde el router del estudio de PB por B2), TVs de 55" apoyadas en mueble, roller en la ventana norte del Cuarto 1.
+- **Propuestas aceptadas (recomendación, el usuario dijo "usa tus recomendaciones"):** inodoro del Baño 1 0.45 al este
+  (0.92 libres delante; desagüe ~1 m por el contrapiso, lo confirma el plomero); lavamanos del Baño 2 al muro sur;
+  puerta del dormitorio principal 10 cm al norte y subtablero del P1 a (4.52, 2.98), entre B2 y el marco; puerta de la
+  ducha de la suite de 0.60 y mesón de lavamanos desde x 1.30; segunda luz de escalera sobre el descanso de PB (+2.27).
+- **Pendiente:** el generador no une teclas y luces de pisos distintos (anotado en las notas); detector de humo en el
+  hall del P1; con el maestro, si 12.5 / 7.5 cm de muro alcanzan para los marcos.
+- **Estado:** aprobado por el usuario.

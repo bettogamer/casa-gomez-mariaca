@@ -41,8 +41,8 @@ _Última actualización: 2026-10-05_
 ## Próximo paso
 **PB amoblada y con su plano eléctrico definido a mano por el `interiorista` (2026-10-05, ver `docs/decisiones.md`);
 generador eléctrico nuevo (caras reales de muro, conmutadores, puntos a mano, seguridad, circuitos C18–C24).**
-Sigue: el amoblamiento de P1 y altillo con el interiorista (incluye la tecla de arriba de la luz de escalera y los
-muebles que hoy chocan con columnas):
+**P1 amoblado y con puntos eléctricos (2026-10-05).** Sigue: el amoblamiento del altillo con el interiorista (incluye
+los muebles que chocan con columnas: refrigerador B4, cama B5, silla B1; y la tecla de arriba de la escalera P1↔altillo):
 muebles + luces, enchufes, interruptores y agua, para el electricista y el plomero. Ojo: `tools/instalaciones.py`
 reparte los enchufes generales sin mirar camas, sofás ni roperos (solo closets) y no pone enchufes junto a la
 cama ni conmutador: probablemente haya que mejorarlo.
