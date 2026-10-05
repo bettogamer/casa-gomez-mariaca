@@ -103,9 +103,9 @@ def columnas(casa):
 
 
 def huella_casa(casa):
-    """Caja exterior de la casa (columnas extremas + media pared)."""
+    """Caja exterior de la casa (cara exterior de las columnas extremas: ahí van al ras los muros)."""
     cols = columnas(casa)
-    m = casa["estructura"]["espesor_muro_ext"] / 2
+    m = casa["estructura"]["seccion_columna"] / 2
     xs = [c["x"] for c in cols]
     ys = [c["y"] for c in cols]
     return min(xs) - m, min(ys) - m, max(xs) + m, max(ys) + m
@@ -159,12 +159,55 @@ def _restar(a, b, cortes):
             for t0, t1 in tramos if (t1 - t0) * L > 0.01]
 
 
+def muro_soga(casa):
+    return (casa.get("albanileria") or {}).get("muro_soga", 0.15)
+
+
+def seccion_muro(casa, nivel_id, de, a):
+    """(grosor, dx, dy) del muro de ladrillo (o de la abertura) que va de `de` a `a`, dados a eje.
+
+    Interiores: de soga, centrados en el eje. Perimetrales (sobre los ejes extremos): de soga al ras
+    de la cara exterior de las columnas, o sea el eje del muro se corre (dx, dy) hacia afuera; los de
+    los ambientes en `albanileria.de_cabeza` van de cabeza, centrados (al ras de las columnas).
+    """
+    alb = casa.get("albanileria") or {}
+    est = casa["estructura"]
+    soga = alb.get("muro_soga", 0.15)
+    xs, ys = est["ejes_x"].values(), est["ejes_y"].values()
+    (x0, y0), (x1, y1) = de, a
+    afuera = None
+    if abs(x0 - x1) < 0.01:
+        if abs(x0 - min(xs)) < 0.01:
+            afuera = (-1, 0)
+        elif abs(x0 - max(xs)) < 0.01:
+            afuera = (1, 0)
+    elif abs(y0 - y1) < 0.01:
+        if abs(y0 - min(ys)) < 0.01:
+            afuera = (0, -1)
+        elif abs(y0 - max(ys)) < 0.01:
+            afuera = (0, 1)
+    if afuera is None:
+        return soga, 0.0, 0.0
+    cabeza = set(alb.get("de_cabeza") or [])
+    for amb in ambientes(casa, nivel_id):
+        if amb["id"] not in cabeza:
+            continue
+        pts = amb["poly"]
+        if any(_intervalo(p, q, de, a) for p, q in zip(pts, pts[1:] + pts[:1])):
+            return alb.get("muro_cabeza", 0.25), 0.0, 0.0
+    if alb.get("perimetral_al_ras", "exterior") != "exterior":
+        return soga, 0.0, 0.0
+    c = est["seccion_columna"] / 2 - soga / 2
+    return soga, afuera[0] * c, afuera[1] * c
+
+
 def muros(casa, nivel_id):
     """Muros del nivel como segmentos {de, a, tipo}.
 
     Los bordes de ambientes no exteriores son muro de ladrillo (sin duplicar bordes
     compartidos), menos las aberturas y los muros especiales; luego se agregan los
-    muros especiales (celosía, etc.) con su tipo.
+    muros especiales (celosía, etc.) con su tipo. `de`/`a` quedan a eje; los de ladrillo
+    traen `grosor` y el corrimiento (`dx`, `dy`) de su eje real (ver `seccion_muro`).
     """
     especiales = (casa.get("muros") or {}).get(nivel_id) or []
     cortes = [(m["de"], m["a"]) for m in especiales] + [(ab["de"], ab["a"]) for ab in aberturas(casa, nivel_id)]
@@ -177,7 +220,8 @@ def muros(casa, nivel_id):
         for a, b in zip(pts, pts[1:] + pts[:1]):
             for c, d in _restar(a, b, cortes + hechos):
                 hechos.append((c, d))
-                out.append({"de": c, "a": d, "tipo": "ladrillo"})
+                g, dx, dy = seccion_muro(casa, nivel_id, c, d)
+                out.append({"de": c, "a": d, "tipo": "ladrillo", "grosor": g, "dx": dx, "dy": dy, "amb": amb["id"]})
     for m in especiales:
         out.append({"de": m["de"], "a": m["a"], "tipo": m["tipo"], "id": m.get("id"), "alto": m.get("alto")})
     return out
@@ -199,7 +243,7 @@ def escalera(casa):
     ancho, hu, ch = esc["ancho_tramo"], esc["huella"], esc["contrahuella"]
     xl = est["ejes_x"]["2"] + m
     xr = est["ejes_x"]["3"] - m
-    y_desc0 = est["ejes_y"]["A"] + est["espesor_muro_ext"] / 2
+    y_desc0 = est["ejes_y"]["A"] + m   # escalera construida: el descanso arranca a 0.125 del eje A
     y_desc1 = y_desc0 + esc["descanso_fondo"]
 
     def franja(lado):
@@ -236,7 +280,7 @@ def alto_bajo_escalera(casa, nivel_id, de, a):
     """Altura libre (desde el piso del nivel) bajo la escalera que sube desde ese nivel, para un
     muro de `de` a `a`. None si el muro no pasa por debajo de la escalera."""
     est = casa["estructura"]
-    t = est["espesor_muro_int"] / 2
+    t = muro_soga(casa) / 2
     ch = est["escalera"]["contrahuella"]
     x0, x1 = sorted([de[0], a[0]])
     y0, y1 = sorted([de[1], a[1]])

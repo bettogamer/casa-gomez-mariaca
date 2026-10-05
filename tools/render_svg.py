@@ -3,7 +3,7 @@ import math
 from html import escape
 
 from casa import (COLORES_TIPO, SALIDA, aberturas, ambientes, area, caja, cargar, centroide, columnas, dentro, escalera,
-                  huella_casa, muebles, muros, referencia)
+                  huella_casa, muebles, muros, referencia, seccion_muro)
 
 ESC = 50  # px por metro
 MARGEN = 2.2  # m alrededor del dibujo (ejes, cotas)
@@ -131,16 +131,12 @@ def dibujar_referencia(L, refs, nuevos):
 
 
 def dibujar_muros(L, casa, nivel_id):
-    est = casa["estructura"]
-    xs, ys = est["ejes_x"].values(), est["ejes_y"].values()
-    borde_x, borde_y = (min(xs), max(xs)), (min(ys), max(ys))
     for m in muros(casa, nivel_id):
         (x0, y0), (x1, y1) = m["de"], m["a"]
         if m["tipo"] == "ladrillo":
-            perimetral = (abs(x0 - x1) < 0.01 and any(abs(x0 - b) < 0.01 for b in borde_x)) or \
-                         (abs(y0 - y1) < 0.01 and any(abs(y0 - b) < 0.01 for b in borde_y))
-            ancho = est["espesor_muro_ext" if perimetral else "espesor_muro_int"] * ESC
-            L.linea(x0, y0, x1, y1, f'stroke="#222" stroke-width="{ancho:.1f}" stroke-linecap="square"')
+            dx, dy = m["dx"], m["dy"]
+            L.linea(x0 + dx, y0 + dy, x1 + dx, y1 + dy,
+                    f'stroke="#222" stroke-width="{m["grosor"] * ESC:.1f}" stroke-linecap="square"')
         elif m["tipo"] == "celosia_madera":
             L.linea(x0, y0, x1, y1, 'stroke="#c49a6c" stroke-width="5"')
             dx, dy = x1 - x0, y1 - y0
@@ -158,7 +154,8 @@ def dibujar_muros(L, casa, nivel_id):
 def dibujar_aberturas(L, casa, nivel_id):
     ambs = {a["id"]: a for a in ambientes(casa, nivel_id)}
     for ab in aberturas(casa, nivel_id):
-        (x0, y0), (x1, y1) = ab["de"], ab["a"]
+        _, sx, sy = seccion_muro(casa, nivel_id, ab["de"], ab["a"])   # sobre el eje real del muro
+        (x0, y0), (x1, y1) = (ab["de"][0] + sx, ab["de"][1] + sy), (ab["a"][0] + sx, ab["a"][1] + sy)
         dx, dy = x1 - x0, y1 - y0
         largo = (dx * dx + dy * dy) ** 0.5
         if ab["tipo"] == "vano":
