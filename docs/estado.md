@@ -17,9 +17,10 @@ _Última actualización: 2026-10-05_
   sin ducto); paso al patio por la corrediza del comedor; puerta de entrada pivotante de 1.05 con vidrio fijo al lado (2026-10-05, propuesto); cajonera bajo la
   grada; pasillo de 0.90 aceptado. Ver `docs/revision-pb.md`.
 - **Instalaciones PB (esquema preliminar):** eléctrico con 7 circuitos y cuadro de cargas;
-  agua (pozo + bomba → tanque elevado → gravedad), calefón a gas natural en el **núcleo técnico
-  del muro norte** (entre baño y estudio), desagüe por el retiro norte con CI y desgrasadora,
-  gas natural por el retiro norte. Horno y secadora eléctricos.
+  agua (pozo + bomba → tanque elevado → gravedad), calefón a gas natural en el **muro norte,
+  x≈11.90** (tramo sin ventanas en los tres pisos; el núcleo técnico entre baño y estudio queda para la bajada del
+  tanque y la subida de agua caliente), desagüe por el retiro norte con CI y desgrasadora, gas natural por el retiro
+  norte. Horno eléctrico; sin secadora.
 
 - **Primer piso aprobado (completo):** suite principal al frente (dormitorio con TV en el muro oeste, logia
   sobre el volado de 1 m, lavamanos abierto, inodoro y ducha propios, vestidor en U); hall en la llegada de la

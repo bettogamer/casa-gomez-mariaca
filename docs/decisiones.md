@@ -463,3 +463,14 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   Desagües en PVC sanitario (110 mm inodoros y bajantes, 50 mm el resto). Gas aparte, lo define el gasista con YPFB.
 - **Por qué:** es lo más usado en Cochabamba, uniones soldadas sin pérdidas, un solo sistema para fría y caliente.
 - **Estado:** aprobado por el usuario; el plomero confirma clase y diámetros.
+
+## 2026-10-05 — Calefón en el tramo ciego del muro norte (x ≈ 11.90)
+- **Qué:** el calefón pasa de x 8.80 (núcleo técnico) a **x ≈ 11.90**, en el mismo muro norte (retiro), al costado de la
+  columna A4 sin picarla. El agua caliente de PB arranca ahí; la subida al P1 sigue en el núcleo técnico (x 8.80), con
+  un tramo por fuera del muro norte. Enchufe con tapa del calefón en x 12.30.
+- **Por qué:** en x 8.80 quedaba a 0.5 m de las ventanas del baño y del estudio (dormitorio de invitados) y debajo de las
+  de blancos (P1) y del estar del altillo: los gases de la combustión (monóxido) suben. x 11.90 es el único tramo sin
+  ventanas en los tres pisos (≥ 0.9 m a la más cercana). Gas ya pasa por ahí; cocina y lavado quedan más cerca, la suite
+  ~3 m más lejos (al usuario no le importa la espera).
+- **Pendiente:** el gasista confirma distancias de la salida de gases a ventanas (propias y del Lote 105) según YPFB.
+- **Estado:** aprobado por el usuario.
