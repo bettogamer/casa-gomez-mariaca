@@ -377,7 +377,7 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   adentro con mosquitero (≥1.50 abribles), roller screen. Proporción de luz/ventilación según OM 1061/91: confirmar con
   el arquitecto (~1/6, al borde de la regla práctica).
 - **Pendiente:** en `tools/instalaciones.py` el enchufe de la TV sale al pie del mueble y hay un enchufe general detrás de él.
-- **Estado:** propuesto (falta el visto bueno del usuario sobre el amoblado).
+- **Estado:** aprobado por el usuario (2026-10-05).
 
 ## 2026-10-05 — Ladrillo y forma de asentarlo
 - **Qué:** en toda la casa se usa ladrillo cerámico **6 huecos económico rayado** (25 × 15 × 10 cm, 2.7 kg, 23 pzas/m²).
