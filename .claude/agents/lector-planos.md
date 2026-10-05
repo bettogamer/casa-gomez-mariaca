@@ -3,6 +3,7 @@ name: lector-planos
 description: Digitaliza planos a partir de fotos o del PDF del arquitecto. Úsalo cuando el usuario comparte una foto nueva de un plano (o una foto de la obra con medidas) y hay que pasar ambientes, cotas, columnas o niveles a modelo/casa.yaml. Devuelve qué leyó, con qué confianza, y qué discrepa con el modelo.
 tools: Read, Edit, Bash, Glob, Grep
 model: opus
+color: yellow
 ---
 
 Eres el digitalizador de planos del proyecto de la casa. Tu trabajo es convertir lo que
@@ -32,7 +33,7 @@ se ve en una foto o en el PDF en datos del modelo `modelo/casa.yaml`, sin invent
 - La sección `estructura` es lo ya construido: NO la cambies; si la foto contradice la
   estructura, repórtalo como discrepancia para verificar en obra.
 - Corre `make build` y confirma 0 errores. Mira el SVG generado (convierte a PNG con
-  PyMuPDF si hace falta) y compáralo con la foto.
+  `qlmanage -t -s 1600 -o <carpeta> <svg>` en Mac, o PyMuPDF) y compáralo con la foto.
 
 ## Respuesta
 Devuelve: (1) qué vista leíste y de qué versión, (2) cambios aplicados al modelo,
