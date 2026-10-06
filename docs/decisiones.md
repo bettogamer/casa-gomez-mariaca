@@ -665,3 +665,18 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   auto de afuera, que tendría que estacionar ~1.70 más adentro).
 - **Pendiente:** probar la entrada de retro con los autos reales; mediciones de `verificar_en_obra`; `interiorista` del frente.
 - **Estado:** aceptado por el usuario (el recorrido del gas lo confirma el gasista con YPFB).
+
+## 2026-10-06 — Frente: luces, toma, canilla, cámara y portero (interiorista)
+- **Circuito nuevo C27** (iluminación exterior del frente, con diferencial; balizas con fotocélula + reloj, el resto con sensor).
+- **Camino:** 5 balizas **empotradas en el muro sur a 0.30** (el muro del Lote 103 será del dueño), luz con sensor sobre la
+  puerta peatonal por dentro, videoportero y cerradura eléctrica en el pilar sur, y una **luz chica por fuera sobre el portero**
+  (para que la cámara vea la cara de noche). Todo por una zanja al sur que no cruza el gas.
+- **Portón:** luz de destello y fotocélulas (C22). **El portero no abre el portón** (solo la puerta peatonal).
+- **Poste de servicio** en el borde del pasto entre los dos autos (luz con sensor, cámara al portón y a la puerta, toma IP65 y
+  cargador de auto eléctrico): **aceptado para una segunda etapa**; en obra se dejan la base, el registro y los tubos.
+  Mientras tanto, **segunda luz con sensor**: bolardo de 0.80 en la esquina norte de la vereda.
+- **Canilla para lavar los autos y regar**, en cajuela junto al poste, con **agua del tanque** (hay agua aunque corte SEMAPA):
+  baja de la bajada del tanque por el retiro norte y la vereda. La canilla de la terraza sale del mismo caño.
+- **Sirena** subida a la fachada oeste del primer piso (en la logia, ~+6.0): desde la calle se ve por encima del muro.
+- **Herramientas:** las canillas aceptan `recorrido` (el caño real) y el portero `panel` (de dónde sale su cable).
+- **Estado:** aceptado por el usuario.
