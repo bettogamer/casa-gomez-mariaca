@@ -761,3 +761,16 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Para el ingeniero:** dinteles de las 4 ventanas en su nueva posición; la del sur del altillo a 0.125 de la columna B5
   (si se prolonga) y la del Cuarto 2 ahora a 0.395 de C5 (antes 0.145).
 - **Estado:** pedido del dueño (2026-10-06); en el modelo como `propuesto` hasta verlo en la fachada este.
+
+## 2026-10-06 — Muebles por las ventanas nuevas (fachadas norte y este)
+- **Blancos (P1):** repisas bajas (1.40) bajo toda la ventana; el estante alto empieza en 8.50.
+- **Cuarto 1 (P1):** banco ventana de 1.80 justo bajo la ventana, sin librero-velador alto (tapaba el vidrio), repisa baja de
+  0.90 entre el librero y el banco; cama con cabecera baja (≤0.80) o sin cabecera; teclas y tomas fuera de los vanos; la
+  ventana este va corrediza o proyectante (la cama pasa por debajo).
+- **Cuarto 2 (P1):** la toma general pasa al rincón sureste; ropero con puertas corredizas y roller o cortina hacia el sur.
+- **Cocina del altillo:** mesada desde la jamba (9.65) y lavaplatos centrado bajo la ventana.
+- **Dormitorio del altillo:** ropero 0.67 al sur (libera la ventana norte; queda un rincón para una cómoda o cambiador);
+  cama centrada entre las dos ventanas este, con cabecera ≤0.90 y ventanas corredizas o proyectantes con roller.
+- **Baño del altillo:** la ventana se corre a 12.02–12.72 para no quedar partida por la mampara de la ducha.
+- **Pendiente con el dueño:** banco de 1.80 en el Cuarto 1 (¿alcanza?), sin velador propio, cabeceras bajas.
+- **Estado:** propuesto (falta que el dueño vea las fachadas).
