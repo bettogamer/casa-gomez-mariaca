@@ -543,3 +543,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   aire, y pesa poco en la punta del volado. Descartados: abierto con baranda (poca privacidad) y muro entero (pesado y oscuro).
 - **Pendiente:** ingeniero (peso y anclaje), arquitecto (servidumbre de vista).
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Fachadas: alzados y 3 opciones de materiales
+- **Qué:** nuevo `tools/render_alzados.py` (en `make build`): fachadas oeste, norte, este y sur desde el modelo, y una
+  página `salida/fachadas.html` con las opciones de `fachada.opciones`. Referencias del usuario en
+  `fuentes/referencias-fachada/` (blanco y negro con pérgola; beige con marco gris y madera).
+- **Opciones:** A blanco y negro; B beige, marco gris y madera; C (recomendada) blanco + piedra en el muro ciego del living
+  (aguanta el sol de la tarde) + madera solo donde la protege el volado (pared del dormitorio en la logia, puerta, celosía)
+  + gris oscuro en bordes de losa y frente del baño de la suite + negro en carpintería, barandas y techo de la terraza.
+- **Pendiente:** que el usuario elija; dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
+- **Estado:** propuesto.

@@ -348,6 +348,35 @@ techos:
     - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: canaleta del frente (techo de la terraza) + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
     - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): techo del departamento + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
 
+# Fachada (2026-10-05): opciones de materiales para conversar con el usuario. Referencias en
+# fuentes/referencias-fachada/. `paleta` = color por tipo de pieza; `acentos` = paños de material sobre una cara:
+# vista, u (horizontal de esa vista: oeste = y), z (alto), d (profundidad de la cara: oeste = x de la cara exterior).
+fachada:
+  opciones:
+    - id: a
+      nombre: Blanco y negro
+      descripcion: "Como la primera referencia: casa blanca con piezas negras. Carpintería, barandas, puerta y techo de la terraza en negro; el frente del baño de la suite como un volumen negro y un paño negro alrededor de la puerta de entrada. Sobria y contrastada; el negro al oeste se calienta con el sol de la tarde."
+      paleta: {muro: "#f5f5f3", losa: "#f5f5f3", zocalo: "#2b2b2b", baranda: "#1e1e1e", marco: "#1e1e1e", puerta: "#1f1f1f", techo: "#1e1e1e", celosia: "#2b2b2b", antepecho: "#f5f5f3", tanque: "#f5f5f3", columna: "#f5f5f3"}
+      acentos:
+        - {vista: oeste, u: [4.20, 6.795], z: [3.40, 6.40], d: -1.20, material: negro, nota: "frente del baño de la suite"}
+        - {vista: oeste, u: [4.95, 6.795], z: [0.20, 3.20], d: -0.125, material: negro, nota: "paño de la entrada"}
+    - id: b
+      nombre: Beige, marco gris y madera
+      descripcion: "Como la segunda referencia: muros beige, bordes de losa en gris oscuro que enmarcan la logia como una caja, listones de madera en la pared del dormitorio dentro de la logia (protegida por el volado), puerta pivotante y celosía de madera, barandas livianas. Cálida y moderna."
+      paleta: {muro: "#ddd0bb", losa: "#43464a", zocalo: "#8f8a82", baranda: "#5a5a5a", marco: "#2b2b2b", puerta: "#a8703f", techo: "#43464a", celosia: "#a8703f", antepecho: "#ddd0bb", tanque: "#ddd0bb", columna: "#ddd0bb"}
+      acentos:
+        - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.20, material: gris_oscuro, nota: "costado del marco de la logia: frente del baño de la suite"}
+        - {vista: oeste, u: [-0.125, 3.25], z: [3.40, 6.40], d: -0.125, material: madera, nota: "listones de madera en la pared del dormitorio, dentro de la logia"}
+        - {vista: oeste, u: [4.95, 6.795], z: [0.20, 3.20], d: -0.125, material: gris_claro, nota: "paño de la entrada"}
+    - id: c
+      nombre: Blanco, piedra, madera y gris (recomendada)
+      descripcion: "Mezcla de las dos: base blanca; el muro ciego del living (el que da a la calle) en piedra, que aguanta el sol de la tarde sin mantenimiento; madera solo donde está protegida (pared del dormitorio dentro de la logia, puerta y celosía); bordes de losa y frente del baño en gris oscuro como marco; carpintería, barandas y techo de la terraza en negro."
+      paleta: {muro: "#f3f1ec", losa: "#43464a", zocalo: "#43464a", baranda: "#2b2b2b", marco: "#2b2b2b", puerta: "#a8703f", techo: "#2b2b2b", celosia: "#a8703f", antepecho: "#f3f1ec", tanque: "#f3f1ec", columna: "#f3f1ec"}
+      acentos:
+        - {vista: oeste, u: [-0.125, 4.95], z: [0.20, 3.20], d: -0.125, material: piedra, nota: "muro ciego del living hacia la calle"}
+        - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.20, material: gris_oscuro, nota: "frente del baño de la suite (marco de la logia)"}
+        - {vista: oeste, u: [-0.125, 3.25], z: [3.40, 6.40], d: -0.125, material: madera, nota: "listones en la pared del dormitorio, dentro de la logia"}
+
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
   pb:
