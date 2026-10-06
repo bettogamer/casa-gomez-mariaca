@@ -638,3 +638,30 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   pilar al norte); mover el símbolo del motor/portero del plano eléctrico al portón y al pilar sur; luces, toma y canilla
   del frente (interiorista).
 - **Estado:** aprobado por el usuario (2026-10-06); falta pasar por los revisores y el interiorista.
+
+## 2026-10-06 — Frente: revisión estructural y de habitabilidad
+- **Revisores:** el frente no toca nada de lo construido (columnas, losas, volado, escalera). Encontraron dos conflictos
+  (el gas pegado al muro, bajo el riel del portón, y la cisterna demasiado cerca de los cimientos) y varios temas para
+  el ingeniero, el arquitecto y el herrero (anotados en `verificar_en_obra`).
+- **Aceptado por el usuario (propuesto en el modelo):**
+  - **Cisterna corrida ~1 m al este y al norte**, bajo el pasto (x −13.50 a −11.10, y 3.30 a 5.30): ~1.5 m de los cimientos del
+    Lote 103 y del muro de la calle. Tapa y cámara de la bomba en el pasto. La vieja no se demuele de golpe (puede estar
+    sosteniendo el suelo del vecino); la nueva se hace antes que el muro y el riel.
+  - **Gas enterrado** desde el medidor (pilar junto a la puerta peatonal): baja por el costado de la puerta, va al este por el
+    camino del lado del Lote 103 (y 6.20), al norte por la vereda (x −3.30) y sigue por el retiro norte. Es la idea del
+    usuario (pegado al muro sur), pero sin bordear la casa por el sur porque la casa está pegada al Lote 103. **La norma lo
+    permite** (ANH, RAN-ANH-UN 0036/2016, anexo 5, cap. V): acero con protección anticorrosiva y uniones soldadas a ≥0.30
+    (multicapa amarillo a ≥0.60), arena, cinta amarilla "GAS", nunca bajo cimientos ni zapatas, ≥0.20 de agua, desagüe y
+    cables, funda donde pasa un auto. Ya no pasa bajo los autos ni bajo el riel. La llave general va en el gabinete del
+    medidor. La impulsión pasa a y −0.30 en el retiro norte para quedar a 0.25 del gas.
+  - **Tope de ruedas** al fondo del estacionamiento (x −5.10): el auto no sigue hacia el retiro norte ni hacia A1.
+  - **Corona anti-gatos solo hacia afuera** en el tramo donde se guarda la hoja del portón (no choca con la guía superior).
+  - **Puerta peatonal con bisagras al norte** (pilar del gas): la cerradura eléctrica pasa al pilar sur, a ≥0.30 del gabinete
+    de gas (ANH 42.4). Abierta queda contra el borde norte del camino.
+- **Decisiones del usuario sobre la norma** (el arquitecto igual lo confirma al presentar): muro ciego de 2.50 sí (es común
+  en la zona); la cisterna en el retiro frontal vale; **sin árbol en la acera** (el art. 53 b pide indicarlo en el plano:
+  queda para el arquitecto).
+- **Portón:** sigue corredizo; si el herrero o la maniobra dan problemas, el usuario acepta uno **abatible** (pero barre el
+  auto de afuera, que tendría que estacionar ~1.70 más adentro).
+- **Pendiente:** probar la entrada de retro con los autos reales; mediciones de `verificar_en_obra`; `interiorista` del frente.
+- **Estado:** aceptado por el usuario (el recorrido del gas lo confirma el gasista con YPFB).

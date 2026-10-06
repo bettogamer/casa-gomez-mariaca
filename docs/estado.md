@@ -56,13 +56,13 @@ _Última sesión: 2026-10-06._
   pasto al medio, cisterna junto a la puerta, muro alto con corona anti-gatos.
 
 **Siguiente (en este orden):**
-1. Frente: `revisor-estructural` (muro alto de 2.50, viga del riel del portón, excavación de la cisterna junto al
-   Lote 103, colector y gas bajo los autos) y `revisor-habitabilidad` (norma: altura del muro, art. 49 cisterna,
-   art. 53 b árbol en la acera, rebaje del cordón, niveles).
+1. ~~Frente: revisores~~ hecho 2026-10-06: cisterna bajo el pasto, gas enterrado por el camino y la vereda (norma ANH),
+   tope de ruedas, corona solo hacia afuera en el portón, puerta peatonal con bisagras al norte. Antes de construir: probar la
+   entrada de retro con los autos y las mediciones de `verificar_en_obra`.
 2. `interiorista` en el frente: luces del camino y del estacionamiento con sensor, toma con tapa y canilla para lavar
    autos, cámara mirando al portón (las luces que hoy pone el generador en el centro de los exteriores son provisorias).
-3. Llevar al muro de la calle la acometida eléctrica, el gas y el colector (hoy arrancan junto a la casa), con cámara
-   final del colector junto al muro.
+3. Llevar al muro de la calle la acometida eléctrica y el colector (hoy arrancan junto a la casa; el gas ya llega al
+   medidor), con cámara final del colector a ≥1 m del muro y un pase bajo la viga del riel.
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
    Fachada: dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
 
