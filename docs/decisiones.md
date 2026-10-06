@@ -785,3 +785,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Descartadas:** banco centrado con librero a cada lado y cama al este (la ventana alineada partía el nicho); cama con
   cabecera al oeste (tapaba la puerta del Baño 1).
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-06 — Bajante común en la columna A4
+- **Qué:** el Baño 1 del P1 y el baño y la cocina del altillo bajan por UNA bajante común por fuera de la fachada norte,
+  pegada a la columna A4 (x 11.20) y tapada con un cajón. Reemplaza a las de x 9.25 (Baño 1) y x 11.40 (altillo), que
+  chocaba con la ventana nueva del Cuarto 1. No perfora losas, no pasa delante de ninguna ventana y libera el núcleo técnico.
+  La ventilación Ø50 del baño y el lavado de PB sube sola en x 9.25.
+- **Quedan 3 bajantes:** suite (esquina C1), Baño 2 + lavandería del altillo (ducto al almacén) y la común de A4. Una sola
+  no es posible: los baños están repartidos y las losas ya están hechas (sugerencia del albañil, 2026-10-06).
+- **Pendiente:** el plomero confirma diámetros y pendientes (inodoro del Baño 1 a ~1 m, del altillo a ~0.45 m).
+- **Estado:** aprobado por el usuario.
