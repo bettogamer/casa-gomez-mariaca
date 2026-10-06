@@ -191,7 +191,7 @@ ambientes:
       rect: [-15.075, 5.295, -2.625, 6.795]
       etiqueta: [-9.00, 6.15]
       estado: propuesto
-      nota: "camino RECTO de 1.50 de la puerta peatonal (y 5.40–6.30) a la puerta de entrada (x 0, y 5.32–6.37), pasando por el acceso; llega hasta el muro sur (Lote 103), sin franja de pasto suelta. Bajo el camino, del lado del Lote 103 y separados ≥0.20 entre sí (ANH): la impulsión (y 5.80), el GAS enterrado del medidor (y 6.20, con cinta amarilla) y el cable del medidor de luz al tablero (y ~6.50, o el gas con funda). Ninguno por debajo del cimiento del vecino. Tapas ya no hay en el camino (la cisterna pasó al pasto). Por debajo, el relleno de la cisterna vieja: compactar en capas. Luz: balizas o apliques bajos (a definir con el interiorista)"
+      nota: "camino RECTO de 1.50 de la puerta peatonal (y 5.40–6.30) a la puerta de entrada (x 0, y 5.32–6.37), pasando por el acceso; llega hasta el muro sur (Lote 103), sin franja de pasto suelta. Bajo el camino, del lado del Lote 103 y separados ≥0.20 entre sí (ANH): la impulsión (y 5.80), el GAS enterrado del medidor (y 6.20, con cinta amarilla) y el cable del medidor de luz al tablero (y ~6.50, o el gas con funda). Ninguno por debajo del cimiento del vecino. Tapas ya no hay en el camino (la cisterna pasó al pasto). Por debajo, el relleno de la cisterna vieja: compactar en capas. Luz (interiorista 2026-10-06): 5 balizas a 0.45 en el borde sur cada 2.50 y luz con sensor sobre la puerta peatonal, circuito C27 (fotocélula + reloj)"
     - id: vereda_terraza
       nombre: Vereda
       tipo: exterior
@@ -633,6 +633,9 @@ muebles:
     - {tipo: silla, rect: [-0.80, 2.17, -0.35, 2.62], estado: propuesto}
     - {tipo: silla, rect: [-1.62, 1.35, -1.17, 1.80], estado: propuesto}
     - {tipo: silla, rect: [-1.62, 3.00, -1.17, 3.45], estado: propuesto}
+    # Frente (interiorista 2026-10-06): poste de servicio en el borde del pasto, frente al hueco de 0.50 entre los dos autos
+    # (x -9.85 a -9.35): ninguna puerta de auto lo toca y queda a 1.1 del costado del auto. Lejos de los muros (gatos).
+    - {tipo: estante, nombre: Poste de servicio, rect: [-9.70, 1.40, -9.50, 1.60], alto: 2.80, estado: propuesto, nota: "columnita de H° o tubo metálico de ~0.20, 2.80 de alto, a 0.135 del borde de la franja (dentro del pasto): luz con sensor a 2.60, cámara a 2.80, toma IP65 a 0.90, registro con el tubo del cargador del auto eléctrico en la base; canilla en cajuela a 0.65 al sur. Base con un cordón al ras para la cortadora de pasto"}
 
   p1:
     # Interiorista 2026-10-05: muebles ajustados a la cara REAL de los muros (perimetrales de soga al ras de afuera:
@@ -855,6 +858,37 @@ instalaciones:
         - {amb: living, tipo: toma, pos: [4.325, 3.80], alto: 0.30, estado: propuesto, nota: "general, debajo de la tecla"}
         # Terraza (exterior, en el muro del living)
         - {amb: terraza, tipo: toma_ext, pos: [-0.125, 4.20], alto: 0.40, estado: propuesto, nota: "toma con tapa (IP44); lejos de la caja de la TV del otro lado del muro"}
+        # ── Exteriores del frente (interiorista 2026-10-06) ──
+        # C27 (NUEVO) = iluminación exterior del frente, con diferencial: balizas por contactor con FOTOCÉLULA + RELOJ (selector
+        # auto/0/1 en el TD) y luces con SENSOR de movimiento (alimentación directa, cada una con su fotocélula interna).
+        # Zanjas: (1) zanja eléctrica SUR a y ~6.55 (con el cable del medidor), de la caja de paso del acceso a la puerta peatonal,
+        # SIN cruzar el gas (que va a y 6.20 y sube por x -3.30): balizas, luz de la puerta, portero y cerradura; (2) UN SOLO
+        # cruce del gas y la impulsión en x -9.60 (perpendicular, en funda, ≥0.20 del gas) hacia el poste de servicio, y de
+        # ahí al motor del portón por el borde del pasto (y ~1.50) y a la bomba. Débiles (cámara, portero) en tubo propio.
+        # Gatos: nada saliente pegado a los muros; lo de los muros es plano o empotrado; balizas con tapa redondeada.
+        # Camino: balizas en el borde SUR (gas a 0.42, sin tocar la cisterna ni la hoja abierta de la puerta peatonal)
+        - {amb: camino, tipo: luz, pos: [-15.075, 5.85], alto: 2.35, circuito: C27, estado: propuesto, nota: "LUZ CON SENSOR sobre la puerta peatonal, por dentro, en el dintel: aplique PLANO (≤5 cm, tapa superior inclinada: no es escalón bajo la corona), luz hacia abajo (umbral, cerradura y arranque del camino). A 0.45 del gabinete de gas (ANH 42.4 pide ≥0.30): el tubo llega desde el pilar sur por el dintel (dejarlo antes de hormigonar la viga). Si el dintel no lo permite: en la cara interior del pilar sur a 2.20"}
+        - {amb: camino, tipo: luz, pos: [-12.90, 6.62], alto: 0.45, circuito: C27, estado: propuesto, nota: "BALIZA 1 de 5 (cada 2.50, borde sur del camino): ~0.45 de alto, tapa redondeada, luz hacia el piso, 3000 K; anclada a la losa del camino sin dado propio (a 0.42 del gas). Si el muro sur del lado del camino es NUESTRO: mejor luz empotrada en el muro a 0.30 en el mismo lugar (mismo tubo)"}
+        - {amb: camino, tipo: luz, pos: [-10.40, 6.62], alto: 0.45, circuito: C27, estado: propuesto, nota: "baliza 2 de 5 (fotocélula + reloj)"}
+        - {amb: camino, tipo: luz, pos: [-7.90, 6.62], alto: 0.45, circuito: C27, estado: propuesto, nota: "baliza 3 de 5"}
+        - {amb: camino, tipo: luz, pos: [-5.40, 6.62], alto: 0.45, circuito: C27, estado: propuesto, nota: "baliza 4 de 5"}
+        - {amb: camino, tipo: luz, pos: [-2.90, 6.62], alto: 0.45, circuito: C27, estado: propuesto, nota: "baliza 5 de 5 (a 0.58 de la vuelta del gas en x -3.30 y a 0.57 de la puesta a tierra); después sigue la luz del acceso bajo el volado"}
+        # Pilar sur: videoportero en la cara de la calle y cerradura eléctrica en el marco (lado de la manija). Débiles (C23).
+        - {amb: camino, tipo: especial, etiqueta: PT, pos: [-15.225, 6.62], alto: 1.40, circuito: C23, va: 0, estado: propuesto, nota: "VIDEOPORTERO (frente con cámara) en la cara de la calle del pilar sur, a ~0.30 del marco; cable débil en tubo propio por la zanja sur hasta el monitor del ingreso (0.65, 6.60, a 1.40, ya previsto). El medidor de ELFEC va en el mismo pilar: ELFEC define su altura, el portero va debajo o al costado"}
+        - {amb: camino, tipo: especial, etiqueta: CE, pos: [-15.075, 6.31], alto: 1.00, circuito: C23, va: 0, estado: propuesto, nota: "CERRADURA ELÉCTRICA de la puerta peatonal en el marco del pilar sur (manija al sur), 12 V desde la fuente del portero; se abre desde el monitor y con llave. A 0.91 del gabinete de gas"}
+        # Estacionamiento: destello del portón y fotocélulas (van con el motor, C22)
+        - {amb: estacionamiento, tipo: luz, pos: [-15.225, 1.35], alto: 2.30, circuito: C22, va: 25, estado: propuesto, nota: "LUZ DE DESTELLO del portón, en la cara de la CALLE del muro, junto al motor (x -14.90, y 1.35–1.75): avisa a la vereda y a la calle mientras el portón se mueve. Cable corto del motor a través del muro, sin cruzar el hueco"}
+        - {amb: estacionamiento, tipo: especial, etiqueta: FT, pos: [-15.075, -2.035], alto: 0.50, circuito: C22, va: 0, estado: propuesto, nota: "FOTOCÉLULA del portón en el pilar norte (la otra junto al motor). OBRA: tubo de Ø20 del motor al pilar norte cruzando el hueco POR DEBAJO de la viga del riel (camisa), ANTES de hormigonarla. Que el haz no lo corte la propia hoja: lo ajusta el instalador del portón"}
+        # Poste de servicio en el borde del pasto, entre los dos autos (x -9.60, y 1.50; ver muebles): luz con sensor, cámara,
+        # (en el plano la cámara, la toma y el VE se dibujan corridos alrededor del poste para que se lean; van TODOS en el poste)
+        # toma IP65 y tubo del cargador del auto eléctrico. Canilla en cajuela a 0.65 al sur (sanitario.canillas).
+        - {amb: jardin, tipo: luz, pos: [-9.60, 1.50], alto: 2.60, circuito: C27, estado: propuesto, nota: "LUZ DEL ESTACIONAMIENTO CON SENSOR en el poste de servicio, entre los dos autos: cabeza con corte total (full cut-off), mirando al carril y al suelo, nada hacia el Lote 105; 3000 K. Alcanza a las dos franjas de 0.94 donde se baja el conductor"}
+        - {amb: jardin, tipo: especial, etiqueta: CAM, pos: [-10.05, 1.50], alto: 2.80, circuito: C23, va: 15, estado: propuesto, nota: "CÁMARA en lo alto del poste de servicio mirando al OESTE: ve el portón (a ~5.5 m) y la puerta peatonal (a ~7 m) con un lente de ~2.8 mm (~100°). Cable de red PoE en tubo propio hasta el grabador del estudio (9.30, 1.30)"}
+        - {amb: jardin, tipo: toma_ext, pos: [-9.20, 1.50], alto: 0.90, estado: propuesto, nota: "TOMA EXTERIOR IP65 con tapa en el poste, cara al carril: aspiradora e hidrolavadora para los dos autos (C21, con diferencial). A 0.65 de la canilla"}
+        - {amb: jardin, tipo: especial, etiqueta: VE, pos: [-9.60, 2.05], alto: 1.20, circuito: futuro, va: 0, estado: propuesto, nota: "AUTO ELÉCTRICO a futuro: TUBO VACÍO de Ø32 (1¼\") con guía, del TD hasta la base del poste de servicio (registro), para un circuito propio de ~32 A (cable 6 mm²: lo dimensiona el electricista con ELFEC según la acometida). Con 5–7.5 m de cable el cargador llega a cualquiera de los dos autos"}
+        # Vereda y retiro: del lado de la casa (no cruzan el gas)
+        - {amb: vereda_terraza, tipo: luz, pos: [-2.68, 3.30], alto: 0.15, circuito: C27, estado: propuesto, nota: "luz baja EMPOTRADA en el perfil de remate del deck, mirando a la vereda (no achica el paso de 0.80); o baliza de 0.45 pegada al deck. Con las balizas (fotocélula + reloj). Cable desde el acceso por el borde del deck, a 0.30 de la impulsión (x -3.025)"}
+        - {amb: retiro_norte_arranque, tipo: luz, pos: [0.30, -0.125], alto: 2.40, circuito: C27, estado: propuesto, nota: "aplique PLANO CON SENSOR en la cara norte de la casa, al este de la columna A1 (no se pica), hacia abajo: alumbra el paso del fondo del estacionamiento al deck y al retiro (cámaras de inspección, gas)"}
         # Depósito: aplique en vez de la luz al centro (techo inclinado), toma junto a la puerta y toma exterior al retiro
         - {amb: deposito_patio, tipo: luz, pos: [6.975, 1.00], estado: propuesto, nota: "aplique hermético en el muro, a 1.80 (bajo el descanso hay ~1.9 libres)"}
         - {amb: deposito_patio, tipo: toma, pos: [6.975, 0.50], alto: 1.10, estado: propuesto, nota: "junto a la puerta: cargar herramientas"}
@@ -906,6 +940,8 @@ instalaciones:
         - {pos: [-0.20, 4.60], etiqueta: "canilla (jardín y terraza del frente)", estado: propuesto}
         - {pos: [17.05, 3.60], etiqueta: "canilla (patio)", estado: propuesto}
         - {pos: [5.00, -0.20], etiqueta: "canilla (retiro norte)", estado: propuesto}
+        # Interiorista 2026-10-06: canilla para lavar los autos y regar el pasto, junto al poste de servicio (x -9.60, y 1.50)
+        - {pos: [-9.60, 2.15], etiqueta: "canilla en cajuela (autos y pasto): AF directa de SEMAPA", estado: propuesto, nota: "cajuela con tapa al ras del pasto, llave de paso y ANTIRRETORNO; toma el agua de la entrada de SEMAPA antes de la cisterna. A 0.65 del poste (la toma IP65 queda en la otra cara). Desde el centro, una manguera de ~15 m llega a los dos autos y a todo el pasto. Agua de SEMAPA directa: no gasta la reserva de la cisterna ni la bomba; en un corte de agua no hay. Alternativa: desde la bajada del tanque por el retiro norte (~13 m más de caño)"}
       llaves:
         - {pos: [9.10, 0.05], etiqueta: "LL general AF de la casa (bajada del tanque)"}
         - {pos: [7.20, 2.45], etiqueta: "LL baño"}

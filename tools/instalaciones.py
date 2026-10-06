@@ -35,6 +35,7 @@ CIRCUITOS = {
         ("C22", "Portón eléctrico", "especial"),
         ("C23", "Seguridad: alarma, cámaras, portero (con respaldo)", "especial"),
         ("C24", "Tomas estudio / invitados (computadora, router)", "toma"),
+        ("C27", "Iluminación exterior del frente: balizas y luces con sensor (fotocélula + reloj, con diferencial)", "luz"),
     ],
     "p1": [
         ("C8", "Iluminación primer piso", "luz"),
