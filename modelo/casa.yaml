@@ -36,7 +36,10 @@ lote:
   # Con el plano sin espejar: eje A / retiro lateral (Lote 105) = NORTE (lado soleado),
   # eje C / vecino (Lote 103) = SUR, patio del fondo = ESTE (sol de mañana).
   orientacion: {frente: oeste, lado_A: norte, lado_C: sur, fondo: este, norte_en_planta: [0, -1]}
-  estacionamiento: "2 autos en el jardín delantero (dicho por el usuario)"
+  estacionamiento: "2 autos LADO A LADO junto a la calle (sedán + RAV4), portón corredizo telescópico de 5.50 con motor; ver ambientes.pb.estacionamiento (propuesto 2026-10-05)"
+  # Exteriores del frente (propuesto 2026-10-05): jardín delantero de x -15.225 (línea de la calle) a -2.625 (terraza),
+  # 12.45 m libres de fondo (cara interior del muro de la calle en x -15.075) × 8.93 de ancho (y -2.135 a 6.795; los
+  # muros laterales de los vecinos pueden comer ~0.08–0.15 de cada lado: medir). Muro de la calle alto y ciego.
   # Normativa: Reglamento Complementario a la Normativa Urbana, OM 4100/10 (reglamento/, resumen en docs/normativa.md).
   # Zona de Renovación de la Imagen Urbana, edificación aislada; frente 9.02 (8.01–10.00) y vía 9.00 (9.00–12.50):
   # 3 plantas = PB y 1er piso con un retiro lateral de 2.00 (incluido voladizo) y apoyo en el otro; 2do piso
@@ -162,8 +165,45 @@ albanileria:
 # ─────────────────────────────────────────────────────────────────────────────
 ambientes:
   pb:
-    - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 4.95], etiqueta: [-1.375, 4.25], estado: definido}
+    - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 4.95], etiqueta: [-1.375, 4.25], estado: definido, nota: "PISO: deck de PVC tipo madera (WPC, decisión del usuario 2026-10-05) sobre rastreles de aluminio o WPC cada ~0.35, encima del contrapiso con pendiente 1–2 % hacia el jardín y juntas de dilatación; color claro (da al oeste: el WPC oscuro se calienta con el sol de la tarde). NO es para estacionar. Borde oeste con perfil de remate contra la vereda"}
     - {id: acceso, nombre: Acceso, tipo: exterior, rect: [-2.625, 4.95, -0.125, 6.795], estado: definido, nota: "nivel ±0.00, llega a la puerta de entrada"}
+    # ── Exteriores del frente (PROPUESTO 2026-10-05, alternativa A: autos lado a lado junto a la calle) ──
+    # Franjas de sur a norte, junto a la calle: camino 1.10 | sedán 2.85 | RAV4 2.75 | jardín (sobre el colector, el gas y la
+    # impulsión, que van por el norte). Portón corredizo telescópico de 5.50 (y 1.00–6.50) que guarda sus hojas detrás del
+    # tramo norte del muro; la apertura peatonal del motor (1.00) queda en la punta sur, justo sobre el camino.
+    - id: estacionamiento
+      nombre: Estacionamiento
+      tipo: exterior
+      rect: [-15.075, 0.10, -8.85, 5.695]
+      etiqueta: [-12.00, 1.40]
+      estado: propuesto
+      nota: "2 cajones LADO A LADO de ~2.80 × 5.50 (norma de referencia 2.50 × 5.00, OM 4100/10 art. 51): RAV4 al norte (y 0.10–2.85; la puerta del conductor abre hacia el norte con ~0.85 libres) y sedán al sur (y 2.85–5.695; sus pasajeros bajan al camino). Entre los dos autos quedan ~0.90 para abrir puertas, y ahí van las tapas de la cisterna y de la bomba (se abren sin mover los autos). Piso de hormigón o adoquín para tránsito, pendiente 1–2 % hacia la calle con rejilla lineal por dentro del portón (agua de lluvia a la calle, nunca al alcantarillado). Si se estaciona de punta, el portón cerrado deja ~0.5 detrás de la RAV4: para abrir la compuerta, mejor estacionar de retro (maletero hacia la casa). Nada fijo en el piso (macetas, postes, grifos) dentro de este rectángulo"
+    - id: camino
+      nombre: Camino
+      tipo: exterior
+      rect: [-15.075, 5.695, -2.625, 6.795]
+      etiqueta: [-11.50, 6.30]
+      estado: propuesto
+      nota: "camino a pie de 1.10 del portón (apertura peatonal en la punta sur) a la puerta de entrada, recto junto al muro sur; mismo piso que el estacionamiento o un poco más fino (sin desnivel con él). Bomba de la cisterna en una cámara seca bajo el camino o junto a la cisterna (ver instalaciones). Luz: apliques bajos o balizas (a definir con el interiorista)"
+    - id: vereda_terraza
+      nombre: Vereda
+      tipo: exterior
+      rect: [-3.425, -2.135, -2.625, 5.695]
+      estado: propuesto
+      nota: "vereda de 0.80 delante de la terraza: une el camino con el retiro norte sin pisar el pasto (cortadora de pasto y herramientas salen del depósito del retiro) y protege el borde del deck"
+    - id: jardin
+      nombre: Jardín (pasto)
+      tipo: exterior
+      poly: [[-15.075, -2.135], [-3.425, -2.135], [-3.425, 5.695], [-8.85, 5.695], [-8.85, 0.10], [-15.075, 0.10]]
+      etiqueta: [-6.20, 2.20]
+      estado: propuesto
+      nota: "SOLO PASTO esmeralda (usuario): sin plantas bajas ni árboles. Debajo, por la franja norte, pasan el colector (y -0.85), el gas (y -0.55) y la impulsión (y -0.40): el pasto deja reparar sin romper piso. Junto al muro de la calle, de y -2.135 a 1.00, franja de hormigón de ~0.35 para el riel y las hojas del portón. Riego: canilla o aspersores (a definir). Gatos: nada pegado a los muros que sirva de escalón"
+    - id: retiro_norte_arranque
+      nombre: Retiro norte
+      tipo: exterior
+      rect: [-2.625, -2.135, -0.125, -0.125]
+      estado: propuesto
+      nota: "arranque del retiro lateral norte (2.01): sigue a lo largo de la casa hasta el patio. Piso firme (hormigón o adoquín) por las cámaras de inspección, el gas y la impulsión; sin pasto"
     - {id: living, nombre: Living, tipo: social, rect: [0.00, 0.00, 4.40, 4.95], etiqueta: [2.20, 4.30], estado: definido}
     - {id: ingreso, nombre: Ingreso, tipo: circulacion, rect: [0.00, 4.95, 2.58, 6.67], estado: definido}
     - id: deposito_patio
@@ -254,6 +294,22 @@ ambientes:
 muros:
   pb:
     - {id: celosia_ingreso, tipo: celosia_madera, de: [0.00, 4.95], a: [2.58, 4.95], nota: "separa living e ingreso; de piso a techo"}
+    # Muro de la calle (PROPUESTO 2026-10-05): alto y ciego (usuario). Eje en x -15.15 (cara exterior en la línea de la calle).
+    # tipo cerco = muro de cerco exterior: se dibuja en planta y en el 3D (casilla "Muro de la calle"), no en las fachadas.
+    - id: cerco_calle_norte
+      tipo: cerco
+      de: [-15.15, -2.135]
+      a: [-15.15, 1.00]
+      alto: 2.50
+      estado: propuesto
+      nota: "tramo fijo norte (3.135). Detrás, por dentro, se guardan las 2 hojas del portón telescópico (~2.95). MEDIDORES empotrados en la cara a la calle: gas YPFB en la punta norte (y ≈ -1.95 a -1.45, cerca de la línea de gas), luz ELFEC (y ≈ -0.95 a -0.55) y agua SEMAPA abajo (y ≈ 0.25–0.65; o en cajuela en la acera si SEMAPA lo pide así). Este tramo va de LADRILLO DE CABEZA (0.25) para que los gabinetes queden empotrados sin sobresalir por dentro, donde corren las hojas. Altura ~2.50 sobre la acera + corona anti-gatos (malla inclinada ~45° hacia adentro de ~0.45, o rodillos anti-gato) en todo el perímetro. Revoque liso por dentro, sin molduras ni salientes. Columnetas de H°A° cada ~3 m, viga de encadenado arriba y cimiento corrido (lo calcula el ingeniero). ALTURA Y SI PUEDE SER CIEGO: confirmar con el arquitecto (OM 1061/91)"
+    - id: cerco_calle_sur
+      tipo: cerco
+      de: [-15.15, 6.50]
+      a: [-15.15, 6.885]
+      alto: 2.50
+      estado: propuesto
+      nota: "pilar de cierre del portón (contra el muro del Lote 103): ahí cierra la hoja y van el panel exterior del PORTERO (a ~1.40, cara a la calle) y la fotocélula. La apertura peatonal del motor queda al lado, en y 5.50–6.50"
   p1:
     - {id: baranda_logia, tipo: baranda, alto: 1.00, de: [-1.125, 0.00], a: [-1.125, 4.20], nota: "baranda o antepecho ≥ 1.00 m al frente de la logia"}
     - {id: baranda_logia_norte, tipo: baranda, alto: 1.00, de: [-1.125, 0.00], a: [0.00, 0.00], estado: propuesto, nota: "costado norte de la logia: MURO BAJO de ladrillo de 6 huecos de 1.00 (decisión del usuario 2026-10-05)"}
@@ -391,6 +447,17 @@ aberturas:
     - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.32], a: [0.00, 6.37], abre_hacia: ingreso, alto: 2.60, estado: propuesto, nota: "1.05 PIVOTANTE (gira sobre un eje en el piso y el marco, no sobre bisagras), maciza, madera con listones verticales y tirador grande; alto ~2.60 hasta la viga del eje 1 (medir cuánto cuelga); barniz exterior: da al oeste (sol de la tarde), el volado de 1 m la protege; burletes contra polvo y viento"}
     - {id: vidrio_entrada, tipo: ventana, de: [0.00, 5.05], a: [0.00, 5.32], antepecho: 0.00, alto: 2.60, estado: propuesto, nota: "paño fijo de vidrio 0.27 de piso a techo, en el mismo marco que la puerta (luz al hall); vidrio LAMINADO de seguridad"}
     - {id: ingreso_estar, tipo: vano, de: [2.58, 4.95], a: [2.58, 6.67], nota: "ingreso abierto hacia el estar"}
+    # Portón de la calle (PROPUESTO 2026-10-05). `de` = punta de cierre (sur), `a` = lado donde se guardan las hojas (norte).
+    - id: porton
+      tipo: porton
+      de: [-15.15, 6.50]
+      a: [-15.15, 1.00]
+      alto: 2.50
+      apila_hasta: [-15.15, -1.95]
+      peatonal: 1.00
+      etiqueta: "portón telescópico 5.50"
+      estado: propuesto
+      nota: "PORTÓN CORREDIZO TELESCÓPICO de 5.50 libres con motor (circuito C22): 2 hojas de ~2.90 que corren a distinta velocidad y se guardan juntas detrás del tramo norte del muro (y -1.95 a 1.00). Un corredizo de UNA hoja de 5.50 no entra (necesita ~6 m de muro al costado y el lote tiene 8.93). APERTURA PEATONAL: el motor abre solo 1.00 desde la punta sur (y 5.50–6.50), justo sobre el camino; no hay puerta peatonal aparte (usuario). Chapa CIEGA y LISA por las dos caras (sin travesaños a la vista por dentro: gatos), alto igual al muro (~2.50), cepillos en los bordes y abajo (sin rendijas > 5 cm). Motor con cierre automático temporizado, fotocélulas, banda de seguridad, desbloqueo manual con llave y batería de respaldo; control remoto + apertura peatonal desde el portero. Riel sobre viga de hormigón a nivel, sin escalón (lo confirma el herrero / instalador del motor)"
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}
     - {id: living_estar, tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
     # Depósito: puerta al costado de la columna A3, donde el techo interior sube (bajo el tramo de 6).
@@ -854,12 +921,22 @@ instalaciones:
       # Agua (corregido 2026-10-05: no hay pozo, era la cisterna): SEMAPA -> cisterna enterrada -> bomba -> tanque
       # elevado en el último piso -> baja por gravedad a toda la casa. Núcleo técnico en el muro norte, entre baño y
       # estudio (exterior, en el retiro): bajada de agua fría del tanque. El calefón está en el ALTILLO (2026-10-05).
-      # SEMAPA + cisterna existente (usuario 2026-10-05): red pública con medidor en la calle; cisterna enterrada VIEJA en la
-      # esquina suroeste del lote (frente, lado Lote 103). Posición y tamaño aproximados: medir. Falta decidir reparar o reubicar.
-      cisterna: {pos: [-14.00, 5.90], va_bomba: 750, estado: aproximado, nota: "cisterna enterrada existente (vieja): de SEMAPA → cisterna → bomba → tanque elevado. BOMBA de la cisterna (aún no comprada; ~½–1 HP según la altura hasta el tanque, ~11 m más el recorrido: la elige el plomero), circuito propio C20 con guardamotor, flotante en el tanque y protección contra marcha en seco en la cisterna. Antes de decidir: vaciar, limpiar, inspeccionar fisuras y hacer prueba de llenado 48 h. Lejos de cámaras y colector (el desagüe va por el retiro NORTE). Si queda bajo el estacionamiento, tapa para carga de auto"}
-      # Impulsión: de la cisterna (frente) por el jardín hasta el retiro norte, por el retiro hasta el núcleo técnico, y sube
-      # junto a la bajada del tanque (x 9.40) por fuera del muro norte; arriba llega al tanque (sobre A3) por un tramo corto.
-      impulsion: [[-14.00, 5.90], [-13.20, 5.90], [-13.20, -0.40], [9.40, -0.40]]
+      # SEMAPA + cisterna (usuario 2026-10-05): red pública con medidor en el muro de la calle. La cisterna VIEJA (esquina
+      # suroeste) se rehace DE CERO (usuario): PROPUESTO 2026-10-05 debajo del estacionamiento, junto a la calle, centrada en la
+      # franja entre los dos autos (ahí van las tapas: se abren sin mover autos). La vieja se vacía y se rellena compactada
+      # (o se demuele) para que no quede un hueco bajo el camino.
+      cisterna:
+        pos: [-13.30, 3.275]
+        rect: [-14.50, 2.275, -12.10, 4.275]
+        tapa: [-13.30, 3.275]
+        bomba: [-11.70, 3.275]
+        va_bomba: 750
+        etiqueta: "CISTERNA nueva ~5 m³ + bomba"
+        estado: propuesto
+        nota: "cisterna NUEVA enterrada de H°A° impermeabilizado: SEMAPA → cisterna → bomba → tanque elevado. Medidas de referencia: ~2.00 × 1.60 por dentro y 1.60 de agua útil (~5 m³; ~2.40 × 2.00 por fuera, ~2.1 de hondo); la capacidad la define el plomero según consumo y cortes de SEMAPA. Losa superior para TRÁNSITO DE AUTO (la calcula el ingeniero). TAPA de 0.60 × 0.60 hermética, de hormigón o metálica para tránsito, con borde que no deje entrar el agua del piso (el piso escurre lejos de la tapa). Entrada de SEMAPA con flotante mecánico, rebalse con sifón/rejilla a lo pluvial (nunca directo al desagüe) y ventilación con malla. A ~3.1 m del colector (y -0.85) y ~2.8 del gas; a ~0.6 del cimiento del muro de la calle (el ingeniero confirma). BOMBA (aún no comprada; ~½–1 HP para ~11 m de altura más ~27 m de caño: la elige el plomero): centrífuga en CÁMARA SECA de ~0.80 × 0.80 pegada a la cisterna (tapa en la misma franja entre autos, con drenaje para que no se inunde) o sumergible dentro de la cisterna. Circuito propio C20 con guardamotor, flotante en el tanque y protección contra marcha en seco"
+      # Impulsión: de la bomba por la franja entre los autos hasta el borde del estacionamiento, al norte por debajo del pasto
+      # hasta y -0.40, y por el jardín y el retiro norte hasta el núcleo técnico (x 9.40), donde sube junto a la bajada del tanque.
+      impulsion: [[-11.70, 3.275], [-9.40, 3.275], [-9.40, -0.40], [9.40, -0.40]]
       bajada_tanque: {pos: [9.10, -0.30], nota: "bajada de agua fría desde el tanque elevado (muro norte)"}
       # Varias troncales: listas de polilíneas.
       agua_fria: [[[9.10, -0.30], [9.10, 3.10], [16.60, 3.10]], [[9.10, 3.10], [7.20, 3.10]]]
@@ -1207,7 +1284,9 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
-  - "Cisterna vieja (esquina suroeste del lote): medir tamaño y profundidad, vaciar, limpiar, revisar fisuras y hacer prueba de llenado 48 h (si baja el nivel, pierde). Ubicar el medidor de SEMAPA y la cañería de entrada."
+  - "Cisterna vieja (esquina suroeste del lote): se rehace DE CERO en otro lugar (usuario 2026-10-05). Ubicarla y medirla, vaciarla y rellenarla compactada (o demolerla) porque queda bajo el camino. Ubicar el medidor de SEMAPA actual y la cañería de entrada."
+  - "EXTERIORES DEL FRENTE (propuesto 2026-10-05): medir el ancho libre real entre los muros de los vecinos en el jardín delantero (el modelo supone 8.93: y -2.135 a 6.795) y la distancia de la casa a la línea de la calle (12.60 desde la terraza). ¿Existen muros laterales en el frente (Lote 105 y Lote 103)? ¿De quién son, qué altura tienen? Para los gatos tienen que ser igual de altos que el de la calle y con corona anti-gatos. Niveles: acera (cota cero, OM 4100/10 art. 41), piso del portón y del estacionamiento, camino, acceso (±0.00) y terraza con deck."
+  - "Muro de la calle y portón (propuesto 2026-10-05): el ARQUITECTO confirma la altura máxima del cerco frontal y si puede ser ciego (la OM 4100/10 no lo dice; la OM 1061/91 o la zona pueden pedir verja/transparencia); rebaje del cordón de la acera frente al portón (permiso municipal); que la cisterna en el retiro frontal no cuente como sótano (art. 49) y qué especie de árbol pide la Alcaldía en la faja jardín o la acera (art. 53 b: el usuario no quiere árboles). El INGENIERO: cimiento y columnetas del muro (2.50 ciego = viento), viga del riel del portón, losa de la cisterna para auto. El HERRERO / instalador del motor: que haga el telescópico de 5.50 con apertura peatonal de 1.00."
   - "Instalaciones (ronda de huecos 2026-10-05): el electricista calcula la DEMANDA (~37 kVA instalados: horno, anafe, lavavajillas, bomba) y define con ELFEC si la acometida es monofásica de mayor amperaje o trifásica; protector contra sobretensiones en el TD; medir la resistencia de la puesta a tierra. El plomero confirma ventilaciones de desagüe sobre el techo, rebalse y limpieza del tanque, flotante de la bomba. YPFB: rejillas de la cocina y llaves de corte"
   - "Logia de la suite (P1): muro bajo de 1.00 + celosía de madera en el costado norte, en la punta del volado: el ingeniero confirma el peso y el anclaje de la celosía a la losa del altillo; el arquitecto, que con celosía no hay vista directa al Lote 105 (logia a 2.01 del lindero)"
   - "Tanque elevado: base subida a +10.50 (~2.5 m sobre la entrada del calefón del altillo). Base propia de hormigón sobre A3 y el muro de la escalera, aún no construida: el ingeniero la dimensiona con la nueva altura (más palanca con viento y sismo)"

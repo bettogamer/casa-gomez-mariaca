@@ -38,6 +38,7 @@ PLANTILLA = r"""<!doctype html>
     <label><input type="checkbox" id="muebles" checked> Muebles</label>
     <label><input type="checkbox" id="etiquetas" checked> Nombres de ambientes</label>
     <label><input type="checkbox" id="lote" checked> Lote</label>
+    <label><input type="checkbox" id="cerco" checked> Muro de la calle y portón</label>
     <label><input type="checkbox" id="techos"> Techos y tanque</label>
     <label><input type="checkbox" id="fachada"> Fachada con materiales</label>
   </div>
@@ -127,8 +128,8 @@ function etiqueta(texto, x, y, z) {
 }
 
 // Grupos para encender/apagar
-const G = { lote: new THREE.Group(), obra: new THREE.Group(), etiquetas: new THREE.Group(), niveles: {} };
-escena.add(G.lote, G.obra, G.etiquetas);
+const G = { lote: new THREE.Group(), cerco: new THREE.Group(), obra: new THREE.Group(), etiquetas: new THREE.Group(), niveles: {} };
+escena.add(G.lote, G.cerco, G.obra, G.etiquetas);
 
 // Lote
 const L = D.lote;
@@ -192,6 +193,10 @@ D.niveles.forEach(nv => {
     G.etiquetas.add(s);
   });
   nv.muros.forEach(m => {
+    if (m.tipo === "cerco") {          // muro de la calle: desde la acera, con su alto; se apaga con su casilla
+      G.cerco.add(segmento(m.de, m.a, 0, m.alto || 2.5, m.grosor, 0xeeeae2));
+      return;
+    }
     if (m.tipo === "celosia_madera") {
       // listones verticales de 4 x 4 cm cada 10 cm
       const [x0, z0] = m.de, [x1, z1] = m.a;
@@ -215,6 +220,10 @@ D.niveles.forEach(nv => {
   const dinteles = [];
   nv.aberturas.forEach(ab => {
     if (ab.tipo === "vano") return;
+    if (ab.tipo === "porton") {       // portón cerrado: hoja ciega oscura del alto del muro (casilla del muro de la calle)
+      G.cerco.add(segmento(ab.de, ab.a, 0.03, ab.alto, 0.06, 0x2b2b2b));
+      return;
+    }
     const d = tag(segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, ab.grosor, 0xe8e4da), "muro");
     dinteles.push(d); grupo.add(d);
     if (ab.tipo === "ventana") {
@@ -332,7 +341,7 @@ if (F) {
   });
   // vidrios y puertas en las aberturas (en el plano medio del muro)
   D.niveles.forEach(nv => nv.aberturas.forEach(ab => {
-    if (ab.tipo === "vano") return;
+    if (ab.tipo === "vano" || ab.tipo === "porton") return;
     const L = Math.hypot(ab.a[0] - ab.de[0], ab.a[1] - ab.de[1]);
     const mx = (ab.de[0] + ab.a[0]) / 2, mz = (ab.de[1] + ab.a[1]) / 2, rot = -Math.atan2(ab.a[1] - ab.de[1], ab.a[0] - ab.de[0]);
     const vidrio = ab.tipo === "ventana" || ab.tipo === "corrediza";
@@ -420,6 +429,7 @@ function actualizar() {
     : Math.min(E.alto_columnas, tope + (document.getElementById("corte").checked ? 1.2 : 3.0));
   COLUMNAS.forEach(c => { c.scale.y = altoCol / E.alto_columnas; c.position.y = altoCol / 2; });
   G.lote.visible = document.getElementById("lote").checked;
+  G.cerco.visible = modo === "proyecto" && document.getElementById("cerco").checked;
   const conTecho = document.getElementById("techos").checked;
   G.techos.visible = modo === "proyecto" && conTecho && vis["altillo"] !== false;
   Object.values(G.niveles).forEach(g => g.userData.muebles.visible = document.getElementById("muebles").checked);
@@ -493,7 +503,7 @@ if (location.hash.includes("pb")) cont.querySelectorAll("input").forEach(i => i.
 actualizar();
 if (location.hash.includes("techos")) document.getElementById("vista-techos").click();   // #techos
 if (location.hash.includes("calle")) document.getElementById("vista-calle").click();     // #calle
-if (location.hash.includes("foto")) { ["panel", "info"].forEach(id => document.getElementById(id).style.display = "none"); G.techos.children.forEach(o => { if (o.isSprite) o.visible = false; }); }  // #calle&foto: captura limpia
+if (location.hash.includes("foto")) { document.getElementById("cerco").checked = false; actualizar(); ["panel", "info"].forEach(id => document.getElementById(id).style.display = "none"); G.techos.children.forEach(o => { if (o.isSprite) o.visible = false; }); }  // #calle&foto: captura limpia
 // #vista=Cuarto 1 → abre directamente la vista de ese ambiente (busca por nombre)
 const mv = decodeURIComponent(location.hash).match(/vista=([^&]+)/);
 if (mv) { const k = VISTAS.findIndex(v => (v.nv.nombre + ": " + v.a.nombre).toLowerCase().includes(mv[1].toLowerCase())); if (k >= 0) { selVista.value = k; irAVista(k); } }

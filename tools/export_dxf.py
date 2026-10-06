@@ -7,7 +7,7 @@ import ezdxf
 
 from casa import SALIDA, aberturas, ambientes, area, caja, cargar, centroide, columnas, escalera, huella_casa, muros, referencia
 
-CAPAS = {"EJES": 1, "COLUMNAS": 1, "MUROS": 7, "CELOSIA": 32, "ABERTURAS": 4, "REFERENCIA": 8, "AMBIENTES": 7, "EXTERIOR": 3, "ESCALERA": 30, "TEXTOS": 8, "LOSA": 9}
+CAPAS = {"EJES": 1, "COLUMNAS": 1, "MUROS": 7, "CELOSIA": 32, "CERCO": 250, "ABERTURAS": 4, "REFERENCIA": 8, "AMBIENTES": 7, "EXTERIOR": 3, "ESCALERA": 30, "TEXTOS": 8, "LOSA": 9}
 
 
 def main():
@@ -47,7 +47,7 @@ def main():
         for a in referencia(casa, nivel["id"]):
             msp.add_lwpolyline([P(x, y) for x, y in a["poly"]], close=True, dxfattribs={"layer": "REFERENCIA", "linetype": "DASHED"})
         for m in muros(casa, nivel["id"]):
-            capa = "MUROS" if m["tipo"] == "ladrillo" else "CELOSIA"
+            capa = {"ladrillo": "MUROS", "cerco": "CERCO"}.get(m["tipo"], "CELOSIA")
             msp.add_line(P(*m["de"]), P(*m["a"]), dxfattribs={"layer": capa, "lineweight": 50 if capa == "MUROS" else 25})
         for ab in aberturas(casa, nivel["id"]):
             msp.add_line(P(*ab["de"]), P(*ab["a"]), dxfattribs={"layer": "ABERTURAS", "linetype": "DASHED"})

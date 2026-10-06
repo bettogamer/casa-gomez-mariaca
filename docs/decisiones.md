@@ -593,3 +593,40 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   bomba → tanque elevado → gravedad**. Se quita el pozo del patio; la bomba (C20) pasa a la cisterna y la impulsión va
   por el jardín delantero y el retiro norte hasta el núcleo técnico (x 9.40), donde sube junto a la bajada del tanque.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-05 — Exteriores del frente: estacionamiento, portón, camino, jardín y cisterna nueva
+- **Pedido del usuario:** 2 autos (sedán y RAV4 de 5 puertas); portón con motor y SIN puerta peatonal aparte (se entra a pie
+  por la apertura parcial del motor); jardín solo de pasto esmeralda (sin plantas ni árboles; hay gatos); muro de la calle
+  alto y ciego; la terraza de PB no es para autos: **deck de PVC tipo madera (WPC)**; la cisterna vieja se rehace de cero.
+- **Lugar:** 12.45 m libres de la calle a la terraza × ~8.93 de ancho (medir los muros de los vecinos).
+- **Alternativa A (recomendada y aplicada como propuesta):** autos **lado a lado junto a la calle** (cajones de ~2.80 × 5.50;
+  RAV4 al norte, sedán al sur), **portón corredizo telescópico de 5.50** (2 hojas que se guardan juntas detrás de los 3.1 m del
+  tramo norte del muro), apertura peatonal de 1.00 en la punta sur, **camino de 1.10** junto al muro sur hasta la puerta,
+  vereda de 0.80 delante de la terraza hasta el retiro norte, **jardín de ~56 m²** en un solo paño delante de la terraza
+  (y en la franja norte, sobre el colector, el gas y la impulsión). Cada auto sale sin mover al otro.
+- **Alternativa B:** autos **en fila** (uno detrás del otro) en un carril junto al camino sur, **portón corredizo de UNA hoja
+  de 3.50** (el más común y barato; la hoja se guarda detrás de 4 m de muro y los medidores quedan libres). Jardín ~60 m²
+  (franja de 11.6 × 5 al norte). Contra: para sacar el auto de adentro hay que mover el de afuera y retroceder ~10 m; entrada
+  de 3.50 desde una calle de 9 m, más justa. Descartada por la comodidad diaria con dos autos.
+- **Tipos de portón evaluados (para 5.50):** corredizo de una hoja → no entra (pide ~6 m de muro al costado, hay 3.4);
+  telescópico → entra (pide ~3.0) y abre 1.00 para peatones: **elegido**; batiente de dos hojas de 2.75 → barre 2.75 hacia
+  adentro (autos 2.85 más atrás, ~16 m² menos de jardín), hojas ciegas = vela al viento, para peatones abre una hoja entera;
+  seccional / basculante → piden pórtico y guías sobre los autos y no tienen apertura peatonal (solo con puertita, que el
+  usuario no quiere): descartados.
+- **Muro de la calle:** ~2.50 sobre la acera, ciego, revoque liso por dentro, **corona anti-gatos** (malla inclinada hacia adentro
+  o rodillos) en todo el perímetro: la altura sola no alcanza (un gato salta del techo de la RAV4 al muro). Medidores
+  empotrados en el tramo norte (gas en la punta norte, luz, agua abajo o en la acera), ese tramo de ladrillo de cabeza para
+  que no sobresalgan por dentro. Portero en el pilar sur, junto a la apertura peatonal. Portón liso por las dos caras,
+  cepillos sin rendijas, cierre automático y fotocélulas.
+- **Cisterna nueva (~5 m³, propuesta):** bajo el estacionamiento junto a la calle, centrada en la franja entre los dos autos
+  (tapa 0.60 hermética y para tránsito, y la cámara de la bomba, se abren sin mover autos); a ~3.1 m del colector. Bomba
+  centrífuga en cámara seca pegada (o sumergible), C20. Impulsión: por la franja entre autos, al norte bajo el pasto hasta
+  y -0.40 y por el retiro norte al núcleo técnico (~27 m). La cisterna vieja se rellena o demuele.
+- **Herramientas:** muro tipo `cerco` y abertura tipo `porton` (planta, instalaciones, DXF y visor 3D con la casilla
+  "Muro de la calle y portón"; no salen en las fachadas ni en la captura `#calle&foto`); la cisterna se dibuja con su tamaño,
+  tapa y bomba.
+- **Pendiente:** arquitecto (altura y si el cerco puede ser ciego en esta zona; rebaje de la acera; niveles acera–portón–
+  estacionamiento–acceso–deck; cisterna en el retiro frontal vs art. 49; especie de árbol que pide el art. 53 b); ingeniero
+  (cimiento y columnetas del muro, riel, losa de la cisterna); herrero (telescópico con apertura peatonal); mover el símbolo
+  del motor/portero del plano eléctrico al portón real; luces, toma y canilla del frente (interiorista).
+- **Estado:** propuesto (alternativa A aplicada en el modelo).
