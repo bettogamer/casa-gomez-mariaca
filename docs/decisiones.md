@@ -680,3 +680,23 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Sirena** subida a la fachada oeste del primer piso (en la logia, ~+6.0): desde la calle se ve por encima del muro.
 - **Herramientas:** las canillas aceptan `recorrido` (el caño real) y el portero `panel` (de dónde sale su cable).
 - **Estado:** aceptado por el usuario.
+
+## 2026-10-06 — Frente: ajustes del dueño (gas al pilar sur, cisterna bajo el camino, muro norte en vez de poste, luces del retiro)
+- **Medidor de gas en el pilar sur**, pegado al Lote 103 (ahí llega la red). El medidor de luz, el videoportero y la
+  cerradura eléctrica pasan al pilar norte de la puerta (ANH: el gabinete de gas a ≥0.30 de lo eléctrico). La puerta
+  peatonal vuelve a tener las bisagras al sur.
+- **Gas a la vista por el muro sur** (a ~0.15, con protección), baja a tierra en x −3.30, cruza enterrado al retiro norte
+  (con funda donde pueden pasar autos) y vuelve a salir **a la vista por la fachada norte de la casa a ~2.40**: a menor altura
+  cruzaría la puerta del depósito (y en la fachada este, la corrediza del comedor). Idea del usuario, ajustada por eso.
+- **Cisterna bajo el camino**, justo después de la puerta (el usuario no la quiere bajo el pasto, por el riego sobre la tapa).
+  Es alargada (~1.40 × 3.50 por fuera) y queda pegada al muro sur. **La bomba va al sur de la puerta.** Contra la revisión
+  estructural (que la alejaba ~1.5 m): se acepta porque el muro sur es nuevo y del dueño: cisterna primero, de H°A° como
+  contención, y los muros fundados con ella. Antes, **pozo de prueba** del lado del Lote 103; si el vecino tiene cimientos
+  pegados al lindero, excavar por partes con entibado o volver a correrla. Lo decide el ingeniero.
+- **Sin poste de servicio:** el muro norte es del dueño. Ahí van 4 apliques arriba/abajo a 2.00, la toma IP65, la canilla
+  (agua del tanque) y el tubo del auto eléctrico en el hueco entre los dos autos, y la cámara al fondo. Se quita el bolardo.
+  El pasto queda sin luz propia.
+- **Retiro norte:** 7 apliques arriba/abajo en el muro norte a 1.80, cada ~3 m (foto de ejemplo del usuario). C27 pasa a ser
+  "iluminación exterior: frente y retiro norte".
+- **Herramientas:** un punto a mano con `quitar: true` saca la luz que el programa pone sola en un ambiente.
+- **Estado:** pedido del usuario; la cisterna junto al muro sur la confirma el ingeniero.

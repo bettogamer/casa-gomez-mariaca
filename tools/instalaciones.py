@@ -35,7 +35,7 @@ CIRCUITOS = {
         ("C22", "Portón eléctrico", "especial"),
         ("C23", "Seguridad: alarma, cámaras, portero (con respaldo)", "especial"),
         ("C24", "Tomas estudio / invitados (computadora, router)", "toma"),
-        ("C27", "Iluminación exterior del frente: balizas y luces con sensor (fotocélula + reloj, con diferencial)", "luz"),
+        ("C27", "Iluminación exterior: frente y retiro norte (balizas, apliques y sensores; fotocélula + reloj, con diferencial)", "luz"),
     ],
     "p1": [
         ("C8", "Iluminación primer piso", "luz"),
@@ -471,6 +471,8 @@ def electrico(casa, nivel_id):
         quitar.add((amb_id, familia(mp)))
     puntos[:] = [q for q in puntos if not (q.get("gen") and (q.get("amb"), familia(q)) in quitar)]
     for mp in manuales:
+        if mp.get("quitar"):     # `quitar: true` = solo saca el generado (ej.: un exterior que no lleva luz propia)
+            continue
         amb_id = mp.get("amb") or (_amb_de(casa, nivel_id, mp["pos"]) or {}).get("id")
         t = mp["tipo"]
         if mp.get("circuito"):
