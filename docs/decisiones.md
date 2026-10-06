@@ -812,6 +812,6 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Ingeniero:** muro x 13.60 paralelo a las viguetas (sobre todo y 2.68–4.67); contrapiso del baño (~15 cm) sobre
   viguetas de 4.20, alivianado si hace falta; la ducha NO pica la losa; pases solo si el plomero no puede evitarlos, entre
   viguetas (ubicarlas desde el Baño 1 antes del cielo falso).
-- **Para decidir:** ropero de 0.50 con cama queen (paso de 0.60 justo) o cama de 1.40 con ropero de 0.55; refrigerador de
-  0.60 a 0.17 del lavaplatos.
+- **Decidido por el usuario:** cama QUEEN con ropero de puertas corredizas de 0.50 de fondo (paso de 0.60 al pie de la
+  cama); refrigerador de 0.60 de ancho con puerta reversible, fuera de la U, a 0.17 del lavaplatos.
 - **Estado:** aprobado por el usuario (opción B).
