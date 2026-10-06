@@ -637,4 +637,4 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   colector y del gas bajo el estacionamiento); herrero (corredizo de 3.20 y puerta peatonal); gasista (recorrido del gas del
   pilar al norte); mover el símbolo del motor/portero del plano eléctrico al portón y al pilar sur; luces, toma y canilla
   del frente (interiorista).
-- **Estado:** propuesto (versión 2026-10-06 aplicada en el modelo).
+- **Estado:** aprobado por el usuario (2026-10-06); falta pasar por los revisores y el interiorista.
