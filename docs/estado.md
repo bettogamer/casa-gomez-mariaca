@@ -17,7 +17,7 @@ _Última actualización: 2026-10-05_
   sin ducto); paso al patio por la corrediza del comedor; puerta de entrada pivotante de 1.05 con vidrio fijo al lado (2026-10-05, propuesto); cajonera bajo la
   grada; pasillo de 0.90 aceptado. Ver `docs/revision-pb.md`.
 - **Instalaciones PB (esquema preliminar):** eléctrico con 7 circuitos y cuadro de cargas;
-  agua (pozo + bomba → tanque elevado → gravedad), **calefón a gas natural de toda la casa
+  agua (SEMAPA → cisterna enterrada existente + bomba → tanque elevado → gravedad), **calefón a gas natural de toda la casa
   en la terraza del altillo, junto a la columna A2** (2026-10-05; gas sube a la vista por la fachada norte; agua
   caliente baja por fuera del muro norte junto a A2; sin termotanques en la suite ni en el altillo; tanque a +10.50), desagüe por el retiro norte con CI y desgrasadora, gas natural por el retiro
   norte. Horno eléctrico; sin secadora.
@@ -59,6 +59,6 @@ bisagra cuando no hay lugar, hueco de la escalera, exteriores sin techo, uniones
 - Medir en obra: fondo del descanso, distancia de la columna B2 al primer escalón, espesor
   de losa, sección real de columnas.
 - Con arquitecto/instaladores: ubicación del tanque elevado y de la bajada (se define con el altillo),
-  distancias del pozo. Medir cuánto cuelgan las vigas (altura del cielo falso).
+  estado de la cisterna vieja (prueba de llenado). Medir cuánto cuelgan las vigas (altura del cielo falso).
 - Para el final, toda la casa junta: terminaciones (pisos, azulejos), carpintería y rejas, fachada,
   exteriores (portón, cerco, parrilla, tendedero) y medidores en el muro de la calle.

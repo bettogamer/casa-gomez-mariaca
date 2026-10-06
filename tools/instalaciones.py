@@ -30,7 +30,7 @@ CIRCUITOS = {
         ("C7", "Tomas baño, depósito, almacén (con diferencial)", "toma"),
         ("C18", "Horno eléctrico", "especial"),
         ("C19", "Lavavajillas (con diferencial)", "especial"),
-        ("C20", "Bomba del pozo (guardamotor + flotante)", "especial"),
+        ("C20", "Bomba de la cisterna (guardamotor + flotante)", "especial"),
         ("C21", "Tomas exteriores con tapa (con diferencial)", "toma"),
         ("C22", "Portón eléctrico", "especial"),
         ("C23", "Seguridad: alarma, cámaras, portero (con respaldo)", "especial"),
@@ -446,11 +446,12 @@ def electrico(casa, nivel_id):
         else:
             circ = uso["luz_social"] if amb["id"] in SOCIALES else uso["luz"]
         agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False, id=l.get("id"))
-    # bomba del pozo (en el pozo)
-    pozo = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {}).get("pozo")
-    if pozo and "bomba" in uso:
-        agregar(tipo="especial", pos=tuple(pozo["pos"]), circuito=uso["bomba"], va=pozo.get("va_bomba", 750), etiqueta="B",
-                desc="bomba del pozo", amb=None, gen=False)
+    # bomba de agua (en la cisterna o en el pozo)
+    san = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {})
+    fuente = san.get("cisterna") or san.get("pozo")
+    if fuente and "bomba" in uso:
+        agregar(tipo="especial", pos=tuple(fuente["pos"]), circuito=uso["bomba"], va=fuente.get("va_bomba", 750), etiqueta="B",
+                desc="bomba de agua", amb=None, gen=False)
     # seguridad: cargas del portón y de alarma + cámaras + portero (se dibujan aparte)
     seg = cfg.get("seguridad") or {}
     if seg.get("porton") and "porton" in uso:
@@ -672,7 +673,8 @@ def _circulo(L, x, y, r, estilo):
 def plano_electrico(casa, nivel):
     puntos, cables = electrico(casa, nivel["id"])
     cfg = casa.get("instalaciones", {}).get(nivel["id"], {}).get("electrico", {})
-    pozo = casa.get("instalaciones", {}).get(nivel["id"], {}).get("sanitario", {}).get("pozo")
+    san = casa.get("instalaciones", {}).get(nivel["id"], {}).get("sanitario", {})
+    pozo = san.get("cisterna") or san.get("pozo")
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — ELÉCTRICO (esquema)",
                                 "Preliminar, para conversar con el electricista. Diseño definitivo según NB 777.",
                                 [pozo["pos"]] if pozo else [])
@@ -869,7 +871,7 @@ def plano_sanitario(casa, nivel):
     if cfg.get("cisterna"):
         x, y = cfg["cisterna"]["pos"]
         L.poly([[x - 0.8, y - 0.6], [x + 0.8, y - 0.6], [x + 0.8, y + 0.6], [x - 0.8, y + 0.6]], 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5" stroke-dasharray="4 2"')
-        L.texto(x, y + 0.05, "CISTERNA (existente)", 7, 'fill="#00838f" font-weight="bold"')
+        L.texto(x, y + 0.05, "CISTERNA (existente) + bomba", 7, 'fill="#00838f" font-weight="bold"')
         L.texto(x, y + 0.85, "← SEMAPA (medidor en la calle)", 6, 'fill="#00838f"')
     if cfg.get("pozo"):
         x, y = cfg["pozo"]["pos"]
@@ -953,7 +955,7 @@ def plano_sanitario(casa, nivel):
         _circulo(L, x, y, 0.09, f'fill="#fff" stroke="{CAFE}" stroke-width="1.5"')
     # leyenda
     lx, ly = x0 + 6, y1 + 1.15
-    for k, (col, txt, dash) in enumerate([(AZUL, "agua fría", ""), (ROJO, "agua caliente", ""), ("#00838f", "pozo → tanque", 'stroke-dasharray="3 3"'),
+    for k, (col, txt, dash) in enumerate([(AZUL, "agua fría", ""), (ROJO, "agua caliente", ""), ("#00838f", "bomba → tanque", 'stroke-dasharray="3 3"'),
                                           (CAFE, "desagüe", 'stroke-dasharray="7 3"'), (GAS, "gas natural", 'stroke-dasharray="10 4"'),
                                           ("#2e7d32", "ducto de aire (cielo falso punteado)", 'stroke-opacity="0.75"')]):
         cx = lx + k * 2.4

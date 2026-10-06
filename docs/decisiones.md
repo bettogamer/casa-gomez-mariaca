@@ -587,3 +587,9 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Paneles solares:** sí a futuro: espacio reservado en el techo del departamento (estructura inclinada al norte), tubos
   vacíos al TD y espera de caños para un colector solar.
 - **Estado:** aprobado por el usuario; la cisterna, a decidir después de inspeccionarla.
+
+## 2026-10-05 — Corrección: no hay pozo, es la cisterna
+- **Qué:** el "pozo" del patio era la cisterna. El sistema es **SEMAPA → cisterna enterrada (esquina suroeste, frente) →
+  bomba → tanque elevado → gravedad**. Se quita el pozo del patio; la bomba (C20) pasa a la cisterna y la impulsión va
+  por el jardín delantero y el retiro norte hasta el núcleo técnico (x 9.40), donde sube junto a la bajada del tanque.
+- **Estado:** aprobado por el usuario.
