@@ -774,3 +774,14 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Baño del altillo:** la ventana se corre a 12.02–12.72 para no quedar partida por la mampara de la ducha.
 - **Pendiente con el dueño:** banco de 1.80 en el Cuarto 1 (¿alcanza?), sin velador propio, cabeceras bajas.
 - **Estado:** propuesto (falta que el dueño vea las fachadas).
+
+## 2026-10-06 — Cuarto 1: rincón de lectura, tocador y cama
+- **Qué:** la ventana norte se corre lo más al oeste (11.45–13.25, a 0.125 de la columna A4); en fachada queda alineada con la
+  ventana del baño del altillo (la columna del comedor queda sin ventana en P1). Sobre el muro norte, de oeste a este: banco
+  ventana de lectura (1.97 × 0.75, cajones y almohadones, aplique en cada punta), librero alto, tocador (1.00 × 0.45, espejo
+  y aplique), velador angosto con teclas y toma USB, y cama queen con la cabecera al norte pegada a A5 (cabecera ≤ 5 cm).
+  Ropero entero con puertas corredizas (0.68 libres frente a los pies de la cama); escritorio sin cambios. La ventana del
+  patio queda al costado de la cama: corrediza o proyectante con roller.
+- **Descartadas:** banco centrado con librero a cada lado y cama al este (la ventana alineada partía el nicho); cama con
+  cabecera al oeste (tapaba la puerta del Baño 1).
+- **Estado:** aprobado por el usuario.

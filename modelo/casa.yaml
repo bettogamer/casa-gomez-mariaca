@@ -504,7 +504,7 @@ aberturas:
     - {id: puerta_bano_2, tipo: puerta, de: [11.20, 6.47], a: [11.20, 5.77], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
     - {id: puerta_cuarto_1, tipo: puerta, de: [11.42, 2.585], a: [12.32, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
     - {id: puerta_cuarto_2, tipo: puerta, de: [11.42, 4.085], a: [12.32, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
-    - {id: ventana_cuarto_1_norte, tipo: ventana, de: [13.40, 0.00], a: [15.20, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.80 × 1.20 al norte sobre el banco-cama empotrado (pedido de la hija): antepecho 0.90 = ~0.45 sobre el banco; vidrio de seguridad o limitador de apertura. 2026-10-06 (alinear la fachada norte): antes 12.85–14.65; ahora centrada en x 14.30, sobre la ventana del comedor de PB. El banco, los libreros y las teclas del nicho los reacomoda el interiorista"}
+    - {id: ventana_cuarto_1_norte, tipo: ventana, de: [11.45, 0.00], a: [13.25, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "2026-10-06 (pedido del dueño): LO MÁS AL OESTE posible (0.125 de la columna A4) con el banco de lectura debajo; la cama va al este. En fachada queda alineada con la ventana del baño del altillo (centro ~12.35). 1.80 × 1.20 al norte sobre el banco-cama empotrado (pedido de la hija): antepecho 0.90 = ~0.45 sobre el banco; vidrio de seguridad o limitador de apertura. 2026-10-06 (alinear la fachada norte): antes 12.85–14.65; ahora centrada en x 14.30, sobre la ventana del comedor de PB. El banco, los libreros y las teclas del nicho los reacomoda el interiorista"}
     - {id: ventana_cuarto_1_este, tipo: ventana, de: [16.90, 0.75], a: [16.90, 1.95], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.20 al patio, junto a la cama; antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 0.40–1.60; ahora centrada en y 1.35, sobre la corrediza del comedor de PB (0.35–2.35). A 0.625 de la cara de la columna A5 y 0.605 de la de B5 (toma general en y 2.30, entre la ventana y B5)"}
     - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.15], a: [16.90, 6.15], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana); antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 4.40–6.40; ahora centrada en y 5.15, sobre la ventana de la cocina de PB (4.55–5.75). Queda a 0.19 del costado del ropero (y 3.96) y a 0.395 de la cara de la columna C5 (antes 0.145)"}
     # Suite principal
@@ -666,24 +666,20 @@ muebles:
     # Lavamanos en el muro sur, fuera del giro de la puerta (opción A, elegida por el dueño 2026-10-05): 0.74 libres delante
     # del lavamanos y 0.95 delante del inodoro (antes enfrentados a 0.50); queda bajo el tragaluz propuesto
     - {tipo: lavamanos, rect: [9.90, 6.195, 10.45, 6.645], estado: propuesto, nota: "espejo en el muro sur; PLOMERO: el desagüe Ø50 va hasta el ducto de la bajante (≈9.30, 3.85), ~3 m: unirlo al ramal del inodoro o de la ducha para acortar; agua fría y caliente desde el muro x=9.40"}
-    # Cuarto 1 (norte, hija): banco-cama empotrado bajo la ventana norte (pedido de la hija, foto de referencia),
-    # entre el librero y la cama desde 2026-10-06; cama contra el muro del patio (la punta del banco hace de velador);
-    # ropero empotrado contra el muro entre cuartos (aísla el ruido) con el escritorio de la
-    # computadora en su punta oeste, junto a la entrada (pedido del usuario 2026-10-04)
+    # Cuarto 1 (norte, hija). 2026-10-06, pedido del dueño: BANCO VENTANA de lectura bajo la ventana norte (11.45–13.25),
+    # enmarcado entre el muro oeste y un librero alto; a continuación, en el muro norte, el TOCADOR y un velador angosto;
+    # CAMA con la CABECERA contra el muro NORTE, del lado este (pegada a la columna A5), ventana del patio al costado.
+    # Ropero empotrado contra el muro entre cuartos (aísla el ruido) con el escritorio de la computadora en su punta
+    # oeste, junto a la entrada (pedido del usuario 2026-10-04): no cambian.
     - {tipo: escritorio, nombre: Computadora, rect: [12.58, 2.66, 13.78, 3.26], nota: "2 tomas + datos a 0.90 sobre la mesa. ROLLER en la ventana norte (decidido por el dueño 2026-10-05): queda a la espalda y el sol se refleja en la pantalla"}
     - {tipo: silla, rect: [12.95, 2.16, 13.40, 2.61]}
-    - {tipo: closet, nombre: Ropero empotrado, rect: [13.80, 2.71, 16.77, 3.26]}
-    # Fila del muro norte corrida 0.10 al norte (cara real del muro): al pie de la cama quedan 0.68 hasta el ropero (antes 0.58)
-    # Tocador en la esquina noroeste (donde estaba el escritorio): luz de la ventana norte de costado, espejo en la pared
-    - {tipo: meson, nombre: Tocador, rect: [11.33, 0.03, 12.33, 0.48], estado: propuesto, nota: "espejo en la pared con aplique encima (~1.90) y toma a 1.05 en la punta este"}
-    - {tipo: taburete, rect: [11.63, 0.53, 12.03, 0.88]}
-    # 2026-10-06 (ventana norte corrida a 13.40–15.20): el banco pasa a 1.80, justo bajo la ventana, entre una repisa
-    # baja y la cama; se quita el librero-velador alto (quedaba delante del vidrio). El librero alto del oeste no cambia;
-    # entre él y el banco va una repisa BAJA (0.90) para no quitarle luz al tocador
-    - {tipo: estante, nombre: Librero, rect: [12.35, 0.03, 12.75, 0.40], alto: 2.20, estado: propuesto}
-    - {tipo: estante, nombre: Repisa baja, rect: [12.77, 0.03, 13.375, 0.40], alto: 0.90, estado: propuesto, nota: "mesita del banco (lámpara, libros, taza): encima, toma y tecla del spot a 1.00. Baja para no tapar la luz de la ventana al tocador"}
-    - {tipo: sofa, nombre: Banco ventana, rect: [13.375, 0.03, 15.175, 0.80], estado: propuesto, nota: "banco-cama de 1.80 empotrado justo bajo la ventana (13.40–15.20; antepecho 0.90 = ~0.45 sobre el asiento); la punta este toca la cabecera de la cama y hace de apoyo de velador. Spot de lectura encima (tecla sobre la repisa baja)"}
-    - {tipo: cama, nombre: Queen, rect: [15.175, 0.03, 16.775, 2.03], estado: propuesto, nota: "cabecera en el muro norte, pegada a la columna A5; su borde oeste toca 2.5 cm el marco de la ventana norte: CABECERA BAJA (≤ 0.80) o sin cabecera, para no tapar el vidrio y dejar libres la tecla y la toma a 0.90. El costado este corre bajo la ventana del patio (antepecho 1.00): ventana corrediza o proyectante, roller dentro del vano (sin cortina que caiga sobre la cama)"}
+    - {tipo: closet, nombre: Ropero empotrado, rect: [13.80, 2.71, 16.77, 3.26], nota: "2026-10-06, pedido del dueño (el tocador pasó al muro norte): vuelve a tener TODO el frente con puertas (2.97). Del pie de la cama (y 2.03) al ropero quedan 0.68 en el tramo x 15.175–16.77: ahí PUERTAS CORREDIZAS (recomendado, todo el ropero) u hojas batientes de ≤ 0.45. En el tramo oeste (x 13.80–15.175) el frente está libre"}
+    - {tipo: sofa, nombre: Banco ventana, rect: [11.33, 0.03, 13.30, 0.78], alto: 0.45, estado: propuesto, nota: "2026-10-06, pedido del dueño (fotos de referencia): banco-cama de día de 1.97 × 0.75, asiento a ~0.45, con CAJONES abajo y colchoneta + almohadones; del muro oeste (rellena el saliente de 5 cm al sur de la columna A4) hasta 5 cm pasada la jamba este de la ventana (11.45–13.25, antepecho 0.90 = ~0.45 sobre el asiento). Vidrio de seguridad o limitador de apertura. Termina en y 0.78: deja libre el vano de la puerta del Baño 1 (y 0.95–1.65) y su tecla (y 0.85). Aplique de lectura en cada punta (muro oeste y costado del librero) con una tecla y una toma en el muro oeste, sobre los almohadones"}
+    - {tipo: estante, nombre: Librero, rect: [13.30, 0.03, 13.70, 0.43], alto: 2.20, estado: propuesto, nota: "2026-10-06, pedido del dueño: librero alto que cierra el banco ventana por el este (a 5 cm de la jamba: no tapa vidrio). Aplique de lectura en su costado oeste a ~1.30: la caja sale del muro norte detrás del librero (x ~13.45) y el cable corre por dentro del mueble (hueco en el fondo)"}
+    - {tipo: meson, nombre: Tocador, rect: [13.72, 0.03, 14.72, 0.48], alto: 0.75, estado: propuesto, nota: "2026-10-06, pedido del dueño: en el muro norte, a continuación del librero (2 cm). 1.00 × 0.45, mesada a 0.75. ESPEJO en el muro (~0.60 de ancho, x ~13.90–14.50, de ~1.00 a ~1.80), aplique encima a 1.90, tecla del aplique al oeste (x 13.82) y toma del secador al este (x 14.58), las dos a 1.05-1.10, sobre la mesada. Luz natural de costado: la ventana norte a la izquierda (el librero le quita un poco) y la del patio a la derecha"}
+    - {tipo: taburete, rect: [14.03, 0.52, 14.41, 0.90], alto: 0.45, estado: propuesto, nota: "del tocador; se guarda debajo"}
+    - {tipo: estante, nombre: Velador, rect: [14.75, 0.03, 15.15, 0.43], alto: 0.55, estado: propuesto, nota: "2026-10-06: velador angosto de 0.40 × 0.40 en el hueco entre el tocador y la cama (3 cm a cada lado), a la altura del colchón (~0.55). Encima, en el muro norte: teclas a 0.80 (x 14.80–14.87), toma con USB a 0.70 (x 14.99) y aplique de lectura a 1.20 (x 15.12, junto al borde de la cama). Del lado este no hay velador (muro)"}
+    - {tipo: cama, nombre: Queen, rect: [15.175, 0.03, 16.775, 2.03], estado: propuesto, nota: "2026-10-06, pedido del dueño: 1.60 × 2.00 con la CABECERA contra el muro NORTE y el costado este PEGADO A LA COLUMNA A5 (sobresale 10 cm del muro: entre la cama y el muro este queda una rendija de 0.10, bajo la ventana). Cabecera delgada (≤ 0.05) o sin cabecera: con un marco más largo el pie pasa de 2.03 y el paso frente al ropero baja de 0.68. La ventana del patio (y 0.75–1.95, antepecho 1.00) queda al COSTADO de la cama: CORREDIZA o PROYECTANTE (una hoja batiente hacia adentro barre el colchón) con ROLLER. Se sube por el lado oeste (0.77 libres hasta el taburete del tocador, más hacia el sur). Velador, toma con USB, teclas y aplique de lectura del lado oeste, en el muro norte"}
     # Cuarto 2 (sur): cabecera en el muro sur; mueble de computadora de ~2 m (dicho por el usuario) en la punta oeste del ropero
     - {tipo: escritorio, nombre: Computadora, rect: [12.58, 3.41, 14.58, 4.01], nota: "2 tomas + datos a 0.90 sobre la mesa; luz de la ventana este de costado"}
     - {tipo: silla, rect: [12.95, 4.06, 13.40, 4.51]}
@@ -1105,7 +1101,7 @@ instalaciones:
         - {amb: vestidor_principal, tipo: interruptor, pos: [3.60, 4.275], alto: 1.10, estado: propuesto, nota: "a la izquierda al entrar, antes del mueble norte"}
         - {amb: vestidor_principal, tipo: toma, pos: [3.80, 4.275], alto: 1.10, estado: propuesto, nota: "plancha vertical a vapor / espejo"}
         # Baño 1 (Cuarto 1): tecla afuera (adentro, del lado de la manija, cae la ducha); toma al costado del espejo
-        - {amb: bano_hijo_1, tipo: interruptor, pos: [11.275, 0.80], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 1, junto a la puerta (al sur la tapaba la puerta abierta del cuarto)"}
+        - {amb: bano_hijo_1, tipo: interruptor, pos: [11.275, 0.86], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 1, junto a la puerta (al sur la tapaba la puerta abierta del cuarto). 2026-10-06: corrida de 0.80 a 0.86 para que no quede pegada a la punta del banco ventana (termina en y 0.78); 0.09 del vano"}
         - {amb: bano_hijo_1, tipo: luz, pos: [10.30, 1.30], estado: propuesto, nota: "general (cielo falso 2.70)"}
         - {amb: bano_hijo_1, tipo: luz, pos: [9.475, 1.375], alto: 2.00, estado: propuesto, nota: "aplique sobre el espejo"}
         - {amb: bano_hijo_1, tipo: toma, pos: [9.475, 1.00], alto: 1.30, estado: propuesto, nota: "al costado del espejo, a 0.66 de la ducha; con diferencial"}
@@ -1114,23 +1110,32 @@ instalaciones:
         - {amb: bano_hijo_2, tipo: luz, pos: [10.20, 5.00], estado: propuesto, nota: "general, fuera del tragaluz propuesto (ranuras y 5.50–6.10)"}
         - {amb: bano_hijo_2, tipo: luz, pos: [10.175, 6.645], alto: 2.00, estado: propuesto, nota: "aplique sobre el espejo (muro sur)"}
         - {amb: bano_hijo_2, tipo: toma, pos: [9.75, 6.645], alto: 1.30, estado: propuesto, nota: "al costado oeste del espejo, a 1.8 m de la ducha; no al este: ahí se apoya la hoja abierta de la puerta. Con diferencial"}
-        # Cuarto 1: conmutador en la puerta y en el velador; tocador con su aplique; spot del banco ventana
-        - {amb: cuarto_hijo_1, tipo: conmutador, pos: [12.47, 2.51], alto: 1.10, estado: propuesto, nota: "puerta, lado de la manija"}
-        - {amb: cuarto_hijo_1, tipo: conmutador, pos: [15.32, 0.025], alto: 0.90, estado: propuesto, nota: "cama: en el muro norte, 0.12 al este de la jamba de la ventana (fuera del vano), en la punta oeste de la cabecera (cabecera ≤ 0.80)"}
-        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [13.10, 0.025], alto: 1.00, luces: [spot_banco], estado: propuesto, nota: "spot del banco ventana, sobre la repisa baja (0.30 de la jamba): se alcanza sentado en el banco"}
-        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [11.40, 0.025], alto: 1.10, luces: [aplique_tocador], estado: propuesto, nota: "aplique del tocador, al costado del espejo"}
-        - {amb: cuarto_hijo_1, tipo: luz, pos: [13.40, 1.55], estado: propuesto, nota: "general, sobre la zona libre (no sobre la cama)"}
-        - {amb: cuarto_hijo_1, tipo: luz, pos: [16.00, 2.37], estado: propuesto, nota: "frente al ropero, al pie de la cama"}
-        - {amb: cuarto_hijo_1, tipo: luz, id: spot_banco, pos: [13.90, 0.45], estado: propuesto, nota: "spot de lectura dirigible sobre la mitad oeste del banco ventana (donde se apoya la espalda junto a la repisa)"}
-        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_tocador, pos: [11.83, 0.025], alto: 1.90, estado: propuesto, nota: "aplique sobre el espejo del tocador"}
-        - {amb: cuarto_hijo_1, tipo: toma, pos: [15.45, 0.025], alto: 0.90, estado: propuesto, nota: "cama (celular, lámpara): junto al conmutador, encima de la cabecera baja; mejor con USB"}
-        - {amb: cuarto_hijo_1, tipo: toma, pos: [13.25, 0.025], alto: 1.00, estado: propuesto, nota: "banco ventana: lámpara de lectura y cargador, sobre la repisa baja (0.15 de la jamba)"}
-        - {amb: cuarto_hijo_1, tipo: toma, pos: [12.25, 0.025], alto: 1.05, estado: propuesto, nota: "tocador: secador / plancha de pelo, sobre la mesada"}
+        # Cuarto 1 (2026-10-06, pedido del dueño: banco ventana al noroeste, tocador y velador a continuación en el muro norte,
+        # cama con la cabecera al norte del lado este). Luz general conmutada entre la puerta y la cama; apliques propios para
+        # leer (cama y banco) y para el tocador. Nada detrás de la cabecera ni de los muebles.
+        - {amb: cuarto_hijo_1, tipo: conmutador, pos: [12.47, 2.51], alto: 1.10, estado: propuesto, nota: "puerta, lado de la manija: luz general"}
+        - {amb: cuarto_hijo_1, tipo: luz, pos: [13.10, 1.55], estado: propuesto, nota: "general: sobre la zona libre entre el banco, la puerta, el escritorio y el tocador"}
+        - {amb: cuarto_hijo_1, tipo: luz, pos: [15.30, 2.37], estado: propuesto, nota: "general: entre el pie de la cama y el ropero (ilumina adentro del ropero); a ~2 m de la almohada, no encima"}
+        # Cama: en el muro norte, sobre el velador (lado oeste de la cama, por donde se sube)
+        - {amb: cuarto_hijo_1, tipo: toma, pos: [14.99, 0.025], alto: 0.70, estado: propuesto, nota: "cama: toma doble CON USB sobre el velador (celular, lámpara), 0.15 sobre la tapa"}
+        - {amb: cuarto_hijo_1, tipo: conmutador, pos: [14.80, 0.025], alto: 0.80, estado: propuesto, nota: "cama: luz general (conmutada con la puerta), sobre el velador al alcance de la almohada. Caja doble con la tecla del aplique"}
+        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [14.87, 0.025], alto: 0.80, luces: [aplique_cama], estado: propuesto, nota: "cama: aplique de lectura (misma caja que el conmutador)"}
+        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_cama, pos: [15.12, 0.025], alto: 1.20, estado: propuesto, nota: "aplique de lectura de brazo articulado en el muro norte, en el borde oeste de la cama (al costado de la almohada, no encima)"}
+        # Banco ventana: aplique en cada punta, tecla y toma en el muro oeste por encima de los almohadones (no cambia)
+        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_banco_o, pos: [11.275, 0.35], alto: 1.30, estado: propuesto, nota: "aplique de lectura en el muro oeste, punta oeste del banco (quien se apoya contra este muro tiene la luz por encima del hombro)"}
+        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_banco_e, pos: [13.30, 0.30], alto: 1.30, estado: propuesto, nota: "aplique de lectura en el COSTADO OESTE DEL LIBRERO: caja en el muro norte detrás del librero (x ~13.45, a 1.30), el cable corre por dentro del mueble"}
+        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [11.275, 0.68], alto: 0.95, luces: [aplique_banco_o, aplique_banco_e], estado: propuesto, nota: "banco: los dos apliques de lectura; se alcanza sentado (encima de los almohadones)"}
+        - {amb: cuarto_hijo_1, tipo: toma, pos: [11.275, 0.50], alto: 0.95, estado: propuesto, nota: "banco: cargador, lámpara; encima de los almohadones (no queda tapada)"}
+        # Tocador: muro norte, espejo entre la tecla (oeste) y la toma (este)
+        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [13.82, 0.025], alto: 1.10, luces: [aplique_tocador], estado: propuesto, nota: "tocador: aplique del espejo, punta oeste de la mesada (junto al librero)"}
+        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_tocador, pos: [14.22, 0.025], alto: 1.90, estado: propuesto, nota: "aplique sobre el espejo del tocador"}
+        - {amb: cuarto_hijo_1, tipo: toma, pos: [14.58, 0.025], alto: 1.05, estado: propuesto, nota: "tocador: secador / plancha de pelo, sobre la mesada, punta este (a 0.22 de las teclas de la cama: cajas separadas)"}
+        # Escritorio (no cambia)
         - {amb: cuarto_hijo_1, tipo: toma, pos: [12.85, 3.26], alto: 0.90, estado: propuesto, nota: "escritorio: toma doble sobre la mesa"}
         - {amb: cuarto_hijo_1, tipo: toma, pos: [13.55, 3.26], alto: 0.90, estado: propuesto, nota: "escritorio: segunda toma doble (lámpara, cargadores)"}
         - {amb: cuarto_hijo_1, tipo: datos, pos: [13.10, 3.26], alto: 0.90, estado: propuesto, nota: "escritorio: internet por cable"}
-        - {amb: cuarto_hijo_1, tipo: toma, pos: [16.875, 2.30], alto: 0.30, estado: propuesto, nota: "general (aspiradora), entre la ventana y la columna B5"}
-        - {amb: cuarto_hijo_1, tipo: toma, pos: [11.275, 0.62], alto: 0.30, estado: propuesto, nota: "general, junto al tocador (fuera de la hoja abierta del cuarto)"}
+        # General: el único tramo de muro libre (este, entre el pie de la cama y la columna B5)
+        - {amb: cuarto_hijo_1, tipo: toma, pos: [16.875, 2.30], alto: 0.30, estado: propuesto, nota: "general (aspiradora, estufa), en el muro este entre el pie de la cama (2.03) y la columna B5 (2.555); la ventana termina en 1.95"}
         # Cuarto 2: conmutador en la puerta y en el velador oeste; tomas en los dos veladores y el escritorio de 2 m
         - {amb: cuarto_hijo_2, tipo: conmutador, pos: [12.47, 4.16], alto: 1.10, estado: propuesto, nota: "puerta, lado de la manija"}
         - {amb: cuarto_hijo_2, tipo: conmutador, pos: [13.55, 6.645], alto: 0.90, estado: propuesto, nota: "velador oeste (duerme una sola persona: no hace falta otro conmutador)"}
