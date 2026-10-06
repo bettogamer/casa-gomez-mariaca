@@ -31,7 +31,9 @@ _Última actualización: 2026-10-06_
 - **Instalaciones P1 (esquema preliminar):** eléctrico con subtablero en el hall junto a la columna B2 y 4 circuitos (C8–C11), agua
   desde el núcleo técnico, 3 bajantes, extractores del Baño 2 y de los lavamanos de la suite; agua caliente de la suite desde el calefón de PB (sin termotanque, 2026-10-05). Sin gas.
 
-- **Altillo aprobado:** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
+- **Altillo reordenado (2026-10-06, opción B):** baño apilado sobre el Baño 1 del P1 (nada húmedo sobre dormitorios);
+  cocina en U y comedor junto a la escalera, estar al este, dormitorio de 15.4 m². Ver `docs/decisiones.md`.
+- **Altillo aprobado (versión anterior, reemplazada en la distribución interior):** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
   adentro, terraza adelante, franja de 2 m al sur con lavandería; techo de calamina oculto; tanque sobre la
   columna A3. Instalaciones (esquema): C13–C16, anafe eléctrico; agua caliente del calefón de la terraza; presurizadora solo si el calefón no enciende.
 
