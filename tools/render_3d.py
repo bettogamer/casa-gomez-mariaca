@@ -39,10 +39,20 @@ PLANTILLA = r"""<!doctype html>
     <label><input type="checkbox" id="etiquetas" checked> Nombres de ambientes</label>
     <label><input type="checkbox" id="lote" checked> Lote</label>
     <label><input type="checkbox" id="techos"> Techos y tanque</label>
+    <label><input type="checkbox" id="fachada"> Fachada con materiales</label>
   </div>
   <div class="grupo"><b>Vistas</b><br><select id="vista" style="width:100%;margin-top:4px"><option value="">— elegir un ambiente —</option></select>
     <button id="vista-general" style="margin-top:6px">Vista general</button>
-    <button id="vista-techos" style="margin-top:6px">Vista con techos</button></div>
+    <button id="vista-techos" style="margin-top:6px">Vista con techos</button>
+    <button id="vista-calle" style="margin-top:6px">Vista desde la calle (fachada)</button>
+    <button id="vista-retiro" style="margin-top:6px">Vista desde el retiro norte</button></div>
+  <div class="grupo"><b>Sol</b> (Cochabamba)<br><select id="sol" style="width:100%;margin-top:4px">
+    <option value="12,17">Tarde de verano (enero, 17 h)</option>
+    <option value="6,17">Tarde de invierno (julio, 17 h)</option>
+    <option value="12,12">Mediodía de verano</option>
+    <option value="6,12">Mediodía de invierno</option>
+    <option value="12,9">Mañana de verano (9 h)</option>
+  </select></div>
   <div class="mini">Arrastrar: girar · Rueda: zoom · Clic derecho: mover<br>Rojo = columnas construidas</div>
 </div>
 <div id="info">Generado desde modelo/casa.yaml</div>
@@ -93,6 +103,15 @@ function segmento(p, q, y0, y1, grosor, color) {
   return b;
 }
 
+// Piezas que cambian de color con "Fachada con materiales": FCH[categoría] = [mallas]
+const FCH = {};
+function tag(mesh, cat) {
+  (FCH[cat] = FCH[cat] || []).push(mesh);
+  mesh.userData.colorBase = mesh.material.color.getHex();
+  mesh.userData.opBase = mesh.material.opacity;
+  return mesh;
+}
+
 function etiqueta(texto, x, y, z) {
   const c = document.createElement("canvas");
   c.width = 512; c.height = 96;
@@ -129,7 +148,7 @@ D.losas.forEach(l => {
     forma.holes.push(new THREE.Path([[a, b], [a, d], [c, d], [c, b]].map(p => new THREE.Vector2(p[0], p[1]))));
   }
   const g = new THREE.ExtrudeGeometry(forma, { depth: E.losa, bevelEnabled: false });
-  const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0xb9b9b4, transparent: true, opacity: 0.92 }));
+  const m = tag(new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0xb9b9b4, transparent: true, opacity: 0.92 })), "losa");
   m.rotation.x = Math.PI / 2;      // (x, y) del plano -> (x, z) del 3D; la extrusión baja desde la cota
   m.position.y = l.cota;
   m.castShadow = m.receiveShadow = true;
@@ -139,7 +158,7 @@ D.losas.forEach(l => {
 });
 D.columnas.forEach(c => {
   const s = E.seccion / 2;
-  const col = caja(c.x - s, 0, c.y - s, c.x + s, E.alto_columnas, c.y + s, 0xc62828);
+  const col = tag(caja(c.x - s, 0, c.y - s, c.x + s, E.alto_columnas, c.y + s, 0xc62828), "columna");
   COLUMNAS.push(col);
   G.obra.add(col);
 });
@@ -179,7 +198,7 @@ D.niveles.forEach(nv => {
       const L = Math.hypot(x1 - x0, z1 - z0), n = Math.floor(L / 0.10);
       for (let k = 0; k <= n; k++) {
         const x = x0 + (x1 - x0) * k / n, z = z0 + (z1 - z0) * k / n;
-        const l = caja(x - 0.02, nv.cota, z - 0.02, x + 0.02, nv.cota + nv.alto_muro, z + 0.02, 0xa0703f);
+        const l = tag(caja(x - 0.02, nv.cota, z - 0.02, x + 0.02, nv.cota + nv.alto_muro, z + 0.02, 0xa0703f), "celosia");
         l.userData.alto = nv.alto_muro; l.userData.base = nv.cota;
         muros.push(l); grupo.add(l);
       }
@@ -187,7 +206,8 @@ D.niveles.forEach(nv => {
     }
     // barandas y antepechos con su propio alto; bajo la escalera, hasta su cara inferior
     const alto = m.alto ? Math.min(m.alto, nv.alto_muro) : (m.tipo === "baranda" ? 1.1 : nv.alto_muro);
-    const w = segmento(m.de, m.a, nv.cota, nv.cota + alto, m.grosor, 0xf4f1ea);
+    const w = tag(segmento(m.de, m.a, nv.cota, nv.cota + alto, m.grosor, 0xf4f1ea),
+                  m.tipo === "baranda" ? (alto <= 1.2 ? "baranda" : "antepecho") : "muro");
     w.userData.alto = alto; w.userData.base = nv.cota;
     muros.push(w); grupo.add(w);
   });
@@ -195,10 +215,10 @@ D.niveles.forEach(nv => {
   const dinteles = [];
   nv.aberturas.forEach(ab => {
     if (ab.tipo === "vano") return;
-    const d = segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, ab.grosor, 0xe8e4da);
+    const d = tag(segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, ab.grosor, 0xe8e4da), "muro");
     dinteles.push(d); grupo.add(d);
     if (ab.tipo === "ventana") {
-      const ap = segmento(ab.de, ab.a, nv.cota, nv.cota + ab.antepecho, ab.grosor, 0xf4f1ea);
+      const ap = tag(segmento(ab.de, ab.a, nv.cota, nv.cota + ab.antepecho, ab.grosor, 0xf4f1ea), "muro");
       ap.userData.alto = ab.antepecho; ap.userData.base = nv.cota;
       muros.push(ap); grupo.add(ap);
     }
@@ -231,7 +251,7 @@ if (D.techos) {
     const v = ag.poly.map(p => new THREE.Vector3(p[0], h(p), p[1]));
     const g = new THREE.BufferGeometry().setFromPoints([v[0], v[1], v[2], v[0], v[2], v[3]]);
     g.computeVertexNormals();
-    const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0x90a4ae, side: THREE.DoubleSide }));
+    const m = tag(new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0x90a4ae, side: THREE.DoubleSide })), "techo");
     m.castShadow = m.receiveShadow = true;
     G.techos.add(m);
     // ondas de la calamina: líneas en el sentido de la caída
@@ -245,19 +265,19 @@ if (D.techos) {
     }
     G.techos.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: 0x607d8b })));
   });
-  T.antepechos.forEach(a => G.techos.add(segmento(a.de, a.a, a.base, a.tope, 0.15, 0xf4f1ea)));
+  T.antepechos.forEach(a => G.techos.add(tag(segmento(a.de, a.a, a.base, a.tope, 0.15, 0xf4f1ea), "antepecho")));
   if (T.tanque) {
     const [x0, z0, x1, z1] = T.tanque.rect, b = T.tanque.cota_base;
     G.techos.add(caja(x0, b - 0.20, z0, x1, b, z1, 0x9e9e9e));                       // base de hormigón
-    G.techos.add(caja(x0 + 0.05, b, z0 + 0.05, x1 - 0.05, b + T.tanque.alto, z1 - 0.05, 0xc1866b));  // forro de ladrillo
+    G.techos.add(tag(caja(x0 + 0.05, b, z0 + 0.05, x1 - 0.05, b + T.tanque.alto, z1 - 0.05, 0xc1866b), "tanque"));  // forro de ladrillo
     G.techos.add(caja(x0, b + T.tanque.alto, z0, x1, b + T.tanque.alto + 0.08, z1, 0xbdbdbd));       // tapa
     const s = etiqueta("Tanque " + (T.tanque.capacidad || ""), (x0 + x1) / 2, b + T.tanque.alto + 0.6, (z0 + z1) / 2);
     G.techos.add(s);
   }
-  T.postes.forEach(p => G.techos.add(caja(p.pos[0] - 0.05, 6.60, p.pos[1] - 0.05, p.pos[0] + 0.05, p.tope, p.pos[1] + 0.05, 0x37474f)));
-  T.canaletas.forEach(c => G.techos.add(segmento(c.de, c.a, c.cota, c.cota + 0.12, 0.12, 0x1565c0)));
+  T.postes.forEach(p => G.techos.add(tag(caja(p.pos[0] - 0.05, 6.60, p.pos[1] - 0.05, p.pos[0] + 0.05, p.tope, p.pos[1] + 0.05, 0x37474f), "poste")));
+  T.canaletas.forEach(c => G.techos.add(tag(segmento(c.de, c.a, c.cota, c.cota + 0.12, 0.12, 0x1565c0), "canaleta")));
   T.bajantes.forEach(b => {
-    const cil = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, b.tope, 12), new THREE.MeshLambertMaterial({ color: 0x1565c0 }));
+    const cil = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, b.tope, 12), new THREE.MeshLambertMaterial({ color: 0x1565c0 })), "canaleta");
     cil.position.set(b.pos[0], b.tope / 2, b.pos[1]);
     G.techos.add(cil);
   });
@@ -266,6 +286,114 @@ if (D.techos) {
     G.techos.add(caja(x0, s.cota, z0, x1, s.cota + 0.02, z1, 0x2e7d32, { op: 0.45 }));
   });
 }
+
+// ── Fachada con materiales (opción elegida del modelo): colores, acentos, vidrios y puertas, sol ──
+const F = D.fachada;
+const hex = c => parseInt(c.slice(1), 16);
+function textura(material, ancho, alto) {
+  const c = document.createElement("canvas");
+  c.width = Math.max(64, Math.round(ancho * 100)); c.height = Math.max(64, Math.round(alto * 100));
+  const k = c.getContext("2d");
+  const base = { madera: "#a8703f", piedra: "#9a948b", negro: "#2b2b2b", gris_oscuro: "#43464a",
+                 blanco: "#f7f7f5", beige: "#d8c9b1", gris_claro: "#c9c6c0" }[material] || "#cccccc";
+  k.fillStyle = base; k.fillRect(0, 0, c.width, c.height);
+  if (material === "madera") {          // listones verticales de ~8 cm con vetas
+    for (let x = 0; x < c.width; x += 8) {
+      k.fillStyle = `hsl(28, 45%, ${30 + Math.random() * 14}%)`; k.fillRect(x, 0, 7, c.height);
+      k.fillStyle = "#5a3a1e"; k.fillRect(x + 7, 0, 1, c.height);
+    }
+  } else if (material === "piedra") {   // piedra laja en hiladas irregulares
+    for (let y = 0; y < c.height; y += 15) {
+      let x = -Math.random() * 40;
+      while (x < c.width) {
+        const w = 25 + Math.random() * 45, l = 48 + Math.random() * 18;
+        k.fillStyle = `hsl(35, ${6 + Math.random() * 8}%, ${l}%)`; k.fillRect(x, y, w - 2, 13);
+        x += w;
+      }
+    }
+  }
+  const t = new THREE.CanvasTexture(c);
+  return t;
+}
+const ACENTOS = new THREE.Group(), CARP = new THREE.Group();
+escena.add(ACENTOS, CARP);
+if (F) {
+  // acentos: paño de material pegado a la cara del muro (vista, u, z, d como en los alzados)
+  (F.acentos || []).forEach(a => {
+    const [u0, u1] = a.u, [z0, z1] = a.z, w = u1 - u0, h = z1 - z0, um = (u0 + u1) / 2;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshLambertMaterial({ map: textura(a.material, w, h) }));
+    const sep = 0.012;
+    if (a.vista === "oeste") { m.position.set(a.d - sep, (z0 + z1) / 2, um); m.rotation.y = -Math.PI / 2; }
+    if (a.vista === "este")  { m.position.set(-a.d + sep, (z0 + z1) / 2, -um); m.rotation.y = Math.PI / 2; }
+    if (a.vista === "norte") { m.position.set(-um, (z0 + z1) / 2, a.d - sep); m.rotation.y = Math.PI; }
+    if (a.vista === "sur")   { m.position.set(um, (z0 + z1) / 2, -a.d + sep); }
+    m.receiveShadow = true;
+    ACENTOS.add(m);
+  });
+  // vidrios y puertas en las aberturas (en el plano medio del muro)
+  D.niveles.forEach(nv => nv.aberturas.forEach(ab => {
+    if (ab.tipo === "vano") return;
+    const L = Math.hypot(ab.a[0] - ab.de[0], ab.a[1] - ab.de[1]);
+    const mx = (ab.de[0] + ab.a[0]) / 2, mz = (ab.de[1] + ab.a[1]) / 2, rot = -Math.atan2(ab.a[1] - ab.de[1], ab.a[0] - ab.de[0]);
+    const vidrio = ab.tipo === "ventana" || ab.tipo === "corrediza";
+    const z0 = nv.cota + (ab.tipo === "ventana" ? ab.antepecho : 0), z1 = nv.cota + ab.alto;
+    const mat = vidrio ? new THREE.MeshLambertMaterial({ color: 0x7fa7bf, transparent: true, opacity: 0.55 })
+                       : new THREE.MeshLambertMaterial({ color: hex(F.paleta.puerta || "#a8703f") });
+    const p = new THREE.Mesh(new THREE.BoxGeometry(L, z1 - z0, vidrio ? 0.02 : 0.05), mat);
+    p.position.set(mx, (z0 + z1) / 2, mz); p.rotation.y = rot; p.castShadow = !vidrio;
+    CARP.add(p);
+    // marco
+    const marco = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(L, z1 - z0, 0.06)),
+                                         new THREE.LineBasicMaterial({ color: hex(F.paleta.marco || "#2b2b2b") }));
+    marco.position.copy(p.position); marco.rotation.y = rot;
+    CARP.add(marco);
+  }));
+}
+function aplicarFachada() {
+  const on = !!F && document.getElementById("fachada").checked;
+  ACENTOS.visible = CARP.visible = on && modo === "proyecto";
+  const pal = on ? { canaleta: F.paleta.marco, ...F.paleta } : {};
+  Object.entries(FCH).forEach(([cat, ms]) => ms.forEach(m => {
+    const c = pal[cat] ? hex(pal[cat]) : m.userData.colorBase;
+    m.material.color.setHex(c);
+    if (cat === "losa") m.material.opacity = on ? 1 : m.userData.opBase;
+    if (cat === "baranda") {          // baranda de barrotes: se ve a través
+      m.material.transparent = true;
+      m.material.opacity = on ? 0.35 : m.userData.opBase;
+      m.material.needsUpdate = true;
+    }
+  }));
+  escena.background = new THREE.Color(on ? 0xbfd9ee : 0xe9eef2);
+  sol.intensity = on ? 0.95 : 0.6;
+}
+// Sol de Cochabamba (lat −17.4°): mes y hora solar → posición de la luz (norte = −z, este = +x)
+function ponerSol() {
+  const [mes, hora] = document.getElementById("sol").value.split(",").map(Number);
+  const N = [17, 47, 75, 105, 135, 162, 198, 228, 258, 288, 318, 344][mes - 1];
+  const r = Math.PI / 180, lat = -17.4 * r;
+  const dec = 23.44 * r * Math.sin(2 * Math.PI * (284 + N) / 365);
+  const H = 15 * (hora - 12) * r;
+  const alt = Math.asin(Math.sin(lat) * Math.sin(dec) + Math.cos(lat) * Math.cos(dec) * Math.cos(H));
+  const az = Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(lat) - Math.tan(dec) * Math.cos(lat)) + Math.PI;  // desde el norte, horario
+  const dx = Math.sin(az) * Math.cos(alt), dy = Math.sin(alt), dn = Math.cos(az) * Math.cos(alt);
+  sol.position.set(cx + dx * 40, dy * 40, cz - dn * 40);
+  sol.target.position.set(cx, 0, cz);
+  escena.add(sol.target);
+}
+document.getElementById("sol").addEventListener("change", ponerSol);
+ponerSol();
+function vistaFachada(pos, mira) {
+  selVista.value = ""; nivelVista = null;
+  cont.querySelectorAll("input").forEach(i => i.checked = true);
+  ["techos", "fachada"].forEach(id => document.getElementById(id).checked = true);
+  ["corte", "etiquetas", "muebles"].forEach(id => document.getElementById(id).checked = false);
+  modo = "proyecto";
+  document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o.dataset.modo === "proyecto"));
+  actualizar();
+  camara.position.set(...pos); ctl.target.set(...mira); ctl.update();
+}
+document.getElementById("vista-calle").addEventListener("click", () => vistaFachada([-17, 2.2, cz + 4], [0, 4.6, cz]));
+document.getElementById("vista-retiro").addEventListener("click", () => vistaFachada([-9, 3.0, -9], [6, 4.5, 2]));
 
 function alturaMuros() {
   const corte = document.getElementById("corte").checked;
@@ -296,6 +424,7 @@ function actualizar() {
   G.techos.visible = modo === "proyecto" && conTecho && vis["altillo"] !== false;
   Object.values(G.niveles).forEach(g => g.userData.muebles.visible = document.getElementById("muebles").checked);
   alturaMuros();
+  aplicarFachada();
   document.getElementById("info").textContent = modo === "obra"
     ? "Obra actual: columnas, losas y escalera (lo ya construido)"
     : "Proyecto: generado desde modelo/casa.yaml";
@@ -363,6 +492,8 @@ if (location.hash.includes("retiro")) { camara.position.set(cx - 4, 7, cz - 13);
 if (location.hash.includes("pb")) cont.querySelectorAll("input").forEach(i => i.checked = i.dataset.nivel === "pb");
 actualizar();
 if (location.hash.includes("techos")) document.getElementById("vista-techos").click();   // #techos
+if (location.hash.includes("calle")) document.getElementById("vista-calle").click();     // #calle
+if (location.hash.includes("foto")) { ["panel", "info"].forEach(id => document.getElementById(id).style.display = "none"); G.techos.children.forEach(o => { if (o.isSprite) o.visible = false; }); }  // #calle&foto: captura limpia
 // #vista=Cuarto 1 → abre directamente la vista de ese ambiente (busca por nombre)
 const mv = decodeURIComponent(location.hash).match(/vista=([^&]+)/);
 if (mv) { const k = VISTAS.findIndex(v => (v.nv.nombre + ": " + v.a.nombre).toLowerCase().includes(mv[1].toLowerCase())); if (k >= 0) { selVista.value = k; irAVista(k); } }
@@ -439,7 +570,14 @@ def datos(casa):
         "escalera": escalera(casa),
         "niveles": niveles,
         "techos": datos_techos(casa),
+        "fachada": _fachada_elegida(casa),
     }
+
+
+def _fachada_elegida(casa):
+    fz = casa.get("fachada") or {}
+    op = next((o for o in fz.get("opciones") or [] if o["id"] == fz.get("elegida")), None)
+    return {"paleta": op.get("paleta") or {}, "acentos": op.get("acentos") or [], "nombre": op["nombre"]} if op else None
 
 
 def datos_techos(casa):

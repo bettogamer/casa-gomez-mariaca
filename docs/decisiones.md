@@ -554,3 +554,9 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Elegida:** la **opción C** (usuario, 2026-10-05).
 - **Pendiente:** dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas; ver la fachada en una imagen realista.
 - **Estado:** aprobado por el usuario (opción C).
+
+## 2026-10-05 — Visor 3D con la fachada elegida
+- **Qué:** el visor 3D tiene "Fachada con materiales" (colores y acentos de la opción elegida: piedra, madera, marco gris,
+  vidrios y puertas), el **sol de Cochabamba** por mes y hora (sombras), y las vistas "desde la calle" y "desde el retiro
+  norte". `#calle&foto` da una captura limpia (`salida/fachada-calle-3d.png`) para usar como base en una herramienta de IA.
+- **Estado:** hecho.
