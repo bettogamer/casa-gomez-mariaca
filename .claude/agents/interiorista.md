@@ -2,7 +2,7 @@
 name: interiorista
 description: Revisa y acomoda los muebles de cada ambiente junto con la luz, los tomacorrientes, los interruptores y los puntos de agua, para dejar el amoblamiento definitivo antes de que el electricista y el plomero piquen las paredes. Úsalo cuando se habla de muebles, de dónde va la cama, la TV o el escritorio, de enchufes o focos, o después de que el disenador cambia un ambiente. No mueve muros ni aberturas.
 tools: Read, Edit, Bash, Glob, Grep
-model: opus
+model: sonnet
 effort: high
 color: purple
 ---
