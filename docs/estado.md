@@ -56,11 +56,12 @@ _Última sesión: 2026-10-06._
   pasto al medio, cisterna junto a la puerta, muro alto con corona anti-gatos.
 
 **Siguiente (en este orden):**
-1. ~~Frente: revisores~~ hecho 2026-10-06: cisterna bajo el pasto, gas enterrado por el camino y la vereda (norma ANH),
+1. ~~Frente: revisores~~ hecho 2026-10-06 (después ajustado, ver punto 2):
    tope de ruedas, corona solo hacia afuera en el portón, puerta peatonal con bisagras al norte. Antes de construir: probar la
    entrada de retro con los autos y las mediciones de `verificar_en_obra`.
-2. ~~`interiorista` en el frente~~ hecho 2026-10-06: circuito C27, balizas en el muro sur, sensor en la puerta y en la
-   vereda, canilla del tanque para los autos, poste de servicio (cámara, toma, cargador) en segunda etapa, sirena arriba.
+2. ~~`interiorista` en el frente~~ hecho 2026-10-06 y ajustado por el dueño: gas en el pilar sur y a la vista por el muro
+   sur y la fachada norte, cisterna bajo el camino (pegada al muro sur nuevo: ingeniero), bomba al sur de la puerta, luces,
+   toma, canilla y cargador en el muro norte (sin poste), 7 apliques en el retiro norte, circuito C27, sirena arriba.
 3. Llevar al muro de la calle la acometida eléctrica y el colector (hoy arrancan junto a la casa; el gas ya llega al
    medidor), con cámara final del colector a ≥1 m del muro y un pase bajo la viga del riel.
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
