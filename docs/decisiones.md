@@ -795,3 +795,23 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   no es posible: los baños están repartidos y las losas ya están hechas (sugerencia del albañil, 2026-10-06).
 - **Pendiente:** el plomero confirma diámetros y pendientes (inodoro del Baño 1 a ~1 m, del altillo a ~0.45 m).
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-06 — Baño del altillo apilado sobre el Baño 1 (opción B)
+- **Por qué:** consejo del albañil ("baños uno debajo de otro, bajante recta"). El baño del altillo quedaba encima del
+  Cuarto 1 (dormitorio de la hija): si gotea o se tira la cadena, cae sobre un dormitorio.
+- **Qué:** el baño del altillo pasa a x 9.40–11.20 × 0–2.68, copia del Baño 1 de abajo (inodoro sobre inodoro, ducha sobre
+  ducha, lavamanos sobre lavamanos), puerta al sur, ventana alta 0.70 × 0.50 en x 10.15 sobre la del Baño 1. Sigue usando
+  la bajante común de la columna A4 (cajón del ancho de la columna, como pilastra).
+  Departamento reordenado (opción B): cocina en U + comedor con banqueta junto a la escalera (11.0 m²); camino recto por
+  el sur hasta el dormitorio, sin hall; estar donde estaba el baño viejo (14.8 m², seco, sobre el Cuarto 1) con TV bajo una
+  ventana alta de 1.80 en el eje 12.35 y ventana al sur; dormitorio de 15.4 m² (antes 18.2: muro de x 13.00 a 13.60).
+  Ventanas grandes del altillo con antepecho 1.10 y altas con 1.60. Nada húmedo encima de ningún dormitorio.
+- **Descartadas:** cambiar el Baño 1 con los blancos (el Cuarto 1 perdía su baño); mover el baño de PB debajo del Baño 1
+  (el estudio quedaba de 2.35); mover la suite. Primera versión con hall y cocina en línea ("se ve rara"). Opción A
+  (cocina-comedor sobre el Cuarto 1, estar de 2.35 de ancho).
+- **Ingeniero:** muro x 13.60 paralelo a las viguetas (sobre todo y 2.68–4.67); contrapiso del baño (~15 cm) sobre
+  viguetas de 4.20, alivianado si hace falta; la ducha NO pica la losa; pases solo si el plomero no puede evitarlos, entre
+  viguetas (ubicarlas desde el Baño 1 antes del cielo falso).
+- **Para decidir:** ropero de 0.50 con cama queen (paso de 0.60 justo) o cama de 1.40 con ropero de 0.55; refrigerador de
+  0.60 a 0.17 del lavaplatos.
+- **Estado:** aprobado por el usuario (opción B).
