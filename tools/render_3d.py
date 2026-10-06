@@ -220,8 +220,9 @@ D.niveles.forEach(nv => {
   const dinteles = [];
   nv.aberturas.forEach(ab => {
     if (ab.tipo === "vano") return;
-    if (ab.tipo === "porton") {       // portón cerrado: hoja ciega oscura del alto del muro (casilla del muro de la calle)
+    if (ab.tipo === "porton" || ab.en_cerco) {   // portón / puerta del muro de la calle: hoja ciega oscura (casilla del muro)
       G.cerco.add(segmento(ab.de, ab.a, 0.03, ab.alto, 0.06, 0x2b2b2b));
+      if (ab.en_cerco) G.cerco.add(segmento(ab.de, ab.a, ab.alto, 2.5, 0.15, 0xeeeae2));   // muro sobre la puerta
       return;
     }
     const d = tag(segmento(ab.de, ab.a, nv.cota + ab.alto, nv.cota + nv.alto_muro, ab.grosor, 0xe8e4da), "muro");
@@ -341,7 +342,7 @@ if (F) {
   });
   // vidrios y puertas en las aberturas (en el plano medio del muro)
   D.niveles.forEach(nv => nv.aberturas.forEach(ab => {
-    if (ab.tipo === "vano" || ab.tipo === "porton") return;
+    if (ab.tipo === "vano" || ab.tipo === "porton" || ab.en_cerco) return;
     const L = Math.hypot(ab.a[0] - ab.de[0], ab.a[1] - ab.de[1]);
     const mx = (ab.de[0] + ab.a[0]) / 2, mz = (ab.de[1] + ab.a[1]) / 2, rot = -Math.atan2(ab.a[1] - ab.de[1], ab.a[0] - ab.de[0]);
     const vidrio = ab.tipo === "ventana" || ab.tipo === "corrediza";
@@ -558,7 +559,7 @@ def datos(casa):
                         "muros": lista_muros,
                         "muebles": [{"rect": m["rect"], "alto": m["alto"], "color": m["color"]} for m in muebles(casa, n["id"])],
                         "aberturas": [{**_sobre_muro(casa, n["id"], ab), "tipo": ab["tipo"], "alto": ab.get("alto", 2.10),
-                                       "antepecho": ab.get("antepecho", 1.0)}
+                                       "antepecho": ab.get("antepecho", 1.0), "en_cerco": bool(ab.get("en_cerco"))}
                                       for ab in aberturas(casa, n["id"])],
                         "alto_muro": n["altura"] - est["espesor_losa"], "ambientes": ambs})
     # losas: contrapiso PB + cada nivel superior, con hueco sobre la escalera que llega
