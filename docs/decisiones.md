@@ -551,5 +551,6 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Opciones:** A blanco y negro; B beige, marco gris y madera; C (recomendada) blanco + piedra en el muro ciego del living
   (aguanta el sol de la tarde) + madera solo donde la protege el volado (pared del dormitorio en la logia, puerta, celosía)
   + gris oscuro en bordes de losa y frente del baño de la suite + negro en carpintería, barandas y techo de la terraza.
-- **Pendiente:** que el usuario elija; dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
-- **Estado:** propuesto.
+- **Elegida:** la **opción C** (usuario, 2026-10-05).
+- **Pendiente:** dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas; ver la fachada en una imagen realista.
+- **Estado:** aprobado por el usuario (opción C).

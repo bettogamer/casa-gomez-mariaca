@@ -352,6 +352,7 @@ techos:
 # fuentes/referencias-fachada/. `paleta` = color por tipo de pieza; `acentos` = paños de material sobre una cara:
 # vista, u (horizontal de esa vista: oeste = y), z (alto), d (profundidad de la cara: oeste = x de la cara exterior).
 fachada:
+  elegida: c     # el usuario eligió la opción C (2026-10-05)
   opciones:
     - id: a
       nombre: Blanco y negro
