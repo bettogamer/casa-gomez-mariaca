@@ -6,6 +6,7 @@ from html import escape
 import checks
 import export_dxf
 import instalaciones
+import render_alzados
 import render_3d
 import render_svg
 from casa import SALIDA, ambientes, area, cargar
@@ -30,6 +31,10 @@ def tablero(casa, res, resumen, cargas):
         f = SALIDA / f"planta-losa-{n['id']}.svg"
         if f.exists():
             plantas += f'<section><h2>Losa bajo {escape(n["nombre"])} — viguetas</h2>{f.read_text(encoding="utf-8")}</section>'
+    for v in ("oeste", "norte", "este", "sur"):
+        f = SALIDA / f"fachada-{v}.svg"
+        if f.exists():
+            plantas += f'<section><h2>Fachada {v}</h2>{f.read_text(encoding="utf-8")}</section>'
     techos = SALIDA / "planta-techos.svg"
     if techos.exists():
         plantas += f'<section><h2>Planta de techos</h2>{techos.read_text(encoding="utf-8")}</section>'
@@ -86,6 +91,7 @@ def main():
     res = checks.verificar(casa)
     render_svg.main()
     render_3d.main()
+    render_alzados.main()
     export_dxf.main()
     cargas = instalaciones.main()
     f = SALIDA / "index.html"
