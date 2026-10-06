@@ -814,7 +814,7 @@ def _dibujar_simbolo(L, p, naranja):
 
 def plano_sanitario(casa, nivel):
     cfg, puntos, ramas = sanitario(casa, nivel["id"])
-    extra = [cfg["pozo"]["pos"]] if cfg.get("pozo") else []
+    extra = [cfg[k]["pos"] for k in ("pozo", "cisterna") if cfg.get(k)]
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — AGUA, DESAGÜE, GAS Y VENTILACIÓN (esquema)",
                                 "Preliminar: recorridos y diámetros a confirmar con el instalador (agua/desagüe) y con YPFB (gas natural).",
                                 extra)
@@ -866,6 +866,11 @@ def plano_sanitario(casa, nivel):
         a, b = cfg["impulsion"][0], cfg["impulsion"][-1]
         _circulo(L, b[0], b[1], 0.10, 'fill="#00838f"')
         L.texto(b[0] + 0.2, b[1] - 0.15, "↑ sube al tanque", 7, 'fill="#00838f" text-anchor="start"')
+    if cfg.get("cisterna"):
+        x, y = cfg["cisterna"]["pos"]
+        L.poly([[x - 0.8, y - 0.6], [x + 0.8, y - 0.6], [x + 0.8, y + 0.6], [x - 0.8, y + 0.6]], 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5" stroke-dasharray="4 2"')
+        L.texto(x, y + 0.05, "CISTERNA (existente)", 7, 'fill="#00838f" font-weight="bold"')
+        L.texto(x, y + 0.85, "← SEMAPA (medidor en la calle)", 6, 'fill="#00838f"')
     if cfg.get("pozo"):
         x, y = cfg["pozo"]["pos"]
         _circulo(L, x, y, 0.45, 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"')

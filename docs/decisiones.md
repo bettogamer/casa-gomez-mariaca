@@ -575,3 +575,15 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Preguntas abiertas al usuario:** alcantarillado en la calle, conexión a SEMAPA y filtro, medidor aparte para el
   altillo, parrilla a carbón o gas, tubos vacíos al techo para solar.
 - **Estado:** propuesto (aceptado por el usuario como propuesta para los profesionales).
+
+## 2026-10-05 — Respuestas de la ronda de instalaciones
+- **Alcantarillado:** hay en la calle (el colector va a la red pública, como estaba).
+- **Agua:** hay **SEMAPA** y una **cisterna enterrada vieja** en la esquina suroeste del lote (frente, lado Lote 103),
+  cargada aproximada en el modelo. Recomendación: primero inspeccionarla (vaciar, limpiar, fisuras, prueba de llenado 48 h);
+  si está sana, **repararla en el mismo lugar** (cerca del medidor y lejos del desagüe); si no, cisterna nueva en el mismo
+  pozo. Falta saber si además hay pozo propio.
+- **Medidor de luz:** uno solo para toda la casa (el altillo no lleva medidor aparte).
+- **Parrilla:** móvil a carbón, en el patio (aún no comprada).
+- **Paneles solares:** sí a futuro: espacio reservado en el techo del departamento (estructura inclinada al norte), tubos
+  vacíos al TD y espera de caños para un colector solar.
+- **Estado:** aprobado por el usuario; la cisterna, a decidir después de inspeccionarla.

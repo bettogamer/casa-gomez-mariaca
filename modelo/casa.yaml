@@ -320,6 +320,9 @@ techos:
   # Tanque elevado: base propia de hormigón sobre la columna A3 y el muro de la escalera, forrado de ladrillo.
   # Capacidad y altura SUPUESTAS (tanque de ~2500 L, ~1.55 de diámetro × 1.55 de alto): las define el plomero/ingeniero.
   # Base subida a +10.50 (usuario 2026-10-05): ~2.5 m sobre la entrada de agua del calefón del altillo (~+8.00).
+  # Paneles solares a futuro (usuario 2026-10-05): sobre el techo del departamento, en una estructura liviana INCLINADA AL
+  # NORTE (~15–20°; el techo cae al sur, que es la orientación mala), detrás del antepecho; sin sombra del tanque.
+  solar: {rect: [8.10, 0.30, 16.60, 4.40], estado: propuesto, nota: "espacio reservado (~35 m²) para paneles fotovoltaicos y/o colector de agua caliente; dejar ahora: 2 tubos vacíos de 1\" desde el techo (junto al tanque) hasta el TD por el montante de B2, y una espera de caños AF/AC de PPR tapados en el techo por si se pone un colector solar que precaliente el agua del calefón"}
   tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.50, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado, nota: "con tapa hermética; REBALSE y DESAGÜE DE LIMPIEZA con llave, a la canaleta/bajante pluvial del techo (no al sanitario); FLOTANTE eléctrico que prende y apaga la bomba del pozo (C20); salida con llave de paso y filtro"}
   postes:
     - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
@@ -851,6 +854,9 @@ instalaciones:
       # Agua: pozo en el patio + bomba -> tanque elevado en el último piso -> baja por gravedad a toda
       # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
       # estudio (exterior, en el retiro): bajada de agua fría del tanque. El calefón está en el ALTILLO (2026-10-05).
+      # SEMAPA + cisterna existente (usuario 2026-10-05): red pública con medidor en la calle; cisterna enterrada VIEJA en la
+      # esquina suroeste del lote (frente, lado Lote 103). Posición y tamaño aproximados: medir. Falta decidir reparar o reubicar.
+      cisterna: {pos: [-14.00, 5.90], estado: aproximado, nota: "cisterna enterrada existente (vieja): de SEMAPA → cisterna → bomba → tanque elevado. Antes de decidir: vaciar, limpiar, inspeccionar fisuras y hacer prueba de llenado 48 h. Lejos de cámaras y colector (el desagüe va por el retiro NORTE). Si queda bajo el estacionamiento, tapa para carga de auto"}
       pozo: {pos: [21.20, 3.00], va_bomba: 750, nota: "pozo con bomba (aún no comprada: sumergible ~½–1 HP según profundidad, la elige el pocero/plomero); circuito propio C20 con guardamotor y flotante del tanque; distancias a desagües a confirmar con el instalador"}
       # Impulsión corregida (2026-10-05): del pozo por el retiro norte hasta el núcleo técnico y sube junto a la bajada del
       # tanque (x 9.40), por fuera del muro norte; arriba llega al tanque (sobre A3) por un tramo corto.
@@ -1202,6 +1208,7 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
+  - "Cisterna vieja (esquina suroeste del lote): medir tamaño y profundidad, vaciar, limpiar, revisar fisuras y hacer prueba de llenado 48 h (si baja el nivel, pierde). Ubicar el medidor de SEMAPA y la cañería de entrada. ¿Hay pozo además de SEMAPA?"
   - "Instalaciones (ronda de huecos 2026-10-05): el electricista calcula la DEMANDA (~37 kVA instalados: horno, anafe, lavavajillas, bomba) y define con ELFEC si la acometida es monofásica de mayor amperaje o trifásica; protector contra sobretensiones en el TD; medir la resistencia de la puesta a tierra. El plomero confirma ventilaciones de desagüe sobre el techo, rebalse y limpieza del tanque, flotante de la bomba. YPFB: rejillas de la cocina y llaves de corte"
   - "Logia de la suite (P1): muro bajo de 1.00 + celosía de madera en el costado norte, en la punta del volado: el ingeniero confirma el peso y el anclaje de la celosía a la losa del altillo; el arquitecto, que con celosía no hay vista directa al Lote 105 (logia a 2.01 del lindero)"
   - "Tanque elevado: base subida a +10.50 (~2.5 m sobre la entrada del calefón del altillo). Base propia de hormigón sobre A3 y el muro de la escalera, aún no construida: el ingeniero la dimensiona con la nueva altura (más palanca con viento y sismo)"
