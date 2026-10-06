@@ -40,10 +40,13 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
 - `disenador` — propone y aplica cambios de distribución.
 - `revisor-estructural` — contrasta cambios con lo construido (solo lectura).
 - `revisor-habitabilidad` — luz, ventilación, circulación, normativa (solo lectura).
+- `arquitecto` — ojo de arquitecto: composición de fachadas, orden de las plantas, zonas húmedas,
+  detalles y encuentros (solo lectura).
 - `interiorista` — muebles + luces, enchufes, interruptores y puntos de agua de cada ambiente
   (deja el amoblamiento definitivo para el electricista y el plomero). Solo toca `muebles`, `luces_extra` y `electrico.puntos`.
 
-Flujo típico de un cambio: `disenador` → `revisor-estructural` + `revisor-habitabilidad`
+Flujo típico de un cambio: `disenador` → `revisor-estructural` + `revisor-habitabilidad` (+ `arquitecto` si toca
+fachadas o el orden de un piso)
 → `interiorista` (si cambian muebles o puntos) → el usuario decide → se registra en `docs/decisiones.md`.
 
 ## Instalaciones

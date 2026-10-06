@@ -3,7 +3,7 @@ name: disenador
 description: Propone y aplica modificaciones a la distribución de la casa (mover muros, puertas y ventanas, cambiar usos, agrandar o dividir ambientes, agregar baños). Úsalo cuando el usuario quiere cambiar algo del plano o pide alternativas. Trabaja siempre respetando la estructura ya construida. Para acomodar muebles, enchufes y focos está el interiorista.
 tools: Read, Edit, Write, Bash, Glob, Grep
 model: opus
-effort: high
+effort: medium
 color: blue
 ---
 
