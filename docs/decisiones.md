@@ -700,3 +700,31 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   "iluminación exterior: frente y retiro norte".
 - **Herramientas:** un punto a mano con `quitar: true` saca la luz que el programa pone sola en un ambiente.
 - **Estado:** pedido del usuario; la cisterna junto al muro sur la confirma el ingeniero.
+
+## 2026-10-06 — Fachada norte: ventanas del primer piso y del altillo alineadas con las de PB
+- **Qué:** las ventanas del muro norte (eje A) del primer piso y del altillo se corren para quedar en **4 columnas verticales**
+  con las de planta baja, que **no se tocan** (el albañil ya empieza esos muros). Centros: **2.20** (living), **7.95** (baño PB),
+  **10.15** (estudio) y **14.30** (comedor).
+  | Ventana | Antes | Ahora |
+  |---|---|---|
+  | P1 dormitorio principal | 1.10–2.90 (1.80), ant. 1.00 | 1.30–3.10 (1.80), ant. 1.00 |
+  | P1 blancos | 7.70–8.70 (1.00), ant. 1.50 | 7.45–8.45 (1.00), ant. 1.60 |
+  | P1 Baño 1 | 10.00–10.70 (0.70), ant. 1.60 | 9.80–10.50 (0.70), ant. 1.60 |
+  | P1 Cuarto 1 | 12.85–14.65 (1.80), ant. 0.90 | 13.40–15.20 (1.80), ant. 0.90 |
+  | Altillo estar | 7.70–9.30 (1.60), ant. 1.00 | 7.30–8.60 (**1.30**), ant. 1.00 |
+  | Altillo cocina | 9.90–10.90 (1.00), ant. 1.10 | 9.65–10.65 (1.00), ant. 1.10 |
+  | Altillo baño | 12.00–12.60 (0.60), ant. 1.60 | 11.875–12.575 (0.70), ant. 1.60 |
+  | Altillo dormitorio | 14.20–15.70 (1.50), ant. 1.00 | 13.40–15.20 (1.80), ant. 1.00 |
+- **Tipos:** grande 1.80 (ant. 1.00; 0.90 en el Cuarto 1 por el banco), mediana 1.00, alta 0.70 (ant. 1.60); todas con dintel
+  a 2.10. Se mantienen con motivo: 0.90 del banco ventana y 1.10 de la cocina del altillo (mesada). Los blancos pasan de 1.50 a
+  1.60 (misma línea que las altas de baño). La ventana de la escalera (alta, 4.80–6.60) queda como está.
+- **Por qué:** estaban casi alineadas pero corridas 0.20–0.65 m, con 9 anchos y 6 antepechos distintos.
+- **Excepciones:** el estar del altillo queda en **1.30** (con 1.60 pisaba la columna A3; con 1.50 quedaban 2.5 cm de muro).
+  El baño del altillo no tiene nada debajo con qué alinearse (muro ciego entre x 11.0 y 13.3 en PB y P1): se centra a mitad
+  de camino entre las columnas 10.15 y 14.30 (ritmo parejo en el altillo) y sigue sobre la ducha.
+- **Para el interiorista:** blancos (estante alto 7.18–7.60 delante de la ventana), banco ventana del Cuarto 1 con sus libreros
+  y las teclas y la toma del nicho (todo queda corrido 0.55 respecto de la ventana), mesada y lavaplatos de la cocina del altillo
+  (la ventana empieza 0.20 antes que la mesada), ropero del dormitorio del altillo (su punta norte queda delante de la ventana).
+- **Para el ingeniero:** dinteles de las 8 ventanas en su nueva posición; la del estar del altillo queda bajo el borde este del
+  tanque elevado (x 6.30–7.90) y a 0.125 de la columna A3.
+- **Estado:** pedido del dueño (2026-10-06); en el modelo como `propuesto` hasta verlo en la fachada norte.
