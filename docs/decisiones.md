@@ -560,3 +560,18 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   vidrios y puertas), el **sol de Cochabamba** por mes y hora (sombras), y las vistas "desde la calle" y "desde el retiro
   norte". `#calle&foto` da una captura limpia (`salida/fachada-calle-3d.png`) para usar como base en una herramienta de IA.
 - **Estado:** hecho.
+
+## 2026-10-05 — Ronda de huecos en instalaciones (eléctrico, agua, gas)
+- **Qué se agregó (propuesto):** puesta a tierra (jabalina con cámara junto al acceso, al TD); tubo propio de corrientes
+  débiles (router y grabador de cámaras en el estudio, datos por los tubos de B2 al access point del P1 y al altillo);
+  iluminación del P1 dividida en C8 y **C26** (cuartos de los hijos, sus baños, pasillo y vestíbulo); detectores de humo
+  (halls de PB y P1, llegada del altillo) y de gas (cocina, alto). Agua: **impulsión** del pozo corregida (por el retiro
+  hasta el núcleo técnico, x 9.40, sube junto a la bajada del tanque); tanque con rebalse y desagüe de limpieza a lo
+  pluvial, flotante de la bomba y tapa hermética; **llaves de paso** general, por piso y por baño/cocina/lavado;
+  **canillas de afuera** (frente, patio, retiro); **ventilaciones** de desagüe sobre el techo (bajantes y ramales de PB);
+  sumidero de la logia a BP1. Gas: **rejillas** fijas alta y baja en la cocina (YPFB) y llaves de corte (general,
+  cocina, calefón).
+- **Para el electricista:** demanda y tipo de acometida (monofásica mayor o trifásica, con ELFEC); protector de sobretensiones.
+- **Preguntas abiertas al usuario:** alcantarillado en la calle, conexión a SEMAPA y filtro, medidor aparte para el
+  altillo, parrilla a carbón o gas, tubos vacíos al techo para solar.
+- **Estado:** propuesto (aceptado por el usuario como propuesta para los profesionales).

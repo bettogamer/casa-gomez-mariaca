@@ -41,6 +41,7 @@ CIRCUITOS = {
         ("C9", "Tomas suite principal, hall y estar", "toma"),
         ("C10", "Tomas baños, blancos y vestidor; extractores (con diferencial)", "toma"),
         ("C11", "Tomas cuartos de los hijos", "toma"),
+        ("C26", "Iluminación P1: cuartos de los hijos, sus baños, pasillo y vestíbulo", "luz"),
     ],
     "altillo": [
         ("C13", "Iluminación altillo (interior, terraza y franja)", "luz"),
@@ -51,6 +52,9 @@ CIRCUITOS = {
     ],
 }
 # Tomas comunes que se pasan a otro circuito según el ambiente (para no sobrecargar uno solo)
+# Luces (y sus teclas) que se pasan a otro circuito de iluminación según el ambiente
+LUZ_POR_AMBIENTE = {"p1": {a: "C26" for a in ("cuarto_hijo_1", "cuarto_hijo_2", "bano_hijo_1", "bano_hijo_2",
+                                               "pasillo_p1", "vestibulo_hijos")}}
 TOMA_POR_AMBIENTE = {"pb": {"estudio": "C24"}, "p1": {"cuarto_hijo_1": "C11", "cuarto_hijo_2": "C11"}}
 # Qué circuito usa cada clase de punto, por nivel
 USO = {
@@ -487,9 +491,16 @@ def electrico(casa, nivel_id):
         va = mp.get("va", VA_TOMA if FAMILIA.get(t) == "toma" else VA_LUZ if t == "luz" else 0)
         if t == "especial" and "va" not in mp:
             va = next((q[1] for q in ESPECIALES.values() for q in q if q[0] == mp.get("etiqueta")), VA_TOMA)
-        agregar(tipo=t if t in FAMILIA or t == "especial" else "toma", pos=tuple(mp["pos"]), circuito=circ, va=va,
+        if t == "detector":
+            circ, va = "-", 0
+        agregar(tipo=t if t in FAMILIA or t in ("especial", "detector") else "toma", pos=tuple(mp["pos"]), circuito=circ, va=va,
                 etiqueta=mp.get("etiqueta", ""), amb=amb_id, gen=False, manual=True, luces=mp.get("luces"),
                 id=mp.get("id"), alto=mp.get("alto"))
+    # luces y teclas a otro circuito de iluminación según el ambiente
+    for q in puntos:
+        nuevo = LUZ_POR_AMBIENTE.get(nivel_id, {}).get(q.get("amb"))
+        if nuevo and q["tipo"] in ("luz", "interruptor", "conmutador") and q["circuito"] in (uso["luz"], uso["luz_social"]):
+            q["circuito"] = nuevo
     # tomas comunes a otro circuito según el ambiente
     for amb in ambs:
         nuevo = TOMA_POR_AMBIENTE.get(nivel_id, {}).get(amb["id"])
@@ -596,6 +607,8 @@ def sanitario(casa, nivel_id):
         x0, y0, x1, y1 = m["rect"]
         c = ((x0 + x1) / 2, (y0 + y1) / 2)
         puntos.append({"pos": c, "af": af, "ac": ac, "desague": ds, "nombre": m.get("nombre") or m["tipo"]})
+    for cn in cfg.get("canillas") or []:     # canillas de afuera: solo agua fría, sin desagüe
+        puntos.append({"pos": tuple(cn["pos"]), "af": True, "ac": False, "desague": None, "nombre": "canilla"})
     ramas = {"agua_fria": [], "agua_caliente": [], "desague": []}
     for p in puntos:
         if p["af"] and cfg.get("agua_fria"):
@@ -693,6 +706,9 @@ def plano_electrico(casa, nivel):
         elif t == "extractor":
             _circulo(L, x, y, 0.16, 'fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.2"')
             L.texto(x, y + 0.05, "E", 8, 'fill="#2e7d32" font-weight="bold"')
+        elif t == "detector":
+            _circulo(L, x, y, 0.13, 'fill="#fff" stroke="#c62828" stroke-width="1.5"')
+            L.texto(x, y + 0.04, (p.get("etiqueta") or "D")[:1], 7, 'fill="#c62828" font-weight="bold"')
         if p.get("alto") and t != "luz":
             L.texto(x, y + 0.27, f"h{p['alto']:.2f}", 5, 'fill="#555"')
     if cfg.get("tablero"):
@@ -719,6 +735,20 @@ def plano_electrico(casa, nivel):
         x, y = cfg["timbre"]
         _circulo(L, x, y, 0.08, 'fill="#fff" stroke="#212121"')
         L.texto(x - 0.3, y + 0.05, "timbre", 6, 'fill="#212121"')
+    for d in cfg.get("debiles") or []:      # corrientes débiles: datos, cámaras, portero (tubo propio)
+        L.add('<polyline points="%s" fill="none" stroke="#6a1b9a" stroke-width="1.2" stroke-dasharray="2 3"/>'
+              % " ".join("%.1f,%.1f" % L.p(*q) for q in d["linea"]))
+        b = d["linea"][-1]
+        L.texto(b[0] + 0.15, b[1] - 0.12, d.get("etiqueta", ""), 6, 'fill="#6a1b9a" text-anchor="start"')
+    if cfg.get("puesta_tierra"):
+        x, y = cfg["puesta_tierra"]["pos"]
+        for k, w in enumerate((0.22, 0.14, 0.06)):
+            L.linea(x - w, y + k * 0.07, x + w, y + k * 0.07, 'stroke="#2e7d32" stroke-width="1.5"')
+        L.linea(x, y - 0.25, x, y, 'stroke="#2e7d32" stroke-width="1.5"')
+        L.texto(x, y + 0.40, "puesta a tierra", 6, 'fill="#2e7d32"')
+        if cfg.get("tablero"):
+            tx, ty = cfg["tablero"]["pos"]
+            L.linea(x, y - 0.25, tx, ty, 'stroke="#2e7d32" stroke-width="1" stroke-dasharray="5 3"')
     _dibujar_seguridad(L, cfg.get("seguridad") or casa.get("instalaciones", {}).get(nivel["id"], {}).get("seguridad"))
     # leyenda de símbolos
     lx, ly = x0 + 6, y1 + 1.15
@@ -814,6 +844,7 @@ def plano_sanitario(casa, nivel):
         L.texto(x, y + 0.05, "BV", 6, f'fill="{CAFE}" font-weight="bold"')
         if b.get("etiqueta"):
             L.texto(x + 0.25, y - 0.22, b["etiqueta"], 7, f'fill="{CAFE}" text-anchor="start"')
+        L.texto(x + 0.25, y + 0.32, "ventila ↑ sobre el techo", 6, f'fill="{CAFE}" text-anchor="start"')
     for pos, ruta, etiqueta in ramas.get("llegan", []):
         poli(ruta, f'stroke="{CAFE}" stroke-width="2.5" stroke-dasharray="2 3"')
         _circulo(L, pos[0], pos[1], 0.16, f'fill="{CAFE}" stroke="{CAFE}" stroke-width="1.5"')
@@ -890,6 +921,27 @@ def plano_sanitario(casa, nivel):
             L.texto(sx, sy + 0.05, "E", 8, f'fill="{VERDE}" font-weight="bold"')
         L.texto(bx + ux * 0.4 + (0.1 if ux else 0), by + uy * 0.4 + (0.1 if uy else 0), f"Ø{d['diametro']} {d['id']}", 7,
                 f'fill="{VERDE}" font-weight="bold" text-anchor="{"start" if ux >= 0 else "end"}"')
+    # llaves de paso (agua y gas), rejillas de ventilación de ambientes con gas, ventilaciones de desagüe, sumideros
+    for ll in cfg.get("llaves") or []:
+        x, y = ll["pos"]
+        col = GAS if ll.get("gas") else AZUL
+        L.poly([[x - 0.10, y - 0.10], [x + 0.10, y + 0.10], [x + 0.10, y - 0.10], [x - 0.10, y + 0.10]], f'fill="{col}" stroke="{col}"')
+        L.texto(x + 0.15, y - 0.12, ll.get("etiqueta", "LL"), 6, f'fill="{col}" text-anchor="start"')
+    for r in cfg.get("rejillas") or []:
+        x, y = r["pos"]
+        L.poly([[x - 0.15, y - 0.06], [x + 0.15, y - 0.06], [x + 0.15, y + 0.06], [x - 0.15, y + 0.06]], 'fill="#fff" stroke="#9a6700" stroke-width="1.2"')
+        L.texto(x, y - 0.12, r.get("etiqueta", "rejilla"), 6, 'fill="#9a6700"')
+    for v in cfg.get("ventilaciones") or []:
+        x, y = v["pos"]
+        _circulo(L, x, y, 0.10, f'fill="#fff" stroke="{CAFE}" stroke-width="1.2" stroke-dasharray="2 1"')
+        L.texto(x + 0.15, y + 0.30, v.get("etiqueta", "V ↑ sobre el techo"), 6, f'fill="{CAFE}" text-anchor="start"')
+    for sd in cfg.get("sumideros") or []:
+        x, y = sd["pos"]
+        L.poly([[x - 0.10, y - 0.10], [x + 0.10, y - 0.10], [x + 0.10, y + 0.10], [x - 0.10, y + 0.10]], f'fill="#efebe9" stroke="{CAFE}" stroke-width="1.2"')
+        L.texto(x + 0.15, y - 0.15, sd.get("etiqueta", "sumidero"), 6, f'fill="{CAFE}" text-anchor="start"')
+    for cn in cfg.get("canillas") or []:
+        x, y = cn["pos"]
+        L.texto(x + 0.15, y + 0.25, cn.get("etiqueta", "canilla"), 6, f'fill="{AZUL}" text-anchor="start"')
     # puntos de artefactos
     for p in puntos:
         x, y = p["pos"]

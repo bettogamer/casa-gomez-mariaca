@@ -320,7 +320,7 @@ techos:
   # Tanque elevado: base propia de hormigón sobre la columna A3 y el muro de la escalera, forrado de ladrillo.
   # Capacidad y altura SUPUESTAS (tanque de ~2500 L, ~1.55 de diámetro × 1.55 de alto): las define el plomero/ingeniero.
   # Base subida a +10.50 (usuario 2026-10-05): ~2.5 m sobre la entrada de agua del calefón del altillo (~+8.00).
-  tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.50, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado}
+  tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.50, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado, nota: "con tapa hermética; REBALSE y DESAGÜE DE LIMPIEZA con llave, a la canaleta/bajante pluvial del techo (no al sanitario); FLOTANTE eléctrico que prende y apaga la bomba del pozo (C20); salida con llave de paso y filtro"}
   postes:
     - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
     - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
@@ -709,6 +709,11 @@ instalaciones:
       # si se quiere, timbre inalámbrico en el marco de la puerta.
       # Seguridad (el usuario quiere todo, 2026-10-05). ESQUEMA PROPUESTO: ubicaciones a definir con el instalador;
       # dejar tubos vacíos antes de revocar. Circuitos C22 (portón) y C23 (alarma, cámaras, portero; con respaldo).
+      # Ronda de huecos (2026-10-05): puesta a tierra y tubo propio de corrientes débiles (datos, cámaras, portero).
+      puesta_tierra: {pos: [-2.40, 6.35], estado: propuesto, nota: "jabalina de cobre (o malla) con cámara de inspección en el jardín junto al acceso, cable al TD; el electricista mide la resistencia (NB 777). Protector contra sobretensiones en el TD"}
+      debiles:
+        - {linea: [[8.925, 1.30], [8.925, 3.25], [4.55, 3.25], [4.55, 2.95]], etiqueta: "datos ↑ P1 y altillo: tubo PROPIO (no con 220 V) en los tubos dejados junto a B2", estado: propuesto}
+        - {linea: [[9.30, 1.30], [9.30, 0.05]], etiqueta: "router + grabador de cámaras (NVR) en el estudio; cámaras y portero llegan acá", estado: propuesto}
       seguridad:
         porton: {pos: [-1.30, 6.40], etiqueta: "← portón con motor + portero (calle)", nota: "motor y portero en el portón de la calle (~15 m); tubo enterrado hasta el ingreso"}
         portero: {pos: [0.65, 6.60], nota: "monitor del portero en el ingreso, junto al juego de teclas, a 1.40", estado: propuesto}
@@ -749,6 +754,8 @@ instalaciones:
       # Puntos A MANO (interiorista 2026-10-05): reemplazan a los generados de su familia en su ambiente.
       # Alturas al eje de la caja, desde el piso terminado; las confirma el electricista (NB 777).
       puntos:
+        - {amb: cocina, tipo: detector, etiqueta: GAS, pos: [15.40, 6.595], alto: 2.30, estado: propuesto, nota: "detector de gas natural (el gas sube: alto, cerca del techo), cerca de la cocina pero no encima"}
+        - {amb: hall, tipo: detector, etiqueta: HUMO, pos: [5.80, 5.60], estado: propuesto, nota: "detector de humo en el techo del hall"}
         # Ingreso: juego de teclas en el muro sur, junto a la puerta (la manija está al sur; la columna C1 sobresale hasta x 0.125)
         - {amb: ingreso, tipo: interruptor, pos: [0.27, 6.645], alto: 1.10, luces: [ingreso], estado: propuesto, nota: "juego de teclas de la entrada (1 de 3): luz del ingreso"}
         - {amb: ingreso, tipo: conmutador, pos: [0.37, 6.645], alto: 1.10, luces: [hall], estado: propuesto, nota: "juego de la entrada (2 de 3): luces del hall, conmutadas con el juego del hall (x 6.975)"}
@@ -820,6 +827,24 @@ instalaciones:
         - {amb: lavado, tipo: toma, pos: [7.125, 5.45], alto: 1.10, estado: propuesto, nota: "PLANCHA: se plancha en el medio del lavado; con diferencial"}
         - {amb: lavado, tipo: toma, pos: [9.05, 5.60], alto: 1.10, estado: propuesto, nota: "general, entre el ropero de blancos y la lavadora manual"}
     sanitario:
+      # Ronda de huecos (2026-10-05): canillas de afuera, llaves de paso, rejillas de la cocina (gas), ventilación de desagües.
+      canillas:
+        - {pos: [-0.20, 4.60], etiqueta: "canilla (jardín y terraza del frente)", estado: propuesto}
+        - {pos: [17.05, 3.60], etiqueta: "canilla (patio)", estado: propuesto}
+        - {pos: [5.00, -0.20], etiqueta: "canilla (retiro norte)", estado: propuesto}
+      llaves:
+        - {pos: [9.10, 0.05], etiqueta: "LL general AF de la casa (bajada del tanque)"}
+        - {pos: [7.20, 2.45], etiqueta: "LL baño"}
+        - {pos: [16.75, 5.70], etiqueta: "LL cocina"}
+        - {pos: [7.20, 6.30], etiqueta: "LL lavado"}
+        - {pos: [-0.40, -0.40], gas: true, etiqueta: "LL general de gas (junto al medidor)"}
+        - {pos: [15.20, 6.40], gas: true, etiqueta: "LL gas cocina"}
+      rejillas:
+        - {pos: [16.875, 6.30], etiqueta: "rejilla alta 2.20 (YPFB)"}
+        - {pos: [16.875, 2.90], etiqueta: "rejilla baja 0.30 (YPFB)"}
+      ventilaciones:
+        - {pos: [8.80, 0.05], etiqueta: "V Ø50 baño y lavado → se une a la bajante del Baño 1 (x 9.25) y sale sobre el techo"}
+        - {pos: [16.70, 6.20], etiqueta: "V Ø50 cocina → sube por el muro este hasta sobre el techo"}
       # Materiales (usuario 2026-10-05): agua fría y caliente en PPR por termofusión (fría PN16–PN20; caliente PN20
       # mínimo, mejor PPR con fibra/compuesto; troncales 25 mm, ramales 20 mm; caliente aislada con coquilla).
       # Desagües en PVC sanitario (110 inodoros y bajantes, 50 el resto). Gas: material que define el gasista (YPFB).
@@ -827,7 +852,9 @@ instalaciones:
       # la casa (decisión del usuario 2026-10-03). Núcleo técnico en el muro norte, entre baño y
       # estudio (exterior, en el retiro): bajada de agua fría del tanque. El calefón está en el ALTILLO (2026-10-05).
       pozo: {pos: [21.20, 3.00], va_bomba: 750, nota: "pozo con bomba (aún no comprada: sumergible ~½–1 HP según profundidad, la elige el pocero/plomero); circuito propio C20 con guardamotor y flotante del tanque; distancias a desagües a confirmar con el instalador"}
-      impulsion: [[21.20, 3.00], [17.15, 3.00], [17.15, 0.10]]   # del pozo a la subida al tanque (esquina NE)
+      # Impulsión corregida (2026-10-05): del pozo por el retiro norte hasta el núcleo técnico y sube junto a la bajada del
+      # tanque (x 9.40), por fuera del muro norte; arriba llega al tanque (sobre A3) por un tramo corto.
+      impulsion: [[21.20, 3.00], [21.20, -0.40], [9.40, -0.40]]
       bajada_tanque: {pos: [9.10, -0.30], nota: "bajada de agua fría desde el tanque elevado (muro norte)"}
       # Varias troncales: listas de polilíneas.
       agua_fria: [[[9.10, -0.30], [9.10, 3.10], [16.60, 3.10]], [[9.10, 3.10], [7.20, 3.10]]]
@@ -872,6 +899,8 @@ instalaciones:
 
   p1:
     electrico:
+      debiles:
+        - {linea: [[4.55, 2.95], [4.55, 3.30], [9.20, 3.30], [9.20, 5.50], [9.325, 5.50]], etiqueta: "datos desde PB (tubo propio) al access point del estar", estado: propuesto}
       montante: {pos: [4.40, 2.88], etiqueta: "montante ↕ (B2)"}
       alimentador: [[4.40, 2.88], [4.52, 2.98]]
       tablero: {pos: [4.52, 2.98], nota: "subtablero del primer piso junto a la columna B2 (corrido hacia la puerta del dormitorio: no al pie de la grada al altillo), lado del hall (muro x=4.40 entre B2 y la puerta del dormitorio): los tubos salen por la cara sur de B2, dentro de ese mismo muro (dicho por el usuario 2026-10-04); alimentado desde el TD de PB (tubos por dentro de B2 en las dos losas)"}
@@ -879,6 +908,7 @@ instalaciones:
       # Alturas al eje de la caja, desde el piso terminado; las confirma el electricista (NB 777).
       # Caras de muro: perimetrales a 0.025 del eje (norte/oeste) o 0.025 antes (sur/este); interiores a ±0.075.
       puntos:
+        - {amb: hall_p1, tipo: detector, etiqueta: HUMO, pos: [5.40, 4.00], estado: propuesto, nota: "detector de humo en el techo del hall (donde hay losa)"}
         # Hall: juego de 4 teclas en el muro del vestidor, frente a la llegada de la escalera y junto a la puerta del dormitorio
         - {amb: hall_p1, tipo: interruptor, pos: [5.40, 4.125], alto: 1.10, estado: propuesto, nota: "juego del hall (1 de 4): luz del hall"}
         - {amb: hall_p1, tipo: conmutador, pos: [5.50, 4.125], alto: 1.10, luces: [luz_escalera, luz_escalera_descanso], estado: propuesto, nota: "juego del hall (2 de 4): LUZ DE ESCALERA PB↔P1 (ids luz_escalera y luz_escalera_descanso, en el plano de PB), conmutada con la tecla del hall de PB (x 6.975, y 4.04). Cable por el montante de B2"}
@@ -976,6 +1006,13 @@ instalaciones:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte). El agua caliente BAJA del calefón del
       # altillo por fuera del muro norte junto a A2 (x 4.20) y entra bajo el piso: suite cerca; baños de los hijos por
       # el hall y el pasillo. Sin termotanque (2026-10-05). Caños de agua caliente aislados con coquilla.
+      llaves:
+        - {pos: [9.30, 0.20], etiqueta: "LL general P1"}
+        - {pos: [9.55, 2.55], etiqueta: "LL Baño 1"}
+        - {pos: [9.55, 4.05], etiqueta: "LL Baño 2"}
+        - {pos: [3.20, 5.75], etiqueta: "LL suite"}
+      sumideros:
+        - {pos: [-0.95, 4.05], etiqueta: "sumidero de la logia (piso 1 % hacia acá) → BP1 por la esquina del volado", estado: propuesto}
       bajada_tanque: {pos: [9.10, -0.30], etiqueta: "AF ↓ tanque"}
       subida_caliente: {pos: [4.20, -0.30], etiqueta: "AC ↓ del calefón (altillo), por fuera"}
       agua_fria: [[[9.10, -0.30], [9.10, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
@@ -1007,9 +1044,12 @@ instalaciones:
 
   altillo:
     electrico:
+      debiles:
+        - {linea: [[4.55, 2.95], [4.55, 4.30], [7.20, 4.30]], etiqueta: "datos desde PB (tubo propio) al departamento", estado: propuesto}
       montante: {pos: [4.40, 2.88], etiqueta: "montante ↓ (B2)"}
       alimentador: [[4.40, 2.88], [4.40, 3.95], [4.75, 3.95], [4.75, 4.55]]
       puntos:
+        - {amb: llegada_alt, tipo: detector, etiqueta: HUMO, pos: [5.80, 4.30], estado: propuesto, nota: "detector de humo en la llegada"}
         - {amb: terraza_alt, tipo: toma_ext, pos: [4.325, 1.35], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (220 V): enchufe con tapa al costado del gabinete"}
         # Puntos A MANO (interiorista 2026-10-05): reemplazan a los generados de su familia en su ambiente.
         # Alturas al eje de la caja, desde el piso terminado; las confirma el electricista (NB 777).
@@ -1078,6 +1118,12 @@ instalaciones:
       # bajo el techo de la terraza (sin lluvia), fuera de los retiros, sin ventanas cerca. Sin termotanque.
       # Anafe eléctrico (el gas sube solo al calefón). Tanque a ~2.5 m sobre el calefón: poca presión →
       # calefón de ENCENDIDO A BAJA PRESIÓN; si no alcanza, presurizadora para TODA la casa (lo define el plomero).
+      llaves:
+        - {pos: [7.30, 0.45], etiqueta: "LL general altillo"}
+        - {pos: [10.90, 0.45], etiqueta: "LL cocina"}
+        - {pos: [11.45, 2.30], etiqueta: "LL baño"}
+        - {pos: [11.45, 4.55], etiqueta: "LL lavandería"}
+        - {pos: [3.90, 0.55], gas: true, etiqueta: "LL gas calefón"}
       bajada_tanque: {pos: [7.30, 0.80], etiqueta: "AF ↓ del tanque (encima)"}
       agua_fria: [[[7.30, 0.80], [7.30, 0.30], [11.20, 0.30], [11.20, 2.30], [12.30, 2.30]], [[11.20, 2.30], [11.20, 4.60], [10.20, 4.60]], [[7.30, 0.30], [4.15, 0.30], [4.15, 0.55]]]
       calefon: {pos: [4.15, 0.80], estado: propuesto, nota: "calefón a gas natural de TODA la casa, en la terraza del altillo, colgado en el muro x=4.40 (cara de la terraza) junto a la columna A2, base a ~1.40. SUGERIDO: ~18–20 L/min nominal (a ~2550 m rinde ~20–25 % menos), tiro forzado, electrónico modulante, ENCENDIDO A BAJA PRESIÓN (~0.1 bar: el tanque queda ~2.5 m arriba), con protección ANTIHIELO, apto exterior. PROTECCIÓN: gabinete metálico para calefón de exterior (chapa galvanizada pintada, rejillas arriba y abajo, nunca hermético), con candado; el techo de la terraza ya lo protege de la lluvia; salida de gases por un caño que sube por encima del techo de la terraza; llave de paso del gas a la vista. Lo dimensiona y aprueba el gasista (YPFB)"}
@@ -1156,6 +1202,7 @@ verificar_en_obra:
   - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
+  - "Instalaciones (ronda de huecos 2026-10-05): el electricista calcula la DEMANDA (~37 kVA instalados: horno, anafe, lavavajillas, bomba) y define con ELFEC si la acometida es monofásica de mayor amperaje o trifásica; protector contra sobretensiones en el TD; medir la resistencia de la puesta a tierra. El plomero confirma ventilaciones de desagüe sobre el techo, rebalse y limpieza del tanque, flotante de la bomba. YPFB: rejillas de la cocina y llaves de corte"
   - "Logia de la suite (P1): muro bajo de 1.00 + celosía de madera en el costado norte, en la punta del volado: el ingeniero confirma el peso y el anclaje de la celosía a la losa del altillo; el arquitecto, que con celosía no hay vista directa al Lote 105 (logia a 2.01 del lindero)"
   - "Tanque elevado: base subida a +10.50 (~2.5 m sobre la entrada del calefón del altillo). Base propia de hormigón sobre A3 y el muro de la escalera, aún no construida: el ingeniero la dimensiona con la nueva altura (más palanca con viento y sismo)"
   - "Calefón en la terraza del altillo (junto a A2): el gasista confirma con YPFB la subida de gas a la vista por la fachada norte, la salida de gases por encima del techo de la terraza y las distancias; el plomero, que el modelo elegido encienda con ~0.25 bar (si no, presurizadora para toda la casa)"
