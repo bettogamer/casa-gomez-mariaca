@@ -450,7 +450,7 @@ def electrico(casa, nivel_id):
     san = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {})
     fuente = san.get("cisterna") or san.get("pozo")
     if fuente and "bomba" in uso:
-        agregar(tipo="especial", pos=tuple(fuente["pos"]), circuito=uso["bomba"], va=fuente.get("va_bomba", 750), etiqueta="B",
+        agregar(tipo="especial", pos=tuple(fuente.get("bomba") or fuente["pos"]), circuito=uso["bomba"], va=fuente.get("va_bomba", 750), etiqueta="B",
                 desc="bomba de agua", amb=None, gen=False)
     # seguridad: cargas del portón y de alarma + cámaras + portero (se dibujan aparte)
     seg = cfg.get("seguridad") or {}
@@ -869,10 +869,19 @@ def plano_sanitario(casa, nivel):
         _circulo(L, b[0], b[1], 0.10, 'fill="#00838f"')
         L.texto(b[0] + 0.2, b[1] - 0.15, "↑ sube al tanque", 7, 'fill="#00838f" text-anchor="start"')
     if cfg.get("cisterna"):
-        x, y = cfg["cisterna"]["pos"]
-        L.poly([[x - 0.8, y - 0.6], [x + 0.8, y - 0.6], [x + 0.8, y + 0.6], [x - 0.8, y + 0.6]], 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5" stroke-dasharray="4 2"')
-        L.texto(x, y + 0.05, "CISTERNA (existente) + bomba", 7, 'fill="#00838f" font-weight="bold"')
-        L.texto(x, y + 0.85, "← SEMAPA (medidor en la calle)", 6, 'fill="#00838f"')
+        cis = cfg["cisterna"]
+        x, y = cis["pos"]
+        cx0, cy0, cx1, cy1 = cis.get("rect") or [x - 0.8, y - 0.6, x + 0.8, y + 0.6]
+        L.poly([[cx0, cy0], [cx1, cy0], [cx1, cy1], [cx0, cy1]], 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5" stroke-dasharray="4 2"')
+        if cis.get("tapa"):            # tapa de inspección 0.60 × 0.60
+            tx, ty = cis["tapa"]
+            L.poly([[tx - 0.3, ty - 0.3], [tx + 0.3, ty - 0.3], [tx + 0.3, ty + 0.3], [tx - 0.3, ty + 0.3]], 'fill="none" stroke="#00838f" stroke-width="1"')
+        if cis.get("bomba"):           # bomba (cámara seca o sumergible)
+            bx, by = cis["bomba"]
+            _circulo(L, bx, by, 0.18, 'fill="#fff" stroke="#00838f" stroke-width="1.5"')
+            L.texto(bx, by + 0.05, "B", 7, 'fill="#00838f" font-weight="bold"')
+        L.texto(x, cy0 - 0.15, cis.get("etiqueta", "CISTERNA (existente) + bomba"), 7, 'fill="#00838f" font-weight="bold"')
+        L.texto(x, cy1 + 0.30, "← SEMAPA (medidor en la calle)", 6, 'fill="#00838f"')
     if cfg.get("pozo"):
         x, y = cfg["pozo"]["pos"]
         _circulo(L, x, y, 0.45, 'fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"')

@@ -106,7 +106,7 @@ def _piezas(casa, vista, pal):
                 lineas(u0, u1, n["cota"], z1, d - 0.02, 0.10, pal["celosia"], orden=2)
         for ab in aberturas(casa, n["id"]):
             p = _plano(ab["de"], ab["a"], vista)
-            if not p or ab["tipo"] == "vano":
+            if not p or ab["tipo"] in ("vano", "porton") or ab.get("en_cerco"):     # el portón y el cerco de la calle no van en las fachadas
                 continue
             u0, u1, d = p
             alto = ab.get("alto", 2.10)

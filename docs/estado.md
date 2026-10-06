@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-05_
+_Última actualización: 2026-10-06_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -40,16 +40,31 @@ _Última actualización: 2026-10-05_
   sobre la lavandería. Montante eléctrico en la columna B2.
 
 ## Próximo paso
-**Amoblamiento definitivo de toda la casa listo (2026-10-05):** PB, P1 y altillo con muebles y puntos eléctricos a mano
-(`instalaciones.<nivel>.electrico.puntos`) hechos por el `interiorista`; generador eléctrico nuevo (caras reales de
-muro, conmutadores, seguridad, circuitos C18–C25). Ver `docs/decisiones.md`.
+_Última sesión: 2026-10-06._
 
-Decidido: la salida del estar del altillo a la franja queda corrediza.
+**Hecho en la sesión del 2026-10-05/06** (detalle en `docs/decisiones.md`):
+- Amoblamiento definitivo de PB, P1 y altillo con puntos eléctricos a mano (`instalaciones.<nivel>.electrico.puntos`);
+  generador eléctrico nuevo; ronda de huecos de instalaciones (tierra, débiles, detectores, llaves, canillas,
+  ventilaciones, rejillas de gas).
+- Muros: ladrillo de 6 huecos; living de cabeza, resto de soga al ras exterior de las columnas.
+- Living sin corrediza (TV al oeste, ventana norte de 3.00); logia con muro bajo + celosía al norte.
+- Calefón de toda la casa en la terraza del altillo junto a A2 (sin termotanques); tanque a +10.50; caños PPR.
+- Agua: SEMAPA → cisterna enterrada (nueva, junto a la puerta peatonal) → bomba → tanque. Reserva para paneles solares.
+- Llegada del altillo según la obra (hueco extra sobre el tramo de 10; muro propuesto sobre el eje B).
+- Fachada: alzados en `make build`, opción **C** elegida (blanco, piedra, madera, gris); 3D con materiales y sol.
+- **Frente aprobado:** autos en fila al norte con portón corredizo de 3.20, puerta peatonal al sur, camino recto,
+  pasto al medio, cisterna junto a la puerta, muro alto con corona anti-gatos.
 
-Después: revisión del altillo (`revisor-estructural`, `revisor-habitabilidad`) y, para toda la casa junta,
-exteriores (portón, jardín, parrilla movible en el patio), fachada, terminaciones, carpintería y rejas.
-Mejoras del generador que quedan (hoy se resuelven con puntos a mano): enchufes junto a la cama, tecla del lado de la
-bisagra cuando no hay lugar, hueco de la escalera, exteriores sin techo, uniones entre pisos.
+**Siguiente (en este orden):**
+1. Frente: `revisor-estructural` (muro alto de 2.50, viga del riel del portón, excavación de la cisterna junto al
+   Lote 103, colector y gas bajo los autos) y `revisor-habitabilidad` (norma: altura del muro, art. 49 cisterna,
+   art. 53 b árbol en la acera, rebaje del cordón, niveles).
+2. `interiorista` en el frente: luces del camino y del estacionamiento con sensor, toma con tapa y canilla para lavar
+   autos, cámara mirando al portón (las luces que hoy pone el generador en el centro de los exteriores son provisorias).
+3. Llevar al muro de la calle la acometida eléctrica, el gas y el colector (hoy arrancan junto a la casa), con cámara
+   final del colector junto al muro.
+4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
+   Fachada: dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
 
 ## Pendientes abiertos
 - Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el

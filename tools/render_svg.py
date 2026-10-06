@@ -147,6 +147,8 @@ def dibujar_muros(L, casa, nivel_id):
                 px, py = x0 + dx * k / n, y0 + dy * k / n
                 L.linea(px - nx, py - ny, px + nx, py + ny, 'stroke="#7a5230" stroke-width="1.5"')
             L.texto((x0 + x1) / 2 + nx * 4, (y0 + y1) / 2 + ny * 4 + 0.05, "celosía de madera", 8, 'fill="#7a5230" font-style="italic"')
+        elif m["tipo"] == "cerco":       # muro de cerco exterior (muro de la calle)
+            L.linea(x0, y0, x1, y1, f'stroke="#455a64" stroke-width="{0.15 * ESC:.1f}" stroke-linecap="square"')
         else:
             L.linea(x0, y0, x1, y1, 'stroke="#555" stroke-width="3"')
 
@@ -160,6 +162,25 @@ def dibujar_aberturas(L, casa, nivel_id):
         largo = (dx * dx + dy * dy) ** 0.5
         if ab["tipo"] == "vano":
             L.linea(x0, y0, x1, y1, 'stroke="#999" stroke-width="1" stroke-dasharray="2 4"')
+        elif ab["tipo"] == "porton":
+            # portón de la calle: hoja cerrada (línea gruesa), hojas guardadas (punteado, por dentro) y apertura peatonal
+            ux, uy = dx / largo, dy / largo
+            nx, ny = -uy, ux
+            hx0, hy0, hx1, hy1 = huella_casa(casa)
+            if ((hx0 + hx1) / 2 - x0) * nx + ((hy0 + hy1) / 2 - y0) * ny < 0:
+                nx, ny = -nx, -ny               # normal hacia adentro del lote
+            L.linea(x0 + nx * 0.12, y0 + ny * 0.12, x1 + nx * 0.12, y1 + ny * 0.12, 'stroke="#263238" stroke-width="4"')
+            if ab.get("apila_hasta"):
+                ax, ay = ab["apila_hasta"]
+                for k in (0.22, 0.30):
+                    L.linea(x1 + nx * k, y1 + ny * k, ax + nx * k, ay + ny * k, 'stroke="#263238" stroke-width="1.5" stroke-dasharray="5 3"')
+                L.texto((x1 + ax) / 2 + nx * 1.10, (y1 + ay) / 2 + ny * 1.10 + 0.05, "hojas guardadas", 7, 'fill="#263238" font-style="italic"')
+            if ab.get("peatonal"):
+                p = ab["peatonal"]
+                px, py = x0 + ux * p, y0 + uy * p
+                L.linea(px, py, px + nx * 0.45, py + ny * 0.45, 'stroke="#c62828" stroke-width="1.5"')
+                L.texto(x0 + ux * p / 2 + nx * 0.75, y0 + uy * p / 2 + ny * 0.75 + 0.05, f"peatonal {p:.2f}", 7, 'fill="#c62828"')
+            L.texto(x0 + dx * 0.25 + nx * 1.60, y0 + dy * 0.25 + ny * 1.60 + 0.05, ab.get("etiqueta") or f"portón {largo:.2f}", 8, 'fill="#263238" font-weight="bold"')
         elif ab["tipo"] == "puerta_corrediza":
             # hoja que se esconde dentro del muro (línea punteada = bolsillo)
             hx, hy = ab.get("corre_hacia", [x1 + dx, y1 + dy])
