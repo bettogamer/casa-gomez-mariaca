@@ -610,10 +610,13 @@ def sanitario(casa, nivel_id):
         c = ((x0 + x1) / 2, (y0 + y1) / 2)
         puntos.append({"pos": c, "af": af, "ac": ac, "desague": ds, "nombre": m.get("nombre") or m["tipo"]})
     for cn in cfg.get("canillas") or []:     # canillas de afuera: solo agua fría, sin desagüe
-        puntos.append({"pos": tuple(cn["pos"]), "af": True, "ac": False, "desague": None, "nombre": "canilla"})
+        puntos.append({"pos": tuple(cn["pos"]), "af": True, "ac": False, "desague": None, "nombre": "canilla",
+                       "recorrido": [tuple(q) for q in cn.get("recorrido") or []]})   # `recorrido` = caño real (no la L más corta)
     ramas = {"agua_fria": [], "agua_caliente": [], "desague": []}
     for p in puntos:
-        if p["af"] and cfg.get("agua_fria"):
+        if p.get("recorrido"):
+            ramas["agua_fria"].append(p["recorrido"])
+        elif p["af"] and cfg.get("agua_fria"):
             ramas["agua_fria"].append(_escuadra(p["pos"], _proyectar(p["pos"], cfg["agua_fria"])))
         if p["ac"] and cfg.get("agua_caliente"):
             ramas["agua_caliente"].append(_escuadra(p["pos"], _proyectar(p["pos"], cfg["agua_caliente"])))
@@ -779,8 +782,9 @@ def _dibujar_seguridad(L, seg):
         x, y = seg["portero"]["pos"]
         L.poly([[x - 0.10, y - 0.10], [x + 0.10, y - 0.10], [x + 0.10, y + 0.10], [x - 0.10, y + 0.10]], f'fill="#fff" stroke="{VIO}" stroke-width="1.2"')
         L.texto(x, y + 0.04, "P", 6, f'fill="{VIO}" font-weight="bold"')
-        if seg.get("porton"):
-            px, py = seg["porton"]["pos"]
+        panel = seg["portero"].get("panel") or (seg.get("porton") or {}).get("pos")   # frente de calle del portero
+        if panel:
+            px, py = panel
             L.linea(px, py, x, y, f'stroke="{VIO}" stroke-width="0.8" stroke-dasharray="4 3"')
     for c in seg.get("camaras") or []:
         x, y = c["pos"]
