@@ -13,7 +13,7 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
    rellenar con hormigón. — disenador, plomero, albañil.
 2. ✅ **Puerta del depósito (PB, x 6.07–6.87) a 5.5 cm de A3.** Pasarla a 6.00–6.80, bisagra al oeste. — disenador.
 3. ✅ **Puerta del baño de PB (x 8.00–8.70) a 7.5 cm del muro del estudio.** Pasarla a 7.95–8.65. — disenador.
-4. ⏳ **Bajantes en el camino de la entrada:** la de la suite (−0.30, 6.50) cae dentro de la ducha de la suite y queda a
+4. ✅ **Bajantes en el camino de la entrada:** la de la suite (−0.30, 6.50) cae dentro de la ducha de la suite y queda a
    7.5 cm del marco de la puerta de entrada; la pluvial BP1 (−1.00, 6.55) atraviesa la ducha y el volado. Propuesta: las dos
    por fuera en la esquina suroeste de la caja gris (x ≈ −1.25, y ≈ 6.65), en un cajón gris de 0.30 × 0.30. Alternativa:
    BP1 a la esquina norte. — plomero, disenador, ingeniero (antes del muro junto a la puerta y del piso del acceso).

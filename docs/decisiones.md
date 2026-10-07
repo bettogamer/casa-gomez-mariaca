@@ -834,3 +834,27 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Queda para el punto 7:** los caños del núcleo (x 9.10–9.25) a 10 cm de la ventana del estudio; mudarlos a una pilastra
   sobre A3 se decide con el ordenamiento de la fachada norte.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-07 — Bajantes de la entrada por fuera, en un cajón de chapa (revisión del arquitecto, punto 4)
+- **Por qué:** la bajante de la suite caía dentro de la ducha y, en PB, a 7.5 cm del marco de la puerta de entrada; la
+  pluvial BP1 atravesaba la ducha y el volado. Las dos quedaban paradas en el camino de entrada.
+- **Qué:** las dos bajan juntas por fuera, en un CAJÓN DE CHAPA de 2 mm gris (color de la caja) de 0.30 × 0.30 en la esquina
+  suroeste del volado (x −1.425 a −1.125, y 6.495–6.795), del suelo a +8.40, pegado al canto en los tres niveles, sobre dado
+  propio de 0.40 × 0.30 con junta contra el cimiento del muro sur; anclado solo a hormigón macizo; tapas de registro en la
+  cara norte. No se perfora el volado. El camino queda de 1.20 junto al cajón.
+- **Baño de la suite:** muro del frente al ras del canto (−1.125) (antes dibujado medio en el aire); inodoro COLGADO con
+  estanque empotrado en un muro técnico de 0.20 (hueco o liviano); puerta del inodoro hacia AFUERA (bisagra al norte);
+  plato de 0.875 × 1.015 con sumidero en el rincón y salida corta a la bajante; poyo y zócalo técnico a 0.45; mampara fija de
+  0.50; ventana de la ducha en 5.65–6.35. Teclas: inodoro y 5.46, ducha y 6.35.
+- **Agua de lluvia:** logia con canaleta-cornisa de chapa gris por todo el frente (sin sumidero en el volado); bajada del
+  techo de la terraza del altillo como poste negro de 0.10 con canaleta de piso hasta el sumidero del rincón; BP1 a un pozo
+  de absorción en el jardín con rebalse a la calle (nunca al desagüe sanitario).
+- **PB:** cámara CI1 en el eje de la puerta de entrada (−1.29, 5.85), tapa rellenable hermética, antes del piso; colector
+  alargado hasta CI2 (−4.00, −0.85).
+- **Descartadas:** cajón de ladrillo (0.50 × 0.40: come el camino); todo el desagüe por el contrapiso (~2 t más en la punta
+  del volado); bajante en la esquina noroeste; ducto dentro de la ducha (perfora el volado); BP1 al norte; canal solo de
+  2.4 m o gárgola para la logia.
+- **Ingeniero / arquitecto de la obra:** peso nuevo en la punta del volado (~500 kg); qué hay en el canto entre B y C para
+  colgar la cornisa; zapatas de C1 y B1 y cimiento del muro sur (ninguna zanja por debajo); prueba de infiltración del pozo;
+  el cajón queda en el retiro frontal (~1.40 de la fachada).
+- **Estado:** aprobado por el usuario (las tres recomendaciones).

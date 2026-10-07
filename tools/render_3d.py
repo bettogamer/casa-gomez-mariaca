@@ -622,7 +622,7 @@ def datos_techos(casa):
     for c in t.get("canaletas", []):
         ag = agua_en(*c["de"]) or agua_en(*c["a"])
         canaletas.append({"de": c["de"], "a": c["a"], "cota": (ag["baja"] if ag else 9.0) - 0.12})
-    bajantes = [{"pos": b["pos"], "tope": min(a["baja"] for a in aguas)} for b in t.get("bajantes", [])]
+    bajantes = [{"pos": b["pos"], "tope": b.get("tope") or min(a["baja"] for a in aguas)} for b in t.get("bajantes", [])]
     return {
         "aguas": aguas,
         "antepechos": [{"de": m["de"], "a": m["a"], "base": m["cota_base"], "tope": m["cota_tope"]}

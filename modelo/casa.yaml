@@ -276,8 +276,10 @@ ambientes:
     - {id: logia, nombre: Logia, tipo: exterior, rect: [-1.125, 0.00, 0.00, 4.20], etiqueta: [-0.56, 3.75], estado: definido, nota: "balcón cubierto sobre el volado de 1 m (la losa del altillo vuela igual y lo techa); al sur la pared del baño, al norte muro bajo de 1.00 + celosía de madera hasta la losa (2026-10-05), baranda al frente; sombrea el dormitorio del sol de la tarde"}
     - {id: vestidor_principal, nombre: Vestidor, tipo: servicio, rect: [3.40, 4.20, 5.85, 6.67], etiqueta: [4.60, 5.45], estado: definido, nota: "~2.3 × 2.32 libres (achicado para agrandar el estar), muebles en U con pasillo de 1.20; se entra desde los lavamanos"}
     - {id: lavamanos_ppal, nombre: Lavamanos, tipo: bano, rect: [0.90, 4.20, 3.40, 6.67], etiqueta: [2.15, 5.20], estado: definido, nota: "zona abierta con doble lavamanos; da al inodoro y a la ducha, cada uno con su puerta; sin ventana: extractor en cielo falso con ducto corto al frente (por encima del inodoro)"}
-    - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.125, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
-    - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.125, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: definido, nota: "ambiente propio ~1.90 × 1.15, sobre el volado; ventana alta al frente"}
+    # 2026-10-07 (PROPUESTO, revisores del punto 4): el muro del frente de la caja va con la cara exterior AL RAS del canto del
+    # volado (x -1.125), apoyado entero en la losa: su eje pasa a x -1.05 (antes -1.125, la mitad del muro quedaba en el aire).
+    - {id: wc_ppal, nombre: Inodoro, tipo: bano, rect: [-1.05, 4.20, 0.90, 5.45], etiqueta: [0.10, 5.25], estado: propuesto, nota: "ambiente propio ~1.80 × 1.10 libres, sobre el volado; ventana alta al frente. Muro del frente al ras del canto del volado (2026-10-07: 7.5 cm menos adentro)"}
+    - {id: ducha_ppal, nombre: Ducha, tipo: bano, rect: [-1.05, 5.45, 0.90, 6.67], etiqueta: [0.45, 5.75], estado: propuesto, nota: "ambiente propio ~1.80 × 1.12 libres, sobre el volado; ventana alta al frente. Muro del frente al ras del canto del volado (2026-10-07: 7.5 cm menos adentro)"}
   altillo:
     # ── Altillo: departamento temporal para un hijo casado (pareja + bebé), aprobado 2026-10-03 ──
     # Terraza adelante; franja de 2 m libre al sur (normativa); la escalera llega ADENTRO del departamento
@@ -324,12 +326,18 @@ muros:
 
 # Lo que queda por encima del plano de corte (se dibuja punteado): aleros, tanque sobre el techo.
 proyecciones:
+  # Cajón gris de las bajantes de la suite y BP1 (2026-10-07, PROPUESTO): no es muro de la casa; se marca en las tres plantas.
+  pb:
+    - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto, nota: "decisión del dueño 2026-10-07: CHAPA PLEGADA de 2 mm pintada del gris de la caja, sobre bastidor de tubo de 30 × 30 anclado SOLO al hormigón macizo (punta de la viga del eje C en volado a +3.40 y +6.60, columna o encadenado), nunca a viguetas, plastoformo ni ladrillo de 6 huecos. APOYA ENTERO en su dado; las grapas solo lo sujetan de costado. Tapas atornilladas de 0.30 × 0.40 en la cara norte a +0.30 y +3.50 (registro de las dos bajantes). Remate arriba con tapa y gotero de 3 cm; la ventilación sale 0.30 más con sombrerete gris oscuro"}
+    - {rect: [-1.475, 6.495, -1.075, 6.795], nombre: "dado", estado: propuesto, nota: "DADO de hormigón de 0.40 × 0.30 al pie del cajón: no pasa de y 6.795 (lindero) y va separado con JUNTA del cimiento del muro sur; antes, pozo de prueba junto al lindero para ver ese cimiento"}
   p1:
+    - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto}
     # 2026-10-05 (PROPUESTO): borde norte del domo 0.10 al sur (antes y 5.30) para dejar 0.65 de paso entre el muro del
     # departamento (cara y 4.745) y el domo. El borde sur NO se mueve (y 6.20): correr todo 0.10 dejaba solo ~0.35
     # libres hacia el antepecho sur y la ranura a 0.47 del eje C (el revisor pidió ≥0.40 y ≥0.5).
     - {rect: [9.75, 5.40, 10.90, 6.20], nombre: "tragaluz", estado: propuesto, nota: "PROPUESTO: tragaluz cenital del Baño 2, dos ranuras de ~0.30 × 0.60 (y 5.50–6.10; antes 0.70 desde y 5.40) en la losa del altillo, centradas entre viguetas a cada lado de la de x≈10.31 (las viguetas no se cortan), a 0.57 del eje C; bajo un domo (x 9.75–10.90, y 5.40–6.20) en la franja descubierta: 0.65 de paso al norte y ~0.45 libres al antepecho sur"}
   altillo:
+    - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto}
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -379,6 +387,7 @@ techos:
   postes:
     - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
     - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
+    - {pos: [-1.03, 4.60], tope: 9.05, estado: propuesto, nota: "2026-10-07 (PROPUESTO): BAJADA DE LA CANALETA del techo de la terraza: tubo cuadrado de fierro de 0.10 × 0.10, NEGRO como los postes, en la esquina sur del techo, por dentro del antepecho del frente; de la punta de la canaleta (+9.07) al piso de la terraza. Al pie descarga en la canaleta de piso con rejilla que va junto al frente hasta el sumidero del rincón. Nada de caño horizontal a la vista"}
   # Canaletas por dentro de la línea y=4.67 (no invaden la separación de 2 m), de chapa galvanizada, 0.5%.
   canaletas:
     - {de: [4.55, 4.58], a: [16.78, 4.58], pendiente: 0.005}
@@ -391,16 +400,22 @@ techos:
   pendientes_losa:
     - {de: [7.90, 6.05], a: [0.20, 6.05], texto: "losa 1.5%"}
     - {de: [7.90, 6.05], a: [15.60, 6.05], texto: "losa 1.5%"}
-    - {de: [-0.55, 2.80], a: [-0.55, 4.40], texto: "piso 1%"}
+    - {de: [-0.30, 2.10], a: [-1.00, 2.10], texto: "logia 1% al frente"}
   sumideros:
-    - {pos: [-0.75, 6.40]}
+    # 2026-10-07 (PROPUESTO, revisión del arquitecto punto 4): sumidero de la terraza en el rincón suroeste, contra los dos
+    # antepechos, de SALIDA LATERAL: sale por la base del antepecho del frente al cajón gris (no se perfora la losa). Antes (-0.75, 6.40).
+    - {pos: [-0.90, 6.45], estado: propuesto}
     - {pos: [16.55, 6.40]}
   # Cada canaleta baja por un tubo pegado al antepecho hasta la bajante de la esquina (no se vuelca sobre la losa).
   conexiones:
-    - [[-1.18, 4.58], [-1.18, 6.55], [-1.00, 6.55]]
+    # Canaleta del frente (2026-10-07, PROPUESTO): baja por el tubo cuadrado negro de la esquina sur del techo (ver postes); al pie,
+    # CANALETA DE PISO con rejilla junto al antepecho del frente hasta el sumidero del rincón; de ahí, salida lateral al cajón (BP1).
+    - [[-1.18, 4.58], [-1.03, 4.60]]
+    - [[-1.03, 4.60], [-1.00, 4.60], [-1.00, 6.45], [-0.90, 6.45]]
+    - [[-0.90, 6.45], [-1.36, 6.45], [-1.36, 6.645]]
     - [[16.78, 4.58], [16.78, 6.55]]
   bajantes:
-    - {id: BP1, pos: [-1.00, 6.55], nota: "esquina sur del frente: canaleta del frente (techo de la terraza) + sumidero de la terraza; baja por la esquina del volado al acceso → a la calle (no al desagüe sanitario)"}
+    - {id: BP1, pos: [-1.36, 6.645], tope: 8.40, estado: propuesto, nota: "2026-10-07 (PROPUESTO, revisión del arquitecto punto 4, aceptado por el dueño; antes en (-1.00, 6.55), atravesaba la ducha de la suite y el volado): POR FUERA, en el CAJÓN GRIS de la esquina suroeste de la caja del baño de la suite (cajón x -1.425 a -1.125, y 6.495 a 6.795, del suelo a +8.40, pegado al canto del volado), del lado de la calle; al lado, del lado de la casa, la bajante sanitaria de la suite. Recibe la canaleta del techo de la terraza (por el tubo negro y la canaleta de piso), el sumidero de la terraza (salida lateral por la base del antepecho) y la logia del primer piso (canaleta-cornisa gris por todo el frente). NO se perfora el volado. Abajo: tapón de registro al pie y caño Ø100 enterrado al POZO DE ABSORCIÓN del jardín (ver instalaciones.pb.sanitario.pluvial), nunca al desagüe sanitario. Ø100 (techo ~26 m² + terraza ~11 m² + logia): lo confirma el plomero"}
     - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): techo del departamento + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
 
 # Fachada (2026-10-05): opciones de materiales para conversar con el usuario. Referencias en
@@ -414,14 +429,14 @@ fachada:
       descripcion: "Como la primera referencia: casa blanca con piezas negras. Carpintería, barandas, puerta y techo de la terraza en negro; el frente del baño de la suite como un volumen negro y un paño negro alrededor de la puerta de entrada. Sobria y contrastada; el negro al oeste se calienta con el sol de la tarde."
       paleta: {muro: "#f5f5f3", losa: "#f5f5f3", zocalo: "#2b2b2b", baranda: "#1e1e1e", marco: "#1e1e1e", puerta: "#1f1f1f", techo: "#1e1e1e", celosia: "#2b2b2b", antepecho: "#f5f5f3", tanque: "#f5f5f3", columna: "#f5f5f3"}
       acentos:
-        - {vista: oeste, u: [4.20, 6.795], z: [3.40, 6.40], d: -1.20, material: negro, nota: "frente del baño de la suite"}
+        - {vista: oeste, u: [4.20, 6.795], z: [3.40, 6.40], d: -1.125, material: negro, nota: "frente del baño de la suite"}
         - {vista: oeste, u: [4.95, 6.795], z: [0.20, 3.20], d: -0.125, material: negro, nota: "paño de la entrada"}
     - id: b
       nombre: Beige, marco gris y madera
       descripcion: "Como la segunda referencia: muros beige, bordes de losa en gris oscuro que enmarcan la logia como una caja, listones de madera en la pared del dormitorio dentro de la logia (protegida por el volado), puerta pivotante y celosía de madera, barandas livianas. Cálida y moderna."
       paleta: {muro: "#ddd0bb", losa: "#43464a", zocalo: "#8f8a82", baranda: "#5a5a5a", marco: "#2b2b2b", puerta: "#a8703f", techo: "#43464a", celosia: "#a8703f", antepecho: "#ddd0bb", tanque: "#ddd0bb", columna: "#ddd0bb"}
       acentos:
-        - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.20, material: gris_oscuro, nota: "costado del marco de la logia: frente del baño de la suite"}
+        - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.125, material: gris_oscuro, nota: "costado del marco de la logia: frente del baño de la suite"}
         - {vista: oeste, u: [-0.125, 3.25], z: [3.40, 6.40], d: -0.125, material: madera, nota: "listones de madera en la pared del dormitorio, dentro de la logia"}
         - {vista: oeste, u: [4.95, 6.795], z: [0.20, 3.20], d: -0.125, material: gris_claro, nota: "paño de la entrada"}
     - id: c
@@ -430,10 +445,20 @@ fachada:
       paleta: {muro: "#f3f1ec", losa: "#43464a", zocalo: "#43464a", baranda: "#2b2b2b", marco: "#2b2b2b", puerta: "#a8703f", techo: "#2b2b2b", celosia: "#a8703f", antepecho: "#f3f1ec", tanque: "#f3f1ec", columna: "#f3f1ec"}
       acentos:
         - {vista: oeste, u: [-0.125, 4.95], z: [0.20, 3.20], d: -0.125, material: piedra, nota: "muro ciego del living hacia la calle"}
-        - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.20, material: gris_oscuro, nota: "frente del baño de la suite (marco de la logia)"}
+        - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.125, material: gris_oscuro, nota: "frente del baño de la suite (marco de la logia); 2026-10-07: cara al ras del canto del volado"}
         - {vista: oeste, u: [-0.125, 3.25], z: [3.40, 6.40], d: -0.125, material: madera, nota: "listones en la pared del dormitorio, dentro de la logia"}
         - {vista: norte, u: [-11.325, -11.075], z: [0.00, 10.20], d: -0.30, material: gris_claro, nota: "cajón-pilastra de la bajante común en la columna A4, del ancho de la columna, del suelo al remate (2026-10-06, propuesto; color a definir: como el muro o gris)"}
         - {vista: norte, u: [-8.95, -8.75], z: [8.50, 8.70], d: -0.13, material: negro, nota: "rejilla de la campana del altillo, borde de arriba a 2.10 (2026-10-06, propuesto)"}
+        # Cajón de bajantes de la esquina suroeste (2026-10-07, PROPUESTO, revisión del arquitecto punto 4): "la pata" de la caja gris.
+        # Cajón x -1.425 a -1.125 (pegado al canto del volado en los tres niveles, sin ranura), y 6.495 a 6.795 (pegado al muro sur),
+        # del suelo a +8.40 (remate del muro ciego sur del altillo). CHAPA PLEGADA de 2 mm pintada del gris de la caja (decisión del dueño).
+        - {vista: oeste, u: [6.495, 6.795], z: [0.00, 8.40], d: -1.425, material: gris_oscuro, estado: propuesto, nota: "cajón de chapa de las bajantes de la suite (sanitaria) y BP1 (pluvial), frente de 0.30"}
+        - {vista: oeste, u: [6.59, 6.70], z: [8.40, 8.70], d: -1.21, material: gris_oscuro, estado: propuesto, nota: "ventilación de la bajante de la suite: sale 0.30 sobre la tapa del cajón, con sombrerete gris oscuro"}
+        - {vista: sur, u: [-1.425, -1.125], z: [0.00, 8.40], d: -6.795, material: gris_oscuro, estado: propuesto, nota: "costado sur del cajón de bajantes"}
+        - {vista: norte, u: [1.125, 1.425], z: [0.00, 8.40], d: 6.495, material: gris_oscuro, estado: propuesto, nota: "costado norte del cajón de bajantes (se ve desde el camino); tapas atornilladas de 0.30 × 0.40 a +0.30 y +3.50"}
+        - {vista: norte, u: [1.125, 1.225], z: [3.20, 3.40], d: 0.00, material: gris_oscuro, estado: propuesto, nota: "arranque de la canaleta-cornisa de la logia, con tapa recta"}
+        # Canaleta-cornisa de la logia (decisión del dueño 2026-10-07): por TODO el frente del volado del primer piso, de y 0.00 a la pata.
+        - {vista: oeste, u: [0.00, 6.495], z: [3.20, 3.40], d: -1.225, material: gris_oscuro, estado: propuesto, nota: "CANALETA-CORNISA de chapa gris de 0.10 × 0.20, horizontal por fuera, del alto de la banda de la losa (borde de abajo alineado con la cara de abajo de la losa, gotero de 1.5 cm); la pendiente (1 %) va por dentro, hacia el cajón; tapa recta en el arranque (y 0.00)"}
 
 # Aberturas en los bordes de los ambientes. tipo: puerta | ventana | vano (paso abierto, sin muro)
 aberturas:
@@ -441,7 +466,8 @@ aberturas:
     # Definidas (ingreso y living)
     # Entrada (2026-10-05, referencia del usuario): puerta PIVOTANTE de madera con listones verticales y paño fijo de
     # vidrio al costado, los dos en UN SOLO MARCO de madera y del mismo alto (casi hasta el techo). El borde sur
-    # queda en 6.37: hace falta muro hasta la columna C1 (bajante de la suite por fuera).
+    # queda en 6.37, con un tramo de muro liso de 0.175 hasta la cara de la columna C1. 2026-10-07: la bajante de la suite ya NO
+    # pasa junto a la puerta (se fue al cajón gris de la esquina del volado, x -1.50 a -1.20): ese tramo queda libre.
     - {id: puerta_entrada, tipo: puerta, de: [0.00, 5.32], a: [0.00, 6.37], abre_hacia: ingreso, alto: 2.60, estado: propuesto, nota: "1.05 PIVOTANTE (gira sobre un eje en el piso y el marco, no sobre bisagras), maciza, madera con listones verticales y tirador grande; alto ~2.60 hasta la viga del eje 1 (medir cuánto cuelga); barniz exterior: da al oeste (sol de la tarde), el volado de 1 m la protege; burletes contra polvo y viento"}
     - {id: vidrio_entrada, tipo: ventana, de: [0.00, 5.05], a: [0.00, 5.32], antepecho: 0.00, alto: 2.60, estado: propuesto, nota: "paño fijo de vidrio 0.27 de piso a techo, en el mismo marco que la puerta (luz al hall); vidrio LAMINADO de seguridad"}
     - {id: ingreso_estar, tipo: vano, de: [2.58, 4.95], a: [2.58, 6.67], nota: "ingreso abierto hacia el estar"}
@@ -519,12 +545,12 @@ aberturas:
     - {id: ventana_dorm_norte, tipo: ventana, de: [1.30, 0.00], a: [3.10, 0.00], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.80 × 1.10 al retiro (sol); antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada norte): antes 1.10–2.90; ahora centrada en x 2.20 (mitad del paño A1–A2), sobre la ventana del living de PB; 1.175 de muro a cada columna"}
     - {id: puerta_lavamanos_ppal, tipo: puerta, de: [2.20, 4.20], a: [3.00, 4.20], abre_hacia: lavamanos_ppal, estado: definido, nota: "0.80, del dormitorio directo a los lavamanos (de la cama al inodoro ~3 m); al vestidor se sigue por el paso abierto"}
     - {id: vestidor_lavamanos, tipo: vano, de: [3.40, 4.30], a: [3.40, 5.40], estado: definido, nota: "paso abierto del vestidor a los lavamanos"}
-    - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: wc_ppal, estado: definido, nota: "0.70"}
+    - {id: puerta_wc_ppal, tipo: puerta, de: [0.90, 4.62], a: [0.90, 5.32], abre_hacia: lavamanos_ppal, estado: propuesto, nota: "0.70. 2026-10-07 (decisión del dueño): abre HACIA AFUERA (hacia los lavamanos), bisagra al NORTE (y 4.62): la hoja barre x 0.90–1.60, y 4.62–5.32; no toca el mesón (empieza en y 6.09), ni la puerta vaivén de la ducha (barre desde y 5.60), ni las teclas (inodoro en y 5.46, entre las dos puertas; ducha en y 6.35, al sur de su marco). Si alguien se cae adentro, la puerta se abre igual"}
     # 2026-10-05 (PROPUESTO): de 0.70 a 0.60 y bisagra al NORTE (antes y 5.55–6.25 con bisagra al sur: abierta hacia los
     # lavamanos la hoja caía sobre el mesón, y quedaba a 2.5 cm de la cara del muro norte de la ducha, sin lugar para el marco).
-    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 5.60], a: [0.90, 6.20], abre_hacia: ducha_ppal, estado: propuesto, nota: "0.60, puerta VAIVÉN (abre para los dos lados: si alguien se cae adentro, se abre hacia afuera); bisagra (pivote) al norte, a 7.5 cm de la esquina. Hacia los lavamanos la hoja barre hasta y 6.20 junto al muro: para abrir 90° sin tocar el mesón, este tiene que empezar en x ≈ 1.30 (hoy 0.975; lo ajusta el interiorista). Hacia adentro barre hasta x ≈ 0.30: no toca el plato (termina en x 0.10). Abierta hacia afuera queda en y ≈ 5.60, al sur de las teclas (5.40 y 5.47), sin tocar la puerta del inodoro (abre hacia adentro del inodoro)"}
-    - {id: ventana_wc_ppal, tipo: ventana, de: [-1.125, 4.45], a: [-1.125, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
-    - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.125, 5.75], a: [-1.125, 6.45], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada"}
+    - {id: puerta_ducha_ppal, tipo: puerta, de: [0.90, 5.60], a: [0.90, 6.20], abre_hacia: ducha_ppal, estado: propuesto, nota: "0.60, puerta VAIVÉN (abre para los dos lados: si alguien se cae adentro, se abre hacia afuera); bisagra (pivote) al norte, a 7.5 cm de la esquina. Hacia los lavamanos la hoja barre hasta y 6.20 junto al muro: para abrir 90° sin tocar el mesón, este tiene que empezar en x ≈ 1.30 (hoy 0.975; lo ajusta el interiorista). Hacia adentro barre hasta x ≈ 0.30: no toca el plato (termina en x 0.10). Abierta hacia afuera queda en y ≈ 5.60, sin tocar la tecla del inodoro (5.46) ni la de la ducha (6.35, al sur del marco), sin tocar la puerta del inodoro (abre hacia adentro del inodoro)"}
+    - {id: ventana_wc_ppal, tipo: ventana, de: [-1.05, 4.45], a: [-1.05, 5.15], antepecho: 1.60, alto: 2.10, estado: definido, nota: "0.70 × 0.50 alta al frente, esmerilada (2026-10-07: el muro del frente pasa al ras del canto del volado, eje x -1.05)"}
+    - {id: ventana_ducha_ppal, tipo: ventana, de: [-1.05, 5.65], a: [-1.05, 6.35], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada. 2026-10-07 (PROPUESTO, revisores): corrida 0.10 al norte (antes 5.75–6.45) para dejar ~0.145 entre el vano y el cajón gris de las bajantes (empieza en y 6.495)"}
   altillo:
     - {id: llegada_terraza, tipo: puerta, de: [4.40, 3.87], a: [4.40, 4.57], abre_hacia: terraza_alt, estado: definido, nota: "0.70–0.75 (máximo que permite la llegada), abre hacia la terraza; con vidrio para dar luz a la llegada"}
     # 2026-10-05 (PROPUESTO): bisagra al SUR (antes al norte): la tecla de entrada del estar (7.125, 3.72) queda del lado
@@ -715,9 +741,20 @@ muebles:
     - {tipo: meson, nombre: Doble lavamanos, rect: [1.30, 6.09, 3.325, 6.645], estado: propuesto, nota: "2.03 m; espejo corrido con tira LED encima; tomas a 1.20 en las dos puntas. El rincón x 0.975–1.30 queda libre (toallero)"}
     - {tipo: lavamanos, rect: [1.50, 6.14, 1.95, 6.59], estado: propuesto}
     - {tipo: lavamanos, rect: [2.50, 6.14, 2.95, 6.59]}
-    - {tipo: inodoro, rect: [-1.05, 4.62, -0.36, 5.02]}
-    # Ducha 1.15 × 1.02: termina en 6.54, delante de la columna C1 (antes la pisaba); el saliente de la columna queda como repisa
-    - {tipo: ducha, rect: [-1.05, 5.525, 0.10, 6.54], estado: propuesto, nota: "el saliente de la columna C1 (y 6.545–6.645) queda como repisa para el champú; rejilla fuera de la viga del eje 1"}
+    # 2026-10-07 (PROPUESTO, revisión del arquitecto punto 4, aceptado por el dueño): desagües de la suite al cajón gris de la
+    # esquina suroeste SIN perforar el volado y casi sin engordar el contrapiso. Muro del frente al ras del canto (cara interior
+    # x -0.975). MURO TÉCNICO de 0.20 contra él (inodoro colgado con estanque empotrado) que sigue como POYO dentro de la ducha:
+    # por adentro corre el Ø110 del inodoro hasta la esquina suroeste.
+    - {tipo: estante, nombre: Muro técnico, rect: [-0.975, 4.275, -0.775, 5.375], alto: 1.10, estado: propuesto, nota: "falso muro de 0.20 × ~1.10 con el ESTANQUE EMPOTRADO y el bastidor del inodoro colgado (decisión del dueño 2026-10-07; puede bajar a 0.15–0.18 según el estanque que se compre: lo que se gana va al plato de la ducha). HUECO o con relleno liviano (peso en la punta del volado). PULSADOR de doble descarga al frente (cara x -0.775), centrado sobre el inodoro (y 4.825) a ~1.00 del piso: su placa es también el registro del estanque (no se tapa ni se enchapa encima; la repisa de arriba no lo cubre). Sin toma: el dueño no pidió inodoro con lavado (si se quiere dejar la opción, solo un tubo vacío con caja ciega a ~0.20 del piso, al costado del inodoro). Arriba repisa. Por adentro el Ø110 sale horizontal y corre al sur con 2 % (~1.8 m, baja ~4 cm) hasta la esquina suroeste de la ducha y atraviesa el muro del frente al cajón. Tapa de registro"}
+    - {tipo: inodoro, nombre: Inodoro colgado, rect: [-0.775, 4.645, -0.225, 5.005], estado: propuesto, nota: "COLGADO (suspendido) del bastidor del muro técnico, taza de ~0.55 de fondo, a ~0.40 del piso; piso libre debajo (se limpia fácil). Delante quedan ~1.05 hasta el muro de la puerta (la puerta ahora abre hacia afuera)"}
+    - {tipo: estante, nombre: Poyo técnico, rect: [-0.975, 5.525, -0.775, 6.645], alto: 0.45, estado: propuesto, nota: "sigue el muro técnico dentro de la ducha a 0.45 de alto, igual que el zócalo técnico y con la MISMA PIEDRA arriba (sirve para apoyar el pie); hueco o con relleno liviano. Por adentro pasa el Ø110 del inodoro hasta la esquina. Impermeabilizado con la ducha"}
+    # Ducha 0.875 × 1.015: termina en 6.54, delante de la columna C1; el saliente de la columna queda como repisa
+    - {tipo: ducha, rect: [-0.775, 5.525, 0.10, 6.54], estado: propuesto, nota: "el saliente de la columna C1 (y 6.545–6.645) queda como repisa para el champú. 2026-10-07: 0.875 × 1.015 (antes 1.15 de ancho: 0.20 de poyo técnico y 0.075 del muro del frente al ras del canto). Sumidero (o rejilla lineal) en la ESQUINA SUROESTE, junto al poyo (~x -0.70, y 6.40), con SIFÓN DE PERFIL BAJO: sale por debajo del poyo y del muro del frente directo a la bajante (~0.6 m). Pide ~10–12 cm de contrapiso SOLO bajo el plato, LIVIANO; por ahí pasa también el Ø50 de los lavamanos. La losa no se pica"}
+    # Mampara (2026-10-07, interiorista, recomendación del revisor de habitabilidad): vidrio FIJO en el borde del plato (x 0.10),
+    # pegado al muro norte, del lado del rociador. El plato mide 1.015: con 0.60 de vidrio la entrada quedaría en 0.415 (no se pasa);
+    # con 0.50 quedan 0.515 de entrada al sur, junto a la repisa de la columna.
+    - {tipo: mampara, nombre: Vidrio, rect: [0.08, 5.525, 0.10, 6.025], alto: 2.00, estado: propuesto, nota: "mampara FIJA de vidrio templado de 8 mm, 0.50 × 2.00, en el borde del plato desde el muro norte (perfil al muro y pie sobre el borde del plato). Rociador en el muro NORTE (el del inodoro, pared húmeda) a ~2.10, mirando al sur; grifería al costado, a ~1.10. Entrada libre de 0.515 al sur. El vidrio tapa el agua hacia la puerta vaivén y la zona seca. Si se quiere 0.60, la entrada baja a 0.415: no conviene"}
+    - {tipo: estante, nombre: Zócalo técnico, rect: [0.125, 6.445, 0.825, 6.645], alto: 0.45, estado: propuesto, nota: "zócalo de 0.20 × 0.45 (misma piedra arriba que el poyo de la ducha) contra el muro sur, en la parte seca de la ducha (fuera del giro de la puerta vaivén): por adentro pasa el Ø50 de los lavamanos, que viene por dentro del mueble del mesón a ~0.40 del piso y baja bajo el plato de la ducha al llegar a x 0.10"}
   altillo:
     # OPCIÓN B (2026-10-06, interiorista): cocina en U al norte junto a la escalera, comedor con banqueta junto a la
     # corrediza, camino recto por el sur (y 3.70–4.595, ~0.90 libres), estar al este mirando al norte.
@@ -786,7 +823,8 @@ instalaciones:
       alimentador: [[2.75, 6.45], [4.28, 6.45], [4.28, 2.88], [4.40, 2.88]]
       acometida: {pos: [-0.30, 6.10], nota: "desde el medidor en el muro de la calle (frente del lote)"}
       # Sin timbre cableado en la puerta (caía sobre la bajante de la suite): portero eléctrico en el portón y,
-      # si se quiere, timbre inalámbrico en el marco de la puerta.
+      # si se quiere, timbre inalámbrico en el marco de la puerta. 2026-10-07: la bajante se fue al cajón gris de la esquina
+      # del volado; el tramo de muro entre la puerta y C1 quedó libre (si se quiere timbre cableado, lo ubica el interiorista).
       # Seguridad (el usuario quiere todo, 2026-10-05). ESQUEMA PROPUESTO: ubicaciones a definir con el instalador;
       # dejar tubos vacíos antes de revocar. Circuitos C22 (portón) y C23 (alarma, cámaras, portero; con respaldo).
       # Ronda de huecos (2026-10-05): puesta a tierra y tubo propio de corrientes débiles (datos, cámaras, portero).
@@ -805,7 +843,7 @@ instalaciones:
         # el panel real está en el pilar norte de la puerta peatonal (punto PT del camino) y el recorrido va en `debiles`.
         portero: {pos: [16.875, 3.00], panel: [-15.225, 5.15], recorrido: [[-15.225, 5.15], [-15.00, 5.00], [-0.50, 5.00], [-0.50, 5.50], [0.40, 5.50], [0.40, 6.20], [12.00, 6.20], [12.00, 2.95], [16.875, 2.95], [16.875, 3.00]], nota: "MONITOR del portero en la COCINA, muro este (el del patio), en el tramo libre de 0.49 entre la columna B5 (cara y 2.805) y el costado del refrigerador (y 3.30), centrado en y 3.00, a 1.45 del piso. Se ve desde la isla, el comedor y la punta del pasillo; a ~3.5 m de las hornallas y la campana y a ~1.7 m del lavaplatos (sin vapor ni salpicaduras); ni la puerta del refrigerador ni una alacena lo tapan (las alacenas van en el muro sur). Fuente: caja de 220 V del C23 (con respaldo) detrás del monitor, o fuente en riel en el TD si el equipo es de 2 hilos. Abre solo la puerta peatonal (el portón se abre con su control remoto, usuario 2026-10-06). Panel en el pilar norte de la puerta peatonal; cable en tubo PROPIO (ver debiles)", estado: propuesto}
         camaras:
-          - {pos: [-0.25, 4.85], nota: "frente: acceso y terraza", estado: propuesto}
+          - {pos: [-0.25, 4.85], nota: "frente: acceso y terraza. Mirando al OESTE-SUROESTE (hacia la puerta peatonal y el camino), con lente gran angular. 2026-10-07 (interiorista): el cajón gris de las bajantes (x -1.425 a -1.125, y 6.495 a 6.795) queda en el borde sur del cuadro y no tapa la puerta de entrada ni el camino; detrás de él solo queda ciego un rincón de ~0.20 × 0.30 contra el muro sur", estado: propuesto}
           - {pos: [5.90, -0.20], nota: "retiro norte: puerta del depósito y la subida de gas", estado: propuesto}
           - {pos: [17.05, 0.30], nota: "patio (esquina noreste)", estado: propuesto}
         alarma:
@@ -1005,8 +1043,24 @@ instalaciones:
       agua_caliente: [[[4.20, -0.30], [4.20, 3.35], [16.55, 3.35]]]
       # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
       # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
-      colector: [[17.70, 5.15], [17.70, -0.85], [-3.00, -0.85]]
-      camaras: [[17.70, -0.85], [12.70, -0.85], [8.00, -0.85], [2.00, -0.85]]
+      # 2026-10-07: colector alargado a x -4.00 (sigue hacia la calle por y -0.85, ver estado.md punto 3) para recibir la bajante
+      # de la suite en la cámara CI2 (-4.00, -0.85): a 0.40 del gas enterrado (x -3.30 y y -0.55). En x -1.3 a -3.3 la cámara de
+      # unión pisaba el gas (y -0.55). CI1 (-1.29, 5.85) = cámara de la bajante de la suite, bajo el acceso, CENTRADA EN EL EJE DE
+      # LA PUERTA DE ENTRADA (revisores 2026-10-07): tapa RELLENABLE de 0.60 × 0.60, hermética, con la baldosa del acceso; se hace ANTES
+      # del piso. El caño sigue al oeste por y 5.85: a 0.65 de la impulsión (y 5.20), a 0.85 del cable (y 5.00) y a 0.35 de la cámara
+      # de la puesta a tierra; cruza el gas (x -3.30) en perpendicular.
+      colector: [[17.70, 5.15], [17.70, -0.85], [-4.00, -0.85]]
+      camaras: [[17.70, -0.85], [12.70, -0.85], [8.00, -0.85], [2.00, -0.85], [-1.29, 5.85], [-4.00, -0.85]]
+      # Desagüe PLUVIAL (no va nunca al colector sanitario). 2026-10-07 (PROPUESTO, revisión del arquitecto punto 4).
+      pluvial:
+        - linea: [[-1.36, 6.645], [-1.36, 6.70], [-2.00, 6.70], [-2.00, 4.00], [-5.00, 4.00]]
+          etiqueta: "← BP1 Ø100 enterrado, 1 %"
+          estado: propuesto
+          nota: "de la base del cajón (tapón de registro al pie, a ~0.30 del suelo) sale al oeste pegado al muro sur (0.20 al sur de la cámara de la puesta a tierra), dobla al norte en x -2.00 (0.25 al este de esa cámara) bajo el camino y el deck, y al oeste por y 4.00 bajo la vereda hasta el POZO DE ABSORCIÓN. Cruza en perpendicular, por encima, el desagüe de la suite (y 5.85), el cable del portero (y 5.00), la canilla de la terraza (y 4.60), la impulsión (x -3.025) y el gas (x -3.30), a ≥0.20. ~7.2 m"
+        - rect: [-6.00, 3.50, -5.00, 4.50]
+          etiqueta: "POZO DE ABSORCIÓN de BP1 (~1.0 × 1.0 × 1.2, grava)"
+          estado: propuesto
+          nota: "x -6.0 a -5.0, y 3.5 a 4.5: a ~2.4 del borde de la terraza, ~4.9 de la casa, ~4.2 de la cisterna y 0.5 del cable del borde del camino. Si el suelo no absorbe (prueba de infiltración), un caño de REBALSE a la calle por su cuenta, junto al colector; nunca al desagüe sanitario. PRUEBA DE INFILTRACIÓN antes de hacerlo"
       desgrasadora: [17.70, 5.15]
       # Gas natural (red), 2026-10-06 (usuario): el medidor está en el PILAR SUR, pegado al Lote 103 (ahí llega la red).
       # A LA VISTA por la cara interior del MURO SUR a ~0.15 (con ángulo o canaleta de protección: es el borde del camino),
@@ -1104,8 +1158,14 @@ instalaciones:
         - {amb: lavamanos_ppal, tipo: toma, pos: [1.38, 6.645], alto: 1.20, estado: propuesto, nota: "punta oeste del mesón (empieza en 1.30) (secador, afeitadora); con diferencial"}
         - {amb: lavamanos_ppal, tipo: toma, pos: [3.22, 6.645], alto: 1.20, estado: propuesto, nota: "punta este del mesón; con diferencial"}
         # Inodoro y ducha de la suite: teclas AFUERA, en el tramo de muro entre las dos puertas (lado de la manija de ambas)
-        - {amb: wc_ppal, tipo: interruptor, pos: [0.975, 5.40], alto: 1.10, estado: propuesto, nota: "afuera, en los lavamanos (adentro quedaba detrás de la hoja)"}
-        - {amb: ducha_ppal, tipo: interruptor, pos: [0.975, 5.47], alto: 1.10, estado: propuesto, nota: "afuera, en los lavamanos (no dentro de la ducha); luminaria hermética adentro"}
+        # 2026-10-07 (interiorista): cada tecla del lado de la MANIJA de su puerta. Inodoro (abre hacia afuera, bisagra al norte
+        # en 4.62, manija en 5.32): tecla al sur del marco, centrada en el tramo de muro de 0.28 entre las dos puertas (0.14 de
+        # cada vano; no da para 0.15). Ducha (vaivén, pivote al norte en 5.60, borde libre en 6.20): tecla al SUR de su marco,
+        # en el tramo de muro libre hasta el rincón del mesón; la hoja nunca pasa al sur de 6.20, abra para donde abra.
+        - {amb: wc_ppal, tipo: interruptor, pos: [0.975, 5.46], alto: 1.10, estado: propuesto, nota: "afuera, en los lavamanos, del lado de la manija (al sur del marco): la hoja abre hacia el norte y no la tapa. Caja VERTICAL (placa angosta): entra justo entre los dos marcos"}
+        - {amb: ducha_ppal, tipo: interruptor, pos: [0.975, 6.35], alto: 1.10, estado: propuesto, nota: "afuera, en los lavamanos, del lado libre de la puerta vaivén (0.15 al sur del marco): se prende antes de empujar la hoja; fuera de las salpicaduras. El toallero del rincón va en el muro sur (x 0.975–1.30), no sobre esta tecla"}
+        - {amb: wc_ppal, tipo: luz, pos: [0.025, 4.825], estado: propuesto, nota: "plafón en el centro del piso libre (delante del inodoro, a 0.25 de la taza), no sobre la cabeza. Si el ducto del extractor de los lavamanos pasa por este cielo falso, plafón de superficie o corrido unos cm"}
+        - {amb: ducha_ppal, tipo: luz, pos: [-0.30, 6.05], estado: propuesto, nota: "luminaria HERMÉTICA (IP65) sobre el centro del plato (0.875 × 1.015), detrás de la mampara: no queda sobre el rociador (muro norte) ni sobre el vidrio. Alumbra también la zona seca"}
         # Vestidor: tecla al entrar desde los lavamanos
         - {amb: vestidor_principal, tipo: interruptor, pos: [3.60, 4.275], alto: 1.10, estado: propuesto, nota: "a la izquierda al entrar, antes del mueble norte"}
         - {amb: vestidor_principal, tipo: toma, pos: [3.80, 4.275], alto: 1.10, estado: propuesto, nota: "plancha vertical a vapor / espejo"}
@@ -1167,7 +1227,15 @@ instalaciones:
         - {pos: [9.55, 4.05], etiqueta: "LL Baño 2"}
         - {pos: [3.20, 5.75], etiqueta: "LL suite"}
       sumideros:
-        - {pos: [-0.95, 4.05], etiqueta: "sumidero de la logia (piso 1 % hacia acá) → BP1 por la esquina del volado", estado: propuesto}
+        # 2026-10-07 (PROPUESTO, decisión del dueño): la logia no puede bajar por el volado ni cruzar el baño (no hay altura bajo su
+        # piso). Sin sumidero: el piso cae 1 % hacia el FRENTE y vuelca por la base de la baranda en la canaleta-cornisa (ver pluvial).
+      # Pluvial (no se mezcla con el desagüe de la suite)
+      pluvial:
+        - linea: [[-1.175, 0.00], [-1.175, 6.495]]
+          etiqueta: "cornisa-canaleta → BP1"
+          etiqueta_pos: [-1.45, 5.45]
+          estado: propuesto
+          nota: "decisión del dueño 2026-10-07: canaleta de chapa galvanizada pintada del gris de la caja por TODO el frente del volado del primer piso, de y 0.00 (tapa recta en el arranque) a la pata (cajón, y 6.495). Por fuera es HORIZONTAL, como una cornisa del alto de la banda de la losa (0.20), con el borde de abajo alineado con la cara de abajo de la losa y gotero de 1.5 cm; la pendiente (1 %, ~6.5 cm) va por DENTRO. La logia (piso 1 % hacia el frente) vuelca por la base de la baranda en todo su largo. Se cuelga del canto SOLO donde hay hormigón macizo; si entre B y C no hay viga de borde vaciada, con ménsulas al muro del frente o a la carpeta (lo define el ingeniero)"
       bajada_tanque: {pos: [9.10, -0.30], etiqueta: "AF ↓ tanque"}
       subida_caliente: {pos: [4.20, -0.30], etiqueta: "AC ↓ del calefón (altillo), por fuera"}
       agua_fria: [[[9.10, -0.30], [9.10, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
@@ -1176,7 +1244,17 @@ instalaciones:
       bajantes:
         - {pos: [11.20, -0.20], ambientes: [bano_hijo_1], etiqueta: "BAJANTE COMÚN (Baño 1 + baño y cocina del altillo): por fuera, pegada a la columna A4, en cajón"}
         - {pos: [9.30, 3.85], ambientes: [bano_hijo_2], etiqueta: "Baño 2 → ducto en esquina (almacén abajo)"}
-        - {pos: [-0.30, 6.50], ambientes: [wc_ppal, ducha_ppal, lavamanos_ppal], etiqueta: "suite → esquina C1, baja por fuera"}
+        # 2026-10-07 (PROPUESTO, revisión del arquitecto punto 4): antes en (-0.30, 6.50), dentro del plato de la ducha, perforaba el
+        # volado y bajaba a 7.5 cm del marco de la puerta de entrada. Ahora por FUERA, en el cajón gris de la esquina suroeste de la
+        # caja (x -1.425 a -1.125, y 6.495 a 6.795, del suelo a +8.40), del lado de la casa; BP1 al lado, del lado de la calle.
+        # `entrada` = por dónde entran los caños (esquina suroeste de la ducha, por dentro del muro técnico); `recorrido_pb` = el caño en PB.
+        - pos: [-1.21, 6.645]
+          entrada: [-0.875, 6.60]
+          ambientes: [wc_ppal, ducha_ppal, lavamanos_ppal]
+          etiqueta: "suite → cajón gris de la esquina suroeste, por fuera (sin perforar el volado)"
+          recorrido_pb: [[-1.21, 6.645], [-1.21, 5.85], [-4.00, 5.85], [-4.00, -0.85]]
+          estado: propuesto
+          nota: "Ø110. Entran por el muro del frente, en la esquina suroeste de la ducha, POR ENCIMA DE LA LOSA: inodoro COLGADO con estanque empotrado en el muro técnico (~1.8 m, 2 %), ducha con sifón de perfil bajo (~0.6 m) y lavamanos Ø50 por el mueble, el zócalo y bajo el plato (~4.1 m, 2 %). Ventila por arriba: sigue dentro del cajón hasta +8.40 y sale 0.30 más con sombrerete gris oscuro (≥2 m sobre el piso de la terraza). Tapón de registro al pie. En PB: al norte bajo el acceso hasta la cámara CI1 (-1.29, 5.85, en el eje de la puerta), al oeste por y 5.85 (lejos de la cisterna: no se va por el camino hacia la calle), al norte por x -4.00 (borde del pasto, 0.70 del gas de la vereda) y a la cámara CI2 (-4.00, -0.85) en el colector. ~9.4 m de CI1 a CI2 con 2 % (~0.19 de desnivel)"
     ventilacion:
       ductos:
         - id: baño 2
@@ -1365,7 +1443,12 @@ verificar_en_obra:
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."
   - "Volado de la losa del primer piso al frente: medir cuánto sale (se asume 1.00 m desde la cara del muro) y su espesor en la punta. El baño principal y la logia van encima."
   - "Cuánto cuelga la viga del eje A entre A2 y A3 bajo la losa del altillo (define el alto de la ventana de la escalera)."
-  - "Espacio por fuera entre la puerta de entrada y la columna C1 (bajante de la suite principal)."
+  - "CAJÓN DE BAJANTES de la esquina suroeste (PROPUESTO 2026-10-07, revisión del arquitecto punto 4, aceptado por el dueño; reemplaza la bajante junto a la puerta de entrada). MEDIR el CANTO REAL del volado del primer piso y de la losa del altillo en esa esquina: el muro del frente de la caja va con la cara exterior al ras del canto (se supone x -1.125) y el cajón de chapa (x -1.425 a -1.125) pegado al canto en los tres niveles, sin ranura; si el canto está en otro lugar, se corren los dos."
+  - "INGENIERO (punto 4, 2026-10-07): PESO NUEVO en la punta del volado, ~500 kg (muro técnico con estanque empotrado, poyo de la ducha y contrapiso de ~10–12 cm bajo el plato): el muro técnico y el poyo HUECOS o con relleno liviano y el contrapiso LIVIANO. Anclajes del bastidor del cajón SOLO a hormigón macizo (punta de la viga del eje C en volado a +3.40 y +6.60, columna C1 o encadenado), nunca a viguetas, plastoformo ni ladrillo de 6 huecos."
+  - "INGENIERO (punto 4): ¿qué hay en el CANTO del volado entre B y C (y entre A y B) para colgar la canaleta-cornisa de la logia? Si no hay viga de borde vaciada, ménsulas al muro del frente o a la carpeta; nada atornillado al plastoformo."
+  - "INGENIERO (punto 4): profundidad de las ZAPATAS de C1 y B1 y del CIMIENTO DEL MURO SUR. Ninguna zanja (desagüe de la suite, pluvial, cámara CI1, dado del cajón) por debajo de ellas. Dado del cajón de 0.40 × 0.30 que no pase de y 6.795, separado con junta del cimiento del muro sur; antes, POZO DE PRUEBA junto al lindero."
+  - "PLOMERO (punto 4): PRUEBA DE INFILTRACIÓN del pozo de absorción de BP1 (jardín, x -6.0 a -5.0, y 3.5 a 4.5) y REBALSE propio a la calle (nunca al desagüe sanitario). Cámara CI1 (-1.29, 5.85) con tapa rellenable hermética de 0.60 × 0.60, hecha ANTES del piso del acceso. Inodoro colgado con estanque empotrado (muro técnico de 0.15–0.20), sifón de perfil bajo en la ducha, pendientes del 2 %, ventilación con sombrerete sobre el cajón."
+  - "NORMATIVA (punto 4): el cajón de bajantes queda ~1.40 delante de la fachada de planta baja (x 0), dentro del retiro frontal, y la canaleta-cornisa sale 0.10 del canto del volado (voladizo desde la cara del muro de PB ~1.10; límite 1.20). Lo confirma el arquitecto de la obra."
   - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga?"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
   - "Puerta peatonal y medidor de gas ACTUALES (fotos IMG_8373 e IMG_8376): medir el ancho de la puerta actual, la distancia de su borde sur al muro del vecino (Lote 103) y el tamaño y la altura del gabinete del medidor de gas. El modelo supone un pilar de 0.585; la foto sugiere ~1.3–1.5. ¿La puerta y el muro actuales se quedan o se rehacen? El medidor de gas NO se mueve sin YPFB."
