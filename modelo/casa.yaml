@@ -170,7 +170,7 @@ ambientes:
     # ── Exteriores del frente (PROPUESTO 2026-10-06, pedido del dueño: autos en fila al norte, puerta peatonal al sur) ──
     # Franjas de norte a sur: estacionamiento en fila 3.40 (contra el Lote 105) | pasto 4.03 | camino 1.50 recto de la puerta
     # peatonal a la puerta de entrada (contra el Lote 103). Muro de la calle, de norte a sur: pilar 0.20 | portón 3.20 |
-    # muro 3.45 (detrás se guarda la hoja) | pilar 0.685 (gas) | puerta peatonal 0.90 | pilar 0.585 (luz, agua, portero).
+    # muro 3.45 (detrás se guarda la hoja) | pilar 0.685 (medidor de luz, videoportero) | puerta peatonal 0.90 | pilar 0.585 (medidor de gas).
     - id: estacionamiento
       nombre: Estacionamiento (en fila)
       tipo: exterior
@@ -793,10 +793,17 @@ instalaciones:
       puesta_tierra: {pos: [-2.40, 6.35], estado: propuesto, nota: "jabalina de cobre (o malla) con cámara de inspección en el jardín junto al acceso, cable al TD; el electricista mide la resistencia (NB 777). Protector contra sobretensiones en el TD"}
       debiles:
         - {linea: [[8.925, 1.30], [8.925, 3.25], [4.55, 3.25], [4.55, 2.95]], etiqueta: "datos ↑ P1 y altillo: tubo PROPIO (no con 220 V) en los tubos dejados junto a B2", estado: propuesto}
-        - {linea: [[9.30, 1.30], [9.30, 0.05]], etiqueta: "router + grabador de cámaras (NVR) en el estudio; cámaras y portero llegan acá", estado: propuesto}
+        - {linea: [[9.30, 1.30], [9.30, 0.05]], etiqueta: "router + grabador de cámaras (NVR) en el estudio; las cámaras llegan acá", estado: propuesto}
+        # Portero (2026-10-06): tubo PROPIO del panel (pilar norte de la puerta peatonal) al monitor de la cocina. Borde norte
+        # del camino (y 5.00, junto al cable del medidor, a ≥0.20); entra bajo el umbral de la puerta; contrapiso a 0.45 del
+        # muro sur por ingreso, hall (lejos del TD y su alimentador, y 6.45), lavado, almacén y cocina; sube entre la alacena
+        # y la torre del horno (x 12.00), cruza al norte de la isla (y 2.95) y sube por el muro este hasta el monitor.
       seguridad:
-        porton: {pos: [-13.60, 1.55], etiqueta: "← motor del portón (C22)", estado: propuesto, nota: "motor del portón corredizo de 3.20 junto al pilar norte, por dentro; PANEL DEL PORTERO en el pilar sur de la puerta peatonal (~[-15.15, 6.60]) con apertura eléctrica de la puerta; tubos enterrados por el camino hasta el ingreso de la casa"}
-        portero: {pos: [0.65, 6.60], panel: [-15.225, 5.15], nota: "monitor del portero en el ingreso, junto al juego de teclas, a 1.40; abre solo la puerta peatonal (el portón se abre con su control remoto, usuario 2026-10-06). Cable del panel del pilar sur por la zanja sur", estado: propuesto}
+        porton: {pos: [-13.60, 1.55], etiqueta: "← motor del portón (C22)", estado: propuesto, nota: "motor del portón corredizo de 3.20 junto al pilar norte, por dentro; PANEL DEL PORTERO en el pilar sur de la puerta peatonal (~[-15.15, 6.60]) con apertura eléctrica de la puerta; tubos enterrados por el camino hasta la casa; el monitor está en la cocina (2026-10-06)"}
+        # Monitor del portero en la COCINA (pedido del dueño 2026-10-06; antes en el ingreso, junto a las teclas).
+        # `panel` = [x, y] del monitor A PROPÓSITO: el generador une panel y monitor con una recta que cruzaría la casa;
+        # el panel real está en el pilar norte de la puerta peatonal (punto PT del camino) y el recorrido va en `debiles`.
+        portero: {pos: [16.875, 3.00], panel: [-15.225, 5.15], recorrido: [[-15.225, 5.15], [-15.00, 5.00], [-0.50, 5.00], [-0.50, 5.50], [0.40, 5.50], [0.40, 6.20], [12.00, 6.20], [12.00, 2.95], [16.875, 2.95], [16.875, 3.00]], nota: "MONITOR del portero en la COCINA, muro este (el del patio), en el tramo libre de 0.49 entre la columna B5 (cara y 2.805) y el costado del refrigerador (y 3.30), centrado en y 3.00, a 1.45 del piso. Se ve desde la isla, el comedor y la punta del pasillo; a ~3.5 m de las hornallas y la campana y a ~1.7 m del lavaplatos (sin vapor ni salpicaduras); ni la puerta del refrigerador ni una alacena lo tapan (las alacenas van en el muro sur). Fuente: caja de 220 V del C23 (con respaldo) detrás del monitor, o fuente en riel en el TD si el equipo es de 2 hilos. Abre solo la puerta peatonal (el portón se abre con su control remoto, usuario 2026-10-06). Panel en el pilar norte de la puerta peatonal; cable en tubo PROPIO (ver debiles)", estado: propuesto}
         camaras:
           - {pos: [-0.25, 4.85], nota: "frente: acceso y terraza", estado: propuesto}
           - {pos: [5.90, -0.20], nota: "retiro norte: puerta del depósito y la subida de gas", estado: propuesto}

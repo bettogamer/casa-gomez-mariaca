@@ -815,3 +815,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Decidido por el usuario:** cama QUEEN con ropero de puertas corredizas de 0.50 de fondo (paso de 0.60 al pie de la
   cama); refrigerador de 0.60 de ancho con puerta reversible, fuera de la U, a 0.17 del lavaplatos.
 - **Estado:** aprobado por el usuario (opción B).
+
+## 2026-10-06 — Pantalla del videoportero en la cocina
+- **Qué:** la única pantalla del videoportero pasa del ingreso a la COCINA de PB: muro este (el del patio), en el tramo
+  libre entre la columna B5 y el refrigerador, a 1.45 del piso. Se ve desde la isla, el comedor y la punta del pasillo;
+  lejos del anafe, la campana y el lavaplatos. Sigue abriendo solo la puerta peatonal (el portón, con su control).
+- **Cable:** tubo propio desde el panel del pilar norte de la puerta peatonal, por el borde norte del camino, bajo el umbral
+  de la puerta de entrada y por el contrapiso junto al muro sur hasta la cocina. Corriente del circuito C23 (con respaldo).
+- **Pendiente:** el timbre no se oye bien desde el living (~13 m): campanilla extra en el hall o el living, a decidir.
+- **Estado:** aprobado por el usuario.
