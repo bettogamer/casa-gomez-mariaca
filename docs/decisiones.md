@@ -877,3 +877,10 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   hacia abajo y afuera. La ventana del Cuarto 2 lleva la hoja SUR FIJA (el olor de la campana no entra).
 - **Pendiente:** lo aprueba el gasista (YPFB): posición de rejillas y entrada del gas.
 - **Estado:** aprobado por el usuario (método nuevo: cambio chico).
+
+## 2026-10-07 — Unión muro–columna contra fisuras (revisión del arquitecto, punto 6; cambio chico)
+- **Qué:** instrucción para la obra en `albanileria.union_columnas` del modelo: chicotes de 6 mm cada ~0.45 anclados a
+  la columna con epóxico mientras se levanta el muro; última hilada bien apretada contra viga o losa; malla de 0.30 en el
+  revoque exterior sobre cada columna y cada viga.
+- **Pendiente:** lo confirma el ingeniero (pregunta 12 de `docs/preguntas-ingeniero.md`); pasarlo a la hoja del albañil.
+- **Estado:** aprobado por el usuario.

@@ -151,6 +151,14 @@ albanileria:
   # Perimetrales de soga: al ras de la CARA EXTERIOR de las columnas (fachada lisa; la columna
   # sobresale ~0.10 hacia adentro). Recomendación nuestra, a confirmar con el maestro.
   perimetral_al_ras: exterior
+  # Unión muro–columna y muro–losa (revisión del arquitecto, punto 6, 2026-10-07; PROPUESTO, lo confirma el ingeniero).
+  # El ladrillo y el hormigón se mueven distinto: sin esto, cada columna y cada borde de losa se marca como fisura en la fachada.
+  union_columnas:
+    estado: propuesto
+    chicotes: "MIENTRAS SE LEVANTA el muro: chicotes de fierro de 6 mm cada 3 hiladas (~0.45 de alto), anclados a la columna con epóxico (perforación de ~10 cm) y metidos ~0.50 en la junta del ladrillo"
+    remate_losa: "última hilada bajo viga o losa: junta llena y apretada (o mortero expansivo), sin dejar hueco"
+    malla_revoque: "en el REVOQUE EXTERIOR, malla (de fibra de vidrio o metálica) de 0.30 de ancho, 0.15 a cada lado de cada columna y de cada viga o borde de losa, embebida en la primera capa"
+    nota: "aplica a todos los muros perimetrales de soga al ras de las columnas (fachadas blancas). Pregunta 12 de docs/preguntas-ingeniero.md"
   # Interiores de soga: centrados en el eje.
 
 # ─────────────────────────────────────────────────────────────────────────────
