@@ -785,9 +785,9 @@ def _dibujar_seguridad(L, seg):
         L.poly([[x - 0.10, y - 0.10], [x + 0.10, y - 0.10], [x + 0.10, y + 0.10], [x - 0.10, y + 0.10]], f'fill="#fff" stroke="{VIO}" stroke-width="1.2"')
         L.texto(x, y + 0.04, "P", 6, f'fill="{VIO}" font-weight="bold"')
         panel = seg["portero"].get("panel") or (seg.get("porton") or {}).get("pos")   # frente de calle del portero
-        if panel:
-            px, py = panel
-            L.linea(px, py, x, y, f'stroke="{VIO}" stroke-width="0.8" stroke-dasharray="4 3"')
+        tramo = seg["portero"].get("recorrido") or ([panel, [x, y]] if panel else [])   # `recorrido` = tubo real
+        for (ax, ay), (bx, by) in zip(tramo, tramo[1:]):
+            L.linea(ax, ay, bx, by, f'stroke="{VIO}" stroke-width="0.8" stroke-dasharray="4 3"')
     for c in seg.get("camaras") or []:
         x, y = c["pos"]
         L.poly([[x - 0.12, y - 0.08], [x + 0.08, y - 0.08], [x + 0.08, y + 0.08], [x - 0.12, y + 0.08]], f'fill="{VIO}"')
