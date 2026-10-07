@@ -45,9 +45,33 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
 - `interiorista` — muebles + luces, enchufes, interruptores y puntos de agua de cada ambiente
   (deja el amoblamiento definitivo para el electricista y el plomero). Solo toca `muebles`, `luces_extra` y `electrico.puntos`.
 
-Flujo típico de un cambio: `disenador` → `revisor-estructural` + `revisor-habitabilidad` (+ `arquitecto` si toca
-fachadas o el orden de un piso)
-→ `interiorista` (si cambian muebles o puntos) → el usuario decide → se registra en `docs/decisiones.md`.
+## Forma de trabajo (desde 2026-10-07)
+La casa ya está completa: casi todo lo que llega son "¿y si...?" del dueño. Gastar agentes solo donde aportan.
+Clasificar cada pedido en uno de tres tamaños:
+
+1. **"¿Y si...?" (curiosidad o pregunta):** responde la sesión principal leyendo el modelo; a lo sumo un croquis
+   rápido. **Sin agentes, sin tocar el modelo.** Si al dueño le gusta, pasa a 2 o 3.
+2. **Cambio chico** (mover una puerta o ventana, una medida, una nota, un punto eléctrico o de agua): lo hace la
+   sesión principal directo en el modelo, `make build`, y verifica ella misma lo básico (≥12.5 cm de muro para marcos
+   junto a columnas y muros, choques con muebles, puntos, caños y hojas de puertas). **Sin agentes.** Solo
+   `revisor-estructural` si toca columnas, vigas, losas o cimientos.
+3. **Cambio grande** (redistribuir un ambiente o un piso, fachada, instalaciones), en dos fases:
+   - **Fase A — borrador:** `disenador` hace 1–2 opciones SOLO con muros, puertas y ventanas (sin muebles, puntos ni
+     notas largas), renderizadas a imagen para comparar. **Sin revisores.** El dueño elige.
+   - **Fase B — detalle de la opción elegida:** UNA revisión, en paralelo y solo con el revisor que corresponde
+     (`revisor-estructural` si toca estructura; `arquitecto` si toca fachada u orden de un piso;
+     `revisor-habitabilidad` si cambian tamaños, luz o circulación), con preguntas concretas y respuesta ≤15 líneas.
+     Los ajustes que pidió el revisor se aplican **sin volver a revisar**. `interiorista` entra **una sola vez al
+     final**, con la distribución cerrada.
+
+Reglas para ahorrar:
+- Para ajustes, retomar al mismo agente (SendMessage) en vez de crear uno nuevo.
+- Juntar cambios chicos y guardarlos juntos (una rama, un commit).
+- Pedir a los agentes informes cortos; no repetir revisiones de lo que no cambió.
+- Revisiones completas de la casa (`arquitecto` entero) solo cuando el dueño las pida.
+- No hay agente ingeniero: cálculos y firmas los hace el ingeniero real; las preguntas se juntan en
+  `docs/preguntas-ingeniero.md` y sus respuestas se pasan al modelo.
+- Escribir al dueño en español simple, sin palabras en inglés.
 
 ## Instalaciones
 `tools/instalaciones.py` genera los planos eléctrico y sanitario/gas desde ambientes, aberturas y

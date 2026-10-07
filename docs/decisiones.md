@@ -858,3 +858,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   colgar la cornisa; zapatas de C1 y B1 y cimiento del muro sur (ninguna zanja por debajo); prueba de infiltración del pozo;
   el cajón queda en el retiro frontal (~1.40 de la fachada).
 - **Estado:** aprobado por el usuario (las tres recomendaciones).
+
+## 2026-10-07 — Forma de trabajo con los agentes
+- **Qué:** cada pedido se clasifica en tres tamaños: "¿y si...?" (lo responde la sesión principal, sin agentes ni cambios),
+  cambio chico (lo hace la sesión principal directo, sin agentes salvo estructura) y cambio grande (borrador del
+  `disenador` sin revisores → el dueño elige → una sola revisión con el revisor que corresponde → `interiorista` una vez al
+  final). Escrito en `CLAUDE.md`.
+- **Por qué:** se repetían revisiones completas (3 revisores + interiorista) en cada vuelta de cambios chicos.
+- **Además:** `arquitecto` pasa a un modelo más barato (como `revisor-habitabilidad`); `disenador`, `revisor-estructural` e
+  `interiorista` siguen igual. No se crea agente ingeniero: las preguntas se juntan en `docs/preguntas-ingeniero.md`.
+- **Estado:** aprobado por el usuario.
