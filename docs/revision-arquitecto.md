@@ -5,14 +5,14 @@ Coordenadas: x desde el frente (eje 1) hacia el fondo; y desde el norte (eje A) 
 Columnas de 25 cm: cara = eje ± 0.125. Comprobados contra el modelo: la bajante de la suite cae dentro del plato de
 la ducha y la BP2 cae dentro de la columna C5.
 
-Estado de cada punto: ⏳ pendiente (se trabaja uno por vez con el dueño y se anota en `decisiones.md`).
+Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se trabaja uno por vez con el dueño y se anota en `decisiones.md`).
 
 ## URGENTE (planta baja en obra)
-1. ⏳ **Ventana del estudio (PB, x 9.30–11.00) a 7.5 cm de la columna A4**, y los caños del núcleo (x 9.10–9.25) a 5 cm
+1. ✅ **Ventana del estudio (PB, x 9.30–11.00) a 7.5 cm de la columna A4**, y los caños del núcleo (x 9.10–9.25) a 5 cm
    del otro lado. Propuesta: ventana 9.30–10.95; caños a una pilastra sobre la columna A3 (ver 7). Si ya está el vano,
    rellenar con hormigón. — disenador, plomero, albañil.
-2. ⏳ **Puerta del depósito (PB, x 6.07–6.87) a 5.5 cm de A3.** Pasarla a 6.00–6.80, bisagra al oeste. — disenador.
-3. ⏳ **Puerta del baño de PB (x 8.00–8.70) a 7.5 cm del muro del estudio.** Pasarla a 7.95–8.65. — disenador.
+2. ✅ **Puerta del depósito (PB, x 6.07–6.87) a 5.5 cm de A3.** Pasarla a 6.00–6.80, bisagra al oeste. — disenador.
+3. ✅ **Puerta del baño de PB (x 8.00–8.70) a 7.5 cm del muro del estudio.** Pasarla a 7.95–8.65. — disenador.
 4. ⏳ **Bajantes en el camino de la entrada:** la de la suite (−0.30, 6.50) cae dentro de la ducha de la suite y queda a
    7.5 cm del marco de la puerta de entrada; la pluvial BP1 (−1.00, 6.55) atraviesa la ducha y el volado. Propuesta: las dos
    por fuera en la esquina suroeste de la caja gris (x ≈ −1.25, y ≈ 6.65), en un cajón gris de 0.30 × 0.30. Alternativa:
