@@ -71,6 +71,10 @@ _Última sesión: 2026-10-06._
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
    Fachada: dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
 
+## Revisión del arquitecto (2026-10-07)
+Primera revisión completa de la casa: 26 puntos en `docs/revision-arquitecto.md` (6 urgentes de PB). Se trabajan
+uno por vez con el dueño, empezando por los urgentes.
+
 ## Pendientes abiertos
 - Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el
   techo del estar, pase de la bajante del Baño 2. Tabiques livianos = ladrillo de 6 huecos (no drywall).
