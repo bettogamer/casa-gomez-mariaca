@@ -630,7 +630,11 @@ def sanitario(casa, nivel_id):
             amb = next((a["id"] for a in ambientes(casa, nivel_id) if dentro(a["poly"], *p["pos"])), None)
             cand = [b for b in cfg["bajantes"] if amb in b.get("ambientes", [amb])] or cfg["bajantes"]
             b = min(cand, key=lambda b: math.dist(p["pos"], b["pos"]))
-            ramas["desague"].append((_escuadra(p["pos"], tuple(b["pos"])), p["desague"]))
+            if b.get("entrada"):     # `entrada` = punto por donde los caños llegan a una bajante que está por fuera
+                ruta = _escuadra(p["pos"], tuple(b["entrada"])) + [tuple(b["pos"])]
+            else:
+                ruta = _escuadra(p["pos"], tuple(b["pos"]))
+            ramas["desague"].append((ruta, p["desague"]))
     # bajantes de los pisos de arriba: llegan a este nivel y van al colector por debajo del piso
     ramas["llegan"] = []
     if cfg.get("colector"):
@@ -644,7 +648,8 @@ def sanitario(casa, nivel_id):
                 pos = tuple(b["pos"])
                 if any(math.dist(pos, q[0]) < 0.3 for q in ramas["llegan"]):
                     continue
-                ramas["llegan"].append((pos, _escuadra(pos, _proyectar(pos, cfg["colector"])), b.get("etiqueta", "")))
+                ruta = [tuple(q) for q in b["recorrido_pb"]] if b.get("recorrido_pb") else _escuadra(pos, _proyectar(pos, cfg["colector"]))
+                ramas["llegan"].append((pos, ruta, b.get("etiqueta", "")))
     return cfg, puntos, ramas
 
 
@@ -827,7 +832,7 @@ def plano_sanitario(casa, nivel):
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — AGUA, DESAGÜE, GAS Y VENTILACIÓN (esquema)",
                                 "Preliminar: recorridos y diámetros a confirmar con el instalador (agua/desagüe) y con YPFB (gas natural).",
                                 extra)
-    AZUL, ROJO, CAFE, GAS = "#1565c0", "#c62828", "#6d4c41", "#f9a825"
+    AZUL, ROJO, CAFE, GAS, PLUVIAL = "#1565c0", "#c62828", "#6d4c41", "#f9a825", "#0097a7"
 
     def poli(linea, estilo):
         L.add('<polyline points="%s" fill="none" %s/>' % (" ".join("%.1f,%.1f" % L.p(*q) for q in linea), estilo))
@@ -863,6 +868,20 @@ def plano_sanitario(casa, nivel):
         poli(ruta, f'stroke="{CAFE}" stroke-width="2" stroke-dasharray="7 3"')
         p, q = ruta[0], ruta[1]
         L.texto((p[0] + q[0]) / 2 + 0.12, (p[1] + q[1]) / 2, f"Ø{d}", 6, f'fill="{CAFE}" text-anchor="start"')
+    # pluvial (bajantes de lluvia, sumideros de afuera): nunca al desagüe sanitario
+    for pl in cfg.get("pluvial") or []:
+        if pl.get("rect"):       # pozo de absorción, registro pluvial
+            x0, y0, x1, y1 = pl["rect"]
+            L.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], f'fill="#e0f7fa" stroke="{PLUVIAL}" stroke-width="1.5"')
+            x, y = x0, y1 + 0.30
+        else:
+            poli(pl["linea"], f'stroke="{PLUVIAL}" stroke-width="2.2" stroke-dasharray="2 3"')
+            x, y = pl["linea"][-1]
+            x, y = x + 0.15, y - 0.15
+        if pl.get("etiqueta_pos"):     # [x, y] a mano, el texto termina ahí (a la izquierda)
+            x, y = pl["etiqueta_pos"]
+        if pl.get("etiqueta"):
+            L.texto(x, y, pl["etiqueta"], 6, f'fill="{PLUVIAL}" text-anchor="{"end" if pl.get("etiqueta_pos") else "start"}"')
     # agua fría y caliente
     for linea in _lineas(cfg.get("agua_fria")):
         poli(linea, f'stroke="{AZUL}" stroke-width="2.5"')
@@ -972,7 +991,8 @@ def plano_sanitario(casa, nivel):
     # leyenda
     lx, ly = x0 + 6, y1 + 1.15
     for k, (col, txt, dash) in enumerate([(AZUL, "agua fría", ""), (ROJO, "agua caliente", ""), ("#00838f", "bomba → tanque", 'stroke-dasharray="3 3"'),
-                                          (CAFE, "desagüe", 'stroke-dasharray="7 3"'), (GAS, "gas natural", 'stroke-dasharray="10 4"'),
+                                          (CAFE, "desagüe", 'stroke-dasharray="7 3"'), (PLUVIAL, "pluvial", 'stroke-dasharray="2 3"'),
+                                          (GAS, "gas natural", 'stroke-dasharray="10 4"'),
                                           ("#2e7d32", "ducto de aire (cielo falso punteado)", 'stroke-opacity="0.75"')]):
         cx = lx + k * 2.4
         L.linea(cx, ly, cx + 0.6, ly, f'stroke="{col}" stroke-width="2.5" {dash}')

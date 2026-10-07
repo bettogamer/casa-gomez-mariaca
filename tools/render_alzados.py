@@ -161,7 +161,7 @@ def _piezas(casa, vista, pal):
     for po in t.get("postes") or []:
         x, y = po["pos"]
         zt = max(ag["cota_alta"] for ag in t.get("aguas") or [{"cota_alta": 9.9}])
-        rect(U(x, y) - 0.05, U(x, y) + 0.05, casa["niveles"][-1]["cota"], zt, D(x, y) - 0.12, "poste", orden=4)
+        rect(U(x, y) - 0.05, U(x, y) + 0.05, casa["niveles"][-1]["cota"], po.get("tope", zt), D(x, y) - 0.12, "poste", orden=4)
     if t.get("tanque"):
         tq = t["tanque"]
         x0, y0, x1, y1 = tq["rect"]
