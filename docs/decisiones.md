@@ -868,3 +868,12 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Además:** `arquitecto` pasa a un modelo más barato (como `revisor-habitabilidad`); `disenador`, `revisor-estructural` e
   `interiorista` siguen igual. No se crea agente ingeniero: las preguntas se juntan en `docs/preguntas-ingeniero.md`.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-07 — Rincón sureste de la cocina (revisión del arquitecto, punto 5; cambio chico, sin agentes)
+- **Qué:** se separan las tres cosas que caían en el mismo punto (muro este, y ~6.30):
+  rejilla ALTA de gas (2.20) pasa a y 3.00, sobre la rejilla baja, entre la columna B5 y el refrigerador; el GAS baja por la
+  fachada este a ~0.60 en y 6.45 y entra BAJO, detrás del mesón sur, hasta las hornallas (nunca dentro del cajón de la
+  campana); la salida de la CAMPANA queda sola, lo más alta posible (~2.75, según cuánto cuelgue la viga) con sombrerete
+  hacia abajo y afuera. La ventana del Cuarto 2 lleva la hoja SUR FIJA (el olor de la campana no entra).
+- **Pendiente:** lo aprueba el gasista (YPFB): posición de rejillas y entrada del gas.
+- **Estado:** aprobado por el usuario (método nuevo: cambio chico).

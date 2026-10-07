@@ -17,7 +17,7 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
    7.5 cm del marco de la puerta de entrada; la pluvial BP1 (−1.00, 6.55) atraviesa la ducha y el volado. Propuesta: las dos
    por fuera en la esquina suroeste de la caja gris (x ≈ −1.25, y ≈ 6.65), en un cajón gris de 0.30 × 0.30. Alternativa:
    BP1 a la esquina norte. — plomero, disenador, ingeniero (antes del muro junto a la puerta y del piso del acceso).
-5. ⏳ **Esquina sureste de la cocina (PB, y 6.30–6.35):** coinciden la rejilla alta de gas, la entrada del gas y la salida
+5. ✅ **Esquina sureste de la cocina (PB, y 6.30–6.35):** coinciden la rejilla alta de gas, la entrada del gas y la salida
    de la campana; el humo sube a la ventana del Cuarto 2. Propuesta: rejilla alta a y ≈ 3.00; gas bajo, a ~0.60, detrás del
    mesón (y ≈ 6.20); campana lo más alta posible con sombrerete; hoja sur fija en la ventana del Cuarto 2. — gasista,
    plomero, disenador.
