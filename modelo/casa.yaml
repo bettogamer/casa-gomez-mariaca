@@ -467,7 +467,7 @@ aberturas:
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}
     - {id: living_estar, tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
     # Depósito: puerta al costado de la columna A3, donde el techo interior sube (bajo el tramo de 6).
-    - {id: puerta_deposito, tipo: puerta, de: [6.87, 0.00], a: [6.07, 0.00], abre_hacia: afuera, alto: 1.85, nota: "desde el retiro, bajo el descanso (~1.92 libres)"}
+    - {id: puerta_deposito, tipo: puerta, de: [6.80, 0.00], a: [6.00, 0.00], abre_hacia: afuera, alto: 1.85, estado: propuesto, nota: "desde el retiro, bajo el descanso (~1.92 libres). 2026-10-07 (revisión del arquitecto, aceptada): antes 6.07–6.87, a 5.5 cm de la cara de A3 (6.925); ahora 12.5 cm para el marco. Bisagra al ESTE (no al oeste como propuso el arquitecto): abierta hacia afuera no tapa la toma del retiro (x 5.75). Si se hace una pilastra de caños sobre A3, revisar que la hoja abra 90°"}
     # Living (2026-10-05, PROPUESTO): se quita la corrediza a la terraza (2.43 entre A1 y B1; decisión del usuario: a la
     # terraza se sale por la entrada). El muro oeste queda CIEGO: ahí va la TV, centrada en la columna B1, sobre un
     # mueble (y 1.90–3.50). Sin ventana al oeste: el sol de la tarde entra bajo el volado (no lo frena a menos de ~42° de
@@ -478,10 +478,10 @@ aberturas:
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
     - {id: hall_grada_lado, tipo: vano, de: [5.725, 4.125], a: [5.725, 2.68], nota: "costado del tramo de 10 (baranda)"}
     - {id: hall_pasillo, tipo: vano, de: [7.05, 2.68], a: [7.05, 3.73], nota: "hall abierto al pasillo"}
-    - {id: puerta_bano_pb, tipo: puerta, de: [8.70, 2.68], a: [8.00, 2.68], abre_hacia: bano_pb, estado: definido, nota: "0.70 batiente (el usuario no quiere corrediza, 2026-10-05); corrida al este para no chocar con el lavamanos; abre hacia el baño (el pasillo de 0.90 queda libre), bisagra del lado este: la hoja abierta queda contra el muro, delante del inodoro"}
+    - {id: puerta_bano_pb, tipo: puerta, de: [8.65, 2.68], a: [7.95, 2.68], abre_hacia: bano_pb, estado: definido, nota: "0.70 batiente (el usuario no quiere corrediza, 2026-10-05); corrida al este para no chocar con el lavamanos (2026-10-07: 5 cm al oeste, a 7.95–8.65, para dejar 12.5 cm de muro hasta la cara del muro del estudio, 8.775; la hoja sigue sin tocar el lavamanos ni el inodoro); abre hacia el baño (el pasillo de 0.90 queda libre), bisagra del lado este: la hoja abierta queda contra el muro, delante del inodoro"}
     - {id: ventana_bano_pb, tipo: ventana, de: [7.60, 0.00], a: [8.30, 0.00], antepecho: 1.60, alto: 2.10, nota: "0.70 × 0.50 alta, al retiro; sobre la ducha: marco de aluminio o PVC y alféizar con pendiente hacia afuera"}
     - {id: puerta_estudio, tipo: puerta, de: [9.85, 2.68], a: [9.05, 2.68], abre_hacia: estudio, nota: "0.80"}
-    - {id: ventana_estudio, tipo: ventana, de: [9.30, 0.00], a: [11.00, 0.00], antepecho: 0.90, alto: 2.10, nota: "1.70 × 1.20 al retiro (sin tocar la columna A4)"}
+    - {id: ventana_estudio, tipo: ventana, de: [9.35, 0.00], a: [10.95, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.60 × 1.20 al retiro. 2026-10-07 (revisión del arquitecto, aceptada): antes 9.30–11.00 (1.70), con 7.5 cm de muro hasta la cara de A4 (11.075): no entraba el marco. Ahora 12.5 cm hasta A4 y 10 cm hasta los caños del núcleo (x 9.10–9.25); sigue centrada en x 10.15, debajo de las ventanas del Baño 1 y del baño del altillo"}
     - {id: puerta_lavado, tipo: puerta, de: [7.30, 3.73], a: [8.10, 3.73], abre_hacia: lavado, nota: "0.80"}
     - {id: banderola_lavado, tipo: ventana, de: [8.25, 3.73], a: [9.00, 3.73], antepecho: 2.20, alto: 2.60, nota: "0.75 × 0.40 alta al pasillo, con celosía: entrada de aire para el extractor"}
     - {id: banderola_almacen, tipo: ventana, de: [9.60, 3.73], a: [10.60, 3.73], antepecho: 2.20, alto: 2.60, nota: "1.00 × 0.40 alta al pasillo, con celosía: ventilación del almacén"}
