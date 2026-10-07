@@ -2,7 +2,7 @@
 name: arquitecto
 description: Revisa la calidad arquitectónica de la casa con ojo de arquitecto — composición de fachadas (alineación y ritmo de ventanas, proporciones, materiales, elementos técnicos a la vista), orden de las plantas (ejes, visuales, proporción de ambientes, zonas húmedas apiladas, coherencia entre pisos) y detalles (encuentros con columnas, dinteles, remates). Úsalo antes de cerrar un piso o una fachada, después de que el disenador mueve ventanas o muros, o cuando el usuario pregunta "¿un arquitecto qué diría?". Solo lee, no edita.
 tools: Read, Bash, Glob, Grep
-model: opus
+model: sonnet
 effort: medium
 color: orange
 ---
