@@ -534,7 +534,7 @@ aberturas:
     - {id: puerta_cuarto_2, tipo: puerta, de: [11.42, 4.085], a: [12.32, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
     - {id: ventana_cuarto_1_norte, tipo: ventana, de: [11.45, 0.00], a: [13.25, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "2026-10-06 (pedido del dueño): LO MÁS AL OESTE posible (0.125 de la columna A4) con el banco de lectura debajo; la cama va al este. En fachada queda alineada con la ventana del baño del altillo (centro ~12.35). 1.80 × 1.20 al norte sobre el banco-cama empotrado (pedido de la hija): antepecho 0.90 = ~0.45 sobre el banco; vidrio de seguridad o limitador de apertura. 2026-10-06 (alinear la fachada norte): antes 12.85–14.65; ahora centrada en x 14.30, sobre la ventana del comedor de PB. El banco, los libreros y las teclas del nicho los reacomoda el interiorista"}
     - {id: ventana_cuarto_1_este, tipo: ventana, de: [16.90, 0.75], a: [16.90, 1.95], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.20 al patio, junto a la cama; antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 0.40–1.60; ahora centrada en y 1.35, sobre la corrediza del comedor de PB (0.35–2.35). A 0.625 de la cara de la columna A5 y 0.605 de la de B5 (toma general en y 2.30, entre la ventana y B5)"}
-    - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.15], a: [16.90, 6.15], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana); antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 4.40–6.40; ahora centrada en y 5.15, sobre la ventana de la cocina de PB (4.55–5.75). Queda a 0.19 del costado del ropero (y 3.96) y a 0.395 de la cara de la columna C5 (antes 0.145)"}
+    - {id: ventana_cuarto_2_este, tipo: ventana, de: [16.90, 4.15], a: [16.90, 6.15], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "2026-10-07: hoja SUR FIJA y hoja norte de abrir (la salida de la campana de la cocina queda ~1.6 m debajo, 0.20 al sur: que el olor no entre al cuarto). 2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana); antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 4.40–6.40; ahora centrada en y 5.15, sobre la ventana de la cocina de PB (4.55–5.75). Queda a 0.19 del costado del ropero (y 3.96) y a 0.395 de la cara de la columna C5 (antes 0.145)"}
     # Suite principal
     - {id: ventana_escalera, tipo: ventana, de: [4.80, 0.00], a: [6.60, 0.00], antepecho: 2.30, alto: 2.90, estado: definido, nota: "1.80 × 0.60 alta en la caja de escalera, al retiro norte, sobre el descanso: luz al hall y a la escalera. Hojas PROYECTANTES (se abren un poco hacia afuera, como en los edificios), con manija o varilla alcanzable desde el descanso: es la salida de aire del estar, que no tiene ventana. CONFIRMADO EN OBRA (foto planos-arqui/IMG_8388, 2026-10-06, desde el descanso PB→P1 mirando al norte): la viga del eje A a +3.40 cruza la caja de escalera de A2 a A3, a la altura de los ojos del que está en el descanso. Por eso la escalera lleva UNA sola ventana, ARRIBA de esa viga (esta), y debajo queda muro. El dintel de esta ventana lo da la viga del eje A de la losa del altillo (+6.60): medir cuánto cuelga para confirmar el borde de arriba (2.90)"}
     - {id: hall_escalera, tipo: vano, de: [4.40, 2.68], a: [7.05, 2.68], estado: definido, nota: "escalera (llegada y subida al altillo)"}
@@ -1008,7 +1008,7 @@ instalaciones:
         - {pos: [-15.00, 6.62], gas: true, etiqueta: "LL general de gas (en el gabinete del medidor, pilar sur)"}
         - {pos: [15.20, 6.40], gas: true, etiqueta: "LL gas cocina"}
       rejillas:
-        - {pos: [16.875, 6.30], etiqueta: "rejilla alta 2.20 (YPFB)"}
+        - {pos: [16.875, 3.00], etiqueta: "rejilla alta 2.20 (YPFB)", estado: propuesto, nota: "2026-10-07 (revisión del arquitecto, punto 5): antes en y 6.30, junto a la salida de la campana y a la entrada del gas; ahora sobre la rejilla baja (y 2.90), entre la columna B5 y el refrigerador, por encima del monitor del portero (1.45). Lejos de la campana: no vuelve a entrar el aire que sale"}
         - {pos: [16.875, 2.90], etiqueta: "rejilla baja 0.30 (YPFB)"}
       ventilaciones:
         - {pos: [8.80, 0.05], etiqueta: "V Ø50 baño y lavado → sube SOLA por fuera del muro norte (x 9.25) hasta sobre el techo (la bajante del Baño 1 pasó a la columna A4)"}
@@ -1069,7 +1069,10 @@ instalaciones:
       # del depósito, bajo la losa) y la fachada este hasta la cocina; subida al calefón junto a A2. Norma ANH (RAN-ANH-UN
       # 0036/2016, anexo 5): a la vista con abrazaderas y protección donde hay golpes, nunca encima de muros; enterrado a
       # ≥0.30 (acero protegido) o ≥0.60 (multicapa), cinta amarilla, nunca bajo cimientos; ≥0.20 de agua y cables enterrados.
-      gas: [[-15.00, 6.62], [-3.30, 6.62], [-3.30, -0.55], [0.30, -0.55], [0.30, -0.17], [17.07, -0.17], [17.07, 6.30], [16.90, 6.30], [14.78, 6.30]]
+      gas: [[-15.00, 6.62], [-3.30, 6.62], [-3.30, -0.55], [0.30, -0.55], [0.30, -0.17], [17.07, -0.17], [17.07, 6.45], [16.90, 6.45], [14.78, 6.45]]
+      # 2026-10-07 (revisión del arquitecto, punto 5): por la fachada este baja de ~2.40 a ~0.60 en y 6.45 y ENTRA BAJO, detrás
+      # del mesón sur, hasta las hornallas; nunca dentro del cajón de la campana. ≥0.30 de la toma del rincón (y 6.20, a 1.10)
+      # y separado de la ventilación de la cocina (16.70, 6.20). Lo aprueba el gasista (YPFB).
       gas_ramales:
         - {linea: [[3.90, -0.17], [3.90, -0.30]], etiqueta: "GN ↑ al calefón del altillo (por la fachada norte, a la vista)"}
     # Ventilación mecánica (aprobada 2026-10-03). Solo lo que no tiene ventana propia: campana de la
@@ -1082,7 +1085,7 @@ instalaciones:
           linea: [[14.78, 6.35], [16.90, 6.35], [17.10, 6.35]]
           diametro: 150
           estado: definido
-          nota: "campana → patio, 2.1 m recto, escondido en un cajón sobre las alacenas altas del muro sur"
+          nota: "campana → patio, 2.1 m recto, escondido en un cajón sobre las alacenas altas del muro sur. 2026-10-07 (revisión del arquitecto, punto 5): salida al patio LO MÁS ALTA posible (~2.75, bajo la viga: confirmar cuánto cuelga) con SOMBRERETE que tire el aire hacia abajo y hacia afuera; ya no comparte el rincón con la rejilla alta ni con el gas. Queda ~1.6 m debajo y 0.20 al sur de la ventana del Cuarto 2: la hoja SUR de esa ventana va FIJA"
         - id: lavado
           linea: [[8.10, 6.00], [7.32, 6.00], [7.32, -0.20]]
           diametro: 100
