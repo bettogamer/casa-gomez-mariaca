@@ -824,3 +824,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   de la puerta de entrada y por el contrapiso junto al muro sur hasta la cocina. Corriente del circuito C23 (con respaldo).
 - **Pendiente:** el timbre no se oye bien desde el living (~13 m): campanilla extra en el hall o el living, a decidir.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-07 — Marcos de PB: ventana del estudio y puertas del depósito y del baño (revisión del arquitecto, puntos 1–3)
+- **Qué:** se corren para dejar ≥12.5 cm de muro para el marco junto a columnas y muros:
+  ventana del estudio 9.35–10.95 (1.60 × 1.20; antes 9.30–11.00), sigue centrada en x 10.15 bajo las ventanas de los
+  baños de arriba; puerta del depósito 6.00–6.80 (antes 6.07–6.87); puerta del baño de PB 7.95–8.65 (antes 8.00–8.70).
+- **Cambio sobre la propuesta:** la puerta del depósito mantiene la bisagra al ESTE (el arquitecto la proponía al oeste)
+  para que abierta no tape la toma del retiro (x 5.75).
+- **Queda para el punto 7:** los caños del núcleo (x 9.10–9.25) a 10 cm de la ventana del estudio; mudarlos a una pilastra
+  sobre A3 se decide con el ordenamiento de la fachada norte.
+- **Estado:** aprobado por el usuario.
