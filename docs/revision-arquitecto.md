@@ -21,7 +21,7 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
    de la campana; el humo sube a la ventana del Cuarto 2. Propuesta: rejilla alta a y ≈ 3.00; gas bajo, a ~0.60, detrás del
    mesón (y ≈ 6.20); campana lo más alta posible con sombrerete; hoja sur fija en la ventana del Cuarto 2. — gasista,
    plomero, disenador.
-6. ⏳ **Fisuras en la unión ladrillo–columna** (muros al ras exterior de las columnas): chicotes de 6 mm cada ~0.45
+6. ✅ **Fisuras en la unión ladrillo–columna** (muros al ras exterior de las columnas): chicotes de 6 mm cada ~0.45
    anclados con epóxico mientras se levanta; malla de 0.30 en el revoque sobre cada columna y viga. — ingeniero, albañil.
 
 ## ALTA
