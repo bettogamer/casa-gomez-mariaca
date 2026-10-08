@@ -884,3 +884,15 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   revoque exterior sobre cada columna y cada viga.
 - **Pendiente:** lo confirma el ingeniero (pregunta 12 de `docs/preguntas-ingeniero.md`); pasarlo a la hoja del albañil.
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-08 — Ranura vertical en el muro de piedra del living (fachada oeste; cambio chico)
+- **Qué:** `ranura_living`, vidrio fijo laminado de 0.30 × 2.60 (del piso a 2.60) en la punta norte del muro oeste del living
+  (y 0.30–0.60, a 0.175 de la cara de A1), sin reja. Repite el vidrio de la puerta de entrada en la otra punta del paño de
+  piedra: el paño queda enmarcado por dos líneas de vidrio.
+- **Por qué:** el muro ciego de ~5 × 3 m se veía vacío desde la terraza y el jardín (desde la calle casi no se ve: muro de
+  2.50 a 15 m). Una ranura angosta da escala y une el living con la terraza sin el reflejo de una ventana grande.
+- **Cuidado:** queda a ~35° de la TV mirando desde el sofá: cortina enrollable oscura para el sol de la tarde. Cae detrás
+  del sillón de lectura (luz por encima del hombro). Dintel bajo la viga del eje 1: ingeniero (pregunta 12).
+- **Descartado:** ventana al sur de la TV (compite con el vidrio de la entrada); sin ventana con banco, maceteros y
+  apliques (se puede sumar después: los apliques no chocan con la ranura).
+- **Estado:** aprobado por el usuario (opción A).
