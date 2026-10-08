@@ -305,13 +305,20 @@ function textura(material, ancho, alto) {
   c.width = Math.max(64, Math.round(ancho * 100)); c.height = Math.max(64, Math.round(alto * 100));
   const k = c.getContext("2d");
   const base = { madera: "#a8703f", piedra: "#9a948b", negro: "#2b2b2b", gris_oscuro: "#43464a",
-                 blanco: "#f7f7f5", beige: "#d8c9b1", gris_claro: "#c9c6c0" }[material] || "#cccccc";
+                 blanco: "#f7f7f5", beige: "#d8c9b1", gris_claro: "#c9c6c0",
+                 chapa_perforada: "#43464a", gas: "#e0b000", rejilla_blanca: "#f3f1ec", rejilla_gris: "#43464a" }[material] || "#cccccc";
   k.fillStyle = base; k.fillRect(0, 0, c.width, c.height);
   if (material === "madera") {          // listones verticales de ~8 cm con vetas
     for (let x = 0; x < c.width; x += 8) {
       k.fillStyle = `hsl(28, 45%, ${30 + Math.random() * 14}%)`; k.fillRect(x, 0, 7, c.height);
       k.fillStyle = "#5a3a1e"; k.fillRect(x + 7, 0, 1, c.height);
     }
+  } else if (material === "chapa_perforada") {   // puntos cada ~6 cm
+    k.fillStyle = "#6d7075";
+    for (let y = 3; y < c.height; y += 6) for (let x = 3; x < c.width; x += 6) k.fillRect(x - 1, y - 1, 2, 2);
+  } else if (material.startsWith("rejilla")) {      // lamas horizontales
+    k.fillStyle = material === "rejilla_gris" ? "#7a7d82" : "#b9b4aa";
+    for (let y = 0; y < c.height; y += 3) k.fillRect(0, y, c.width, 1);
   } else if (material === "piedra") {   // piedra laja en hiladas irregulares
     for (let y = 0; y < c.height; y += 15) {
       let x = -Math.random() * 40;

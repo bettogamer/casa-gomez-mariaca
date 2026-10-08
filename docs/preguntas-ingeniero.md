@@ -51,13 +51,22 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
 12. Muros de soga al ras de las columnas: cómo atarlos a las columnas para que no se fisure la fachada (chicotes con
     epóxico cada ~0.45, malla en el revoque). Muro nuevo del eje 1 entre A1 y B1. Ranura del living en ese muro (0.30 × 2.60, a 0.175 de A1):
     dintel bajo la viga del eje 1. [25, 26; revisión del arquitecto punto 6]
+13. Pilastras de chapa de la fachada norte (A2, A3, A4; 2026-10-08): cómo fijarlas sin perforar las columnas; ancho de
+    las zapatas del eje A (el gas enterrado pasa a ~1.3 del eje, en y -1.45). [revisión del arquitecto puntos 7, 8 y 24]
 
 ## C. Para otros profesionales (no son del ingeniero, van acá para no perderlos)
 
+- **Plomero (fachada norte, 2026-10-08):** ¿entra el caño de 110 con sus piezas y las entradas de costado en la pilastra
+  de A4 de 0.375 × 0.25? ¿Agua fría, bomba y ventilación Ø50 juntas en la de A3 de 0.25 × 0.25?
 - **Plomero:** prueba de infiltración del pozo de lluvia del jardín; cámara de la entrada; inodoro colgado de la suite;
   pendientes del Baño 1 y del Baño 2; presión de agua en el altillo. [9, 24, 34]
 - **Electricista:** demanda total y tipo de acometida con ELFEC; tubos de la columna B2; cajas que hayan dejado en la losa.
   [20, 35, 50]
 - **Gasista (YPFB):** subida de gas y calefón en la terraza del altillo. [23]
-- **Arquitecto de la obra (normativa):** cajón de bajantes en el retiro del frente; retiro de 2 m del altillo; muro ciego
+  **Gas ENTERRADO (pedido del dueño, 2026-10-08):** por el retiro norte (y -1.45) y el patio (x 18.30), saliendo solo en
+  la pilastra de A2 (calefón) y en la esquina C5 a ~0.60 (cocina). ¿Lo acepta YPFB? ¿Gas y agua caliente juntos en la
+  pilastra ventilada de A2? ¿Cruce sobre el colector en x -3.30? **Plan B si no:** gas A LA VISTA a ~2.40 por la fachada
+  norte, pasando dentro de las pilastras de A3 y A4 en vaina (opción 1, `salida/fachada-norte-op1.png`; el aplique de la
+  esquina noroeste se corre para no chocar).
+- **Arquitecto de la obra (normativa):** pilastras de 0.25 en el retiro norte de 2 m (quedan 1.76); cajón de bajantes en el retiro del frente; retiro de 2 m del altillo; muro ciego
   de 1.80 al vecino del sur; muro de la calle y cisterna en el retiro. [10, 18, 28, 40]

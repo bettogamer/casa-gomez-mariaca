@@ -906,3 +906,27 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   de la caja. Lo que pedía el arquitecto (4.50–5.20 y 5.80–6.50) ya no entra: la de la ducha quedó fija en 5.65–6.35 entre
   su muro y el cajón de las bajantes (punto 4), y la del inodoro no puede ir más al norte (12.5 cm para el marco).
 - **Estado:** aplicado; lo ve el dueño en los alzados.
+
+## 2026-10-08 — Fachada norte: lo técnico en pilastras sobre las columnas (revisión del arquitecto, puntos 7, 8 y 24; fase A)
+- **Qué (en el modelo, opción 2):** tres cajones-pilastra de chapa plegada gris oscuro, pegados a las columnas sin perforarlas,
+  frente a 0.25 del muro (el retiro queda de 1.76 en esos puntos): **A2** (0.50, frente perforado) con gas y agua caliente del
+  calefón; **A3** (ancho de la columna, sube hasta el tanque) con bajada de agua fría, impulsión y ventilación Ø50 del baño y
+  el lavado de PB (desaparece el núcleo de x 9.10–9.40); **A4** con la bajante común, ensanchada al oeste hasta x 10.85 desde la
+  losa del P1 y con la rejilla del Baño 2 en su frente. Rejillas del lavado y de la campana del altillo del color del muro; la
+  del altillo se centra entre sus ventanas (x 9.10–9.30). **Gas enterrado** por el retiro (y -1.45) y el patio (x 18.30): sale
+  solo en la pilastra de A2 y en la esquina C5 a ~0.60.
+- **Opción 1 (alzado aparte, `salida/fachada-norte-op1.png`):** las mismas pilastras, con el gas a la vista a 2.40 como se
+  había decidido (pasa por A3 y A4 en vaina).
+- **Elegida: opción 2** (dueño, 2026-10-08): gas enterrado, "porque también me gusta así". Lo decide la norma de YPFB:
+  **plan B** = opción 1 (gas a la vista dentro de las pilastras). Pregunta al gasista en `docs/preguntas-ingeniero.md`.
+- **Ajustes del arquitecto (revisión única, aplicados sin volver a revisar):** pilastras en **gris oscuro** (familia de la
+  caja de la suite, bandas y zócalo); A2 crece solo al este; **A4 ensanchada hasta x 10.95** (antes 10.85), alineada con el
+  borde de la ventana del estudio, con la rejilla del Baño 2 centrada en su frente (11.02–11.18, ducto en x 11.00 sin tocar la
+  columna) y tapa de inspección por piso a ~1.20; remates con tapa inclinada y goterón (A3 con sello flexible contra el
+  tanque); las tres sobre zócalo de H° de 0.15; rejilla del lavado corrida a 7.33–7.48 (0.155 de A3); puerta del depósito
+  con tope de piso a 90°; ventanas al este de A4 (Cuarto 1, estar del altillo) corredizas.
+- **Pendiente:** plomero (caño de 110 con piezas en A4 de 0.375 × 0.25; agua fría, bomba y ventilación juntas en A3 de
+  0.25 × 0.25); ingeniero (fijación de los cajones sin tocar las columnas; ancho de las zapatas del eje A, el gas pasa a ~1.3);
+  arquitecto de la obra (pilastras de 0.25 dentro del retiro de 2 m); `interiorista` al final (llave general de agua fría
+  movida a la pilastra de A3).
+- **Estado:** aprobado por el usuario (opción 2).

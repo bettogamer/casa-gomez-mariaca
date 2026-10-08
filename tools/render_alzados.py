@@ -177,7 +177,15 @@ MATERIALES = {   # acento -> (relleno, líneas: None | ("v"|"h", paso m, color))
     "negro": ("#2b2b2b", None), "gris_oscuro": ("#43464a", None), "blanco": ("#f7f7f5", None),
     "madera": ("#a8703f", ("v", 0.08, "#7a4f2a")), "piedra": ("#9a948b", ("h", 0.15, "#7c766d")),
     "beige": ("#d8c9b1", None), "gris_claro": ("#c9c6c0", None),
+    # instalaciones a la vista (2026-10-08, fachada norte): chapa perforada (cajón del gas), caño de gas (amarillo, ANH),
+    # rejillas pintadas del color del muro o del gris de las pilastras
+    "chapa_perforada": ("#43464a", ("p", 0.06, "#6d7075")), "gas": ("#e0b000", None),
+    "rejilla_blanca": ("#f3f1ec", ("h", 0.03, "#b9b4aa")), "rejilla_gris": ("#43464a", ("h", 0.03, "#7a7d82")),
 }
+
+
+def _punto(u, z, r=0.012):
+    return [[u - r, z - r], [u + r, z - r], [u + r, z + r], [u - r, z + r]]
 
 
 def _acentos(L, acentos, vista):
@@ -189,7 +197,13 @@ def _acentos(L, acentos, vista):
         L.poly([[u0, -z0], [u1, -z0], [u1, -z1], [u0, -z1]], f'fill="{relleno}" stroke="none"')
         if lin:
             sentido, paso, col = lin
-            if sentido == "v":
+            if sentido == "p":         # perforado: puntos cada `paso`
+                nu, nz = max(1, int((u1 - u0) / paso)), max(1, int((z1 - z0) / paso))
+                for i in range(nu):
+                    for j in range(nz):
+                        L.poly(_punto(u0 + (i + 0.5) * (u1 - u0) / nu, -(z0 + (j + 0.5) * (z1 - z0) / nz)),
+                               f'fill="{col}" stroke="none"')
+            elif sentido == "v":
                 n = max(1, int((u1 - u0) / paso))
                 for k in range(1, n):
                     u = u0 + (u1 - u0) * k / n
