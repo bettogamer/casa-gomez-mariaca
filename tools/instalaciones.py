@@ -950,6 +950,9 @@ def plano_sanitario(casa, nivel):
     VERDE = "#2e7d32"
     for c in (vent.get("cielos_falsos") or []) + (vent.get("cajones") or []):
         x0_, y0_, x1_, y1_ = c["rect"]
+        if c.get("ducto"):      # ducto vertical de ladrillo (caños que suben por dentro): gris macizo
+            L.poly([[x0_, y0_], [x1_, y0_], [x1_, y1_], [x0_, y1_]], 'fill="#9e9e9e" fill-opacity="0.55" stroke="#424242" stroke-width="1.2"')
+            continue
         L.poly([[x0_, y0_], [x1_, y0_], [x1_, y1_], [x0_, y1_]], f'fill="{VERDE}" fill-opacity="0.08" stroke="{VERDE}" stroke-width="0.8" stroke-dasharray="2 2"')
     for d in vent.get("ductos") or []:
         poli(d["linea"], f'stroke="{VERDE}" stroke-width="3.5" stroke-opacity="0.75"')

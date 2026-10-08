@@ -40,7 +40,9 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
    la escalera: dimensionar base y vigas. [22, 29]
 
 **Pases y losas**
-8. ¿Se pueden hacer pases de Ø110 y Ø50 en el plastoformo entre viguetas, con camisa? ¿Refuerzo? ¿Distancia mínima a las
+8. ✅ **Respondida (2026-10-08, al dueño): SÍ se pueden perforar las losas.** Falta confirmar en obra el pase del agua
+   caliente en los dos descansos de la escalera (ducto de A2) y la distancia a las vigas A, 3 y 4 (los pases quedan a ~5 cm).
+   Pregunta original: ¿Se pueden hacer pases de Ø110 y Ø50 en el plastoformo entre viguetas, con camisa? ¿Refuerzo? ¿Distancia mínima a las
    vigas? (Baño 2 del primer piso hacia el almacén; tragaluz del Baño 2) [39, 45, 46]
 9. Pase de la bajante del Baño 2: ¿libre de vigas? [39]
 
@@ -51,22 +53,22 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
 12. Muros de soga al ras de las columnas: cómo atarlos a las columnas para que no se fisure la fachada (chicotes con
     epóxico cada ~0.45, malla en el revoque). Muro nuevo del eje 1 entre A1 y B1. Ranura del living en ese muro (0.30 × 2.60, a 0.175 de A1):
     dintel bajo la viga del eje 1. [25, 26; revisión del arquitecto punto 6]
-13. Pilastras de chapa de la fachada norte (A2, A3, A4; 2026-10-08): cómo fijarlas sin perforar las columnas; ancho de
-    las zapatas del eje A (el gas enterrado pasa a ~1.3 del eje, en y -1.45). [revisión del arquitecto puntos 7, 8 y 24]
+13. Caños adentro (2026-10-08, reemplaza a las pilastras): ¿cómo cruzan el cimiento corrido del eje A, junto a las zapatas
+    de A3 y A4, la bajante (hacia la cámara nueva en 10.93, −0.85) y los caños del tanque? [revisión del arquitecto 7, 8]
 
 ## C. Para otros profesionales (no son del ingeniero, van acá para no perderlos)
 
-- **Plomero (fachada norte, 2026-10-08):** ¿entra el caño de 110 con sus piezas y las entradas de costado en la pilastra
-  de A4 de 0.375 × 0.25? ¿Agua fría, bomba y ventilación Ø50 juntas en la de A3 de 0.25 × 0.25?
+- **Plomero (caños adentro, 2026-10-08):** ¿entra el caño de 110 con sus piezas en el ducto de A4 (~0.22 libre por dentro)?
+  ¿Agua fría, bomba y ventilación Ø50 juntas en el de A3 (~0.10 × 0.30 libre)?
 - **Plomero:** prueba de infiltración del pozo de lluvia del jardín; cámara de la entrada; inodoro colgado de la suite;
   pendientes del Baño 1 y del Baño 2; presión de agua en el altillo. [9, 24, 34]
 - **Electricista:** demanda total y tipo de acometida con ELFEC; tubos de la columna B2; cajas que hayan dejado en la losa.
   [20, 35, 50]
 - **Gasista (YPFB):** subida de gas y calefón en la terraza del altillo. [23]
-  **Gas ENTERRADO (pedido del dueño, 2026-10-08):** por el retiro norte (y -1.45) y el patio (x 18.30), saliendo solo en
-  la pilastra de A2 (calefón) y en la esquina C5 a ~0.60 (cocina). ¿Lo acepta YPFB? ¿Gas y agua caliente juntos en la
-  pilastra ventilada de A2? ¿Cruce sobre el colector en x -3.30? **Plan B si no:** gas A LA VISTA a ~2.40 por la fachada
-  norte, pasando dentro de las pilastras de A3 y A4 en vaina (opción 1, `salida/fachada-norte-op1.png`; el aplique de la
-  esquina noroeste se corre para no chocar).
-- **Arquitecto de la obra (normativa):** pilastras de 0.25 en el retiro norte de 2 m (quedan 1.76); cajón de bajantes en el retiro del frente; retiro de 2 m del altillo; muro ciego
+  **Gas (2026-10-08, elegido por el dueño):** enterrado por el retiro norte y el patio hasta la cocina (sale a ~0.60 en C5);
+  al CALEFÓN sube por un compartimiento propio de chapa perforada junto al cajón gris de la esquina suroeste (con la pluvial
+  de la logia cruzándolo en vaina sellada) y sigue a la vista por dentro de los antepechos de la terraza del altillo a ~0.30
+  del piso. ¿Lo acepta YPFB? **Plan B:** enterrado hasta A2 y subida en vaina ventilada dentro del ducto de la escalera
+  (`salida/gas-variante-a.png`).
+- **Arquitecto de la obra (normativa):** cajón gris del frente que crece 0.12 con el gas (camino de 1.08); cajón de bajantes en el retiro del frente; retiro de 2 m del altillo; muro ciego
   de 1.80 al vecino del sur; muro de la calle y cisterna en el retiro. [10, 18, 28, 40]

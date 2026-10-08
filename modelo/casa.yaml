@@ -336,15 +336,18 @@ muros:
 proyecciones:
   # Cajón gris de las bajantes de la suite y BP1 (2026-10-07, PROPUESTO): no es muro de la casa; se marca en las tres plantas.
   pb:
+    - {rect: [-1.425, 6.375, -1.125, 6.495], nombre: "gas", estado: propuesto, nota: "2026-10-08 (PROPUESTO, plan B): COMPARTIMIENTO PROPIO del gas al calefón, pegado al norte del cajón (0.30 × 0.12), separado de las bajantes por una chapa; frente norte de CHAPA PERFORADA (ventila arriba y abajo). El camino queda de 1.08 junto al cajón (antes 1.20)"}
     - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto, nota: "decisión del dueño 2026-10-07: CHAPA PLEGADA de 2 mm pintada del gris de la caja, sobre bastidor de tubo de 30 × 30 anclado SOLO al hormigón macizo (punta de la viga del eje C en volado a +3.40 y +6.60, columna o encadenado), nunca a viguetas, plastoformo ni ladrillo de 6 huecos. APOYA ENTERO en su dado; las grapas solo lo sujetan de costado. Tapas atornilladas de 0.30 × 0.40 en la cara norte a +0.30 y +3.50 (registro de las dos bajantes). Remate arriba con tapa y gotero de 3 cm; la ventilación sale 0.30 más con sombrerete gris oscuro"}
-    - {rect: [-1.475, 6.495, -1.075, 6.795], nombre: "dado", estado: propuesto, nota: "DADO de hormigón de 0.40 × 0.30 al pie del cajón: no pasa de y 6.795 (lindero) y va separado con JUNTA del cimiento del muro sur; antes, pozo de prueba junto al lindero para ver ese cimiento"}
+    - {rect: [-1.475, 6.375, -1.075, 6.795], nombre: "dado", estado: propuesto, nota: "2026-10-08: crece 0.12 al norte con el compartimiento del gas. DADO de hormigón de 0.40 × 0.30 al pie del cajón: no pasa de y 6.795 (lindero) y va separado con JUNTA del cimiento del muro sur; antes, pozo de prueba junto al lindero para ver ese cimiento"}
   p1:
+    - {rect: [-1.425, 6.375, -1.125, 6.495], nombre: "gas", estado: propuesto}
     - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto}
     # 2026-10-05 (PROPUESTO): borde norte del domo 0.10 al sur (antes y 5.30) para dejar 0.65 de paso entre el muro del
     # departamento (cara y 4.745) y el domo. El borde sur NO se mueve (y 6.20): correr todo 0.10 dejaba solo ~0.35
     # libres hacia el antepecho sur y la ranura a 0.47 del eje C (el revisor pidió ≥0.40 y ≥0.5).
     - {rect: [9.75, 5.40, 10.90, 6.20], nombre: "tragaluz", estado: propuesto, nota: "PROPUESTO: tragaluz cenital del Baño 2, dos ranuras de ~0.30 × 0.60 (y 5.50–6.10; antes 0.70 desde y 5.40) en la losa del altillo, centradas entre viguetas a cada lado de la de x≈10.31 (las viguetas no se cortan), a 0.57 del eje C; bajo un domo (x 9.75–10.90, y 5.40–6.20) en la franja descubierta: 0.65 de paso al norte y ~0.45 libres al antepecho sur"}
   altillo:
+    - {rect: [-1.425, 6.375, -1.125, 6.495], nombre: "gas", estado: propuesto}
     - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto}
     - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
 
@@ -420,7 +423,7 @@ techos:
     # CANALETA DE PISO con rejilla junto al antepecho del frente hasta el sumidero del rincón; de ahí, salida lateral al cajón (BP1).
     - [[-1.18, 4.58], [-1.03, 4.60]]
     - [[-1.03, 4.60], [-1.00, 4.60], [-1.00, 6.45], [-0.90, 6.45]]
-    - [[-0.90, 6.45], [-1.36, 6.45], [-1.36, 6.645]]
+    - [[-0.90, 6.45], [-0.90, 6.56], [-1.36, 6.56], [-1.36, 6.645]]   # 2026-10-08: entra al cajón por y 6.56 (al norte está el compartimiento del gas)
     - [[16.78, 4.58], [16.78, 6.55]]
   bajantes:
     - {id: BP1, pos: [-1.36, 6.645], tope: 8.40, estado: propuesto, nota: "2026-10-07 (PROPUESTO, revisión del arquitecto punto 4, aceptado por el dueño; antes en (-1.00, 6.55), atravesaba la ducha de la suite y el volado): POR FUERA, en el CAJÓN GRIS de la esquina suroeste de la caja del baño de la suite (cajón x -1.425 a -1.125, y 6.495 a 6.795, del suelo a +8.40, pegado al canto del volado), del lado de la calle; al lado, del lado de la casa, la bajante sanitaria de la suite. Recibe la canaleta del techo de la terraza (por el tubo negro y la canaleta de piso), el sumidero de la terraza (salida lateral por la base del antepecho) y la logia del primer piso (canaleta-cornisa gris por todo el frente). NO se perfora el volado. Abajo: tapón de registro al pie y caño Ø100 enterrado al POZO DE ABSORCIÓN del jardín (ver instalaciones.pb.sanitario.pluvial), nunca al desagüe sanitario. Ø100 (techo ~26 m² + terraza ~11 m² + logia): lo confirma el plomero"}
@@ -456,17 +459,9 @@ fachada:
         - {vista: norte, u: [-0.175, 0.125], z: [0.20, 3.20], d: -0.13, material: piedra, nota: "2026-10-08 (punto 22): la piedra DA LA VUELTA 0.30 en la esquina noroeste (x -0.125 a 0.175), para que se lea como un muro macizo y no como una placa pegada; termina con canto limpio, lejos de la ventana del living (x 0.70)"}
         - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.125, material: gris_oscuro, nota: "frente del baño de la suite (marco de la logia); 2026-10-07: cara al ras del canto del volado"}
         - {vista: oeste, u: [-0.125, 4.20], z: [3.40, 6.40], d: -0.125, material: madera, nota: "listones en la pared del dormitorio, dentro de la logia. 2026-10-08 (punto 22): llegan HASTA LA CAJA GRIS (antes terminaban en 3.25 y quedaba muro blanco alrededor de la puerta de la logia); la puerta queda dentro del paño de madera"}
-        # ── Fachada norte ordenada en PILASTRAS sobre las columnas (2026-10-08, PROPUESTO, revisión del arquitecto puntos 7, 8 y 24) ──
-        # Cajones de CHAPA PLEGADA de 2 mm, gris oscuro como la caja de la suite y las bandas de losa, con pestañas atornilladas
-        # al ladrillo a los costados de la columna (la columna NO se perfora). Frente a y -0.375: ocupan 0.25 del retiro (quedan 1.76).
-        - {vista: norte, u: [-4.525, -4.025], z: [0.00, 10.20], d: -0.375, material: chapa_perforada, estado: propuesto, nota: "PILASTRA A2 (0.50 × 0.25): gas (x 4.08) y agua caliente aislada (x 4.20) del calefón; frente de CHAPA PERFORADA (el gas ventila). A ~+7.0 los caños entran a la terraza por el costado sur. A 0.325 de la ventana del living. Crece SOLO hacia el este (borde oeste = cara de la columna). REMATES (arquitecto 2026-10-08): arriba a +10.20, al ras del antepecho, tapa de chapa inclinada 5° hacia el muro con goterón de 1.5 cm; abajo sobre ZÓCALO de H° de 0.15 sobre el piso del retiro, la chapa empieza 3 cm más arriba con goterón (igual en A3 y A4)"}
-        - {vista: norte, u: [-7.175, -6.925], z: [0.00, 10.50], d: -0.375, material: gris_oscuro, estado: propuesto, nota: "PILASTRA A3 (0.25 × 0.25, del ancho de la columna): bajada de agua fría del tanque (x 7.00), impulsión de la bomba (x 7.10) y ventilación Ø50 del baño y el lavado de PB; sube hasta la base del tanque (+10.50). Reemplaza al núcleo de x 9.10–9.40. Arriba: tapa de chapa inclinada hacia afuera y SELLO FLEXIBLE contra el fondo del tanque (sin mortero: el tanque se mueve y se limpia). Abajo: zócalo de H° de 0.15 como A2"}
-        - {vista: norte, u: [-7.09, -7.01], z: [10.50, 10.80], d: -0.30, material: gris_oscuro, estado: propuesto, nota: "ventilación Ø50 con sombrerete, delante del tanque"}
-        - {vista: norte, u: [-11.325, -11.075], z: [0.00, 3.20], d: -0.375, material: gris_oscuro, estado: propuesto, nota: "PILASTRA A4 en PB: del ancho de la columna (la ventana del estudio llega a 10.95), solo pasa la bajante. Abajo: zócalo de H° de 0.15 como A2"}
-        - {vista: norte, u: [-11.325, -10.95], z: [3.20, 10.20], d: -0.375, material: gris_oscuro, estado: propuesto, nota: "PILASTRA A4 desde la losa del P1: ENSANCHADA al oeste hasta x 10.95 (0.375) para recibir de costado los caños del Baño 1 y del baño y la cocina del altillo. 2026-10-08 (arquitecto): antes hasta 10.85; ahora ALINEADA con el borde de la ventana del estudio de abajo (10.95); el quiebre de ancho queda a la altura de la banda de losa (+3.20). A 0.45 de las ventanas de los baños. Las ventanas al este (Cuarto 1, estar del altillo, a 0.125) CORREDIZAS (no batientes ni proyectantes: la pilastra sale 0.375 delante). Arriba a +10.20 con tapa inclinada y goterón como A2. TAPA DE INSPECCIÓN de la bajante en cada piso a ~1.20, sin rejillas encima"}
-        - {vista: norte, u: [-11.25, -11.15], z: [10.20, 10.50], d: -0.30, material: gris_oscuro, estado: propuesto, nota: "ventilación de la bajante común, con sombrerete"}
-        - {vista: norte, u: [-11.18, -11.02], z: [6.12, 6.30], d: -0.38, material: rejilla_gris, estado: propuesto, nota: "rejilla del extractor del Baño 2, CENTRADA en el frente de la pilastra (arquitecto 2026-10-08). El ducto sale del muro en x ~11.00 (ducto plano o Ø100 entre la cara de la ventana y la columna: NO tocar la columna, cara 11.075) y adentro de la pilastra la rejilla lo recibe; separada de la tapa de inspección"}
-        - {vista: norte, u: [-7.48, -7.33], z: [2.95, 3.10], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla del extractor del lavado, del color del muro. 2026-10-08 (arquitecto): corrida de 7.245–7.395 a 7.33–7.48, a 0.155 de la pilastra de A3 (antes 0.07)"}
+        # ── Plan B (2026-10-08, PROPUESTO): retiro norte de 2.00 justo → NADA sobresale de la fachada norte; los caños van adentro ──
+        - {vista: norte, u: [-7.525, -7.375], z: [2.95, 3.10], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla AL RAS del extractor del lavado, del color del muro (ducto corrido a x 7.45 por el ducto de A3)"}
+        - {vista: norte, u: [-10.225, -10.075], z: [6.12, 6.30], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla AL RAS del extractor del Baño 2, en el eje de las ventanas de los baños (x 10.15), sobre el dintel"}
         - {vista: norte, u: [-9.30, -9.10], z: [8.50, 8.70], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla de la campana del altillo, del color del muro; centrada entre las ventanas de la cocina y del baño (antes 8.75–8.95, apretada contra los caños que se fueron a A3)"}
         - {vista: este, u: [-6.47, -6.43], z: [0.00, 0.62], d: -17.07, material: gas, estado: propuesto, nota: "gas a la cocina: sale del suelo en la esquina C5 y entra a ~0.60 detrás del mesón (opción 2: gas enterrado)"}
         # Cajón de bajantes de la esquina suroeste (2026-10-07, PROPUESTO, revisión del arquitecto punto 4): "la pata" de la caja gris.
@@ -475,7 +470,8 @@ fachada:
         - {vista: oeste, u: [6.495, 6.795], z: [0.00, 8.40], d: -1.425, material: gris_oscuro, estado: propuesto, nota: "cajón de chapa de las bajantes de la suite (sanitaria) y BP1 (pluvial), frente de 0.30"}
         - {vista: oeste, u: [6.59, 6.70], z: [8.40, 8.70], d: -1.21, material: gris_oscuro, estado: propuesto, nota: "ventilación de la bajante de la suite: sale 0.30 sobre la tapa del cajón, con sombrerete gris oscuro"}
         - {vista: sur, u: [-1.425, -1.125], z: [0.00, 8.40], d: -6.795, material: gris_oscuro, estado: propuesto, nota: "costado sur del cajón de bajantes"}
-        - {vista: norte, u: [1.125, 1.425], z: [0.00, 8.40], d: 6.495, material: gris_oscuro, estado: propuesto, nota: "costado norte del cajón de bajantes (se ve desde el camino); tapas atornilladas de 0.30 × 0.40 a +0.30 y +3.50"}
+        - {vista: norte, u: [1.125, 1.425], z: [0.00, 8.40], d: 6.375, material: chapa_perforada, estado: propuesto, nota: "2026-10-08 (plan B): costado norte = frente PERFORADO del compartimiento del gas al calefón (0.12 delante del cajón de bajantes); las tapas de registro de las bajantes pasan a la cara oeste, a +0.30 y +3.50"}
+        - {vista: oeste, u: [6.375, 6.495], z: [0.00, 8.40], d: -1.425, material: chapa_perforada, estado: propuesto, nota: "frente oeste del compartimiento del gas"}
         - {vista: norte, u: [1.125, 1.225], z: [3.20, 3.40], d: 0.00, material: gris_oscuro, estado: propuesto, nota: "arranque de la canaleta-cornisa de la logia, con tapa recta"}
         # Canaleta-cornisa de la logia (decisión del dueño 2026-10-07): por TODO el frente del volado del primer piso, de y 0.00 a la pata.
         - {vista: oeste, u: [0.00, 6.495], z: [3.20, 3.40], d: -1.225, material: gris_oscuro, estado: propuesto, nota: "CANALETA-CORNISA de chapa gris de 0.10 × 0.20, horizontal por fuera, del alto de la banda de la losa (borde de abajo alineado con la cara de abajo de la losa, gotero de 1.5 cm); la pendiente (1 %) va por dentro, hacia el cajón; tapa recta en el arranque (y 0.00)"}
@@ -513,7 +509,7 @@ aberturas:
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}
     - {id: living_estar, tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
     # Depósito: puerta al costado de la columna A3, donde el techo interior sube (bajo el tramo de 6).
-    - {id: puerta_deposito, tipo: puerta, de: [6.80, 0.00], a: [6.00, 0.00], abre_hacia: afuera, alto: 1.85, estado: propuesto, nota: "desde el retiro, bajo el descanso (~1.92 libres). 2026-10-07 (revisión del arquitecto, aceptada): antes 6.07–6.87, a 5.5 cm de la cara de A3 (6.925); ahora 12.5 cm para el marco. Bisagra al ESTE (no al oeste como propuso el arquitecto): abierta hacia afuera no tapa la toma del retiro (x 5.75). Con la pilastra de A3 (2026-10-08, sale 0.375 del muro): TOPE DE PISO que detenga la hoja a 90° (si no, la hoja choca la chapa y se pellizcan los dedos); cerrojo del lado oeste"}
+    - {id: puerta_deposito, tipo: puerta, de: [6.80, 0.00], a: [6.00, 0.00], abre_hacia: afuera, alto: 1.85, estado: propuesto, nota: "desde el retiro, bajo el descanso (~1.92 libres). 2026-10-07 (revisión del arquitecto, aceptada): antes 6.07–6.87, a 5.5 cm de la cara de A3 (6.925); ahora 12.5 cm para el marco. Bisagra al ESTE (no al oeste como propuso el arquitecto): abierta hacia afuera no tapa la toma del retiro (x 5.75). Cerrojo del lado oeste (2026-10-08: sin pilastra en A3, ya no hace falta el tope a 90°)"}
     # Living (2026-10-05, PROPUESTO): se quita la corrediza a la terraza (2.43 entre A1 y B1; decisión del usuario: a la
     # terraza se sale por la entrada). El muro oeste queda CIEGO: ahí va la TV, centrada en la columna B1, sobre un
     # mueble (y 1.90–3.50). Sin ventana al oeste: el sol de la tarde entra bajo el volado (no lo frena a menos de ~42° de
@@ -530,7 +526,7 @@ aberturas:
     - {id: puerta_bano_pb, tipo: puerta, de: [8.65, 2.68], a: [7.95, 2.68], abre_hacia: bano_pb, estado: definido, nota: "0.70 batiente (el usuario no quiere corrediza, 2026-10-05); corrida al este para no chocar con el lavamanos (2026-10-07: 5 cm al oeste, a 7.95–8.65, para dejar 12.5 cm de muro hasta la cara del muro del estudio, 8.775; la hoja sigue sin tocar el lavamanos ni el inodoro); abre hacia el baño (el pasillo de 0.90 queda libre), bisagra del lado este: la hoja abierta queda contra el muro, delante del inodoro"}
     - {id: ventana_bano_pb, tipo: ventana, de: [7.60, 0.00], a: [8.30, 0.00], antepecho: 1.60, alto: 2.10, nota: "0.70 × 0.50 alta, al retiro; sobre la ducha: marco de aluminio o PVC y alféizar con pendiente hacia afuera"}
     - {id: puerta_estudio, tipo: puerta, de: [9.85, 2.68], a: [9.05, 2.68], abre_hacia: estudio, nota: "0.80"}
-    - {id: ventana_estudio, tipo: ventana, de: [9.35, 0.00], a: [10.95, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "1.60 × 1.20 al retiro. 2026-10-07 (revisión del arquitecto, aceptada): antes 9.30–11.00 (1.70), con 7.5 cm de muro hasta la cara de A4 (11.075): no entraba el marco. Ahora 12.5 cm hasta A4 y 10 cm hasta los caños del núcleo (x 9.10–9.25); sigue centrada en x 10.15, debajo de las ventanas del Baño 1 y del baño del altillo"}
+    - {id: ventana_estudio, tipo: ventana, de: [9.05, 0.00], a: [10.60, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "2026-10-08 (plan B, PROPUESTO): 9.05–10.60 (1.55): el ducto de la bajante ocupa el rincón de A4 (desde x 10.75) y los caños de x 9.10 ya no están; 12.5 cm de muro a cada lado. Alternativa alineada con las ventanas de los baños (eje 10.15): 9.70–10.60 (0.90). Antes: 1.60 × 1.20 al retiro. 2026-10-07 (revisión del arquitecto, aceptada): antes 9.30–11.00 (1.70), con 7.5 cm de muro hasta la cara de A4 (11.075): no entraba el marco. Ahora 12.5 cm hasta A4 y 10 cm hasta los caños del núcleo (x 9.10–9.25); sigue centrada en x 10.15, debajo de las ventanas del Baño 1 y del baño del altillo"}
     - {id: puerta_lavado, tipo: puerta, de: [7.30, 3.73], a: [8.10, 3.73], abre_hacia: lavado, nota: "0.80"}
     - {id: banderola_lavado, tipo: ventana, de: [8.25, 3.73], a: [9.00, 3.73], antepecho: 2.20, alto: 2.60, nota: "0.75 × 0.40 alta al pasillo, con celosía: entrada de aire para el extractor"}
     - {id: banderola_almacen, tipo: ventana, de: [9.60, 3.73], a: [10.60, 3.73], antepecho: 2.20, alto: 2.60, nota: "1.00 × 0.40 alta al pasillo, con celosía: ventilación del almacén"}
@@ -581,7 +577,7 @@ aberturas:
     - {id: llegada_estar, tipo: puerta, de: [7.05, 4.57], a: [7.05, 3.87], abre_hacia: cocina_alt, estado: propuesto, nota: "0.70–0.75, puerta propia del departamento (privacidad, frío y ruido de la escalera); la llegada solo deja ese ancho (piso y 3.85–4.595). Bisagra al SUR: abierta 90° la hoja queda contra el muro sur de la cocina-comedor (x 7.05–7.75), delante de la hoja FIJA de la corrediza; la banqueta fija del comedor termina ~0.18 antes del giro: la puerta abre libre. Tope de piso en x ≈ 7.70 para que la manija no golpee el vidrio. Marco del lado de la bisagra a ~2.5 cm de la cara del muro sur: marco angosto o hoja de 0.65, lo ve el carpintero"}
     - {id: estar_franja, tipo: corrediza, de: [7.25, 4.67], a: [9.35, 4.67], estado: definido, nota: "2.10 a la franja sur (corrida para dejar lugar a la lavandería). Hoja FIJA la del oeste (x 7.25–8.30) y móvil la del este (2026-10-05, PROPUESTO): delante de la fija se apoya abierta la puerta de la llegada. Se queda CORREDIZA (decisión del usuario 2026-10-05)"}
     - {id: vano_cocina_estar_alt, tipo: vano, de: [9.40, 2.68], a: [9.40, 4.67], estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): abierto, sin muro"}
-    - {id: ventana_cocina_alt, tipo: ventana, de: [7.30, 0.00], a: [8.60, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B aceptada): 1.30 × 1.00 sobre la mesada, centrada en x 7.95 (antepecho 1.10 como todas las ventanas grandes del altillo). El dueño la prefiere de 1.30 por la luz. Alternativa del arquitecto: 1.00 × 1.00 (x 7.45–8.45), del ancho de la del dormitorio"}
+    - {id: ventana_cocina_alt, tipo: ventana, de: [7.45, 0.00], a: [8.60, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "2026-10-08 (plan B, PROPUESTO): 7.45–8.60 (1.15; antes 7.30–8.60): el ducto de A3 ocupa el rincón hasta x 7.325; borde oeste alineado con la ventana de los blancos. PROPUESTO (2026-10-06, opción B aceptada): 1.30 × 1.00 sobre la mesada, centrada en x 7.95 (antepecho 1.10 como todas las ventanas grandes del altillo). El dueño la prefiere de 1.30 por la luz. Alternativa del arquitecto: 1.00 × 1.00 (x 7.45–8.45), del ancho de la del dormitorio"}
     - {id: ventana_bano_alt, tipo: ventana, de: [9.80, 0.00], a: [10.50, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): 0.70 × 0.50 alta, esmerilada, sobre el inodoro; EXACTAMENTE encima de la del Baño 1 (columna de x 10.15)"}
     - {id: ventana_estar_alt, tipo: ventana, de: [11.45, 0.00], a: [13.25, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): 1.80 × 0.50 ALTA sobre la TV, exactamente encima de la ventana del Cuarto 1 (11.45–13.25). Reemplaza a la alta del hall (12.02–12.72)"}
     - {id: ventana_estar_sur_alt, tipo: ventana, de: [11.75, 4.67], a: [12.95, 4.67], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B aceptada): 1.20 × 1.10 a la franja, centrada en el eje 12.35 (el de la ventana alta del estar y la del Cuarto 1): luz al estar y al paso. Afuera quedan las piletas"}
@@ -1022,9 +1018,9 @@ instalaciones:
         - {pos: [17.05, 3.60], etiqueta: "canilla (patio)", estado: propuesto}
         - {pos: [5.00, -0.20], etiqueta: "canilla (retiro norte)", estado: propuesto}
         # 2026-10-06 (usuario): canilla de los autos en el MURO NORTE (es del dueño), entre los dos autos; agua del tanque por el retiro norte
-        - {pos: [-9.35, -2.00], etiqueta: "canilla en el muro norte (autos y riego): AF del tanque", estado: propuesto, recorrido: [[7.00, -0.30], [7.00, -1.75], [-9.35, -1.75], [-9.35, -2.00]], nota: "canilla de pared a ~0.60 en el muro norte, en el hueco de 0.50 entre los dos autos (x -9.85 a -9.35), con llave de paso. Agua DEL TANQUE: de la bajada (x 7.00, pilastra de A3; antes 9.10) cruza el retiro y va enterrada junto al muro norte (y -1.75, fuera de la huella de las ruedas, por encima del cimiento del muro). Presión de gravedad (~1 bar): alcanza para manguera; para hidrolavadora, la propia máquina. Para regar el pasto, manguera o aspersores desde acá"}
+        - {pos: [-9.35, -2.00], etiqueta: "canilla en el muro norte (autos y riego): AF del tanque", estado: propuesto, recorrido: [[7.25, 0.20], [7.25, -1.75], [-9.35, -1.75], [-9.35, -2.00]], nota: "canilla de pared a ~0.60 en el muro norte, en el hueco de 0.50 entre los dos autos (x -9.85 a -9.35), con llave de paso. Agua DEL TANQUE: de la bajada (ducto de A3, x 7.25; sale bajo el muro norte) cruza el retiro y va enterrada junto al muro norte (y -1.75, fuera de la huella de las ruedas, por encima del cimiento del muro). Presión de gravedad (~1 bar): alcanza para manguera; para hidrolavadora, la propia máquina. Para regar el pasto, manguera o aspersores desde acá"}
       llaves:
-        - {pos: [7.25, 0.05], etiqueta: "LL general AF de la casa (bajada del tanque, junto a A3)", estado: propuesto}
+        - {pos: [7.25, 3.10], etiqueta: "LL general AF de la casa (en el pasillo, en caja con tapa)", estado: propuesto}
         - {pos: [7.20, 2.45], etiqueta: "LL baño"}
         - {pos: [16.75, 5.70], etiqueta: "LL cocina"}
         - {pos: [7.20, 6.30], etiqueta: "LL lavado"}
@@ -1034,7 +1030,7 @@ instalaciones:
         - {pos: [16.875, 3.00], etiqueta: "rejilla alta 2.20 (YPFB)", estado: propuesto, nota: "2026-10-07 (revisión del arquitecto, punto 5): antes en y 6.30, junto a la salida de la campana y a la entrada del gas; ahora sobre la rejilla baja (y 2.90), entre la columna B5 y el refrigerador, por encima del monitor del portero (1.45). Lejos de la campana: no vuelve a entrar el aire que sale"}
         - {pos: [16.875, 2.90], etiqueta: "rejilla baja 0.30 (YPFB)"}
       ventilaciones:
-        - {pos: [7.30, 0.10], estado: propuesto, etiqueta: "V Ø50 baño y lavado → por el cielo falso del baño a la PILASTRA de A3 y sube hasta sobre el tanque (2026-10-08; antes suelta en x 9.25)"}
+        - {pos: [7.25, 0.41], estado: propuesto, etiqueta: "V Ø50 baño y lavado → sube por el DUCTO de A3 (adentro) y sale por el techo junto al tanque"}
         - {pos: [16.70, 6.20], etiqueta: "V Ø50 cocina → sube por el muro este hasta sobre el techo"}
       # Materiales (usuario 2026-10-05): agua fría y caliente en PPR por termofusión (fría PN16–PN20; caliente PN20
       # mínimo, mejor PPR con fibra/compuesto; troncales 25 mm, ramales 20 mm; caliente aislada con coquilla).
@@ -1056,14 +1052,14 @@ instalaciones:
         nota: "cisterna NUEVA enterrada de H°A° impermeabilizado (SEMAPA → cisterna → bomba → tanque elevado), BAJO EL CAMINO justo después de la puerta peatonal (usuario 2026-10-06: bajo piso y no bajo pasto, para que el riego no moje la tapa ni la losa). ALARGADA a lo largo del camino: ~1.00 × 3.10 por dentro con 1.60 de agua útil (~5 m³), ~1.40 × 3.50 por fuera, ~2.1 de hondo; capacidad según consumo y cortes de SEMAPA (plomero). TAPA de 0.60 hermética en el camino, con borde elevado, antideslizante. ATENCIÓN ESTRUCTURAL (revisión 2026-10-06): queda pegada al muro sur (Lote 103) y la cámara de la bomba a ~0.50 del muro de la calle. Se puede porque el muro sur es NUEVO y del dueño: se hace PRIMERO la cisterna, con paredes de H°A° que trabajen como muro de contención, y el muro sur y el de la calle se fundan con ella (lo diseña el ingeniero). ANTES: pozo de prueba para ver si el vecino tiene cimientos o construcción pegada al lindero; si los tiene, excavar por partes con entibado o volver a correrla al norte. La vieja se rellena o se demuele por partes. Si hay agua en el suelo, pestaña contra la flotación. BOMBA (~½–1 HP, ~11 m de altura + ~27 m de caño; la elige el plomero): centrífuga en CÁMARA SECA de ~0.80 × 0.80 pegada al OESTE de la cisterna, al SUR de la puerta peatonal (x -14.60 a -13.80, y 5.95 a 6.75; pedido del usuario), con tapa en el camino y drenaje; o sumergible. Circuito C20 con guardamotor, flotante en el tanque y protección contra marcha en seco. Medidor de SEMAPA en cajuela en la acera"
       # Impulsión: de la bomba (al sur de la puerta) por el borde norte del camino (y 5.20) hasta la vereda, al norte por la vereda (sin pasar bajo los autos) hasta
       # y -0.30 (a 0.25 del gas: ANH pide ≥0.20 en paralelo), y por el retiro norte hasta el núcleo técnico (x 9.25, antes de la ventana del estudio que empieza en 9.30), donde sube junto a la bajada del tanque. ~27 m.
-      impulsion: [[-14.20, 6.35], [-14.20, 5.20], [-3.025, 5.20], [-3.025, -0.30], [7.10, -0.30]]   # 2026-10-08: sube en la pilastra de A3 (antes x 9.25)
-      bajada_tanque: {pos: [7.00, -0.30], nota: "bajada de agua fría desde el tanque elevado, en la PILASTRA de A3 (2026-10-08, propuesto; antes x 9.10)"}
+      impulsion: [[-14.20, 6.35], [-14.20, 5.20], [-3.025, 5.20], [-3.025, -0.30], [7.25, -0.30], [7.25, 0.30]]   # 2026-10-08 plan B: entra bajo el muro norte y sube por el DUCTO de A3 (adentro)
+      bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ tanque (ducto de A3)", nota: "2026-10-08 (plan B, propuesto): DUCTO de A3 por dentro, en el rincón noroeste del baño de PB, de los blancos del P1 y de la cocina del altillo: [7.125, 0.025, 7.325, 0.50]"}
       # Varias troncales: listas de polilíneas.
-      agua_fria: [[[7.00, -0.30], [7.25, -0.30], [7.25, 3.10], [16.60, 3.10]]]
+      agua_fria: [[[7.25, 0.20], [7.25, 3.10], [16.60, 3.10]]]
       # Agua caliente: baja del calefón del altillo por FUERA del muro norte junto a A2 (x 4.20, aislada y con cajón de
       # protección), entra bajo el piso y sigue la troncal de siempre por el hall y el pasillo.
-      subida_caliente: {pos: [4.20, -0.30], etiqueta: "AC ↓ del calefón (altillo), por fuera"}
-      agua_caliente: [[[4.20, -0.30], [4.20, 3.35], [16.55, 3.35]]]
+      subida_caliente: {pos: [4.60, 0.10], etiqueta: "AC ↓ del calefón por el ducto de A2 (escalera)"}
+      agua_caliente: [[[4.60, 0.10], [4.60, 3.35], [16.55, 3.35]]]
       # Desagüe: colector exterior por el retiro norte hacia la calle (frente); cámaras de inspección
       # en cambios de dirección y cada ~10-15 m. La cocina pasa antes por una desgrasadora.
       # 2026-10-07: colector alargado a x -4.00 (sigue hacia la calle por y -0.85, ver estado.md punto 3) para recibir la bajante
@@ -1073,7 +1069,7 @@ instalaciones:
       # del piso. El caño sigue al oeste por y 5.85: a 0.65 de la impulsión (y 5.20), a 0.85 del cable (y 5.00) y a 0.35 de la cámara
       # de la puesta a tierra; cruza el gas (x -3.30) en perpendicular.
       colector: [[17.70, 5.15], [17.70, -0.85], [-4.00, -0.85]]
-      camaras: [[17.70, -0.85], [12.70, -0.85], [8.00, -0.85], [2.00, -0.85], [-1.29, 5.85], [-4.00, -0.85]]
+      camaras: [[17.70, -0.85], [12.70, -0.85], [10.93, -0.85], [8.00, -0.85], [2.00, -0.85], [-1.29, 5.85], [-4.00, -0.85]]
       # Desagüe PLUVIAL (no va nunca al colector sanitario). 2026-10-07 (PROPUESTO, revisión del arquitecto punto 4).
       pluvial:
         - linea: [[-1.36, 6.645], [-1.36, 6.70], [-2.00, 6.70], [-2.00, 4.00], [-5.00, 4.00]]
@@ -1095,14 +1091,15 @@ instalaciones:
       # 2026-10-08 (PROPUESTO, revisión del arquitecto puntos 7 y 24, opción 2): YA NO va a la vista por las fachadas norte y
       # este. ENTERRADO por el retiro norte en y -1.45 (al norte de las cámaras del colector, ≥0.20; a 0.30 del caño de la
       # canilla en y -1.75; cruza el colector en x -3.30 en perpendicular, por encima) y por el patio en x 18.30 (≥0.60 del
-      # colector y la desgrasadora). Sale del suelo SOLO en la pilastra de A2 (calefón) y en la esquina C5, a ~0.60 (cocina).
+      # colector y la desgrasadora). Sale del suelo SOLO en la esquina C5, a ~0.60 (cocina). Plan B (2026-10-08): el ramal del calefón sale del muro sur
+      # (x -3.30) a la vista hasta el cajón gris de la esquina suroeste (gas_ramales).
       # Antes: [-3.30, -0.55] → [0.30, -0.55] → a la vista a ~2.40 por y -0.17 hasta x 17.07 y por la fachada este.
       gas: [[-15.00, 6.62], [-3.30, 6.62], [-3.30, -1.45], [18.30, -1.45], [18.30, 6.45], [16.90, 6.45], [14.78, 6.45]]
       # 2026-10-07 (revisión del arquitecto, punto 5): por la fachada este baja de ~2.40 a ~0.60 en y 6.45 y ENTRA BAJO, detrás
       # del mesón sur, hasta las hornallas; nunca dentro del cajón de la campana. ≥0.30 de la toma del rincón (y 6.20, a 1.10)
       # y separado de la ventilación de la cocina (16.70, 6.20). Lo aprueba el gasista (YPFB).
       gas_ramales:
-        - {linea: [[4.08, -1.45], [4.08, -0.30]], etiqueta: "GN ↑ al calefón del altillo (sale del suelo dentro de la pilastra de A2)", estado: propuesto}
+        - {linea: [[-3.30, 6.62], [-1.60, 6.62], [-1.60, 6.435], [-1.425, 6.435]], etiqueta: "GN al calefón: a la vista por el muro sur → sube en el compartimiento propio del cajón gris", estado: propuesto}
     # Ventilación mecánica (aprobada 2026-10-03). Solo lo que no tiene ventana propia: campana de la
     # cocina y extractor del lavado. Baño, estudio, comedor y cocina ya ventilan por ventana; el almacén
     # por su banderola. La losa ya está hecha: los ductos van BAJO la losa y BAJO las vigas (nunca
@@ -1115,7 +1112,7 @@ instalaciones:
           estado: definido
           nota: "campana → patio, 2.1 m recto, escondido en un cajón sobre las alacenas altas del muro sur. 2026-10-07 (revisión del arquitecto, punto 5): salida al patio LO MÁS ALTA posible (~2.75, bajo la viga: confirmar cuánto cuelga) con SOMBRERETE que tire el aire hacia abajo y hacia afuera; ya no comparte el rincón con la rejilla alta ni con el gas. Queda ~1.6 m debajo y 0.20 al sur de la ventana del Cuarto 2: la hoja SUR de esa ventana va FIJA"
         - id: lavado
-          linea: [[8.10, 6.00], [7.405, 6.00], [7.405, -0.20]]
+          linea: [[8.10, 6.00], [7.45, 6.00], [7.45, -0.20]]
           diametro: 100
           extractor: true
           estado: definido
@@ -1126,6 +1123,9 @@ instalaciones:
         - {rect: [7.05, 0.00, 8.85, 2.68], alto: 2.70, nota: "baño completo (oculta el ducto)"}
       cajones:
         - {rect: [14.30, 6.10, 16.90, 6.67], nota: "cajón sobre las alacenas altas (campana)"}
+        - {rect: [7.125, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
+        - {rect: [10.75, 0.025, 11.325, 0.45], ducto: true, estado: propuesto, nota: "DUCTO de la bajante común en el estudio: envuelve la cara sur de A4 (se lee como la columna más ancha); tapa de registro abajo"}
+        - {rect: [4.525, 0.025, 4.675, 0.30], ducto: true, estado: propuesto, nota: "DUCTO de A2 en el rincón de la escalera (plan B 2026-10-08): agua caliente del calefón; del depósito de PB, cruzando los dos descansos, hasta el altillo, donde pasa a la terraza por el muro x 4.40"}
 
   p1:
     electrico:
@@ -1262,18 +1262,18 @@ instalaciones:
         # piso). Sin sumidero: el piso cae 1 % hacia el FRENTE y vuelca por la base de la baranda en la canaleta-cornisa (ver pluvial).
       # Pluvial (no se mezcla con el desagüe de la suite)
       pluvial:
-        - linea: [[-1.175, 0.00], [-1.175, 6.495]]
+        - linea: [[-1.175, 0.00], [-1.175, 6.375], [-1.175, 6.55]]
           etiqueta: "cornisa-canaleta → BP1"
           etiqueta_pos: [-1.45, 5.45]
           estado: propuesto
           nota: "decisión del dueño 2026-10-07: canaleta de chapa galvanizada pintada del gris de la caja por TODO el frente del volado del primer piso, de y 0.00 (tapa recta en el arranque) a la pata (cajón, y 6.495). Por fuera es HORIZONTAL, como una cornisa del alto de la banda de la losa (0.20), con el borde de abajo alineado con la cara de abajo de la losa y gotero de 1.5 cm; la pendiente (1 %, ~6.5 cm) va por DENTRO. La logia (piso 1 % hacia el frente) vuelca por la base de la baranda en todo su largo. Se cuelga del canto SOLO donde hay hormigón macizo; si entre B y C no hay viga de borde vaciada, con ménsulas al muro del frente o a la carpeta (lo define el ingeniero)"
-      bajada_tanque: {pos: [7.00, -0.30], etiqueta: "AF ↓ tanque (pilastra A3)"}
-      subida_caliente: {pos: [4.20, -0.30], etiqueta: "AC ↓ del calefón (altillo), por fuera"}
-      agua_fria: [[[7.00, -0.30], [7.25, -0.30], [7.25, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
-      agua_caliente: [[[4.20, -0.30], [4.20, 4.35], [5.95, 4.35], [5.95, 5.65], [-0.20, 5.65]], [[5.95, 4.35], [6.75, 4.35], [6.75, 3.45], [11.35, 3.45]]]
+      bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ tanque (ducto de A3)"}
+      subida_caliente: {pos: [4.60, 0.10], etiqueta: "AC ↓ por el ducto de A2 (escalera)"}
+      agua_fria: [[[7.25, 0.20], [7.40, 0.20], [7.40, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
+      agua_caliente: [[[4.60, 0.10], [4.20, 0.10], [4.20, 4.35], [5.95, 4.35], [5.95, 5.65], [-0.20, 5.65]], [[5.95, 4.35], [6.75, 4.35], [6.75, 3.45], [11.35, 3.45]]]
       # Sin colector en este piso: cada artefacto va a su bajante (BV).
       bajantes:
-        - {pos: [11.20, -0.20], ambientes: [bano_hijo_1], etiqueta: "BAJANTE COMÚN (Baño 1 + baño y cocina del altillo): por fuera, pegada a la columna A4, en cajón"}
+        - {pos: [10.93, 0.27], ambientes: [bano_hijo_1], recorrido_pb: [[10.93, 0.27], [10.93, -0.85]], estado: propuesto, etiqueta: "BAJANTE COMÚN (Baño 1 + baño y cocina del altillo): ADENTRO, en el ducto del rincón de A4 (plan B 2026-10-08)"}
         - {pos: [9.30, 3.85], ambientes: [bano_hijo_2], etiqueta: "Baño 2 → ducto en esquina (almacén abajo)"}
         # 2026-10-07 (PROPUESTO, revisión del arquitecto punto 4): antes en (-0.30, 6.50), dentro del plato de la ducha, perforaba el
         # volado y bajaba a 7.5 cm del marco de la puerta de entrada. Ahora por FUERA, en el cajón gris de la esquina suroeste de la
@@ -1289,11 +1289,11 @@ instalaciones:
     ventilacion:
       ductos:
         - id: baño 2
-          linea: [[11.00, 6.10], [11.00, -0.20]]
+          linea: [[11.00, 6.10], [11.00, 0.70], [10.15, 0.70], [10.15, -0.20]]
           diametro: 100
           extractor: true
           estado: definido
-          nota: "extractor del Baño 2 de los hijos → retiro norte por cielo falso del pasillo y del Baño 1; 2026-10-08: sale por la rejilla centrada en el frente de la pilastra de A4 (ducto en x 11.00, sin tocar la columna; antes x 10.85)"
+          nota: "extractor del Baño 2 de los hijos → retiro norte por cielo falso del pasillo y del Baño 1; 2026-10-08 (plan B): sale por una rejilla al ras en x 10.15, sobre la ventana del Baño 1 (antes en la pilastra de A4)"
         - id: lavamanos
           linea: [[1.40, 5.30], [-1.30, 5.30]]
           diametro: 100
@@ -1305,6 +1305,10 @@ instalaciones:
         - {rect: [10.60, 2.68, 11.20, 3.88], alto: 2.70, nota: "franja del pasillo"}
         - {rect: [9.40, 0.00, 11.20, 2.68], alto: 2.70, nota: "Baño 1 de los hijos"}
         - {rect: [-1.125, 4.20, 3.40, 5.45], alto: 2.70, nota: "inodoro y lavamanos de la suite"}
+      cajones:
+        - {rect: [7.125, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
+        - {rect: [10.75, 0.025, 11.125, 0.45], ducto: true, estado: propuesto, nota: "DUCTO de la bajante común (plan B 2026-10-08), rincón de A4 al costado del inodoro; Ø110 en (10.93, 0.27); tapa de registro; pases entre viguetas"}
+        - {rect: [4.525, 0.025, 4.675, 0.30], ducto: true, estado: propuesto, nota: "DUCTO de A2 en el rincón de la escalera (plan B 2026-10-08): agua caliente del calefón; del depósito de PB, cruzando los dos descansos, hasta el altillo, donde pasa a la terraza por el muro x 4.40"}
 
   altillo:
     electrico:
@@ -1389,19 +1393,19 @@ instalaciones:
         - {pos: [9.20, 0.70], etiqueta: "LL cocina"}
         - {pos: [10.95, 0.85], etiqueta: "LL baño"}
         - {pos: [11.45, 4.55], etiqueta: "LL lavandería"}
-        - {pos: [4.08, 0.55], gas: true, etiqueta: "LL gas calefón"}
-      bajada_tanque: {pos: [7.00, -0.30], etiqueta: "AF ↓ del tanque (pilastra A3)"}
+        - {pos: [3.90, 0.15], gas: true, etiqueta: "LL gas calefón"}
+      bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ del tanque (ducto de A3)"}
       # 2026-10-06 (opción B aceptada, PROPUESTO): baño encima del Baño 1 (x 9.40–11.20); cocina del otro lado de su muro oeste.
       # Agua por el muro norte al baño y a la cocina; a la lavandería por el piso del paso. Caños por debajo de la mesada.
-      agua_fria: [[[7.00, -0.30], [7.25, -0.30], [7.25, 0.20]], [[7.25, 0.20], [10.95, 0.20], [10.95, 2.40]], [[9.55, 0.20], [9.55, 1.20]], [[9.20, 0.20], [9.20, 1.15]], [[10.95, 2.40], [10.95, 4.55], [11.60, 4.55]], [[7.25, 0.20], [4.15, 0.20], [4.15, 0.55]]]
+      agua_fria: [[[7.25, 0.20], [10.95, 0.20], [10.95, 2.40]], [[9.55, 0.20], [9.55, 1.20]], [[9.20, 0.20], [9.20, 1.15]], [[10.95, 2.40], [10.95, 4.55], [11.60, 4.55]], [[7.25, 0.20], [4.15, 0.20], [4.15, 0.55]]]
       calefon: {pos: [4.15, 0.80], estado: propuesto, nota: "calefón a gas natural de TODA la casa, en la terraza del altillo, colgado en el muro x=4.40 (cara de la terraza) junto a la columna A2, base a ~1.40. SUGERIDO: ~18–20 L/min nominal (a ~2550 m rinde ~20–25 % menos), tiro forzado, electrónico modulante, ENCENDIDO A BAJA PRESIÓN (~0.1 bar: el tanque queda ~2.5 m arriba), con protección ANTIHIELO, apto exterior. PROTECCIÓN: gabinete metálico para calefón de exterior (chapa galvanizada pintada, rejillas arriba y abajo, nunca hermético), con candado; el techo de la terraza ya lo protege de la lluvia; salida de gases por un caño que sube por encima del techo de la terraza; llave de paso del gas a la vista. Lo dimensiona y aprueba el gasista (YPFB)"}
-      gas: [[4.08, -0.30], [4.08, 0.80]]
-      gas_inicio: "GN ↑ desde el retiro norte (en la pilastra de A2)"
+      gas: [[-1.275, 6.435], [-0.90, 6.435], [-0.90, 0.15], [4.08, 0.15], [4.08, 0.80]]   # 2026-10-08 (plan B, variante b): del cajón gris por dentro de los antepechos de la terraza, a ~0.30 del piso
+      gas_inicio: "GN ↑ del cajón gris (esquina suroeste)"
       gas_fin: "calefón"
-      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [10.85, 0.45], [10.85, 2.35]], [[9.65, 0.45], [9.65, 1.20]], [[9.10, 0.45], [9.10, 1.15]], [[10.85, 2.35], [10.85, 4.50], [11.60, 4.50]], [[4.15, 0.80], [4.15, -0.30]]]
-      subida_caliente: {pos: [4.15, -0.30], etiqueta: "AC ↓ a P1 y PB, por fuera"}
+      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [10.85, 0.45], [10.85, 2.35]], [[9.65, 0.45], [9.65, 1.20]], [[9.10, 0.45], [9.10, 1.15]], [[10.85, 2.35], [10.85, 4.50], [11.60, 4.50]], [[4.15, 0.80], [4.15, 0.10], [4.60, 0.10]]]
+      subida_caliente: {pos: [4.60, 0.10], etiqueta: "AC ↓ a P1 y PB por el ducto de A2 (escalera)"}
       bajantes:
-        - {pos: [11.20, -0.20], ambientes: [bano_alt, cocina_alt], etiqueta: "BAJANTE COMÚN (baño y cocina + Baño 1 del P1): por fuera, en cajón-pilastra en la columna A4", nota: "PILASTRA de chapa en la columna A4, del suelo al remate (+10.20): en PB del ancho de la columna (x 11.075–11.325); desde la losa del P1 ensanchada al oeste hasta x 10.95 (alineada con la ventana del estudio) para recibir los caños de costado (2026-10-08, propuesto, revisión del arquitecto punto 8). Tapa de inspección en cada piso. Recibe el inodoro (salida a la pared), la ducha y el lavamanos del altillo, el lavaplatos de la cocina del altillo y el Baño 1 del P1"}
+        - {pos: [10.93, 0.27], ambientes: [bano_alt, cocina_alt], estado: propuesto, etiqueta: "BAJANTE COMÚN (baño y cocina + Baño 1 del P1): ADENTRO, en el ducto del rincón de A4", nota: "plan B (2026-10-08): la pilastra de afuera invadía el retiro de 2.00. Ducto de ladrillo en el rincón noroeste de A4, al lado oeste (en el este estaban las ventanas del Cuarto 1 y del estar), en el baño del altillo, el Baño 1 y el estudio; pases por el plastoformo entre viguetas en (10.93, 0.27), lejos de las vigas A y 4 (ingeniero, pregunta 8); en PB baja bajo el piso a la cámara nueva (10.93, -0.85). Ventila sobre el techo del departamento. Recibe el inodoro (salida a la pared, ~0.5 m), la ducha y el lavamanos del altillo, el lavaplatos de la cocina del altillo y el Baño 1 del P1"}
         - {pos: [9.60, 4.85], ambientes: [franja_sur_alt], hasta: p1, etiqueta: "lavandería → baja por el Baño 2 del P1 (desagüe ~1.7 m por el contrapiso; pase entre viguetas, sin tocar el nervio)"}
       # NO SE PICA LA LOSA del altillo para el baño (2026-10-06, opción B aceptada): el desnivel de la ducha y las pendientes
       # salen del contrapiso (~15 cm; el ingeniero define si va alivianado). Inodoro de preferencia con SALIDA A LA PARED, con
@@ -1417,6 +1421,10 @@ instalaciones:
           diametro: 150
           estado: propuesto
           nota: "PROPUESTO (2026-10-06, opción B aceptada): campana sobre el anafe de la esquina → ducto recto de ~0.4 m al muro norte. REJILLA del color del muro, borde de arriba a 2.10 (alineado con los dinteles). 2026-10-08: CENTRADA entre las dos ventanas (x 9.10–9.30), porque los caños de x 9.10–9.40 se fueron a la pilastra de A3 (antes 8.75–8.95)"
+      cajones:
+        - {rect: [7.125, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
+        - {rect: [10.75, 0.025, 11.125, 0.45], ducto: true, estado: propuesto, nota: "DUCTO de la bajante común (plan B 2026-10-08), rincón de A4 al costado del inodoro; Ø110 en (10.93, 0.27); tapa de registro; pases entre viguetas"}
+        - {rect: [4.525, 0.025, 4.675, 0.30], ducto: true, estado: propuesto, nota: "DUCTO de A2 en el rincón de la escalera (plan B 2026-10-08): agua caliente del calefón; del depósito de PB, cruzando los dos descansos, hasta el altillo, donde pasa a la terraza por el muro x 4.40"}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # REFERENCIA: juego impreso fotografiado (IMG_8276, IMG_8277). Solo para consulta;

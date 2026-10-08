@@ -930,3 +930,28 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   arquitecto de la obra (pilastras de 0.25 dentro del retiro de 2 m); `interiorista` al final (llave general de agua fría
   movida a la pilastra de A3).
 - **Estado:** aprobado por el usuario (opción 2).
+
+## 2026-10-08 — Plan B: caños adentro, fachada norte lisa (retiro de 2.00 justo; fase A)
+- **Qué (propuesto):** salen las tres pilastras; en la fachada norte solo quedan rejillas al ras (lavado x 7.375–7.525,
+  Baño 2 en x 10.15 sobre la ventana del Baño 1, campana del altillo). Ductos de ladrillo por dentro:
+  **A4** (bajante común, lado oeste) en el rincón del baño del altillo, del Baño 1 y del estudio, [10.75–11.125 × 0.025–0.45]
+  (en el estudio envuelve la columna hasta 11.325), pases entre viguetas en (10.93, 0.27), cámara nueva en (10.93, −0.85);
+  **A3** (agua fría, impulsión, ventilación Ø50, lado este) en el rincón del baño de PB, los blancos y la cocina del altillo,
+  [7.125–7.325 × 0.025–0.50]; **A2** (agua caliente) en el rincón de la escalera, [4.525–4.675 × 0.025–0.30], cruzando los
+  dos descansos. Ventana del estudio 9.05–10.60; ventana de la cocina del altillo 7.45–8.60.
+- **Gas al calefón, variante b (en el modelo):** a la vista por el muro sur desde x −3.30, sube en un compartimiento propio
+  de chapa perforada al norte del cajón gris (crece 0.12; camino 1.08 ahí) y va por dentro de los antepechos de la terraza.
+  **Variante a (solo imagen, `salida/gas-variante-a.png`):** enterrado hasta A2, nicho al ras y vaina ventilada en el ducto
+  de la escalera.
+- **Elegido por el dueño (2026-10-08):** ventana del estudio **(i)** 9.05–10.60 (1.55, deja de alinear con las ventanitas
+  de los baños: más luz para el invitado) y gas **variante b** (cajón gris del frente + antepechos de la terraza; nunca entra a
+  la casa). Plan B del gas si YPFB no acepta b: variante a.
+- **Ingeniero (respuesta al dueño, 2026-10-08):** SÍ se pueden perforar las losas para los pases (pregunta 8). Confirmar con
+  él en obra que vale también para el pase Ø~50 del agua caliente en los dos descansos de la escalera (A2).
+- **Sin revisores en la fase B:** la estructura la contestó el ingeniero real y los cambios de tamaño son rincones chicos.
+  Reemplaza a las pilastras de los puntos 7, 8 y 24 (que siguen resueltos, ahora por dentro).
+- **Pendiente:** plomero (110 con piezas en el ducto de A4; agua fría, bomba y ventilación en el de A3); YPFB (variante b,
+  gas junto a las bajantes con la pluvial de la logia cruzando en vaina sellada; gas a la vista a 0.30 en la terraza);
+  `interiorista` una vez al final (librero del estudio, repisas de blancos, mesón del altillo, estante del depósito y llave
+  general de agua fría).
+- **Estado:** aprobado por el usuario.
