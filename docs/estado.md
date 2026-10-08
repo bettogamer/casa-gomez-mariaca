@@ -76,10 +76,11 @@ Primera revisión completa de la casa: 26 puntos en `docs/revision-arquitecto.md
 uno por vez con el dueño, empezando por los urgentes.
 
 **Avance (el dueño trabaja en varias sesiones: al cerrar cada punto, actualizar esta lista):**
-- Hechos: 1–6 (urgentes de PB), 22 (fachada oeste, 2026-10-08) y, fuera de la lista, la ranura vertical del living
-  (2026-10-08).
-- **Sigue: punto 7** (fachada norte: caños y gas en pilastras, dibujados en los alzados). Es cambio grande (fachada +
-  instalaciones): borrador del `disenador` → el dueño elige → `arquitecto`. Después 8, 9, 10, 11 en orden.
+- Hechos: 1–6 (urgentes de PB), 7, 8 y 24 (fachada norte: pilastras de chapa gris en A2, A3 y A4 y gas ENTERRADO;
+  plan B si YPFB no lo acepta: gas a la vista dentro de las pilastras), 22 (fachada oeste) y, fuera de la lista, la ranura
+  vertical del living. Todo el 2026-10-08.
+- **Sigue: punto 9** (barandas de la escalera). Después 10, 11 y los de prioridad media (12 en adelante).
+- Para el `interiorista` al final: la llave general de agua fría se mudó a la pilastra de A3.
 
 ## Pendientes abiertos
 - Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el

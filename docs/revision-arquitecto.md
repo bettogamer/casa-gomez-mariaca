@@ -25,11 +25,11 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
    anclados con epóxico mientras se levanta; malla de 0.30 en el revoque sobre cada columna y viga. — ingeniero, albañil.
 
 ## ALTA
-7. ⏳ **Fachada norte: lo técnico desparramado y sin dibujar** (gas x 3.90, agua caliente x 4.20, caños x 9.10–9.25,
+7. ✅ **Fachada norte: lo técnico desparramado y sin dibujar** (gas x 3.90, agua caliente x 4.20, caños x 9.10–9.25,
    bajante A4, rejillas x 7.32, 8.75 y 10.85, gas horizontal a 2.40). Propuesta: pilastras sobre columnas: A2 (gas, con
    frente perforado, y agua caliente), A3 (tanque, bomba, ventilación), A4 (bajante); rejillas del color del muro;
    dibujarlo en los alzados. — disenador, plomero, gasista.
-8. ⏳ **Pilastra de A4: no recibe los caños de costado** (un caño de 110 no entra en 10 cm de ladrillo). Propuesta: de la
+8. ✅ **Pilastra de A4: no recibe los caños de costado** (un caño de 110 no entra en 10 cm de ladrillo). Propuesta: de la
    losa del P1 hacia arriba se ensancha al oeste hasta x 10.85; ventanas del lado este corredizas. — plomero, disenador.
 9. ⏳ **Escalera sin barandas definidas.** Pasamanos a 0.90 del lado del muro; baranda de 0.95 en tramos y 1.10 en bordes
    del hueco; barrotes verticales cada ≤10 cm, sin travesaños; anclada a losa o vigas. — disenador, herrero.
@@ -70,7 +70,7 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
     — dueño.
 
 ## DECIDIDO, PERO OJO
-24. ⏳ **Gas a la vista a 2.40 por 17 m de fachada norte y la este:** llevarlo enterrado por el retiro y que salga solo en
+24. ✅ **Gas a la vista a 2.40 por 17 m de fachada norte y la este:** llevarlo enterrado por el retiro y que salga solo en
     la pilastra de A2 (calefón) y 0.60 en la esquina C5 (cocina). — dueño, gasista.
 25. ⏳ **Baños sobre el estudio de invitados** (Baño 1, y el del altillo encima): membrana en todo el piso (0.20 en muros,
     1.80 en la ducha), prueba de 48 h con agua, caños sin uniones en la losa. — plomero, albañil.
