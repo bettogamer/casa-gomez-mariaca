@@ -64,7 +64,7 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
 
 ## BAJA
 21. ⏳ Bandas grises de losa cortadas en cada columna (norte, este, sur): continuas o solo en la oeste. — disenador.
-22. ⏳ Fachada oeste: piedra hasta el marco del vidrio y con vuelta de 0.30 en la esquina noroeste; madera de la logia hasta
+22. ✅ Fachada oeste: piedra hasta el marco del vidrio y con vuelta de 0.30 en la esquina noroeste; madera de la logia hasta
     la caja gris; ventanitas de la caja gris en 4.50–5.20 y 5.80–6.50. — disenador.
 23. ⏳ Terraza común abierta a la franja del departamento: reja con puerta de 0.90 en x 4.40 (y 4.67–6.67) si se alquila.
     — dueño.

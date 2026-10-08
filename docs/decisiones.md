@@ -896,3 +896,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Descartado:** ventana al sur de la TV (compite con el vidrio de la entrada); sin ventana con banco, maceteros y
   apliques (se puede sumar después: los apliques no chocan con la ranura).
 - **Estado:** aprobado por el usuario (opción A).
+
+## 2026-10-08 — Fachada oeste: remates de piedra, madera y ventanitas (revisión del arquitecto, punto 22; cambio chico)
+- **Piedra:** llega hasta el marco del vidrio de la entrada (antes terminaba en y 4.95 y dejaba una tira blanca de 0.10),
+  forra los costados de la ranura del living y da la vuelta 0.30 en la esquina noroeste (fachada norte, x −0.125 a 0.175),
+  para que se lea como un muro macizo y no como una placa pegada.
+- **Madera de la logia:** llega hasta la caja gris (antes terminaba en 3.25 y quedaba blanco alrededor de la puerta de la logia).
+- **Ventanitas de la caja gris:** la del inodoro pasa a 4.40–5.10 (antes 4.45–5.15): bordes de 0.20 y 0.145 a los costados
+  de la caja. Lo que pedía el arquitecto (4.50–5.20 y 5.80–6.50) ya no entra: la de la ducha quedó fija en 5.65–6.35 entre
+  su muro y el cajón de las bajantes (punto 4), y la del inodoro no puede ir más al norte (12.5 cm para el marco).
+- **Estado:** aplicado; lo ve el dueño en los alzados.
