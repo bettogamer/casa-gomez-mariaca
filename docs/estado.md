@@ -79,6 +79,8 @@ uno por vez con el dueño, empezando por los urgentes.
 - Hechos: 1–6 (urgentes de PB), 7, 8 y 24 (fachada norte: pilastras de chapa gris en A2, A3 y A4 y gas ENTERRADO;
   plan B si YPFB no lo acepta: gas a la vista dentro de las pilastras), 22 (fachada oeste) y, fuera de la lista, la ranura
   vertical del living. Todo el 2026-10-08.
+- **Abierto (2026-10-08):** las pilastras de la fachada norte salen 0.25 dentro del retiro lateral de 2.00 y el maestro dejó
+  justo 2.00: probable incumplimiento (ver `docs/normativa.md`). Falta decidir con el dueño el plan B (caños hacia adentro).
 - **Sigue: punto 9** (barandas de la escalera). Después 10, 11 y los de prioridad media (12 en adelante).
 - Para el `interiorista` al final: la llave general de agua fría se mudó a la pilastra de A3.
 
