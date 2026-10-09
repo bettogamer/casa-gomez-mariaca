@@ -979,3 +979,21 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   en el borde horizontal del hueco. Del lado de los muros, pasamanos de madera a 0.90 en todos los tramos y en los descansos.
 - **Anclaje:** postes con placa y pernos a la losa del tramo o del piso, nunca al ladrillo. Herrero + carpintero.
 - **Estado:** aplicado (propuesto).
+
+## 2026-10-08 — Niveles de piso de PB y exteriores (revisión del arquitecto, punto 10; cambio chico)
+- **Sin medir** (el dueño no puede medir por ahora): se dibuja la propuesta del arquitecto como PROPUESTA y se agregó la
+  medición a `verificar_en_obra`. Si lo medido cambia, se corren todas las cotas juntas.
+- **Cuadro de niveles** (±0.00 = vereda pública frente al portón; sección `niveles_piso` del modelo, ▽ en la planta baja):
+  | Lugar | Cota | Cómo |
+  |---|---|---|
+  | Vereda pública | ±0.00 | referencia |
+  | Estacionamiento | ±0.00 → +0.15 al fondo | cae ~1.5 % a la calle, rejilla por dentro del portón |
+  | Camino | ±0.00 → +0.02 | casi plano, 1 % hacia el pasto |
+  | Pasto | −0.03 | bajo el borde de los pisos, 1.5–2 % al dren |
+  | Terraza (deck) | +0.10 | contrapiso 1 % hacia el jardín |
+  | Acceso | +0.02 | 1 % hacia el camino |
+  | Umbral de piedra de la entrada | +0.20 | un escalón de 0.18, con goterón |
+  | Piso de adentro (toda la PB) | +0.20 | sin desniveles; ducha 1.5 cm más baja |
+  | Retiro norte | +0.05 | 0.15 bajo el piso; cae 1.5 % hacia el lindero; escalón de 0.15 en la puerta del depósito |
+  | Patio | +0.05 | 0.15 bajo el comedor; rejilla lineal delante de la corrediza; cae 1.5 % alejándose de la casa |
+- **Estado:** propuesto; falta medir en obra (vereda, losa de PB, patio y retiro).

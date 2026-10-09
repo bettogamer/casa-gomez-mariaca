@@ -174,7 +174,7 @@ albanileria:
 ambientes:
   pb:
     - {id: terraza, nombre: Terraza libre, tipo: exterior, rect: [-2.625, -0.125, -0.125, 4.95], etiqueta: [-1.375, 4.25], estado: definido, nota: "PISO: deck de PVC tipo madera (WPC, decisión del usuario 2026-10-05) sobre rastreles de aluminio o WPC cada ~0.35, encima del contrapiso con pendiente 1–2 % hacia el jardín y juntas de dilatación; color claro (da al oeste: el WPC oscuro se calienta con el sol de la tarde). NO es para estacionar. Borde oeste con perfil de remate contra la vereda"}
-    - {id: acceso, nombre: Acceso, tipo: exterior, rect: [-2.625, 4.95, -0.125, 6.795], estado: definido, nota: "nivel ±0.00, llega a la puerta de entrada"}
+    - {id: acceso, nombre: Acceso, tipo: exterior, rect: [-2.625, 4.95, -0.125, 6.795], estado: definido, nota: "nivel +0.02 (propuesto 2026-10-08, ver niveles_piso), llega a la puerta de entrada con un escalón de 0.18"}
     # ── Exteriores del frente (PROPUESTO 2026-10-06, pedido del dueño: autos en fila al norte, puerta peatonal al sur) ──
     # Franjas de norte a sur: estacionamiento en fila 3.40 (contra el Lote 105) | pasto 4.03 | camino 1.50 recto de la puerta
     # peatonal a la puerta de entrada (contra el Lote 103). Muro de la calle, de norte a sur: pilar 0.20 | portón 3.20 |
@@ -1480,7 +1480,22 @@ referencia:
 # Áreas declaradas en la carátula del PDF (versión anterior) — solo referencia.
 areas_declaradas_pdf: {pb: 65.66, p1: 79.27, altillo: 53.49, total: 198.42}
 
+# Niveles de piso de PB y exteriores (revisión del arquitecto, punto 10, 2026-10-08). PROPUESTO: el dueño no pudo medir;
+# ±0.00 = vereda pública frente al portón. Se dibujan en la planta baja (▽). Medir en obra (ver verificar_en_obra).
+niveles_piso:
+  pb:
+    - {pos: [-16.95, 2.00], cota: 0.00, etiqueta: "vereda ±0.00", estado: propuesto, nota: "REFERENCIA de todas las cotas"}
+    - {pos: [-6.00, 0.70], cota: 0.15, etiqueta: "fondo +0.15", estado: propuesto, nota: "estacionamiento: cae ~1.5 % hacia la calle (+0.15 al fondo → ±0.00 en el portón), rejilla lineal por dentro del portón a lo pluvial"}
+    - {pos: [-8.00, 3.80], cota: -0.03, etiqueta: "pasto −0.03", estado: propuesto, nota: "pasto 3 cm bajo el borde del camino, la vereda y el estacionamiento (el agua no cae a los pisos); 1.5–2 % al dren"}
+    - {pos: [-9.00, 5.85], cota: 0.02, etiqueta: "camino +0.02", estado: propuesto, nota: "casi plano (±0.00 en la puerta peatonal, +0.02 junto a la casa), 1 % de bombeo hacia el pasto"}
+    - {pos: [-1.375, 2.60], cota: 0.10, etiqueta: "deck +0.10", estado: propuesto, nota: "terraza: deck de WPC a +0.10; el contrapiso de abajo cae 1 % hacia el jardín"}
+    - {pos: [-2.55, 5.15], cota: 0.02, etiqueta: "acceso +0.02 · umbral +0.20", estado: propuesto, nota: "acceso de piedra o porcelanato de exterior antideslizante, 1 % hacia el camino. UMBRAL DE PIEDRA en la puerta de entrada a +0.20 (nivel del piso de adentro), con goterón: un solo escalón de 0.18 desde el acceso"}
+    - {pos: [2.20, 3.40], cota: 0.20, etiqueta: "NPT +0.20", estado: propuesto, nota: "piso terminado de toda la PB (living, hall, baño, estudio, comedor, cocina, lavado, almacén), sin desniveles. Baño: ducha 1.5 cm más baja, con rejilla lineal"}
+    - {pos: [5.70, -1.00], cota: 0.05, etiqueta: "retiro +0.05", estado: propuesto, nota: "retiro norte: 0.15 bajo el piso de adentro junto a la casa, cae 1.5 % hacia el lindero (el agua se aleja de los muros y de las zapatas) y a lo largo hacia el patio y el frente. Depósito: escalón de 0.15 en su puerta (piso del depósito +0.20)"}
+    - {pos: [17.20, 2.95], cota: 0.05, etiqueta: "patio +0.05", estado: propuesto, nota: "patio 0.15 bajo el comedor; REJILLA LINEAL de ~0.10 delante de toda la corrediza (a lo pluvial) y piso que cae 1.5 % alejándose de la casa. Así la lluvia con viento no entra al comedor"}
+
 verificar_en_obra:
+  - "NIVELES DE PB (punto 10, 2026-10-08): con manguera de nivel, medir cuánto más alto que la VEREDA PÚBLICA está la losa o contrapiso de PB, la tierra del PATIO de atrás y la del RETIRO norte. Las cotas de `niveles_piso` son propuestas sobre un piso terminado a +0.20; si lo medido cambia, se corren todas juntas"
   - "Comprobar que lo construido siguió IMG_8278: tramo del fondo 5.70 m (el PDF decía 4.50 m)."
   - "Sección real de columnas (se asume 25x25) y espesor de losas."
   - "Distancia de la casa al lindero del fondo (5.00 m) y al lateral del Lote 105 (2.01 m)."
