@@ -613,9 +613,9 @@ muebles:
     - {tipo: estante, nombre: Banca + perchero, rect: [6.60, 4.30, 7.00, 5.30], alto: 0.45, estado: propuesto}
     - {tipo: estante, nombre: Cajonera, rect: [4.50, 2.75, 5.65, 3.95], alto: 0.40, nota: "bajo el tramo de 10, se abre hacia el hall (tentativo: el usuario aún decide el uso)"}
     # Depósito bajo la grada: estantes del lado bajo
-    - {tipo: estante, nombre: Herramientas, rect: [4.48, 0.20, 4.90, 2.55], alto: 0.80}
+    - {tipo: estante, nombre: Herramientas, rect: [4.48, 0.30, 4.90, 2.55], alto: 0.80, nota: "2026-10-08 (plan B): empieza en y 0.30, al sur del ducto de A2 (agua caliente) del rincón"}
     # Baño: ducha al fondo, inodoro y lavamanos alternados
-    - {tipo: ducha, rect: [7.13, 0.13, 8.77, 1.03], estado: propuesto, nota: "AL RAS DEL PISO con cancel (dicho por el usuario 2026-10-05): rebajar el contrapiso ~5–8 cm en la zona de la ducha ANTES de hacerlo, con pendiente al sumidero"}
+    - {tipo: ducha, rect: [7.325, 0.13, 8.77, 1.03], estado: propuesto, nota: "2026-10-08 (plan B): el ducto de A3 ocupa el rincón noroeste (x 7.125–7.325, y hasta 0.50), enchapado como la ducha y SIN tapa de registro adentro; el hueco al sur del ducto (x 7.13–7.325, y 0.50–1.03) se suma al plato o queda como nicho/repisa de champú. AL RAS DEL PISO con cancel (dicho por el usuario 2026-10-05): rebajar el contrapiso ~5–8 cm en la zona de la ducha ANTES de hacerlo, con pendiente al sumidero"}
     # Inodoro corrido 5 cm al sur: su eje queda a 0.40 del borde de la ducha
     - {tipo: inodoro, rect: [8.08, 1.25, 8.77, 1.65], estado: propuesto}
     - {tipo: lavamanos, rect: [7.13, 1.90, 7.58, 2.45], nota: "espejo encima"}
@@ -625,7 +625,7 @@ muebles:
     - {tipo: escritorio, rect: [8.93, 0.35, 9.63, 1.75], estado: propuesto, nota: "llegada de internet + router aquí. Lámpara de escritorio en la punta SUR (izquierda del usuario diestro); cortina translúcida en la ventana norte"}
     - {tipo: silla, rect: [9.75, 0.80, 10.25, 1.30]}
     # Librero bajo acortado (antes hasta 11.00): no choca con el sofá cama abierto
-    - {tipo: estante, nombre: Librero bajo, rect: [9.75, 0.13, 10.80, 0.48], alto: 0.85, estado: propuesto}
+    - {tipo: estante, nombre: Librero bajo, rect: [9.75, 0.13, 10.70, 0.48], alto: 0.85, estado: propuesto, nota: "2026-10-08 (plan B): termina en 10.70, a 5 cm del ducto de la bajante (desde 10.75). Bajo la ventana nueva (9.05–10.60, antepecho 0.90): 5 cm libres hasta el alféizar. TAPA DE REGISTRO del ducto en su cara SUR (y 0.45), del lado oeste (x ~10.78–11.08) y abajo: queda libre (el sofá cama abierto llega hasta x ~10.92, solo se corre al abrir el registro)"}
     # Sofá cama corrido 0.20 al norte: abierto (~2.0 m hacia el oeste) ya no pisa el frente del closet y deja ~0.75
     # para subirse por el lado sur.
     - {tipo: sofa, nombre: Sofá cama, rect: [12.05, 0.15, 12.92, 2.15], estado: propuesto, nota: "cabecera contra el muro este"}
@@ -695,7 +695,7 @@ muebles:
     # Baño 1 (privado del Cuarto 1): inodoro contra el muro norte, ducha al fondo
     # Inodoro corrido 0.45 al este por el muro norte, bajo la ventana alta (opción A, elegida por el dueño 2026-10-05):
     # antes el lavamanos quedaba justo delante (0.36 libres); ahora quedan 0.92 hasta la ducha
-    - {tipo: inodoro, rect: [10.00, 0.05, 10.40, 0.74], estado: propuesto, nota: "PLOMERO: el desagüe Ø110 corre ~1.0 m por el contrapiso hasta la BAJANTE COMÚN por fuera pegada a la columna A4 (x 11.20; 2026-10-06, antes x 9.25; no tapa la ventana del estudio de PB): con 2 % de pendiente baja ~2 cm + el diámetro del tubo; confirmar que el contrapiso sobre la losa lo permite (no cortar viguetas). Llave de paso al costado oeste"}
+    - {tipo: inodoro, rect: [10.00, 0.05, 10.40, 0.74], estado: propuesto, nota: "PLOMERO: el desagüe Ø110 corre por el contrapiso hasta la BAJANTE COMÚN, desde 2026-10-08 ADENTRO en el ducto del rincón de A4 (Ø110 en x 10.93, y 0.27; ~0.5 m): con 2 % de pendiente baja ~1 cm + el diámetro del tubo; confirmar que el contrapiso sobre la losa lo permite (no cortar viguetas). Llave de paso al costado oeste"}
     - {tipo: lavamanos, rect: [9.48, 1.10, 9.93, 1.65]}
     # Ducha 0.89 de fondo: termina en 2.55 para no pisar la columna B4 (esquina sureste)
     - {tipo: ducha, rect: [9.475, 1.66, 11.125, 2.55], estado: propuesto}
@@ -703,9 +703,9 @@ muebles:
     # columna A3 y es BAJO (1.40) frente a la ventana alta (antepecho 1.60): no la tapa.
     # 2026-10-06 (ventana corrida a 7.45–8.45): la parte baja va desde la esquina (7.18) hasta 8.50 y la alta desde 8.50;
     # el estante alto de la esquina (7.18–7.60) tapaba 0.15 de la ventana y de 7.18 a 7.45 solo quedaban 0.27 (rincón sin uso)
-    - {tipo: estante, nombre: Repisas bajo la ventana, rect: [7.18, 0.025, 8.50, 0.475], alto: 1.40, estado: propuesto, nota: "bajo la ventana alta (antepecho 1.60, 0.20 libres arriba): repisas bajas, sirven de mesada para doblar; incluye el rincón noroeste"}
+    - {tipo: estante, nombre: Repisas bajo la ventana, rect: [7.325, 0.025, 8.50, 0.475], alto: 1.40, estado: propuesto, nota: "bajo la ventana alta (antepecho 1.60, 0.20 libres arriba): repisas bajas, sirven de mesada para doblar. 2026-10-08 (plan B): empiezan en 7.325, contra la cara este del ducto de A3"}
     - {tipo: estante, rect: [8.50, 0.025, 9.325, 0.475], alto: 2.10, estado: propuesto, nota: "alto desde 8.50 (5 cm de la jamba de la ventana)"}
-    - {tipo: estante, rect: [7.125, 0.475, 7.575, 1.75], alto: 2.10}
+    - {tipo: estante, rect: [7.125, 0.70, 7.575, 1.75], alto: 2.10, nota: "2026-10-08 (plan B): empieza en y 0.70: deja 0.20 libres frente a la cara sur del ducto de A3 (y 0.50) para su TAPA DE REGISTRO y la llave general del P1, que se alcanzan desde el este (entre las repisas bajas y este estante)"}
     - {tipo: estante, rect: [8.875, 0.475, 9.325, 2.60], alto: 2.10}
     # Baño 2 (privado del Cuarto 2): ducha junto al pasillo, inodoro contra el muro x=9.40
     - {tipo: ducha, rect: [9.48, 3.96, 11.12, 4.86]}
@@ -779,7 +779,7 @@ muebles:
     # corrediza, camino recto por el sur (y 3.70–4.595, ~0.90 libres), estar al este mirando al norte.
     # Cocina en U: mesada norte bajo la ventana con el anafe en la esquina, brazo este con el lavaplatos (pared húmeda del
     # baño) y el refrigerador en su punta sur, brazo oeste corto con el microondas. Pasillo de la U: 1.00 (7.725–8.725).
-    - {tipo: meson, rect: [7.175, 0.025, 9.325, 0.625], nota: "bajo la ventana (antepecho 1.10): ~1.45 de mesada libre de trabajo entre la columna A3 y el anafe"}
+    - {tipo: meson, rect: [7.325, 0.025, 9.325, 0.625], nota: "bajo la ventana (7.45–8.60, antepecho 1.10). 2026-10-08 (plan B): empieza en 7.325, contra el ducto de A3; la piedra lleva un CALADO de 0.20 × 0.125 en la esquina con el brazo oeste (x 7.125–7.325, y 0.50–0.625) y el mueble bajo de la esquina deja ver la llave general del altillo. ~1.33 de mesada libre entre el ducto y el anafe"}
     - {tipo: meson, rect: [8.725, 0.625, 9.325, 1.90], nota: "brazo este, contra el muro del baño (pared húmeda compartida). Alacena encima con tira LED abajo"}
     - {tipo: meson, rect: [7.125, 0.625, 7.725, 1.85], nota: "brazo oeste, contra el muro de la escalera: segunda mesada de trabajo y el microondas en la punta sur. Las tomas de la cocina van acá (en las mesadas norte y este no hay muro a ≥0.60 del anafe y del lavaplatos)"}
     - {tipo: lavaplatos, rect: [8.775, 1.18, 9.275, 1.73], nota: "bacha simple de ~0.55: 0.61 de mesada hasta el anafe (esquina) y 0.17 hasta el refrigerador (con un lateral de terminación). Desagüe Ø50 por el muro al baño y a la bajante A4 (ramal propio ~2.2 m hasta unirse al del inodoro; ~3 m en total)"}
@@ -796,7 +796,7 @@ muebles:
     - {tipo: sofa, rect: [11.50, 2.50, 13.20, 3.40], nota: "mirando al norte, centrado en el eje 12.35, de espaldas al camino (detrás quedan ~1.20 libres); ~2.6 de los ojos a la pantalla"}
     - {tipo: alfombra, nombre: Alfombra de juego, rect: [11.60, 0.85, 13.10, 2.35], nota: "alfombra acolchada de goma eva o similar para el bebé (1.50 × 1.50), en vez de mesa de centro: sin esquinas duras frente al sofá"}
     # Baño apilado (los dos): inodoro sobre el inodoro del Baño 1, lavamanos sobre el lavamanos, ducha sobre la ducha
-    - {tipo: inodoro, rect: [10.00, 0.05, 10.40, 0.74], estado: propuesto, nota: "encima del inodoro del Baño 1; Ø110 ~1.0 m a la bajante A4"}
+    - {tipo: inodoro, rect: [10.00, 0.05, 10.40, 0.74], estado: propuesto, nota: "encima del inodoro del Baño 1; Ø110 ~0.5 m a la bajante del ducto de A4 (10.93, 0.27), con salida a la pared si se puede. Entre el inodoro y el ducto quedan 0.35"}
     - {tipo: lavamanos, rect: [9.48, 0.95, 9.93, 1.50], estado: propuesto, nota: "con espejo encima; aplique sobre el espejo y toma al costado norte"}
     - {tipo: ducha, rect: [9.475, 1.605, 10.225, 2.605], estado: propuesto, nota: "0.75 × 1.00, encima de la ducha del Baño 1; mampara"}
     # Dormitorio: cama queen con la cabecera contra el muro del patio (entre las dos ventanas), ropero de puertas
@@ -1253,7 +1253,7 @@ instalaciones:
       # altillo por fuera del muro norte junto a A2 (x 4.20) y entra bajo el piso: suite cerca; baños de los hijos por
       # el hall y el pasillo. Sin termotanque (2026-10-05). Caños de agua caliente aislados con coquilla.
       llaves:
-        - {pos: [9.30, 0.20], etiqueta: "LL general P1"}
+        - {pos: [7.225, 0.56], etiqueta: "LL general P1", estado: propuesto, nota: "2026-10-08 (plan B): frente a la cara sur del ducto de A3, en el hueco de 0.20 entre el ducto y el estante oeste de los blancos (junto a la tapa de registro)"}
         - {pos: [9.55, 2.55], etiqueta: "LL Baño 1"}
         - {pos: [9.55, 4.05], etiqueta: "LL Baño 2"}
         - {pos: [3.20, 5.75], etiqueta: "LL suite"}
@@ -1269,7 +1269,7 @@ instalaciones:
           nota: "decisión del dueño 2026-10-07: canaleta de chapa galvanizada pintada del gris de la caja por TODO el frente del volado del primer piso, de y 0.00 (tapa recta en el arranque) a la pata (cajón, y 6.495). Por fuera es HORIZONTAL, como una cornisa del alto de la banda de la losa (0.20), con el borde de abajo alineado con la cara de abajo de la losa y gotero de 1.5 cm; la pendiente (1 %, ~6.5 cm) va por DENTRO. La logia (piso 1 % hacia el frente) vuelca por la base de la baranda en todo su largo. Se cuelga del canto SOLO donde hay hormigón macizo; si entre B y C no hay viga de borde vaciada, con ménsulas al muro del frente o a la carpeta (lo define el ingeniero)"
       bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ tanque (ducto de A3)"}
       subida_caliente: {pos: [4.60, 0.10], etiqueta: "AC ↓ por el ducto de A2 (escalera)"}
-      agua_fria: [[[7.25, 0.20], [7.40, 0.20], [7.40, 0.10], [9.30, 0.10], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
+      agua_fria: [[[7.25, 0.20], [7.25, 0.60], [9.30, 0.60], [9.30, 3.20], [11.35, 3.20]], [[9.30, 3.20], [6.50, 3.20], [6.50, 4.10], [5.70, 4.10], [5.70, 5.90], [-0.20, 5.90]]]
       agua_caliente: [[[4.60, 0.10], [4.20, 0.10], [4.20, 4.35], [5.95, 4.35], [5.95, 5.65], [-0.20, 5.65]], [[5.95, 4.35], [6.75, 4.35], [6.75, 3.45], [11.35, 3.45]]]
       # Sin colector en este piso: cada artefacto va a su bajante (BV).
       bajantes:
@@ -1344,7 +1344,7 @@ instalaciones:
         - {amb: cocina_alt, tipo: especial, etiqueta: M, pos: [7.125, 1.60], alto: 1.30, circuito: C15, estado: propuesto, nota: "MICROONDAS apoyado en la punta del brazo oeste: toma propia arriba del aparato"}
         - {amb: cocina_alt, tipo: especial, etiqueta: R, pos: [9.325, 2.20], alto: 0.60, circuito: C15, estado: propuesto, nota: "refrigerador: detrás, en el muro del baño (lado cocina), sin caños de agua en ese tramo"}
         - {amb: cocina_alt, tipo: especial, etiqueta: A, pos: [8.80, 0.025], alto: 0.60, circuito: C16, estado: propuesto, nota: "anafe eléctrico: caja de conexión bajo la mesada, circuito propio C16 (potencia según el anafe que se compre)"}
-        - {amb: cocina_alt, tipo: especial, etiqueta: C, pos: [9.15, 0.025], alto: 2.00, circuito: C15, estado: propuesto, nota: "CAMPANA sobre el anafe: toma dentro de su chimenea, al este de la rejilla del ducto (x 8.75–8.95)"}
+        - {amb: cocina_alt, tipo: especial, etiqueta: C, pos: [8.85, 0.025], alto: 2.00, circuito: C15, estado: propuesto, nota: "CAMPANA sobre el anafe: toma dentro de su chimenea, al OESTE de la salida del ducto (rejilla en x 9.10–9.30 desde 2026-10-08)"}
         - {amb: cocina_alt, tipo: toma, pos: [7.125, 3.10], alto: 0.30, estado: propuesto, nota: "comedor, bajo la banqueta (al sur de la columna B3): cargadores, olla arrocera en la mesa"}
         # Estar: TV, sofá y ventanas en el eje x 12.35. Teclas: camino conmutado (entrada ↔ dormitorio) y luz del estar
         - {amb: estar_alt, tipo: conmutador, pos: [13.525, 3.57], alto: 1.10, luces: [luz_paso_alt], estado: propuesto, nota: "junto a la puerta del dormitorio, lado del estar y de la manija: luz del camino (de noche, al baño). Caja doble con la de abajo"}
@@ -1389,7 +1389,7 @@ instalaciones:
       # Anafe eléctrico (el gas sube solo al calefón). Tanque a ~2.5 m sobre el calefón: poca presión →
       # calefón de ENCENDIDO A BAJA PRESIÓN; si no alcanza, presurizadora para TODA la casa (lo define el plomero).
       llaves:
-        - {pos: [7.30, 0.45], etiqueta: "LL general altillo"}
+        - {pos: [7.225, 0.56], etiqueta: "LL general altillo", estado: propuesto, nota: "2026-10-08 (plan B): frente a la cara sur del ducto de A3, dentro del mueble bajo de la esquina (se ve por el calado de la mesada)"}
         - {pos: [9.20, 0.70], etiqueta: "LL cocina"}
         - {pos: [10.95, 0.85], etiqueta: "LL baño"}
         - {pos: [11.45, 4.55], etiqueta: "LL lavandería"}
@@ -1397,12 +1397,12 @@ instalaciones:
       bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ del tanque (ducto de A3)"}
       # 2026-10-06 (opción B aceptada, PROPUESTO): baño encima del Baño 1 (x 9.40–11.20); cocina del otro lado de su muro oeste.
       # Agua por el muro norte al baño y a la cocina; a la lavandería por el piso del paso. Caños por debajo de la mesada.
-      agua_fria: [[[7.25, 0.20], [10.95, 0.20], [10.95, 2.40]], [[9.55, 0.20], [9.55, 1.20]], [[9.20, 0.20], [9.20, 1.15]], [[10.95, 2.40], [10.95, 4.55], [11.60, 4.55]], [[7.25, 0.20], [4.15, 0.20], [4.15, 0.55]]]
+      agua_fria: [[[7.25, 0.20], [10.68, 0.20], [10.68, 0.55], [10.95, 0.55], [10.95, 2.40]], [[9.55, 0.20], [9.55, 1.20]], [[9.20, 0.20], [9.20, 1.15]], [[10.95, 2.40], [10.95, 4.55], [11.60, 4.55]], [[7.25, 0.20], [4.15, 0.20], [4.15, 0.55]]]
       calefon: {pos: [4.15, 0.80], estado: propuesto, nota: "calefón a gas natural de TODA la casa, en la terraza del altillo, colgado en el muro x=4.40 (cara de la terraza) junto a la columna A2, base a ~1.40. SUGERIDO: ~18–20 L/min nominal (a ~2550 m rinde ~20–25 % menos), tiro forzado, electrónico modulante, ENCENDIDO A BAJA PRESIÓN (~0.1 bar: el tanque queda ~2.5 m arriba), con protección ANTIHIELO, apto exterior. PROTECCIÓN: gabinete metálico para calefón de exterior (chapa galvanizada pintada, rejillas arriba y abajo, nunca hermético), con candado; el techo de la terraza ya lo protege de la lluvia; salida de gases por un caño que sube por encima del techo de la terraza; llave de paso del gas a la vista. Lo dimensiona y aprueba el gasista (YPFB)"}
       gas: [[-1.275, 6.435], [-0.90, 6.435], [-0.90, 0.15], [4.08, 0.15], [4.08, 0.80]]   # 2026-10-08 (plan B, variante b): del cajón gris por dentro de los antepechos de la terraza, a ~0.30 del piso
       gas_inicio: "GN ↑ del cajón gris (esquina suroeste)"
       gas_fin: "calefón"
-      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [10.85, 0.45], [10.85, 2.35]], [[9.65, 0.45], [9.65, 1.20]], [[9.10, 0.45], [9.10, 1.15]], [[10.85, 2.35], [10.85, 4.50], [11.60, 4.50]], [[4.15, 0.80], [4.15, 0.10], [4.60, 0.10]]]
+      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [10.60, 0.45], [10.60, 0.65], [10.85, 0.65], [10.85, 2.35]], [[9.65, 0.45], [9.65, 1.20]], [[9.10, 0.45], [9.10, 1.15]], [[10.85, 2.35], [10.85, 4.50], [11.60, 4.50]], [[4.15, 0.80], [4.15, 0.10], [4.60, 0.10]]]
       subida_caliente: {pos: [4.60, 0.10], etiqueta: "AC ↓ a P1 y PB por el ducto de A2 (escalera)"}
       bajantes:
         - {pos: [10.93, 0.27], ambientes: [bano_alt, cocina_alt], estado: propuesto, etiqueta: "BAJANTE COMÚN (baño y cocina + Baño 1 del P1): ADENTRO, en el ducto del rincón de A4", nota: "plan B (2026-10-08): la pilastra de afuera invadía el retiro de 2.00. Ducto de ladrillo en el rincón noroeste de A4, al lado oeste (en el este estaban las ventanas del Cuarto 1 y del estar), en el baño del altillo, el Baño 1 y el estudio; pases por el plastoformo entre viguetas en (10.93, 0.27), lejos de las vigas A y 4 (ingeniero, pregunta 8); en PB baja bajo el piso a la cámara nueva (10.93, -0.85). Ventila sobre el techo del departamento. Recibe el inodoro (salida a la pared, ~0.5 m), la ducha y el lavamanos del altillo, el lavaplatos de la cocina del altillo y el Baño 1 del P1"}

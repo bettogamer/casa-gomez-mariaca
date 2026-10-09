@@ -955,3 +955,17 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   `interiorista` una vez al final (librero del estudio, repisas de blancos, mesón del altillo, estante del depósito y llave
   general de agua fría).
 - **Estado:** aprobado por el usuario.
+
+## 2026-10-08 — Muebles y llaves junto a los ductos de adentro (plan B; `interiorista` una vez + cambio chico)
+- **Estudio PB:** librero bajo hasta x 10.70 (5 cm del ducto de A4); tapa de registro abajo en la cara sur del ducto, libre
+  (el sofá cama abierto se corre para abrirla).
+- **Blancos P1:** repisas bajas desde x 7.325; estante oeste desde y 0.70: hueco de 0.20 frente al ducto de A3 para su tapa
+  de registro y la **llave general del P1** (7.225, 0.56; antes en 9.30, 0.20). El agua fría del P1 sale por la cara sur del ducto.
+- **Cocina del altillo:** mesada norte 7.325–9.325 con calado de 0.20 × 0.125 en la esquina del ducto; **llave general del
+  altillo** (7.225, 0.56) en el mueble bajo de la esquina; enchufe de la campana a x 8.85 (estaba en la salida del ducto).
+  Agua fría y caliente del altillo doblan antes del ducto de A4 (antes lo cruzaban).
+- **Depósito PB:** estante desde y 0.30, al sur del ducto de A2.
+- **Baño PB:** la ducha empieza en x 7.325 (1.445 × 0.90); el ducto de A3 queda enchapado y sin tapa en la ducha; el hueco al
+  sur del ducto, repisa o piso de ducha. **Llave general de la casa:** sigue en el pasillo (7.25, 3.10), se alcanza sin entrar al baño.
+- **Pendiente:** plomero confirma recorridos y registros; electricista, alturas (NB 777).
+- **Estado:** aplicado.

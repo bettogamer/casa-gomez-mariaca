@@ -79,8 +79,9 @@ uno por vez con el dueño, empezando por los urgentes.
 - Hechos: 1–6 (urgentes de PB), 7, 8 y 24 (fachada norte LISA: caños adentro en ductos junto a A2, A3 y A4, porque el
   retiro es de 2.00 justo; gas enterrado a la cocina y al calefón por el cajón gris del frente + antepechos de la terraza),
   22 (fachada oeste) y la ranura vertical del living. Todo el 2026-10-08.
-- **Sigue:** `interiorista` una sola vez por los caños adentro (librero del estudio, repisas de blancos, mesón del altillo,
-  estante del depósito, llave general de agua fría). Después **punto 9** (barandas de la escalera), 10, 11 y los medios.
+- Hecho: `interiorista` por los caños adentro (muebles, llaves generales del P1 y del altillo, caños del altillo fuera del
+  ducto de A4), 2026-10-08.
+- **Sigue:** **punto 9** (barandas de la escalera), 10, 11 y los medios.
 
 ## Pendientes abiertos
 - Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el
