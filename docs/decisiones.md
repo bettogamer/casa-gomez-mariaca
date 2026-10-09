@@ -969,3 +969,13 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   sur del ducto, repisa o piso de ducha. **Llave general de la casa:** sigue en el pasillo (7.25, 3.10), se alcanza sin entrar al baño.
 - **Pendiente:** plomero confirma recorridos y registros; electricista, alturas (NB 777).
 - **Estado:** aplicado.
+
+## 2026-10-08 — Barandas de la escalera (revisión del arquitecto, punto 9; cambio chico)
+- **Elegido por el dueño:** fierro pintado de negro (gris oscuro de la fachada C) con barrotes verticales cada ≤ 0.10, sin
+  travesaños, y **pasamanos de madera** (la misma de la puerta y la celosía). Descartados: todo de fierro y vidrio templado.
+- **Dónde:** la escalera es en U sin ojo (tramos pegados en x 5.725): una baranda por esa línea, continua en los tres
+  niveles — PB del arranque (y 4.125) al eje B, del lado del hall; P1 entre los dos tramos (y 1.325–3.005); altillo del
+  descanso a la llegada (y 1.325–3.85), con puerta de seguridad removible arriba. 0.95 en vertical sobre las narices y 1.10
+  en el borde horizontal del hueco. Del lado de los muros, pasamanos de madera a 0.90 en todos los tramos y en los descansos.
+- **Anclaje:** postes con placa y pernos a la losa del tramo o del piso, nunca al ladrillo. Herrero + carpintero.
+- **Estado:** aplicado (propuesto).

@@ -81,7 +81,8 @@ uno por vez con el dueño, empezando por los urgentes.
   22 (fachada oeste) y la ranura vertical del living. Todo el 2026-10-08.
 - Hecho: `interiorista` por los caños adentro (muebles, llaves generales del P1 y del altillo, caños del altillo fuera del
   ducto de A4), 2026-10-08.
-- **Sigue:** **punto 9** (barandas de la escalera), 10, 11 y los medios.
+- Hecho: punto 9 (barandas de la escalera: fierro negro con barrotes y pasamanos de madera), 2026-10-08.
+- **Sigue:** **punto 10** (niveles y umbrales de PB), 11 y los medios.
 
 ## Pendientes abiertos
 - Ingeniero (P1, 2026-10-04): muro del vestidor x=5.85 sobre losa, muro del Baño 2 en y=3.88, viga del eje 3 en el
