@@ -65,8 +65,10 @@ _Última sesión: 2026-10-06._
    sur y la fachada norte, cisterna bajo el camino (pegada al muro sur nuevo: ingeniero), bomba al sur de la puerta, luces,
    toma, canilla y cargador en el muro norte (sin poste), 7 apliques en el retiro norte, circuito C27, sirena arriba.
 2b. Fachadas norte y este (2026-10-06): ventanas del P1 y del altillo alineadas con las de PB (PB sin cambios) y muebles
-   acomodados. PDF para el albañil: `salida/obra-albanil.pdf`, con `make albanil` (2026-10-09: paso a paso, hoja de medidas a tomar,
-   niveles de PB, plantas, muros y vanos; marca en rojo los muros que esperan al ingeniero).
+   acomodados. **Cuaderno de obra** (2026-10-09): `salida/cuaderno-obra.pdf` con `make cuaderno`, uno solo para albañil, plomero, gas
+   y electricista: paso a paso, lista "para el dueño: cómo revisar", planos con una sola instalación por hoja (luces y teclas /
+   enchufes y tablero / agua / desagüe y lluvia / gas y ventilación) con leyenda completa, tablas para contar puntos por
+   ambiente, enchufes especiales, circuitos, llaves de paso y hoja de medidas. Los muros que esperan al ingeniero, en rojo.
 3. Llevar al muro de la calle la acometida eléctrica y el colector (hoy arrancan junto a la casa; el gas ya llega al
    medidor), con cámara final del colector a ≥1 m del muro y un pase bajo la viga del riel.
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.

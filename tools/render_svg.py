@@ -36,9 +36,14 @@ class Lienzo:
         ancla = "" if "text-anchor" in estilo else 'text-anchor="middle" '
         self.add(f'<text x="{a:.1f}" y="{b:.1f}" font-size="{tam}" {ancla}{estilo}>{escape(str(t))}</text>')
 
-    def svg(self, titulo):
+    def svg(self, titulo, desde_x=None, hasta_x=None, desde_y=None, hasta_y=None):
+        """`desde_*`/`hasta_*` (m) recortan el dibujo (p. ej. la casa sin el frente, para el cuaderno de obra)."""
+        a = max(0.0, self.p(desde_x, 0)[0]) if desde_x is not None else 0.0
+        b = min(self.w, self.p(hasta_x, 0)[0]) if hasta_x is not None else self.w
+        c = max(0.0, self.p(0, desde_y)[1]) if desde_y is not None else 0.0
+        d = min(self.h, self.p(0, hasta_y)[1]) if hasta_y is not None else self.h
         cab = (
-            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.w:.0f} {self.h:.0f}" '
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{a:.0f} {c:.0f} {b - a:.0f} {d - c:.0f}" '
             f'font-family="Helvetica, Arial, sans-serif">\n<title>{escape(titulo)}</title>\n'
             f'<rect width="100%" height="100%" fill="#fff"/>\n'
         )
