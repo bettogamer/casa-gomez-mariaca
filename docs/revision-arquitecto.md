@@ -31,7 +31,7 @@ Estado de cada punto: ✅ resuelto (ver `decisiones.md`) · ⏳ pendiente (se tr
    dibujarlo en los alzados. — disenador, plomero, gasista.
 8. ✅ **Pilastra de A4: no recibe los caños de costado** (un caño de 110 no entra en 10 cm de ladrillo). Propuesta: de la
    losa del P1 hacia arriba se ensancha al oeste hasta x 10.85; ventanas del lado este corredizas. — plomero, disenador.
-9. ⏳ **Escalera sin barandas definidas.** Pasamanos a 0.90 del lado del muro; baranda de 0.95 en tramos y 1.10 en bordes
+9. ✅ **Escalera sin barandas definidas.** Pasamanos a 0.90 del lado del muro; baranda de 0.95 en tramos y 1.10 en bordes
    del hueco; barrotes verticales cada ≤10 cm, sin travesaños; anclada a losa o vigas. — disenador, herrero.
 10. ⏳ **Niveles y umbrales de PB sin definir** (interior +0.20, acceso ±0.00, patio, retiro, terraza). Propuesta: umbral
     de piedra en la entrada con escalón de ~0.18; patio a −0.12/−0.15 con rejilla bajo la corrediza; terraza a +0.10;
