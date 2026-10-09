@@ -353,6 +353,15 @@ def dibujar_proyecciones(L, casa, nivel_id):
         L.texto((x0 + x1) / 2, (y0 + y1) / 2 + 0.05, e["nombre"], 7, 'fill="#555" font-style="italic"')
 
 
+def dibujar_niveles_piso(L, casa, nivel_id):
+    """Cotas de piso (▽ +0.20) de `niveles_piso`."""
+    for n in (casa.get("niveles_piso") or {}).get(nivel_id) or []:
+        x, y = n["pos"]
+        a, b = L.p(x, y)
+        L.add(f'<polygon points="{a - 5:.1f},{b - 9:.1f} {a + 5:.1f},{b - 9:.1f} {a:.1f},{b:.1f}" fill="none" stroke="#00695c" stroke-width="1.2"/>')
+        L.texto(x + 0.15, y - 0.02, n["etiqueta"], 8, 'fill="#00695c" text-anchor="start" font-weight="bold"')
+
+
 def leyenda(L, x, y, titulo, subt):
     L.add(f'<text x="{L.p(x, y)[0]:.1f}" y="{L.p(x, y)[1]:.1f}" font-size="18" font-weight="bold">{escape(titulo)}</text>')
     L.add(f'<text x="{L.p(x, y + 0.4)[0]:.1f}" y="{L.p(x, y + 0.4)[1]:.1f}" font-size="10" fill="#666">{escape(subt)}</text>')
@@ -380,6 +389,7 @@ def planta(casa, nivel):
     dibujar_escalera(L, casa, nivel["id"])
     dibujar_muebles(L, casa, nivel["id"])
     dibujar_proyecciones(L, casa, nivel["id"])
+    dibujar_niveles_piso(L, casa, nivel["id"])
     dibujar_ejes(L, casa, x0, y0, x1, y1)
     dibujar_muros(L, casa, nivel["id"])
     dibujar_aberturas(L, casa, nivel["id"])
