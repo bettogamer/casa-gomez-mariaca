@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-08_
+_Última actualización: 2026-10-09_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -65,7 +65,8 @@ _Última sesión: 2026-10-06._
    sur y la fachada norte, cisterna bajo el camino (pegada al muro sur nuevo: ingeniero), bomba al sur de la puerta, luces,
    toma, canilla y cargador en el muro norte (sin poste), 7 apliques en el retiro norte, circuito C27, sirena arriba.
 2b. Fachadas norte y este (2026-10-06): ventanas del P1 y del altillo alineadas con las de PB (PB sin cambios) y muebles
-   acomodados. PDF para el albañil: `salida/obra-albanil.pdf` (se arma con un script fuera del repo; pasarlo a `make`).
+   acomodados. PDF para el albañil: `salida/obra-albanil.pdf`, con `make albanil` (2026-10-09: paso a paso, hoja de medidas a tomar,
+   niveles de PB, plantas, muros y vanos; marca en rojo los muros que esperan al ingeniero).
 3. Llevar al muro de la calle la acometida eléctrica y el colector (hoy arrancan junto a la casa; el gas ya llega al
    medidor), con cámara final del colector a ≥1 m del muro y un pase bajo la viga del riel.
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
