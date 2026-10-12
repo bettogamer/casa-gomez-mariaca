@@ -257,6 +257,11 @@ def revisar(items):
             + "".join(f'<p class="chk">☐ {i}</p>' for i in items) + "</div>")
 
 
+def alternativa(titulo, items):
+    """Recuadro amarillo: qué cambiaría si se decide otra cosa (todavía NO se hace)."""
+    return (f'<div class="alt"><h3>{titulo}</h3>' + "".join(f'<p class="chk">• {i}</p>' for i in items) + "</div>")
+
+
 # ── símbolos para las leyendas (mismo dibujo que en los planos) ─────────────────
 
 def mini(dibujar, w=0.9, h=0.5):
@@ -713,6 +718,16 @@ partes.append(hoja("Paso a paso del plomero", pasos(
     "Echar un balde de agua en cada desagüe y sumidero: que corra rápido y llegue a la cámara (destapar la tapa y mirar).",
     "Las tapas de las cámaras (CI) quedan a la vista y se pueden abrir.",
     "Que ningún caño cruce una columna o una viga.",
+]) + alternativa("Alternativa (todavía NO): bajante de A4 por AFUERA, solo si el arquitecto de la obra o la municipalidad lo aceptan", [
+    "<b>Hoy se hace ADENTRO</b>: ducto de ladrillo en el rincón de A4 (baño del altillo, Baño 1 y estudio), pases por las dos "
+    "losas entre viguetas y cruce del cimiento del eje A hasta la cámara nueva del retiro.",
+    "<b>Por qué no va afuera:</b> el retiro norte quedó en 2.00 justo (la norma dice \"incluido voladizo\"); un cajón de ~0.25 "
+    "lo deja en 1.75 y puede traer observaciones. Además la fachada norte deja de ser lisa.",
+    "<b>Si lo aceptan, para el plomero cambia:</b> no perfora losas (cada ramal sale por el muro norte, que es ladrillo); no "
+    "cruza el cimiento del eje A (baja pegada a A4 directo a la cámara del retiro); tapa de registro y ventilación quedan "
+    "afuera, sin entrar a los cuartos; el caño va dentro de un cajón que lo proteja del sol.",
+    "<b>Para el albañil:</b> no se hace el ducto en los tres ambientes; el estudio recupera ese rincón.",
+    "<b>Antes de hacerlo, avisar al dueño:</b> se actualizan los planos del plomero de los tres pisos.",
 ]), seccion=S))
 for nid, nombre in NIVELES:
     n = nivel_dict(nid)
@@ -846,6 +861,9 @@ table.indice td:first-child {{ font-weight: bold; font-size: 20px; text-align: c
 .revisar {{ border: 3px solid #2e7d32; background: #f1f8e9; border-radius: 8px; padding: 6px 16px 10px; margin-top: 16px;
   break-inside: avoid; }}
 .revisar h3 {{ color: #1b5e20; }}
+.alt {{ border: 3px dashed #b28704; background: #fffde7; border-radius: 8px; padding: 6px 16px 10px; margin-top: 14px;
+  break-inside: avoid; }}
+.alt h3 {{ color: #7a5c00; }}
 .plano {{ width: 100%; max-height: 245mm; object-fit: contain; }}
 .plano.inst {{ max-height: 200mm; }}
 .leyenda {{ border-top: 2px solid #111; margin-top: 4px; break-inside: avoid; }}
