@@ -58,6 +58,43 @@ def corto(t, n=150):
     return t if len(t) <= n else t[: n - 1].rsplit(" ", 1)[0] + "…"
 
 
+def donde_id(nivel, x, y):
+    """Id del ambiente que contiene el punto; si cae en un muro de la casa, el de al lado; afuera, qué lado."""
+    ambs = C.ambientes(c, nivel)
+    x1, y1 = EX[-1][0], EY[-1][0]
+    afuera = ("afuera: retiro norte" if 0 <= x <= x1 and y < 0 else "afuera: patio" if x > x1
+              else "afuera: lado sur" if y > y1 else "")
+    for dx, dy in [(0, 0)] + ([] if afuera else [(0.2, 0), (-0.2, 0), (0, 0.2), (0, -0.2)]):
+        for a in ambs:
+            if C.dentro(a["poly"], x + dx, y + dy):
+                return a["id"]
+    return afuera or "afuera"
+
+
+def donde(nivel, x, y):
+    i = donde_id(nivel, x, y)
+    return nombres_amb(nivel).get(i, i)
+
+
+def lados(nivel, ab):
+    """Los dos ambientes que une una puerta o ventana (o el ambiente y 'afuera')."""
+    (x0, y0), (x1, y1) = ab["de"], ab["a"]
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+    hor = abs(y0 - y1) < 0.01
+    ns = []
+    for s in (-0.25, 0.25):
+        px, py = (mx, my + s) if hor else (mx + s, my)
+        adentro = 0 < px < EX[-1][0] and 0 < py < EY[-1][0]
+        n = next((a.get("nombre", a["id"]) for a in C.ambientes(c, nivel) if C.dentro(a["poly"], px, py)),
+                 "Escalera" if adentro else "afuera")
+        if n not in ns:
+            ns.append(n)
+    return " ↔ ".join(ns)
+
+
+MIN_VANO = 0.20   # huecos más angostos son restos de dibujo entre muros, no se marcan
+
+
 def esperar(nivel, eje, val, de, a):
     """Texto de aviso si el muro espera al ingeniero."""
     if nivel == "p1" and (eje == "y" and a < 0.01 or eje == "x" and val < -0.01):
@@ -89,6 +126,8 @@ def lineas(nivel):
         if ab.get("en_cerco") or ab["tipo"] == "porton":
             continue
         (x0, y0), (x1, y1) = ab["de"], ab["a"]
+        if abs(x1 - x0) + abs(y1 - y0) < MIN_VANO:
+            continue
         if abs(y0 - y1) < 0.01:
             vanos.append(("y", round(y0, 3), min(x0, x1), max(x0, x1), ab))
         elif abs(x0 - x1) < 0.01:
@@ -156,6 +195,8 @@ def tabla_vanos(nivel):
             continue
         (x0, y0), (x1, y1) = ab["de"], ab["a"]
         ancho = abs(x1 - x0) + abs(y1 - y0)
+        if ancho < MIN_VANO:
+            continue
         if abs(y0 - y1) < 0.01:
             donde = f"{ref(y0, EY)}, de {ref(min(x0, x1), EX)} a {ref(max(x0, x1), EX)}"
         else:
@@ -168,9 +209,9 @@ def tabla_vanos(nivel):
         else:
             ap, dint = "piso", f"{ab.get('alto', 2.10):.2f}"
         filas.append((t != "ventana", donde,
-                      f"<tr><td>{nombre_vano(ab)}</td><td>{html.escape(ab.get('id', ''))}</td><td>{html.escape(donde)}</td>"
+                      f"<tr><td>{nombre_vano(ab)}</td><td>{html.escape(lados(nivel, ab))}</td><td>{html.escape(donde)}</td>"
                       f"<td class=n><b>{ancho:.2f}</b></td><td class=n>{ap}</td><td class=n>{dint}</td>"
-                      f"<td class=nota>{html.escape(corto(ab.get('nota', '')))}</td></tr>"))
+                      f"<td class=nota>{html.escape(ab.get('obra', ''))}</td></tr>"))
     filas.sort(key=lambda f: (f[0], f[1]))
     return "".join(f[2] for f in filas)
 
@@ -186,6 +227,10 @@ def svg_casa(nivel, desde_x=-3.6):
     px0, px1 = float(losa.group(1)), float(losa.group(2))
     x = max(0.0, px0 + (desde_x - hx0) * (px1 - px0) / (hx1 - hx0))
     s = s.replace(vb.group(0), f'viewBox="{x:.1f} 0 {float(vb.group(1)) - x:.1f} {vb.group(2)}"', 1)
+    for e in "ABC":
+        m = re.search(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="13"[^>]*/>\s*<text x="\1"[^>]*>' + e + '</text>', s)
+        if m and float(m.group(1)) < x:
+            s = s.replace(m.group(0), m.group(0).replace(f'x="{m.group(1)}"', f'x="{x + 18:.1f}"'))
     destino = f"obra-albanil-{nivel}.svg"
     (SALIDA / destino).write_text(s, encoding="utf-8")
     return destino
@@ -375,11 +420,13 @@ def nombres_amb(nivel):
 def tabla_puntos_elec(nivel, puntos):
     """Cuántos puntos tiene que haber en cada ambiente (para contarlos en obra)."""
     nom = nombres_amb(nivel)
+    puntos = [dict(p, amb=p.get("amb") or donde_id(nivel, *p["pos"])) for p in puntos]
+    nom.update({p["amb"]: p["amb"] for p in puntos if p["amb"] not in nom})
     cols = [("Luces", {"luz"}), ("Teclas", {"interruptor", "conmutador"}), ("Enchufes", {"toma", "toma_ext", "toma_piso"}),
             ("Especiales", {"especial"}), ("Internet/TV", {"datos"}), ("Extractor", {"extractor"}), ("Detector", {"detector"})]
     filas, tot = [], [0] * len(cols)
     orden = [a["id"] for a in C.ambientes(c, nivel)]
-    for amb in orden + [None]:
+    for amb in orden + sorted({p["amb"] for p in puntos} - set(orden)):
         ps = [p for p in puntos if p.get("amb") == amb]
         n = [sum(p["tipo"] in ts for p in ps) for _, ts in cols]
         if not any(n):
@@ -401,7 +448,7 @@ def tabla_especiales(nivel, puntos):
         que = p.get("desc") or LETRAS.get(et, "")
         alto = f"{p['alto']:.2f}" if p.get("alto") else "—"
         filas += (f"<tr><td class=letra>{html.escape(et)}</td><td>{html.escape(que)}</td>"
-                  f"<td>{html.escape(nom.get(p.get('amb'), '—'))}</td><td>{p.get('circuito', '')}</td><td class=n>{alto}</td></tr>")
+                  f"<td>{html.escape(nom.get(p.get('amb')) or donde(nivel, *p['pos']))}</td><td>{p.get('circuito', '')}</td><td class=n>{alto}</td></tr>")
     if not filas:
         return ""
     return ("<h3>Enchufes especiales (la letra del cuadrado azul)</h3><table><thead><tr><th>Letra</th><th>Para qué</th>"
@@ -419,10 +466,10 @@ def tabla_circuitos(nivel, puntos):
 
 def tabla_agua(nivel):
     _, puntos, _ = I.sanitario(c, nivel)
-    amb_de = lambda p: next((a.get("nombre", a["id"]) for a in C.ambientes(c, nivel) if C.dentro(a["poly"], *p["pos"])), "—")
-    filas = "".join(f"<tr><td>{html.escape(amb_de(p))}</td><td>{html.escape(p['nombre'])}</td>"
+    amb_de = lambda p: donde(nivel, *p["pos"])
+    filas = "".join(f"<tr><td>{html.escape(amb_de(p))}</td><td>{html.escape(LETRAS.get(p['nombre'], p['nombre']))}</td>"
                     f"<td class=c>{'✔' if p['af'] else ''}</td><td class=c>{'✔' if p['ac'] else ''}</td>"
-                    f"<td class=n>Ø{p['desague']}</td><td class=blanco></td></tr>"
+                    f"<td class=n>{'Ø' + str(p['desague']) if p.get('desague') else '—'}</td><td class=blanco></td></tr>"
                     for p in sorted(puntos, key=lambda p: amb_de(p)))
     return ("<h3>Puntos de agua (cada artefacto)</h3><table class=cuenta><thead><tr><th>Ambiente</th><th>Artefacto</th>"
             "<th>Agua fría</th><th>Agua caliente</th><th>Desagüe</th><th>¿Está? (marcar)</th></tr></thead>"
@@ -436,7 +483,7 @@ def tabla_llaves(nivel):
         return ""
     filas = "".join(f"<tr><td>{'gas' if l.get('gas') else 'agua'}</td><td>{html.escape(l.get('etiqueta', ''))}</td>"
                     f"<td class=blanco></td></tr>" for l in ll)
-    return ("<h3>Llaves de paso</h3><table class=cuenta><thead><tr><th></th><th>Cuál</th><th>¿Está y cierra bien?</th></tr>"
+    return ("<h3>Llaves de paso</h3><table class=cuenta><thead><tr><th>Tipo</th><th>Cuál</th><th>¿Está y cierra bien?</th></tr>"
             f"</thead><tbody>{filas}</tbody></table>")
 
 
@@ -631,8 +678,8 @@ for nid, nombre in NIVELES:
                        f"<th>Huecos en ese muro</th></tr></thead><tbody>{''.join(fila_muro(nid, m) for m in ms)}</tbody></table>",
                        seccion=S))
     partes.append(hoja(f"{nombre} — puertas, ventanas y pasos",
-                       "<table class=vanos><thead><tr><th>Tipo</th><th>Código</th><th>Dónde</th><th>Ancho</th><th>Antepecho</th>"
-                       f"<th>Dintel</th><th>Nota</th></tr></thead><tbody>{tabla_vanos(nid)}</tbody></table>", seccion=S))
+                       "<table class=vanos><thead><tr><th>Tipo</th><th>Entre</th><th>Dónde</th><th>Ancho</th><th>Antepecho</th>"
+                       f"<th>Dintel</th><th>Cómo</th></tr></thead><tbody>{tabla_vanos(nid)}</tbody></table>", seccion=S))
 
 # ── B · plomero ────────────────────────────────────────────────────────────────
 S = SEC["P"]
