@@ -38,7 +38,7 @@ CIRCUITOS = {
         ("C27", "Iluminación exterior: frente y retiro norte (balizas, apliques y sensores; fotocélula + reloj, con diferencial)", "luz"),
     ],
     "p1": [
-        ("C8", "Iluminación primer piso", "luz"),
+        ("C8", "Iluminación P1: suite, hall, estar y blancos", "luz"),
         ("C9", "Tomas suite principal, hall y estar", "toma"),
         ("C10", "Tomas baños, blancos y vestidor; extractores (con diferencial)", "toma"),
         ("C11", "Tomas cuartos de los hijos", "toma"),

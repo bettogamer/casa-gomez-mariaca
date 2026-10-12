@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-09_
+_Última actualización: 2026-10-12_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -69,6 +69,7 @@ _Última sesión: 2026-10-06._
    y electricista: paso a paso, lista "para el dueño: cómo revisar", planos con una sola instalación por hoja (luces y teclas /
    enchufes y tablero / agua / desagüe y lluvia / gas y ventilación) con leyenda completa, tablas para contar puntos por
    ambiente, enchufes especiales, circuitos, llaves de paso y hoja de medidas. Los muros que esperan al ingeniero, en rojo.
+   Revisado para imprimir (2026-10-12): notas cortas de obra (`obra:`) en cada puerta y ventana, columna "Entre" (qué ambientes une), ejes A·B·C en la planta baja, puntos de agua y luz ubicados por ambiente (sin "ØNone" ni "otros").
 3. Llevar al muro de la calle la acometida eléctrica y el colector (hoy arrancan junto a la casa; el gas ya llega al
    medidor), con cámara final del colector a ≥1 m del muro y un pase bajo la viga del riel.
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
