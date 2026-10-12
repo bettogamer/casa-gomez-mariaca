@@ -997,3 +997,11 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
   | Retiro norte | +0.05 | 0.15 bajo el piso; cae 1.5 % hacia el lindero; escalón de 0.15 en la puerta del depósito |
   | Patio | +0.05 | 0.15 bajo el comedor; rejilla lineal delante de la corrediza; cae 1.5 % alejándose de la casa |
 - **Estado:** propuesto; falta medir en obra (vereda, losa de PB, patio y retiro).
+
+## 2026-10-12 — Monitor del portero al hall (aceptado)
+- **Pedido del dueño:** verlo al bajar la grada.
+- **Dónde:** muro sur del hall (eje C) entre C2 y C3, en el tramo libre de ~0.67 entre la cara de C2 (x 4.525) y el
+  closet de abrigos (x 5.20); centrado en x 4.86, a 1.45 del piso. Antes: cocina, muro este.
+- **Tubo:** el mismo camino por el ingreso (contrapiso a 0.45 del muro sur), ahora termina en el hall; ya no cruza
+  lavado, almacén ni cocina.
+- **Estado:** propuesto.
