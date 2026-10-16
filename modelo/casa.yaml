@@ -38,6 +38,7 @@ proyecto:
       - "PLANTA BAJA: SOLO EL MURO OESTE (el frente, eje 1, living e ingreso) VA DE CABEZA. Los demás muros del living pasan a soga (el norte al ras de afuera; el del lado de la escalera, al ras de la escalera)."
       - "PLANTA BAJA: HOJA NUEVA DE LA BODEGA DEBAJO DE LA ESCALERA (planta con la altura libre bajo cada escalón y dos cortes). Los cajones hacia el hall solo entran bajo los escalones 4 a 6."
       - "LUCES: ahora cada tipo tiene su símbolo. Círculo con cruz = FOCO DE TECHO; medio círculo con A = APLIQUE DE PARED; barrita LED = TIRA BAJO UN MUEBLE o sobre un espejo; puntito = luz baja de afuera. Las tablas para contar las separan. Adentro de la casa hay 44 focos de techo en total (1 o 2 por ambiente; la cocina de abajo, 6)."
+      - "PATIO DEL FONDO (preparado, sin obra todavía): una segunda luz en la pared de la casa y DOS TUBOS ENTERRADOS hasta el fondo (uno con un enchufe doble para afuera en un pilarcito, otro vacío para luces futuras). Se dejan al hacer el piso del patio."
       - "ALTILLO: VENTANA NUEVA EN LA LLEGADA DE LA ESCALERA (V7), frente al último tramo: 1.20 × 1.10, antepecho 1.00, del ancho del tramo y pegada al muro de la cocina. Da luz a la llegada con las puertas cerradas."
       - "ALTILLO: PILETAS Y LAVADORA AL OESTE de la franja, bajo la ventana del comedor (V8). Los caños de agua llegan bajo esa ventana; el desagüe va por el contrapiso de la franja hasta la bajada de siempre (x 9.60)."
       - "ALTILLO, TECHO: CAE AL NORTE (como dijo el maestro): el agua sale al retiro norte. Dos hojas nuevas (planta y corte). Los muros de afuera del departamento suben DE UNA VEZ hasta +10.20 (el antepecho es el mismo muro). Lo que se deja en los muros (gárgolas, anclajes del techo de la terraza) y lo que falta decidir antes de techar."
@@ -940,10 +941,17 @@ instalaciones:
         - {pos: [-0.55, 1.20], nota: "terraza: luz empotrada bajo el volado; tecla en el ingreso, en el juego de teclas junto a la puerta de entrada (muro sur del ingreso, x≈0.35, a 1.10, lado de la manija) con la del acceso y la del ingreso", estado: propuesto}
         - {pos: [-0.55, 3.80], nota: "terraza: luz empotrada bajo el volado (misma tecla)", estado: propuesto}
         - {pos: [-0.55, 5.85], nota: "acceso: luz bajo el volado sobre la puerta; tecla en el ingreso; fotocélula o sensor opcional", estado: propuesto}
-        - {id: luz_patio, pos: [17.25, 1.35], nota: "patio: aplique en el muro este junto a la corrediza del comedor, a ~2.20 (parrilla movible en el patio); tecla adentro", estado: propuesto}
+        - {id: luz_patio, rotulo: "patio", pos: [17.25, 1.35], nota: "patio: aplique en el muro este junto a la corrediza del comedor, a ~2.20 (parrilla movible en el patio); tecla adentro", estado: propuesto}
+        - {id: luz_patio_2, rotulo: "patio", pos: [17.25, 4.00], alto: 2.20, nota: "2026-10-16 (dueño): patio del fondo de 5 m, todavía sin proyecto: dejar luces y un punto de corriente. SEGUNDO APLIQUE del patio, en el muro este entre B5 y la ventana de la cocina (lado sur del patio), a 2.20; misma tecla que el de la corrediza. A 0.40 de la canilla (y 3.60)", estado: propuesto}
         - {rotulo: "afuera", pos: [6.47, -0.25], nota: "retiro norte: aplique sobre la puerta del depósito, con sensor de movimiento + fotocélula (sin tecla)", estado: propuesto}
       # Puntos A MANO (interiorista 2026-10-05): reemplazan a los generados de su familia en su ambiente.
       # Alturas al eje de la caja, desde el piso terminado; las confirma el electricista (NB 777).
+      # Tubos enterrados de corriente (se dibujan en el plano de enchufes). 2026-10-16: al fondo del patio, para el futuro.
+      tubos_enterrados:
+        - linea: [[17.025, 4.10], [21.55, 4.10]]
+          etiqueta: "tubo enterrado al fondo (2 tubos: enchufe + luces futuras)"
+          estado: propuesto
+          nota: "2026-10-16 (dueño): patio del fondo de 5 m, todavía sin proyecto: dejar luces y un punto de corriente. DOS tubos de PVC eléctrico de 1\" enterrados a ~0.50 con cinta de aviso: uno con los cables del enchufe del fondo (circuito de tomas de afuera) y otro VACÍO con alambre guía, para luces del patio más adelante. Sale de una caja de paso en la base del muro este (y 4.10, a 0.50 de la canilla). Cruza el colector (x 17.70) y el gas (x 18.30) en perpendicular y a ≥0.20 del gas; pasa a ~1.1 del pozo de lluvia (y 2.0–3.0)."
       puntos:
         - {amb: cocina, tipo: detector, etiqueta: GAS, pos: [15.40, 6.595], alto: 2.30, estado: propuesto, nota: "detector de gas natural (el gas sube: alto, cerca del techo), cerca de la cocina pero no encima"}
         - {amb: hall, tipo: detector, etiqueta: HUMO, pos: [5.80, 5.60], estado: propuesto, nota: "detector de humo en el techo del hall"}
@@ -1030,11 +1038,12 @@ instalaciones:
         - {amb: estudio, tipo: toma, pos: [11.60, 2.555], alto: 0.30, estado: propuesto, nota: "general (aspiradora)"}
         - {amb: estudio, tipo: datos, pos: [8.925, 1.30], alto: 0.30, estado: propuesto, nota: "LLEGADA DE INTERNET + router (tubo desde la acometida de la calle); de aquí sale el cableado de datos a la TV del living"}
         # Comedor: conmutador junto a la corrediza (+ luz del patio) y otro en el juego del final del pasillo
-        - {amb: comedor, tipo: conmutador, pos: [16.875, 0.18], alto: 1.10, luces: [comedor, luz_patio], estado: propuesto, nota: "junto a la corrediza del patio, tecla doble: comedor (conmutada) + aplique del patio"}
+        - {amb: comedor, tipo: conmutador, pos: [16.875, 0.18], alto: 1.10, luces: [comedor, luz_patio, luz_patio_2], estado: propuesto, nota: "junto a la corrediza del patio, tecla doble: comedor (conmutada) + aplique del patio"}
         - {amb: comedor, tipo: conmutador, pos: [12.72, 2.705], alto: 1.10, estado: propuesto, nota: "en el juego del final del pasillo (cara del pasillo del muro del estudio)"}
         - {amb: comedor, tipo: toma, pos: [13.075, 0.60], alto: 0.30, estado: propuesto, nota: "muro oeste (aparador, aspiradora)"}
         - {amb: comedor, tipo: toma, pos: [16.25, 0.025], alto: 0.30, estado: propuesto, nota: "muro norte, junto a la esquina"}
         - {amb: comedor, tipo: toma_ext, pos: [17.025, 2.47], alto: 0.40, estado: propuesto, nota: "PATIO: toma con tapa junto a la corrediza, para la parrilla movible"}
+        - {tipo: toma_ext, pos: [21.55, 4.10], alto: 0.50, estado: propuesto, nota: "2026-10-16 (dueño): patio del fondo de 5 m, todavía sin proyecto: dejar luces y un punto de corriente. PUNTO DEL FONDO: caja con tapa IP65 en un pilarcito de ~0.60 (o en el muro del fondo, si se hace), con TOMA DOBLE y diferencial; ahí termina también el tubo vacío para las luces futuras del patio"}
         # Pasillo: conmutadores en las dos puntas
         - {amb: pasillo_pb, tipo: conmutador, pos: [7.17, 3.655], alto: 1.10, estado: propuesto, nota: "punta del hall, entre el hall y la puerta del lavado"}
         - {amb: pasillo_pb, tipo: conmutador, pos: [12.84, 2.705], alto: 1.10, estado: propuesto, nota: "punta de la cocina, en el juego del final del pasillo"}

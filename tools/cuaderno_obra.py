@@ -498,7 +498,7 @@ def tabla_llaves(nivel):
 # ── planos de instalaciones ────────────────────────────────────────────────────
 
 ALTO_Y = (-2.7, 7.35)                # del retiro norte (luces del muro del lote) al muro sur
-CASA_X = (-3.6, 21.3) + ALTO_Y       # la casa con la terraza, el acceso y el patio (pozo de lluvia del fondo)
+CASA_X = (-3.6, 22.4) + ALTO_Y       # la casa con la terraza, el acceso y el patio (pozo de lluvia del fondo)
 FRENTE_X = (-16.2, 0.6) + ALTO_Y     # el frente: estacionamiento, jardín, camino, cisterna, portón
 
 
