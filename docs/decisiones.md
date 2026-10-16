@@ -1040,3 +1040,6 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   muro); la calamina se apoya por dentro (+10.05 norte, +9.35 sur) y termina contra el muro sur con la canaleta; gárgolas a
   ~+9.20; cielo raso ~2.55 libres (a definir, debajo de la canaleta). Sin cambios de diseño. Pregunta 16 al ingeniero
   (cómo se apoya la calamina y la viga de encadenado).
+- **Ventana en la llegada de la escalera del altillo (dueño, cuaderno v2.0):** con las dos puertas cerradas la llegada
+  quedaba oscura. Ventana V7 de 1.20 × 1.10 (antepecho 1.00) en el muro sur, frente al último tramo: x 5.725–6.925, del
+  ancho del tramo y pegada al muro x 7.05. La del comedor pasa a ser V8.
