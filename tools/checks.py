@@ -5,7 +5,7 @@ municipal de Cochabamba: esa la confirma el arquitecto.
 """
 import sys
 
-from casa import GARGANTA, area, caja, cargar, columnas, dentro, dist_borde, escalera, huella_casa, ambientes
+from casa import GARGANTA, aberturas, ambientes, area, caja, cargar, columnas, dentro, dist_borde, escalera, huella_casa, muebles, muros
 
 # (área mínima m², lado mínimo m) — referencial
 MINIMOS = {
@@ -99,6 +99,54 @@ def verificar(casa):
             if lado < m[1]:
                 res.append((nid, "aviso", f"'{a['nombre']}' tiene un lado de {lado:.2f} m (< {m[1]} m referencial)"))
 
+        res += verificar_obra(casa, nid)
+
+    return res
+
+
+# Junto a una columna, un pedazo de ladrillo de menos de esto no sostiene el marco: la abertura va AL RAS de la
+# columna (pedido del maestro, 2026-10-16). Entre esto y un ladrillo entero (0.25) se decide caso por caso.
+RAS_COLUMNA = 0.15
+
+
+def verificar_obra(casa, nid):
+    """Aberturas a pocos cm de una columna y muebles metidos dentro de un muro (con el muro en su lugar real)."""
+    res = []
+    m = casa["estructura"]["seccion_columna"] / 2
+    for ab in aberturas(casa, nid):
+        if ab.get("en_cerco") or ab["tipo"] in ("porton", "vano"):
+            continue
+        (x0, y0), (x1, y1) = ab["de"], ab["a"]
+        hor = abs(y0 - y1) < 0.01
+        lo, hi = (min(x0, x1), max(x0, x1)) if hor else (min(y0, y1), max(y0, y1))
+        for col in columnas(casa):
+            cl, cv = (col["x"], col["y"]) if hor else (col["y"], col["x"])
+            if abs(cv - (y0 if hor else x0)) > m:
+                continue
+            for gap in (lo - (cl + m), (cl - m) - hi):
+                if 0.005 < gap < RAS_COLUMNA:
+                    res.append((nid, "aviso", f"'{ab['id']}' queda a {gap * 100:.1f} cm de la columna {col['id']}: "
+                                              "ponerla al ras de la columna (el marco no agarra en ese pedazo)"))
+    paredes = []
+    for mu in muros(casa, nid):
+        if mu["tipo"] != "ladrillo":
+            continue
+        (x0, y0), (x1, y1) = mu["de"], mu["a"]
+        g = mu["grosor"] / 2
+        x0, x1, y0, y1 = x0 + mu["dx"], x1 + mu["dx"], y0 + mu["dy"], y1 + mu["dy"]
+        if abs(x0 - x1) < 0.01:
+            paredes.append((x0 - g, min(y0, y1), x0 + g, max(y0, y1)))
+        else:
+            paredes.append((min(x0, x1), y0 - g, max(x0, x1), y0 + g))
+    for mb in muebles(casa, nid):
+        a = mb.get("rect")
+        if not a:
+            continue
+        for w in paredes:
+            ox, oy = min(a[2], w[2]) - max(a[0], w[0]), min(a[3], w[3]) - max(a[1], w[1])
+            if ox > 0.01 and oy > 0.01:
+                res.append((nid, "aviso", f"Mueble '{mb.get('nombre', mb['tipo'])}' se mete {min(ox, oy) * 100:.0f} cm en un muro"))
+                break
     return res
 
 

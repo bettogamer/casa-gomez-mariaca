@@ -24,6 +24,18 @@ proyecto:
     Fotos del juego impreso (planos-arqui/IMG_8276..8278, ago-2026). NO coincide
     con el PDF "PLANO DE const. 06-03.pdf" (versión anterior, feb-2020). Ver
     docs/versiones-del-plano.md.
+  # Cuaderno de obra impreso (make cuaderno). La v1 (2026-10-12) ya está impresa y en manos del maestro: cada versión
+  # nueva dice qué cambió y qué hojas reemplazar, y además sale un PDF corto solo con las hojas nuevas.
+  cuaderno:
+    version: "2.0"
+    fecha: 2026-10-16
+    reemplazar: "Todas las hojas del ALTILLO (plano, muros, puertas y ventanas) y la hoja «Ladrillo y forma de asentar». Las de planta baja y primer piso también cambian, pero se pueden imprimir cuando el albañil llegue a esos pisos."
+    cambios:
+      - "MUROS SOBRE LA LÍNEA DE COLUMNAS: ya no van centrados. Van AL RAS DE UNA CARA de la columna (el plano dice cuál; la columna asoma 10 cm del otro lado). Los de afuera, al ras de la cara de afuera, también el del altillo que da a la terraza (eje 2)."
+      - "PUERTAS Y VENTANAS JUNTO A UNA COLUMNA: van AL RAS de la columna (sin pedacito de ladrillo, que no agarra el marco). Altillo: ventana alta del estar (A4), ventana del dormitorio al patio (B5) y puerta del baño (B4). Primer piso: ventana del Cuarto 1, puertas de blancos, Baño 2 y de los dos cuartos. Planta baja: puerta del depósito."
+      - "ALTILLO — PUERTAS MÁS ANCHAS (hueco que deja el albañil): a la terraza 1.00, al dormitorio 1.00, al baño 0.85 (más ancha choca con la ducha), entrada al departamento 0.75 (no entra más: al lado están los últimos escalones). Todas pegadas al muro o a la columna."
+      - "ALTILLO — LA CORREDIZA SE VA AL ESTAR (2.00, x 9.50 a 11.50). Donde estaba, en el comedor, va una ventana de 1.00 × 1.10. Los muebles grandes entran por la terraza, la franja y esta corrediza."
+      - "LOS PLANOS DEL ALBAÑIL TRAEN LAS MEDIDAS DIBUJADAS: cada puerta y ventana con su código (V1, P1, C1), ancho × alto y antepecho, y una cadena de medidas de cara a cara de columnas y muros. Y una hoja con cada puerta y ventana VISTA DE FRENTE con sus alturas desde el piso."
 
 lote:
   largo: 37.25          # P1-P2 (colinda Lote 105, Jesús Maldonado)
@@ -159,7 +171,19 @@ albanileria:
     remate_losa: "última hilada bajo viga o losa: junta llena y apretada (o mortero expansivo), sin dejar hueco"
     malla_revoque: "en el REVOQUE EXTERIOR, malla (de fibra de vidrio o metálica) de 0.30 de ancho, 0.15 a cada lado de cada columna y de cada viga o borde de losa, embebida en la primera capa"
     nota: "aplica a todos los muros perimetrales de soga al ras de las columnas (fachadas blancas). Pregunta 12 de docs/preguntas-ingeniero.md"
-  # Interiores de soga: centrados en el eje.
+  # Muros de soga SOBRE UN EJE de columnas (2026-10-16, pedido del maestro: centrados, la columna asoma 5 cm por
+  # cada lado y hay que dibujarlos bien): van AL RAS DE UNA CARA de la columna. Regla automática (tools/casa.py,
+  # lado_al_ras): afuera > escalera > ambiente más importante (dormitorio/estar > cocina > pasillo > baño > depósito).
+  # Aquí, los tramos que se corrigen a mano (lado = hacia dónde queda la cara lisa al ras de la columna).
+  # Los tabiques que no van sobre un eje siguen centrados en su línea.
+  al_ras:
+    pb:
+      - {y: 2.68, desde: 4.40, hasta: 13.00, lado: norte}   # eje B parejo: pasillo de 0.95 sin escalón en x 8.85; entra la cajonera bajo la grada
+      - {x: 7.05, desde: 3.73, hasta: 6.67, lado: este}     # hall liso (abrigos y banca); la columna C3 asoma al lavado
+      - {x: 11.20, desde: 3.73, hasta: 6.67, lado: oeste}   # cocina sin cambios (alacena); la columna C4 asoma en el rincón de la cocina
+    altillo:
+      - {x: 7.05, lado: oeste}                              # todo el eje 3 del lado de la escalera
+      - {y: 2.68, desde: 4.40, hasta: 5.725, lado: norte}   # muro de la llegada: al ras del hueco de la escalera
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DISEÑO NUEVO (2026-10-03 en adelante). Se define pieza por pieza con el usuario.
@@ -513,7 +537,7 @@ aberturas:
     - {id: living_paso, tipo: vano, de: [2.58, 4.95], a: [4.40, 4.95], nota: "paso del living al estar, después de la celosía"}
     - {id: living_estar, obra: "Abierto, bajo la escalera.", tipo: vano, de: [4.40, 3.98], a: [4.40, 4.95], nota: "bajo la escalera, abierto"}
     # Depósito: puerta al costado de la columna A3, donde el techo interior sube (bajo el tramo de 6).
-    - {id: puerta_deposito, obra: "Abre hacia afuera (al retiro), bisagra al este. Baja (1.85) por el descanso de la escalera; escalón de 0.15.", tipo: puerta, de: [6.80, 0.00], a: [6.00, 0.00], abre_hacia: afuera, alto: 1.85, estado: propuesto, nota: "desde el retiro, bajo el descanso (~1.92 libres). 2026-10-07 (revisión del arquitecto, aceptada): antes 6.07–6.87, a 5.5 cm de la cara de A3 (6.925); ahora 12.5 cm para el marco. Bisagra al ESTE (no al oeste como propuso el arquitecto): abierta hacia afuera no tapa la toma del retiro (x 5.75). Cerrojo del lado oeste (2026-10-08: sin pilastra en A3, ya no hace falta el tope a 90°)"}
+    - {id: puerta_deposito, obra: "AL RAS de la columna A3. Abre hacia afuera (al retiro), bisagra al este. Baja (1.85) por el descanso de la escalera; escalón de 0.15.", tipo: puerta, de: [6.925, 0.00], a: [6.125, 0.00], abre_hacia: afuera, alto: 1.85, estado: propuesto, nota: "desde el retiro, bajo el descanso (~1.92 libres). 2026-10-07 (revisión del arquitecto, aceptada): antes 6.07–6.87, a 5.5 cm de la cara de A3 (6.925); ahora 12.5 cm para el marco. Bisagra al ESTE (no al oeste como propuso el arquitecto): abierta hacia afuera no tapa la toma del retiro (x 5.75). Cerrojo del lado oeste (2026-10-08: sin pilastra en A3, ya no hace falta el tope a 90°)"}
     # Living (2026-10-05, PROPUESTO): se quita la corrediza a la terraza (2.43 entre A1 y B1; decisión del usuario: a la
     # terraza se sale por la entrada). El muro oeste queda CIEGO: ahí va la TV, centrada en la columna B1, sobre un
     # mueble (y 1.90–3.50). Sin ventana al oeste: el sol de la tarde entra bajo el volado (no lo frena a menos de ~42° de
@@ -551,11 +575,11 @@ aberturas:
     - {id: ventana_blancos, obra: "Alta, para ventilar.", tipo: ventana, de: [7.45, 0.00], a: [8.45, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "1.00 × 0.50 alta al norte, para ventilar los blancos. 2026-10-06 (alinear la fachada norte): antes 7.70–8.70 con antepecho 1.50; ahora centrada en x 7.95, sobre la ventana del baño de PB, y antepecho 1.60 como las altas de baño (misma línea). Queda a 0.275 de la cara de la columna A3"}
     - {id: puerta_bano_1, obra: "Desde el Cuarto 1.", tipo: puerta, de: [11.20, 0.95], a: [11.20, 1.65], abre_hacia: bano_hijo_1, estado: definido, nota: "0.70, desde el Cuarto 1, en la esquina noroeste"}
     - {id: ventana_bano_1, obra: "Alta, sobre el inodoro.", tipo: ventana, de: [9.80, 0.00], a: [10.50, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta, sobre el inodoro. 2026-10-06 (alinear la fachada norte): antes 10.00–10.70; ahora centrada en x 10.15, sobre la ventana del estudio de PB. Lejos del núcleo técnico (bajante x 9.25, caños x 9.10–9.40) y del ducto del extractor (x 10.85, sobre el cielo falso)"}
-    - {id: puerta_blancos, obra: "Desde el pasillo.", tipo: puerta, de: [7.30, 2.68], a: [8.10, 2.68], abre_hacia: blancos, estado: definido, nota: "0.80, desde el pasillo"}
-    - {id: puerta_bano_2, obra: "Desde el Cuarto 2.", tipo: puerta, de: [11.20, 6.47], a: [11.20, 5.77], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
-    - {id: puerta_cuarto_1, obra: "0.90 para pasar muebles. Queda ~10 cm de muro hasta la columna B4: marco angosto.", tipo: puerta, de: [11.42, 2.585], a: [12.32, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
-    - {id: puerta_cuarto_2, obra: "0.90 para pasar muebles. Queda ~10 cm de muro hasta la columna B4: marco angosto.", tipo: puerta, de: [11.42, 4.085], a: [12.32, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
-    - {id: ventana_cuarto_1_norte, obra: "Lleva un banco empotrado debajo: vidrio de seguridad o limitador de apertura. 12.5 cm de muro hasta la columna A4.", tipo: ventana, de: [11.45, 0.00], a: [13.25, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "2026-10-06 (pedido del dueño): LO MÁS AL OESTE posible (0.125 de la columna A4) con el banco de lectura debajo; la cama va al este. En fachada queda alineada con la ventana del baño del altillo (centro ~12.35). 1.80 × 1.20 al norte sobre el banco-cama empotrado (pedido de la hija): antepecho 0.90 = ~0.45 sobre el banco; vidrio de seguridad o limitador de apertura. 2026-10-06 (alinear la fachada norte): antes 12.85–14.65; ahora centrada en x 14.30, sobre la ventana del comedor de PB. El banco, los libreros y las teclas del nicho los reacomoda el interiorista"}
+    - {id: puerta_blancos, obra: "Desde el pasillo, AL RAS de la columna B3.", tipo: puerta, de: [7.175, 2.68], a: [7.975, 2.68], abre_hacia: blancos, estado: definido, nota: "0.80, desde el pasillo"}
+    - {id: puerta_bano_2, obra: "Desde el Cuarto 2, AL RAS de la columna C4.", tipo: puerta, de: [11.20, 6.545], a: [11.20, 5.845], abre_hacia: bano_hijo_2, estado: definido, nota: "0.70, desde el Cuarto 2"}
+    - {id: puerta_cuarto_1, obra: "0.90 para pasar muebles, AL RAS de la columna B4.", tipo: puerta, de: [11.325, 2.585], a: [12.225, 2.585], abre_hacia: cuarto_hijo_1, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
+    - {id: puerta_cuarto_2, obra: "0.90 para pasar muebles, al ras del muro del baño (igual que la del Cuarto 1).", tipo: puerta, de: [11.325, 4.085], a: [12.225, 4.085], abre_hacia: cuarto_hijo_2, estado: definido, nota: "0.90 (mudanzas); ~10 cm de jamba a la columna B4"}
+    - {id: ventana_cuarto_1_norte, obra: "AL RAS de la columna A4. Lleva un banco empotrado debajo: vidrio de seguridad o limitador de apertura.", tipo: ventana, de: [11.325, 0.00], a: [13.125, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "2026-10-16 (maestro): corrida 12.5 cm al oeste, al ras de la columna A4 (mismo tamaño). 2026-10-06 (pedido del dueño): LO MÁS AL OESTE posible (0.125 de la columna A4) con el banco de lectura debajo; la cama va al este. En fachada queda alineada con la ventana del baño del altillo (centro ~12.35). 1.80 × 1.20 al norte sobre el banco-cama empotrado (pedido de la hija): antepecho 0.90 = ~0.45 sobre el banco; vidrio de seguridad o limitador de apertura. 2026-10-06 (alinear la fachada norte): antes 12.85–14.65; ahora centrada en x 14.30, sobre la ventana del comedor de PB. El banco, los libreros y las teclas del nicho los reacomoda el interiorista"}
     - {id: ventana_cuarto_1_este, obra: "Al patio, junto a la cama.", tipo: ventana, de: [16.90, 0.75], a: [16.90, 1.95], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.20 al patio, junto a la cama; antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 0.40–1.60; ahora centrada en y 1.35, sobre la corrediza del comedor de PB (0.35–2.35). A 0.625 de la cara de la columna A5 y 0.605 de la de B5 (toma general en y 2.30, entre la ventana y B5)"}
     - {id: ventana_cuarto_2_este, obra: "Dos hojas: la del sur FIJA y la del norte se abre (debajo sale la campana de la cocina).", tipo: ventana, de: [16.90, 4.15], a: [16.90, 6.15], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "2026-10-07: hoja SUR FIJA y hoja norte de abrir (la salida de la campana de la cocina queda ~1.6 m debajo, 0.20 al sur: que el olor no entre al cuarto). 2.00 × 1.20 al patio (más grande que la del Cuarto 1: es su única ventana); antepecho 1.00 (planta alta). 2026-10-06 (alinear la fachada este): antes 4.40–6.40; ahora centrada en y 5.15, sobre la ventana de la cocina de PB (4.55–5.75). Queda a 0.19 del costado del ropero (y 3.96) y a 0.395 de la cara de la columna C5 (antes 0.145)"}
     # Suite principal
@@ -575,21 +599,22 @@ aberturas:
     - {id: ventana_wc_ppal, obra: "Alta, vidrio esmerilado. Está en el muro sobre el volado: espera al ingeniero.", tipo: ventana, de: [-1.05, 4.40], a: [-1.05, 5.10], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada (2026-10-07: el muro del frente pasa al ras del canto del volado, eje x -1.05). 2026-10-08 (punto 22): antes 4.45–5.15; corrida 0.05 al norte para que las dos ventanitas queden lo más centradas posible en la caja gris (0.20 de borde al norte, 0.145 al cajón). Más no se puede: 12.5 cm para el marco junto al muro del inodoro (cara 4.275). La de la ducha no se mueve (entre su muro, cara 5.525, y el cajón)"}
     - {id: ventana_ducha_ppal, obra: "Alta, vidrio esmerilado. Está en el muro sobre el volado: espera al ingeniero.", tipo: ventana, de: [-1.05, 5.65], a: [-1.05, 6.35], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "0.70 × 0.50 alta al frente, esmerilada. 2026-10-07 (PROPUESTO, revisores): corrida 0.10 al norte (antes 5.75–6.45) para dejar ~0.145 entre el vano y el cajón gris de las bajantes (empieza en y 6.495)"}
   altillo:
-    - {id: llegada_terraza, obra: "Con vidrio (luz a la llegada), abre hacia la terraza. De 0.70 a 0.75: lo que entre.", tipo: puerta, de: [4.40, 3.87], a: [4.40, 4.57], abre_hacia: terraza_alt, estado: definido, nota: "0.70–0.75 (máximo que permite la llegada), abre hacia la terraza; con vidrio para dar luz a la llegada"}
+    - {id: llegada_terraza, obra: "Hueco de 1.00, pegado al muro sur (sin pedacito de ladrillo). Con vidrio, abre hacia la terraza, bisagra al norte. Por aquí entran los muebles grandes del departamento (terraza → franja → corrediza del estar).", tipo: puerta, de: [4.40, 3.595], a: [4.40, 4.595], abre_hacia: terraza_alt, estado: propuesto, nota: "2026-10-16 (maestro): hueco de 1.00 (antes 0.70–0.75), hasta la cara del muro sur del departamento. Entre B2 y el muro sur hay ~1.79 libres: no la limitaba la llegada. Abre hacia la terraza; con vidrio para dar luz a la llegada. Es la puerta para MUDANZAS (la del departamento no puede pasar de 0.75)"}
     # 2026-10-05 (PROPUESTO): bisagra al SUR (antes al norte): la tecla de entrada del estar (7.125, 3.72) queda del lado
     # de la manija y la hoja abierta no la tapa. La bisagra va en `de`.
-    - {id: llegada_estar, obra: "Bisagra al sur; abierta queda delante de la hoja fija de la corrediza. De 0.70 a 0.75: lo que entre.", tipo: puerta, de: [7.05, 4.57], a: [7.05, 3.87], abre_hacia: cocina_alt, estado: propuesto, nota: "0.70–0.75, puerta propia del departamento (privacidad, frío y ruido de la escalera); la llegada solo deja ese ancho (piso y 3.85–4.595). Bisagra al SUR: abierta 90° la hoja queda contra el muro sur de la cocina-comedor (x 7.05–7.75), delante de la hoja FIJA de la corrediza; la banqueta fija del comedor termina ~0.18 antes del giro: la puerta abre libre. Tope de piso en x ≈ 7.70 para que la manija no golpee el vidrio. Marco del lado de la bisagra a ~2.5 cm de la cara del muro sur: marco angosto o hoja de 0.65, lo ve el carpintero"}
-    - {id: estar_franja, obra: "Corrediza: la hoja del oeste FIJA y la del este se mueve.", tipo: corrediza, de: [7.25, 4.67], a: [9.35, 4.67], estado: definido, nota: "2.10 a la franja sur (corrida para dejar lugar a la lavandería). Hoja FIJA la del oeste (x 7.25–8.30) y móvil la del este (2026-10-05, PROPUESTO): delante de la fija se apoya abierta la puerta de la llegada. Se queda CORREDIZA (decisión del usuario 2026-10-05)"}
+    - {id: llegada_estar, obra: "Hueco de 0.75 (el máximo: al norte está el hueco de la escalera), pegado al muro sur. Bisagra al sur: abierta queda contra el muro sur.", tipo: puerta, de: [7.05, 4.595], a: [7.05, 3.845], abre_hacia: cocina_alt, estado: propuesto, nota: "2026-10-16 (maestro): hueco de 0.75 pegado al muro sur (antes 0.70 con 2.5 cm de ladrillo); no puede ser de 1.00: al norte del hueco están los últimos escalones del tramo de 10 (el piso de la llegada va de y 3.85 a 4.595). Los muebles grandes entran por la terraza, la franja y la corrediza del estar. 2026-10-16: la corrediza se fue al estar; abierta, la hoja queda contra el muro liso (ventana del comedor desde x 8.00). Antes: puerta propia del departamento (privacidad, frío y ruido de la escalera); la llegada solo deja ese ancho (piso y 3.85–4.595). Bisagra al SUR: abierta 90° la hoja queda contra el muro sur de la cocina-comedor (x 7.05–7.75), delante de la hoja FIJA de la corrediza; la banqueta fija del comedor termina ~0.18 antes del giro: la puerta abre libre. Tope de piso en x ≈ 7.70 para que la manija no golpee el vidrio. Marco del lado de la bisagra a ~2.5 cm de la cara del muro sur: marco angosto o hoja de 0.65, lo ve el carpintero"}
+    - {id: estar_franja, obra: "Corrediza del ESTAR a la franja (antes estaba en el comedor). Entre la corrediza y la ventana quedan 0.25 de muro: por ahí suben los caños de las piletas.", tipo: corrediza, de: [9.50, 4.67], a: [11.50, 4.67], estado: propuesto, nota: "2026-10-16 (maestro): MOVIDA AL ESTAR (pedido del dueño): 2.00 en x 9.50–11.50; la puerta de entrada ya no abre contra ella y por aquí entran los muebles (desde la terraza por la franja). Afuera, 0.65 libres hasta el domo del tragaluz. ANTES (2026-10-05): 2.10 a la franja sur desde el comedor (corrida para dejar lugar a la lavandería). Hoja FIJA la del oeste (x 7.25–8.30) y móvil la del este (2026-10-05, PROPUESTO): delante de la fija se apoya abierta la puerta de la llegada. Se queda CORREDIZA (decisión del usuario 2026-10-05)"}
+    - {id: ventana_comedor_sur_alt, obra: "Nueva, donde estaba la corrediza: luz al comedor.", tipo: ventana, de: [8.00, 4.67], a: [9.00, 4.67], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "2026-10-16 (maestro): al irse la corrediza al estar, el comedor queda con esta ventana de 1.00 × 1.10 a la franja (antepecho 1.00 como la del estar). Desde x 8.00: la puerta de entrada abierta llega a x 7.83"}
     - {id: vano_cocina_estar_alt, tipo: vano, de: [9.40, 2.68], a: [9.40, 4.67], estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): abierto, sin muro"}
     - {id: ventana_cocina_alt, obra: "Sobre la mesada. Al oeste queda el ducto de A3.", tipo: ventana, de: [7.45, 0.00], a: [8.60, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "2026-10-08 (plan B, PROPUESTO): 7.45–8.60 (1.15; antes 7.30–8.60): el ducto de A3 ocupa el rincón hasta x 7.325; borde oeste alineado con la ventana de los blancos. PROPUESTO (2026-10-06, opción B aceptada): 1.30 × 1.00 sobre la mesada, centrada en x 7.95 (antepecho 1.10 como todas las ventanas grandes del altillo). El dueño la prefiere de 1.30 por la luz. Alternativa del arquitecto: 1.00 × 1.00 (x 7.45–8.45), del ancho de la del dormitorio"}
     - {id: ventana_bano_alt, obra: "Alta, esmerilada, sobre el inodoro: justo encima de la del Baño 1.", tipo: ventana, de: [9.80, 0.00], a: [10.50, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): 0.70 × 0.50 alta, esmerilada, sobre el inodoro; EXACTAMENTE encima de la del Baño 1 (columna de x 10.15)"}
-    - {id: ventana_estar_alt, obra: "Alta, sobre la TV: justo encima de la ventana del Cuarto 1.", tipo: ventana, de: [11.45, 0.00], a: [13.25, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): 1.80 × 0.50 ALTA sobre la TV, exactamente encima de la ventana del Cuarto 1 (11.45–13.25). Reemplaza a la alta del hall (12.02–12.72)"}
+    - {id: ventana_estar_alt, obra: "Alta, sobre la TV, AL RAS de la columna A4: justo encima de la ventana del Cuarto 1.", tipo: ventana, de: [11.325, 0.00], a: [13.125, 0.00], antepecho: 1.60, alto: 2.10, estado: propuesto, nota: "2026-10-16 (maestro): corrida 12.5 cm al oeste, al ras de la columna A4 (mismo tamaño), igual que la del Cuarto 1 de abajo. PROPUESTO (2026-10-06, opción B): 1.80 × 0.50 ALTA sobre la TV, exactamente encima de la ventana del Cuarto 1 (11.45–13.25). Reemplaza a la alta del hall (12.02–12.72)"}
     - {id: ventana_estar_sur_alt, obra: "A la franja de la lavandería.", tipo: ventana, de: [11.75, 4.67], a: [12.95, 4.67], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B aceptada): 1.20 × 1.10 a la franja, centrada en el eje 12.35 (el de la ventana alta del estar y la del Cuarto 1): luz al estar y al paso. Afuera quedan las piletas"}
-    - {id: puerta_bano_alt, obra: "Abre hacia adentro, bisagra al este. Cerradura con destrabe desde afuera.", tipo: puerta, de: [10.95, 2.68], a: [10.25, 2.68], abre_hacia: bano_alt, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B): 0.70 desde el paso, bisagra al este (0.125 de muro hasta la columna B4). Abre hacia adentro sin tocar la ducha (0.75 de ancho). Cerradura de baño con destrabe desde afuera"}
-    - {id: puerta_dorm_alt, obra: "Maciza con burlete (ruido). Bisagra al sur.", tipo: puerta, de: [13.60, 4.47], a: [13.60, 3.72], abre_hacia: dorm_alt, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B aceptada): 0.75 MACIZA con burlete (ruido del estar), al final del paso recto desde la escalera; bisagra al sur: abierta queda contra el muro sur (hoja hasta x ≈ 14.35). 0.125 de muro a la esquina"}
+    - {id: puerta_bano_alt, obra: "Hueco de 0.85, AL RAS de la columna B4. Abre hacia adentro, bisagra al este. Cerradura con destrabe desde afuera.", tipo: puerta, de: [11.075, 2.68], a: [10.225, 2.68], abre_hacia: bano_alt, estado: propuesto, nota: "2026-10-16 (maestro): hueco de 0.85 al ras de la columna B4 (antes 0.70 con 12.5 cm de ladrillo). Más ancha no: la hoja tocaría la mampara de la ducha (borde en x 10.225), que va encima de la de abajo. ANTES: PROPUESTO (2026-10-06, opción B): 0.70 desde el paso, bisagra al este (0.125 de muro hasta la columna B4). Abre hacia adentro sin tocar la ducha (0.75 de ancho). Cerradura de baño con destrabe desde afuera"}
+    - {id: puerta_dorm_alt, obra: "Hueco de 1.00 pegado al muro sur. Maciza con burlete (ruido). Bisagra al sur.", tipo: puerta, de: [13.60, 4.595], a: [13.60, 3.595], abre_hacia: dorm_alt, estado: propuesto, nota: "2026-10-16 (maestro): hueco de 1.00 pegado al muro sur (antes 0.75); abierta, la hoja llega a x ≈ 14.68 y la cuna empieza en 15.30. ANTES: PROPUESTO (2026-10-06, opción B aceptada): 0.75 MACIZA con burlete (ruido del estar), al final del paso recto desde la escalera; bisagra al sur: abierta queda contra el muro sur (hoja hasta x ≈ 14.35). 0.125 de muro a la esquina"}
     - {id: ventana_dorm_alt_norte, obra: "Encima de la ventana del comedor de PB.", tipo: ventana, de: [13.80, 0.00], a: [14.80, 0.00], antepecho: 1.10, alto: 2.10, estado: propuesto, nota: "PROPUESTO (2026-10-06, opción B aceptada): 1.00 × 1.00 centrada en x 14.30 (sobre la del comedor de PB), antepecho 1.10. Con el muro en 13.60 la de 1.80 ya no entraba. 0.125 de muro al muro oeste. En el altillo las ventanas grandes quedan con antepecho 1.10 y las bandas altas con 1.60"}
     - {id: ventana_dorm_alt_este, obra: "Al patio.", tipo: ventana, de: [16.90, 0.75], a: [16.90, 1.95], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio. 2026-10-06 (alinear la fachada este): antes 0.50–1.70; ahora centrada en y 1.35, sobre la del Cuarto 1 y la corrediza del comedor (columna de ventanas del norte). Ya no queda detrás del escritorio del rincón (termina en y 0.55)"}
-    - {id: ventana_dorm_alt_este_2, obra: "Al patio.", tipo: ventana, de: [16.90, 2.93], a: [16.90, 4.13], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "1.20 × 1.10 al patio. 2026-10-06 (alinear la fachada este): antes 3.20–4.40. El muro este del altillo termina en y 4.67 (al sur, la franja abierta): no puede ir sobre la cocina de PB. Lo pedido era simétrica a la otra (centro 4.67 − 1.35 = 3.32, y 2.72–3.92), pero así pisaba 8.5 cm la columna B5 (cara 2.555–2.805, se propone prolongarla en el altillo): se corre lo mínimo, 0.21 al sur, para dejar 0.125 de ladrillo junto a B5 (mismo margen que el estar del altillo con A3). Centro 3.53; a 0.465 de la cara del muro sur del departamento (4.595)"}
+    - {id: ventana_dorm_alt_este_2, obra: "Al patio, AL RAS de la columna B5.", tipo: ventana, de: [16.90, 2.805], a: [16.90, 4.005], antepecho: 1.00, alto: 2.10, estado: propuesto, nota: "2026-10-16 (maestro): corrida 12.5 cm al norte, al ras de la columna B5 (mismo tamaño; antes 2.93–4.13). 1.20 × 1.10 al patio. 2026-10-06 (alinear la fachada este): antes 3.20–4.40. El muro este del altillo termina en y 4.67 (al sur, la franja abierta): no puede ir sobre la cocina de PB. Lo pedido era simétrica a la otra (centro 4.67 − 1.35 = 3.32, y 2.72–3.92), pero así pisaba 8.5 cm la columna B5 (cara 2.555–2.805, se propone prolongarla en el altillo): se corre lo mínimo, 0.21 al sur, para dejar 0.125 de ladrillo junto a B5 (mismo margen que el estar del altillo con A3). Centro 3.53; a 0.465 de la cara del muro sur del departamento (4.595)"}
 # Muebles (propuesta de amoblado). rect = [x0, y0, x1, y1] en planta.
 # tipo: sofa | sillon | mesa | silla | taburete | cama | escritorio | estante | closet | meson |
 #       refrigerador | cocina | lavaplatos | inodoro | lavamanos | ducha | lavadora | lavadero | alfombra
@@ -615,9 +640,9 @@ muebles:
     - {tipo: estante, nombre: Consola + espejo, rect: [3.20, 6.19, 4.50, 6.54], alto: 0.85, estado: propuesto, nota: "aplique sobre el espejo a ~1.90"}
     # Banca acortada a 1.00: las puertas del closet de abrigos ya no chocan con su punta
     - {tipo: estante, nombre: Banca + perchero, rect: [6.60, 4.30, 7.00, 5.30], alto: 0.45, estado: propuesto}
-    - {tipo: estante, nombre: Cajonera, rect: [4.50, 2.75, 5.65, 3.95], alto: 0.40, nota: "bajo el tramo de 10, se abre hacia el hall (tentativo: el usuario aún decide el uso)"}
+    - {tipo: estante, nombre: Cajonera, rect: [4.53, 2.75, 5.65, 3.95], alto: 0.40, nota: "bajo el tramo de 10, se abre hacia el hall (tentativo: el usuario aún decide el uso)"}
     # Depósito bajo la grada: estantes del lado bajo
-    - {tipo: estante, nombre: Herramientas, rect: [4.48, 0.30, 4.90, 2.55], alto: 0.80, nota: "2026-10-08 (plan B): empieza en y 0.30, al sur del ducto de A2 (agua caliente) del rincón"}
+    - {tipo: estante, nombre: Herramientas, rect: [4.53, 0.30, 4.90, 2.55], alto: 0.80, nota: "2026-10-08 (plan B): empieza en y 0.30, al sur del ducto de A2 (agua caliente) del rincón"}
     # Baño: ducha al fondo, inodoro y lavamanos alternados
     - {tipo: ducha, rect: [7.325, 0.13, 8.77, 1.03], estado: propuesto, nota: "2026-10-08 (plan B): el ducto de A3 ocupa el rincón noroeste (x 7.125–7.325, y hasta 0.50), enchapado como la ducha y SIN tapa de registro adentro; el hueco al sur del ducto (x 7.13–7.325, y 0.50–1.03) se suma al plato o queda como nicho/repisa de champú. AL RAS DEL PISO con cancel (dicho por el usuario 2026-10-05): rebajar el contrapiso ~5–8 cm en la zona de la ducha ANTES de hacerlo, con pendiente al sumidero"}
     # Inodoro corrido 5 cm al sur: su eje queda a 0.40 del borde de la ducha
@@ -666,18 +691,18 @@ muebles:
     # Almacén: estantes en U, libre el giro de la puerta. Rincón noroeste (x 9.20–9.55, y 3.81–4.10) LIBRE: por ahí
     # baja el desagüe del Baño 2 del primer piso (ducto con tapa de registro). Freezer vertical de 1.00 contra el muro
     # oeste, de frente a la puerta, con 1.22 libres delante para abrirlo (2026-10-05).
-    - {tipo: estante, rect: [9.55, 3.81, 11.12, 4.25], alto: 2.00, estado: propuesto, nota: "empieza en x 9.55: deja libre el rincón del ducto de la bajante del Baño 2 (P1) con su registro"}
+    - {tipo: estante, rect: [9.55, 3.81, 11.07, 4.25], alto: 2.00, estado: propuesto, nota: "empieza en x 9.55: deja libre el rincón del ducto de la bajante del Baño 2 (P1) con su registro"}
     - {tipo: estante, rect: [9.20, 4.25, 9.65, 5.00], alto: 2.00, estado: propuesto, nota: "acortado para el freezer"}
     - {tipo: estante, rect: [9.65, 6.10, 10.30, 6.54], alto: 2.00}
     - {tipo: refrigerador, nombre: Freezer, rect: [9.20, 5.05, 9.90, 6.05], alto: 1.80, estado: propuesto, nota: "freezer VERTICAL (dicho por el usuario): 1.00 de ancho; fondo ~0.70 y alto ~1.80 SUPUESTOS, confirmar con el modelo comprado (y hacia qué lado abre la puerta: mejor bisagra al sur). Enchufe propio a 0.50 detrás, en el muro oeste. Fuera del giro de la puerta del almacén y del rincón del ducto; 1.22 libres delante"}
-    - {tipo: estante, rect: [10.72, 4.25, 11.12, 5.15], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro este (recuperan lo que se quitó al estante oeste); terminan en 5.15 para dejar la tecla junto a la puerta"}
+    - {tipo: estante, rect: [10.67, 4.25, 11.07, 5.15], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro este (recuperan lo que se quitó al estante oeste); terminan en 5.15 para dejar la tecla junto a la puerta"}
     # Lavado (2026-10-05, dicho por el usuario): SOLO lavadora (sin secadora) + lavadora manual chica para prendas
     # menores, lavadero entre las dos (un solo desagüe), y el resto con muebles para guardar blancos.
     - {tipo: lavadora, nombre: L, rect: [7.20, 5.94, 7.80, 6.54], estado: propuesto, nota: "llave de agua fría a ~1.00 y desagüe con sifón a ~0.85"}
     - {tipo: lavadero, rect: [7.85, 5.94, 8.45, 6.54], estado: propuesto}
     - {tipo: lavadora, nombre: Lavadora manual, rect: [8.50, 6.04, 9.00, 6.54], estado: propuesto, nota: "chica, para prendas menores; desagüe al mismo ramal del lavadero"}
     - {tipo: closet, nombre: Blancos, rect: [8.45, 4.00, 9.05, 5.40], alto: 2.10, estado: propuesto, nota: "ropero de blancos de 0.60, debajo de la banderola (2.20); termina en 5.40 para dejar 0.64 delante de la lavadora manual"}
-    - {tipo: estante, nombre: Blancos, rect: [7.13, 4.60, 7.53, 5.30], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro del hall (después del giro de la puerta); terminan en 5.30 para abrir la lavadora. Se plancha en el medio del lavado"}
+    - {tipo: estante, nombre: Blancos, rect: [7.18, 4.60, 7.58, 5.30], alto: 2.00, estado: propuesto, nota: "repisas de 0.40 en el muro del hall (después del giro de la puerta); terminan en 5.30 para abrir la lavadora. Se plancha en el medio del lavado"}
     # Terraza: sin corrediza al living (2026-10-05) la mesa vuelve al centro de la terraza; se llega por el acceso
     - {tipo: mesa, rect: [-1.90, 1.90, -0.90, 2.90], estado: propuesto}
     - {tipo: silla, rect: [-2.45, 2.17, -2.00, 2.62], estado: propuesto}
@@ -816,7 +841,7 @@ muebles:
     - {tipo: silla, rect: [15.975, 0.62, 16.425, 1.07]}
     # Terraza: mesa para 6 (la parrilla irá en la terraza de PB, decisión del usuario)
     # Corrida 0.25 al este (interiorista 2026-10-05): la silla de la cabecera oeste chocaba con el poste del techo sobre
-    # B1 (x 0). Frente al gabinete del calefón (x 4.00–4.325, y ~0.45–1.15) quedan > 0.80 libres.
+    # B1 (x 0). Frente al gabinete del calefón (x 3.95–4.275, y ~0.45–1.15) quedan > 0.80 libres.
     - {tipo: mesa, nombre: Mesa 6, rect: [0.85, 2.10, 2.65, 3.00]}
     - {tipo: silla, rect: [1.20, 1.60, 1.65, 2.05]}
     - {tipo: silla, rect: [1.85, 1.60, 2.30, 2.05]}
@@ -909,15 +934,15 @@ instalaciones:
         - {amb: ingreso, tipo: conmutador, pos: [0.37, 6.645], alto: 1.10, luces: [hall], estado: propuesto, nota: "juego de la entrada (2 de 3): luces del hall, conmutadas con el juego del hall (x 6.975)"}
         - {amb: ingreso, tipo: interruptor, pos: [0.47, 6.645], alto: 1.10, luces: [acceso, terraza], estado: propuesto, nota: "juego de la entrada (3 de 3): luces exteriores bajo el volado (acceso y terraza), tecla doble"}
         # Hall: juego en el muro del lavado, al norte de la banca; luz general + luz de escalera (sobre el tramo de 10)
-        - {amb: hall, tipo: conmutador, pos: [6.975, 3.92], alto: 1.10, luces: [hall], estado: propuesto, nota: "luces del hall, conmutada con la entrada"}
-        - {amb: hall, tipo: conmutador, pos: [6.975, 4.04], alto: 1.10, luces: [luz_escalera, luz_escalera_descanso], estado: propuesto, nota: "luz de ESCALERA (tramo de 10 + descanso), conmutada con el hall del primer piso (la otra tecla se pone con el P1)"}
+        - {amb: hall, tipo: conmutador, pos: [7.025, 3.92], alto: 1.10, luces: [hall], estado: propuesto, nota: "luces del hall, conmutada con la entrada"}
+        - {amb: hall, tipo: conmutador, pos: [7.025, 4.04], alto: 1.10, luces: [luz_escalera, luz_escalera_descanso], estado: propuesto, nota: "luz de ESCALERA (tramo de 10 + descanso), conmutada con el hall del primer piso (la otra tecla se pone con el P1)"}
         - {amb: hall, tipo: luz, pos: [5.24, 5.18], estado: propuesto, nota: "luz general del hall"}
         - {amb: hall, tipo: luz, id: luz_escalera_descanso, pos: [5.725, 0.025], alto: 3.87, estado: propuesto, nota: "aplique en el muro norte de la caja de escalera sobre el DESCANSO PB→P1 (+2.27), a ~1.80 sobre el descanso (3.87 sobre el piso de PB), debajo del descanso de arriba; misma tecla que luz_escalera (hall de PB y hall del P1)"}
         - {amb: hall, tipo: luz, id: luz_escalera, pos: [5.05, 3.40], estado: propuesto, nota: "luz de escalera sobre el tramo de 10: aplique en el muro x=4.40 a ~2.20 o plafón en el borde del hueco (según losa/hueco: ver verificar_en_obra)"}
         - {amb: hall, tipo: toma, pos: [3.40, 6.645], alto: 1.00, estado: propuesto, nota: "sobre la consola (lámpara, cargar celulares)"}
-        - {amb: hall, tipo: toma, pos: [6.975, 5.70], alto: 0.30, estado: propuesto, nota: "aspiradora (entre la banca y el closet de abrigos)"}
+        - {amb: hall, tipo: toma, pos: [7.025, 5.70], alto: 0.30, estado: propuesto, nota: "aspiradora (entre la banca y el closet de abrigos)"}
         # Living: TV sobre mueble en el muro oeste, centrada en B1 (y 2.555–2.805 es hormigón: nada ahí)
-        - {amb: living, tipo: interruptor, pos: [4.325, 3.85], alto: 1.10, estado: propuesto, nota: "junto al paso del hall: tecla doble (luz central con dimmer + luz de la entrada)"}
+        - {amb: living, tipo: interruptor, pos: [4.275, 3.85], alto: 1.10, estado: propuesto, nota: "junto al paso del hall: tecla doble (luz central con dimmer + luz de la entrada)"}
         - {amb: living, tipo: luz, pos: [2.10, 2.70], estado: propuesto, nota: "sobre la mesa de centro, con dimmer (a 3.00 de alto no se refleja en la TV)"}
         - {amb: living, tipo: luz, pos: [3.40, 4.35], estado: propuesto, nota: "entrada del living, entre el sofá y la celosía"}
         - {amb: living, tipo: toma, pos: [0.125, 3.00], alto: 0.70, estado: propuesto, nota: "TV: toma doble en el ladrillo al sur de B1, detrás de la pantalla (justo encima del mueble)"}
@@ -925,8 +950,8 @@ instalaciones:
         - {amb: living, tipo: toma, pos: [0.125, 2.35], alto: 0.30, estado: propuesto, nota: "detrás del mueble de la TV, al norte de B1: decodificador y equipos"}
         - {amb: living, tipo: toma, pos: [0.125, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara del sillón de lectura"}
         - {amb: living, tipo: toma, pos: [0.125, 4.70], alto: 0.30, estado: propuesto, nota: "lámpara del sillón suroeste / aspiradora"}
-        - {amb: living, tipo: toma, pos: [4.325, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara de pie al costado del sofá (no detrás)"}
-        - {amb: living, tipo: toma, pos: [4.325, 3.80], alto: 0.30, estado: propuesto, nota: "general, debajo de la tecla"}
+        - {amb: living, tipo: toma, pos: [4.275, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara de pie al costado del sofá (no detrás)"}
+        - {amb: living, tipo: toma, pos: [4.275, 3.80], alto: 0.30, estado: propuesto, nota: "general, debajo de la tecla"}
         # Terraza (exterior, en el muro del living)
         - {amb: terraza, tipo: toma_ext, pos: [-0.125, 4.20], alto: 0.40, estado: propuesto, nota: "toma con tapa (IP44); lejos de la caja de la TV del otro lado del muro"}
         # ── Exteriores del frente (interiorista 2026-10-06) ──
@@ -971,11 +996,11 @@ instalaciones:
         - {amb: vereda_terraza, tipo: luz, pos: [-2.68, 3.30], alto: 0.15, circuito: C27, estado: propuesto, nota: "luz baja EMPOTRADA en el perfil de remate del deck, mirando a la vereda (no achica el paso de 0.80); o baliza de 0.45 pegada al deck. Con las balizas (fotocélula + reloj). Cable desde el acceso por el borde del deck, a 0.30 de la impulsión (x -3.025)"}
         - {amb: retiro_norte_arranque, tipo: luz, pos: [0.30, -0.125], alto: 2.40, circuito: C27, estado: propuesto, nota: "aplique PLANO CON SENSOR en la cara norte de la casa, al este de la columna A1 (no se pica), hacia abajo: alumbra el paso del fondo del estacionamiento al deck y al retiro (cámaras de inspección, gas)"}
         # Depósito: aplique en vez de la luz al centro (techo inclinado), toma junto a la puerta y toma exterior al retiro
-        - {amb: deposito_patio, tipo: luz, pos: [6.975, 1.00], estado: propuesto, nota: "aplique hermético en el muro, a 1.80 (bajo el descanso hay ~1.9 libres)"}
-        - {amb: deposito_patio, tipo: toma, pos: [6.975, 0.50], alto: 1.10, estado: propuesto, nota: "junto a la puerta: cargar herramientas"}
+        - {amb: deposito_patio, tipo: luz, pos: [6.925, 1.00], estado: propuesto, nota: "aplique hermético en el muro, a 1.80 (bajo el descanso hay ~1.9 libres)"}
+        - {amb: deposito_patio, tipo: toma, pos: [6.925, 0.50], alto: 1.10, estado: propuesto, nota: "junto a la puerta: cargar herramientas"}
         - {amb: deposito_patio, tipo: toma_ext, pos: [5.75, -0.125], alto: 0.40, estado: propuesto, nota: "toma con tapa en el retiro, junto a la puerta del depósito (manguera, hidrolavadora)"}
         # Baño: toma al costado del espejo
-        - {amb: bano_pb, tipo: toma, pos: [7.125, 1.75], alto: 1.30, estado: propuesto, nota: "al costado del espejo, a 0.72 de la ducha; con diferencial"}
+        - {amb: bano_pb, tipo: toma, pos: [7.075, 1.75], alto: 1.30, estado: propuesto, nota: "al costado del espejo, a 0.72 de la ducha; con diferencial"}
         # Estudio: escritorio (diestro: lámpara a la izquierda = lado sur), sofá cama con veladores y conmutador
         - {amb: estudio, tipo: conmutador, pos: [8.925, 2.45], alto: 1.10, estado: propuesto, nota: "junto a la puerta, en el muro oeste (del lado de la manija)"}
         - {amb: estudio, tipo: conmutador, pos: [12.925, 2.30], alto: 0.90, estado: propuesto, nota: "junto a la cabecera del sofá cama (lado sur)"}
@@ -984,20 +1009,20 @@ instalaciones:
         - {amb: estudio, tipo: toma, pos: [8.925, 1.60], alto: 0.90, estado: propuesto, nota: "lámpara de escritorio a la IZQUIERDA del usuario diestro"}
         - {amb: estudio, tipo: toma, pos: [11.95, 0.025], alto: 0.60, estado: propuesto, nota: "velador norte del sofá cama abierto"}
         - {amb: estudio, tipo: toma, pos: [12.925, 2.45], alto: 0.60, estado: propuesto, nota: "velador sur del sofá cama (cabecera)"}
-        - {amb: estudio, tipo: toma, pos: [11.60, 2.605], alto: 0.30, estado: propuesto, nota: "general (aspiradora)"}
+        - {amb: estudio, tipo: toma, pos: [11.60, 2.555], alto: 0.30, estado: propuesto, nota: "general (aspiradora)"}
         - {amb: estudio, tipo: datos, pos: [8.925, 1.30], alto: 0.30, estado: propuesto, nota: "LLEGADA DE INTERNET + router (tubo desde la acometida de la calle); de aquí sale el cableado de datos a la TV del living"}
         # Comedor: conmutador junto a la corrediza (+ luz del patio) y otro en el juego del final del pasillo
         - {amb: comedor, tipo: conmutador, pos: [16.875, 0.18], alto: 1.10, luces: [comedor, luz_patio], estado: propuesto, nota: "junto a la corrediza del patio, tecla doble: comedor (conmutada) + aplique del patio"}
-        - {amb: comedor, tipo: conmutador, pos: [12.72, 2.755], alto: 1.10, estado: propuesto, nota: "en el juego del final del pasillo (cara del pasillo del muro del estudio)"}
+        - {amb: comedor, tipo: conmutador, pos: [12.72, 2.705], alto: 1.10, estado: propuesto, nota: "en el juego del final del pasillo (cara del pasillo del muro del estudio)"}
         - {amb: comedor, tipo: toma, pos: [13.075, 0.60], alto: 0.30, estado: propuesto, nota: "muro oeste (aparador, aspiradora)"}
         - {amb: comedor, tipo: toma, pos: [16.25, 0.025], alto: 0.30, estado: propuesto, nota: "muro norte, junto a la esquina"}
         - {amb: comedor, tipo: toma_ext, pos: [17.025, 2.47], alto: 0.40, estado: propuesto, nota: "PATIO: toma con tapa junto a la corrediza, para la parrilla movible"}
         # Pasillo: conmutadores en las dos puntas
         - {amb: pasillo_pb, tipo: conmutador, pos: [7.17, 3.655], alto: 1.10, estado: propuesto, nota: "punta del hall, entre el hall y la puerta del lavado"}
-        - {amb: pasillo_pb, tipo: conmutador, pos: [12.84, 2.755], alto: 1.10, estado: propuesto, nota: "punta de la cocina, en el juego del final del pasillo"}
-        - {amb: pasillo_pb, tipo: toma, pos: [10.40, 2.755], alto: 0.30, estado: propuesto, nota: "aspiradora"}
+        - {amb: pasillo_pb, tipo: conmutador, pos: [12.84, 2.705], alto: 1.10, estado: propuesto, nota: "punta de la cocina, en el juego del final del pasillo"}
+        - {amb: pasillo_pb, tipo: toma, pos: [10.40, 2.705], alto: 0.30, estado: propuesto, nota: "aspiradora"}
         # Cocina: teclas en el juego del final del pasillo; luces generales sobre los pasos; tomas del mesón a 1.10
-        - {amb: cocina, tipo: interruptor, pos: [12.60, 2.755], alto: 1.10, estado: propuesto, nota: "juego del final del pasillo: tecla triple (generales, colgantes de la isla, LED bajo alacena)"}
+        - {amb: cocina, tipo: interruptor, pos: [12.60, 2.705], alto: 1.10, estado: propuesto, nota: "juego del final del pasillo: tecla triple (generales, colgantes de la isla, LED bajo alacena)"}
         - {amb: cocina, tipo: luz, pos: [12.10, 4.70], estado: propuesto, nota: "zona de la alacena, la torre y la puerta del almacén"}
         - {amb: cocina, tipo: luz, pos: [14.20, 5.45], estado: propuesto, nota: "paso entre la isla y las hornallas"}
         - {amb: cocina, tipo: luz, pos: [15.75, 4.40], estado: propuesto, nota: "paso entre la isla, el refrigerador y el lavavajillas"}
@@ -1007,13 +1032,13 @@ instalaciones:
         - {amb: cocina, tipo: toma, pos: [16.875, 6.20], alto: 1.10, estado: propuesto, nota: "rincón del mesón, muro este (a 0.65 del lavaplatos)"}
         - {amb: cocina, tipo: toma_piso, pos: [14.10, 4.40], estado: propuesto, nota: "isla: tubo bajo el contrapiso desde el muro sur; sube por dentro de la isla a una toma doble en la cara oeste, a 0.90"}
         # Almacén: tecla del lado de la manija (la bisagra está al sur); toma general; freezer con su especial (generada)
-        - {amb: almacen, tipo: interruptor, pos: [11.125, 5.33], alto: 1.10, estado: propuesto, nota: "del lado de la manija, fuera del giro de la puerta"}
-        - {amb: almacen, tipo: toma, pos: [11.125, 5.25], alto: 0.30, estado: propuesto, nota: "general (aspiradora, cargadores)"}
+        - {amb: almacen, tipo: interruptor, pos: [11.075, 5.33], alto: 1.10, estado: propuesto, nota: "del lado de la manija, fuera del giro de la puerta"}
+        - {amb: almacen, tipo: toma, pos: [11.075, 5.25], alto: 0.30, estado: propuesto, nota: "general (aspiradora, cargadores)"}
         # Lavado: lavadoras a 1.20 al costado (lejos del agua), plancha en el medio
         - {amb: lavado, tipo: interruptor, pos: [8.22, 3.805], alto: 1.10, estado: propuesto, nota: "del lado de la manija; prende también el extractor (con temporizador)"}
-        - {amb: lavado, tipo: especial, etiqueta: L, pos: [7.125, 6.20], alto: 1.20, estado: propuesto, nota: "lavadora: al costado, en el muro oeste (a 0.70 del lavadero)"}
+        - {amb: lavado, tipo: especial, etiqueta: L, pos: [7.175, 6.20], alto: 1.20, estado: propuesto, nota: "lavadora: al costado, en el muro oeste (a 0.70 del lavadero)"}
         - {amb: lavado, tipo: especial, etiqueta: LM, pos: [9.05, 6.30], alto: 1.20, estado: propuesto, nota: "lavadora manual: al costado, en el muro este (a 0.60 del lavadero)"}
-        - {amb: lavado, tipo: toma, pos: [7.125, 5.45], alto: 1.10, estado: propuesto, nota: "PLANCHA: se plancha en el medio del lavado; con diferencial"}
+        - {amb: lavado, tipo: toma, pos: [7.175, 5.45], alto: 1.10, estado: propuesto, nota: "PLANCHA: se plancha en el medio del lavado; con diferencial"}
         - {amb: lavado, tipo: toma, pos: [9.05, 5.60], alto: 1.10, estado: propuesto, nota: "general, entre el ropero de blancos y la lavadora manual"}
     sanitario:
       # Ronda de huecos (2026-10-05): canillas de afuera, llaves de paso, rejillas de la cocina (gas), ventilación de desagües.
@@ -1127,7 +1152,7 @@ instalaciones:
         - {rect: [7.05, 0.00, 8.85, 2.68], alto: 2.70, nota: "baño completo (oculta el ducto)"}
       cajones:
         - {rect: [14.30, 6.10, 16.90, 6.67], nota: "cajón sobre las alacenas altas (campana)"}
-        - {rect: [7.125, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
+        - {rect: [7.075, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
         - {rect: [10.75, 0.025, 11.325, 0.45], ducto: true, estado: propuesto, nota: "DUCTO de la bajante común en el estudio: envuelve la cara sur de A4 (se lee como la columna más ancha); tapa de registro abajo"}
         - {rect: [4.525, 0.025, 4.675, 0.30], ducto: true, estado: propuesto, nota: "DUCTO de A2 en el rincón de la escalera (plan B 2026-10-08): agua caliente del calefón; del depósito de PB, cruzando los dos descansos, hasta el altillo, donde pasa a la terraza por el muro x 4.40"}
 
@@ -1149,12 +1174,12 @@ instalaciones:
         - {amb: hall_p1, tipo: conmutador, pos: [5.60, 4.125], alto: 1.10, luces: [luz_escalera_alt], estado: propuesto, nota: "juego del hall (3 de 4): luz de la escalera P1↔altillo, conmutada con una tecla en la llegada del altillo (se pone con el altillo)"}
         - {amb: pasillo_p1, tipo: conmutador, pos: [5.70, 4.125], alto: 1.10, luces: [pasillo_p1, vestibulo_hijos], estado: propuesto, nota: "juego del hall (4 de 4): luces del pasillo y del vestíbulo de los chicos, conmutadas con el vestíbulo"}
         - {amb: hall_p1, tipo: luz, pos: [5.05, 4.125], alto: 2.20, estado: propuesto, nota: "aplique en el muro del vestidor a 2.20: sobre la mayor parte del hall hay hueco de escalera o el tramo al altillo (la losa del altillo solo cubre la franja y > ~3.85). Detector de humo en esta franja (recomendado)"}
-        - {amb: hall_p1, tipo: luz, id: luz_escalera_alt, pos: [4.475, 0.70], alto: 3.40, estado: propuesto, nota: "escalera P1→altillo: aplique en el muro del dormitorio (x=4.40, lado escalera) sobre el descanso +4.72, a ~2.10 sobre el descanso (3.40 sobre el piso del P1). Alumbra el descanso y los dos tramos"}
+        - {amb: hall_p1, tipo: luz, id: luz_escalera_alt, pos: [4.525, 0.70], alto: 3.40, estado: propuesto, nota: "escalera P1→altillo: aplique en el muro del dormitorio (x=4.40, lado escalera) sobre el descanso +4.72, a ~2.10 sobre el descanso (3.40 sobre el piso del P1). Alumbra el descanso y los dos tramos"}
         - {amb: hall_p1, tipo: toma, pos: [4.65, 4.125], alto: 0.30, estado: propuesto, nota: "aspiradora (hall, escalera, estar)"}
         # Pasillo y vestíbulo: dos luces en el pasillo, conmutadas entre el hall y el vestíbulo
         - {amb: pasillo_p1, tipo: luz, pos: [8.20, 3.20], estado: propuesto, nota: "pasillo, tramo del estar y los blancos (fuera de la viga del eje 3)"}
         - {amb: pasillo_p1, tipo: luz, pos: [10.15, 3.28], estado: propuesto, nota: "pasillo, entre los baños (cielo falso en x > 10.60)"}
-        - {amb: pasillo_p1, tipo: toma, pos: [8.60, 2.755], alto: 0.30, estado: propuesto, nota: "aspiradora (cuartos de los chicos)"}
+        - {amb: pasillo_p1, tipo: toma, pos: [8.60, 2.805], alto: 0.30, estado: propuesto, nota: "aspiradora (cuartos de los chicos)"}
         - {amb: vestibulo_hijos, tipo: conmutador, pos: [12.425, 3.20], alto: 1.10, luces: [pasillo_p1, vestibulo_hijos], estado: propuesto, nota: "al fondo del vestíbulo, entre las dos puertas: pasillo + vestíbulo, conmutada con el hall"}
         # Estar: TV en el muro del vestidor, conmutadores en la entrada del hall y en la del pasillo
         - {amb: estar_p1, tipo: conmutador, pos: [5.925, 4.33], alto: 1.10, estado: propuesto, nota: "entrada del hall (a la vuelta del juego del hall); luz con dimmer"}
@@ -1167,17 +1192,17 @@ instalaciones:
         - {amb: estar_p1, tipo: toma, pos: [9.325, 4.28], alto: 0.30, estado: propuesto, nota: "lámpara de pie al costado del sofá (no detrás) y cargar celulares"}
         - {amb: estar_p1, tipo: toma, pos: [6.70, 6.645], alto: 0.30, estado: propuesto, nota: "general, entre la TV y la columna C3"}
         # Blancos
-        - {amb: blancos, tipo: interruptor, pos: [8.25, 2.605], alto: 1.10, estado: propuesto, nota: "del lado de la manija"}
-        - {amb: blancos, tipo: toma, pos: [8.45, 2.605], alto: 1.10, estado: propuesto, nota: "cargar la aspiradora inalámbrica (se guarda aquí); fuera de la hoja abierta"}
+        - {amb: blancos, tipo: interruptor, pos: [8.25, 2.655], alto: 1.10, estado: propuesto, nota: "del lado de la manija"}
+        - {amb: blancos, tipo: toma, pos: [8.45, 2.655], alto: 1.10, estado: propuesto, nota: "cargar la aspiradora inalámbrica (se guarda aquí); fuera de la hoja abierta"}
         # Dormitorio principal: conmutador en la puerta y a los dos lados de la cama (3 puntos: uno es "de cruce")
         - {amb: dorm_principal, tipo: conmutador, pos: [4.17, 4.125], alto: 1.10, estado: propuesto, nota: "puerta: del lado de la manija, en el muro sur a la vuelta del marco (al norte de la bisagra quedaba tapada por la hoja)"}
-        - {amb: dorm_principal, tipo: conmutador, pos: [4.325, 0.50], alto: 0.90, estado: propuesto, nota: "velador norte, lado de la ESPOSA: conmutador de punta (3 puntos: puerta – velador sur – velador norte)"}
-        - {amb: dorm_principal, tipo: conmutador, pos: [4.325, 2.48], alto: 0.90, estado: propuesto, nota: "velador sur, lado del DUEÑO, entre la cama y la columna B2 (no picar la columna); es el de CRUCE (queda en el medio del recorrido puerta → velador norte)"}
+        - {amb: dorm_principal, tipo: conmutador, pos: [4.375, 0.50], alto: 0.90, estado: propuesto, nota: "velador norte, lado de la ESPOSA: conmutador de punta (3 puntos: puerta – velador sur – velador norte)"}
+        - {amb: dorm_principal, tipo: conmutador, pos: [4.375, 2.48], alto: 0.90, estado: propuesto, nota: "velador sur, lado del DUEÑO, entre la cama y la columna B2 (no picar la columna); es el de CRUCE (queda en el medio del recorrido puerta → velador norte)"}
         - {amb: dorm_principal, tipo: interruptor, pos: [0.025, 3.10], alto: 1.10, luces: [logia], estado: propuesto, nota: "luz de la logia, junto a su puerta (abre hacia afuera: no la tapa)"}
         - {amb: dorm_principal, tipo: luz, pos: [1.35, 2.10], estado: propuesto, nota: "entre la TV y el pie de la cama (no sobre la almohada), con dimmer"}
         - {amb: dorm_principal, tipo: luz, pos: [2.90, 3.30], estado: propuesto, nota: "zona de paso: puerta, lavamanos, sillón"}
-        - {amb: dorm_principal, tipo: toma, pos: [4.325, 0.38], alto: 0.65, estado: propuesto, nota: "velador norte, lado de la esposa (sobre el revestimiento acústico de la cabecera: cajas con suplemento)"}
-        - {amb: dorm_principal, tipo: toma, pos: [4.325, 2.40], alto: 0.65, estado: propuesto, nota: "velador sur, lado del dueño, entre la cama y la columna B2"}
+        - {amb: dorm_principal, tipo: toma, pos: [4.375, 0.38], alto: 0.65, estado: propuesto, nota: "velador norte, lado de la esposa (sobre el revestimiento acústico de la cabecera: cajas con suplemento)"}
+        - {amb: dorm_principal, tipo: toma, pos: [4.375, 2.40], alto: 0.65, estado: propuesto, nota: "velador sur, lado del dueño, entre la cama y la columna B2"}
         - {amb: dorm_principal, tipo: toma, pos: [0.025, 1.55], alto: 0.80, estado: propuesto, nota: "TV de 55\" apoyada: toma doble detrás de la pantalla, justo encima del mueble (0.60)"}
         - {amb: dorm_principal, tipo: datos, pos: [0.025, 1.70], alto: 0.80, estado: propuesto, nota: "TV de 55\": internet + cable, junto a la toma"}
         - {amb: dorm_principal, tipo: toma, pos: [0.025, 1.05], alto: 0.30, estado: propuesto, nota: "detrás del mueble de la TV: decodificador"}
@@ -1205,12 +1230,12 @@ instalaciones:
         - {amb: vestidor_principal, tipo: interruptor, pos: [3.60, 4.275], alto: 1.10, estado: propuesto, nota: "a la izquierda al entrar, antes del mueble norte"}
         - {amb: vestidor_principal, tipo: toma, pos: [3.80, 4.275], alto: 1.10, estado: propuesto, nota: "plancha vertical a vapor / espejo"}
         # Baño 1 (Cuarto 1): tecla afuera (adentro, del lado de la manija, cae la ducha); toma al costado del espejo
-        - {amb: bano_hijo_1, tipo: interruptor, pos: [11.275, 0.86], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 1, junto a la puerta (al sur la tapaba la puerta abierta del cuarto). 2026-10-06: corrida de 0.80 a 0.86 para que no quede pegada a la punta del banco ventana (termina en y 0.78); 0.09 del vano"}
+        - {amb: bano_hijo_1, tipo: interruptor, pos: [11.325, 0.86], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 1, junto a la puerta (al sur la tapaba la puerta abierta del cuarto). 2026-10-06: corrida de 0.80 a 0.86 para que no quede pegada a la punta del banco ventana (termina en y 0.78); 0.09 del vano"}
         - {amb: bano_hijo_1, tipo: luz, pos: [10.30, 1.30], estado: propuesto, nota: "general (cielo falso 2.70)"}
         - {amb: bano_hijo_1, tipo: luz, pos: [9.475, 1.375], alto: 2.00, estado: propuesto, nota: "aplique sobre el espejo"}
         - {amb: bano_hijo_1, tipo: toma, pos: [9.475, 1.00], alto: 1.30, estado: propuesto, nota: "al costado del espejo, a 0.66 de la ducha; con diferencial"}
         # Baño 2 (Cuarto 2): tecla afuera, toma al costado del espejo
-        - {amb: bano_hijo_2, tipo: interruptor, pos: [11.275, 5.66], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 2, lado de la manija: tecla doble (luz + extractor con temporizador)"}
+        - {amb: bano_hijo_2, tipo: interruptor, pos: [11.325, 5.66], alto: 1.10, estado: propuesto, nota: "afuera, en el Cuarto 2, lado de la manija: tecla doble (luz + extractor con temporizador)"}
         - {amb: bano_hijo_2, tipo: luz, pos: [10.20, 5.00], estado: propuesto, nota: "general, fuera del tragaluz propuesto (ranuras y 5.50–6.10)"}
         - {amb: bano_hijo_2, tipo: luz, pos: [10.175, 6.645], alto: 2.00, estado: propuesto, nota: "aplique sobre el espejo (muro sur)"}
         - {amb: bano_hijo_2, tipo: toma, pos: [9.75, 6.645], alto: 1.30, estado: propuesto, nota: "al costado oeste del espejo, a 1.8 m de la ducha; no al este: ahí se apoya la hoja abierta de la puerta. Con diferencial"}
@@ -1226,10 +1251,10 @@ instalaciones:
         - {amb: cuarto_hijo_1, tipo: interruptor, pos: [14.87, 0.025], alto: 0.80, luces: [aplique_cama], estado: propuesto, nota: "cama: aplique de lectura (misma caja que el conmutador)"}
         - {amb: cuarto_hijo_1, tipo: luz, id: aplique_cama, pos: [15.12, 0.025], alto: 1.20, estado: propuesto, nota: "aplique de lectura de brazo articulado en el muro norte, en el borde oeste de la cama (al costado de la almohada, no encima)"}
         # Banco ventana: aplique en cada punta, tecla y toma en el muro oeste por encima de los almohadones (no cambia)
-        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_banco_o, pos: [11.275, 0.35], alto: 1.30, estado: propuesto, nota: "aplique de lectura en el muro oeste, punta oeste del banco (quien se apoya contra este muro tiene la luz por encima del hombro)"}
+        - {amb: cuarto_hijo_1, tipo: luz, id: aplique_banco_o, pos: [11.325, 0.35], alto: 1.30, estado: propuesto, nota: "aplique de lectura en el muro oeste, punta oeste del banco (quien se apoya contra este muro tiene la luz por encima del hombro)"}
         - {amb: cuarto_hijo_1, tipo: luz, id: aplique_banco_e, pos: [13.30, 0.30], alto: 1.30, estado: propuesto, nota: "aplique de lectura en el COSTADO OESTE DEL LIBRERO: caja en el muro norte detrás del librero (x ~13.45, a 1.30), el cable corre por dentro del mueble"}
-        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [11.275, 0.68], alto: 0.95, luces: [aplique_banco_o, aplique_banco_e], estado: propuesto, nota: "banco: los dos apliques de lectura; se alcanza sentado (encima de los almohadones)"}
-        - {amb: cuarto_hijo_1, tipo: toma, pos: [11.275, 0.50], alto: 0.95, estado: propuesto, nota: "banco: cargador, lámpara; encima de los almohadones (no queda tapada)"}
+        - {amb: cuarto_hijo_1, tipo: interruptor, pos: [11.325, 0.68], alto: 0.95, luces: [aplique_banco_o, aplique_banco_e], estado: propuesto, nota: "banco: los dos apliques de lectura; se alcanza sentado (encima de los almohadones)"}
+        - {amb: cuarto_hijo_1, tipo: toma, pos: [11.325, 0.50], alto: 0.95, estado: propuesto, nota: "banco: cargador, lámpara; encima de los almohadones (no queda tapada)"}
         # Tocador: muro norte, espejo entre la tecla (oeste) y la toma (este)
         - {amb: cuarto_hijo_1, tipo: interruptor, pos: [13.82, 0.025], alto: 1.10, luces: [aplique_tocador], estado: propuesto, nota: "tocador: aplique del espejo, punta oeste de la mesada (junto al librero)"}
         - {amb: cuarto_hijo_1, tipo: luz, id: aplique_tocador, pos: [14.22, 0.025], alto: 1.90, estado: propuesto, nota: "aplique sobre el espejo del tocador"}
@@ -1251,7 +1276,7 @@ instalaciones:
         - {amb: cuarto_hijo_2, tipo: toma, pos: [14.25, 3.41], alto: 0.90, estado: propuesto, nota: "escritorio: segunda toma doble (otra punta del mueble de 2 m)"}
         - {amb: cuarto_hijo_2, tipo: datos, pos: [13.10, 3.41], alto: 0.90, estado: propuesto, nota: "escritorio: internet por cable"}
         - {amb: cuarto_hijo_2, tipo: toma, pos: [16.875, 6.35], alto: 0.30, estado: propuesto, nota: "general (estufa, ventilador, aspiradora), en el rincón sureste entre la ventana (termina en 6.15) y la columna C5; antes en y 4.18, quedaba dentro del vano corrido"}
-        - {amb: cuarto_hijo_2, tipo: toma, pos: [11.275, 5.25], alto: 0.30, estado: propuesto, nota: "general (fuera de la hoja abierta del cuarto)"}
+        - {amb: cuarto_hijo_2, tipo: toma, pos: [11.325, 5.25], alto: 0.30, estado: propuesto, nota: "general (fuera de la hoja abierta del cuarto)"}
     sanitario:
       # Agua fría baja del tanque elevado por el núcleo técnico (muro norte). El agua caliente BAJA del calefón del
       # altillo por fuera del muro norte junto a A2 (x 4.20) y entra bajo el piso: suite cerca; baños de los hijos por
@@ -1310,7 +1335,7 @@ instalaciones:
         - {rect: [9.40, 0.00, 11.20, 2.68], alto: 2.70, nota: "Baño 1 de los hijos"}
         - {rect: [-1.125, 4.20, 3.40, 5.45], alto: 2.70, nota: "inodoro y lavamanos de la suite"}
       cajones:
-        - {rect: [7.125, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
+        - {rect: [7.075, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
         - {rect: [10.75, 0.025, 11.125, 0.45], ducto: true, estado: propuesto, nota: "DUCTO de la bajante común (plan B 2026-10-08), rincón de A4 al costado del inodoro; Ø110 en (10.93, 0.27); tapa de registro; pases entre viguetas"}
         - {rect: [4.525, 0.025, 4.675, 0.30], ducto: true, estado: propuesto, nota: "DUCTO de A2 en el rincón de la escalera (plan B 2026-10-08): agua caliente del calefón; del depósito de PB, cruzando los dos descansos, hasta el altillo, donde pasa a la terraza por el muro x 4.40"}
 
@@ -1322,14 +1347,14 @@ instalaciones:
       alimentador: [[4.40, 2.88], [4.40, 3.95], [4.75, 3.95], [4.75, 4.55]]
       puntos:
         - {amb: llegada_alt, tipo: detector, etiqueta: HUMO, pos: [5.80, 4.30], estado: propuesto, nota: "detector de humo en la llegada"}
-        - {amb: terraza_alt, tipo: toma_ext, pos: [4.325, 1.35], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (220 V): enchufe con tapa al costado del gabinete"}
+        - {amb: terraza_alt, tipo: toma_ext, pos: [4.275, 1.35], alto: 1.60, estado: propuesto, nota: "calefón de tiro forzado (220 V): enchufe con tapa al costado del gabinete"}
         # Puntos A MANO (interiorista 2026-10-05; departamento rehecho el 2026-10-06, opción B): reemplazan a los generados
         # de su familia en su ambiente. Alturas al eje de la caja, desde el piso terminado; las confirma el electricista (NB 777).
         # Caras: norte y este (ejes extremos) a 0.025 del eje hacia adentro; interiores de soga a ±0.075.
         # Terraza (zona común): luz sobre la mesa y aplique junto a la puerta; tecla en la llegada
         - {amb: terraza_alt, tipo: luz, pos: [1.75, 2.55], estado: propuesto, nota: "sobre la mesa, colgada de la estructura del techo (IP65)"}
-        - {amb: terraza_alt, tipo: luz, pos: [4.325, 3.40], alto: 2.20, estado: propuesto, nota: "aplique exterior junto a la puerta de la llegada; alumbra también la parte descubierta del sur"}
-        - {amb: terraza_alt, tipo: toma_ext, pos: [4.325, 2.60], alto: 0.40, estado: propuesto, nota: "toma con tapa (IP44) frente a la mesa, a 1.2 m del gabinete del calefón"}
+        - {amb: terraza_alt, tipo: luz, pos: [4.275, 3.40], alto: 2.20, estado: propuesto, nota: "aplique exterior junto a la puerta de la llegada; alumbra también la parte descubierta del sur"}
+        - {amb: terraza_alt, tipo: toma_ext, pos: [4.275, 2.60], alto: 0.40, estado: propuesto, nota: "toma con tapa (IP44) frente a la mesa, a 1.2 m del gabinete del calefón"}
         # Llegada (zona común): el piso es solo la franja y 3.85–4.595 (el resto es hueco de escalera). Juego en el muro sur
         - {amb: llegada_alt, tipo: interruptor, pos: [5.05, 4.595], alto: 1.10, luces: [terraza_alt], estado: propuesto, nota: "luces de la terraza, junto a la puerta (al este del tablero)"}
         - {amb: llegada_alt, tipo: conmutador, pos: [6.15, 4.595], alto: 1.10, luces: [luz_escalera_alt], estado: propuesto, nota: "LUZ DE LA ESCALERA P1↔altillo (aplique luz_escalera_alt sobre el descanso, en el plano del P1), conmutada con la tecla del hall del P1 (5.60, 4.125). El generador no une niveles: cable por el muro x=4.40 / montante de B2. De frente al llegar arriba"}
@@ -1337,38 +1362,38 @@ instalaciones:
         - {amb: llegada_alt, tipo: luz, pos: [5.45, 4.595], alto: 2.20, estado: propuesto, nota: "aplique en el muro sur (en el techo quedaba sobre el hueco: no se puede cambiar el foco)"}
         - {amb: llegada_alt, tipo: toma, pos: [6.75, 4.595], alto: 0.30, estado: propuesto, nota: "aspiradora (escalera)"}
         # Cocina-comedor. Teclas: en la entrada (lado de la manija, sobre la punta de la banqueta) y a la boca de la cocina
-        - {amb: cocina_alt, tipo: conmutador, pos: [7.125, 3.72], alto: 1.10, luces: [luz_paso_alt], estado: propuesto, nota: "entrada, lado de la manija (bisagra al sur): luz del CAMINO, conmutada con la tecla junto a la puerta del dormitorio. Caja doble con la de abajo"}
-        - {amb: cocina_alt, tipo: interruptor, pos: [7.125, 3.58], alto: 1.10, luces: [luz_comedor_alt], estado: propuesto, nota: "colgante del comedor (misma caja doble que el conmutador del camino)"}
-        - {amb: cocina_alt, tipo: interruptor, pos: [7.125, 2.05], alto: 1.10, luces: [luz_cocina_alt, led_alacena_alt], estado: propuesto, nota: "tecla doble a la boca de la cocina (entre la punta del brazo oeste y la columna B3): luz de la cocina + LED bajo la alacena"}
+        - {amb: cocina_alt, tipo: conmutador, pos: [7.075, 3.72], alto: 1.10, luces: [luz_paso_alt], estado: propuesto, nota: "entrada, lado de la manija (bisagra al sur): luz del CAMINO, conmutada con la tecla junto a la puerta del dormitorio. Caja doble con la de abajo"}
+        - {amb: cocina_alt, tipo: interruptor, pos: [7.075, 3.58], alto: 1.10, luces: [luz_comedor_alt], estado: propuesto, nota: "colgante del comedor (misma caja doble que el conmutador del camino)"}
+        - {amb: cocina_alt, tipo: interruptor, pos: [7.075, 2.05], alto: 1.10, luces: [luz_cocina_alt, led_alacena_alt], estado: propuesto, nota: "tecla doble a la boca de la cocina (entre la punta del brazo oeste y la columna B3): luz de la cocina + LED bajo la alacena"}
         - {amb: cocina_alt, tipo: luz, id: luz_cocina_alt, pos: [8.20, 1.20], estado: propuesto, nota: "al centro de la U"}
         - {amb: cocina_alt, tipo: luz, id: led_alacena_alt, pos: [9.325, 1.55], alto: 1.40, estado: propuesto, nota: "tira LED bajo la alacena del brazo este (sobre el lavaplatos); la caja va arriba, dentro de la alacena"}
         - {amb: cocina_alt, tipo: luz, id: luz_comedor_alt, pos: [8.00, 3.15], estado: propuesto, nota: "colgante sobre el centro de la mesa (~0.75 sobre la mesa)"}
-        - {amb: cocina_alt, tipo: toma, pos: [7.125, 0.85], alto: 1.10, circuito: C15, estado: propuesto, nota: "mesada oeste: toma doble (hervidor, licuadora), lejos del anafe y del lavaplatos"}
-        - {amb: cocina_alt, tipo: toma, pos: [7.125, 1.15], alto: 1.10, circuito: C15, estado: propuesto, nota: "mesada oeste: segunda toma doble. En las mesadas norte y este no hay muro a ≥0.60 del anafe y del lavaplatos (bajo la ventana no va nada)"}
-        - {amb: cocina_alt, tipo: especial, etiqueta: M, pos: [7.125, 1.60], alto: 1.30, circuito: C15, estado: propuesto, nota: "MICROONDAS apoyado en la punta del brazo oeste: toma propia arriba del aparato"}
+        - {amb: cocina_alt, tipo: toma, pos: [7.075, 0.85], alto: 1.10, circuito: C15, estado: propuesto, nota: "mesada oeste: toma doble (hervidor, licuadora), lejos del anafe y del lavaplatos"}
+        - {amb: cocina_alt, tipo: toma, pos: [7.075, 1.15], alto: 1.10, circuito: C15, estado: propuesto, nota: "mesada oeste: segunda toma doble. En las mesadas norte y este no hay muro a ≥0.60 del anafe y del lavaplatos (bajo la ventana no va nada)"}
+        - {amb: cocina_alt, tipo: especial, etiqueta: M, pos: [7.075, 1.60], alto: 1.30, circuito: C15, estado: propuesto, nota: "MICROONDAS apoyado en la punta del brazo oeste: toma propia arriba del aparato"}
         - {amb: cocina_alt, tipo: especial, etiqueta: R, pos: [9.325, 2.20], alto: 0.60, circuito: C15, estado: propuesto, nota: "refrigerador: detrás, en el muro del baño (lado cocina), sin caños de agua en ese tramo"}
         - {amb: cocina_alt, tipo: especial, etiqueta: A, pos: [8.80, 0.025], alto: 0.60, circuito: C16, estado: propuesto, nota: "anafe eléctrico: caja de conexión bajo la mesada, circuito propio C16 (potencia según el anafe que se compre)"}
         - {amb: cocina_alt, tipo: especial, etiqueta: C, pos: [8.85, 0.025], alto: 2.00, circuito: C15, estado: propuesto, nota: "CAMPANA sobre el anafe: toma dentro de su chimenea, al OESTE de la salida del ducto (rejilla en x 9.10–9.30 desde 2026-10-08)"}
-        - {amb: cocina_alt, tipo: toma, pos: [7.125, 3.10], alto: 0.30, estado: propuesto, nota: "comedor, bajo la banqueta (al sur de la columna B3): cargadores, olla arrocera en la mesa"}
+        - {amb: cocina_alt, tipo: toma, pos: [7.075, 3.10], alto: 0.30, estado: propuesto, nota: "comedor, bajo la banqueta (al sur de la columna B3): cargadores, olla arrocera en la mesa"}
         # Estar: TV, sofá y ventanas en el eje x 12.35. Teclas: camino conmutado (entrada ↔ dormitorio) y luz del estar
-        - {amb: estar_alt, tipo: conmutador, pos: [13.525, 3.57], alto: 1.10, luces: [luz_paso_alt], estado: propuesto, nota: "junto a la puerta del dormitorio, lado del estar y de la manija: luz del camino (de noche, al baño). Caja doble con la de abajo"}
-        - {amb: estar_alt, tipo: interruptor, pos: [13.525, 3.43], alto: 1.10, luces: [luz_estar_alt], estado: propuesto, nota: "luz del estar, al alcance desde el sofá"}
+        - {amb: estar_alt, tipo: conmutador, pos: [13.525, 3.47], alto: 1.10, luces: [luz_paso_alt], estado: propuesto, nota: "junto a la puerta del dormitorio, lado del estar y de la manija: luz del camino (de noche, al baño). Caja doble con la de abajo"}
+        - {amb: estar_alt, tipo: interruptor, pos: [13.525, 3.33], alto: 1.10, luces: [luz_estar_alt], estado: propuesto, nota: "luz del estar, al alcance desde el sofá"}
         - {amb: estar_alt, tipo: luz, id: luz_estar_alt, pos: [12.35, 1.55], estado: propuesto, nota: "entre la TV y el sofá, sobre la alfombra de juego"}
         - {amb: estar_alt, tipo: luz, id: luz_paso_alt, pos: [10.30, 3.65], estado: propuesto, nota: "camino, frente a la puerta del baño"}
         - {amb: estar_alt, tipo: toma, pos: [12.20, 0.025], alto: 0.70, estado: propuesto, nota: "TV apoyada en el mueble (0.50): toma doble detrás de la pantalla"}
         - {amb: estar_alt, tipo: datos, pos: [12.50, 0.025], alto: 0.70, estado: propuesto, nota: "TV: internet + cable; ROUTER del departamento acá (centro del departamento); tubo vacío de 1\" hasta la toma de 0.30 (HDMI). El tubo de datos que llega a la entrada sigue por el muro sur y la losa hasta acá"}
         - {amb: estar_alt, tipo: toma, pos: [12.80, 0.025], alto: 0.30, estado: propuesto, nota: "detrás del mueble de la TV: decodificador, router"}
-        - {amb: estar_alt, tipo: toma, pos: [11.275, 2.30], alto: 0.30, estado: propuesto, nota: "costado oeste del sofá (lámpara de pie, cargadores), no detrás"}
+        - {amb: estar_alt, tipo: toma, pos: [11.325, 2.30], alto: 0.30, estado: propuesto, nota: "costado oeste del sofá (lámpara de pie, cargadores), no detrás"}
         - {amb: estar_alt, tipo: toma, pos: [13.525, 2.30], alto: 0.30, estado: propuesto, nota: "costado este del sofá"}
-        - {amb: estar_alt, tipo: toma, pos: [10.40, 4.595], alto: 0.30, estado: propuesto, nota: "camino: aspiradora, luz de noche"}
+        - {amb: estar_alt, tipo: toma, pos: [11.625, 4.595], alto: 0.30, estado: propuesto, nota: "camino: aspiradora, luz de noche"}
         - {amb: estar_alt, tipo: detector, etiqueta: HUMO, pos: [11.60, 4.10], estado: propuesto, nota: "detector de humo en el techo del camino, entre la cocina y el dormitorio (no en la cocina: falsas alarmas)"}
         # Baño: tecla afuera (la puerta abre hacia adentro); enchufe al costado del espejo
-        - {amb: bano_alt, tipo: interruptor, pos: [10.10, 2.755], alto: 1.10, estado: propuesto, nota: "afuera, en el camino, lado de la manija (bisagra al este): tecla doble (luz general + aplique del espejo)"}
+        - {amb: bano_alt, tipo: interruptor, pos: [10.05, 2.805], alto: 1.10, estado: propuesto, nota: "afuera, en el camino, lado de la manija (bisagra al este): tecla doble (luz general + aplique del espejo)"}
         - {amb: bano_alt, tipo: luz, pos: [10.65, 1.20], estado: propuesto, nota: "general, fuera de la ducha (hermética)"}
         - {amb: bano_alt, tipo: luz, pos: [9.475, 1.225], alto: 2.00, estado: propuesto, nota: "aplique sobre el espejo del lavamanos"}
         - {amb: bano_alt, tipo: toma, pos: [9.475, 0.80], alto: 1.20, estado: propuesto, nota: "al costado norte del espejo, a 0.80 de la ducha; con diferencial"}
         # Dormitorio: 3 puntos para la luz (puerta + los dos veladores); veladores bajo las ventanas del patio (antepecho 1.00)
-        - {amb: dorm_alt, tipo: conmutador, pos: [13.675, 3.57], alto: 1.10, estado: propuesto, nota: "puerta, lado de la manija (bisagra al sur), entre la punta del ropero y el marco"}
+        - {amb: dorm_alt, tipo: conmutador, pos: [13.675, 3.45], alto: 1.10, estado: propuesto, nota: "puerta, lado de la manija (bisagra al sur), entre la punta del ropero y el marco"}
         - {amb: dorm_alt, tipo: conmutador, pos: [16.875, 1.45], alto: 0.85, estado: propuesto, nota: "velador norte, en el antepecho de la ventana (es el de CRUCE: puerta – velador norte – velador sur)"}
         - {amb: dorm_alt, tipo: conmutador, pos: [16.875, 3.45], alto: 0.85, estado: propuesto, nota: "velador sur, en el antepecho de la ventana"}
         - {amb: dorm_alt, tipo: toma, pos: [16.875, 1.30], alto: 0.65, estado: propuesto, nota: "velador norte"}
@@ -1381,7 +1406,7 @@ instalaciones:
         - {amb: dorm_alt, tipo: toma, pos: [15.00, 4.595], alto: 1.80, estado: propuesto, nota: "CUNA: monitor o cámara del bebé, alta y a 0.30 de la cuna, fuera de su alcance; con obturador (tapa de seguridad) y el cable sujeto al muro. Ningún enchufe bajo junto a la cuna"}
         - {amb: dorm_alt, tipo: toma, pos: [13.675, 0.30], alto: 0.30, estado: propuesto, nota: "general en el rincón noroeste, al norte del ropero (cómoda o cambiador, lámpara, aspiradora); lejos de la cuna"}
         # Franja sur (descubierta): apliques en el muro del departamento, tecla adentro junto a la corrediza
-        - {amb: franja_sur_alt, tipo: interruptor, pos: [9.50, 4.595], alto: 1.10, luces: [franja_sur_alt], estado: propuesto, nota: "adentro, en el estar, al este de la corrediza: luces de la lavandería y del tendedero"}
+        - {amb: franja_sur_alt, tipo: interruptor, pos: [9.25, 4.595], alto: 1.10, luces: [franja_sur_alt], estado: propuesto, nota: "adentro, entre la ventana del comedor y la corrediza del estar (2026-10-16): luces de la lavandería y del tendedero"}
         - {amb: franja_sur_alt, tipo: luz, pos: [12.15, 4.745], alto: 2.20, estado: propuesto, nota: "aplique exterior IP65 sobre las piletas (bajo la semisombra)"}
         - {amb: franja_sur_alt, tipo: luz, pos: [15.10, 4.745], alto: 2.20, estado: propuesto, nota: "aplique exterior IP65 sobre el tendedero"}
         - {amb: franja_sur_alt, tipo: especial, etiqueta: LM, pos: [13.55, 4.745], alto: 1.20, estado: propuesto, nota: "lavadora manual: al costado este (no detrás ni bajo las piletas, a 0.80), con tapa IP44 y diferencial"}
@@ -1401,12 +1426,12 @@ instalaciones:
       bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ del tanque (ducto de A3)"}
       # 2026-10-06 (opción B aceptada, PROPUESTO): baño encima del Baño 1 (x 9.40–11.20); cocina del otro lado de su muro oeste.
       # Agua por el muro norte al baño y a la cocina; a la lavandería por el piso del paso. Caños por debajo de la mesada.
-      agua_fria: [[[7.25, 0.20], [10.68, 0.20], [10.68, 0.55], [10.95, 0.55], [10.95, 2.40]], [[9.55, 0.20], [9.55, 1.20]], [[9.20, 0.20], [9.20, 1.15]], [[10.95, 2.40], [10.95, 4.55], [11.60, 4.55]], [[7.25, 0.20], [4.15, 0.20], [4.15, 0.55]]]
+      agua_fria: [[[7.25, 0.20], [10.68, 0.20], [10.68, 0.55], [10.95, 0.55], [10.95, 2.40]], [[9.55, 0.20], [9.55, 1.20]], [[9.20, 0.20], [9.20, 1.15]], [[10.95, 2.40], [10.95, 4.40], [11.66, 4.40], [11.66, 4.745]], [[7.25, 0.20], [4.15, 0.20], [4.15, 0.55]]]
       calefon: {pos: [4.15, 0.80], estado: propuesto, nota: "calefón a gas natural de TODA la casa, en la terraza del altillo, colgado en el muro x=4.40 (cara de la terraza) junto a la columna A2, base a ~1.40. SUGERIDO: ~18–20 L/min nominal (a ~2550 m rinde ~20–25 % menos), tiro forzado, electrónico modulante, ENCENDIDO A BAJA PRESIÓN (~0.1 bar: el tanque queda ~2.5 m arriba), con protección ANTIHIELO, apto exterior. PROTECCIÓN: gabinete metálico para calefón de exterior (chapa galvanizada pintada, rejillas arriba y abajo, nunca hermético), con candado; el techo de la terraza ya lo protege de la lluvia; salida de gases por un caño que sube por encima del techo de la terraza; llave de paso del gas a la vista. Lo dimensiona y aprueba el gasista (YPFB)"}
       gas: [[-1.275, 6.435], [-0.90, 6.435], [-0.90, 0.15], [4.08, 0.15], [4.08, 0.80]]   # 2026-10-08 (plan B, variante b): del cajón gris por dentro de los antepechos de la terraza, a ~0.30 del piso
       gas_inicio: "GN ↑ del cajón gris (esquina suroeste)"
       gas_fin: "calefón"
-      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [10.60, 0.45], [10.60, 0.65], [10.85, 0.65], [10.85, 2.35]], [[9.65, 0.45], [9.65, 1.20]], [[9.10, 0.45], [9.10, 1.15]], [[10.85, 2.35], [10.85, 4.50], [11.60, 4.50]], [[4.15, 0.80], [4.15, 0.10], [4.60, 0.10]]]
+      agua_caliente: [[[4.15, 0.80], [4.30, 0.45], [10.60, 0.45], [10.60, 0.65], [10.85, 0.65], [10.85, 2.35]], [[9.65, 0.45], [9.65, 1.20]], [[9.10, 0.45], [9.10, 1.15]], [[10.85, 2.35], [10.85, 4.30], [11.58, 4.30], [11.58, 4.745]], [[4.15, 0.80], [4.15, 0.10], [4.60, 0.10]]]
       subida_caliente: {pos: [4.60, 0.10], etiqueta: "AC ↓ a P1 y PB por el ducto de A2 (escalera)"}
       bajantes:
         - {pos: [10.93, 0.27], ambientes: [bano_alt, cocina_alt], estado: propuesto, etiqueta: "BAJANTE COMÚN (baño y cocina + Baño 1 del P1): ADENTRO, en el ducto del rincón de A4", nota: "plan B (2026-10-08): la pilastra de afuera invadía el retiro de 2.00. Ducto de ladrillo en el rincón noroeste de A4, al lado oeste (en el este estaban las ventanas del Cuarto 1 y del estar), en el baño del altillo, el Baño 1 y el estudio; pases por el plastoformo entre viguetas en (10.93, 0.27), lejos de las vigas A y 4 (ingeniero, pregunta 8); en PB baja bajo el piso a la cámara nueva (10.93, -0.85). Ventila sobre el techo del departamento. Recibe el inodoro (salida a la pared, ~0.5 m), la ducha y el lavamanos del altillo, el lavaplatos de la cocina del altillo y el Baño 1 del P1"}
@@ -1426,7 +1451,7 @@ instalaciones:
           estado: propuesto
           nota: "PROPUESTO (2026-10-06, opción B aceptada): campana sobre el anafe de la esquina → ducto recto de ~0.4 m al muro norte. REJILLA del color del muro, borde de arriba a 2.10 (alineado con los dinteles). 2026-10-08: CENTRADA entre las dos ventanas (x 9.10–9.30), porque los caños de x 9.10–9.40 se fueron a la pilastra de A3 (antes 8.75–8.95)"
       cajones:
-        - {rect: [7.125, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
+        - {rect: [7.075, 0.025, 7.325, 0.50], ducto: true, estado: propuesto, nota: "DUCTO de A3 (plan B 2026-10-08): agua fría del tanque, impulsión y ventilación Ø50; ladrillo de 6 huecos revocado, de piso a techo; pases entre viguetas en x ~7.25, y 0.20–0.41"}
         - {rect: [10.75, 0.025, 11.125, 0.45], ducto: true, estado: propuesto, nota: "DUCTO de la bajante común (plan B 2026-10-08), rincón de A4 al costado del inodoro; Ø110 en (10.93, 0.27); tapa de registro; pases entre viguetas"}
         - {rect: [4.525, 0.025, 4.675, 0.30], ducto: true, estado: propuesto, nota: "DUCTO de A2 en el rincón de la escalera (plan B 2026-10-08): agua caliente del calefón; del depósito de PB, cruzando los dos descansos, hasta el altillo, donde pasa a la terraza por el muro x 4.40"}
 

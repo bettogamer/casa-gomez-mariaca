@@ -56,6 +56,14 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
 13. Caños adentro (2026-10-08, reemplaza a las pilastras): ¿cómo cruzan el cimiento corrido del eje A, junto a las zapatas
     de A3 y A4, la bajante (hacia la cámara nueva en 10.93, −0.85) y los caños del tanque? [revisión del arquitecto 7, 8]
 
+**Muros y aberturas (pedido del maestro, 2026-10-16)**
+14. Puertas y ventanas AL RAS de las columnas (sin el pedacito de 12.5 cm, que no agarra el marco): ¿cómo se apoya o se
+    ancla el dintel en la columna? ¿Algún cuidado porque la columna queda libre a la altura de la ventana (columna corta),
+    o con el antepecho de ladrillo de 6 huecos no hace falta? Altillo: V3 (A4), V6 (B5), P1 (B4). Primer piso: ventana del
+    Cuarto 1 (A4), puertas de blancos (B3), del Baño 2 (C4) y del Cuarto 1 (B4). Planta baja: puerta del depósito (A3).
+15. (Solo si se elige el calefón SOLAR, todavía no decidido) Termotanque solar de ~200–300 L, ~300–400 kg lleno: ¿sobre el
+    techo de calamina del departamento (con base propia apoyada en columnas) o sobre la losa de la terraza del altillo?
+
 ## C. Para otros profesionales (no son del ingeniero, van acá para no perderlos)
 
 - **Plomero (caños adentro, 2026-10-08):** ¿entra el caño de 110 con sus piezas en el ducto de A4 (~0.22 libre por dentro)?
