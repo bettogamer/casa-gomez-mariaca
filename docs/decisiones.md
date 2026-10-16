@@ -1043,3 +1043,18 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
 - **Ventana en la llegada de la escalera del altillo (dueño, cuaderno v2.0):** con las dos puertas cerradas la llegada
   quedaba oscura. Ventana V7 de 1.20 × 1.10 (antepecho 1.00) en el muro sur, frente al último tramo: x 5.725–6.925, del
   ancho del tramo y pegada al muro x 7.05. La del comedor pasa a ser V8.
+
+## 2026-10-16 — Techo del departamento del altillo: CAE AL NORTE (aceptado por el dueño, pedido del maestro)
+- **Revisados por `arquitecto`, `revisor-estructural` y `revisor-habitabilidad`: los tres votan NORTE.** Razones: el agua
+  y el rebalse salen al retiro norte (afuera) y no a la franja de uso diario, que es losa descubierta sobre el P1 (lo que
+  decía el maestro: "el agua entra al medio"); la canaleta llena carga sobre el eje A (columnas y viga) y no sobre el
+  muro sur, que está sobre la losa sin nada debajo; paneles o calentador solar casi apoyados sobre la calamina mirando
+  al norte; ~1.15 entre el techo y la base del tanque. En contra (resuelto): más sol sobre la calamina (aislación),
+  canaleta junto a la base del tanque (ingeniero), bajante nueva (en la cara del patio, no en la fachada norte lisa).
+- **Qué cambió en el modelo:** `techos.aguas.techo_depto` cae al norte (+10.05 contra el muro sur, +9.35 contra el
+  eje A); canaleta por dentro del antepecho norte hacia el este; UNA gárgola de rebalse al norte (x ~16.20, +9.20);
+  bajante **BP3** nueva en la esquina A5, en un cajón gris sobre la cara de la columna (fachada este); **BP2** (C5) queda
+  solo para el sumidero de la franja; las dos van enterradas a un **pozo de absorción en el patio** (x 19.8–20.8,
+  y 2.0–3.0), cruzando el colector y el gas en perpendicular. Llave de la lavandería junto a las piletas nuevas. Hojas
+  del techo del cuaderno v2.0 rehechas. Pregunta 16 al ingeniero ampliada (apoyo en ejes A y B con volado hasta el muro
+  sur; encadenado; paso de la canaleta junto al tanque; termotanque solar).

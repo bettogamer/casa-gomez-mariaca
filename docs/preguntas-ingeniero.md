@@ -63,9 +63,14 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
     Cuarto 1 (A4), puertas de blancos (B3), del Baño 2 (C4) y del Cuarto 1 (B4). Planta baja: puerta del depósito (A3).
 15. (Solo si se elige el calefón SOLAR, todavía no decidido) Termotanque solar de ~200–300 L, ~300–400 kg lleno: ¿sobre el
     techo de calamina del departamento (con base propia apoyada en columnas) o sobre la losa de la terraza del altillo?
-16. Techo del departamento del altillo (calamina a un agua al sur, +10.05 a +9.35, escondida tras el antepecho de +10.20):
-    ¿cómo se apoya? ¿Vigas de norte a sur (4.67 m) metidas en los muros norte y sur, o correas de este a oeste sobre los
-    muros de adentro (x 7.05, 9.40, 11.20, 13.60; dos de ellos sin muro debajo)? ¿Viga de encadenado a qué altura?
+16. Techo del departamento del altillo (2026-10-16: calamina a un agua que cae al NORTE, +10.05 contra el muro sur y
+    +9.35 contra el eje A, escondida tras el antepecho de +10.20; canaleta por dentro del antepecho norte):
+    a) ¿Apoyamos el techo en vigas de norte a sur sobre el eje A y la línea del eje B (columnas B2–B5 prolongadas), con un
+       volado corto hasta el muro sur (y 4.67), para que ese muro —sobre la losa sin nada debajo— solo cierre?
+    b) ¿El encadenado del eje A a qué altura (+9.35 o más) y aguanta la canaleta llena?
+    c) ¿El muro sur entero de +6.60 a +10.20 sobre la losa se puede hacer, y con qué refuerzo (ver pregunta 4)?
+    d) La canaleta pasa junto a la base del tanque (pregunta 7): ¿tubo por debajo de la base o dos tramos?
+    e) ¿Dónde y sobre qué va un termotanque solar de 300–400 kg (cerca del eje A o B, nunca del muro sur)?
 
 ## C. Para otros profesionales (no son del ingeniero, van acá para no perderlos)
 
