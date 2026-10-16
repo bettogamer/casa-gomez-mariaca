@@ -771,7 +771,7 @@ def plano_electrico(casa, nivel, capa=None, recorte=(None, None), leyenda_svg=Tr
     sub = {"luces": " — LUCES E INTERRUPTORES", "tomas": " — ENCHUFES, TABLERO Y ESPECIALES"}.get(capa, "")
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — ELÉCTRICO{sub} (esquema)",
                                 "Preliminar, para conversar con el electricista. Diseño definitivo según NB 777.",
-                                [pozo["pos"]] if pozo else [])
+                                ([pozo["pos"]] if pozo else []) + [q for t in cfg.get("tubos_enterrados") or [] for q in t["linea"]])
     luces, tomas = capa in (None, "luces"), capa in (None, "tomas")
     naranja = NARANJA
     # muebles de fondo, apenas visibles: para saber a qué sirve cada luz y cada enchufe (pedido del dueño 2026-10-16)
@@ -820,6 +820,11 @@ def plano_electrico(casa, nivel, capa=None, recorte=(None, None), leyenda_svg=Tr
               % " ".join("%.1f,%.1f" % L.p(*q) for q in d["linea"]))
         b = d["linea"][-1]
         L.texto(b[0] + 0.15, b[1] - 0.12, d.get("etiqueta", ""), 6, 'fill="#6a1b9a" text-anchor="start"')
+    for tb in cfg.get("tubos_enterrados") or [] if tomas else []:      # tubos de corriente enterrados (afuera)
+        L.add('<polyline points="%s" fill="none" stroke="#4e342e" stroke-width="2" stroke-dasharray="8 3 2 3"/>'
+              % " ".join("%.1f,%.1f" % L.p(*q) for q in tb["linea"]))
+        a, b = tb["linea"][0], tb["linea"][-1]
+        L.texto((a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - 0.15, tb.get("etiqueta", "tubo enterrado"), 6, 'fill="#4e342e"')
     if tomas and cfg.get("puesta_tierra"):
         x, y = cfg["puesta_tierra"]["pos"]
         _dibujar_tierra(L, x, y)

@@ -1077,3 +1077,7 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
 - **Apliques junto a la bodega (dueño, 2026-10-16):** de los "4 apliques" que se veían en la bodega, solo uno es de
   ella; los otros son de la escalera (a 3.87, sobre el descanso), del retiro (sobre la puerta, por fuera) y del espejo
   del baño. Los apliques más altos que el techo del piso (escalera) se dibujan punteados con "A↑"; rótulos cortos.
+- **Patio del fondo (5 m), dejar preparado (dueño, 2026-10-16):** segundo aplique en el muro este (y 4.00, a 2.20, misma
+  tecla que el de la corrediza); dos tubos enterrados de 1" (uno con cables, otro vacío con alambre guía) desde la base
+  del muro este (y 4.10) hasta una caja IP65 con toma doble en un pilarcito al fondo (21.55, 4.10). Cruzan colector y gas
+  en perpendicular; a ~1.1 del pozo de lluvia. Nada más en el patio hasta que el dueño lo decida.
