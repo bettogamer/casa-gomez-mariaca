@@ -1074,3 +1074,6 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   (sin aplicar).
 - **Muebles de fondo en los planos del electricista** (pedido del dueño): al 28 % de opacidad, solo como guía; y
   `rotulo:` corto en las luces que lo tienen (cocinas de PB y del altillo) para saber para qué es cada una.
+- **Apliques junto a la bodega (dueño, 2026-10-16):** de los "4 apliques" que se veían en la bodega, solo uno es de
+  ella; los otros son de la escalera (a 3.87, sobre el descanso), del retiro (sobre la puerta, por fuera) y del espejo
+  del baño. Los apliques más altos que el techo del piso (escalera) se dibujan punteados con "A↑"; rótulos cortos.

@@ -332,6 +332,9 @@ LEY_LUCES = [
     (punto("luz"), "<b>Foco de TECHO</b> (círculo con cruz): la caja va en el techo."),
     (punto("luz", clase="aplique"), "<b>Aplique de PARED (A)</b>: la caja va en el muro, a la altura que dice h (sobre un espejo, "
                                      "junto a una cama, en la escalera, afuera)."),
+    (punto("luz", clase="aplique", alto=3.5), "<b>Aplique de la ESCALERA (A↑, punteado)</b>: va más arriba que el techo de "
+                                               "ese piso (sobre un descanso). En la planta cae encima de otro ambiente, pero "
+                                               "<b>no es de ese ambiente</b>."),
     (punto("luz", clase="led"), "<b>Tira LED</b> bajo una alacena o sobre un espejo: solo una caja chica en el muro, "
                                  "detrás del mueble. <b>No es un foco.</b>"),
     (punto("luz", clase="baliza"), "<b>Luz baja de afuera</b> (baliza empotrada en un muro o en el borde del deck)."),

@@ -716,7 +716,11 @@ def _dibujar_punto(L, p, naranja=NARANJA):
     """Símbolo de un punto eléctrico (se usa en el plano y en las leyendas)."""
     x, y = p["pos"]
     t = p["tipo"]
-    if t == "luz" and p.get("clase") == "aplique":       # aplique de pared: medio círculo lleno con una A
+    if t == "luz" and p.get("clase") == "aplique" and (p.get("alto") or 0) > 3.0:
+        # aplique de la ESCALERA, más alto que el techo de este piso: cae encima de otro ambiente en la planta
+        _circulo(L, x, y, 0.15, f'fill="#fff" stroke="{naranja}" stroke-width="1.2" stroke-dasharray="2 2"')
+        L.texto(x, y + 0.045, "A↑", 6, f'fill="{naranja}" font-weight="bold"')
+    elif t == "luz" and p.get("clase") == "aplique":     # aplique de pared: medio círculo lleno con una A
         _circulo(L, x, y, 0.15, f'fill="#fff" stroke="{naranja}" stroke-width="1.4"')
         L.add(f'<path d="M {L.p(x - 0.15, y)[0]:.1f} {L.p(x, y)[1]:.1f} A {0.15 * 50:.1f} {0.15 * 50:.1f} 0 0 0 '
               f'{L.p(x + 0.15, y)[0]:.1f} {L.p(x, y)[1]:.1f} Z" fill="{naranja}"/>')
