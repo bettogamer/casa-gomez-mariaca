@@ -1005,3 +1005,27 @@ Una entrada por cambio propuesto. Estados: `propuesto` · `aprobado` · `descart
 - **Tubo:** el mismo camino por el ingreso (contrapiso a 0.45 del muro sur), ahora termina en el hall; ya no cruza
   lavado, almacén ni cocina.
 - **Estado:** propuesto.
+
+## 2026-10-16 — Pedidos del maestro al empezar el altillo (propuesto, rama `feat/altillo-obra-v2`)
+El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones y lo que se hizo:
+- **Muros sobre la línea de columnas: AL RAS DE UNA CARA** (antes centrados: la columna asomaba 5 cm por cada lado).
+  Regla en `tools/casa.py` (`lado_al_ras`): afuera > escalera (sin rendija entre la escalera construida y el muro) >
+  ambiente más importante (dormitorio/estar > cocina > pasillo > baño > depósito). A mano en `albanileria.al_ras`:
+  PB eje B todo al norte (pasillo de 0.95 parejo, entra la cajonera), PB eje 3 hall–lavado al este y eje 4 almacén–cocina
+  al oeste (no chocan muebles); altillo eje 3 todo al oeste (escalera) y el muro de la llegada al norte (hueco). El living
+  sigue de cabeza también en el eje 2. Teclas, tomas, ductos y 5 muebles corridos 2.5–5 cm a las caras nuevas.
+- **Aberturas junto a columnas: AL RAS de la columna** (antes 12.5 cm de ladrillo). Corridas, mismo tamaño: altillo
+  V3 (A4), V6 (B5); P1 ventana del Cuarto 1 (A4, sigue debajo de la del estar del altillo), puertas de blancos (B3), Baño 2
+  (C4), Cuartos 1 y 2; PB puerta del depósito (A3). `make check` avisa si una abertura queda a menos de 15 cm de una
+  columna. **Pendiente decidir:** puerta de entrada y ranura del living (17.5 cm de C1 y A1, son parte del paño de piedra).
+- **Puertas del altillo más anchas** (el maestro pedía 1.00): terraza 1.00 y dormitorio 1.00 (bisagra al sur, la hoja
+  llega a x 14.68, la cuna empieza en 15.30); baño 0.85 (con 0.90 la hoja toca la mampara de la ducha, apilada); entrada al
+  departamento 0.75, el máximo (al norte están los últimos escalones del tramo de 10). Todas pegadas al muro o a la columna.
+  Puertas de PB y P1 (0.70–0.80): **sin cambiar**, a decidir con el dueño.
+- **Corrediza del altillo al estar** (pedido del dueño): 2.00 en x 9.50–11.50; en el comedor, ventana nueva de 1.00 × 1.10
+  (x 8.00–9.00). La puerta de entrada abierta ya no queda delante de la corrediza. Caños de las piletas suben por el
+  muro de 0.25 entre la corrediza y la ventana del estar; tecla de la lavandería en x 9.25; toma del camino en x 11.625.
+- **Medidas en los planos, números grandes**: plano del albañil nuevo (`tools/plano_obra.py`): sin muebles, cada abertura
+  con código (V/P/C), ancho × alto y antepecho, cadenas de medidas de cara a cara; y una hoja con cada abertura de frente
+  con sus alturas. **Cuaderno v2.0** con hoja "qué cambió" y PDF corto `cuaderno-obra-v2.0-hojas-nuevas.pdf`.
+- **Calefón solar** en vez de gas: el dueño lo está pensando (no decidido). No se tocó el modelo; pregunta 15 al ingeniero.

@@ -52,8 +52,8 @@ Clasificar cada pedido en uno de tres tamaños:
 1. **"¿Y si...?" (curiosidad o pregunta):** responde la sesión principal leyendo el modelo; a lo sumo un croquis
    rápido. **Sin agentes, sin tocar el modelo.** Si al dueño le gusta, pasa a 2 o 3.
 2. **Cambio chico** (mover una puerta o ventana, una medida, una nota, un punto eléctrico o de agua): lo hace la
-   sesión principal directo en el modelo, `make build`, y verifica ella misma lo básico (≥12.5 cm de muro para marcos
-   junto a columnas y muros, choques con muebles, puntos, caños y hojas de puertas). **Sin agentes.** Solo
+   sesión principal directo en el modelo, `make build`, y verifica ella misma lo básico (aberturas AL RAS de la columna
+   si quedan a menos de 15 cm, ≥12.5 cm o pegadas junto a muros, choques con muebles, puntos, caños y hojas de puertas). **Sin agentes.** Solo
    `revisor-estructural` si toca columnas, vigas, losas o cimientos.
 3. **Cambio grande** (redistribuir un ambiente o un piso, fachada, instalaciones), en dos fases:
    - **Fase A — borrador:** `disenador` hace 1–2 opciones SOLO con muros, puertas y ventanas (sin muebles, puntos ni

@@ -158,7 +158,9 @@ def dibujar_muros(L, casa, nivel_id):
             L.linea(x0, y0, x1, y1, 'stroke="#555" stroke-width="3"')
 
 
-def dibujar_aberturas(L, casa, nivel_id):
+def dibujar_aberturas(L, casa, nivel_id, rotulos=True):
+    """`rotulos=False`: sin las medidas chicas (el plano del albañil pone las suyas, grandes)."""
+    T = L.texto if rotulos else (lambda *a, **k: None)
     ambs = {a["id"]: a for a in ambientes(casa, nivel_id)}
     for ab in aberturas(casa, nivel_id):
         _, sx, sy = seccion_muro(casa, nivel_id, ab["de"], ab["a"])   # sobre el eje real del muro
@@ -179,13 +181,13 @@ def dibujar_aberturas(L, casa, nivel_id):
                 ax, ay = ab["apila_hasta"]
                 for k in (0.22, 0.30):
                     L.linea(x1 + nx * k, y1 + ny * k, ax + nx * k, ay + ny * k, 'stroke="#263238" stroke-width="1.5" stroke-dasharray="5 3"')
-                L.texto((x1 + ax) / 2 + nx * 1.10, (y1 + ay) / 2 + ny * 1.10 + 0.05, "hojas guardadas", 7, 'fill="#263238" font-style="italic"')
+                T((x1 + ax) / 2 + nx * 1.10, (y1 + ay) / 2 + ny * 1.10 + 0.05, "hojas guardadas", 7, 'fill="#263238" font-style="italic"')
             if ab.get("peatonal"):
                 p = ab["peatonal"]
                 px, py = x0 + ux * p, y0 + uy * p
                 L.linea(px, py, px + nx * 0.45, py + ny * 0.45, 'stroke="#c62828" stroke-width="1.5"')
-                L.texto(x0 + ux * p / 2 + nx * 0.75, y0 + uy * p / 2 + ny * 0.75 + 0.05, f"peatonal {p:.2f}", 7, 'fill="#c62828"')
-            L.texto(x0 + dx * 0.25 + nx * 1.60, y0 + dy * 0.25 + ny * 1.60 + 0.05, ab.get("etiqueta") or f"portón {largo:.2f}", 8, 'fill="#263238" font-weight="bold"')
+                T(x0 + ux * p / 2 + nx * 0.75, y0 + uy * p / 2 + ny * 0.75 + 0.05, f"peatonal {p:.2f}", 7, 'fill="#c62828"')
+            T(x0 + dx * 0.25 + nx * 1.60, y0 + dy * 0.25 + ny * 1.60 + 0.05, ab.get("etiqueta") or f"portón {largo:.2f}", 8, 'fill="#263238" font-weight="bold"')
         elif ab["tipo"] == "puerta_corrediza":
             # hoja que se esconde dentro del muro (línea punteada = bolsillo)
             hx, hy = ab.get("corre_hacia", [x1 + dx, y1 + dy])
@@ -193,7 +195,7 @@ def dibujar_aberturas(L, casa, nivel_id):
             L.linea(x0, y0, x1, y1, 'stroke="#222" stroke-width="2"')
             L.linea(x1, y1, hx, hy, 'stroke="#fff" stroke-width="2" stroke-dasharray="3 2"')
             nx, ny = -dy / largo, dx / largo
-            L.texto((x0 + x1) / 2 + nx * 0.25, (y0 + y1) / 2 + ny * 0.25 + 0.05, f"corr. {largo:.2f}", 7, 'fill="#444"')
+            T((x0 + x1) / 2 + nx * 0.25, (y0 + y1) / 2 + ny * 0.25 + 0.05, f"corr. {largo:.2f}", 7, 'fill="#444"')
         elif ab["tipo"] == "corrediza":
             # dos hojas de vidrio desplazadas
             nx, ny = -dy / largo * 0.04, dx / largo * 0.04
@@ -204,7 +206,7 @@ def dibujar_aberturas(L, casa, nivel_id):
             ox, oy = nx / 0.04, ny / 0.04
             if ((hx0 + hx1) / 2 - x0) * ox + ((hy0 + hy1) / 2 - y0) * oy > 0:
                 ox, oy = -ox, -oy
-            L.texto((x0 + x1) / 2 + ox * 0.55, (y0 + y1) / 2 + oy * 0.55 + 0.05, f"corrediza {largo:.2f}", 8, 'fill="#2a6f97"')
+            T((x0 + x1) / 2 + ox * 0.55, (y0 + y1) / 2 + oy * 0.55 + 0.05, f"corrediza {largo:.2f}", 8, 'fill="#2a6f97"')
         elif ab["tipo"] == "ventana":
             L.linea(x0, y0, x1, y1, 'stroke="#222" stroke-width="7"')
             L.linea(x0, y0, x1, y1, 'stroke="#bfe3f5" stroke-width="4"')
@@ -213,7 +215,7 @@ def dibujar_aberturas(L, casa, nivel_id):
             cx, cy = (hx0 + hx1) / 2, (hy0 + hy1) / 2
             if (cx - x0) * nx + (cy - y0) * ny > 0:
                 nx, ny = -nx, -ny
-            L.texto((x0 + x1) / 2 + nx * 0.3, (y0 + y1) / 2 + ny * 0.3 + 0.05, f"V {largo:.2f}", 8, 'fill="#2a6f97"')
+            T((x0 + x1) / 2 + nx * 0.3, (y0 + y1) / 2 + ny * 0.3 + 0.05, f"V {largo:.2f}", 8, 'fill="#2a6f97"')
         elif ab["tipo"] == "puerta":
             # hoja perpendicular hacia el ambiente al que abre + arco de giro
             nx, ny = -dy / largo, dx / largo
@@ -236,7 +238,7 @@ def dibujar_aberturas(L, casa, nivel_id):
             L.add('<polyline points="%s" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="3 2"/>'
                   % " ".join("%.1f,%.1f" % p for p in pts))
             # medida dentro del giro de la hoja, lejos de los rótulos del ambiente vecino
-            L.texto(x0 + (dx * 0.6 + nx * largo * 0.35), y0 + (dy * 0.6 + ny * largo * 0.35) + 0.05, f"{largo:.2f}", 7, 'fill="#444"')
+            T(x0 + (dx * 0.6 + nx * largo * 0.35), y0 + (dy * 0.6 + ny * largo * 0.35) + 0.05, f"{largo:.2f}", 7, 'fill="#444"')
 
 
 def dibujar_muebles(L, casa, nivel_id):

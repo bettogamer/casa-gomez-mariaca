@@ -14,6 +14,7 @@ import sys
 
 import casa as C
 import instalaciones as I
+import plano_obra as O
 from render_svg import ESC, Lienzo
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
@@ -26,6 +27,9 @@ EX = sorted((v, k) for k, v in est["ejes_x"].items())
 EY = sorted((v, k) for k, v in est["ejes_y"].items())
 NIVELES = [("pb", "Planta baja"), ("p1", "Primer piso"), ("altillo", "Altillo")]
 COTA = {n["id"]: n.get("cota", 0) for n in c["niveles"]}
+CUAD = (c.get("proyecto") or {}).get("cuaderno") or {}
+VERSION = str(CUAD.get("version", "1"))
+NUEVAS = []     # hojas que cambian en esta versión: van también al PDF corto de "hojas nuevas"
 
 # Muros sobre losa sin muro debajo (docs/preguntas-ingeniero.md, pregunta 4) y sobre el volado (pregunta 1):
 # (eje, valor, rango opcional sobre la otra coordenada, texto)
@@ -177,7 +181,11 @@ def fila_muro(nivel, m):
         tramo = f"de {ref(m['de'], EY)} a {ref(m['a'], EY)}"
     tipo = "CABEZA (25)" if m["grosor"] >= 0.2 else "soga (15)"
     if m["dx"] or m["dy"]:
-        tipo += " · al ras EXTERIOR de las columnas"
+        cara = {(-1, 0): "OESTE", (1, 0): "ESTE", (0, -1): "NORTE", (0, 1): "SUR"}[
+            ((m["dx"] > 0) - (m["dx"] < 0), (m["dy"] > 0) - (m["dy"] < 0))]
+        tipo += f" · al ras de la cara {cara} de las columnas"
+    elif m["grosor"] < 0.2:
+        tipo += " · centrado en la línea"
     aviso = esperar(nivel, m["eje"], m["val"], m["de"], m["a"])
     clase = ' class="espera"' if aviso else ""
     aviso = f'<div class="aviso">✗ NO LEVANTAR TODAVÍA: {html.escape(aviso)} → ingeniero</div>' if aviso else ""
@@ -189,6 +197,7 @@ def fila_muro(nivel, m):
 
 
 def tabla_vanos(nivel):
+    cod = O.codigos(c, nivel)
     filas = []
     for ab in C.aberturas(c, nivel):
         if ab.get("en_cerco") or ab["tipo"] == "porton":
@@ -209,36 +218,20 @@ def tabla_vanos(nivel):
         else:
             ap, dint = "piso", f"{ab.get('alto', 2.10):.2f}"
         filas.append((t != "ventana", donde,
-                      f"<tr><td>{nombre_vano(ab)}</td><td>{html.escape(lados(nivel, ab))}</td><td>{html.escape(donde)}</td>"
+                      f"<tr><td><b>{cod.get(ab['id'], '')}</b> {nombre_vano(ab)}</td><td>{html.escape(lados(nivel, ab))}</td><td>{html.escape(donde)}</td>"
                       f"<td class=n><b>{ancho:.2f}</b></td><td class=n>{ap}</td><td class=n>{dint}</td>"
                       f"<td class=nota>{html.escape(ab.get('obra', ''))}</td></tr>"))
     filas.sort(key=lambda f: (f[0], f[1]))
     return "".join(f[2] for f in filas)
 
 
-def svg_casa(nivel, desde_x=-3.6):
-    """Planta del nivel recortada desde `desde_x` (m) hacia el fondo: deja afuera el frente, que todavía no se hace."""
-    s = (SALIDA / f"planta-{nivel}.svg").read_text(encoding="utf-8")
-    vb = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', s)
-    losa = re.search(r'<polygon points="([\d.]+),[\d.]+ ([\d.]+),', s)  # contorno de la losa = huella_casa
-    if not (vb and losa):
-        return f"planta-{nivel}.svg"
-    hx0, _, hx1, _ = C.huella_casa(c)
-    px0, px1 = float(losa.group(1)), float(losa.group(2))
-    x = max(0.0, px0 + (desde_x - hx0) * (px1 - px0) / (hx1 - hx0))
-    s = s.replace(vb.group(0), f'viewBox="{x:.1f} 0 {float(vb.group(1)) - x:.1f} {vb.group(2)}"', 1)
-    for e in "ABC":
-        m = re.search(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="13"[^>]*/>\s*<text x="\1"[^>]*>' + e + '</text>', s)
-        if m and float(m.group(1)) < x:
-            s = s.replace(m.group(0), m.group(0).replace(f'x="{m.group(1)}"', f'x="{x + 18:.1f}"'))
-    destino = f"obra-albanil-{nivel}.svg"
-    (SALIDA / destino).write_text(s, encoding="utf-8")
-    return destino
-
-
-def hoja(titulo, cuerpo, clase="", seccion=""):
+def hoja(titulo, cuerpo, clase="", seccion="", nueva=False):
     s = f'<span class="secc">{seccion}</span>' if seccion else ""
-    return f'<section class="hoja {clase}"><h2 class="tit">{s}{titulo}</h2>{cuerpo}</section>'
+    marca = f'<span class="ver{" nueva" if nueva else ""}">v{VERSION}{" · HOJA NUEVA" if nueva else ""}</span>'
+    h = f'<section class="hoja {clase}"><h2 class="tit">{s}{titulo}{marca}</h2>{cuerpo}</section>'
+    if nueva is True:      # nueva="luego": cambia, pero no va al PDF corto (se imprime cuando se llegue a ese piso)
+        NUEVAS.append(h)
+    return h
 
 
 def paso(n, titulo, items, quien=""):
@@ -541,7 +534,7 @@ partes = []
 # ── portada general ────────────────────────────────────────────────────────────
 partes.append(f"""
 <section class="hoja portada">
-<h1>Casa — cuaderno de obra</h1>
+<h1>Casa — cuaderno de obra <span class="vgr">v{VERSION}</span></h1>
 <p class="sub">Para el albañil, el plomero, el gasista y el electricista · generado del modelo el {hoy} ·
 <b>PRELIMINAR</b>: lo que dice "ingeniero", "YPFB" o "lo define el electricista" se espera a su respuesta</p>
 <div class="cols">
@@ -581,17 +574,27 @@ partes.append(f"""
 </div>
 </section>""")
 
+if CUAD.get("cambios"):
+    items = "".join(f"<li>{html.escape(t)}</li>" for t in CUAD["cambios"])
+    partes.append(hoja(f"Qué cambió en la v{VERSION} ({CUAD.get('fecha', '')}) — leer primero", nueva=True, cuerpo=
+        f'<ol class="cambios">{items}</ol><div class="alt"><h3>Qué hojas cambiar en el cuaderno impreso</h3>'
+        f'<p>{html.escape(CUAD.get("reemplazar", ""))}</p><p>Las hojas nuevas dicen <b>«v{VERSION} · HOJA NUEVA»</b> arriba a la '
+        f'derecha. Las viejas del mismo tema se <b>tachan o se sacan</b>, para que nadie trabaje con la medida vieja.</p></div>'))
+
 # ── A · albañil ────────────────────────────────────────────────────────────────
 S = SEC["A"]
-partes.append(hoja("Ladrillo y forma de asentar", f"""<div class="cols"><div><ul>
+partes.append(hoja("Ladrillo y forma de asentar", nueva=True, cuerpo=f"""<div class="cols"><div><ul>
 <li><b>Ladrillo:</b> {html.escape(alb.get('ladrillo', ''))}, en toda la casa (también los tabiques; no hay drywall).</li>
 <li><b>Casi todos los muros van de SOGA</b> (~0.15 terminado).</li>
-<li><b>Living: los muros de afuera van de CABEZA</b> (~0.25, al ras de las columnas).</li>
+<li><b>Living: sus muros sobre las columnas van de CABEZA</b> (~0.25, al ras de las dos caras de las columnas).</li>
 <li><b>Muros de afuera de soga: AL RAS DE LA CARA EXTERIOR de las columnas</b> (fachada lisa; la columna sobresale ~0.10 hacia adentro).</li>
-<li><b>Muros de adentro:</b> centrados en la línea indicada.</li></ul></div><div><ul>
-<li>Puertas y ventanas: <b>ancho del hueco terminado</b>. Ventanas con <b>antepecho</b> (del piso a la parte de abajo
-de la ventana) y <b>dintel</b> (del piso a la parte de arriba).</li>
-<li><b>Junto a una columna o a otro muro, dejar siempre al menos 12.5 cm de muro</b> para que entre el marco.</li>
+<li><b>Muros sobre la línea de las columnas: AL RAS DE UNA CARA de la columna</b> (el plano y la tabla de muros dicen
+cuál); del otro lado la columna asoma ~10 cm. Los tabiques que no van sobre una línea de columnas, centrados.</li></ul></div><div><ul>
+<li>Puertas y ventanas: <b>ancho del hueco terminado</b> (la hoja de la puerta mide ~10 cm menos, por el marco). Ventanas con
+<b>antepecho</b> (del piso a la parte de abajo de la ventana) y <b>dintel</b> (del piso a la parte de arriba). Todo está
+<b>dibujado en el plano</b> y en la hoja <b>de frente</b>.</li>
+<li><b>Junto a una COLUMNA: la puerta o ventana va AL RAS de la columna</b>, sin pedacito de ladrillo (no agarra el marco).
+Junto a otro muro: pegada a él, o con al menos 12.5 cm.</li>
 <li>Antes de marcar: <b>comprobar con cinta</b> las distancias entre columnas. Si algo no coincide en más de 2 cm,
 <b>parar y avisar</b>.</li>
 <li>Los muros en <b style="color:#b00">rojo</b> en las tablas: <b>NO LEVANTAR TODAVÍA</b> (esperan al ingeniero).</li>
@@ -620,7 +623,7 @@ partes.append(hoja("Paso a paso (1 de 2)", pasos(
     paso(3, "Marcar los muros de planta baja", [
         "Tirar hilos por los ejes de columnas. Marcar cada muro con tiza según la tabla <b>Planta baja — muros</b>.",
         "Marcar los huecos de puertas y ventanas según la tabla de <b>puertas y ventanas</b> (el ancho es del hueco terminado).",
-        "Comprobar que junto a cada columna queden al menos 12.5 cm de muro para el marco.",
+        "Las puertas y ventanas que están junto a una columna, AL RAS de la columna (sin pedacito de ladrillo).",
     ], "maestro"),
     paso(4, "Levantar los muros de planta baja", [
         "Soga en casi todo; de cabeza solo los muros de afuera del living. Los de afuera, al ras de la cara exterior de las columnas.",
@@ -674,17 +677,31 @@ partes.append(hoja("Niveles de piso — planta baja y exteriores (PROPUESTOS, fa
                    "<p>±0.00 = vereda pública frente al portón. Todo se mide con manguera de nivel desde ahí.</p>"
                    f"<table><thead><tr><th>Lugar</th><th>Cota</th><th>Cómo</th></tr></thead><tbody>{filas}</tbody></table>",
                    seccion=S))
+# Recorte de cada plano del albañil (m): PB sin el frente; altillo sin la terraza.
+RECORTE = {"pb": (-3.0, 19.8, -3.6, 9.2), "p1": (-3.0, 19.8, -3.6, 9.2), "altillo": (0.9, 19.8, -3.6, 7.1)}
+LEE_PLANO = (f"<p class=lee><b>Cómo leer:</b> <b style='color:{O.ROJO}'>V</b> ventana, <b style='color:{O.ROJO}'>P</b> puerta, "
+             f"<b style='color:{O.ROJO}'>C</b> corrediza, con <b style='color:{O.AZUL}'>ancho × alto</b> y <b style='color:{O.AZUL}'>ant.</b> "
+             "= antepecho (del piso terminado a la parte de abajo de la ventana). Las puertas: <b>hueco</b> (ancho que deja el albañil) y "
+             "<b>alto</b>. Las <b>cadenas de medidas</b> van de cara a cara (de columnas y de muros), no de eje a eje; en azul, los huecos. "
+             "Columnas: cuadrados rojos (naranja punteado = las que se prolongan en el altillo).</p>")
 for nid, nombre in NIVELES:
-    svg = svg_casa(nid) if nid == "pb" else f"planta-{nid}.svg"
-    partes.append(hoja(f"{nombre} — planta (piso terminado +{COTA[nid]:.2f})", f'<img class="plano" src="{svg}">', seccion=S))
+    nv = nivel_dict(nid)
+    (SALIDA / f"obra-albanil-{nid}.svg").write_text(O.planta_obra(c, nv, *RECORTE[nid]), encoding="utf-8")
+    partes.append(hoja(f"{nombre} — plano del albañil (piso terminado +{COTA[nid]:.2f})",
+                       f'<img class="plano alb" src="obra-albanil-{nid}.svg">' + LEE_PLANO, seccion=S,
+                       nueva=True if nid == "altillo" else "luego"))
+    partes.append(hoja(f"{nombre} — puertas y ventanas VISTAS DE FRENTE (alturas desde el piso terminado)",
+                       O.frentes_html(c, nid, lambda ab, n=nid: lados(n, ab)), seccion=S,
+                       nueva=True if nid == "altillo" else "luego"))
     ms = lineas(nid)
     partes.append(hoja(f"{nombre} — muros de ladrillo (medidos desde los ejes)",
                        "<table><thead><tr><th>Dónde va el muro</th><th>Desde / hasta</th><th>Largo</th><th>Ladrillo</th>"
                        f"<th>Huecos en ese muro</th></tr></thead><tbody>{''.join(fila_muro(nid, m) for m in ms)}</tbody></table>",
-                       seccion=S))
+                       seccion=S, nueva=True if nid == "altillo" else "luego"))
     partes.append(hoja(f"{nombre} — puertas, ventanas y pasos",
                        "<table class=vanos><thead><tr><th>Tipo</th><th>Entre</th><th>Dónde</th><th>Ancho</th><th>Antepecho</th>"
-                       f"<th>Dintel</th><th>Cómo</th></tr></thead><tbody>{tabla_vanos(nid)}</tbody></table>", seccion=S))
+                       f"<th>Dintel</th><th>Cómo</th></tr></thead><tbody>{tabla_vanos(nid)}</tbody></table>", seccion=S,
+                       nueva=True if nid == "altillo" else "luego"))
 
 # ── B · plomero ────────────────────────────────────────────────────────────────
 S = SEC["P"]
@@ -834,9 +851,7 @@ partes.append(hoja("Medidas a tomar en obra (anotar y devolver al dueño)",
                    f"<table class=medir><thead><tr><th>Qué medir</th><th>Lo que supone el plano</th><th>Medido en obra</th></tr>"
                    f"</thead><tbody>{filas}</tbody></table>", seccion="✎"))
 
-HTML = SALIDA / "cuaderno-obra.html"
-HTML.write_text(f"""<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Casa — cuaderno de obra</title>
-<style>
+ESTILO = f"""<style>
 @page {{ size: A3 landscape; margin: 12mm; }}
 body {{ font-family: Helvetica, Arial, sans-serif; color: #111; margin: 0; }}
 .hoja {{ page-break-after: always; }}
@@ -882,14 +897,37 @@ table.cuenta td.blanco {{ width: 18%; }}
 .amb {{ font-size: 11px; color: #555; }}
 tr.espera td {{ background: #fdeaea; }} .aviso {{ color: #b00; font-weight: bold; margin-top: 3px; }}
 table.medir td {{ font-size: 15px; height: 34px; }} td.sup {{ color: #555; }} td.blanco {{ width: 30%; }}
-</style></head><body>{''.join(partes)}</body></html>""", encoding="utf-8")
-print("ok", HTML.relative_to(RAIZ))
+.ver {{ float: right; font-size: 13px; font-weight: normal; color: #555; border: 1px solid #999; border-radius: 10px;
+  padding: 2px 10px; margin-top: 4px; }}
+.ver.nueva {{ color: #fff; background: #b71c1c; border-color: #b71c1c; font-weight: bold; }}
+.vgr {{ font-size: 22px; color: #fff; background: #b71c1c; border-radius: 6px; padding: 2px 10px; vertical-align: 5px; }}
+ol.cambios li {{ font-size: 17px; margin: 10px 0; line-height: 1.4; }}
+.plano.alb {{ max-height: 228mm; }}
+p.lee {{ font-size: 13px; margin: 2px 0; }}
+.tarjetas {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }}
+.tarjeta {{ border: 2px solid #333; border-radius: 6px; padding: 4px 6px; break-inside: avoid; }}
+.tarjeta .cod {{ font-size: 28px; font-weight: bold; color: #b71c1c; float: left; margin: -2px 8px 0 0; }}
+.tarjeta .que {{ font-size: 12px; min-height: 30px; }} .tarjeta .como {{ font-size: 11px; color: #333; }}
+svg.frente {{ display: block; max-width: 100%; height: auto; margin: 2px auto; }}
+</style>"""
 
+
+def escribir(nombre, titulo, hojas):
+    h = SALIDA / f"{nombre}.html"
+    h.write_text(f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>{titulo}</title>{ESTILO}</head>'
+                 f'<body>{"".join(hojas)}</body></html>', encoding="utf-8")
+    print("ok", h.relative_to(RAIZ))
+    return h
+
+
+HTML = escribir("cuaderno-obra", f"Casa — cuaderno de obra v{VERSION}", partes)
+CORTO = escribir(f"cuaderno-obra-v{VERSION}-hojas-nuevas", f"Casa — hojas nuevas v{VERSION}", NUEVAS)
 chrome = CHROME if pathlib.Path(CHROME).exists() else shutil.which("google-chrome") or shutil.which("chromium")
 if not chrome:
     print("sin Chrome: abrir el HTML e imprimir a PDF (A3 apaisado)")
     sys.exit(0)
-PDF = SALIDA / "cuaderno-obra.pdf"
-subprocess.run([chrome, "--headless", "--disable-gpu", "--no-pdf-header-footer", "--allow-file-access-from-files",
-                f"--print-to-pdf={PDF}", HTML.as_uri()], check=True, capture_output=True)
-print("ok", PDF.relative_to(RAIZ))
+for h in (HTML, CORTO):
+    pdf = h.with_suffix(".pdf")
+    subprocess.run([chrome, "--headless", "--disable-gpu", "--no-pdf-header-footer", "--allow-file-access-from-files",
+                    f"--print-to-pdf={pdf}", h.as_uri()], check=True, capture_output=True)
+    print("ok", pdf.relative_to(RAIZ))

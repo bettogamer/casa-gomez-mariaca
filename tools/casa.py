@@ -163,30 +163,101 @@ def muro_soga(casa):
     return (casa.get("albanileria") or {}).get("muro_soga", 0.15)
 
 
+# Qué ambiente se queda con la cara LISA de un muro sobre un eje de columnas (el otro ve la columna asomar ~0.10).
+RANGO_CARA = {"social": 4, "dormitorio": 4, "cocina": 3, "circulacion": 2, "bano": 1, "servicio": 0}
+LADOS = {"oeste": (-1, 0), "este": (1, 0), "norte": (0, -1), "sur": (0, 1)}
+
+
+def ambiente_en(casa, nivel_id, x, y):
+    for amb in ambientes(casa, nivel_id):
+        if dentro(amb["poly"], x, y):
+            return amb
+    return None
+
+
+def _en_caja_escalera(casa, nivel_id, eje_val, y0, y1):
+    """¿El tramo de muro (vertical, en x = eje_val) corre al costado de la escalera en este nivel?"""
+    est = casa["estructura"]
+    m = est["seccion_columna"] / 2
+    lado2 = abs(eje_val - est["ejes_x"]["2"]) < 0.01
+    if not lado2 and abs(eje_val - est["ejes_x"]["3"]) > 0.01:
+        return False
+    cara = eje_val + m if lado2 else eje_val - m
+    for e in escalera(casa):
+        if nivel_id not in (e["desde"], e["hasta"]):
+            continue
+        # solo los peldaños pegados a ESTE muro (el tramo del otro lado no cuenta) y el descanso
+        pegados = [p for p in e["peldanos"] + [e["descanso"]] if abs((p["x0"] if lado2 else p["x1"]) - cara) < 0.02]
+        if any(min(y1, p["y1"]) - max(y0, p["y0"]) > 0.05 for p in pegados):
+            return True
+    return False
+
+
+def lado_al_ras(casa, nivel_id, de, a):
+    """Hacia dónde va al ras un muro de soga sobre un eje de columnas: (nx, ny, motivo) o None si va centrado.
+
+    1. A mano en `albanileria.al_ras` (nivel, eje x|y, valor, tramo opcional, lado).
+    2. Si de un lado es afuera (terraza, retiro, patio): al ras de la cara exterior.
+    3. Junto a la escalera (ejes 2 y 3): al ras del lado de los escalones (sin rendija entre escalera y muro).
+    4. Entre dos ambientes: la cara lisa para el de mayor RANGO_CARA; si empatan, centrado.
+    """
+    alb = casa.get("albanileria") or {}
+    (x0, y0), (x1, y1) = de, a
+    vertical = abs(x0 - x1) < 0.01
+    val = x0 if vertical else y0
+    lo, hi = (min(y0, y1), max(y0, y1)) if vertical else (min(x0, x1), max(x0, x1))
+    for r in (alb.get("al_ras") or {}).get(nivel_id) or []:
+        if ("x" in r) == vertical and abs(r.get("x", r.get("y")) - val) < 0.01 \
+                and lo >= r.get("desde", -99) - 0.01 and hi <= r.get("hasta", 99) + 0.01:
+            nx, ny = LADOS[r["lado"]]
+            return nx, ny, "a mano"
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+    n1 = (-1, 0) if vertical else (0, -1)
+    lados = []
+    for s in (1, -1):
+        nx, ny = n1[0] * s, n1[1] * s
+        amb = ambiente_en(casa, nivel_id, mx + nx * 0.30, my + ny * 0.30)
+        lados.append((nx, ny, amb))
+    hx0, hy0, hx1, hy1 = huella_casa(casa)
+    for nx, ny, amb in lados:
+        px, py = mx + nx * 0.30, my + ny * 0.30
+        if (amb and amb["tipo"] == "exterior") or not (hx0 < px < hx1 and hy0 < py < hy1):
+            return nx, ny, "afuera"
+    if vertical and _en_caja_escalera(casa, nivel_id, val, lo, hi):
+        hacia = 1 if abs(val - casa["estructura"]["ejes_x"]["2"]) < 0.01 else -1
+        return hacia, 0, "escalera"
+    for nx, ny, amb in lados:
+        if amb is None:              # hueco de la escalera
+            return nx, ny, "hueco"
+    (ax, ay, A), (bx, by, B) = lados
+    ra, rb = RANGO_CARA.get(A["tipo"], 2), RANGO_CARA.get(B["tipo"], 2)
+    if ra == rb or A["id"] == B["id"]:
+        return None
+    return (ax, ay, A["nombre"]) if ra > rb else (bx, by, B["nombre"])
+
+
+def sobre_eje(casa, de, a):
+    est = casa["estructura"]
+    (x0, y0), (x1, y1) = de, a
+    if abs(x0 - x1) < 0.01:
+        return any(abs(x0 - v) < 0.01 for v in est["ejes_x"].values())
+    if abs(y0 - y1) < 0.01:
+        return any(abs(y0 - v) < 0.01 for v in est["ejes_y"].values())
+    return False
+
+
 def seccion_muro(casa, nivel_id, de, a):
     """(grosor, dx, dy) del muro de ladrillo (o de la abertura) que va de `de` a `a`, dados a eje.
 
-    Interiores: de soga, centrados en el eje. Perimetrales (sobre los ejes extremos): de soga al ras
-    de la cara exterior de las columnas, o sea el eje del muro se corre (dx, dy) hacia afuera; los de
-    los ambientes en `albanileria.de_cabeza` van de cabeza, centrados (al ras de las columnas).
+    De soga (0.15) salvo los de los ambientes en `albanileria.de_cabeza` sobre ejes de columnas (de cabeza, 0.25,
+    al ras de las dos caras). Los de soga SOBRE UN EJE de columnas van al ras de UNA cara de la columna (pedido del
+    maestro, 2026-10-16: centrados la columna asoma 5 cm por cada lado): el eje real del muro se corre (dx, dy);
+    el lado lo decide `lado_al_ras`. Los que no van sobre un eje (tabiques sueltos), centrados en su línea.
     """
     alb = casa.get("albanileria") or {}
     est = casa["estructura"]
     soga = alb.get("muro_soga", 0.15)
-    xs, ys = est["ejes_x"].values(), est["ejes_y"].values()
-    (x0, y0), (x1, y1) = de, a
-    afuera = None
-    if abs(x0 - x1) < 0.01:
-        if abs(x0 - min(xs)) < 0.01:
-            afuera = (-1, 0)
-        elif abs(x0 - max(xs)) < 0.01:
-            afuera = (1, 0)
-    elif abs(y0 - y1) < 0.01:
-        if abs(y0 - min(ys)) < 0.01:
-            afuera = (0, -1)
-        elif abs(y0 - max(ys)) < 0.01:
-            afuera = (0, 1)
-    if afuera is None:
+    if not sobre_eje(casa, de, a):
         return soga, 0.0, 0.0
     cabeza = set(alb.get("de_cabeza") or [])
     for amb in ambientes(casa, nivel_id):
@@ -195,10 +266,11 @@ def seccion_muro(casa, nivel_id, de, a):
         pts = amb["poly"]
         if any(_intervalo(p, q, de, a) for p, q in zip(pts, pts[1:] + pts[:1])):
             return alb.get("muro_cabeza", 0.25), 0.0, 0.0
-    if alb.get("perimetral_al_ras", "exterior") != "exterior":
+    lado = lado_al_ras(casa, nivel_id, de, a)
+    if lado is None:
         return soga, 0.0, 0.0
     c = est["seccion_columna"] / 2 - soga / 2
-    return soga, afuera[0] * c, afuera[1] * c
+    return soga, lado[0] * c, lado[1] * c
 
 
 def muros(casa, nivel_id):

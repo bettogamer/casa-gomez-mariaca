@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-12_
+_Última actualización: 2026-10-16_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -74,6 +74,15 @@ _Última sesión: 2026-10-06._
    medidor), con cámara final del colector a ≥1 m del muro y un pase bajo la viga del riel.
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
    Fachada: dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
+
+## Obra: el albañil empezó por el altillo (2026-10-16)
+Tiene el **cuaderno v1** impreso. Se hizo el **cuaderno v2.0** (`make cuaderno`: completo + `salida/cuaderno-obra-v2.0-hojas-nuevas.pdf`
+para imprimir ya). Cambios (detalle en `docs/decisiones.md`, rama `feat/altillo-obra-v2`): muros sobre columnas al ras de una
+cara, aberturas al ras de las columnas, puertas del altillo más anchas, corrediza del altillo al estar, plano del albañil con
+las medidas dibujadas y aberturas de frente con alturas.
+**Pendiente con el dueño:** (a) ¿puertas de PB y P1 también más anchas? (b) puerta de entrada y ranura del living a 17.5 cm
+de su columna; (c) calefón solar o a gas; (d) pulir el plano del albañil del P1 (zona de la suite, rótulos apretados)
+antes de imprimir esas hojas.
 
 ## Revisión del arquitecto (2026-10-07)
 Primera revisión completa de la casa: 26 puntos en `docs/revision-arquitecto.md` (6 urgentes de PB). Se trabajan
