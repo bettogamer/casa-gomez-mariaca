@@ -1029,13 +1029,13 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   con código (V/P/C), ancho × alto y antepecho, cadenas de medidas de cara a cara; y una hoja con cada abertura de frente
   con sus alturas. **Cuaderno v2.0** con hoja "qué cambió" y PDF corto `cuaderno-obra-v2.0-hojas-nuevas.pdf`.
 - **Calefón solar** en vez de gas: el dueño lo está pensando (no decidido). No se tocó el modelo; pregunta 15 al ingeniero.
-- **Ajuste del mismo día (dueño, v2.1):** la corrediza va FRENTE AL ESTAR (x 11.35–13.35, centrada en el sofá y en el eje
+- **Ajuste del mismo día (dueño, entra en la v2.0):** la corrediza va FRENTE AL ESTAR (x 11.35–13.35, centrada en el sofá y en el eje
   12.35), no frente al baño; se quita la ventana sur del estar y el muro sur entre x 9.40 y 11.35 queda ciego. Piletas y
   lavadora al oeste de la franja, bajo la ventana del comedor (x 7.30–9.15), con la semisombra encima; caños por el
-  contrapiso hasta bajo esa ventana, desagüe ~1.3 m por la franja a la bajada de x 9.60. Cuaderno v2.1.
+  contrapiso hasta bajo esa ventana, desagüe ~1.3 m por la franja a la bajada de x 9.60. Va en el cuaderno v2.0 (todavía no impreso).
 - **Ventana de la cocina del altillo (V1) junto a A3:** pendiente. En el plano quedan 27.5 cm de ladrillo hasta la cara
   de A3 (si la columna es de 25); no se puede pegar a la columna porque en ese rincón sube el ducto de A3 (caños del tanque).
-- **Techo del altillo para la obra (v2.1):** dos hojas nuevas en el cuaderno (planta del techo y corte norte–sur con
+- **Techo del altillo para la obra (cuaderno v2.0):** dos hojas nuevas en el cuaderno (planta del techo y corte norte–sur con
   paso a paso). Aclarado: los muros de afuera del departamento suben de una vez hasta +10.20 (el antepecho es el mismo
   muro); la calamina se apoya por dentro (+10.05 norte, +9.35 sur) y termina contra el muro sur con la canaleta; gárgolas a
   ~+9.20; cielo raso ~2.55 libres (a definir, debajo de la canaleta). Sin cambios de diseño. Pregunta 16 al ingeniero

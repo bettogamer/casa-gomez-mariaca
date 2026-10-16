@@ -27,18 +27,17 @@ proyecto:
   # Cuaderno de obra impreso (make cuaderno). La v1 (2026-10-12) ya está impresa y en manos del maestro: cada versión
   # nueva dice qué cambió y qué hojas reemplazar, y además sale un PDF corto solo con las hojas nuevas.
   cuaderno:
-    version: "2.1"
+    version: "2.0"
     fecha: 2026-10-16
-    reemplazar: "Todas las hojas del ALTILLO (plano, muros, puertas y ventanas) y la hoja «Ladrillo y forma de asentar». Las de planta baja y primer piso también cambian, pero se pueden imprimir cuando el albañil llegue a esos pisos."
+    reemplazar: "Todas las hojas del ALTILLO (plano, muros, puertas y ventanas; las del techo son nuevas) y la hoja «Ladrillo y forma de asentar». Las de planta baja y primer piso también cambian, pero se pueden imprimir cuando el albañil llegue a esos pisos."
     cambios:
-      - "v2.1 — ALTILLO: LA CORREDIZA VA FRENTE AL ESTAR (no frente al baño): 2.00 en x 11.35 a 13.35, centrada en el sofá. Ya no hay ventana sur en el estar. Entre x 9.40 y 11.35 el muro sur queda CIEGO."
-      - "v2.1 — ALTILLO, TECHO: dos hojas nuevas (planta y corte). Los muros de afuera del departamento suben DE UNA VEZ hasta +10.20 (el antepecho es el mismo muro). Lo que se deja en los muros (gárgolas, anclajes del techo de la terraza) y lo que falta decidir antes de techar."
-      - "v2.1 — ALTILLO: PILETAS Y LAVADORA AL OESTE de la franja, bajo la ventana del comedor (V7). Los caños de agua llegan bajo esa ventana; el desagüe va por el contrapiso de la franja hasta la bajada de siempre (x 9.60)."
-      - "v2.0 — MUROS SOBRE LA LÍNEA DE COLUMNAS: ya no van centrados. Van AL RAS DE UNA CARA de la columna (el plano dice cuál; la columna asoma 10 cm del otro lado). Los de afuera, al ras de la cara de afuera, también el del altillo que da a la terraza (eje 2)."
-      - "v2.0 — PUERTAS Y VENTANAS JUNTO A UNA COLUMNA: van AL RAS de la columna (sin pedacito de ladrillo, que no agarra el marco). Altillo: ventana alta del estar (A4), ventana del dormitorio al patio (B5) y puerta del baño (B4). Primer piso: ventana del Cuarto 1, puertas de blancos, Baño 2 y de los dos cuartos. Planta baja: puerta del depósito."
-      - "v2.0 — ALTILLO: PUERTAS MÁS ANCHAS (hueco que deja el albañil): a la terraza 1.00, al dormitorio 1.00, al baño 0.85 (más ancha choca con la ducha), entrada al departamento 0.75 (no entra más: al lado están los últimos escalones). Todas pegadas al muro o a la columna."
-      - "v2.0 — ALTILLO: LA CORREDIZA SE VA AL ESTAR (en la v2.1 se corrió frente al sofá). Donde estaba, en el comedor, va una ventana de 1.00 × 1.10. Los muebles grandes entran por la terraza, la franja y esta corrediza."
-      - "v2.0 — LOS PLANOS DEL ALBAÑIL TRAEN LAS MEDIDAS DIBUJADAS: cada puerta y ventana con su código (V1, P1, C1), ancho × alto y antepecho, y una cadena de medidas de cara a cara de columnas y muros. Y una hoja con cada puerta y ventana VISTA DE FRENTE con sus alturas desde el piso."
+      - "MUROS SOBRE LA LÍNEA DE COLUMNAS: ya no van centrados. Van AL RAS DE UNA CARA de la columna (el plano dice cuál; la columna asoma 10 cm del otro lado). Los de afuera, al ras de la cara de afuera, también el del altillo que da a la terraza (eje 2)."
+      - "PUERTAS Y VENTANAS JUNTO A UNA COLUMNA: van AL RAS de la columna (sin pedacito de ladrillo, que no agarra el marco). Altillo: ventana alta del estar (A4), ventana del dormitorio al patio (B5) y puerta del baño (B4). Primer piso: ventana del Cuarto 1, puertas de blancos, Baño 2 y de los dos cuartos. Planta baja: puerta del depósito."
+      - "ALTILLO: PUERTAS MÁS ANCHAS (hueco que deja el albañil): a la terraza 1.00, al dormitorio 1.00, al baño 0.85 (más ancha choca con la ducha), entrada al departamento 0.75 (no entra más: al lado están los últimos escalones). Todas pegadas al muro o a la columna."
+      - "ALTILLO: LA CORREDIZA VA FRENTE AL ESTAR (no en el comedor): 2.00 en x 11.35 a 13.35, centrada en el sofá; ya no hay ventana sur en el estar y entre x 9.40 y 11.35 el muro sur queda CIEGO. En el comedor, donde estaba la corrediza, va una ventana de 1.00 × 1.10 (V7). Los muebles grandes entran por la terraza, la franja y la corrediza."
+      - "ALTILLO: PILETAS Y LAVADORA AL OESTE de la franja, bajo la ventana del comedor (V7). Los caños de agua llegan bajo esa ventana; el desagüe va por el contrapiso de la franja hasta la bajada de siempre (x 9.60)."
+      - "ALTILLO, TECHO: dos hojas nuevas (planta y corte). Los muros de afuera del departamento suben DE UNA VEZ hasta +10.20 (el antepecho es el mismo muro). Lo que se deja en los muros (gárgolas, anclajes del techo de la terraza) y lo que falta decidir antes de techar."
+      - "LOS PLANOS DEL ALBAÑIL TRAEN LAS MEDIDAS DIBUJADAS: cada puerta y ventana con su código (V1, P1, C1), ancho × alto y antepecho, y una cadena de medidas de cara a cara de columnas y muros. Y una hoja con cada puerta y ventana VISTA DE FRENTE con sus alturas desde el piso."
 
 lote:
   largo: 37.25          # P1-P2 (colinda Lote 105, Jesús Maldonado)
