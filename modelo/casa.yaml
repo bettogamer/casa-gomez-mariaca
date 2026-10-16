@@ -926,11 +926,11 @@ instalaciones:
             - {pos: [13.20, 0.25], tipo: movimiento, nota: "comedor"}
       luces_extra:
         # Cocina
-        - {pos: [13.60, 4.40], nota: "colgante sobre la isla (1 de 2)", estado: propuesto}
-        - {pos: [14.60, 4.40], nota: "colgante sobre la isla (2 de 2)", estado: propuesto}
-        - {pos: [16.30, 5.15], nota: "luz de techo sobre el lavaplatos (ahí hay ventana, no alacena)", estado: propuesto}
-        - {pos: [13.60, 6.25], nota: "tira LED bajo las alacenas del muro sur, x 12.80–14.40, a ~1.45, con tecla propia", estado: propuesto}
-        - {pos: [15.95, 6.25], nota: "tira LED bajo las alacenas del muro sur, x 15.15–16.78, a ~1.45 (misma tecla)", estado: propuesto}
+        - {rotulo: colgante isla, pos: [13.60, 4.40], nota: "colgante sobre la isla (1 de 2)", estado: propuesto}
+        - {rotulo: colgante isla, pos: [14.60, 4.40], nota: "colgante sobre la isla (2 de 2)", estado: propuesto}
+        - {rotulo: sobre el lavaplatos, pos: [16.30, 5.15], nota: "luz de techo sobre el lavaplatos (ahí hay ventana, no alacena)", estado: propuesto}
+        - {rotulo: LED bajo alacenas, pos: [13.60, 6.25], nota: "tira LED bajo las alacenas del muro sur, x 12.80–14.40, a ~1.45, con tecla propia", estado: propuesto}
+        - {rotulo: LED bajo alacenas, pos: [15.95, 6.25], nota: "tira LED bajo las alacenas del muro sur, x 15.15–16.78, a ~1.45 (misma tecla)", estado: propuesto}
         # Hall, pasillo, baño, estudio
         - {pos: [6.40, 3.40], nota: "hall: tramo hacia el pasillo (conmutada con la entrada)", estado: propuesto}
         - {pos: [8.20, 3.21], nota: "pasillo: segunda luz (conmutador en el hall y al final, junto a la cocina)", estado: propuesto}
@@ -1041,9 +1041,9 @@ instalaciones:
         - {amb: pasillo_pb, tipo: toma, pos: [10.40, 2.705], alto: 0.30, estado: propuesto, nota: "aspiradora"}
         # Cocina: teclas en el juego del final del pasillo; luces generales sobre los pasos; tomas del mesón a 1.10
         - {amb: cocina, tipo: interruptor, pos: [12.60, 2.705], alto: 1.10, estado: propuesto, nota: "juego del final del pasillo: tecla triple (generales, colgantes de la isla, LED bajo alacena)"}
-        - {amb: cocina, tipo: luz, pos: [12.10, 4.70], estado: propuesto, nota: "zona de la alacena, la torre y la puerta del almacén"}
-        - {amb: cocina, tipo: luz, pos: [14.20, 5.45], estado: propuesto, nota: "paso entre la isla y las hornallas"}
-        - {amb: cocina, tipo: luz, pos: [15.75, 4.40], estado: propuesto, nota: "paso entre la isla, el refrigerador y el lavavajillas"}
+        - {amb: cocina, tipo: luz, rotulo: alacena y torre, pos: [12.10, 4.70], estado: propuesto, nota: "zona de la alacena, la torre y la puerta del almacén"}
+        - {amb: cocina, tipo: luz, rotulo: entre isla y hornallas, pos: [14.20, 5.45], estado: propuesto, nota: "paso entre la isla y las hornallas"}
+        - {amb: cocina, tipo: luz, rotulo: isla – refrigerador, pos: [15.75, 4.40], estado: propuesto, nota: "paso entre la isla, el refrigerador y el lavavajillas"}
         - {amb: cocina, tipo: toma, pos: [13.30, 6.645], alto: 1.10, estado: propuesto, nota: "mesón: toma doble (a 1.10 de las hornallas)"}
         - {amb: cocina, tipo: toma, pos: [13.80, 6.645], alto: 1.10, estado: propuesto, nota: "mesón: toma doble (a 0.60 de las hornallas)"}
         - {amb: cocina, tipo: toma, pos: [15.80, 6.645], alto: 1.10, estado: propuesto, nota: "mesón: toma doble (a 0.65 de las hornallas)"}
@@ -1398,9 +1398,9 @@ instalaciones:
         - {amb: cocina_alt, tipo: conmutador, pos: [7.075, 3.72], alto: 1.10, luces: [luz_paso_alt], estado: propuesto, nota: "entrada, lado de la manija (bisagra al sur): luz del CAMINO, conmutada con la tecla junto a la puerta del dormitorio. Caja doble con la de abajo"}
         - {amb: cocina_alt, tipo: interruptor, pos: [7.075, 3.58], alto: 1.10, luces: [luz_comedor_alt], estado: propuesto, nota: "colgante del comedor (misma caja doble que el conmutador del camino)"}
         - {amb: cocina_alt, tipo: interruptor, pos: [7.075, 2.05], alto: 1.10, luces: [luz_cocina_alt, led_alacena_alt], estado: propuesto, nota: "tecla doble a la boca de la cocina (entre la punta del brazo oeste y la columna B3): luz de la cocina + LED bajo la alacena"}
-        - {amb: cocina_alt, tipo: luz, id: luz_cocina_alt, pos: [8.20, 1.20], estado: propuesto, nota: "al centro de la U"}
+        - {amb: cocina_alt, tipo: luz, id: luz_cocina_alt, rotulo: centro de la cocina, pos: [8.20, 1.20], estado: propuesto, nota: "al centro de la U"}
         - {amb: cocina_alt, tipo: luz, id: led_alacena_alt, pos: [9.325, 1.55], alto: 1.40, estado: propuesto, nota: "tira LED bajo la alacena del brazo este (sobre el lavaplatos); la caja va arriba, dentro de la alacena"}
-        - {amb: cocina_alt, tipo: luz, id: luz_comedor_alt, pos: [8.00, 3.15], estado: propuesto, nota: "colgante sobre el centro de la mesa (~0.75 sobre la mesa)"}
+        - {amb: cocina_alt, tipo: luz, id: luz_comedor_alt, rotulo: colgante mesa, pos: [8.00, 3.15], estado: propuesto, nota: "colgante sobre el centro de la mesa (~0.75 sobre la mesa)"}
         - {amb: cocina_alt, tipo: toma, pos: [7.075, 0.85], alto: 1.10, circuito: C15, estado: propuesto, nota: "mesada oeste: toma doble (hervidor, licuadora), lejos del anafe y del lavaplatos"}
         - {amb: cocina_alt, tipo: toma, pos: [7.075, 1.15], alto: 1.10, circuito: C15, estado: propuesto, nota: "mesada oeste: segunda toma doble. En las mesadas norte y este no hay muro a ≥0.60 del anafe y del lavaplatos (bajo la ventana no va nada)"}
         - {amb: cocina_alt, tipo: especial, etiqueta: M, pos: [7.075, 1.60], alto: 1.30, circuito: C15, estado: propuesto, nota: "MICROONDAS apoyado en la punta del brazo oeste: toma propia arriba del aparato"}

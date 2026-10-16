@@ -14,7 +14,7 @@ empresa de agua y de YPFB). Sirve para ubicar y conversar.
 import math
 
 from casa import SALIDA, _intervalo, aberturas, ambientes, area, caja, cargar, centroide, columnas, dentro, muebles, muros
-from render_svg import ESC, Lienzo, dibujar_aberturas, dibujar_columnas, dibujar_escalera, dibujar_muros, flecha_norte, leyenda
+from render_svg import ESC, Lienzo, dibujar_aberturas, dibujar_muebles, dibujar_columnas, dibujar_escalera, dibujar_muros, flecha_norte, leyenda
 
 TENSION = 220  # V
 
@@ -469,7 +469,7 @@ def electrico(casa, nivel_id):
         else:
             circ = uso["luz_social"] if amb["id"] in SOCIALES else uso["luz"]
         agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False, id=l.get("id"),
-                clase=clase_luz(l.get("nota"), l.get("alto"), l.get("clase")), alto=l.get("alto"))
+                clase=clase_luz(l.get("nota"), l.get("alto"), l.get("clase")), alto=l.get("alto"), rotulo=l.get("rotulo"))
     # bomba de agua (en la cisterna o en el pozo)
     san = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {})
     fuente = san.get("cisterna") or san.get("pozo")
@@ -523,7 +523,8 @@ def electrico(casa, nivel_id):
         agregar(tipo=t if t in FAMILIA or t in ("especial", "detector") else "toma", pos=tuple(mp["pos"]), circuito=circ, va=va,
                 etiqueta=mp.get("etiqueta", ""), amb=amb_id, gen=False, manual=True, luces=mp.get("luces"),
                 id=mp.get("id"), alto=mp.get("alto"),
-                clase=clase_luz(mp.get("nota"), mp.get("alto"), mp.get("clase")) if t == "luz" else None)
+                clase=clase_luz(mp.get("nota"), mp.get("alto"), mp.get("clase")) if t == "luz" else None,
+                rotulo=mp.get("rotulo"))
     # luces y teclas a otro circuito de iluminación según el ambiente
     for q in puntos:
         nuevo = LUZ_POR_AMBIENTE.get(nivel_id, {}).get(q.get("amb"))
@@ -769,6 +770,10 @@ def plano_electrico(casa, nivel, capa=None, recorte=(None, None), leyenda_svg=Tr
                                 [pozo["pos"]] if pozo else [])
     luces, tomas = capa in (None, "luces"), capa in (None, "tomas")
     naranja = NARANJA
+    # muebles de fondo, apenas visibles: para saber a qué sirve cada luz y cada enchufe (pedido del dueño 2026-10-16)
+    L.add('<g opacity="0.28">')
+    dibujar_muebles(L, casa, nivel["id"])
+    L.add('</g>')
     if luces:
         for a, b in cables:
             L.linea(a[0], a[1], b[0], b[1], f'stroke="{naranja}" stroke-width="0.8" stroke-dasharray="4 3"')
@@ -778,6 +783,8 @@ def plano_electrico(casa, nivel, capa=None, recorte=(None, None), leyenda_svg=Tr
             continue
         _dibujar_punto(L, p, naranja)
         x, y = p["pos"]
+        if p.get("rotulo"):        # para qué es esa luz (rótulo corto del modelo)
+            L.texto(x, y + 0.33, p["rotulo"], 6, f'fill="#bf360c" font-style="italic" stroke="#fff" stroke-width="2.5" paint-order="stroke"')
         if p.get("alto") and t != "luz":
             L.texto(x, y + 0.27, f"h{p['alto']:.2f}", 5, 'fill="#555"')
     if tomas and cfg.get("tablero"):
