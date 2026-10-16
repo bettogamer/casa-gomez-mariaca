@@ -51,7 +51,7 @@ _Última sesión: 2026-10-06._
 - Muros: ladrillo de 6 huecos; living de cabeza, resto de soga al ras exterior de las columnas.
 - Living sin corrediza (TV al oeste, ventana norte de 3.00); logia con muro bajo + celosía al norte.
 - Calefón de toda la casa en la terraza del altillo junto a A2 (sin termotanques); tanque a +10.50; caños PPR.
-- Agua: SEMAPA → cisterna enterrada (nueva, junto a la puerta peatonal) → bomba → tanque. Reserva para paneles solares.
+- Agua: SEMAPA → cisterna enterrada (nueva, junto a la puerta peatonal; ~10 m³ desde 2026-10-16) → bomba → tanque. Reserva para paneles solares.
 - Llegada del altillo según la obra (hueco extra sobre el tramo de 10; muro propuesto sobre el eje B).
 - Fachada: alzados en `make build`, opción **C** elegida (blanco, piedra, madera, gris); 3D con materiales y sol.
 - **Frente aprobado:** autos en fila al norte con portón corredizo de 3.20, puerta peatonal al sur, camino recto,

@@ -1093,3 +1093,10 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   con techos / Inicio), panel de opciones plegado en "☰ Más opciones", ayuda de dedos, ángulo más abierto con el celular
   parado y menos carga (sombras y resolución).
 - **Ojo:** en Vercel la página la ve cualquiera que tenga el enlace (no hay contraseña en el plan gratis).
+
+## 2026-10-16 — Cisterna de ~10 m³ (pedido del dueño, consejo de un ingeniero amigo)
+- Antes ~5 m³ (1.00 × 3.10 × 1.60 de agua). Ahora **~1.00 × 4.80 por dentro con 2.10 de agua útil (~10 m³)**,
+  ~1.40 × 5.20 por fuera (x -13.75 a -8.55), ~2.7 de hondo, siempre bajo el camino y pegada al muro sur.
+- No se ensancha (al norte van la impulsión y el cable). Se eligió alargar y ahondar un poco a la vez: más larga sola
+  (6.25 m) quedaba a ~1.4 del pozo de absorción de BP1; más honda sola (3.2 de agua) era una excavación de ~3.7 junto al
+  vecino. Queda a ~2.7 del pozo. Medidas y espesores los define el ingeniero.
