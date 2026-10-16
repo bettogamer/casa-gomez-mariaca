@@ -22,7 +22,23 @@ PLANTILLA = r"""<!doctype html>
   #panel .mini { color: #666; font-size: 11px; margin-top: 8px; }
   .modo button { border: 1px solid #bbb; background: #f6f6f6; padding: 4px 8px; border-radius: 6px; cursor: pointer; margin: 2px 2px 2px 0; }
   .modo button.on { background: #1565c0; color: #fff; border-color: #1565c0; }
-  #info { position: absolute; bottom: 12px; left: 12px; background: #fffffff0; padding: 6px 10px; border-radius: 8px; font-size: 12px; }
+  #info { position: absolute; bottom: 72px; left: 12px; background: #fffffff0; padding: 6px 10px; border-radius: 8px; font-size: 12px; }
+  html, body { height: 100dvh; } canvas { touch-action: none; display: block; }
+  /* barra de botones grandes (celular y la página de la obra) */
+  #barra { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 6px; padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+           overflow-x: auto; background: #ffffffe8; box-shadow: 0 -2px 10px #0002; }
+  #barra button, #barra a { flex: 0 0 auto; border: 2px solid #1565c0; background: #fff; color: #111; border-radius: 10px;
+           padding: 9px 12px; font: bold 15px -apple-system, Helvetica, Arial, sans-serif; text-decoration: none; white-space: nowrap; }
+  #barra .on { background: #1565c0; color: #fff; }
+  #barra .sep { flex: 0 0 1px; background: #ccc; margin: 0 2px; }
+  #volver { display: none; } #abrir-panel { display: none; }
+  #ayuda { position: absolute; top: 10px; right: 10px; background: #000a; color: #fff; padding: 6px 10px; border-radius: 8px;
+           font-size: 13px; pointer-events: none; transition: opacity 1s; }
+  @media (max-width: 760px), (pointer: coarse) {
+    #panel { display: none; left: 8px; right: 8px; top: 8px; max-width: none; max-height: calc(100dvh - 90px); overflow-y: auto; font-size: 15px; }
+    #panel.abierto { display: block; } #panel label { padding: 5px 0; } #panel select, #panel button { font-size: 15px; padding: 6px; }
+    #abrir-panel { display: block; } #info { display: none; } #panel .mini { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -57,6 +73,20 @@ PLANTILLA = r"""<!doctype html>
   <div class="mini">Arrastrar: girar · Rueda: zoom · Clic derecho: mover<br>Rojo = columnas construidas</div>
 </div>
 <div id="info">Generado desde modelo/casa.yaml</div>
+<div id="ayuda"></div>
+<div id="barra">
+  <a id="volver" href="/">🏠 Inicio</a>
+  <button data-piso="todo" class="on">Toda la casa</button>
+  <button data-piso="pb">Planta baja</button>
+  <button data-piso="p1">Primer piso</button>
+  <button data-piso="altillo">Altillo</button>
+  <span class="sep"></span>
+  <button data-ir="vista-calle">Desde la calle</button>
+  <button data-ir="vista-retiro">Desde el retiro</button>
+  <button data-ir="vista-techos">Con techos</button>
+  <span class="sep"></span>
+  <button id="abrir-panel">☰ Más opciones</button>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
@@ -66,7 +96,8 @@ const escena = new THREE.Scene();
 escena.background = new THREE.Color(0xe9eef2);
 const camara = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 500);
 const render = new THREE.WebGLRenderer({ antialias: true });
-render.setPixelRatio(devicePixelRatio);
+const TACTIL = matchMedia("(pointer: coarse)").matches;
+render.setPixelRatio(Math.min(devicePixelRatio, TACTIL ? 1.5 : 2));   // en el celular: más liviano
 render.setSize(innerWidth, innerHeight);
 render.shadowMap.enabled = true;
 document.body.appendChild(render.domElement);
@@ -75,13 +106,15 @@ const cx = (D.huella[0] + D.huella[2]) / 2, cz = (D.huella[1] + D.huella[3]) / 2
 camara.position.set(cx - 14, 16, cz + 20);
 const ctl = new THREE.OrbitControls(camara, render.domElement);
 ctl.target.set(cx, 2.5, cz);
+ctl.enableDamping = true; ctl.dampingFactor = 0.12;
+ctl.screenSpacePanning = true;
 ctl.update();
 
 escena.add(new THREE.HemisphereLight(0xffffff, 0x888877, 0.75));
 const sol = new THREE.DirectionalLight(0xffffff, 0.6);
 sol.position.set(cx - 15, 30, cz - 20);
 sol.castShadow = true;
-sol.shadow.mapSize.set(2048, 2048);
+sol.shadow.mapSize.set(TACTIL ? 1024 : 2048, TACTIL ? 1024 : 2048);
 Object.assign(sol.shadow.camera, { left: -30, right: 30, top: 30, bottom: -30 });
 escena.add(sol);
 
@@ -511,17 +544,51 @@ if (location.hash.includes("pb")) cont.querySelectorAll("input").forEach(i => i.
 actualizar();
 if (location.hash.includes("techos")) document.getElementById("vista-techos").click();   // #techos
 if (location.hash.includes("calle")) document.getElementById("vista-calle").click();     // #calle
-if (location.hash.includes("foto")) { document.getElementById("cerco").checked = false; actualizar(); ["panel", "info"].forEach(id => document.getElementById(id).style.display = "none"); G.techos.children.forEach(o => { if (o.isSprite) o.visible = false; }); }  // #calle&foto: captura limpia
+if (location.hash.includes("foto")) { document.getElementById("cerco").checked = false; actualizar(); ["panel", "info", "barra", "ayuda"].forEach(id => document.getElementById(id).style.display = "none"); G.techos.children.forEach(o => { if (o.isSprite) o.visible = false; }); }  // #calle&foto: captura limpia
 // #vista=Cuarto 1 → abre directamente la vista de ese ambiente (busca por nombre)
 const mv = decodeURIComponent(location.hash).match(/vista=([^&]+)/);
 if (mv) { const k = VISTAS.findIndex(v => (v.nv.nombre + ": " + v.a.nombre).toLowerCase().includes(mv[1].toLowerCase())); if (k >= 0) { selVista.value = k; irAVista(k); } }
 
-addEventListener("resize", () => {
+// Barra de botones grandes: un piso por vez (ese y los de abajo, muros cortados, solo sus nombres) o toda la casa
+function marcarBarra(b) { document.querySelectorAll("#barra [data-piso], #barra [data-ir]").forEach(o => o.classList.toggle("on", o === b)); }
+document.querySelectorAll("#barra [data-piso]").forEach(b => b.addEventListener("click", () => {
+  marcarBarra(b);
+  const id = b.dataset.piso;
+  if (id === "todo") { document.getElementById("vista-general").click(); return; }
+  const nv = D.niveles.find(n => n.id === id);
+  selVista.value = ""; nivelVista = id; modo = "proyecto";
+  document.querySelectorAll(".modo button").forEach(o => o.classList.toggle("on", o.dataset.modo === "proyecto"));
+  cont.querySelectorAll("input").forEach(i => i.checked = D.niveles.find(n => n.id === i.dataset.nivel).cota <= nv.cota + 0.01);
+  document.getElementById("corte").checked = true; document.getElementById("techos").checked = false;
+  document.getElementById("fachada").checked = false; document.getElementById("etiquetas").checked = true;
+  actualizar();
+  ctl.target.set(cx, nv.cota, cz);
+  camara.position.set(cx - 6, nv.cota + 19, cz + 12); ctl.update();
+}));
+document.querySelectorAll("#barra [data-ir]").forEach(b => b.addEventListener("click", () => {
+  document.getElementById(b.dataset.ir).click(); marcarBarra(b);
+}));
+const panel = document.getElementById("panel");
+document.getElementById("abrir-panel").addEventListener("click", () => panel.classList.toggle("abierto"));
+render.domElement.addEventListener("pointerdown", () => panel.classList.remove("abierto"));
+// Dentro de la página de la obra (no con doble clic): botón para volver al inicio
+if (location.protocol.startsWith("http")) document.getElementById("volver").style.display = "block";
+const ayuda = document.getElementById("ayuda");
+ayuda.textContent = TACTIL ? "1 dedo: girar · 2 dedos: acercar y mover" : "Arrastrar: girar · Rueda: zoom · Clic derecho: mover";
+setTimeout(() => ayuda.style.opacity = 0, 6000);
+
+// Pantalla angosta (celular parado): se abre el ángulo para que entre la casa a lo ancho
+function ajustarAngulo() {
   camara.aspect = innerWidth / innerHeight;
+  camara.fov = camara.aspect >= 1 ? 45 : Math.min(72, 2 * Math.atan(Math.tan(22.5 * Math.PI / 180) / camara.aspect) * 180 / Math.PI);
   camara.updateProjectionMatrix();
+}
+ajustarAngulo();
+addEventListener("resize", () => {
+  ajustarAngulo();
   render.setSize(innerWidth, innerHeight);
 });
-(function bucle() { requestAnimationFrame(bucle); render.render(escena, camara); })();
+(function bucle() { requestAnimationFrame(bucle); ctl.update(); render.render(escena, camara); })();
 </script>
 </body>
 </html>

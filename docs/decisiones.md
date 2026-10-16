@@ -1081,3 +1081,15 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   tecla que el de la corrediza); dos tubos enterrados de 1" (uno con cables, otro vacío con alambre guía) desde la base
   del muro este (y 4.10) hasta una caja IP65 con toma doble en un pilarcito al fondo (21.55, 4.10). Cruzan colector y gas
   en perpendicular; a ~1.1 del pozo de lluvia. Nada más en el patio hasta que el dueño lo decida.
+
+## 2026-10-16 — Página web de la obra y visor 3D para el celular (pedido del dueño)
+- **Página web de la obra** (`make sitio` → `salida/sitio/`; `make publicar` la sube a Vercel): las MISMAS hojas del
+  cuaderno, siempre la última versión, para el celular de cada trabajador. Se navega con botones grandes
+  OFICIO → PISO → HOJA, con direcciones claras (`/albanil/primer-piso/muros-de-ladrillo/`). En cada hoja: "ver esto en
+  otro piso" (mismo tema), "otras hojas" de ese oficio y piso, anterior/siguiente y "ver este piso de otro oficio".
+  "Para todos": cómo leer las medidas, qué cambió y medidas a tomar. "La casa entera": fachadas, plantas, techos y 3D.
+  Los planos se abren grandes al tocarlos. El cuaderno impreso sigue igual (`make cuaderno` también genera la página).
+- **Visor 3D en el celular:** barra de botones grandes abajo (toda la casa / un piso / desde la calle / desde el retiro /
+  con techos / Inicio), panel de opciones plegado en "☰ Más opciones", ayuda de dedos, ángulo más abierto con el celular
+  parado y menos carga (sombras y resolución).
+- **Ojo:** en Vercel la página la ve cualquiera que tenga el enlace (no hay contraseña en el plan gratis).
