@@ -313,6 +313,28 @@ def _accesos(casa, nivel_id, amb, abs_):
     return propias
 
 
+CLASES_LUZ = {
+    "techo": "foco de techo",
+    "aplique": "aplique en la pared",
+    "led": "tira LED bajo un mueble o sobre un espejo",
+    "baliza": "luz baja de exterior (baliza, empotrada)",
+}
+
+
+def clase_luz(nota="", alto=None, clase=None):
+    """Qué clase de luz es (el maestro contaba todas como focos de techo, 2026-10-16). `clase:` en el modelo manda."""
+    if clase:
+        return clase
+    n = (nota or "").lower()
+    if "tira led" in n:
+        return "led"
+    if "baliza" in n or "luz baja" in n or (alto is not None and alto < 0.8):
+        return "baliza"
+    if "aplique" in n or (alto is not None and alto < 2.6):
+        return "aplique"
+    return "techo"
+
+
 def electrico(casa, nivel_id):
     """Devuelve (puntos, cables). puntos: dict(tipo, pos, circuito, etiqueta, va, amb, gen)."""
     puntos, cables = [], []
@@ -446,7 +468,8 @@ def electrico(casa, nivel_id):
             circ = uso["luz_ext"]
         else:
             circ = uso["luz_social"] if amb["id"] in SOCIALES else uso["luz"]
-        agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False, id=l.get("id"))
+        agregar(tipo="luz", pos=tuple(l["pos"]), circuito=circ, va=VA_LUZ, amb=amb and amb["id"], gen=False, id=l.get("id"),
+                clase=clase_luz(l.get("nota"), l.get("alto"), l.get("clase")), alto=l.get("alto"))
     # bomba de agua (en la cisterna o en el pozo)
     san = casa.get("instalaciones", {}).get(nivel_id, {}).get("sanitario", {})
     fuente = san.get("cisterna") or san.get("pozo")
@@ -499,7 +522,8 @@ def electrico(casa, nivel_id):
             circ, va = "-", 0
         agregar(tipo=t if t in FAMILIA or t in ("especial", "detector") else "toma", pos=tuple(mp["pos"]), circuito=circ, va=va,
                 etiqueta=mp.get("etiqueta", ""), amb=amb_id, gen=False, manual=True, luces=mp.get("luces"),
-                id=mp.get("id"), alto=mp.get("alto"))
+                id=mp.get("id"), alto=mp.get("alto"),
+                clase=clase_luz(mp.get("nota"), mp.get("alto"), mp.get("clase")) if t == "luz" else None)
     # luces y teclas a otro circuito de iluminación según el ambiente
     for q in puntos:
         nuevo = LUZ_POR_AMBIENTE.get(nivel_id, {}).get(q.get("amb"))
@@ -691,7 +715,19 @@ def _dibujar_punto(L, p, naranja=NARANJA):
     """Símbolo de un punto eléctrico (se usa en el plano y en las leyendas)."""
     x, y = p["pos"]
     t = p["tipo"]
-    if t == "luz":
+    if t == "luz" and p.get("clase") == "aplique":       # aplique de pared: medio círculo lleno con una A
+        _circulo(L, x, y, 0.15, f'fill="#fff" stroke="{naranja}" stroke-width="1.4"')
+        L.add(f'<path d="M {L.p(x - 0.15, y)[0]:.1f} {L.p(x, y)[1]:.1f} A {0.15 * 50:.1f} {0.15 * 50:.1f} 0 0 0 '
+              f'{L.p(x + 0.15, y)[0]:.1f} {L.p(x, y)[1]:.1f} Z" fill="{naranja}"/>')
+        L.texto(x, y - 0.025, "A", 7, f'fill="{naranja}" font-weight="bold"')
+    elif t == "luz" and p.get("clase") == "led":         # tira LED: barrita
+        L.poly([[x - 0.24, y - 0.06], [x + 0.24, y - 0.06], [x + 0.24, y + 0.06], [x - 0.24, y + 0.06]],
+               f'fill="{naranja}" stroke="{naranja}"')
+        L.texto(x, y + 0.04, "LED", 5, 'fill="#fff" font-weight="bold"')
+    elif t == "luz" and p.get("clase") == "baliza":      # luz baja de exterior: puntito lleno
+        _circulo(L, x, y, 0.08, f'fill="{naranja}"')
+        _circulo(L, x, y, 0.13, f'fill="none" stroke="{naranja}" stroke-width="0.8"')
+    elif t == "luz":                                     # foco de techo: círculo con cruz
         _circulo(L, x, y, 0.16, f'fill="#fff3e0" stroke="{naranja}" stroke-width="1.2"')
         L.linea(x - 0.11, y - 0.11, x + 0.11, y + 0.11, f'stroke="{naranja}" stroke-width="1"')
         L.linea(x - 0.11, y + 0.11, x + 0.11, y - 0.11, f'stroke="{naranja}" stroke-width="1"')
@@ -785,12 +821,17 @@ def plano_electrico(casa, nivel, capa=None, recorte=(None, None), leyenda_svg=Tr
     # leyenda de símbolos
     if leyenda_svg:
         lx, ly = x0 + 6, y1 + 1.15
-        items = [("luz", "luz de techo"), ("interruptor", "interruptor (Sc = conmutador)"), ("toma", "tomacorriente (circuito)"),
+        items = [("luz", "foco de techo"), ("luz:aplique", "aplique de pared"), ("luz:led", "tira LED"),
+                 ("interruptor", "interruptor (Sc = conmutador)"), ("toma", "tomacorriente (circuito)"),
                  ("especial", "toma especial"), ("datos", "datos / TV"), ("extractor", "extractor")]
         for k, (t, txt) in enumerate(items):
             cx = lx + k * 2.2
-            fake = {"tipo": t, "pos": (cx, ly), "circuito": "", "etiqueta": "X"}
-            _dibujar_simbolo(L, fake, naranja)
+            t, _, cl = t.partition(":")
+            fake = {"tipo": t, "pos": (cx, ly), "circuito": "", "etiqueta": "X", "clase": cl or None}
+            if t == "luz":
+                _dibujar_punto(L, fake, naranja)
+            else:
+                _dibujar_simbolo(L, fake, naranja)
             L.texto(cx + 0.25, ly + 0.05, txt, 7, 'fill="#444" text-anchor="start"')
     return L.svg(f"{nivel['nombre']} — eléctrico", *recorte), puntos
 

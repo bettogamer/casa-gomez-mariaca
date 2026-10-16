@@ -29,12 +29,15 @@ proyecto:
   cuaderno:
     version: "2.0"
     fecha: 2026-10-16
-    reemplazar: "Todas las hojas del ALTILLO (plano, muros, puertas y ventanas; las del techo son nuevas) y la hoja «Ladrillo y forma de asentar». Las de planta baja y primer piso también cambian, pero se pueden imprimir cuando el albañil llegue a esos pisos."
+    reemplazar: "Todas las hojas del ALTILLO (plano, muros, puertas y ventanas; las del techo son nuevas), la hoja «Ladrillo y forma de asentar» y las de LUCES Y TECLAS de los tres pisos. La de la BODEGA es nueva. Las de muros, puertas y ventanas de planta baja y primer piso también cambian, pero se pueden imprimir cuando el albañil llegue a esos pisos."
     cambios:
       - "MUROS SOBRE LA LÍNEA DE COLUMNAS: ya no van centrados. Van AL RAS DE UNA CARA de la columna (el plano dice cuál; la columna asoma 10 cm del otro lado). Los de afuera, al ras de la cara de afuera, también el del altillo que da a la terraza (eje 2)."
       - "PUERTAS Y VENTANAS JUNTO A UNA COLUMNA: van AL RAS de la columna (sin pedacito de ladrillo, que no agarra el marco). Altillo: ventana alta del estar (A4), ventana del dormitorio al patio (B5) y puerta del baño (B4). Primer piso: ventana del Cuarto 1, puertas de blancos, Baño 2 y de los dos cuartos. Planta baja: puerta del depósito."
       - "ALTILLO: PUERTAS MÁS ANCHAS (hueco que deja el albañil): a la terraza 1.00, al dormitorio 1.00, al baño 0.85 (más ancha choca con la ducha), entrada al departamento 0.75 (no entra más: al lado están los últimos escalones). Todas pegadas al muro o a la columna."
       - "ALTILLO: LA CORREDIZA VA FRENTE AL ESTAR (no en el comedor): 2.00 en x 11.35 a 13.35, centrada en el sofá; ya no hay ventana sur en el estar y entre x 9.40 y 11.35 el muro sur queda CIEGO. En el comedor, donde estaba la corrediza, va una ventana de 1.00 × 1.10 (V8). Los muebles grandes entran por la terraza, la franja y la corrediza."
+      - "PLANTA BAJA: SOLO EL MURO OESTE (el frente, eje 1, living e ingreso) VA DE CABEZA. Los demás muros del living pasan a soga (el norte al ras de afuera; el del lado de la escalera, al ras de la escalera)."
+      - "PLANTA BAJA: HOJA NUEVA DE LA BODEGA DEBAJO DE LA ESCALERA (planta con la altura libre bajo cada escalón y dos cortes). Los cajones hacia el hall solo entran bajo los escalones 4 a 6."
+      - "LUCES: ahora cada tipo tiene su símbolo. Círculo con cruz = FOCO DE TECHO; medio círculo con A = APLIQUE DE PARED; barrita LED = TIRA BAJO UN MUEBLE o sobre un espejo; puntito = luz baja de afuera. Las tablas para contar las separan. Adentro de la casa hay 44 focos de techo en total (1 o 2 por ambiente; la cocina de abajo, 6)."
       - "ALTILLO: VENTANA NUEVA EN LA LLEGADA DE LA ESCALERA (V7), frente al último tramo: 1.20 × 1.10, antepecho 1.00, del ancho del tramo y pegada al muro de la cocina. Da luz a la llegada con las puertas cerradas."
       - "ALTILLO: PILETAS Y LAVADORA AL OESTE de la franja, bajo la ventana del comedor (V8). Los caños de agua llegan bajo esa ventana; el desagüe va por el contrapiso de la franja hasta la bajada de siempre (x 9.60)."
       - "ALTILLO, TECHO: CAE AL NORTE (como dijo el maestro): el agua sale al retiro norte. Dos hojas nuevas (planta y corte). Los muros de afuera del departamento suben DE UNA VEZ hasta +10.20 (el antepecho es el mismo muro). Lo que se deja en los muros (gárgolas, anclajes del techo de la terraza) y lo que falta decidir antes de techar."
@@ -161,8 +164,9 @@ albanileria:
   ladrillo: "cerámico 6 huecos económico rayado, 25 × 15 × 10 cm, 2.7 kg, 23 pzas/m²"
   muro_soga: 0.15     # ladrillo de soga (10) + revoques: todos los muros, salvo los de `de_cabeza`
   muro_cabeza: 0.25   # ladrillo de cabeza (25), al ras de las columnas (con revoque ~0.29)
-  # Ambientes cuyos muros PERIMETRALES van de cabeza (para que no se noten las columnas).
-  de_cabeza: [living]
+  # Muros de cabeza (por ambiente o por línea): al ras de las dos caras de las columnas.
+  # 2026-10-16 (dueño): en PB SOLO el muro OESTE (el frente, eje 1: living e ingreso) va de cabeza; antes todos los del living.
+  de_cabeza: [{nivel: pb, x: 0.00}]
   # Perimetrales de soga: al ras de la CARA EXTERIOR de las columnas (fachada lisa; la columna
   # sobresale ~0.10 hacia adentro). Recomendación nuestra, a confirmar con el maestro.
   perimetral_al_ras: exterior
@@ -653,7 +657,7 @@ muebles:
     - {tipo: estante, nombre: Consola + espejo, rect: [3.20, 6.19, 4.50, 6.54], alto: 0.85, estado: propuesto, nota: "aplique sobre el espejo a ~1.90"}
     # Banca acortada a 1.00: las puertas del closet de abrigos ya no chocan con su punta
     - {tipo: estante, nombre: Banca + perchero, rect: [6.60, 4.30, 7.00, 5.30], alto: 0.45, estado: propuesto}
-    - {tipo: estante, nombre: Cajonera, rect: [4.53, 2.75, 5.65, 3.95], alto: 0.40, nota: "bajo el tramo de 10, se abre hacia el hall (tentativo: el usuario aún decide el uso)"}
+    - {tipo: estante, nombre: Cajonera, rect: [4.53, 2.75, 5.65, 3.30], alto: 0.40, nota: "bajo el tramo de 10, se abre hacia el hall (tentativo: el usuario aún decide el uso). 2026-10-16: solo hasta y 3.30: más al sur la escalera baja a menos de 0.40 del piso (antes llegaba a 3.95, no entraba). Ver si debajo de los primeros escalones hay relleno"}
     # Depósito bajo la grada: estantes del lado bajo
     - {tipo: estante, nombre: Herramientas, rect: [4.53, 0.30, 4.90, 2.55], alto: 0.80, nota: "2026-10-08 (plan B): empieza en y 0.30, al sur del ducto de A2 (agua caliente) del rincón"}
     # Baño: ducha al fondo, inodoro y lavamanos alternados
@@ -956,7 +960,7 @@ instalaciones:
         - {amb: hall, tipo: toma, pos: [3.40, 6.645], alto: 1.00, estado: propuesto, nota: "sobre la consola (lámpara, cargar celulares)"}
         - {amb: hall, tipo: toma, pos: [7.025, 5.70], alto: 0.30, estado: propuesto, nota: "aspiradora (entre la banca y el closet de abrigos)"}
         # Living: TV sobre mueble en el muro oeste, centrada en B1 (y 2.555–2.805 es hormigón: nada ahí)
-        - {amb: living, tipo: interruptor, pos: [4.275, 3.85], alto: 1.10, estado: propuesto, nota: "junto al paso del hall: tecla doble (luz central con dimmer + luz de la entrada)"}
+        - {amb: living, tipo: interruptor, pos: [4.375, 3.85], alto: 1.10, estado: propuesto, nota: "junto al paso del hall: tecla doble (luz central con dimmer + luz de la entrada)"}
         - {amb: living, tipo: luz, pos: [2.10, 2.70], estado: propuesto, nota: "sobre la mesa de centro, con dimmer (a 3.00 de alto no se refleja en la TV)"}
         - {amb: living, tipo: luz, pos: [3.40, 4.35], estado: propuesto, nota: "entrada del living, entre el sofá y la celosía"}
         - {amb: living, tipo: toma, pos: [0.125, 3.00], alto: 0.70, estado: propuesto, nota: "TV: toma doble en el ladrillo al sur de B1, detrás de la pantalla (justo encima del mueble)"}
@@ -964,8 +968,8 @@ instalaciones:
         - {amb: living, tipo: toma, pos: [0.125, 2.35], alto: 0.30, estado: propuesto, nota: "detrás del mueble de la TV, al norte de B1: decodificador y equipos"}
         - {amb: living, tipo: toma, pos: [0.125, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara del sillón de lectura"}
         - {amb: living, tipo: toma, pos: [0.125, 4.70], alto: 0.30, estado: propuesto, nota: "lámpara del sillón suroeste / aspiradora"}
-        - {amb: living, tipo: toma, pos: [4.275, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara de pie al costado del sofá (no detrás)"}
-        - {amb: living, tipo: toma, pos: [4.275, 3.80], alto: 0.30, estado: propuesto, nota: "general, debajo de la tecla"}
+        - {amb: living, tipo: toma, pos: [4.375, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara de pie al costado del sofá (no detrás)"}
+        - {amb: living, tipo: toma, pos: [4.375, 3.80], alto: 0.30, estado: propuesto, nota: "general, debajo de la tecla"}
         # Terraza (exterior, en el muro del living)
         - {amb: terraza, tipo: toma_ext, pos: [-0.125, 4.20], alto: 0.40, estado: propuesto, nota: "toma con tapa (IP44); lejos de la caja de la TV del otro lado del muro"}
         # ── Exteriores del frente (interiorista 2026-10-06) ──

@@ -259,7 +259,16 @@ def seccion_muro(casa, nivel_id, de, a):
     soga = alb.get("muro_soga", 0.15)
     if not sobre_eje(casa, de, a):
         return soga, 0.0, 0.0
-    cabeza = set(alb.get("de_cabeza") or [])
+    # de cabeza: por ambiente (nombre) o por línea ({nivel, x|y}: todo el muro sobre esa línea en ese nivel)
+    lineas = [r for r in alb.get("de_cabeza") or [] if isinstance(r, dict)]
+    cabeza = {r for r in alb.get("de_cabeza") or [] if isinstance(r, str)}
+    (x0, y0), (x1, y1) = de, a
+    for r in lineas:
+        if r.get("nivel", nivel_id) != nivel_id:
+            continue
+        if ("x" in r and abs(x0 - x1) < 0.01 and abs(x0 - r["x"]) < 0.01) or \
+           ("y" in r and abs(y0 - y1) < 0.01 and abs(y0 - r["y"]) < 0.01):
+            return alb.get("muro_cabeza", 0.25), 0.0, 0.0
     for amb in ambientes(casa, nivel_id):
         if amb["id"] not in cabeza:
             continue

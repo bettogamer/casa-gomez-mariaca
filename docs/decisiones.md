@@ -1058,3 +1058,17 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   y 2.0–3.0), cruzando el colector y el gas en perpendicular. Llave de la lavandería junto a las piletas nuevas. Hojas
   del techo del cuaderno v2.0 rehechas. Pregunta 16 al ingeniero ampliada (apoyo en ejes A y B con volado hasta el muro
   sur; encadenado; paso de la canaleta junto al tanque; termotanque solar).
+
+## 2026-10-16 — Muro de cabeza solo al frente, hoja de la bodega y símbolos de luces (pedidos del dueño y del maestro)
+- **PB: solo el muro OESTE (eje 1, living e ingreso) va de cabeza.** Antes iban de cabeza todos los del living. Ahora el
+  norte del living es de soga al ras de afuera y el del eje 2 de soga al ras de la escalera (la columna A2/B2 asoma
+  ~10 cm en el living). `albanileria.de_cabeza` acepta líneas (`{nivel, x|y}`). Tres puntos eléctricos del living
+  corridos 10 cm a la cara nueva.
+- **Bodega bajo la escalera:** hoja nueva en el cuaderno (planta con la altura libre bajo cada escalón y dos cortes:
+  1.92 bajo el descanso; del lado del baño sube a 2.48; del lado del living baja a 0.98 junto al hall). La cajonera
+  hacia el hall se achicó a y 2.75–3.30 (más al sur la escalera queda a menos de 0.40 del piso).
+- **Luces:** el maestro contó como focos de techo todos los círculos con cruz. Ahora cada luz tiene su clase
+  (`clase_luz` en tools/instalaciones.py; `clase:` en el modelo manda): foco de techo, aplique de pared, tira LED y luz
+  baja de afuera, cada una con su símbolo y su columna en las tablas para contar. Conteo: adentro 44 focos de techo
+  (1–2 por ambiente; cocina de PB 6), 14 apliques, 4 tiras LED; afuera 31. Recortes posibles propuestos al dueño
+  (sin aplicar).
