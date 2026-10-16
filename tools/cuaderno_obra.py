@@ -703,6 +703,46 @@ for nid, nombre in NIVELES:
                        f"<th>Dintel</th><th>Cómo</th></tr></thead><tbody>{tabla_vanos(nid)}</tbody></table>", seccion=S,
                        nueva=True if nid == "altillo" else "luego"))
 
+# Techo del altillo (2026-10-16): planta y corte para el albañil, con lo que falta decidir antes de techar.
+tq = (c.get("techos") or {}).get("tanque") or {}
+TOPE = max(m["cota_tope"] for m in (c.get("techos") or {}).get("antepechos", []))
+(SALIDA / "obra-techo-altillo.svg").write_text(O.planta_techo_obra(c), encoding="utf-8")
+(SALIDA / "obra-techo-corte.svg").write_text(O.corte_techo_svg(c), encoding="utf-8")
+partes.append(hoja("Altillo — TECHO: planta (cotas aproximadas, desde el nivel ±0.00 de la vereda)",
+                   '<img class="plano alb" src="obra-techo-altillo.svg">' + "<p class=lee>Departamento: calamina a un agua que "
+                   "cae al SUR, escondida detrás del antepecho; canaleta por dentro hasta la bajante BP2 (esquina del fondo); "
+                   "gárgolas de rebalse por si se tapa. Terraza: techo propio de calamina sobre fierro a la vista que cae al "
+                   "frente, sobre postes en A1 y B1. Las cotas son desde la vereda (el piso del altillo está a +6.60).</p>",
+                   seccion=S, nueva=True))
+partes.append(hoja("Altillo — TECHO: corte norte–sur y paso a paso",
+                   '<img class="plano corte" src="obra-techo-corte.svg">' + pasos(
+    paso(1, "Muros de afuera del departamento", [
+        f"Suben <b>de una sola vez hasta +{TOPE:.2f}</b> ({TOPE - 6.60:.2f} sobre el piso del altillo): la parte de arriba es el "
+        "<b>antepecho</b> que tapa el techo. No cortar el muro a la altura del techo.",
+        "Columnas y viga de encadenado (dónde y de qué tamaño): <b>lo dice el ingeniero</b>.",
+        "Arriba del antepecho, remate con pendiente hacia adentro, para que el agua no manche la fachada.",
+    ], "albañil + ingeniero"),
+    paso(2, "Lo que se deja en los muros mientras se levantan", [
+        "<b>Muro sur:</b> 3 tubos de rebalse (gárgolas) a ~+9.20, uno cada ~4 m, saliendo ~10 cm afuera, con caída hacia afuera "
+        "(diámetro: el plomero).",
+        "<b>Muro oeste (el de la terraza, eje 2):</b> anclajes para las vigas de fierro del techo de la terraza a ~+9.80 "
+        "(los define el herrero).",
+        "<b>Fondo (eje 5):</b> la canaleta sale por la esquina sureste del departamento y baja por el antepecho del fondo de la franja hasta la bajante BP2, junto a C5.",
+    ], "albañil"),
+    paso(3, "Lo que atraviesa el techo", [
+        "Caños del tanque (ducto de A3) y <b>ventilación Ø110</b> del desagüe (ducto de A4): con babeta y sombrerete.",
+        "2 <b>tubos vacíos de 1\"</b> desde el techo (junto al tanque) hasta el tablero, por el montante de B2: para paneles "
+        "solares a futuro.",
+        f"El <b>tanque</b> va sobre su propia base a +{tq.get('cota_base', 10.5):.2f}, junto a A3: la dimensiona el ingeniero.",
+    ], "albañil + plomero"),
+    paso("?", "Falta decidir ANTES de techar", [
+        "<b>Ingeniero:</b> columnas y viga de encadenado del altillo; cómo se apoya la calamina (vigas de norte a sur "
+        "metidas en los muros norte y sur, o correas sobre los muros de adentro); base del tanque.",
+        "<b>Dueño:</b> calefón solar o a gas (el solar lleno pesa ~300–400 kg y va sobre el techo o la terraza).",
+        "<b>Dueño:</b> altura del cielo raso (en el dibujo, ~2.55 libres: tiene que quedar debajo de la canaleta).",
+    ], "dueño + ingeniero"),
+), seccion=S, nueva=True))
+
 # ── B · plomero ────────────────────────────────────────────────────────────────
 S = SEC["P"]
 partes.append(hoja("Paso a paso del plomero", pasos(
@@ -903,6 +943,7 @@ table.medir td {{ font-size: 15px; height: 34px; }} td.sup {{ color: #555; }} td
 .vgr {{ font-size: 22px; color: #fff; background: #b71c1c; border-radius: 6px; padding: 2px 10px; vertical-align: 5px; }}
 ol.cambios li {{ font-size: 17px; margin: 10px 0; line-height: 1.4; }}
 .plano.alb {{ max-height: 228mm; }}
+.plano.corte {{ max-height: 120mm; display: block; margin: 0 auto 6px; }}
 p.lee {{ font-size: 13px; margin: 2px 0; }}
 .tarjetas {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }}
 .tarjeta {{ border: 2px solid #333; border-radius: 6px; padding: 4px 6px; break-inside: avoid; }}
