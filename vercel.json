@@ -1,0 +1,7 @@
+{
+  "framework": null,
+  "installCommand": "python3 -m pip install -r requirements.txt",
+  "buildCommand": "python3 tools/build.py && python3 tools/cuaderno_obra.py --solo-sitio",
+  "outputDirectory": "salida/sitio",
+  "trailingSlash": true
+}
