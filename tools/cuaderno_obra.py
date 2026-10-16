@@ -488,7 +488,7 @@ def tabla_llaves(nivel):
 # ── planos de instalaciones ────────────────────────────────────────────────────
 
 ALTO_Y = (-2.7, 7.35)                # del retiro norte (luces del muro del lote) al muro sur
-CASA_X = (-3.6, 18.3) + ALTO_Y       # la casa con la terraza y el acceso
+CASA_X = (-3.6, 21.3) + ALTO_Y       # la casa con la terraza, el acceso y el patio (pozo de lluvia del fondo)
 FRENTE_X = (-16.2, 0.6) + ALTO_Y     # el frente: estacionamiento, jardín, camino, cisterna, portón
 
 
@@ -710,8 +710,9 @@ TOPE = max(m["cota_tope"] for m in (c.get("techos") or {}).get("antepechos", [])
 (SALIDA / "obra-techo-corte.svg").write_text(O.corte_techo_svg(c), encoding="utf-8")
 partes.append(hoja("Altillo — TECHO: planta (cotas aproximadas, desde el nivel ±0.00 de la vereda)",
                    '<img class="plano alb" src="obra-techo-altillo.svg">' + "<p class=lee>Departamento: calamina a un agua que "
-                   "cae al SUR, escondida detrás del antepecho; canaleta por dentro hasta la bajante BP2 (esquina del fondo); "
-                   "gárgolas de rebalse por si se tapa. Terraza: techo propio de calamina sobre fierro a la vista que cae al "
+                   "cae al NORTE (el agua sale al retiro norte, no a la franja), escondida detrás del antepecho; canaleta por dentro "
+                   "del antepecho norte hasta la bajante BP3 (esquina A5, por la cara del patio); una gárgola de rebalse por si se "
+                   "tapa. La franja tiene su propio sumidero a la bajante BP2 (esquina C5). Terraza: techo propio de calamina sobre fierro a la vista que cae al "
                    "frente, sobre postes en A1 y B1. Las cotas son desde la vereda (el piso del altillo está a +6.60).</p>",
                    seccion=S, nueva=True))
 partes.append(hoja("Altillo — TECHO: corte norte–sur y paso a paso",
@@ -723,21 +724,26 @@ partes.append(hoja("Altillo — TECHO: corte norte–sur y paso a paso",
         "Arriba del antepecho, remate con pendiente hacia adentro, para que el agua no manche la fachada.",
     ], "albañil + ingeniero"),
     paso(2, "Lo que se deja en los muros mientras se levantan", [
-        "<b>Muro sur:</b> 3 tubos de rebalse (gárgolas) a ~+9.20, uno cada ~4 m, saliendo ~10 cm afuera, con caída hacia afuera "
-        "(diámetro: el plomero).",
+        "<b>Muro NORTE:</b> UNA gárgola de rebalse a ~+9.20, cerca de la esquina A5 (x ~16.20), al ras y con goterón, con "
+        "caída hacia afuera (diámetro: el plomero). En el muro sur ya NO van gárgolas.",
         "<b>Muro oeste (el de la terraza, eje 2):</b> anclajes para las vigas de fierro del techo de la terraza a ~+9.80 "
         "(los define el herrero).",
-        "<b>Fondo (eje 5):</b> la canaleta sale por la esquina sureste del departamento y baja por el antepecho del fondo de la franja hasta la bajante BP2, junto a C5.",
+        "<b>Esquina A5 (norte, lado del patio):</b> la canaleta sale por el antepecho a la bajante <b>BP3</b>, que baja por la "
+        "cara del patio en un cajón pegado a la columna. <b>Esquina C5:</b> el sumidero de la franja sale por el antepecho a la "
+        "bajante <b>BP2</b>. Las dos van enterradas a un pozo de absorción en el patio.",
     ], "albañil"),
     paso(3, "Lo que atraviesa el techo", [
         "Caños del tanque (ducto de A3) y <b>ventilación Ø110</b> del desagüe (ducto de A4): con babeta y sombrerete.",
+        "La <b>canaleta pasa junto a la base del tanque</b> (en el borde bajo): que el agua no se estanque contra la base "
+        "(tubo por debajo o canaleta en dos tramos: el ingeniero).",
         "2 <b>tubos vacíos de 1\"</b> desde el techo (junto al tanque) hasta el tablero, por el montante de B2: para paneles "
         "solares a futuro.",
         f"El <b>tanque</b> va sobre su propia base a +{tq.get('cota_base', 10.5):.2f}, junto a A3: la dimensiona el ingeniero.",
     ], "albañil + plomero"),
     paso("?", "Falta decidir ANTES de techar", [
-        "<b>Ingeniero:</b> columnas y viga de encadenado del altillo; cómo se apoya la calamina (vigas de norte a sur "
-        "metidas en los muros norte y sur, o correas sobre los muros de adentro); base del tanque.",
+        "<b>Ingeniero:</b> columnas y viga de encadenado del altillo; cómo se apoya la calamina (propuesta: vigas de norte a "
+        "sur sobre el eje A y el eje B, con un volado corto hasta el muro sur, para que ese muro no cargue; nada sobre los "
+        "muros del baño y del dormitorio); base del tanque y paso de la canaleta.",
         "<b>Dueño:</b> calefón solar o a gas (el solar lleno pesa ~300–400 kg y va sobre el techo o la terraza).",
         "<b>Dueño:</b> altura del cielo raso (en el dibujo, ~2.55 libres: tiene que quedar debajo de la canaleta).",
     ], "dueño + ingeniero"),

@@ -80,6 +80,8 @@ Tiene el **cuaderno v1** impreso. Se hizo el **cuaderno v2.0** (`make cuaderno`:
 para imprimir ya). Cambios (detalle en `docs/decisiones.md`, rama `feat/altillo-obra-v2`): muros sobre columnas al ras de una
 cara, aberturas al ras de las columnas, puertas del altillo más anchas, corrediza del altillo al estar, plano del albañil con
 las medidas dibujadas y aberturas de frente con alturas.
+Después (mismo día): corrediza frente al estar, piletas al oeste, ventana en la llegada (V7), hojas del techo y **techo del
+departamento cayendo al NORTE** (pedido del maestro, los tres revisores de acuerdo; bajante BP3 en A5 y pozo de lluvia en el patio).
 **Pendiente con el dueño:** (a) ¿puertas de PB y P1 también más anchas? (b) puerta de entrada y ranura del living a 17.5 cm
 de su columna; (c) calefón solar o a gas; (d) pulir el plano del albañil del P1 (zona de la suite, rótulos apretados)
 antes de imprimir esas hojas.

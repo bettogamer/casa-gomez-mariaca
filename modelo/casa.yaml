@@ -37,7 +37,7 @@ proyecto:
       - "ALTILLO: LA CORREDIZA VA FRENTE AL ESTAR (no en el comedor): 2.00 en x 11.35 a 13.35, centrada en el sofá; ya no hay ventana sur en el estar y entre x 9.40 y 11.35 el muro sur queda CIEGO. En el comedor, donde estaba la corrediza, va una ventana de 1.00 × 1.10 (V8). Los muebles grandes entran por la terraza, la franja y la corrediza."
       - "ALTILLO: VENTANA NUEVA EN LA LLEGADA DE LA ESCALERA (V7), frente al último tramo: 1.20 × 1.10, antepecho 1.00, del ancho del tramo y pegada al muro de la cocina. Da luz a la llegada con las puertas cerradas."
       - "ALTILLO: PILETAS Y LAVADORA AL OESTE de la franja, bajo la ventana del comedor (V8). Los caños de agua llegan bajo esa ventana; el desagüe va por el contrapiso de la franja hasta la bajada de siempre (x 9.60)."
-      - "ALTILLO, TECHO: dos hojas nuevas (planta y corte). Los muros de afuera del departamento suben DE UNA VEZ hasta +10.20 (el antepecho es el mismo muro). Lo que se deja en los muros (gárgolas, anclajes del techo de la terraza) y lo que falta decidir antes de techar."
+      - "ALTILLO, TECHO: CAE AL NORTE (como dijo el maestro): el agua sale al retiro norte. Dos hojas nuevas (planta y corte). Los muros de afuera del departamento suben DE UNA VEZ hasta +10.20 (el antepecho es el mismo muro). Lo que se deja en los muros (gárgolas, anclajes del techo de la terraza) y lo que falta decidir antes de techar."
       - "LOS PLANOS DEL ALBAÑIL TRAEN LAS MEDIDAS DIBUJADAS: cada puerta y ventana con su código (V1, P1, C1), ancho × alto y antepecho, y una cadena de medidas de cara a cara de columnas y muros. Y una hoja con cada puerta y ventana VISTA DE FRENTE con sus alturas desde el piso."
 
 lote:
@@ -397,12 +397,12 @@ techos:
     - id: techo_depto
       nombre: Departamento
       poly: [[4.40, 0.00], [16.90, 0.00], [16.90, 4.67], [4.40, 4.67]]
-      cae_hacia: sur
+      cae_hacia: norte
       pendiente: 0.15
-      cota_alta: 10.05
-      cota_baja: 9.35
-      estado: definido
-      nota: "oculto detrás del antepecho en los cuatro lados; canaleta interior junto al antepecho sur, toda hacia el este (BP2), con rebosaderos (gárgolas) a la franja cada ~4 m por si se tapa"
+      cota_alta: 10.05      # contra el muro SUR
+      cota_baja: 9.35       # contra el muro NORTE (eje A, con columnas)
+      estado: propuesto
+      nota: "2026-10-16 (dueño + maestro, los tres revisores de acuerdo): CAE AL NORTE (antes al sur). El agua y el rebalse salen al retiro norte (afuera) y no a la franja de uso diario, que es losa descubierta sobre el P1; la canaleta llena carga sobre el eje A (columnas A2–A5 a prolongar y viga) y no sobre el muro sur, que está sobre la losa sin nada debajo; los paneles o el calentador solar se apoyan casi sobre la calamina mirando al norte; entre el techo y la base del tanque quedan ~1.15. Oculto detrás del antepecho de +10.20 en los cuatro lados. Canaleta por dentro del antepecho norte hacia el este, bajante BP3 en la esquina A5 por la cara del patio, UNA gárgola de rebalse al norte. Más sol sobre la calamina: aislación (ya prevista). Apoyo (revisor estructural, lo decide el ingeniero, pregunta 16): vigas de norte a sur sobre el eje A y la línea del eje B, con un tramo corto en volado hasta el muro sur; nada sobre los muros x 9.40 y 13.60"
     - id: techo_terraza
       nombre: Terraza
       poly: [[-1.125, 0.00], [4.40, 0.00], [4.40, 4.67], [-1.125, 4.67]]
@@ -424,8 +424,9 @@ techos:
   # Tanque elevado: base propia de hormigón sobre la columna A3 y el muro de la escalera, forrado de ladrillo.
   # Capacidad y altura SUPUESTAS (tanque de ~2500 L, ~1.55 de diámetro × 1.55 de alto): las define el plomero/ingeniero.
   # Base subida a +10.50 (usuario 2026-10-05): ~2.5 m sobre la entrada de agua del calefón del altillo (~+8.00).
-  # Paneles solares a futuro (usuario 2026-10-05): sobre el techo del departamento, en una estructura liviana INCLINADA AL
-  # NORTE (~15–20°; el techo cae al sur, que es la orientación mala), detrás del antepecho; sin sombra del tanque.
+  # Paneles solares a futuro (usuario 2026-10-05): sobre el techo del departamento. Desde 2026-10-16 el techo cae al NORTE
+  # (~8.5°): los paneles van casi apoyados sobre la calamina mirando al norte, detrás del antepecho. Sombra del tanque en
+  # las mañanas de invierno: empezar los paneles ~1.5 m al este del tanque o verificarlo en el 3D.
   solar: {rect: [8.10, 0.30, 16.60, 4.40], estado: propuesto, nota: "espacio reservado (~35 m²) para paneles fotovoltaicos y/o colector de agua caliente; dejar ahora: 2 tubos vacíos de 1\" desde el techo (junto al tanque) hasta el TD por el montante de B2, y una espera de caños AF/AC de PPR tapados en el techo por si se pone un colector solar que precaliente el agua del calefón"}
   tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.50, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado, nota: "con tapa hermética; REBALSE y DESAGÜE DE LIMPIEZA con llave, a la canaleta/bajante pluvial del techo (no al sanitario); FLOTANTE eléctrico que prende y apaga la bomba de la cisterna (C20); salida con llave de paso y filtro"}
   postes:
@@ -434,8 +435,12 @@ techos:
     - {pos: [-1.03, 4.60], tope: 9.05, estado: propuesto, nota: "2026-10-07 (PROPUESTO): BAJADA DE LA CANALETA del techo de la terraza: tubo cuadrado de fierro de 0.10 × 0.10, NEGRO como los postes, en la esquina sur del techo, por dentro del antepecho del frente; de la punta de la canaleta (+9.07) al piso de la terraza. Al pie descarga en la canaleta de piso con rejilla que va junto al frente hasta el sumidero del rincón. Nada de caño horizontal a la vista"}
   # Canaletas por dentro de la línea y=4.67 (no invaden la separación de 2 m), de chapa galvanizada, 0.5%.
   canaletas:
-    - {de: [4.55, 4.58], a: [16.78, 4.58], pendiente: 0.005}
+    - {de: [4.55, 0.10], a: [16.78, 0.10], pendiente: 0.005, estado: propuesto, nota: "2026-10-16: por DENTRO del antepecho NORTE, toda hacia el este (BP3). Bajo la base del tanque (x 6.30–7.90) pasa en un tubo o se corta en dos y el agua rodea la base: lo resuelve el ingeniero con la base del tanque (pregunta 7); que no quede agua estancada contra la base. Recibe también el rebalse y la limpieza del tanque"}
     - {de: [-1.18, 0.10], a: [-1.18, 4.58], pendiente: 0.005, nota: "canaleta vista al frente, colgada del borde del techo de la terraza (queda a ~1.05 de la fachada: dentro del voladizo frontal de 1.20)"}
+  # Gárgolas de rebalse (por si se tapa la canaleta). 2026-10-16: UNA sola, en el antepecho norte cerca de la bajante, al
+  # ras y con goterón (no caño colgando), a ~+9.20; el agua cae al retiro norte, lejos del lindero lo más posible.
+  gargolas:
+    - {pos: [16.20, -0.125], cota: 9.20, estado: propuesto}
   # Semisombra (malla raschel o toldo) sobre la lavandería: liviana y desmontable, a la altura del antepecho sur.
   semisombras:
     - {rect: [7.05, 4.67, 9.70, 6.67], nombre: "semisombra lavandería", nota: "malla semisombra o toldo retráctil sobre perfiles livianos, entre el muro del departamento y el muro ciego sur; desmontable (no es techo ni volado: confirmar con el arquitecto). El tendedero queda al sol"}
@@ -457,10 +462,12 @@ techos:
     - [[-1.18, 4.58], [-1.03, 4.60]]
     - [[-1.03, 4.60], [-1.00, 4.60], [-1.00, 6.45], [-0.90, 6.45]]
     - [[-0.90, 6.45], [-0.90, 6.56], [-1.36, 6.56], [-1.36, 6.645]]   # 2026-10-08: entra al cajón por y 6.56 (al norte está el compartimiento del gas)
-    - [[16.78, 4.58], [16.78, 6.55]]
+    - [[16.78, 0.10], [17.12, 0.05]]          # canaleta del departamento → BP3 (sale por la esquina A5)
+    - [[16.55, 6.40], [17.10, 6.55]]          # sumidero de la franja → BP2 (salida lateral por el antepecho del fondo)
   bajantes:
     - {id: BP1, pos: [-1.36, 6.645], tope: 8.40, estado: propuesto, nota: "2026-10-07 (PROPUESTO, revisión del arquitecto punto 4, aceptado por el dueño; antes en (-1.00, 6.55), atravesaba la ducha de la suite y el volado): POR FUERA, en el CAJÓN GRIS de la esquina suroeste de la caja del baño de la suite (cajón x -1.425 a -1.125, y 6.495 a 6.795, del suelo a +8.40, pegado al canto del volado), del lado de la calle; al lado, del lado de la casa, la bajante sanitaria de la suite. Recibe la canaleta del techo de la terraza (por el tubo negro y la canaleta de piso), el sumidero de la terraza (salida lateral por la base del antepecho) y la logia del primer piso (canaleta-cornisa gris por todo el frente). NO se perfora el volado. Abajo: tapón de registro al pie y caño Ø100 enterrado al POZO DE ABSORCIÓN del jardín (ver instalaciones.pb.sanitario.pluvial), nunca al desagüe sanitario. Ø100 (techo ~26 m² + terraza ~11 m² + logia): lo confirma el plomero"}
-    - {id: BP2, pos: [16.78, 6.55], nota: "esquina sur del fondo (C5): techo del departamento + sumidero de la franja; baja al patio → jardín o calle (no al desagüe sanitario)"}
+    - {id: BP2, pos: [17.10, 6.55], tope: 6.60, estado: propuesto, nota: "esquina sur del fondo (C5), por la cara del patio: SOLO el sumidero de la franja (2026-10-16: el techo del departamento ya no cae acá). Baja al patio → pozo de absorción (no al desagüe sanitario)"}
+    - {id: BP3, pos: [17.12, 0.05], estado: propuesto, nota: "2026-10-16: esquina NORESTE (A5), por la cara del PATIO (no en la fachada norte, que queda lisa), en un cajón gris (como el del frente) sobre la cara de la columna, de y −0.125 a 0.225 (0.125 libres hasta la corrediza del comedor): techo del departamento + rebalse y limpieza del tanque. Ø100. Baja al patio → pozo de absorción (no al desagüe sanitario)"}
 
 # Fachada (2026-10-05): opciones de materiales para conversar con el usuario. Referencias en
 # fuentes/referencias-fachada/. `paleta` = color por tipo de pieza; `acentos` = paños de material sobre una cara:
@@ -501,6 +508,7 @@ fachada:
         # Cajón x -1.425 a -1.125 (pegado al canto del volado en los tres niveles, sin ranura), y 6.495 a 6.795 (pegado al muro sur),
         # del suelo a +8.40 (remate del muro ciego sur del altillo). CHAPA PLEGADA de 2 mm pintada del gris de la caja (decisión del dueño).
         - {vista: oeste, u: [6.495, 6.795], z: [0.00, 8.40], d: -1.425, material: gris_oscuro, estado: propuesto, nota: "cajón de chapa de las bajantes de la suite (sanitaria) y BP1 (pluvial), frente de 0.30"}
+        - {vista: este, u: [-0.225, 0.125], z: [0.00, 9.35], d: -17.22, material: gris_oscuro, estado: propuesto, nota: "2026-10-16: cajón de la bajante BP3 (techo del departamento, que cae al norte), en la cara del patio pegado a la columna A5; mismo gris que el cajón del frente"}
         - {vista: oeste, u: [6.59, 6.70], z: [8.40, 8.70], d: -1.21, material: gris_oscuro, estado: propuesto, nota: "ventilación de la bajante de la suite: sale 0.30 sobre la tapa del cajón, con sombrerete gris oscuro"}
         - {vista: sur, u: [-1.425, -1.125], z: [0.00, 8.40], d: -6.795, material: gris_oscuro, estado: propuesto, nota: "costado sur del cajón de bajantes"}
         - {vista: norte, u: [1.125, 1.425], z: [0.00, 8.40], d: 6.375, material: chapa_perforada, estado: propuesto, nota: "2026-10-08 (plan B): costado norte = frente PERFORADO del compartimiento del gas al calefón (0.12 delante del cajón de bajantes); las tapas de registro de las bajantes pasan a la cara oeste, a +0.30 y +3.50"}
@@ -1115,6 +1123,21 @@ instalaciones:
           etiqueta: "POZO DE ABSORCIÓN de BP1 (~1.0 × 1.0 × 1.2, grava)"
           estado: propuesto
           nota: "x -6.0 a -5.0, y 3.5 a 4.5: a ~2.4 del borde de la terraza, ~4.9 de la casa, ~4.2 de la cisterna y 0.5 del cable del borde del camino. Si el suelo no absorbe (prueba de infiltración), un caño de REBALSE a la calle por su cuenta, junto al colector; nunca al desagüe sanitario. PRUEBA DE INFILTRACIÓN antes de hacerlo"
+        # 2026-10-16: lluvia del fondo. BP3 (techo del departamento, esquina A5) y BP2 (franja, esquina C5) bajan por la cara
+        # del patio y van enterradas a un POZO DE ABSORCIÓN en el patio; cruzan el colector (x 17.70) y el gas (x 18.30) en
+        # perpendicular, por encima del colector y a ≥0.20 del gas. Si el suelo no absorbe: rebalse a la calle, nunca al sanitario.
+        - linea: [[17.12, 0.05], [20.30, 0.05], [20.30, 2.00]]
+          etiqueta: "BP3 Ø100 enterrado, 1 % →"
+          etiqueta_pos: [20.20, -0.05]
+          estado: propuesto
+        - linea: [[17.10, 6.55], [20.30, 6.55], [20.30, 3.00]]
+          etiqueta: "BP2 Ø100 enterrado, 1 % →"
+          etiqueta_pos: [20.20, 6.85]
+          estado: propuesto
+        - rect: [19.80, 2.00, 20.80, 3.00]
+          etiqueta: "POZO DE ABSORCIÓN del fondo (BP2 + BP3)"
+          estado: propuesto
+          nota: "~1.0 × 1.0 × 1.2 de grava, a ~2.9 de la casa y ~1.2 del lindero del fondo; prueba de infiltración antes"
       desgrasadora: [17.70, 5.15]
       # Gas natural (red), 2026-10-06 (usuario): el medidor está en el PILAR SUR, pegado al Lote 103 (ahí llega la red).
       # A LA VISTA por la cara interior del MURO SUR a ~0.15 (con ángulo o canaleta de protección: es el borde del camino),
@@ -1427,7 +1450,7 @@ instalaciones:
         - {pos: [7.225, 0.56], etiqueta: "LL general altillo", estado: propuesto, nota: "2026-10-08 (plan B): frente a la cara sur del ducto de A3, dentro del mueble bajo de la esquina (se ve por el calado de la mesada)"}
         - {pos: [9.20, 0.70], etiqueta: "LL cocina"}
         - {pos: [10.95, 0.85], etiqueta: "LL baño"}
-        - {pos: [11.45, 4.55], etiqueta: "LL lavandería"}
+        - {pos: [8.30, 4.55], etiqueta: "LL lavandería", nota: "2026-10-16: bajo la ventana del comedor, donde los caños salen a las piletas"}
         - {pos: [3.90, 0.15], gas: true, etiqueta: "LL gas calefón"}
       bajada_tanque: {pos: [7.25, 0.20], etiqueta: "AF ↓ del tanque (ducto de A3)"}
       # 2026-10-06 (opción B aceptada, PROPUESTO): baño encima del Baño 1 (x 9.40–11.20); cocina del otro lado de su muro oeste.

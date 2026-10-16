@@ -378,41 +378,49 @@ def planta_techo_obra(casa):
     if sol:
         sx0, sy0, sx1, sy1 = sol["rect"]
         L.poly([[sx0, sy0], [sx1, sy0], [sx1, sy1], [sx0, sy1]], 'fill="none" stroke="#f9a825" stroke-width="2" stroke-dasharray="8 4"')
-        L.texto((sx0 + sx1) / 2 + 1.6, sy0 + 0.75, "lugar reservado: paneles / calentador solar", 12, f'{HALO}fill="#8d6e00"')
+        L.texto((sx0 + sx1) / 2 + 1.6, sy1 - 0.25, "lugar reservado: paneles / calentador solar", 12, f'{HALO}fill="#8d6e00"')
     for m in t.get("antepechos", []):
         if m["cota_tope"] > 10:
             L.linea(*m["de"], *m["a"], 'stroke="#424242" stroke-width="7"')
     # caída
-    _flecha_gruesa(L, (12.0, 0.9), (12.0, 3.3))
-    L.texto(13.9, 1.95, f"CAE {dep['pendiente'] * 100:.0f}% AL SUR", 17, f'{HALO}font-weight="bold" fill="{ROJO}"')
-    L.texto(13.9, 2.40, "(hacia la franja)", 13, f'{HALO}fill="{ROJO}"')
+    al_norte = dep["cae_hacia"] == "norte"
+    _flecha_gruesa(L, (12.0, 3.3), (12.0, 1.0)) if al_norte else _flecha_gruesa(L, (12.0, 0.9), (12.0, 3.3))
+    L.texto(13.9, 1.95, f"CAE {dep['pendiente'] * 100:.0f}% AL {dep['cae_hacia'].upper()}", 17, f'{HALO}font-weight="bold" fill="{ROJO}"')
+    L.texto(13.9, 2.40, "(hacia el retiro norte)" if al_norte else "(hacia la franja)", 13, f'{HALO}fill="{ROJO}"')
     _flecha_gruesa(L, (2.6, 1.6), (0.6, 1.6))
     L.texto(1.6, 1.15, f"CAE {ter['pendiente'] * 100:.0f}% AL FRENTE", 15, f'{HALO}font-weight="bold" fill="{ROJO}"')
     L.texto(1.6, 3.2, "TECHO DE LA TERRAZA", 13, f'{HALO}font-weight="bold" fill="#333"')
     L.texto(1.6, 3.55, "calamina sobre fierro a la vista", 12, f'{HALO}fill="#333"')
     # cotas de los bordes
-    L.texto(14.6, 0.48, f"borde alto ≈ +{dep['cota_alta']:.2f}", 14, f'{HALO}font-weight="bold" fill="#111"')
-    L.texto(10.0, 4.28, f"borde bajo ≈ +{dep['cota_baja']:.2f}", 14, f'{HALO}font-weight="bold" fill="#111"')
+    y_norte, y_sur = (15.4, 1.30), (9.2, 4.28)
+    alto_, bajo_ = (y_sur, y_norte) if al_norte else (y_norte, y_sur)
+    L.texto(*alto_, f"borde alto ≈ +{dep['cota_alta']:.2f}", 14, f'{HALO}font-weight="bold" fill="#111"')
+    L.texto(*bajo_, f"borde bajo ≈ +{dep['cota_baja']:.2f}", 14, f'{HALO}font-weight="bold" fill="#111"')
     _rotar(L, 4.05, 2.3, f"alto ≈ +{ter['cota_alta']:.2f}", 13, f'{HALO}font-weight="bold" fill="#111"', True)
     _rotar(L, -0.75, 2.3, f"bajo ≈ +{ter['cota_baja']:.2f}", 13, f'{HALO}font-weight="bold" fill="#111"', True)
     top = max(m["cota_tope"] for m in t.get("antepechos", []))
-    L.texto(10.6, -0.55, f"ANTEPECHO todo alrededor del departamento hasta +{top:.2f} (tapa el techo)", 14,
+    L.texto(10.6, -1.55, f"ANTEPECHO todo alrededor del departamento hasta +{top:.2f} (tapa el techo)", 14,
             f'{HALO}font-weight="bold" fill="#424242"')
     # canaletas y gárgolas
     for cn in t.get("canaletas", []):
         L.linea(*cn["de"], *cn["a"], f'stroke="{AZUL}" stroke-width="5"')
     c0 = t["canaletas"][0]
-    L.texto(7.2, 5.05, f"canaleta por DENTRO del antepecho, {c0.get('pendiente', 0.005) * 100:.1f}% hacia el fondo →", 13,
+    cy_ = c0["de"][1]
+    L.texto(11.7, cy_ + (0.55 if cy_ < 2 else -0.30), f"canaleta por DENTRO del antepecho, {c0.get('pendiente', 0.005) * 100:.1f}% → bajante", 13,
             f'{HALO}fill="{AZUL}"')
-    xs = [c0["de"][0] + (c0["a"][0] - c0["de"][0]) * k / 4 for k in (1, 2, 3)]
-    for gx in xs:
-        L.linea(gx, 4.60, gx, 5.05, f'stroke="{AZUL}" stroke-width="3"')
-        L.add(f'<circle cx="{L.p(gx, 5.05)[0]:.1f}" cy="{L.p(gx, 5.05)[1]:.1f}" r="4" fill="{AZUL}"/>')
-    L.texto(xs[1], 5.55, "3 gárgolas de rebalse (aprox. cada 4 m) a la franja", 12, f'{HALO}fill="{AZUL}"')
+    for gg in t.get("gargolas", []):
+        gx, gy = gg["pos"]
+        afuera = -0.45 if gy < 2 else 0.45
+        L.linea(gx, cy_, gx, gy + afuera, f'stroke="{AZUL}" stroke-width="3"')
+        L.add(f'<circle cx="{L.p(gx, gy + afuera)[0]:.1f}" cy="{L.p(gx, gy + afuera)[1]:.1f}" r="4" fill="{AZUL}"/>')
+        L.texto(gx - 0.15, gy + (-0.42 if gy < 2 else 0.75), f"gárgola de rebalse (+{gg.get('cota', 9.2):.2f})", 12, f'{HALO}fill="{AZUL}" text-anchor="end"')
     for bp in t.get("bajantes", []):
         bx, by = bp["pos"]
         L.add(f'<circle cx="{L.p(bx, by)[0]:.1f}" cy="{L.p(bx, by)[1]:.1f}" r="8" fill="{AZUL}"/>')
-        L.texto(bx + (0.0 if bx > 0 else 0.4), by + 0.55, f"{bp['id']} ↓", 13, f'{HALO}font-weight="bold" fill="{AZUL}"')
+        if bx > 17:
+            L.texto(bx + 0.18, by + 0.10, f"{bp['id']} ↓", 13, f'{HALO}font-weight="bold" fill="{AZUL}" text-anchor="start"')
+        else:
+            L.texto(bx + 0.4, by + 0.55, f"{bp['id']} ↓", 13, f'{HALO}font-weight="bold" fill="{AZUL}"')
     for cx_ in t.get("conexiones", []):
         for a, b in zip(cx_, cx_[1:]):
             L.linea(*a, *b, f'stroke="{AZUL}" stroke-width="2" stroke-dasharray="5 3"')
@@ -455,7 +463,7 @@ def corte_techo_svg(casa, x_corte=12.35):
     top = max(m["cota_tope"] for m in t.get("antepechos", []) if m["cota_tope"] > 10)
     ciego = next((m["cota_tope"] for m in t.get("antepechos", []) if m["cota_tope"] < 10), None)
     E = 95                                  # px por metro
-    Y0, Y1, Z0, Z1 = -1.6, 8.3, 6.10, 10.85
+    Y0, Y1, Z0, Z1 = -1.6, 8.8, 6.10, 10.85
     W, H = (Y1 - Y0) * E, (Z1 - Z0) * E
     X = lambda y: (y - Y0) * E
     Z = lambda z: (Z1 - z) * E
@@ -498,31 +506,39 @@ def corte_techo_svg(casa, x_corte=12.35):
     if ciego:
         rect(6.67 - 0.075, 6.60, 6.67 + 0.075, ciego, "#e0dcd5", 'stroke="#333" stroke-width="1.5"')
         txt(6.67, ciego + 0.12, f"muro ciego al vecino +{ciego:.2f}", 13, "", "middle")
-    # techo: calamina de borde alto (norte) a borde bajo (sur), por dentro de los muros
+    # techo: calamina del borde alto al borde bajo, por dentro de los muros; canaleta y gárgola del lado bajo
     za, zb = dep["cota_alta"], dep["cota_baja"]
-    ya, yb = yn1 + 0.05, ys0 - 0.12
-    p.append(f'<line x1="{X(ya):.1f}" y1="{Z(za):.1f}" x2="{X(yb):.1f}" y2="{Z(zb):.1f}" stroke="#37474f" stroke-width="6"/>')
-    # apoyos (esquemáticos) bajo la calamina
+    al_norte = dep["cae_hacia"] == "norte"
+    y_bajo, y_alto = (yn1 + 0.12, ys0 - 0.05) if al_norte else (ys0 - 0.12, yn1 + 0.05)
+    zr = lambda y: zb + (za - zb) * (y - y_bajo) / (y_alto - y_bajo)
+    p.append(f'<line x1="{X(y_alto):.1f}" y1="{Z(za):.1f}" x2="{X(y_bajo):.1f}" y2="{Z(zb):.1f}" stroke="#37474f" stroke-width="6"/>')
     for k in range(5):
-        yy = ya + (yb - ya) * (k + 0.5) / 5
-        zz = za + (zb - za) * (k + 0.5) / 5
-        rect(yy - 0.05, zz - 0.15, yy + 0.05, zz - 0.03, "#8d6e63", 'stroke="#4e342e"')
-    txt(2.4, za - 0.05, "calamina + correas (las define el carpintero / ingeniero)", 14, 'fill="#37474f"')
-    txt(2.4, za - 0.27, f"cae {dep['pendiente'] * 100:.0f}% al sur →", 15, f'font-weight="bold" fill="{ROJO}"')
-    # canaleta y gárgola
-    rect(yb - 0.02, zb - 0.16, ys0, zb - 0.02, "#90caf9", f'stroke="{AZUL}" stroke-width="1.5"')
-    p.append(f'<line x1="{X(ys0):.1f}" y1="{Z(zb - 0.12):.1f}" x2="{X(ys1 + 0.35):.1f}" y2="{Z(zb - 0.16):.1f}" stroke="{AZUL}" stroke-width="5"/>')
-    txt(ys1 + 0.40, zb - 0.10, "gárgola de rebalse (cada ~4 m)", 13, f'fill="{AZUL}"', "start")
-    txt(ys1 + 0.40, zb - 0.38, "canaleta (por dentro) → al fondo, BP2", 13, f'fill="{AZUL}"', "start")
-    # cielo raso (a definir)
-    zc = round(zb - 0.20, 2)                # debajo de la canaleta
+        yy = y_bajo + (y_alto - y_bajo) * (k + 0.5) / 5
+        rect(yy - 0.05, zr(yy) - 0.15, yy + 0.05, zr(yy) - 0.03, "#8d6e63", 'stroke="#4e342e"')
+    txt(2.6, zr(2.6) + 0.22, "calamina + correas (las define el carpintero / ingeniero)", 14, 'fill="#37474f"')
+    flecha = f"← cae {dep['pendiente'] * 100:.0f}% al norte" if al_norte else f"cae {dep['pendiente'] * 100:.0f}% al sur →"
+    txt(2.6, zr(2.6) + 0.45, flecha, 15, f'font-weight="bold" fill="{ROJO}"')
+    if al_norte:
+        rect(yn1, zb - 0.16, y_bajo + 0.02, zb - 0.02, "#90caf9", f'stroke="{AZUL}" stroke-width="1.5"')
+        p.append(f'<line x1="{X(yn1):.1f}" y1="{Z(zb - 0.12):.1f}" x2="{X(yn0 - 0.35):.1f}" y2="{Z(zb - 0.16):.1f}" stroke="{AZUL}" stroke-width="5"/>')
+        txt(-0.10, 10.45, "canaleta por dentro del antepecho norte → bajante BP3 (esquina A5); 1 gárgola de rebalse al retiro", 13,
+            f'fill="{AZUL}"', "start")
+        p.append(f'<line x1="{X(0.0):.1f}" y1="{Z(10.40):.1f}" x2="{X(0.0):.1f}" y2="{Z(zb + 0.02):.1f}" stroke="{AZUL}" stroke-width="1" stroke-dasharray="3 3"/>')
+    else:
+        rect(y_bajo - 0.02, zb - 0.16, ys0, zb - 0.02, "#90caf9", f'stroke="{AZUL}" stroke-width="1.5"')
+        p.append(f'<line x1="{X(ys0):.1f}" y1="{Z(zb - 0.12):.1f}" x2="{X(ys1 + 0.35):.1f}" y2="{Z(zb - 0.16):.1f}" stroke="{AZUL}" stroke-width="5"/>')
+        txt(ys1 + 0.40, zb - 0.10, "gárgola de rebalse", 13, f'fill="{AZUL}"', "start")
+        txt(ys1 + 0.40, zb - 0.38, "canaleta (por dentro) → bajante", 13, f'fill="{AZUL}"', "start")
+    # cielo raso (a definir): debajo del borde bajo y de la canaleta
+    zc = round(zb - 0.20, 2)
     p.append(f'<line x1="{X(yn1):.1f}" y1="{Z(zc):.1f}" x2="{X(ys0):.1f}" y2="{Z(zc):.1f}" stroke="#777" stroke-width="2" stroke-dasharray="10 6"/>')
-    txt(2.3, zc - 0.25, f"cielo raso con aislación, ~+{zc:.2f} (≈{zc - 6.60:.2f} libres, debajo de la canaleta): a definir", 14, 'fill="#555"')
+    txt(2.6, zc - 0.25, f"cielo raso con aislación, ~+{zc:.2f} (≈{zc - 6.60:.2f} libres, debajo de la canaleta): a definir", 14, 'fill="#555"')
     # cotas
     cota_v(-0.55, 6.60, top, f"muro hasta +{top:.2f} ({top - 6.60:.2f} sobre el piso)", -1)
-    cota_v(-1.15, 6.60, za, f"techo +{za:.2f}", -1)
-    cota_v(7.30, 6.60, zb, f"techo +{zb:.2f}", 1)
-    cota_v(7.85, 6.60, top, f"muro hasta +{top:.2f}", 1)
+    z_n, z_s = (zb, za) if al_norte else (za, zb)
+    cota_v(-1.15, 6.60, z_n, f"techo +{z_n:.2f}", -1)
+    cota_v(7.80, 6.60, z_s, f"techo +{z_s:.2f}", 1)
+    cota_v(8.35, 6.60, top, f"muro hasta +{top:.2f}", 1)
     for y, s in ((-0.05, "NORTE (retiro)"), (4.70, "SUR (franja)")):
         txt(y, Z1 - 0.18, s, 16, 'font-weight="bold"')
     txt(2.3, 7.30, "ESTAR", 18, 'font-weight="bold" fill="#9aa"')

@@ -856,6 +856,7 @@ def plano_sanitario(casa, nivel, capa=None, recorte=(None, None), leyenda_svg=Tr
     """capa: None (todo), "agua" (fría, caliente, bomba), "desague" (cloacal y lluvia) o "gas" (gas y ventilación)."""
     cfg, puntos, ramas = sanitario(casa, nivel["id"])
     extra = [cfg[k]["pos"] for k in ("pozo", "cisterna") if cfg.get(k)]
+    extra += [pl["rect"][2:] for pl in cfg.get("pluvial") or [] if pl.get("rect")]   # pozos de absorción a la vista
     tit = {"agua": "AGUA FRÍA Y CALIENTE", "desague": "DESAGÜE Y LLUVIA", "gas": "GAS Y VENTILACIÓN"}.get(
         capa, "AGUA, DESAGÜE, GAS Y VENTILACIÓN")
     L, (x0, y0, x1, y1) = _base(casa, nivel, f"{nivel['nombre'].upper()} — {tit} (esquema)",
