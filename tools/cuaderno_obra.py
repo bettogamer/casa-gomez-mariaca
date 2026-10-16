@@ -15,6 +15,7 @@ import sys
 import casa as C
 import instalaciones as I
 import plano_obra as O
+import sitio_obra
 from render_svg import ESC, Lienzo
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
@@ -30,6 +31,7 @@ COTA = {n["id"]: n.get("cota", 0) for n in c["niveles"]}
 CUAD = (c.get("proyecto") or {}).get("cuaderno") or {}
 VERSION = str(CUAD.get("version", "1"))
 NUEVAS = []     # hojas que cambian en esta versión: van también al PDF corto de "hojas nuevas"
+HOJAS = []      # todas las hojas con su sección: para la página web de la obra (tools/sitio_obra.py)
 
 # Muros sobre losa sin muro debajo (docs/preguntas-ingeniero.md, pregunta 4) y sobre el volado (pregunta 1):
 # (eje, valor, rango opcional sobre la otra coordenada, texto)
@@ -229,6 +231,7 @@ def hoja(titulo, cuerpo, clase="", seccion="", nueva=False):
     s = f'<span class="secc">{seccion}</span>' if seccion else ""
     marca = f'<span class="ver{" nueva" if nueva else ""}">v{VERSION}{" · HOJA NUEVA" if nueva else ""}</span>'
     h = f'<section class="hoja {clase}"><h2 class="tit">{s}{titulo}{marca}</h2>{cuerpo}</section>'
+    HOJAS.append(dict(titulo=titulo, seccion=seccion or globals().get("S", ""), cuerpo=f'<section class="hoja {clase}">{cuerpo}</section>'))
     if nueva is True:      # nueva="luego": cambia, pero no va al PDF corto (se imprime cuando se llegue a ese piso)
         NUEVAS.append(h)
     return h
@@ -1012,6 +1015,13 @@ def escribir(nombre, titulo, hojas):
 
 
 HTML = escribir("cuaderno-obra", f"Casa — cuaderno de obra v{VERSION}", partes)
+sitio_obra.generar(HOJAS, partes[0], ESTILO, VERSION, CUAD.get("fecha", hoy), SALIDA, [
+    ("Fachada norte", "fachada-norte.svg", "🏠"), ("Fachada sur", "fachada-sur.svg", "🏠"),
+    ("Fachada este (patio)", "fachada-este.svg", "🏠"), ("Fachada oeste (calle)", "fachada-oeste.svg", "🏠"),
+    ("Planta baja", "planta-pb.svg", "🗺️"), ("Primer piso", "planta-p1.svg", "🗺️"), ("Altillo", "planta-altillo.svg", "🗺️"),
+    ("Techos", "planta-techos.svg", "🗺️"), ("Vista 3D", "visor-3d.html", "🧊")])
+if "--solo-sitio" in sys.argv:
+    sys.exit(0)
 CORTO = escribir(f"cuaderno-obra-v{VERSION}-hojas-nuevas", f"Casa — hojas nuevas v{VERSION}", NUEVAS)
 chrome = CHROME if pathlib.Path(CHROME).exists() else shutil.which("google-chrome") or shutil.which("chromium")
 if not chrome:

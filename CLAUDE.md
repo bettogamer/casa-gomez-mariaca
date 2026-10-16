@@ -80,7 +80,7 @@ puntos eléctricos puestos a mano (`electrico.puntos`, reemplazan a los generado
 **esquemas preliminares** (NB 777, normas de agua y YPFB los define el profesional).
 
 ## Comandos
-`make setup` · `make build` · `make check` · `make fotos` · `make pdf` · `make abrir` · `make 3d` · `make cuaderno` (PDF de obra)
+`make setup` · `make build` · `make check` · `make fotos` · `make pdf` · `make abrir` · `make 3d` · `make cuaderno` (PDF de obra) · `make sitio` / `make publicar` (página web de la obra en Vercel)
 
 ## Git
 - Identidad local: `Betto <betto.gamer@icloud.com>`. Nunca `git push`.

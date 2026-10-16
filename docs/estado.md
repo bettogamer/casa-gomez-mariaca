@@ -75,6 +75,12 @@ _Última sesión: 2026-10-06._
 4. Después: patio del fondo (parrilla móvil a carbón), terminaciones (pisos, azulejos), carpintería y rejas.
    Fachada: dibujar las subidas de gas y agua caliente de la fachada norte y cómo taparlas.
 
+## Página web de la obra (2026-10-16)
+`make sitio` arma `salida/sitio/` con las hojas del cuaderno por oficio → piso → hoja, más fachadas, plantas y 3D
+(adaptado al celular). `make ver-sitio` la abre en http://localhost:8000; `make publicar` la sube a Vercel (una vez:
+`npm i -g vercel` y `vercel login`). **Después de cada cambio al modelo: `make publicar`** para que los trabajadores vean
+lo último. Pendiente: medir en obra la ventana de la escalera (encadenado, viga, si el muro ya está) y decidir.
+
 ## Obra: el albañil empezó por el altillo (2026-10-16)
 Tiene el **cuaderno v1** impreso. Se hizo el **cuaderno v2.0** (`make cuaderno`: completo + `salida/cuaderno-obra-v2.0-hojas-nuevas.pdf`
 para imprimir ya). Cambios (detalle en `docs/decisiones.md`, rama `feat/altillo-obra-v2`): muros sobre columnas al ras de una
