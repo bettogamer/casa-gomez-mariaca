@@ -329,7 +329,12 @@ NAR, AZ, ROJO, CAFE, GAS, PLUV, VIO, VERDE = "#e65100", "#1565c0", "#c62828", "#
 ALTURA = (texto("h1.10"), "<b>h1.10</b> junto a un punto = altura de la caja desde el piso terminado (1.10 m). Si no dice, "
           "la define el electricista.")
 LEY_LUCES = [
-    (punto("luz"), "<b>Luz de techo</b> (foco o lámpara)."),
+    (punto("luz"), "<b>Foco de TECHO</b> (círculo con cruz): la caja va en el techo."),
+    (punto("luz", clase="aplique"), "<b>Aplique de PARED (A)</b>: la caja va en el muro, a la altura que dice h (sobre un espejo, "
+                                     "junto a una cama, en la escalera, afuera)."),
+    (punto("luz", clase="led"), "<b>Tira LED</b> bajo una alacena o sobre un espejo: solo una caja chica en el muro, "
+                                 "detrás del mueble. <b>No es un foco.</b>"),
+    (punto("luz", clase="baliza"), "<b>Luz baja de afuera</b> (baliza empotrada en un muro o en el borde del deck)."),
     (punto("interruptor"), "<b>Tecla (S)</b>: prende y apaga desde un solo lugar."),
     (punto("conmutador"), "<b>Tecla de dos lugares (Sc)</b>: la misma luz se prende y apaga desde dos teclas "
                           "(entrada y salida, abajo y arriba de la escalera)."),
@@ -420,13 +425,15 @@ def tabla_puntos_elec(nivel, puntos):
     nom = nombres_amb(nivel)
     puntos = [dict(p, amb=p.get("amb") or donde_id(nivel, *p["pos"])) for p in puntos]
     nom.update({p["amb"]: p["amb"] for p in puntos if p["amb"] not in nom})
-    cols = [("Luces", {"luz"}), ("Teclas", {"interruptor", "conmutador"}), ("Enchufes", {"toma", "toma_ext", "toma_piso"}),
+    cols = [("Focos de techo", {"luz:techo"}), ("Apliques de pared", {"luz:aplique"}), ("Tiras LED", {"luz:led"}),
+            ("Balizas (afuera)", {"luz:baliza"}), ("Teclas", {"interruptor", "conmutador"}), ("Enchufes", {"toma", "toma_ext", "toma_piso"}),
             ("Especiales", {"especial"}), ("Internet/TV", {"datos"}), ("Extractor", {"extractor"}), ("Detector", {"detector"})]
     filas, tot = [], [0] * len(cols)
     orden = [a["id"] for a in C.ambientes(c, nivel)]
     for amb in orden + sorted({p["amb"] for p in puntos} - set(orden)):
         ps = [p for p in puntos if p.get("amb") == amb]
-        n = [sum(p["tipo"] in ts for p in ps) for _, ts in cols]
+        clave = lambda p: f"luz:{p.get('clase') or 'techo'}" if p["tipo"] == "luz" else p["tipo"]
+        n = [sum(clave(p) in ts for p in ps) for _, ts in cols]
         if not any(n):
             continue
         tot = [a + b for a, b in zip(tot, n)]
@@ -497,17 +504,17 @@ def plano(nombre, svg):
     return f'<img class="plano inst" src="{nombre}">'
 
 
-def hojas_plano(seccion, titulo, archivo, generar, ley, extra="", frente=True):
+def hojas_plano(seccion, titulo, archivo, generar, ley, extra="", frente=True, nueva=False):
     """Hoja del plano de un nivel (PB: la casa y otra hoja para el frente) con su leyenda debajo."""
     out = []
     nid = archivo.split("-")[1]
     if nid == "pb":
-        out.append(hoja(f"{titulo} — la casa", plano(archivo + ".svg", generar(CASA_X)) + leyenda(ley), seccion=seccion))
+        out.append(hoja(f"{titulo} — la casa", plano(archivo + ".svg", generar(CASA_X)) + leyenda(ley), seccion=seccion, nueva=nueva))
         if frente:
             out.append(hoja(f"{titulo} — el frente (estacionamiento, jardín, camino)",
-                            plano(archivo + "-frente.svg", generar(FRENTE_X)) + leyenda(ley), seccion=seccion))
+                            plano(archivo + "-frente.svg", generar(FRENTE_X)) + leyenda(ley), seccion=seccion, nueva=nueva))
     else:
-        out.append(hoja(titulo, plano(archivo + ".svg", generar((-1.6, 18.3) + ALTO_Y)) + leyenda(ley), seccion=seccion))
+        out.append(hoja(titulo, plano(archivo + ".svg", generar((-1.6, 18.3) + ALTO_Y)) + leyenda(ley), seccion=seccion, nueva=nueva))
     if extra:
         out.append(hoja(f"{titulo} — tablas para revisar", extra, seccion=seccion))
     return out
@@ -586,7 +593,7 @@ S = SEC["A"]
 partes.append(hoja("Ladrillo y forma de asentar", nueva=True, cuerpo=f"""<div class="cols"><div><ul>
 <li><b>Ladrillo:</b> {html.escape(alb.get('ladrillo', ''))}, en toda la casa (también los tabiques; no hay drywall).</li>
 <li><b>Casi todos los muros van de SOGA</b> (~0.15 terminado).</li>
-<li><b>Living: sus muros sobre las columnas van de CABEZA</b> (~0.25, al ras de las dos caras de las columnas).</li>
+<li><b>Solo el muro OESTE de planta baja (el frente, eje 1: living e ingreso) va de CABEZA</b> (~0.25, al ras de las dos caras de las columnas). Todos los demás, de soga.</li>
 <li><b>Muros de afuera de soga: AL RAS DE LA CARA EXTERIOR de las columnas</b> (fachada lisa; la columna sobresale ~0.10 hacia adentro).</li>
 <li><b>Muros sobre la línea de las columnas: AL RAS DE UNA CARA de la columna</b> (el plano y la tabla de muros dicen
 cuál); del otro lado la columna asoma ~10 cm. Los tabiques que no van sobre una línea de columnas, centrados.</li></ul></div><div><ul>
@@ -626,7 +633,7 @@ partes.append(hoja("Paso a paso (1 de 2)", pasos(
         "Las puertas y ventanas que están junto a una columna, AL RAS de la columna (sin pedacito de ladrillo).",
     ], "maestro"),
     paso(4, "Levantar los muros de planta baja", [
-        "Soga en casi todo; de cabeza solo los muros de afuera del living. Los de afuera, al ras de la cara exterior de las columnas.",
+        "Soga en todo, salvo el muro oeste (el frente, eje 1), que va de cabeza. Los de afuera, al ras de la cara exterior de las columnas.",
         f"<b>Unión con las columnas:</b> {html.escape(uc.get('chicotes', ''))}.",
         "Dintel de hormigón sobre cada puerta y ventana.",
         "<b>Ductos de caños</b> de ladrillo en los rincones de las columnas A2 (escalera/depósito), A3 (baño) y A4 (estudio), "
@@ -673,6 +680,38 @@ partes.append(hoja("Paso a paso (2 de 2)", pasos(
 niv = sorted((c.get("niveles_piso") or {}).get("pb", []), key=lambda n: n["cota"])
 filas = "".join(f"<tr><td><b>{html.escape(n['etiqueta'])}</b></td><td class=n>{n['cota']:+.2f}</td>"
                 f"<td class=nota>{html.escape(corto(n.get('nota', ''), 260))}</td></tr>" for n in niv)
+(SALIDA / "obra-bodega-planta.svg").write_text(O.bodega_planta_svg(c), encoding="utf-8")
+(SALIDA / "obra-bodega-corte1.svg").write_text(O.bodega_corte_svg(c, 5.125, "CORTE 1 — lado del living (bajo el tramo de 10, que sube)"), encoding="utf-8")
+(SALIDA / "obra-bodega-corte2.svg").write_text(O.bodega_corte_svg(c, 6.325, "CORTE 2 — lado del baño (bajo el tramo de 6, que llega arriba)"), encoding="utf-8")
+partes.append(hoja("Planta baja — BODEGA debajo de la escalera: cómo es", nueva=True, seccion=S, cuerpo=
+    '<div class="bod"><div><img src="obra-bodega-planta.svg"><p class=lee>En cada escalón: <b>número · altura libre '
+    'debajo</b> (desde el piso). Verde: se entra de pie. Naranja: agachado. Líneas azules: dónde están los cortes.</p></div>'
+    '<div><img src="obra-bodega-corte1.svg"><img src="obra-bodega-corte2.svg"></div></div>' + pasos(
+    paso(1, "Qué es", [
+        "Una <b>bodega cerrada</b> debajo de la escalera, entre las columnas A2, A3, B2 y B3 (2.40 × 2.53 por dentro).",
+        "Se entra <b>solo desde el retiro norte</b>, por una puerta de <b>0.80 × 1.85</b> al ras de la columna A3, que abre "
+        "hacia afuera, con un escalón de 0.15. <b>No se comunica con la casa.</b>",
+    ]),
+    paso(2, "Qué alto queda adentro", [
+        "<b>Bajo el descanso</b> (la parte de la puerta): <b>1.92</b> libres, se entra de pie.",
+        "<b>Lado del baño</b> (bajo el tramo de 6 que llega al primer piso): el techo <b>sube</b> de 1.92 a 2.48.",
+        "<b>Lado del living</b> (bajo el tramo de 10 que sube desde el hall): el techo <b>baja</b> de 1.54 a 0.98 junto al "
+        "muro del hall: ahí va el estante bajo de herramientas.",
+    ]),
+    paso(3, "Muros (todos de soga)", [
+        "<b>Norte</b> (al retiro): con la puerta, al ras de afuera de las columnas.",
+        "<b>Del lado del hall</b> (eje B): al ras de la cara NORTE de B2 y B3; <b>sube hasta tocar la escalera por debajo</b>, "
+        "siguiendo la pendiente (corte 1: llega a ~0.98; corte 2: ~2.48). Arriba se cierra apretado contra la losa de la escalera.",
+        "<b>Del lado del living</b> (eje 2) y <b>del lado del baño</b> (eje 3): al ras de la escalera, hasta tocarla.",
+    ], "albañil"),
+    paso(4, "Adentro y los cajones del hall", [
+        "Piso de cemento. Un <b>aplique</b> en el muro (a 1.80) y un enchufe junto a la puerta. En el rincón de A2 sube el "
+        "<b>ducto del agua caliente</b>: no taparlo.",
+        "<b>Cajones hacia el hall</b> (opcional): debajo de los escalones 4 a 6, del lado del hall, un hueco de ~0.55 de ancho, "
+        "0.40 de alto y 1.10 de fondo. Más al sur la escalera baja a menos de 0.40. Antes, ver si debajo de los primeros "
+        "escalones hay relleno.",
+    ], "albañil + carpintero"),
+)))
 partes.append(hoja("Niveles de piso — planta baja y exteriores (PROPUESTOS, falta medir)",
                    "<p>±0.00 = vereda pública frente al portón. Todo se mide con manguera de nivel desde ahí.</p>"
                    f"<table><thead><tr><th>Lugar</th><th>Cota</th><th>Cómo</th></tr></thead><tbody>{filas}</tbody></table>",
@@ -868,7 +907,7 @@ for nid, nombre in NIVELES:
     n = nivel_dict(nid)
     _, puntos = I.plano_electrico(c, n, leyenda_svg=False)
     partes += hojas_plano(S, f"{nombre} — luces y teclas", f"obra-{nid}-luces",
-                          lambda r, n=n: I.plano_electrico(c, n, "luces", r, leyenda_svg=False)[0], LEY_LUCES)
+                          lambda r, n=n: I.plano_electrico(c, n, "luces", r, leyenda_svg=False)[0], LEY_LUCES, nueva=True)
     partes += hojas_plano(S, f"{nombre} — enchufes, tablero y especiales", f"obra-{nid}-tomas",
                           lambda r, n=n: I.plano_electrico(c, n, "tomas", r, leyenda_svg=False)[0], LEY_TOMAS,
                           "<h3>Cuántos puntos hay en cada ambiente</h3>" + tabla_puntos_elec(nid, puntos)
@@ -950,6 +989,8 @@ table.medir td {{ font-size: 15px; height: 34px; }} td.sup {{ color: #555; }} td
 ol.cambios li {{ font-size: 17px; margin: 10px 0; line-height: 1.4; }}
 .plano.alb {{ max-height: 228mm; }}
 .plano.corte {{ max-height: 120mm; display: block; margin: 0 auto 6px; }}
+.bod {{ display: grid; grid-template-columns: 0.85fr 1fr; gap: 14px; }} .bod img {{ width: 100%; max-height: 92mm; object-fit: contain; display: block; }}
+.bod > div:first-child img {{ max-height: 150mm; }}
 p.lee {{ font-size: 13px; margin: 2px 0; }}
 .tarjetas {{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }}
 .tarjeta {{ border: 2px solid #333; border-radius: 6px; padding: 4px 6px; break-inside: avoid; }}

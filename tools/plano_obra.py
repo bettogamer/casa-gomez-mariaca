@@ -545,3 +545,175 @@ def corte_techo_svg(casa, x_corte=12.35):
     txt(5.7, 6.80, "FRANJA", 15, 'font-weight="bold" fill="#9aa"')
     p.append("</svg>")
     return "".join(p)
+
+
+# ── bodega bajo la escalera de planta baja (2026-10-16: el maestro no entendía cómo era) ─────────────────────────
+
+def _libre(casa, p, base):
+    """Altura libre (desde el piso de PB) bajo un peldaño o el descanso."""
+    ch = casa["estructura"]["escalera"]["contrahuella"]
+    return p["z"] - (ch if "n" in p else 0) - C.GARGANTA - base
+
+
+def bodega_planta_svg(casa):
+    e = C.escalera(casa)[0]
+    base = e["base"]
+    E = 120
+    X0, X1, Y0, Y1 = 3.75, 7.75, -1.05, 4.75
+    W, H = (X1 - X0) * E, (Y1 - Y0) * E
+    X = lambda x: (x - X0) * E
+    Y = lambda y: (y - Y0) * E
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.0f} {H:.0f}" class="bodega" font-family="Helvetica, Arial, sans-serif">',
+         f'<rect width="{W:.0f}" height="{H:.0f}" fill="#fff"/>']
+
+    def rect(x0, y0, x1, y1, est):
+        p.append(f'<rect x="{X(x0):.1f}" y="{Y(y0):.1f}" width="{(x1 - x0) * E:.1f}" height="{(y1 - y0) * E:.1f}" {est}/>')
+
+    def txt(x, y, s, tam=14, est="", ancla="middle"):
+        p.append(f'<text x="{X(x):.1f}" y="{Y(y):.1f}" font-size="{tam}" text-anchor="{ancla}" {HALO}{est}>{escape(s)}</text>')
+
+    # bodega: piso
+    rect(4.525, 0.025, 6.925, 2.555, 'fill="#fff8e1" stroke="none"')
+    # escalera: peldaños con la altura libre debajo
+    for q in e["peldanos"] + [e["descanso"]]:
+        lib = _libre(casa, q, base)
+        fill = "#ffe0b2" if lib < 1.0 else "#fff3e0" if lib < 1.8 else "#e8f5e9"
+        rect(q["x0"], q["y0"], q["x1"], q["y1"], f'fill="{fill}" fill-opacity="0.85" stroke="#8a6a45" stroke-width="1" stroke-dasharray="4 3"')
+        if "n" in q:
+            txt((q["x0"] + q["x1"]) / 2, (q["y0"] + q["y1"]) / 2 + 0.06,
+                f"{q['n']} · {lib:.2f}" if lib > 0 else f"{q['n']} · macizo", 12, 'fill="#5d4037"')
+        else:
+            txt((q["x0"] + q["x1"]) / 2, (q["y0"] + q["y1"]) / 2 - 0.05, "DESCANSO encima", 13, 'font-weight="bold" fill="#5d4037"')
+            txt((q["x0"] + q["x1"]) / 2, (q["y0"] + q["y1"]) / 2 + 0.22, f"debajo {lib:.2f} libres: se entra de pie", 13, 'fill="#2e7d32"')
+    # muros reales
+    for m in C.muros(casa, "pb"):
+        if m["tipo"] != "ladrillo":
+            continue
+        x0, y0, x1, y1 = _rect_muro(m)
+        if x1 < X0 or x0 > X1 or y1 < Y0 or y0 > Y1:
+            continue
+        rect(max(x0, X0), max(y0, Y0), min(x1, X1), min(y1, Y1), 'fill="#222"')
+    for col in C.columnas(casa):
+        if X0 < col["x"] < X1 and Y0 < col["y"] < Y1:
+            rect(col["x"] - 0.125, col["y"] - 0.125, col["x"] + 0.125, col["y"] + 0.125, 'fill="#c62828" stroke="#600"')
+    # puerta de la bodega (al retiro) y su giro
+    ab = next(a for a in C.aberturas(casa, "pb") if a["id"] == "puerta_deposito")
+    (hx, _), (ox, _) = ab["de"], ab["a"]
+    rect(min(hx, ox), -0.125, max(hx, ox), 0.025, 'fill="#fff" stroke="none"')
+    w = abs(hx - ox)
+    p.append(f'<line x1="{X(hx):.1f}" y1="{Y(-0.125):.1f}" x2="{X(hx):.1f}" y2="{Y(-0.125 - w):.1f}" stroke="#222" stroke-width="2"/>')
+    p.append(f'<path d="M {X(hx):.1f} {Y(-0.125 - w):.1f} A {w * E:.1f} {w * E:.1f} 0 0 0 {X(ox):.1f} {Y(-0.125):.1f}" fill="none" stroke="#777" stroke-dasharray="4 3"/>')
+    txt((hx + ox) / 2, -0.55, f"PUERTA {w:.2f} × {ab.get('alto', 2.1):.2f}", 14, 'font-weight="bold" fill="#b71c1c"')
+    txt((hx + ox) / 2, -0.33, "abre al retiro · escalón 0.15", 12, 'fill="#b71c1c"')
+    # muebles de la bodega y la cajonera del hall
+    for mb in casa["muebles"]["pb"]:
+        if mb.get("nombre") in ("Herramientas", "Cajonera"):
+            x0, y0, x1, y1 = mb["rect"]
+            rect(x0, y0, x1, y1, 'fill="#d7ccc8" stroke="#5d4037" stroke-width="1.5"')
+    txt(4.72, 1.45, "estante", 12, 'fill="#4e342e" transform="rotate(-90 {:.1f} {:.1f})"'.format(X(4.72), Y(1.45)))
+    txt(5.09, 3.08, "cajones → hall", 12, 'font-weight="bold" fill="#4e342e"')
+    # ducto de A2 (agua caliente)
+    rect(4.525, 0.025, 4.675, 0.30, 'fill="#9e9e9e"')
+    # rótulos de ambientes
+    txt(6.30, 2.30, "BODEGA", 18, 'font-weight="bold" fill="#e65100"')
+    txt(6.30, 2.50, "(solo desde el retiro)", 12, 'fill="#e65100"')
+    txt(6.40, 3.60, "HALL", 16, 'font-weight="bold" fill="#999"')
+    txt(4.05, 2.20, "LIVING", 14, 'font-weight="bold" fill="#999" transform="rotate(-90 {:.1f} {:.1f})"'.format(X(4.05), Y(2.20)))
+    txt(7.40, 1.30, "BAÑO", 14, 'font-weight="bold" fill="#999" transform="rotate(-90 {:.1f} {:.1f})"'.format(X(7.40), Y(1.30)))
+    txt(5.70, -0.85, "RETIRO NORTE", 14, 'font-weight="bold" fill="#999"')
+    # líneas de corte
+    for xc, k in ((5.125, 1), (6.325, 2)):
+        p.append(f'<line x1="{X(xc):.1f}" y1="{Y(-0.95):.1f}" x2="{X(xc):.1f}" y2="{Y(4.65):.1f}" stroke="#1565c0" stroke-width="2" stroke-dasharray="10 5"/>')
+        txt(xc, 4.70, f"CORTE {k}", 13, 'font-weight="bold" fill="#1565c0"')
+    p.append("</svg>")
+    return "".join(p)
+
+
+def bodega_corte_svg(casa, xc, titulo):
+    """Corte de norte (izquierda) a sur (derecha) por x = xc: escalera, altura libre debajo, muros y puerta."""
+    e = C.escalera(casa)[0]
+    base = e["base"]
+    ch = casa["estructura"]["escalera"]["contrahuella"]
+    G = C.GARGANTA
+    E = 88
+    Y0, Y1, Z0, Z1 = -0.95, 4.65, -0.55, 3.85
+    W, H = (Y1 - Y0) * E, (Z1 - Z0) * E
+    X = lambda y: (y - Y0) * E
+    Z = lambda z: (Z1 - z) * E
+    p = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.0f} {H:.0f}" class="bodega" font-family="Helvetica, Arial, sans-serif">',
+         f'<rect width="{W:.0f}" height="{H:.0f}" fill="#fff"/>']
+
+    def rect(y0, z0, y1, z1, est):
+        p.append(f'<rect x="{X(y0):.1f}" y="{Z(z1):.1f}" width="{(y1 - y0) * E:.1f}" height="{(z1 - z0) * E:.1f}" {est}/>')
+
+    def txt(y, z, s, tam=14, est="", ancla="middle"):
+        p.append(f'<text x="{X(y):.1f}" y="{Z(z):.1f}" font-size="{tam}" text-anchor="{ancla}" {HALO}{est}>{escape(s)}</text>')
+
+    def cota(y, z0, z1, s, col="#2e7d32"):
+        p.append(f'<line x1="{X(y):.1f}" y1="{Z(z0):.1f}" x2="{X(y):.1f}" y2="{Z(z1):.1f}" stroke="{col}" stroke-width="2"/>')
+        for z in (z0, z1):
+            p.append(f'<line x1="{X(y) - 7:.1f}" y1="{Z(z):.1f}" x2="{X(y) + 7:.1f}" y2="{Z(z):.1f}" stroke="{col}" stroke-width="2"/>')
+        a, b = X(y) - 6, Z((z0 + z1) / 2)
+        p.append(f'<text x="{a:.1f}" y="{b:.1f}" font-size="15" font-weight="bold" text-anchor="middle" fill="{col}" '
+                 f'transform="rotate(-90 {a:.1f} {b:.1f})" {HALO}>{escape(s)}</text>')
+
+    # piso de PB y losa del primer piso (al sur del eje B)
+    rect(Y0, -0.20, Y1, 0.0, 'fill="#bdbdbd"')
+    rect(2.555, 3.00, Y1, 3.20, 'fill="#bdbdbd" stroke="#777"')
+    txt(3.65, 3.30, "losa del primer piso", 12, 'fill="#555"')
+    # bodega (relleno claro)
+    rect(0.025, 0.0, 2.555, 1.95, 'fill="#fff8e1"')
+    # escalera en este corte
+    pel = [q for q in e["peldanos"] if q["x0"] - 0.01 <= xc <= q["x1"] + 0.01]
+    d = e["descanso"]
+    zr = lambda z: z - base
+    rect(d["y0"], zr(d["z"]) - G, d["y1"], zr(d["z"]), 'fill="#d7ccc8" stroke="#5d4037" stroke-width="1.5"')
+    # el tramo como UNA losa: escalones arriba y la cara de abajo recta (si toca el piso, macizo)
+    if pel:
+        sube_al_sur = pel[-1]["y0"] > pel[0]["y0"] and pel[-1]["z"] > pel[0]["z"]
+        orden = sorted(pel, key=lambda q: q["z"])
+        arriba, abajo = [], []
+        for q in orden:
+            z = zr(q["z"])
+            y_ent, y_sal = (q["y0"], q["y1"]) if sube_al_sur else (q["y1"], q["y0"])
+            arriba += [(y_ent, z - ch), (y_ent, z), (y_sal, z)]
+            abajo.append((y_ent, max(z - ch - G, 0.0)))
+        abajo.append((arriba[-1][0], max(zr(orden[-1]["z"]) - ch - G, 0.0)))
+        if orden[0]["z"] - base - ch - G < 0.01:         # el primer peldaño apoya en el piso
+            abajo[0] = (arriba[0][0], 0.0)
+        poly = arriba + list(reversed(abajo))
+        p.append('<polygon points="' + " ".join(f"{X(y):.1f},{Z(z):.1f}" for y, z in poly) +
+                 '" fill="#d7ccc8" stroke="#5d4037" stroke-width="1.5"/>')
+    # muros cortados: norte (eje A) y eje B, hasta tocar la escalera
+    lib_desc = zr(d["z"]) - G
+    rect(-0.125, 0.0, 0.025, 3.0, 'fill="#222"')
+    puerta = next(a for a in C.aberturas(casa, "pb") if a["id"] == "puerta_deposito")
+    xs = sorted([puerta["de"][0], puerta["a"][0]])
+    if xs[0] <= xc <= xs[1]:
+        al = puerta.get("alto", 2.1)
+        rect(-0.125, 0.0, 0.025, al, 'fill="#fff" stroke="#b71c1c" stroke-width="2"')
+        txt(-0.10, al + 0.12, f"puerta ↑ {al:.2f}", 13, 'font-weight="bold" fill="#b71c1c"', "start")
+        rect(-0.60, -0.15, -0.125, 0.0, 'fill="#9e9e9e"')
+        txt(-0.55, -0.05, "retiro −0.15", 11, 'fill="#333"', "start")
+    bajo_b = next((zr(q["z"]) - ch - G for q in pel if q["y0"] - 0.01 <= 2.63 <= q["y1"] + 0.01), 3.0)
+    rect(2.555, 0.0, 2.705, min(bajo_b, 3.0), 'fill="#222"')
+    # cotas de altura libre
+    cota(0.55, 0.0, lib_desc, f"{lib_desc:.2f} libres")
+    q_b = next((q for q in pel if q["y0"] - 0.01 <= 2.40 <= q["y1"] + 0.01), None)
+    if q_b:
+        lb = zr(q_b["z"]) - ch - G
+        cota(2.40, 0.0, lb, f"{lb:.2f}")
+    # cajonera (solo en el corte del lado del living)
+    caj = next((m for m in casa["muebles"]["pb"] if m.get("nombre") == "Cajonera"), None)
+    if caj and caj["rect"][0] <= xc <= caj["rect"][2]:
+        _, y0, _, y1 = caj["rect"]
+        rect(y0, 0.0, y1, caj.get("alto", 0.4), 'fill="#bcaaa4" stroke="#4e342e" stroke-width="1.5"')
+        txt((y0 + y1) / 2, caj.get("alto", 0.4) + 0.62, "cajones", 12, 'font-weight="bold" fill="#4e342e"')
+        txt((y0 + y1) / 2, caj.get("alto", 0.4) + 0.42, "(abren al hall)", 11, 'fill="#4e342e"')
+    txt(1.25, 1.10, "BODEGA", 18, 'font-weight="bold" fill="#e65100"')
+    txt(3.65, 1.60, "HALL", 16, 'font-weight="bold" fill="#999"')
+    txt(-0.50, -0.45, "← NORTE (retiro)", 13, 'font-weight="bold"', "start")
+    txt(4.55, -0.45, "SUR (hall) →", 13, 'font-weight="bold"', "end")
+    txt((Y0 + Y1) / 2, Z1 - 0.20, titulo, 15, 'font-weight="bold" fill="#1565c0"')
+    p.append("</svg>")
+    return "".join(p)
