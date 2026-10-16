@@ -1072,3 +1072,5 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   baja de afuera, cada una con su símbolo y su columna en las tablas para contar. Conteo: adentro 44 focos de techo
   (1–2 por ambiente; cocina de PB 6), 14 apliques, 4 tiras LED; afuera 31. Recortes posibles propuestos al dueño
   (sin aplicar).
+- **Muebles de fondo en los planos del electricista** (pedido del dueño): al 28 % de opacidad, solo como guía; y
+  `rotulo:` corto en las luces que lo tienen (cocinas de PB y del altillo) para saber para qué es cada una.
