@@ -78,7 +78,17 @@ def generar(hojas, portada, estilo, version, fecha, salida, extras):
             shutil.copy(salida / src, dest / "planos" / src)
         return f'{m.group(1)}"/planos/{src}"'
 
+    def vivo(m):
+        """Plano del albañil metido en la página (no como imagen): se puede tocar cada código y ver sus datos."""
+        src = m.group(1)
+        svg = (salida / src).read_text(encoding="utf-8")
+        shutil.copy(salida / src, dest / "planos" / src)
+        svg = re.sub(r"<title>[^<]*</title>", "", svg, count=1)
+        return (f'<div class="plano-vivo">{svg}</div><p class="toca">👆 Toca un código (V1, P2…) para ver todos sus datos · '
+                f'<a href="/planos/{src}" target="_blank">🔍 ver el plano solo, para agrandarlo</a></p>')
+
     def ampliable(cuerpo):
+        cuerpo = re.sub(r'<img class="plano alb" src="(obra-albanil-[^"]+\.svg)">', vivo, cuerpo)
         cuerpo = re.sub(r'(src=)"([^"]+)"', copiar, cuerpo)
         # los planos se abren solos al tocarlos (en el celular se agrandan con dos dedos)
         return re.sub(r'(<img class="plano[^"]*" src="([^"]+)">)',
@@ -110,7 +120,7 @@ def generar(hojas, portada, estilo, version, fecha, salida, extras):
                f'<meta name="viewport" content="width=device-width, initial-scale=1">'
                f'<title>{html.escape(titulo)} · Casa</title>{estilo}{ESTILO_WEB}</head>'
                f'<body style="--c:{color}"><header><nav>{nav}</nav><span class="ver">v{version} · {fecha}</span></header>'
-               f'<main>{cuerpo}</main><footer>Casa en construcción · Cochabamba · versión {version} del {fecha}. '
+               f'<main>{cuerpo}</main><div id="dato" hidden></div>{SCRIPT_WEB}<footer>Casa en construcción · Cochabamba · versión {version} del {fecha}. '
                f'Siempre es la última: si algo no coincide con la obra, avisar al dueño.</footer></body></html>')
         f = dest / ruta.strip("/") / "index.html" if ruta != "/" else dest / "index.html"
         f.parent.mkdir(parents=True, exist_ok=True)
@@ -205,6 +215,20 @@ def generar(hojas, portada, estilo, version, fecha, salida, extras):
     print(f"ok salida/sitio ({n} páginas)")
 
 
+SCRIPT_WEB = """<script>
+(function () {
+  var caja = document.getElementById("dato");
+  document.addEventListener("click", function (e) {
+    var g = e.target.closest && e.target.closest("g.rot");
+    if (!g) { caja.hidden = true; return; }
+    var partes = g.getAttribute("data-info").split(" — ");
+    caja.innerHTML = "<b>" + partes[0] + "</b>" + partes.slice(1).map(function (t) { return "<p>" + t + "</p>"; }).join("") +
+      "<small>Toca afuera para cerrar</small>";
+    caja.hidden = false;
+  });
+})();
+</script>"""
+
 ESTILO_WEB = """<style>
 body { background: #f6f4f0; font-size: 17px; }
 header { position: sticky; top: 0; z-index: 5; background: var(--c); color: #fff; padding: 10px 14px;
@@ -239,6 +263,12 @@ a.zoom { display: block; text-decoration: none; position: relative; }
 a.zoom span { display: block; text-align: center; font-size: 14px; color: #1f6fb2; margin: 2px 0 8px; }
 .plano, .plano.inst, .plano.alb { max-height: none; width: 100%; height: auto; background: #fff; }
 table { display: block; overflow-x: auto; font-size: 14px; }
+.plano-vivo svg { width: 100%; height: auto; display: block; }
+.plano-vivo g.rot { cursor: pointer; } .plano-vivo g.rot:hover rect { stroke: #b71c1c; stroke-width: 2; }
+p.toca { font-size: 14px; color: #1f6fb2; margin: 4px 0 10px; text-align: center; }
+#dato { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 20; max-width: 560px; margin: 0 auto; background: #fff;
+  border: 3px solid #b71c1c; border-radius: 12px; padding: 10px 14px; box-shadow: 0 6px 24px rgba(0,0,0,.3); font-size: 16px; }
+#dato b { font-size: 20px; color: #b71c1c; } #dato p { margin: 6px 0; } #dato small { color: #777; }
 footer { text-align: center; color: #777; font-size: 13px; padding: 20px 16px 40px; }
 @media (max-width: 800px) {
   .cols, .pasos, .bod { grid-template-columns: 1fr; gap: 10px; }

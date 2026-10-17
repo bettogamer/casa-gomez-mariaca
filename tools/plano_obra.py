@@ -52,6 +52,52 @@ def fmt(v):
 HALO = 'stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke" '
 
 
+# ── lugares ocupados (en metros): para que los rótulos no se pisen con nada ─────────────────────────
+ESC_M = 50.0        # px por metro (render_svg.ESC)
+
+
+def caja_texto(x, y, txt, tam, vertical=False):
+    """Caja (x0, y0, x1, y1) en m de un texto centrado en x con la base en y (o girado 90°, centrado en y)."""
+    w = len(str(txt)) * tam * 0.56 / ESC_M + 0.04
+    h = tam / ESC_M
+    if vertical:
+        return (x - h * 0.85, y - w / 2, x + h * 0.2, y + w / 2)
+    return (x - w / 2, y - h * 0.82, x + w / 2, y + h * 0.22)
+
+
+def solape(a, b):
+    dx = min(a[2], b[2]) - max(a[0], b[0])
+    dy = min(a[3], b[3]) - max(a[1], b[1])
+    return dx * dy if dx > 0 and dy > 0 else 0.0
+
+
+def _cruza_caja(p, q, c):
+    """¿El segmento p→q pasa por dentro de la caja c? (Liang–Barsky)"""
+    (x0, y0), (x1, y1) = p, q
+    t0, t1 = 0.0, 1.0
+    dx, dy = x1 - x0, y1 - y0
+    for pp, qq in ((-dx, x0 - c[0]), (dx, c[2] - x0), (-dy, y0 - c[1]), (dy, c[3] - y0)):
+        if abs(pp) < 1e-9:
+            if qq < 0:
+                return False
+            continue
+        r = qq / pp
+        if pp < 0:
+            t0 = max(t0, r)
+        else:
+            t1 = min(t1, r)
+        if t0 > t1:
+            return False
+    return t1 - t0 > 0.02
+
+
+def _cruzan(a, b, c, d):
+    """¿Se cruzan los segmentos a→b y c→d?"""
+    def o(p, q, r):
+        return (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+    return (o(a, b, c) * o(a, b, d) < 0) and (o(c, d, a) * o(c, d, b) < 0)
+
+
 def _rotar(L, x, y, t, tam, estilo, vertical):
     a, b = L.p(x, y)
     rot = f' transform="rotate(-90 {a:.1f} {b:.1f})"' if vertical else ""
@@ -145,7 +191,8 @@ def lado_libre(casa, nid, ln):
     for s in (1, -1):
         x, y = (c + s * 0.4, mid) if v else (mid, c + s * 0.4)
         amb = C.ambiente_en(casa, nid, x, y)
-        if amb is None or amb["tipo"] == "exterior" or not (hx0 < x < hx1 and hy0 < y < hy1):
+        # afuera = sin ambiente o un ambiente exterior (no "fuera de la huella": el volado de la suite está fuera de ella)
+        if amb is None or amb["tipo"] == "exterior":
             return s
         a = C.area(amb["poly"])
         if a > area:
@@ -153,7 +200,8 @@ def lado_libre(casa, nid, ln):
     return mejor
 
 
-def dibujar_cadena(L, casa, nid, ln):
+def dibujar_cadena(L, casa, nid, ln, occ=None):
+    occ = occ if occ is not None else []
     pts, macizos = puntos_cadena(casa, nid, ln)
     if len(pts) < 2:
         return
@@ -163,6 +211,8 @@ def dibujar_cadena(L, casa, nid, ln):
     P = (lambda t, o: (o, t)) if v else (lambda t, o: (t, o))
     estilo = 'stroke="#333" stroke-width="1"'
     L.linea(*P(pts[0], d), *P(pts[-1], d), estilo)
+    (ax, ay), (bx, by) = P(pts[0], d), P(pts[-1], d)
+    occ.append((min(ax, bx) - 0.03, min(ay, by) - 0.03, max(ax, bx) + 0.03, max(ay, by) + 0.03, 3.0))
     for t in pts:
         L.linea(*P(t, ln["centro"] + s * (g / 2 + 0.05)), *P(t, d + s * 0.08), 'stroke="#777" stroke-width="0.6"')
         a, b = P(t, d)
@@ -202,36 +252,163 @@ def dibujar_cadena(L, casa, nid, ln):
         else:
             tx, ty = centro, d + (0.30 if k > 0 else -0.10)
         _rotar(L, tx, ty, txt, TAM_COTA, f'{HALO}{peso}fill="{col}"', v)
+        occ.append(caja_texto(tx, ty, txt, TAM_COTA, v) + (8.0,))
 
 
-def dibujar_rotulos(L, casa, nid):
-    """Código + medidas de cada abertura, del mismo lado que la cadena y más afuera (afuera de la casa si el muro da afuera)."""
+def rotulo_texto(ab, codigo):
+    """Las tres líneas del rótulo: código, medidas y antepecho (o alto)."""
+    ap, arriba = alturas(ab)
+    w = ancho(ab)
+    if ab["tipo"] == "ventana":
+        lineas = [f"{fmt(w)} × {fmt(arriba - ap)}", f"ant. {fmt(ap)}"]
+    elif ab["tipo"] == "corrediza":
+        lineas = [f"{fmt(w)} × {fmt(arriba)}", "desde el piso"]
+    else:
+        lineas = [f"hueco {fmt(w)}", f"alto {fmt(arriba)}"]
+    return [codigo] + lineas
+
+
+def info_vano(ab, codigo, donde=None):
+    """Texto completo de una abertura (cuadrito al tocar el código en la página web)."""
+    ap, arriba = alturas(ab)
+    w = ancho(ab)
+    nombre = {"ventana": "Ventana", "puerta": "Puerta", "corrediza": "Corrediza", "puerta_corrediza": "Puerta corrediza"}.get(ab["tipo"], "Abertura")
+    partes = [f"{codigo} · {nombre}"]
+    if ab["tipo"] == "ventana":
+        partes.append(f"{fmt(w)} de ancho × {fmt(arriba - ap)} de alto; antepecho {fmt(ap)} (del piso a la parte de abajo); arriba a {fmt(arriba)}")
+    elif ab["tipo"] == "corrediza":
+        partes.append(f"{fmt(w)} de ancho × {fmt(arriba)} de alto, desde el piso")
+    else:
+        partes.append(f"hueco {fmt(w)} (lo que deja el albañil) × alto {fmt(arriba)}")
+    if donde:
+        partes.append(f"Entre: {donde}")
+    if ab.get("obra"):
+        partes.append(ab["obra"])
+    return " — ".join(partes)
+
+
+TAM_COD = TAM_ROTULO + 4
+PASO = 0.33         # m entre líneas del rótulo
+
+
+def dibujar_rotulos(L, casa, nid, occ=None, limites=None, donde=None):
+    """Código + medidas de cada abertura, en GRANDE, en el primer lugar libre cerca de ella (del lado de su cadena, afuera
+    de la casa si el muro da afuera). Si no entra al lado, se aleja con una rayita guía hasta la abertura. Fondo blanco.
+    Se eligen todos juntos: primero cada uno en su mejor lugar, después varias vueltas en que cada rótulo se vuelve a
+    acomodar viendo dónde quedaron los demás (que no se pisen ni se crucen las rayitas)."""
+    occ = occ if occ is not None else []
     cod = codigos(casa, nid)
+    lx0, lx1, ly0, ly1 = limites or (-1e9, 1e9, -1e9, 1e9)
+    hx0, hy0, hx1, hy1 = C.huella_casa(casa)
+
+    def adentro(ln):
+        """Muro interior: hay ambientes (no exteriores) de los dos lados."""
+        v, c, mid = ln["vertical"], ln["centro"], (ln["lo"] + ln["hi"]) / 2
+        for d in (0.4, -0.4):
+            x, y = (c + d, mid) if v else (mid, c + d)
+            amb = C.ambiente_en(casa, nid, x, y)
+            if amb is None or amb["tipo"] == "exterior":
+                return False
+        return True
+
+    rot = []        # por abertura: datos y lista de lugares posibles [(costo fijo, cx, cy, caja, o, q, guia?)]
     for ln in lineas_de_muro(casa, nid):
         s = lado_libre(casa, nid, ln)
         v, g = ln["vertical"], ln["grosor"]
         for ab in ln["vanos"]:
             (x0, y0), (x1, y1) = ab["de"], ab["a"]
             t = ((y0 + y1) / 2) if v else ((x0 + x1) / 2)
-            ap, arriba = alturas(ab)
-            w = ancho(ab)
-            if ab["tipo"] == "ventana":
-                lineas = [f"{fmt(w)} × {fmt(arriba - ap)}", f"ant. {fmt(ap)}"]
-            elif ab["tipo"] == "corrediza":
-                lineas = [f"{fmt(w)} × {fmt(arriba)}", "desde el piso"]
-            else:
-                lineas = [f"hueco {fmt(w)}", f"alto {fmt(arriba)}"]
-            filas = [(cod[ab["id"]], f'{HALO}font-weight="bold" fill="{ROJO}"', TAM_ROTULO + 4)] + \
-                    [(l, f'{HALO}fill="{AZUL}"', TAM_ROTULO) for l in lineas]
-            cara = ln["centro"] + s * g / 2
-            if v:
-                x = cara + s * 1.70
-                for k, (txt, est, tam) in enumerate(filas):
-                    L.texto(x, t - 0.22 + k * 0.33, txt, tam, est)
-            else:
-                y0r = cara + (1.22 if s > 0 else -1.62)
-                for k, (txt, est, tam) in enumerate(filas):
-                    L.texto(t, y0r + k * 0.33, txt, tam, est)
+            lineas = rotulo_texto(ab, cod[ab["id"]])
+            tams = [TAM_COD] + [TAM_ROTULO] * (len(lineas) - 1)
+            bw = max(len(l) * tm * 0.56 for l, tm in zip(lineas, tams)) / ESC_M + 0.16
+            bh = PASO * (len(lineas) - 1) + TAM_COD / ESC_M + 0.12
+            prof = bw if v else bh
+            lugares = []
+            for k_lado, lado in enumerate([s] if not adentro(ln) else [s, -s]):
+                cara_l = ln["centro"] + lado * g / 2
+                o_ = (cara_l, t) if v else (t, cara_l)
+                for dist in (0.95, 1.25, 1.60, 2.0, 2.45, 2.95, 3.5):
+                    for corr in (0, 0.45, -0.45, 0.9, -0.9, 1.35, -1.35, 1.8, -1.8, 2.3, -2.3, 2.8, -2.8, 3.3, -3.3):
+                        cn = cara_l + lado * (dist if not v else dist + prof / 2 - 0.55)
+                        cx, cy = (cn, t + corr) if v else (t + corr, cn)
+                        caja = (cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2)
+                        fuera = max(0, lx0 - caja[0]) + max(0, caja[2] - lx1) + max(0, ly0 - caja[1]) + max(0, caja[3] - ly1)
+                        choque = sum(solape(caja, o[:4]) * o[4] for o in occ) + fuera * 50
+                        # un rótulo de un muro interior no se va afuera de la casa (no se sabría de qué abertura es)
+                        afuera = adentro(ln) and not (hx0 < cx < hx1 and hy0 < cy < hy1)
+                        q_ = (min(max(o_[0], caja[0]), caja[2]), min(max(o_[1], caja[1]), caja[3]))
+                        largo = ((q_[0] - o_[0]) ** 2 + (q_[1] - o_[1]) ** 2) ** 0.5
+                        guia = largo > 0.6 or (abs(cx - o_[0]) > bw / 2 + 0.05 if not v else abs(cy - o_[1]) > bh / 2 + 0.05)
+                        fijo = choque * 100 + dist * 0.6 + abs(corr) * 0.5 + k_lado * 1.5 + afuera * 15 + largo * 0.8
+                        lugares.append((fijo, cx, cy, caja, o_, q_, guia))
+            lugares.sort(key=lambda l: l[0])
+            rot.append({"ab": ab, "lineas": lineas, "tams": tams, "bw": bw, "bh": bh, "lugares": lugares[:260],
+                        "adentro": adentro(ln)})
+
+    def costo(i, lug, elegidos):
+        fijo, cx, cy, caja, o_, q_, guia = lug
+        c = fijo
+        for j, otro in elegidos.items():
+            if j == i:
+                continue
+            c += solape(caja, otro[3]) * 20 * 100
+            if guia and _cruza_caja(o_, q_, otro[3]):
+                c += 25
+            if otro[6] and _cruza_caja(otro[4], otro[5], caja):
+                c += 25
+            if guia and otro[6] and _cruzan(o_, q_, otro[4], otro[5]):
+                c += 25
+        return c
+
+    elegidos = {}
+    orden = sorted(range(len(rot)), key=lambda i: not rot[i]["adentro"])     # primero los de adentro (menos lugar)
+    for i in orden:
+        elegidos[i] = min(rot[i]["lugares"], key=lambda l: costo(i, l, elegidos))
+    for _ in range(4):                                                       # vueltas de mejora
+        cambio = False
+        for i in orden:
+            mejor = min(rot[i]["lugares"], key=lambda l: costo(i, l, elegidos))
+            if mejor is not elegidos[i] and costo(i, mejor, elegidos) < costo(i, elegidos[i], elegidos) - 0.01:
+                elegidos[i], cambio = mejor, True
+        if not cambio:
+            break
+    # si dos rayitas se cruzan, se prueba intercambiar los lugares de esos dos rótulos
+    def cerca(i, c):
+        return min(rot[i]["lugares"], key=lambda l: (l[1] - c[0]) ** 2 + (l[2] - c[1]) ** 2)
+    for i in orden:
+        for j in orden:
+            if i >= j:
+                continue
+            li, lj = elegidos[i], elegidos[j]
+            if not (li[6] and lj[6] and _cruzan(li[4], li[5], lj[4], lj[5])):
+                continue
+            ni, nj = cerca(i, (lj[1], lj[2])), cerca(j, (li[1], li[2]))
+            antes = costo(i, li, elegidos) + costo(j, lj, elegidos)
+            prueba = dict(elegidos)
+            prueba[i], prueba[j] = ni, nj
+            if costo(i, ni, prueba) + costo(j, nj, prueba) < antes:
+                elegidos[i], elegidos[j] = ni, nj
+
+    for i, r in enumerate(rot):
+        _, cx, cy, caja, (ox, oy), (px, py), guia = elegidos[i]
+        occ.append(caja + (20.0,))
+        if guia:
+            L.linea(ox, oy, px, py, f'stroke="{ROJO}" stroke-width="1" stroke-dasharray="3 2"')
+            a, b = L.p(ox, oy)
+            L.add(f'<circle cx="{a:.1f}" cy="{b:.1f}" r="3" fill="{ROJO}"/>')
+    for i, r in enumerate(rot):
+        _, cx, cy, caja, *_ = elegidos[i]
+        ab = r["ab"]
+        info = info_vano(ab, cod[ab["id"]], (donde or {}).get(ab["id"]))
+        a, b = L.p(caja[0], caja[1])
+        L.add(f'<g class="rot" data-info="{escape(info, quote=True)}"><title>{escape(info)}</title>'
+              f'<rect x="{a:.1f}" y="{b:.1f}" width="{r["bw"] * ESC_M:.1f}" height="{r["bh"] * ESC_M:.1f}" rx="5" '
+              f'fill="#fff" fill-opacity="0.92" stroke="#d7d7d7" stroke-width="0.8"/>')
+        yb = caja[1] + 0.06 + TAM_COD / ESC_M * 0.82
+        for k, (txt, tm) in enumerate(zip(r["lineas"], r["tams"])):
+            est = f'font-weight="bold" fill="{ROJO}"' if k == 0 else f'fill="{AZUL}"'
+            L.texto(cx, yb + k * PASO, txt, tm, est)
+        L.add("</g>")
 
 
 def ejes_lejos(L, casa, x0, y0, x1, y1, izq):
@@ -257,15 +434,57 @@ def ejes_lejos(L, casa, x0, y0, x1, y1, izq):
         L.texto((a + b) / 2, yc - 0.1, f"{b - a:.2f} entre ejes", 12, 'fill="#555"')
 
 
-def rotular_ambientes_simple(L, casa, nid):
+def rotular_ambientes_simple(L, casa, nid, occ=None):
+    """Nombre de cada ambiente; con `occ`, se corre un poco (dentro del ambiente) hasta un lugar libre."""
     for a in C.ambientes(casa, nid):
         if a["tipo"] == "exterior":
             continue
         cx, cy = a.get("etiqueta") or C.centroide(a["poly"])
-        L.texto(cx, cy, a["nombre"].upper(), 12, 'font-weight="bold" fill="#9aa"')
+        txt = a["nombre"].upper()
+        if occ is not None:
+            mejor = None
+            for dy in (0, 0.3, -0.3, 0.6, -0.6, 0.9, -0.9):
+                for dx in (0, 0.4, -0.4, 0.8, -0.8):
+                    x, y = cx + dx, cy + dy
+                    if C.ambiente_en(casa, nid, x, y - 0.1) is not a and (C.ambiente_en(casa, nid, x, y - 0.1) or {}).get("id") != a["id"]:
+                        continue
+                    caja = caja_texto(x, y, txt, 12)
+                    costo = sum(solape(caja, o[:4]) * o[4] for o in occ) * 100 + abs(dx) + abs(dy)
+                    if mejor is None or costo < mejor[0]:
+                        mejor = (costo, x, y, caja)
+            if mejor:
+                _, cx, cy, caja = mejor
+                occ.append(caja + (4.0,))
+        L.texto(cx, cy, txt, 12, f'{HALO}font-weight="bold" fill="#9aa"')
 
 
-def planta_obra(casa, nivel, desde_x=None, hasta_x=None, desde_y=None, hasta_y=None):
+def ocupacion_fija(casa, nid, y0, izq):
+    """Muros, columnas, escalera, la fila de "entre ejes" y las burbujas de los ejes: [(x0, y0, x1, y1, peso)]."""
+    occ = []
+    for m in C.muros(casa, nid):
+        if m["tipo"] == "ladrillo":
+            occ.append(_rect_muro(m) + (6.0,))
+    r = casa["estructura"]["seccion_columna"] / 2
+    for col in C.columnas(casa):
+        occ.append((col["x"] - r, col["y"] - r, col["x"] + r, col["y"] + r, 6.0))
+    for e in C.escalera(casa):
+        if e["desde"] == nid:
+            for p in e["peldanos"] + [e["descanso"]]:
+                occ.append((p["x0"], p["y0"], p["x1"], p["y1"], 1.0))
+            pr = e["peldanos"][0]
+            cx = (pr["x0"] + pr["x1"]) / 2
+            occ.append((cx - 0.55, e["inicio_y"] + 0.05, cx + 0.55, e["inicio_y"] + 0.70, 8.0))   # "▲ SUBE" y su medida
+    est = casa["estructura"]
+    xs = sorted(est["ejes_x"].values())
+    occ.append((xs[0], y0 - 2.75, xs[-1], y0 - 2.30, 10.0))           # fila "entre ejes"
+    for x in xs:
+        occ.append((x - 0.32, y0 - 3.37, x + 0.32, y0 - 2.73, 10.0))   # burbujas 1·2·3…
+    for y in est["ejes_y"].values():
+        occ.append((izq - 0.32, y - 0.32, izq + 0.32, y + 0.32, 10.0))  # burbujas A·B·C
+    return occ
+
+
+def planta_obra(casa, nivel, desde_x=None, hasta_x=None, desde_y=None, hasta_y=None, donde=None):
     nid = nivel["id"]
     ambs = C.ambientes(casa, nid)
     hx0, hy0, hx1, hy1 = C.huella_casa(casa)
@@ -279,14 +498,19 @@ def planta_obra(casa, nivel, desde_x=None, hasta_x=None, desde_y=None, hasta_y=N
     for a in ambs:      # rellenos muy claros: que resalten muros y números
         L.poly(a["poly"], 'fill="#f4f8fb" stroke="none"' if a["tipo"] != "exterior" else 'fill="#f3f7ef" stroke="#999" stroke-width="1" stroke-dasharray="6 3"')
     dibujar_escalera(L, casa, nid)
-    ejes_lejos(L, casa, x0, y0, x1, y1, (desde_x if desde_x is not None else x0 - 3.0) + 0.45)
-    rotular_ambientes_simple(L, casa, nid)
+    izq = (desde_x if desde_x is not None else x0 - 3.0) + 0.45
+    ejes_lejos(L, casa, x0, y0, x1, y1, izq)
+    occ = ocupacion_fija(casa, nid, y0, izq)
     dibujar_muros(L, casa, nid)
     dibujar_aberturas(L, casa, nid, rotulos=False)
     dibujar_columnas(L, casa, nid)
     for ln in lineas_de_muro(casa, nid):
-        dibujar_cadena(L, casa, nid, ln)
-    dibujar_rotulos(L, casa, nid)
+        dibujar_cadena(L, casa, nid, ln, occ)
+    lim = (desde_x if desde_x is not None else x0 - 3.6, hasta_x if hasta_x is not None else x1 + 3.6,
+           desde_y if desde_y is not None else y0 - 3.6, hasta_y if hasta_y is not None else y1 + 3.6)
+    lim = (lim[0] + 0.9, lim[1] - 0.1, lim[2] + 0.1, lim[3] - 0.1)
+    dibujar_rotulos(L, casa, nid, occ, lim, donde)
+    rotular_ambientes_simple(L, casa, nid, occ)       # al final: buscan lugar entre lo que ya está
     return L.svg(f"{nivel['nombre']} — albañil", desde_x=desde_x, hasta_x=hasta_x, desde_y=desde_y, hasta_y=hasta_y)
 
 

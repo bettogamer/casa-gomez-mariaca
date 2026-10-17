@@ -1129,3 +1129,16 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
 - **Alternativa por el techo (dueño, 2026-10-17):** anotada en la hoja del gasista (recuadro amarillo), sin dibujarla:
   subir sobre el antepecho, cruzar a la vista y bajar empotrado en el muro norte (~10–11 m, rodea la base del tanque y
   la canaleta). La de los planos sigue siendo la propuesta; eligen el gasista y YPFB.
+
+## 2026-10-17 — Rótulos del plano del albañil sin choques (pedido del dueño)
+- Los rótulos de puertas y ventanas (código, medidas y antepecho) se pisaban entre sí y con las cadenas de medidas.
+  Ahora `tools/plano_obra.py` los ubica solo: prueba muchos lugares cerca de cada abertura y elige entre todos a la vez
+  (varias vueltas y cambio de lugar si dos rayitas se cruzan) para que no tapen medidas, muros, columnas, la escalera
+  ni otros rótulos; un rótulo de un muro interior no se va afuera de la casa. Fondo blanco y **rayita guía** roja
+  punteada hasta su abertura cuando quedó a más de 0.60. Los nombres de los ambientes se ubican al final, en un lugar
+  libre dentro de su ambiente.
+- Las medidas SIGUEN dibujadas en el plano (lo pidió el maestro), no en tablas.
+- Corregido: los muros sobre el volado de la suite tomaban "afuera" hacia adentro (rótulos y cadenas de V8, V9 iban
+  hacia el lavamanos). La hoja del primer piso se ensanchó a la izquierda para que entren.
+- **Página web:** el plano del albañil va metido en la página: al tocar un código (V1, P2…) aparece un cuadrito con
+  todos sus datos (medidas, entre qué ambientes está y la nota de obra).
