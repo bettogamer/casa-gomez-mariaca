@@ -851,11 +851,13 @@ partes.append(hoja("Paso a paso del gas", pasos(
     paso(1, "Quién lo hace", [
         "Solo un <b>gasista matriculado</b>. La instalación la aprueba <b>YPFB</b> antes de habilitar el gas.",
         "El recorrido de estos planos es una <b>propuesta</b>: se lo muestra a YPFB y él dice si lo acepta.",
+        "Calcular el <b>consumo total</b> (calefón de toda la casa + cocina de planta baja + anafe del altillo) para el "
+        "medidor y el diámetro de cada tramo.",
     ], "gasista + YPFB"),
     paso(2, "Recorrido propuesto", [
         "Del medidor (pilar sur del frente) <b>enterrado</b> por el retiro norte y el patio hasta la cocina: sale a ~0.60 junto a la columna C5.",
         "Al <b>calefón</b>: sube por un compartimiento propio junto al cajón gris del frente y sigue por dentro de los "
-        "antepechos de la terraza del altillo. <b>No entra a la casa.</b>",
+        "antepechos de la terraza del altillo. <b>No entra a la casa</b> (solo el ramal de la cocina del altillo, abajo).",
         "Si YPFB no acepta esa subida: plan B, enterrado hasta A2 y subida en vaina ventilada dentro del ducto de la escalera.",
         "<b>Cocina del altillo</b> (anafe a gas): ramal con su <b>llave en la terraza</b>, junto a la del calefón. Sube a ~2.20, "
         "cruza el muro por encima del ducto de A2, va <b>empotrado</b> en el muro norte de la escalera (sin uniones adentro), "
