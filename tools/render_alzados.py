@@ -246,7 +246,9 @@ def main():
     SALIDA.mkdir(exist_ok=True)
     fz = casa.get("fachada") or {}
     juegos = [("", {**PALETA, **(fz.get("paleta") or {})}, "", None)]
-    for op in fz.get("opciones") or []:
+    # Elegida una opción, solo se dibuja esa (las demás quedan en el modelo como historia).
+    ops = [o for o in fz.get("opciones") or [] if not fz.get("elegida") or o["id"] == fz["elegida"]]
+    for op in ops:
         juegos.append((f"-{op['id']}", {**PALETA, **(op.get("paleta") or {})}, f" — opción {op['id'].upper()}: {op['nombre']}",
                        op.get("acentos")))
     for suf, pal, txt, ac in juegos:
@@ -258,10 +260,10 @@ def main():
 
 
 def _pagina(casa, juegos):
-    """salida/fachadas.html: las opciones lado a lado, con sus notas."""
+    """salida/fachadas.html: la fachada base y la opción elegida, con sus notas."""
     from html import escape
     fz = casa.get("fachada") or {}
-    notas = {f"-{op['id']}": op for op in fz.get("opciones") or []}
+    notas = {f"-{op['id']}": op for op in fz.get("opciones") or [] if f"-{op['id']}" in {j[0] for j in juegos}}
     cuerpo = ""
     for suf, _, txt, _ in juegos:
         op = notas.get(suf)
@@ -276,7 +278,7 @@ def _pagina(casa, juegos):
     html = ("<!doctype html><meta charset=utf-8><title>Fachadas</title><style>body{font-family:Helvetica,Arial,sans-serif;"
             "margin:16px;color:#222}.fila{display:flex;gap:12px;flex-wrap:wrap}figure{margin:0;flex:1 1 420px}"
             "svg{width:100%;height:auto}section{margin-bottom:40px;border-bottom:1px solid #ddd}</style>"
-            "<h1>Fachadas — opciones</h1>" + cuerpo)
+            "<h1>Fachadas</h1>" + cuerpo)
     f = SALIDA / "fachadas.html"
     f.write_text(html, encoding="utf-8")
     print("→", f.relative_to(SALIDA.parent))

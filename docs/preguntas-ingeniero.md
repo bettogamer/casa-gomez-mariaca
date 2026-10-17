@@ -85,6 +85,6 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
   al CALEFÓN sube por un compartimiento propio de chapa perforada junto al cajón gris de la esquina suroeste (con la pluvial
   de la logia cruzándolo en vaina sellada) y sigue a la vista por dentro de los antepechos de la terraza del altillo a ~0.30
   del piso. ¿Lo acepta YPFB? **Plan B:** enterrado hasta A2 y subida en vaina ventilada dentro del ducto de la escalera
-  (`salida/gas-variante-a.png`).
+  (variante a, descrita en `docs/decisiones.md` el 2026-10-08).
 - **Arquitecto de la obra (normativa):** cajón gris del frente que crece 0.12 con el gas (camino de 1.08); cajón de bajantes en el retiro del frente; retiro de 2 m del altillo; muro ciego
   de 1.80 al vecino del sur; muro de la calle y cisterna en el retiro. [10, 18, 28, 40]

@@ -14,7 +14,8 @@ modificar. El dueño no es arquitecto: trabaja con fotos y lenguaje simple. Todo
   usuario lo pida.
 - Ritmo: un tema por vez, confirmar con el usuario antes de pasar al siguiente.
 - `salida/` se genera con `make build` (plantas SVG, visor 3D, DXF, tablero). Nunca se
-  edita a mano y no se versiona.
+  edita a mano y no se versiona. `make build` la vacía cada vez (salvo el cuaderno y `sitio/`): imágenes sueltas
+  para comparar van al scratchpad, y las que valga la pena guardar, a `docs/`.
 - `planos-arqui/` son los originales del arquitecto. Solo lectura.
 - Hay DOS versiones del proyecto (PDF de 2020 vs juego impreso fotografiado).
   El modelo parte de las fotos. Ver `docs/versiones-del-plano.md`.

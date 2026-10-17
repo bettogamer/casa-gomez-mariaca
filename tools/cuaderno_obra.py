@@ -1030,7 +1030,7 @@ def escribir(nombre, titulo, hojas):
 HTML = escribir("cuaderno-obra", f"Casa — cuaderno de obra v{VERSION}", partes)
 sitio_obra.generar(HOJAS, partes[0], ESTILO, VERSION, CUAD.get("fecha", hoy), SALIDA, [
     ("Fachada norte", "fachada-norte.svg", "🏠"), ("Fachada sur", "fachada-sur.svg", "🏠"),
-    ("Fachada este (patio)", "fachada-este.svg", "🏠"), ("Fachada oeste (calle)", "fachada-oeste.svg", "🏠"),
+    ("Fachada este (patio)", "fachada-este.svg", "🏠"), ("Fachada oeste (frente)", "fachada-oeste.svg", "🏠"),
     ("Planta baja", "planta-pb.svg", "🗺️"), ("Primer piso", "planta-p1.svg", "🗺️"), ("Altillo", "planta-altillo.svg", "🗺️"),
     ("Techos", "planta-techos.svg", "🗺️"), ("Vista 3D", "visor-3d.html", "🧊")])
 if "--solo-sitio" in sys.argv:
