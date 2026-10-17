@@ -1,4 +1,5 @@
 """Genera todo salida/ desde el modelo. Uso: python tools/build.py"""
+import shutil
 import sys
 from datetime import datetime
 from html import escape
@@ -86,8 +87,21 @@ def tablero(casa, res, resumen, cargas):
 """
 
 
+def limpiar(casa):
+    """Vacía salida/ antes de armarla, para que no queden dibujos viejos. Se salvan sitio/ (lo limpia sitio_obra,
+    menos el enlace con Vercel) y el cuaderno de la versión actual (lo rehace `make cuaderno`, no `make build`)."""
+    version = ((casa.get("proyecto") or {}).get("cuaderno") or {}).get("version", "")
+    quedan = {"sitio", "cuaderno-obra.html", "cuaderno-obra.pdf",
+              f"cuaderno-obra-v{version}-hojas-nuevas.html", f"cuaderno-obra-v{version}-hojas-nuevas.pdf"}
+    SALIDA.mkdir(exist_ok=True)
+    for x in SALIDA.iterdir():
+        if x.name not in quedan:
+            shutil.rmtree(x) if x.is_dir() else x.unlink()
+
+
 def main():
     casa = cargar()
+    limpiar(casa)
     res = checks.verificar(casa)
     render_svg.main()
     render_3d.main()

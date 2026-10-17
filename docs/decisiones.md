@@ -1157,3 +1157,9 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
 - **Modelo:** `albanileria.de_cabeza: []`; sin `ranura_living`; 5 puntos eléctricos del living a la cara nueva
   (x 0.025); textos del cuaderno v2.0 (no impreso) y pregunta 12 del ingeniero.
 - **Estado:** aprobado por el dueño (2026-10-17).
+
+## 2026-10-17 — `salida/` sin archivos viejos
+- `make build` vacía `salida/` antes de armarla (se salvan `sitio/` y el cuaderno de la versión actual). Se dejan de
+  generar las fachadas de las opciones A y B: solo la base y la elegida (C). Quedan en el modelo como historia.
+- Se borraron 13 imágenes sueltas de comparaciones (5 al 8 de octubre), entre ellas `fachada-oeste-ranura.png` y
+  `gas-variante-a.png` (plan B del gas: queda descrito en la entrada del 2026-10-08).
