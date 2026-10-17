@@ -723,7 +723,7 @@ partes.append(hoja("Niveles de piso — planta baja y exteriores (PROPUESTOS, fa
                    f"<table><thead><tr><th>Lugar</th><th>Cota</th><th>Cómo</th></tr></thead><tbody>{filas}</tbody></table>",
                    seccion=S))
 # Recorte de cada plano del albañil (m): PB sin el frente; altillo sin la terraza.
-RECORTE = {"pb": (-3.0, 19.8, -3.6, 9.2), "p1": (-3.0, 19.8, -3.6, 9.2), "altillo": (0.9, 19.8, -3.6, 7.1)}
+RECORTE = {"pb": (-3.0, 19.8, -3.6, 9.2), "p1": (-4.3, 19.8, -3.6, 9.2), "altillo": (0.9, 19.8, -3.6, 7.1)}
 LEE_PLANO = (f"<p class=lee><b>Cómo leer:</b> <b style='color:{O.ROJO}'>V</b> ventana, <b style='color:{O.ROJO}'>P</b> puerta, "
              f"<b style='color:{O.ROJO}'>C</b> corrediza, con <b style='color:{O.AZUL}'>ancho × alto</b> y <b style='color:{O.AZUL}'>ant.</b> "
              "= antepecho (del piso terminado a la parte de abajo de la ventana). Las puertas: <b>hueco</b> (ancho que deja el albañil) y "
@@ -731,7 +731,8 @@ LEE_PLANO = (f"<p class=lee><b>Cómo leer:</b> <b style='color:{O.ROJO}'>V</b> v
              "Columnas: cuadrados rojos (naranja punteado = las que se prolongan en el altillo).</p>")
 for nid, nombre in NIVELES:
     nv = nivel_dict(nid)
-    (SALIDA / f"obra-albanil-{nid}.svg").write_text(O.planta_obra(c, nv, *RECORTE[nid]), encoding="utf-8")
+    entre = {ab["id"]: lados(nid, ab) for ab in O.de_obra(c, nid)}
+    (SALIDA / f"obra-albanil-{nid}.svg").write_text(O.planta_obra(c, nv, *RECORTE[nid], donde=entre), encoding="utf-8")
     partes.append(hoja(f"{nombre} — plano del albañil (piso terminado +{COTA[nid]:.2f})",
                        f'<img class="plano alb" src="obra-albanil-{nid}.svg">' + LEE_PLANO, seccion=S,
                        nueva=True if nid == "altillo" else "luego"))
