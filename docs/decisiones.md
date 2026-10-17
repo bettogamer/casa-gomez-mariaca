@@ -1100,3 +1100,11 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
 - No se ensancha (al norte van la impulsión y el cable). Se eligió alargar y ahondar un poco a la vez: más larga sola
   (6.25 m) quedaba a ~1.4 del pozo de absorción de BP1; más honda sola (3.2 de agua) era una excavación de ~3.7 junto al
   vecino. Queda a ~2.7 del pozo. Medidas y espesores los define el ingeniero.
+
+## 2026-10-17 — Tanque elevado de 900 L (decisión del dueño)
+- Marca Campeón de **900 L**: Ø1.01, 1.26 de alto con tapa, ~0.92 t lleno. Antes el modelo suponía uno de ~2500 L.
+- Por qué alcanza: 4–5 personas (~600–750 L/día) → ~1 día sin luz; la reserva grande es la cisterna de ~10 m³. Se
+  consideró el de 1200 (~2 días sin luz, por si se ocupa el departamento del altillo); el dueño prefirió el de 900.
+- Forro de ladrillo de **1.40 × 1.40** por fuera (antes 1.60), ~1.45 de alto, centrado en A3, base a +10.50 (sin
+  cambio). La tapa del tanque tiene que quedar accesible para limpiarlo. Pregunta 7 al ingeniero: ahora ~2.5–3 t con
+  base y forro (antes 3–4 t).

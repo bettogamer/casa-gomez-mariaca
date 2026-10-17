@@ -385,7 +385,7 @@ proyecciones:
   altillo:
     - {rect: [-1.425, 6.375, -1.125, 6.495], nombre: "gas", estado: propuesto}
     - {rect: [-1.425, 6.495, -1.125, 6.795], nombre: "cajón BV+BP1", estado: propuesto}
-    - {rect: [6.30, 0.00, 7.90, 1.60], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
+    - {rect: [6.40, 0.00, 7.80, 1.40], nombre: "tanque elevado (sobre el techo)", nota: "base propia de hormigón sobre la columna A3 y el muro de la escalera; forrado de ladrillo: se ve como un volumen cuadrado; bajada al núcleo técnico (x 9.10)"}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PLANTA DE TECHOS (2026-10-04; ESQUEMA para conversar con el ingeniero y el techador). Todo de calamina.
@@ -427,20 +427,22 @@ techos:
     - {de: [4.40, 0.00], a: [4.40, 4.67], cota_base: 9.60, cota_tope: 10.20, nota: "antepecho oeste del departamento: el techo de la terraza se apoya debajo"}
     - {de: [-1.125, 6.67], a: [16.90, 6.67], cota_base: 6.60, cota_tope: 8.40, nota: "muro ciego sur hacia el vecino, ~1.80 sobre la losa (ver muros.altillo)"}
   # Tanque elevado: base propia de hormigón sobre la columna A3 y el muro de la escalera, forrado de ladrillo.
-  # Capacidad y altura SUPUESTAS (tanque de ~2500 L, ~1.55 de diámetro × 1.55 de alto): las define el plomero/ingeniero.
+  # 2026-10-17 (dueño): tanque de 900 L (marca Campeón: Ø1.01, 1.26 de alto con tapa, 18 kg; ~0.92 t lleno). Antes se
+  # suponía uno de ~2500 L. Para 4–5 personas (~600–750 L/día) alcanza ~1 día sin luz; la cisterna de ~10 m³ es la reserva.
+  # Forro de ladrillo de 1.40 × 1.40 por fuera (tanque + ~0.10 de aire a cada lado + ladrillo de soga), centrado en A3.
   # Base subida a +10.50 (usuario 2026-10-05): ~2.5 m sobre la entrada de agua del calefón del altillo (~+8.00).
   # Paneles solares a futuro (usuario 2026-10-05): sobre el techo del departamento. Desde 2026-10-16 el techo cae al NORTE
   # (~8.5°): los paneles van casi apoyados sobre la calamina mirando al norte, detrás del antepecho. Sombra del tanque en
   # las mañanas de invierno: empezar los paneles ~1.5 m al este del tanque o verificarlo en el 3D.
   solar: {rect: [8.10, 0.30, 16.60, 4.40], estado: propuesto, nota: "espacio reservado (~35 m²) para paneles fotovoltaicos y/o colector de agua caliente; dejar ahora: 2 tubos vacíos de 1\" desde el techo (junto al tanque) hasta el TD por el montante de B2, y una espera de caños AF/AC de PPR tapados en el techo por si se pone un colector solar que precaliente el agua del calefón"}
-  tanque: {rect: [6.30, 0.00, 7.90, 1.60], cota_base: 10.50, alto: 1.80, capacidad: "~2500 L (supuesto)", estado: aproximado, nota: "con tapa hermética; REBALSE y DESAGÜE DE LIMPIEZA con llave, a la canaleta/bajante pluvial del techo (no al sanitario); FLOTANTE eléctrico que prende y apaga la bomba de la cisterna (C20); salida con llave de paso y filtro"}
+  tanque: {rect: [6.40, 0.00, 7.80, 1.40], cota_base: 10.50, alto: 1.45, capacidad: "900 L (Campeón, Ø1.01 × 1.26 con tapa)", estado: propuesto, nota: "2026-10-17: tanque de 900 L elegido por el dueño; el forro de ladrillo (1.40 × 1.40, ~1.45 de alto) deja ~0.10 de aire alrededor y la TAPA ACCESIBLE desde arriba (tapa del forro desmontable o abierta) para limpiarlo; con tapa hermética; REBALSE y DESAGÜE DE LIMPIEZA con llave, a la canaleta/bajante pluvial del techo (no al sanitario); FLOTANTE eléctrico que prende y apaga la bomba de la cisterna (C20); salida con llave de paso y filtro"}
   postes:
     - {pos: [0.00, 0.00], nota: "sobre la columna A1"}
     - {pos: [0.00, 2.68], nota: "sobre la columna B1"}
     - {pos: [-1.03, 4.60], tope: 9.05, estado: propuesto, nota: "2026-10-07 (PROPUESTO): BAJADA DE LA CANALETA del techo de la terraza: tubo cuadrado de fierro de 0.10 × 0.10, NEGRO como los postes, en la esquina sur del techo, por dentro del antepecho del frente; de la punta de la canaleta (+9.07) al piso de la terraza. Al pie descarga en la canaleta de piso con rejilla que va junto al frente hasta el sumidero del rincón. Nada de caño horizontal a la vista"}
   # Canaletas por dentro de la línea y=4.67 (no invaden la separación de 2 m), de chapa galvanizada, 0.5%.
   canaletas:
-    - {de: [4.55, 0.10], a: [16.78, 0.10], pendiente: 0.005, estado: propuesto, nota: "2026-10-16: por DENTRO del antepecho NORTE, toda hacia el este (BP3). Bajo la base del tanque (x 6.30–7.90) pasa en un tubo o se corta en dos y el agua rodea la base: lo resuelve el ingeniero con la base del tanque (pregunta 7); que no quede agua estancada contra la base. Recibe también el rebalse y la limpieza del tanque"}
+    - {de: [4.55, 0.10], a: [16.78, 0.10], pendiente: 0.005, estado: propuesto, nota: "2026-10-16: por DENTRO del antepecho NORTE, toda hacia el este (BP3). Bajo la base del tanque (x 6.40–7.80) pasa en un tubo o se corta en dos y el agua rodea la base: lo resuelve el ingeniero con la base del tanque (pregunta 7); que no quede agua estancada contra la base. Recibe también el rebalse y la limpieza del tanque"}
     - {de: [-1.18, 0.10], a: [-1.18, 4.58], pendiente: 0.005, nota: "canaleta vista al frente, colgada del borde del techo de la terraza (queda a ~1.05 de la fachada: dentro del voladizo frontal de 1.20)"}
   # Gárgolas de rebalse (por si se tapa la canaleta). 2026-10-16: UNA sola, en el antepecho norte cerca de la bajante, al
   # ras y con goterón (no caño colgando), a ~+9.20; el agua cae al retiro norte, lejos del lindero lo más posible.
@@ -1610,7 +1612,7 @@ verificar_en_obra:
   - "Altillo, opción B (aceptada 2026-10-06), para el ingeniero: (1) MURO x=13.60 del dormitorio: sin muro debajo y PARALELO a las viguetas del paño 4–5, sobre todo de y 2.68 a 4.67 (viguetas de 4.05, el muro cae a media luz); decidir ladrillo de 6 huecos, refuerzo o viga, y ubicar qué viguetas quedan debajo. (2) BAÑO: contrapiso de ~15 cm (pendientes y desnivel de la ducha sin picar la losa) sobre viguetas de 4.20 de luz (paño 3–4 A–B); ¿alivianado? (3) Antes de cerrar el cielo falso del Baño 1, ubicar desde abajo las 5 viguetas este–oeste del paño 7.05–11.20 × 0–2.68, por si el plomero necesita un pase (solo si no hay otra salida; nunca cortando viguetas). Los muros del baño nuevo caen sobre los del Baño 1 (x 9.40, x 11.20, eje B). Se quitan los muros y=2.40 y x=11.20 al sur de B4"
   - "Viguetas pretensadas: no se cortan. Ubicar cada pase de bajante o ducto entre viguetas antes de perforar."
   - "PROPUESTO — tragaluz del Baño 2 (revisor estructural 2026-10-04; ranuras acortadas 2026-10-05 para el paso de 0.65 al norte del domo): dos ranuras de ~0.30 × 0.60 (y 5.50–6.10; domo y 5.40–6.20) centradas entre viguetas, a ≥0.5 de la viga C; borde macizado ~10 cm con fierro perimetral y diagonales; brocal de hormigón vaciado con el borde, membrana subida 15–20 cm, domo tipo gorro antivandálico o con reja; ≥0.40 libres hacia el antepecho sur. ANTES de abrir medir desde abajo: posición real y ancho de las viguetas entre x 9.40 y 11.20, espesor de losa, ancho de la viga C y franja maciza, nervio transversal. Si las viguetas no dejan lugar: tubos solares de 25–35 cm. Lo aprueba el ingeniero."
-  - "Tanque elevado: definir capacidad y medidas reales (en el 3D se dibuja uno de ~2500 L, 1.60 × 1.60 × 1.80 forrado, sobre base a +10.20; supuesto)."
+  - "Tanque elevado: DEFINIDO 900 L (dueño 2026-10-17; Ø1.01 × 1.26). Falta: base y forro (ingeniero, pregunta 7) y que la tapa quede accesible para limpiarlo."
   - "¿Las vigas de la losa del primer piso cuelgan bajo la losa? ¿Cuánto (sobre todo eje B y eje A, ejes 3-4)? Define la altura del cielo falso del lavado y el baño."
   - "PB, ANTES DEL CONTRAPISO (interiorista 2026-10-05): rebaje de ~5–8 cm para la ducha del baño al ras del piso (con cancel); tubo eléctrico del muro sur de la cocina a la isla (enchufe de la isla); tubo del TD a la columna B2 (montante); desagüe de la bajante del Baño 2 (P1), que baja en el rincón noroeste del almacén (≈9.30, 3.85), hasta el colector del retiro norte (pasa bajo el pasillo y el estudio; registro accesible); desagües de lavadora, lavadero y lavadora manual; agua y desagüe del lavavajillas; agua fría para el dispensador del refrigerador."
   - "Losa del primer piso (ya hecha): ¿dejaron cajas de luz o tubos embutidos? ¿Dónde? Probablemente no coinciden con las luces del diseño nuevo; las nuevas van entre viguetas (sin cortarlas). Lo resuelve el electricista."

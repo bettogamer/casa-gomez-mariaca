@@ -36,7 +36,7 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
 **Altillo**
 6. Baño apilado sobre el Baño 1: ¿qué contrapiso aguantan las viguetas de 4.20 (~15 cm, alivianado)? La ducha NO pica
    la losa. [44]
-7. Tanque elevado (3–4 t con base y forro) sobre la columna A3 prolongada y otra columna, con la mitad sobre el hueco de
+7. Tanque elevado de 900 L (2026-10-17: ~0.9 t lleno; ~2.5–3 t con base de 1.40 × 1.40 y forro de ladrillo) sobre la columna A3 prolongada y otra columna, con la mitad sobre el hueco de
    la escalera: dimensionar base y vigas. [22, 29]
 
 **Pases y losas**
