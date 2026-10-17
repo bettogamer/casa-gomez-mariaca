@@ -598,8 +598,7 @@ if CUAD.get("cambios"):
 S = SEC["A"]
 partes.append(hoja("Ladrillo y forma de asentar", nueva=True, cuerpo=f"""<div class="cols"><div><ul>
 <li><b>Ladrillo:</b> {html.escape(alb.get('ladrillo', ''))}, en toda la casa (también los tabiques; no hay drywall).</li>
-<li><b>Casi todos los muros van de SOGA</b> (~0.15 terminado).</li>
-<li><b>Solo el muro OESTE de planta baja (el frente, eje 1: living e ingreso) va de CABEZA</b> (~0.25, al ras de las dos caras de las columnas). Todos los demás, de soga.</li>
+<li><b>TODOS los muros van de SOGA</b> (~0.15 terminado), también el del frente de planta baja. No hay muros de cabeza.</li>
 <li><b>Muros de afuera de soga: AL RAS DE LA CARA EXTERIOR de las columnas</b> (fachada lisa; la columna sobresale ~0.10 hacia adentro).</li>
 <li><b>Muros sobre la línea de las columnas: AL RAS DE UNA CARA de la columna</b> (el plano y la tabla de muros dicen
 cuál); del otro lado la columna asoma ~10 cm. Los tabiques que no van sobre una línea de columnas, centrados.</li></ul></div><div><ul>
@@ -639,12 +638,12 @@ partes.append(hoja("Paso a paso (1 de 2)", pasos(
         "Las puertas y ventanas que están junto a una columna, AL RAS de la columna (sin pedacito de ladrillo).",
     ], "maestro"),
     paso(4, "Levantar los muros de planta baja", [
-        "Soga en todo, salvo el muro oeste (el frente, eje 1), que va de cabeza. Los de afuera, al ras de la cara exterior de las columnas.",
+        "Soga en todo, también el muro oeste (el frente, eje 1). Los de afuera, al ras de la cara exterior de las columnas.",
         f"<b>Unión con las columnas:</b> {html.escape(uc.get('chicotes', ''))}.",
         "Dintel de hormigón sobre cada puerta y ventana.",
         "<b>Ductos de caños</b> de ladrillo en los rincones de las columnas A2 (escalera/depósito), A3 (baño) y A4 (estudio), "
         "como están dibujados (gris) en los planos del plomero, con tapa de registro donde lo indica el plano.",
-        "Puerta de entrada (1.05, pivotante) y ranura del living (0.30): altas hasta 2.60; "
+        "Puerta de entrada (1.05, pivotante) y su vidrio: altos hasta 2.60; "
         "ventana del living de 3.00: <b>antes medir cuánto cuelgan las vigas</b> del eje 1 y del eje A.",
         f"<b>Última hilada:</b> {html.escape(uc.get('remate_losa', ''))}.",
     ], "albañil"),
@@ -942,7 +941,7 @@ medir = [
     ("Piso de PB (losa o contrapiso) sobre la vereda", "piso terminado +0.20"),
     ("Tierra del patio sobre la vereda", "+0.05 terminado"),
     ("Tierra del retiro norte sobre la vereda", "+0.05 terminado"),
-    ("Cuánto cuelga la viga del eje 1 (A1–B1 y B1–C1)", "puerta de entrada y ranura a 2.60"),
+    ("Cuánto cuelga la viga del eje 1 (A1–B1 y B1–C1)", "puerta de entrada y su vidrio a 2.60"),
     ("Cuánto cuelga la viga del eje A entre A1 y A2", "ventana del living a 2.10"),
     ("Cuánto cuelga la viga del eje A entre A2 y A3 (escalera)", "ventana de la escalera a 2.90"),
     ("Cuánto cuelgan las vigas sobre el lavado, el baño y el pasillo de PB", "cielo falso a 2.70 (si > 0.18 → 2.50)"),

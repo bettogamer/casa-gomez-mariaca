@@ -1142,3 +1142,18 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   hacia el lavamanos). La hoja del primer piso se ensanchó a la izquierda para que entren.
 - **Página web:** el plano del albañil va metido en la página: al tocar un código (V1, P2…) aparece un cuadrito con
   todos sus datos (medidas, entre qué ambientes está y la nota de obra).
+
+## 2026-10-17 — Muro oeste de PB de soga y sin ranura (pedido del dueño)
+- **Qué:** el muro del frente de planta baja (eje 1, living e ingreso), el único que quedaba de cabeza, pasa a **soga al
+  ras de la cara de afuera** de las columnas, como el resto de la casa. Se **quita la ranura de vidrio** del living
+  (0.30 × 2.60 junto a A1, del 2026-10-08): el muro queda ciego salvo la puerta de entrada y su vidrio.
+- **Por qué:** ese muro da al patio delantero (no a la calle), así que no hace falta más grueso por ruido o seguridad.
+  La columna B1 que asoma 10 cm detrás de la TV se resuelve con el mueble (se apoya en ella; a los costados queda lugar
+  para cables; arriba de la TV la columna pintada o forrada en madera). Se ahorran ~440 ladrillos, mezcla y peso, y
+  toda la casa queda con una sola regla para el maestro. La ranura era estética y metía sol de la tarde a la hora de la
+  TV; sin ella el muro ciego compensa en parte el muro más delgado al sol de la tarde.
+- **Descartado:** columnas asomando hacia afuera (rompe el paño de piedra y sería otro caso raro); TV empotrada en la
+  columna (no se pica). Se puede colgar la TV de la columna con tarugos (lo aprueba el ingeniero).
+- **Modelo:** `albanileria.de_cabeza: []`; sin `ranura_living`; 5 puntos eléctricos del living a la cara nueva
+  (x 0.025); textos del cuaderno v2.0 (no impreso) y pregunta 12 del ingeniero.
+- **Estado:** aprobado por el dueño (2026-10-17).

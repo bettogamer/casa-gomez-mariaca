@@ -51,8 +51,8 @@ vecino del sur. Ejes de columnas: x 0 · 4.40 · 7.05 · 11.20 · 16.90 (1 a 5) 
     dado del cajón. Pozo de prueba junto al vecino del sur (Lote 103). [8]
 11. Cisterna nueva (bajo el camino, pegada al muro sur) y cimiento del vecino. [16, 17]
 12. Muros de soga al ras de las columnas: cómo atarlos a las columnas para que no se fisure la fachada (chicotes con
-    epóxico cada ~0.45, malla en el revoque). Muro nuevo del eje 1 entre A1 y B1. Ranura del living en ese muro (0.30 × 2.60, a 0.175 de A1):
-    dintel bajo la viga del eje 1. [25, 26; revisión del arquitecto punto 6]
+    epóxico cada ~0.45, malla en el revoque). Muro nuevo del eje 1 entre A1 y B1 (de soga desde 2026-10-17, ciego:
+    sin ranura). [25, 26; revisión del arquitecto punto 6]
 13. Caños adentro (2026-10-08, reemplaza a las pilastras): ¿cómo cruzan el cimiento corrido del eje A, junto a las zapatas
     de A3 y A4, la bajante (hacia la cámara nueva en 10.93, −0.85) y los caños del tanque? [revisión del arquitecto 7, 8]
 
