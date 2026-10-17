@@ -35,7 +35,7 @@ _Última actualización: 2026-10-16_
   cocina en U y comedor junto a la escalera, estar al este, dormitorio de 15.4 m². Ver `docs/decisiones.md`.
 - **Altillo aprobado (versión anterior, reemplazada en la distribución interior):** departamento temporal (estar-comedor-cocina, baño, dormitorio de 18 m²) con la escalera
   adentro, terraza adelante, franja de 2 m al sur con lavandería; techo de calamina oculto; tanque sobre la
-  columna A3. Instalaciones (esquema): C13–C16, anafe eléctrico; agua caliente del calefón de la terraza; presurizadora solo si el calefón no enciende.
+  columna A3. Instalaciones (esquema): C13–C15, anafe A GAS (desde 2026-10-17, ramal por el muro norte de la escalera); agua caliente del calefón de la terraza; presurizadora solo si el calefón no enciende.
 
 - **Normativa y techos (2026-10-04):** OM 4100/10 revisada (`docs/normativa.md`); planta de techos (`salida/planta-techos.svg`):
   calamina, departamento oculto tras antepecho, terraza con techo sobre fierro; muro ciego sur de ~1.80 y semisombra

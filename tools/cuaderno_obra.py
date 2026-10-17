@@ -857,6 +857,10 @@ partes.append(hoja("Paso a paso del gas", pasos(
         "Al <b>calefón</b>: sube por un compartimiento propio junto al cajón gris del frente y sigue por dentro de los "
         "antepechos de la terraza del altillo. <b>No entra a la casa.</b>",
         "Si YPFB no acepta esa subida: plan B, enterrado hasta A2 y subida en vaina ventilada dentro del ducto de la escalera.",
+        "<b>Cocina del altillo</b> (anafe a gas): ramal con su <b>llave en la terraza</b>, junto a la del calefón. Sube a ~2.20, "
+        "cruza el muro por encima del ducto de A2, va <b>empotrado</b> en el muro norte de la escalera (sin uniones adentro), "
+        "rodea la columna A3 sin picarla y baja por el muro de la cocina hasta el anafe, a 0.20 del piso bajo la mesada. "
+        "Rejilla baja bajo el anafe (muro norte) y alta en el muro sur del comedor; detector de gas.",
     ], "gasista"),
     paso(3, "Ventilación", [
         "Rejillas alta y baja en la cocina (no se tapan nunca).",

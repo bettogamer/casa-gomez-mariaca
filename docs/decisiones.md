@@ -1108,3 +1108,16 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
 - Forro de ladrillo de **1.40 × 1.40** por fuera (antes 1.60), ~1.45 de alto, centrado en A3, base a +10.50 (sin
   cambio). La tapa del tanque tiene que quedar accesible para limpiarlo. Pregunta 7 al ingeniero: ahora ~2.5–3 t con
   base y forro (antes 3–4 t).
+
+## 2026-10-17 — Cocina del altillo a gas (pedido del dueño)
+- **Anafe a GAS natural** (antes eléctrico): en Bolivia el gas es más barato que la luz. Se va el circuito C16 (anafe
+  eléctrico); queda una toma de encendido bajo la mesada (C15, x 7.90 a 0.60).
+- **Ramal (~6 m, propuesto, lo aprueba YPFB):** llave propia en la terraza junto a la del calefón; sube a ~2.20, cruza el
+  muro x 4.40 al sur de A2 y POR ENCIMA del ducto de A2 (nunca dentro de un ducto cerrado); empotrado en el muro norte de
+  la caja de escalera sin uniones; rodea la cara oeste de A3 en el revoque (sin picar la columna); baja empotrado en el
+  muro x 7.05 en y 0.55 (a 0.30 de los enchufes de la mesada oeste); por el muro norte bajo la mesada, a 0.20 del piso,
+  hasta el anafe. Llave del anafe en el mueble (x 8.25).
+- **Ventilación (YPFB):** rejilla baja a 0.30 en el muro norte bajo el anafe (mueble con frente de rejilla o sin puerta)
+  y rejilla alta a 2.20 en el muro sur del comedor (x 9.25), ventilación cruzada. **Detector de gas** alto en el muro de
+  la escalera sobre el brazo oeste.
+- Descartado: ir por el sur (franja) — más largo y cruza el comedor; por el ducto de A2 — un ducto cerrado acumula gas.
