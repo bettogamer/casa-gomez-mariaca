@@ -1126,3 +1126,6 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   calcular el consumo total (calefón + cocina de PB + anafe del altillo) para el medidor y los diámetros; las dos
   rejillas dibujadas en las fachadas norte (baja, bajo la ventana de la cocina) y sur (alta, junto a la ventana del
   comedor), del color del muro.
+- **Alternativa por el techo (dueño, 2026-10-17):** anotada en la hoja del gasista (recuadro amarillo), sin dibujarla:
+  subir sobre el antepecho, cruzar a la vista y bajar empotrado en el muro norte (~10–11 m, rodea la base del tanque y
+  la canaleta). La de los planos sigue siendo la propuesta; eligen el gasista y YPFB.

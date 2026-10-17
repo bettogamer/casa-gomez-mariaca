@@ -875,6 +875,13 @@ partes.append(hoja("Paso a paso del gas", pasos(
     "Las rejillas de la cocina quedan abiertas y sin muebles delante.",
     "El caño de gas no pasa por adentro de la casa (salvo el último tramo a la cocina).",
     "Con agua y jabón en cada unión, con el gas abierto: no tiene que hacer burbujas.",
+]) + alternativa("Cocina del altillo — otra ruta posible: POR EL TECHO (la eligen el gasista y YPFB)", [
+    "Desde la llave de la terraza <b>sube</b> por el muro hasta arriba del antepecho, <b>cruza a la vista</b> sobre el techo "
+    "del departamento y <b>baja empotrado</b> dentro del muro norte hasta el anafe.",
+    "<b>A favor:</b> casi todo al aire libre y fácil de revisar; no pasa por la escalera ni rodea las columnas A2 y A3.",
+    "<b>En contra:</b> ~10–11 m (la de los planos ~6 m); tiene que rodear la <b>base del tanque</b> (x 6.40–7.80, sobre el muro "
+    "norte) y no mezclarse con la <b>canaleta</b>; al sol: pintura y grapas firmes, que no se pise al limpiar el techo.",
+    "<b>Nunca</b> por el espacio entre la calamina y el cielo raso (hueco cerrado: ahí el gas se acumula).",
 ]), seccion=S))
 for nid, nombre in NIVELES:
     if tiene_gas(nid):
