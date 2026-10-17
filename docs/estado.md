@@ -1,6 +1,6 @@
 # Estado del proyecto — leer al empezar una sesión
 
-_Última actualización: 2026-10-16_
+_Última actualización: 2026-10-17_
 
 ## Hecho
 - **Estructura construida modelada y cerrada:** 15 columnas 25×25 (ejes 4.40 · 2.65 · 4.15 · 5.70 /
@@ -48,7 +48,7 @@ _Última sesión: 2026-10-06._
 - Amoblamiento definitivo de PB, P1 y altillo con puntos eléctricos a mano (`instalaciones.<nivel>.electrico.puntos`);
   generador eléctrico nuevo; ronda de huecos de instalaciones (tierra, débiles, detectores, llaves, canillas,
   ventilaciones, rejillas de gas).
-- Muros: ladrillo de 6 huecos; living de cabeza, resto de soga al ras exterior de las columnas.
+- Muros: ladrillo de 6 huecos, TODOS de soga al ras exterior de las columnas (desde 2026-10-17 también el frente de PB).
 - Living sin corrediza (TV al oeste, ventana norte de 3.00); logia con muro bajo + celosía al norte.
 - Calefón de toda la casa en la terraza del altillo junto a A2 (sin termotanques); tanque a +10.50; caños PPR.
 - Agua: SEMAPA → cisterna enterrada (nueva, junto a la puerta peatonal; ~10 m³ desde 2026-10-16) → bomba → tanque. Reserva para paneles solares.
@@ -88,10 +88,10 @@ cara, aberturas al ras de las columnas, puertas del altillo más anchas, corredi
 las medidas dibujadas y aberturas de frente con alturas.
 Después (mismo día): corrediza frente al estar, piletas al oeste, ventana en la llegada (V7), hojas del techo y **techo del
 departamento cayendo al NORTE** (pedido del maestro, los tres revisores de acuerdo; bajante BP3 en A5 y pozo de lluvia en el patio).
-Y: solo el muro oeste de PB de cabeza; hoja de la BODEGA bajo la escalera; luces con símbolo por tipo (techo / aplique /
+Y: solo el muro oeste de PB de cabeza (2026-10-17: también de soga, y sin ranura en el living); hoja de la BODEGA bajo la escalera; luces con símbolo por tipo (techo / aplique /
 LED / baja de afuera). Recortes de luces propuestos, esperando al dueño.
-**Pendiente con el dueño:** (a) ¿puertas de PB y P1 también más anchas? (b) puerta de entrada y ranura del living a 17.5 cm
-de su columna; (c) calefón solar o a gas; (d) pulir el plano del albañil del P1 (zona de la suite, rótulos apretados)
+**Pendiente con el dueño:** (a) ¿puertas de PB y P1 también más anchas? (b) puerta de entrada a 17.5 cm de su columna
+(la ranura del living se quitó); (c) calefón solar o a gas; (d) pulir el plano del albañil del P1 (zona de la suite, rótulos apretados)
 antes de imprimir esas hojas.
 
 ## Revisión del arquitecto (2026-10-07)

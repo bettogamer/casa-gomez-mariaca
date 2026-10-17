@@ -35,7 +35,7 @@ proyecto:
       - "PUERTAS Y VENTANAS JUNTO A UNA COLUMNA: van AL RAS de la columna (sin pedacito de ladrillo, que no agarra el marco). Altillo: ventana alta del estar (A4), ventana del dormitorio al patio (B5) y puerta del baño (B4). Primer piso: ventana del Cuarto 1, puertas de blancos, Baño 2 y de los dos cuartos. Planta baja: puerta del depósito."
       - "ALTILLO: PUERTAS MÁS ANCHAS (hueco que deja el albañil): a la terraza 1.00, al dormitorio 1.00, al baño 0.85 (más ancha choca con la ducha), entrada al departamento 0.75 (no entra más: al lado están los últimos escalones). Todas pegadas al muro o a la columna."
       - "ALTILLO: LA CORREDIZA VA FRENTE AL ESTAR (no en el comedor): 2.00 en x 11.35 a 13.35, centrada en el sofá; ya no hay ventana sur en el estar y entre x 9.40 y 11.35 el muro sur queda CIEGO. En el comedor, donde estaba la corrediza, va una ventana de 1.00 × 1.10 (V8). Los muebles grandes entran por la terraza, la franja y la corrediza."
-      - "PLANTA BAJA: SOLO EL MURO OESTE (el frente, eje 1, living e ingreso) VA DE CABEZA. Los demás muros del living pasan a soga (el norte al ras de afuera; el del lado de la escalera, al ras de la escalera)."
+      - "PLANTA BAJA: YA NO HAY MUROS DE CABEZA. TODOS van de soga, también el del frente (eje 1, living e ingreso): al ras de la cara de afuera de las columnas (la columna asoma 10 cm adentro; la B1 queda detrás del mueble de la TV). Y SIN RANURA DE VIDRIO en el living: ese muro queda ciego salvo la puerta de entrada y su vidrio."
       - "PLANTA BAJA: HOJA NUEVA DE LA BODEGA DEBAJO DE LA ESCALERA (planta con la altura libre bajo cada escalón y dos cortes). Los cajones hacia el hall solo entran bajo los escalones 4 a 6."
       - "LUCES: ahora cada tipo tiene su símbolo. Círculo con cruz = FOCO DE TECHO; medio círculo con A = APLIQUE DE PARED; barrita LED = TIRA BAJO UN MUEBLE o sobre un espejo; puntito = luz baja de afuera. Las tablas para contar las separan. Adentro de la casa hay 44 focos de techo en total (1 o 2 por ambiente; la cocina de abajo, 6)."
       - "PATIO DEL FONDO (preparado, sin obra todavía): una segunda luz en la pared de la casa y DOS TUBOS ENTERRADOS hasta el fondo (uno con un enchufe doble para afuera en un pilarcito, otro vacío para luces futuras). Se dejan al hacer el piso del patio."
@@ -167,7 +167,8 @@ albanileria:
   muro_cabeza: 0.25   # ladrillo de cabeza (25), al ras de las columnas (con revoque ~0.29)
   # Muros de cabeza (por ambiente o por línea): al ras de las dos caras de las columnas.
   # 2026-10-16 (dueño): en PB SOLO el muro OESTE (el frente, eje 1: living e ingreso) va de cabeza; antes todos los del living.
-  de_cabeza: [{nivel: pb, x: 0.00}]
+  # 2026-10-17 (dueño): tampoco ese; TODA la casa de soga. La columna B1 asoma 10 cm detrás del mueble de la TV.
+  de_cabeza: []
   # Perimetrales de soga: al ras de la CARA EXTERIOR de las columnas (fachada lisa; la columna
   # sobresale ~0.10 hacia adentro). Recomendación nuestra, a confirmar con el maestro.
   perimetral_al_ras: exterior
@@ -499,10 +500,10 @@ fachada:
         - {vista: oeste, u: [4.95, 6.795], z: [0.20, 3.20], d: -0.125, material: gris_claro, nota: "paño de la entrada"}
     - id: c
       nombre: Blanco, piedra, madera y gris (recomendada)
-      descripcion: "Mezcla de las dos: base blanca; el muro ciego del living (el que da a la calle) en piedra, que aguanta el sol de la tarde sin mantenimiento; madera solo donde está protegida (pared del dormitorio dentro de la logia, puerta y celosía); bordes de losa y frente del baño en gris oscuro como marco; carpintería, barandas y techo de la terraza en negro."
+      descripcion: "Mezcla de las dos: base blanca; el muro ciego del living (el que da al patio delantero) en piedra, que aguanta el sol de la tarde sin mantenimiento; madera solo donde está protegida (pared del dormitorio dentro de la logia, puerta y celosía); bordes de losa y frente del baño en gris oscuro como marco; carpintería, barandas y techo de la terraza en negro."
       paleta: {muro: "#f3f1ec", losa: "#43464a", zocalo: "#43464a", baranda: "#2b2b2b", marco: "#2b2b2b", puerta: "#a8703f", techo: "#2b2b2b", celosia: "#a8703f", antepecho: "#f3f1ec", tanque: "#f3f1ec", columna: "#f3f1ec"}
       acentos:
-        - {vista: oeste, u: [-0.125, 5.05], z: [0.20, 3.20], d: -0.125, material: piedra, nota: "muro del living hacia la calle. 2026-10-08 (revisión del arquitecto, punto 22): la piedra llega HASTA EL MARCO del vidrio de la entrada (antes terminaba en 4.95 y dejaba una tira blanca de 0.10) y forra los costados de la ranura del living"}
+        - {vista: oeste, u: [-0.125, 5.05], z: [0.20, 3.20], d: -0.125, material: piedra, nota: "muro del living hacia el patio delantero (de soga desde 2026-10-17, al ras de la cara de afuera de las columnas: misma cara que antes). 2026-10-08 (revisión del arquitecto, punto 22): la piedra llega HASTA EL MARCO del vidrio de la entrada (antes terminaba en 4.95 y dejaba una tira blanca de 0.10); 2026-10-17: sin ranura, el paño de piedra queda entero"}
         - {vista: norte, u: [-0.175, 0.125], z: [0.20, 3.20], d: -0.13, material: piedra, nota: "2026-10-08 (punto 22): la piedra DA LA VUELTA 0.30 en la esquina noroeste (x -0.125 a 0.175), para que se lea como un muro macizo y no como una placa pegada; termina con canto limpio, lejos de la ventana del living (x 0.70)"}
         - {vista: oeste, u: [4.20, 6.795], z: [3.20, 6.60], d: -1.125, material: gris_oscuro, nota: "frente del baño de la suite (marco de la logia); 2026-10-07: cara al ras del canto del volado"}
         - {vista: oeste, u: [-0.125, 4.20], z: [3.40, 6.40], d: -0.125, material: madera, nota: "listones en la pared del dormitorio, dentro de la logia. 2026-10-08 (punto 22): llegan HASTA LA CAJA GRIS (antes terminaban en 3.25 y quedaba muro blanco alrededor de la puerta de la logia); la puerta queda dentro del paño de madera"}
@@ -565,9 +566,8 @@ aberturas:
     # mueble (y 1.90–3.50). Sin ventana al oeste: el sol de la tarde entra bajo el volado (no lo frena a menos de ~42° de
     # altura) y quedaría a ~25–35° de la pantalla, de frente a quien mira la TV. La luz se compensa con la ventana norte
     # (sol bueno, sin sol de frente a los ojos ni reflejo en la pantalla), que crece de 1.20 × 1.20 a 3.00 × 1.20.
-    # 2026-10-08 (pedido del dueño): ranura vertical en el muro de piedra del frente, en la punta norte. Repite el vidrio de la
-    # puerta de entrada (mismo ancho y alto) en la otra punta del paño de piedra.
-    - {id: ranura_living, obra: "Ranura fija de vidrio laminado, sin reja. 17.5 cm de muro hasta la cara de la columna A1.", tipo: ventana, de: [0.00, 0.30], a: [0.00, 0.60], antepecho: 0.00, alto: 2.60, estado: propuesto, nota: "RANURA vertical 0.30 × 2.60 de piso a 2.60 (mismo alto que la puerta y el vidrio de la entrada), paño FIJO de vidrio LAMINADO, sin reja (0.30 no deja pasar a una persona). A 0.175 de la cara de la columna A1 (marco). Detrás del sillón de lectura (luz por encima del hombro) y vista a la terraza. Queda a ~35° de la TV mirando desde el sofá: CORTINA ENROLLABLE OSCURA (blackout) para el sol de la tarde a la hora de la TV. La piedra hace el derrame (vuelta en los costados de la ranura). Muro de relleno: solo pide dintel bajo la viga del eje 1 (ingeniero)"}
+    # 2026-10-17 (dueño): se QUITA la ranura de vidrio del muro de piedra (0.30 × 2.60 junto a A1, 2026-10-08): era solo
+    # estética y metía sol de la tarde a la hora de la TV. El muro oeste del living queda ciego.
     - {id: ventana_living, obra: "Centrada: 0.575 de muro a cada lado hasta la cara de A1 y de A2. Dintel bajo la viga: medir antes.", tipo: ventana, de: [0.70, 0.00], a: [3.70, 0.00], antepecho: 0.90, alto: 2.10, estado: propuesto, nota: "3.00 × 1.20 al norte (retiro), centrada en el muro (0.575 de ladrillo a cada columna, A1 y A2). Única ventana del living: 3.60 m² de vidrio (~1/6 del piso). Sugerido (revisores 2026-10-05): 2 paños fijos de ~0.75 a los costados (vidrio esmerilado hasta ~1.50 por privacidad hacia el retiro) y 2 hojas centrales de ~0.75 batientes hacia adentro, con mosquitero (≥1.50 abribles); que no abran hacia el retiro. Roller screen para las horas de TV. Dintel de H°A° (3.00 de luz, apoyo 20–25 cm por lado) bajo la viga del eje A, lo define el ingeniero. NO estirar hasta las columnas (columna corta). Servidumbre de vista: queda a ~2.01 del lindero, medir en obra. Proporción de luz/ventilación de sala según OM 1061/91: confirmar con el arquitecto"}
     # ── Planta baja v4, aprobada 2026-10-03 ──
     - {id: hall_grada, tipo: vano, de: [4.40, 4.125], a: [5.725, 4.125], nota: "arranque de la grada"}
@@ -647,7 +647,7 @@ muebles:
     # entre los dos; la U queda abierta hacia el sur (se entra desde el paso del hall, x 2.58–4.40) y hacia la ventana.
     - {tipo: alfombra, rect: [1.20, 1.40, 3.20, 4.00], estado: propuesto}
     # TV de 60" APOYADA sobre un mueble (no colgada; decisión del usuario 2026-10-05), centrada en la columna B1 (y=2.68).
-    - {tipo: estante, nombre: TV, rect: [0.13, 1.90, 0.58, 3.50], alto: 0.50, estado: propuesto, nota: "mueble bajo con decodificador; TV 60\" (~1.35 de ancho) APOYADA encima, centrada en la columna B1, que NO se pica (enchufes y datos en el ladrillo: ver instalaciones.pb.electrico.puntos)"}
+    - {tipo: estante, nombre: TV, rect: [0.13, 1.90, 0.58, 3.50], alto: 0.50, estado: propuesto, nota: "mueble bajo con decodificador; TV 60\" (~1.35 de ancho) APOYADA encima, centrada en la columna B1, que NO se pica (enchufes y datos en el ladrillo: ver instalaciones.pb.electrico.puntos). 2026-10-17: muro de soga, la columna B1 ASOMA 10 cm y el mueble se apoya en ella; a los costados quedan ~10 cm detrás del mueble para los cables. Arriba de la TV la columna queda a la vista: pintada o forrada en madera"}
     - {tipo: sofa, nombre: Sofá 3, rect: [2.80, 1.65, 3.70, 3.75], estado: propuesto, nota: "mira al oeste, centrado en la TV; ojos a ~2.9 m de la pantalla. Detrás quedan ~0.60 al muro este (no es paso)"}
     - {tipo: mesa, nombre: Centro, rect: [1.80, 2.20, 2.40, 3.20], alto: 0.40, estado: propuesto, nota: "a 0.40 del sofá; 1.22 libres hasta el mueble de la TV"}
     # Sillón de lectura en el rincón noroeste, junto al paño FIJO de la ventana (x 0.70–1.45): no lo tocan las hojas
@@ -975,11 +975,11 @@ instalaciones:
         - {amb: living, tipo: interruptor, pos: [4.375, 3.85], alto: 1.10, estado: propuesto, nota: "junto al paso del hall: tecla doble (luz central con dimmer + luz de la entrada)"}
         - {amb: living, tipo: luz, pos: [2.10, 2.70], estado: propuesto, nota: "sobre la mesa de centro, con dimmer (a 3.00 de alto no se refleja en la TV)"}
         - {amb: living, tipo: luz, pos: [3.40, 4.35], estado: propuesto, nota: "entrada del living, entre el sofá y la celosía"}
-        - {amb: living, tipo: toma, pos: [0.125, 3.00], alto: 0.70, estado: propuesto, nota: "TV: toma doble en el ladrillo al sur de B1, detrás de la pantalla (justo encima del mueble)"}
-        - {amb: living, tipo: datos, pos: [0.125, 3.15], alto: 0.70, estado: propuesto, nota: "TV: internet + cable, junto a la toma de la TV; tubo vacío de 1\" hasta la caja de 0.30 al norte de B1 (HDMI)"}
-        - {amb: living, tipo: toma, pos: [0.125, 2.35], alto: 0.30, estado: propuesto, nota: "detrás del mueble de la TV, al norte de B1: decodificador y equipos"}
-        - {amb: living, tipo: toma, pos: [0.125, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara del sillón de lectura"}
-        - {amb: living, tipo: toma, pos: [0.125, 4.70], alto: 0.30, estado: propuesto, nota: "lámpara del sillón suroeste / aspiradora"}
+        - {amb: living, tipo: toma, pos: [0.025, 3.00], alto: 0.70, estado: propuesto, nota: "TV: toma doble en el ladrillo al sur de B1, detrás de la pantalla (justo encima del mueble)"}
+        - {amb: living, tipo: datos, pos: [0.025, 3.15], alto: 0.70, estado: propuesto, nota: "TV: internet + cable, junto a la toma de la TV; tubo vacío de 1\" hasta la caja de 0.30 al norte de B1 (HDMI)"}
+        - {amb: living, tipo: toma, pos: [0.025, 2.35], alto: 0.30, estado: propuesto, nota: "detrás del mueble de la TV, al norte de B1: decodificador y equipos"}
+        - {amb: living, tipo: toma, pos: [0.025, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara del sillón de lectura"}
+        - {amb: living, tipo: toma, pos: [0.025, 4.70], alto: 0.30, estado: propuesto, nota: "lámpara del sillón suroeste / aspiradora"}
         - {amb: living, tipo: toma, pos: [4.375, 1.30], alto: 0.30, estado: propuesto, nota: "lámpara de pie al costado del sofá (no detrás)"}
         - {amb: living, tipo: toma, pos: [4.375, 3.80], alto: 0.30, estado: propuesto, nota: "general, debajo de la tecla"}
         # Terraza (exterior, en el muro del living)
@@ -1589,7 +1589,7 @@ verificar_en_obra:
   - "INGENIERO (punto 4): profundidad de las ZAPATAS de C1 y B1 y del CIMIENTO DEL MURO SUR. Ninguna zanja (desagüe de la suite, pluvial, cámara CI1, dado del cajón) por debajo de ellas. Dado del cajón de 0.40 × 0.30 que no pase de y 6.795, separado con junta del cimiento del muro sur; antes, POZO DE PRUEBA junto al lindero."
   - "PLOMERO (punto 4): PRUEBA DE INFILTRACIÓN del pozo de absorción de BP1 (jardín, x -6.0 a -5.0, y 3.5 a 4.5) y REBALSE propio a la calle (nunca al desagüe sanitario). Cámara CI1 (-1.29, 5.85) con tapa rellenable hermética de 0.60 × 0.60, hecha ANTES del piso del acceso. Inodoro colgado con estanque empotrado (muro técnico de 0.15–0.20), sifón de perfil bajo en la ducha, pendientes del 2 %, ventilación con sombrerete sobre el cajón."
   - "NORMATIVA (punto 4): el cajón de bajantes queda ~1.40 delante de la fachada de planta baja (x 0), dentro del retiro frontal, y la canaleta-cornisa sale 0.10 del canto del volado (voladizo desde la cara del muro de PB ~1.10; límite 1.20). Lo confirma el arquitecto de la obra."
-  - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga? (define el dintel de la puerta de entrada y de la ranura del living, las dos a 2.60)"
+  - "¿Hay viga en el eje 1 (A1–B1 y B1–C1) y cuánto cuelga? (define el dintel de la puerta de entrada y su vidrio, a 2.60)"
   - "¿Hay viga en el eje A entre A1 y A2 a +3.40 y cuánto cuelga? (dintel de la ventana del living de 3.00)"
   - "Puerta peatonal y medidor de gas ACTUALES (fotos IMG_8373 e IMG_8376): medir el ancho de la puerta actual, la distancia de su borde sur al muro del vecino (Lote 103) y el tamaño y la altura del gabinete del medidor de gas. El modelo supone un pilar de 0.585; la foto sugiere ~1.3–1.5. ¿La puerta y el muro actuales se quedan o se rehacen? El medidor de gas NO se mueve sin YPFB."
   - "Losa del altillo, hueco de la escalera (foto IMG_8391, 2026-10-06, desde arriba mirando al norte): coincide con el modelo: hueco de A2–A3 a B2–B3 más la muesca sobre el tramo de 10 del lado del eje 3 (pasa el eje B), con losa entre B2 y esa muesca; bordes con encofrado todavía puesto; abajo se ve el descanso P1→altillo contra el muro norte. Se ven FIERROS DE ESPERA arriba de las columnas A2 y A3 (sirven para prolongarlas en el altillo). Medir: largo de la muesca más allá del eje B (el modelo supone 1.17, hasta y 3.85) y su ancho (supone 1.325, desde x 5.725); ¿hay fierros de espera en las demás columnas a prolongar (A4, A5, B2–B5)?"
