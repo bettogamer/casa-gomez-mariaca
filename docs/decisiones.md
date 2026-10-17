@@ -1121,3 +1121,8 @@ El albañil empezó por el altillo con el cuaderno v1 impreso. Sus observaciones
   y rejilla alta a 2.20 en el muro sur del comedor (x 9.25), ventilación cruzada. **Detector de gas** alto en el muro de
   la escalera sobre el brazo oeste.
 - Descartado: ir por el sur (franja) — más largo y cruza el comedor; por el ducto de A2 — un ducto cerrado acumula gas.
+- **Revisión de los tres pisos (2026-10-17):** PB y P1 sin cambios (el caño va solo por el altillo, alto en el muro de la
+  escalera; no quedó ningún C16). Corregido: el cuaderno del gasista ya no dice que el gas "no entra a la casa" y pide
+  calcular el consumo total (calefón + cocina de PB + anafe del altillo) para el medidor y los diámetros; las dos
+  rejillas dibujadas en las fachadas norte (baja, bajo la ventana de la cocina) y sur (alta, junto a la ventana del
+  comedor), del color del muro.

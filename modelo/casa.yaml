@@ -509,6 +509,8 @@ fachada:
         # ── Plan B (2026-10-08, PROPUESTO): retiro norte de 2.00 justo → NADA sobresale de la fachada norte; los caños van adentro ──
         - {vista: norte, u: [-7.525, -7.375], z: [2.95, 3.10], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla AL RAS del extractor del lavado, del color del muro (ducto corrido a x 7.45 por el ducto de A3)"}
         - {vista: norte, u: [-10.225, -10.075], z: [6.12, 6.30], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla AL RAS del extractor del Baño 2, en el eje de las ventanas de los baños (x 10.15), sobre el dintel"}
+        - {vista: norte, u: [-8.95, -8.75], z: [6.83, 6.98], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "2026-10-17: rejilla BAJA de la cocina a gas del altillo (YPFB), a 0.30 del piso, bajo el anafe; del color del muro"}
+        - {vista: sur, u: [9.15, 9.35], z: [8.73, 8.88], d: -4.745, material: rejilla_blanca, estado: propuesto, nota: "2026-10-17: rejilla ALTA de la cocina a gas del altillo (YPFB), a 2.20 del piso, al este de la ventana del comedor; da a la franja"}
         - {vista: norte, u: [-9.30, -9.10], z: [8.50, 8.70], d: -0.13, material: rejilla_blanca, estado: propuesto, nota: "rejilla de la campana del altillo, del color del muro; centrada entre las ventanas de la cocina y del baño (antes 8.75–8.95, apretada contra los caños que se fueron a A3)"}
         - {vista: este, u: [-6.47, -6.43], z: [0.00, 0.62], d: -17.07, material: gas, estado: propuesto, nota: "gas a la cocina: sale del suelo en la esquina C5 y entra a ~0.60 detrás del mesón (opción 2: gas enterrado)"}
         # Cajón de bajantes de la esquina suroeste (2026-10-07, PROPUESTO, revisión del arquitecto punto 4): "la pata" de la caja gris.
